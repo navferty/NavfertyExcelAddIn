@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<customUI xmlns="http://schemas.microsoft.com/office/2009/07/customui"
+          xmlns:n="http://navferty.excel-addin.com/4d6cec9b-af75-49aa-bbec-515a0c991b68"
+          onLoad="RibbonLoad" loadImage="GetImage">
+  <ribbon>
+    <tabs>
+      <tab idQ="n:NavfertyAddInTab" label="Navferty's Tools">
+        <group id="CommonGroup" label="Commons">
+          <button id="ParseNumerics" label="Parse Numerics" onAction="ParseNumerics" image="parseNumerics" />
+        </group>
+      </tab>
+    </tabs>
+  </ribbon>
+</customUI>
