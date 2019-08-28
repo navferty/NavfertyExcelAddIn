@@ -5,6 +5,10 @@ VisualStudioVersion = 16.0.29215.179
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NavfertyExcelAddIn", "NavfertyExcelAddIn\NavfertyExcelAddIn.csproj", "{DEF56C38-95B1-4CFC-8B27-70FEA7A35D78}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "NavfertyExcelAddIn.Tests", "NavfertyExcelAddIn.Tests", "{C5668F10-50DC-49EF-AA50-E9036E244BEB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NavfertyExcelAddIn.UnitTests", "NavfertyExcelAddIn.UnitTests\NavfertyExcelAddIn.UnitTests.csproj", "{6A7D8A8F-6338-43E3-B5AC-92483188EC91}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,9 +19,16 @@ Global
 		{DEF56C38-95B1-4CFC-8B27-70FEA7A35D78}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DEF56C38-95B1-4CFC-8B27-70FEA7A35D78}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DEF56C38-95B1-4CFC-8B27-70FEA7A35D78}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6A7D8A8F-6338-43E3-B5AC-92483188EC91}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6A7D8A8F-6338-43E3-B5AC-92483188EC91}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6A7D8A8F-6338-43E3-B5AC-92483188EC91}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6A7D8A8F-6338-43E3-B5AC-92483188EC91}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{6A7D8A8F-6338-43E3-B5AC-92483188EC91} = {C5668F10-50DC-49EF-AA50-E9036E244BEB}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {4E526B65-A0B6-4949-BB35-4570E3D97D47}
