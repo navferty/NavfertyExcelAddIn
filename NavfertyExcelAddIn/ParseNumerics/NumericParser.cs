@@ -11,8 +11,6 @@ namespace NavfertyExcelAddIn.ParseNumerics
 
         public void Parse(Range selection)
         {
-            // _logger.Info($"Start executing Parse for range {selection.Address}");
-
             var values = (object[,])selection.Value;
 
             int upperI = values.GetUpperBound(0); // Columns

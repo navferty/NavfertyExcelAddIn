@@ -1,6 +1,7 @@
 ﻿using System.Drawing;
 using System.IO;
 using System.Runtime.InteropServices;
+using System.Diagnostics.CodeAnalysis;
 
 using Autofac;
 using NavfertyExcelAddIn.ParseNumerics;
@@ -8,11 +9,13 @@ using Microsoft.Office.Core;
 
 using NLog;
 using Microsoft.Office.Interop.Excel;
+
 using Application = Microsoft.Office.Interop.Excel.Application;
 
 namespace NavfertyExcelAddIn
 {
     [ComVisible(true)]
+    [SuppressMessage("Style", "IDE0060:Remove unused parameter", Justification = "Ribbon callbacks must have certain signature")]
     public class NavfertyRibbon : IRibbonExtensibility
     {
         private static readonly IContainer container = Registry.CreateContainer();

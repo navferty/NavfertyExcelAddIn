@@ -8,7 +8,7 @@ namespace NavfertyExcelAddIn
 {
     public class ExceptionLogger : IInterceptor
     {
-        private readonly ILogger _logger = LogManager.GetCurrentClassLogger();
+        private readonly ILogger logger = LogManager.GetCurrentClassLogger();
 
         public void Intercept(IInvocation invocation)
         {
@@ -18,7 +18,7 @@ namespace NavfertyExcelAddIn
             }
             catch (Exception ex)
             {
-                _logger.Error(ex);
+                logger.Error(ex);
                 MessageBox.Show(string.Format(UIStrings.ErrorMessage, ex.Message));
                 throw;
             }
