@@ -39,7 +39,7 @@ namespace NavfertyExcelAddIn
 
         public void ParseNumerics(IRibbonControl ribbonControl)
         {
-            Range selection = App.Selection;
+            var selection = (Range)App.Selection;
 
             if (selection == null)
                 return;

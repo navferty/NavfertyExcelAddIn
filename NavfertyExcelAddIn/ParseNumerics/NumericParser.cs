@@ -1,7 +1,4 @@
-﻿using System;
-using Microsoft.Office.Interop.Excel;
-using System.Collections.Generic;
-using System.Linq;
+﻿using Microsoft.Office.Interop.Excel;
 using NLog;
 using Autofac.Extras.DynamicProxy;
 
@@ -14,14 +11,36 @@ namespace NavfertyExcelAddIn.ParseNumerics
 
         public void Parse(Range selection)
         {
-            _logger.Info($"Start executing Parse for range {selection.Address}");
+            // _logger.Info($"Start executing Parse for range {selection.Address}");
 
-            foreach (Range cell in selection.Cells)
+            var values = (object[,])selection.Value;
+
+            int upperI = values.GetUpperBound(0); // Columns
+            int upperJ = values.GetUpperBound(1); // Rows
+
+            var isChanged = false;
+
+            for (int i = values.GetLowerBound(0); i <= upperI; i++)
             {
-                var value = cell.Value;
+                for (int j = values.GetLowerBound(1); j <= upperJ; j++)
+                {
+                    var value = values[i, j];
+                    if (value is string s)
+                    {
+                        var parsedValue = s.ParseDecimal();
+                        if (parsedValue != null)
+                        {
+                            isChanged = true;
+                            values[i, j] = parsedValue;
+                        }
+                    }
+                }
             }
 
-            throw new NotImplementedException();
+            if (isChanged)
+            {
+                selection.Value = values;
+            }
         }
     }
 }
