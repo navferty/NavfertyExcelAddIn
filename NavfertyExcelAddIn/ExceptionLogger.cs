@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using NLog;
 using Castle.DynamicProxy;
 using System.Windows.Forms;
@@ -6,6 +7,7 @@ using NavfertyExcelAddIn.Localization;
 
 namespace NavfertyExcelAddIn
 {
+    [DebuggerStepThrough]
     public class ExceptionLogger : IInterceptor
     {
         private readonly ILogger logger = LogManager.GetCurrentClassLogger();
