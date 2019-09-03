@@ -7,6 +7,7 @@
       <tab idQ="n:NavfertyAddInTab" label="Navferty's Tools">
         <group id="CommonGroup" label="Commons">
           <button id="ParseNumerics" label="Parse Numerics" onAction="ParseNumerics" image="parseNumerics" />
+          <button id="UnprotectWorkbook" label="Unprotect Workbook" onAction="UnprotectWorkbook" image="unprotectWorkbook" />
         </group>
       </tab>
     </tabs>

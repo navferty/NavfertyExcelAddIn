@@ -56,6 +56,11 @@ namespace NavfertyExcelAddIn
             }
         }
 
+        public void UnprotectWorkbook(IRibbonControl ribbonControl)
+        {
+
+        }
+
         public Bitmap GetImage(string imageName)
         {
             return (Bitmap)RibbonImages.ResourceManager.GetObject(imageName);

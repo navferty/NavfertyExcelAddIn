@@ -214,6 +214,8 @@
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="UnprotectWorkbook\IWbUnprotector.cs" />
+    <Compile Include="UnprotectWorkbook\WbUnprotector.cs" />
     <None Include="app.config" />
     <None Include="NavfertyExcelAddIn_TemporaryKey.pfx" />
     <Content Include="NLog.config">
@@ -270,6 +272,8 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\unprotectWorkbook.png" />
+    <None Include="Resources\parseNumerics.png" />
     <Content Include="RibbonImages\parseNumerics.png" />
   </ItemGroup>
   <PropertyGroup>
