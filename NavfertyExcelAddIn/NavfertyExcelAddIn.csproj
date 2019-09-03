@@ -197,16 +197,6 @@
   -->
   <ItemGroup>
     <Compile Include="ExceptionLogger.cs" />
-    <Compile Include="Localization\UIStrings.en-US.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>UIStrings.en-US.resx</DependentUpon>
-    </Compile>
-    <Compile Include="Localization\UIStrings.ru-RU.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>UIStrings.ru-RU.resx</DependentUpon>
-    </Compile>
     <Compile Include="NavfertyRibbon.cs" />
     <Compile Include="ParseNumerics\DecimalParser.cs" />
     <Compile Include="ParseNumerics\INumericParser.cs" />
@@ -251,18 +241,20 @@
     <AppDesigner Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Localization\RibbonLabels.Designer.cs">
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Include="Localization\UIStrings.Designer.cs">
-      <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>UIStrings.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="Localization\RibbonLabels.en-US.resx" />
+    <EmbeddedResource Include="Localization\RibbonLabels.ru-RU.resx" />
     <EmbeddedResource Include="Localization\UIStrings.en-US.resx">
       <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>UIStrings.en-US.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Localization\UIStrings.ru-RU.resx">
       <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>UIStrings.ru-RU.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="NavfertyRibbon.xml" />
     <EmbeddedResource Include="RibbonImages.resx">
@@ -272,8 +264,15 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\unprotectWorkbook.png" />
-    <None Include="Resources\parseNumerics.png" />
+    <Content Include="RibbonImages\unprotectWorkbook.png" />
+    <Content Include="RibbonImages\parseNumerics.png" />
+    <Content Include="RibbonImages\validateXml.png" />
+    <Content Include="RibbonImages\highlightDuplicates.png" />
+    <Content Include="RibbonImages\toggleCase.png" />
+    <Content Include="RibbonImages\cutNames.png" />
+    <Content Include="RibbonImages\unmergeCells.png" />
+    <Content Include="RibbonImages\trimSpaces.png" />
+    <Content Include="RibbonImages\createSampleXml.png" />
     <Content Include="RibbonImages\parseNumerics.png" />
   </ItemGroup>
   <PropertyGroup>
