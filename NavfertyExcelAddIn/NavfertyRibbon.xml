@@ -4,10 +4,20 @@
           onLoad="RibbonLoad" loadImage="GetImage">
   <ribbon>
     <tabs>
-      <tab idQ="n:NavfertyAddInTab" label="Navferty's Tools">
-        <group id="CommonGroup" label="Commons">
-          <button id="ParseNumerics" label="Parse Numerics" onAction="ParseNumerics" image="parseNumerics" />
-        </group>
+      <tab idQ="n:NavfertyAddInTab" label="Navferty's Tools" keytip="NT" >
+        <group id="CommonGroup" getLabel="GetLabel">
+          <button id="ParseNumerics" getLabel="GetLabel" onAction="ParseNumerics" image="parseNumerics" size="large" keytip="P" />
+          <button id="UnprotectWorkbook" getLabel="GetLabel" onAction="UnprotectWorkbook" image="unprotectWorkbook" size="large" keytip="U" />
+          <button id="CutNames" getLabel="GetLabel" onAction="CutNames" image="cutNames" size="large" keytip="C" />
+          <button id="HighlightDuplicates" getLabel="GetLabel" onAction="HighlightDuplicates" image="highlightDuplicates" size="large" keytip="D" />
+          <button id="ToggleCase" getLabel="GetLabel" onAction="ToggleCase" image="toggleCase" size="large" keytip="T" />
+          <button id="TrimSpaces" getLabel="GetLabel" onAction="TrimSpaces" image="trimSpaces" size="large" keytip="R" />
+          <button id="UnmergeCells" getLabel="GetLabel" onAction="UnmergeCells" image="unmergeCells" size="large" keytip="M" />
+      </group>
+      <group id="XmlToolsGroup" getLabel="GetLabel">
+          <button id="CreateSampleXml" getLabel="GetLabel" onAction="CreateSampleXml" image="createSampleXml" size="large" keytip="X" />
+          <button id="ValidateXml" getLabel="GetLabel" onAction="ValidateXml" image="validateXml" size="large" keytip="V" />
+      </group>
       </tab>
     </tabs>
   </ribbon>

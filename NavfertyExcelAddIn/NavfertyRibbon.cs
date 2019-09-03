@@ -3,11 +3,13 @@ using System.IO;
 using System.Runtime.InteropServices;
 using System.Diagnostics.CodeAnalysis;
 
-using Autofac;
 using NavfertyExcelAddIn.ParseNumerics;
-using Microsoft.Office.Core;
+using NavfertyExcelAddIn.Localization;
 
 using NLog;
+using Autofac;
+
+using Microsoft.Office.Core;
 using Microsoft.Office.Interop.Excel;
 
 using Application = Microsoft.Office.Interop.Excel.Application;
@@ -56,13 +58,88 @@ namespace NavfertyExcelAddIn
             }
         }
 
+        public void UnprotectWorkbook(IRibbonControl ribbonControl)
+        {
+
+        }
+
+        public void CutNames(IRibbonControl ribbonControl)
+        {
+            var selection = (Range)App.Selection;
+
+            if (selection == null)
+                return;
+
+            logger.Debug($"CutNames. Range selected is {selection.Address}");
+
+            // TODO
+        }
+        public void HighlightDuplicates(IRibbonControl ribbonControl)
+        {
+            var selection = (Range)App.Selection;
+
+            if (selection == null)
+                return;
+
+            logger.Debug($"HighlightDuplicates. Range selected is {selection.Address}");
+
+            // TODO
+        }
+        public void ToggleCase(IRibbonControl ribbonControl)
+        {
+             var selection = (Range)App.Selection;
+
+            if (selection == null)
+                return;
+
+            logger.Debug($"ToggleCase. Range selected is {selection.Address}");
+
+            // TODO
+        }
+        public void TrimSpaces(IRibbonControl ribbonControl)
+        {
+             var selection = (Range)App.Selection;
+
+            if (selection == null)
+                return;
+
+            logger.Debug($"TrimSpaces. Range selected is {selection.Address}");
+
+            // TODO
+        }
+        public void UnmergeCells(IRibbonControl ribbonControl)
+        {
+             var selection = (Range)App.Selection;
+
+            if (selection == null)
+                return;
+
+            logger.Debug($"UnmergeCells. Range selected is {selection.Address}");
+
+            // TODO
+        }
+        public void CreateSampleXml(IRibbonControl ribbonControl)
+        {
+            logger.Debug("CreateSampleXml");
+            // TODO
+        }
+        public void ValidateXml(IRibbonControl ribbonControl)
+        {
+            logger.Debug("ValidateXml");
+            // TODO
+        }
+
+        #region Utils
+        public string GetLabel(IRibbonControl ribbonControl)
+        {
+            return RibbonLabels.ResourceManager.GetString(ribbonControl.Id);
+        }
         public Bitmap GetImage(string imageName)
         {
             return (Bitmap)RibbonImages.ResourceManager.GetObject(imageName);
         }
         #endregion
 
-        #region Utils
         private static string GetResourceText()
         {
             var asm = typeof(NavfertyRibbon).Assembly;
