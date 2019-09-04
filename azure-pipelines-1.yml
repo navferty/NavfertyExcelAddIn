@@ -44,7 +44,8 @@ steps:
 
 - task: CopyFiles@2
   inputs:
-    Contents: '**\\app.publish\\**'
+    SourceFolder: '$(Build.SourcesDirectory)\\bin\\Release\\app.publish\\'
+    # Contents: '**\\app.publish\\**'
     TargetFolder: $(Build.ArtifactStagingDirectory)
     flattenFolders: true
 
