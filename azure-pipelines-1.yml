@@ -44,7 +44,7 @@ steps:
 
 - task: CopyFiles@2
   inputs:
-    Contents: '**'
+    Contents: '$(Build.SourcesDirectory)\\bin\\Release\\app.publish\\**'
     TargetFolder: $(Build.ArtifactStagingDirectory)
 - task: PublishBuildArtifacts@1
   inputs:
