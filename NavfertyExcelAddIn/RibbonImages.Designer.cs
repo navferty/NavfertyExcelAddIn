@@ -63,6 +63,36 @@ namespace NavfertyExcelAddIn {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap createSampleXml {
+            get {
+                object obj = ResourceManager.GetObject("createSampleXml", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap cutNames {
+            get {
+                object obj = ResourceManager.GetObject("cutNames", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap highlightDuplicates {
+            get {
+                object obj = ResourceManager.GetObject("highlightDuplicates", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap parseNumerics {
             get {
                 object obj = ResourceManager.GetObject("parseNumerics", resourceCulture);
@@ -73,9 +103,49 @@ namespace NavfertyExcelAddIn {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap toggleCase {
+            get {
+                object obj = ResourceManager.GetObject("toggleCase", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap trimSpaces {
+            get {
+                object obj = ResourceManager.GetObject("trimSpaces", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap unmergeCells {
+            get {
+                object obj = ResourceManager.GetObject("unmergeCells", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap unprotectWorkbook {
             get {
                 object obj = ResourceManager.GetObject("unprotectWorkbook", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap validateXml {
+            get {
+                object obj = ResourceManager.GetObject("validateXml", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

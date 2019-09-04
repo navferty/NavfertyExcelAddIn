@@ -117,35 +117,37 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="createSampleXml" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>RibbonImages\createSampleXml.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="ParseNumerics" xml:space="preserve">
+    <value>Parse Numerics</value>
   </data>
-  <data name="cutNames" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>RibbonImages\cutNames.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="UnprotectWorkbook" xml:space="preserve">
+    <value>Unprotect Workbook</value>
   </data>
-  <data name="highlightDuplicates" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>RibbonImages\highlightDuplicates.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="CutNames" xml:space="preserve">
+    <value>Cut Names</value>
   </data>
-  <data name="parseNumerics" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>Resources\parseNumerics.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="HighlightDuplicates" xml:space="preserve">
+    <value>Highlight Duplicates</value>
   </data>
-  <data name="unprotectWorkbook" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>Resources\unprotectWorkbook.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="ToggleCase" xml:space="preserve">
+    <value>Toggle Case</value>
   </data>
-  <data name="toggleCase" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>RibbonImages\toggleCase.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="TrimSpaces" xml:space="preserve">
+    <value>Trim Spaces</value>
   </data>
-  <data name="trimSpaces" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>RibbonImages\trimSpaces.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="UnmergeCells" xml:space="preserve">
+    <value>Unmerge Cells</value>
   </data>
-  <data name="unmergeCells" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>RibbonImages\unmergeCells.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="ValidateXml" xml:space="preserve">
+    <value>Validate XML with XSD</value>
   </data>
-  <data name="unprotectWorkbook" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>RibbonImages\unprotectWorkbook.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="CreateSampleXml" xml:space="preserve">
+    <value>Create Sample XML based on XSD</value>
   </data>
-  <data name="validateXml" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>RibbonImages\validateXml.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="CommonGroup" xml:space="preserve">
+    <value>Commons</value>
+  </data>
+  <data name="XmlToolsGroup" xml:space="preserve">
+    <value>XML Tools</value>
   </data>
 </root>

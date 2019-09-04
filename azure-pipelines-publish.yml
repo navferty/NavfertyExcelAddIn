@@ -3,14 +3,12 @@
 # Add steps that publish symbols, save build artifacts, and more:
 # https://docs.microsoft.com/azure/devops/pipelines/apps/windows/dot-net
 
-trigger:
-- master
-
 pool:
   vmImage: 'windows-latest'
 
 variables:
-  solution: '**/*.sln'
+  solutionFolder: '$(Build.SourcesDirectory)/NavfertyExcelAddIn'
+  solution: '$(Build.SourcesDirectory)/NavfertyExcelAddIn.sln'
   buildPlatform: 'Any CPU'
   buildConfiguration: 'Release'
 
@@ -26,7 +24,7 @@ steps:
     targetType: 'inline'
     script: |
       Write-Host "Import Certificate"
-      $pfxpath = '$(Build.SourcesDirectory)\$(certfile)'
+      $pfxpath = '$(solutionFolder)/$(certfile)'
       Add-Type -AssemblyName System.Security
       $cert = New-Object System.Security.Cryptography.X509Certificates.X509Certificate2
       $cert.Import($pfxpath, $(password), [System.Security.Cryptography.X509Certificates.X509KeyStorageFlags]"PersistKeySet")
@@ -40,9 +38,14 @@ steps:
     solution: '$(solution)'
     platform: '$(buildPlatform)'
     configuration: '$(buildConfiguration)'
+    msbuildArgs: '$(msbuildArgs)'
 
-- task: VSTest@2
+- task: CopyFiles@2
   inputs:
-    platform: '$(buildPlatform)'
-    configuration: '$(buildConfiguration)'
-
+    SourceFolder: '$(solutionFolder)/bin/Release/app.publish/'
+    TargetFolder: $(Build.ArtifactStagingDirectory)
+- task: PublishBuildArtifacts@1
+  inputs:
+    PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+    ArtifactName: 'InstallationFiles'
+    publishLocation: 'Container'
