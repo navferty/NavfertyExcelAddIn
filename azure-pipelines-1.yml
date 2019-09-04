@@ -44,7 +44,7 @@ steps:
 
 - task: CopyFiles@2
   inputs:
-    Contents: '_buildOutput/**'
+    Contents: '**'
     TargetFolder: $(Build.ArtifactStagingDirectory)
 - task: PublishBuildArtifacts@1
   inputs:
