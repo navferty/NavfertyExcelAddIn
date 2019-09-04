@@ -46,6 +46,8 @@ steps:
   inputs:
     Contents: '**\\app.publish\\**'
     TargetFolder: $(Build.ArtifactStagingDirectory)
+    flattenFolders: true
+
 - task: PublishBuildArtifacts@1
   inputs:
     PathtoPublish: '$(Build.ArtifactStagingDirectory)'
