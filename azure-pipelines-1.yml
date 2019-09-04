@@ -40,3 +40,5 @@ steps:
     solution: '$(solution)'
     platform: '$(buildPlatform)'
     configuration: '$(buildConfiguration)'
+    clean: false
+    msbuildArgs: publish
