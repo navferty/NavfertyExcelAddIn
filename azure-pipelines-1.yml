@@ -40,5 +40,14 @@ steps:
     solution: '$(solution)'
     platform: '$(buildPlatform)'
     configuration: '$(buildConfiguration)'
-    msbuildArgs: publish
+    msbuildArgs: '$(msbuildArgs)'
 
+- task: CopyFiles@2
+  inputs:
+    Contents: '**'
+    TargetFolder: 
+- task: PublishBuildArtifacts@1
+  inputs:
+    PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+    ArtifactName: 'drop'
+    publishLocation: 'Container'
