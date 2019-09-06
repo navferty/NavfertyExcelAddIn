@@ -150,4 +150,7 @@
   <data name="XmlToolsGroup" xml:space="preserve">
     <value>Работа с XML</value>
   </data>
+  <data name="FindErrors" xml:space="preserve">
+    <value>Найти все ошибки на листе</value>
+  </data>
 </root>

@@ -1,6 +1,7 @@
 ﻿using Autofac;
 using Autofac.Extras.DynamicProxy;
 using NavfertyExcelAddIn.ParseNumerics;
+using NavfertyExcelAddIn.Commons;
 
 namespace NavfertyExcelAddIn
 {
@@ -10,11 +11,15 @@ namespace NavfertyExcelAddIn
         {
             var builder = new ContainerBuilder();
 
-
+            builder.RegisterType<ErrorFinder>()
+                .As<IErrorFinder>()
+                .EnableInterfaceInterceptors()
+                .InterceptedBy(typeof(ExceptionLogger));
 
             builder.RegisterType<NumericParser>()
                 .As<INumericParser>()
-                .EnableInterfaceInterceptors();
+                .EnableInterfaceInterceptors()
+                .InterceptedBy(typeof(ExceptionLogger));
 
             builder.Register(c => new ExceptionLogger());
 

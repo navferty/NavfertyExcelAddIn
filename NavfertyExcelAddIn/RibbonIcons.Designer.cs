@@ -22,14 +22,14 @@ namespace NavfertyExcelAddIn {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class RibbonImages {
+    internal class RibbonIcons {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal RibbonImages() {
+        internal RibbonIcons() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace NavfertyExcelAddIn {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("NavfertyExcelAddIn.RibbonImages", typeof(RibbonImages).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("NavfertyExcelAddIn.RibbonIcons", typeof(RibbonIcons).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -76,6 +76,16 @@ namespace NavfertyExcelAddIn {
         internal static System.Drawing.Bitmap cutNames {
             get {
                 object obj = ResourceManager.GetObject("cutNames", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap findErrors {
+            get {
+                object obj = ResourceManager.GetObject("findErrors", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

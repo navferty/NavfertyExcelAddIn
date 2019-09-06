@@ -117,37 +117,19 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="ParseNumerics" xml:space="preserve">
-    <value>Parse Numerics</value>
-  </data>
-  <data name="UnprotectWorkbook" xml:space="preserve">
-    <value>Unprotect Workbook</value>
-  </data>
-  <data name="CutNames" xml:space="preserve">
-    <value>Cut Names</value>
-  </data>
-  <data name="HighlightDuplicates" xml:space="preserve">
-    <value>Highlight Duplicates</value>
-  </data>
-  <data name="ToggleCase" xml:space="preserve">
-    <value>Toggle Case</value>
-  </data>
-  <data name="TrimSpaces" xml:space="preserve">
-    <value>Trim Spaces</value>
-  </data>
-  <data name="UnmergeCells" xml:space="preserve">
-    <value>Unmerge Cells</value>
-  </data>
-  <data name="ValidateXml" xml:space="preserve">
-    <value>Validate XML with XSD</value>
-  </data>
-  <data name="CreateSampleXml" xml:space="preserve">
-    <value>Create Sample XML based on XSD</value>
-  </data>
-  <data name="CommonGroup" xml:space="preserve">
-    <value>Commons</value>
-  </data>
-  <data name="XmlToolsGroup" xml:space="preserve">
-    <value>XML Tools</value>
-  </data>
+  <metadata name="ErrorType.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="Formula.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="Address.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="WsName.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="RangesGridView.GenerateMember" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>False</value>
+  </metadata>
 </root>

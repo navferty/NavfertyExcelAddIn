@@ -4,7 +4,6 @@ using Autofac.Extras.DynamicProxy;
 
 namespace NavfertyExcelAddIn.ParseNumerics
 {
-    [Intercept(typeof(ExceptionLogger))]
     public class NumericParser : INumericParser
     {
         private readonly ILogger _logger = LogManager.GetCurrentClassLogger();
