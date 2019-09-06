@@ -21,7 +21,7 @@ namespace NavfertyExcelAddIn.Commons
         [Description("#DIV/0!")]
         ErrDiv0 = -2146826281,
         
-        [Description("ErrGetData")]
+        [Description("#GETTING_DATA")]
         ErrGettingData = -2146826245,
 
         [Description("#N/A")]
