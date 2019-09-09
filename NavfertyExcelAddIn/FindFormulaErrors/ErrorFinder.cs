@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using Autofac.Extras.DynamicProxy;
 using Microsoft.Office.Interop.Excel;
 
 namespace NavfertyExcelAddIn.FindFormulaErrors

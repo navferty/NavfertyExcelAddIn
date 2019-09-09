@@ -75,6 +75,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="FindFormulaErrors\ErrorFinderTests.cs" />
     <Compile Include="ParseNumerics\DecimalParserTests.cs" />
     <Compile Include="ParseNumerics\NumericParserTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

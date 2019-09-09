@@ -1,6 +1,5 @@
 ﻿using Microsoft.Office.Interop.Excel;
 using NLog;
-using Autofac.Extras.DynamicProxy;
 
 namespace NavfertyExcelAddIn.ParseNumerics
 {
