@@ -129,6 +129,9 @@
   <data name="Formula" xml:space="preserve">
     <value>Formula</value>
   </data>
+  <data name="NoErrors" xml:space="preserve">
+    <value>Found no errors on current worksheet</value>
+  </data>
   <data name="SearchResults" xml:space="preserve">
     <value>Search Results</value>
   </data>

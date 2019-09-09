@@ -196,17 +196,17 @@
     can be found.
   -->
   <ItemGroup>
-    <Compile Include="Commons\SearchRangeResultForm.cs">
+    <Compile Include="FindFormulaErrors\SearchRangeResultForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Commons\SearchRangeResultForm.Designer.cs">
+    <Compile Include="FindFormulaErrors\SearchRangeResultForm.Designer.cs">
       <DependentUpon>SearchRangeResultForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Commons\EnumExtensions.cs" />
-    <Compile Include="Commons\ErrorFinder.cs" />
-    <Compile Include="Commons\IErrorFinder.cs" />
-    <Compile Include="Commons\ErroredRange.cs" />
-    <Compile Include="ExceptionLogger.cs" />
+    <Compile Include="FindFormulaErrors\ErrorFinder.cs" />
+    <Compile Include="FindFormulaErrors\IErrorFinder.cs" />
+    <Compile Include="FindFormulaErrors\ErroredRange.cs" />
+    <Compile Include="Commons\ExceptionLogger.cs" />
     <Compile Include="NavfertyRibbon.cs" />
     <Compile Include="ParseNumerics\DecimalParser.cs" />
     <Compile Include="ParseNumerics\INumericParser.cs" />
@@ -271,7 +271,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Commons\SearchRangeResultForm.resx">
+    <EmbeddedResource Include="FindFormulaErrors\SearchRangeResultForm.resx">
       <DependentUpon>SearchRangeResultForm.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
@@ -297,6 +297,7 @@
       <LastGenOutput>RibbonIcons.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

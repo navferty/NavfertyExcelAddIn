@@ -4,18 +4,22 @@ using System.Data;
 using System.Linq;
 using System.Windows.Forms;
 
+using NavfertyExcelAddIn.Commons;
+
 using Microsoft.Office.Interop.Excel;
 
 using Application = Microsoft.Office.Interop.Excel.Application;
 
-namespace NavfertyExcelAddIn.Commons
+namespace NavfertyExcelAddIn.FindFormulaErrors
 {
     public partial class SearchRangeResultForm : Form
     {
         private readonly IList<ListRangeItem> items;
+        private readonly Worksheet worksheet;
+
         private Application App => Globals.ThisAddIn.Application;
 
-        public SearchRangeResultForm(IReadOnlyCollection<ErroredRange> ranges)
+        public SearchRangeResultForm(IReadOnlyCollection<ErroredRange> ranges, Worksheet worksheet)
         {
             InitializeComponent();
             
@@ -29,10 +33,15 @@ namespace NavfertyExcelAddIn.Commons
             RangesGridView.DataSource = items;
             RangesGridView.SelectionChanged += OnSelectionChanged;
             RangesGridView.AutoGenerateColumns = false;
+            this.worksheet = worksheet;
+
+            worksheet.BeforeDelete += () => Close();
+            ((Workbook)worksheet.Parent).BeforeClose += (ref bool cancel) => Close();
         }
 
         private void OnSelectionChanged(object sender, EventArgs e)
         {
+            var name = worksheet.Name;
             var selectedRows = RangesGridView.SelectedCells.Cast<DataGridViewCell>().ToArray();
 
             if (selectedRows.Length == 0)

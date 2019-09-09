@@ -6,6 +6,7 @@ using System.Runtime.InteropServices;
 using System.Diagnostics.CodeAnalysis;
 
 using NavfertyExcelAddIn.ParseNumerics;
+using NavfertyExcelAddIn.FindFormulaErrors;
 using NavfertyExcelAddIn.Localization;
 
 using NLog;
@@ -15,7 +16,7 @@ using Microsoft.Office.Core;
 using Microsoft.Office.Interop.Excel;
 
 using Application = Microsoft.Office.Interop.Excel.Application;
-using NavfertyExcelAddIn.Commons;
+using System.Windows.Forms;
 
 namespace NavfertyExcelAddIn
 {
@@ -128,7 +129,8 @@ namespace NavfertyExcelAddIn
 
         public void FindErrors(IRibbonControl ribbonControl)
         {
-            var range = ((Worksheet)App.ActiveSheet).UsedRange;
+            var activeSheet = (Worksheet)App.ActiveSheet;
+            var range = activeSheet.UsedRange;
 
             ErroredRange[] allErrors;
             using (var scope = container.BeginLifetimeScope())
@@ -136,7 +138,13 @@ namespace NavfertyExcelAddIn
                 var errorFinder = scope.Resolve<IErrorFinder>();
                 allErrors = errorFinder.GetAllErrorCells(range).ToArray();
             }
-            form = new SearchRangeResultForm(allErrors);
+
+            if (allErrors.Length == 0)
+            {
+                MessageBox.Show(UIStrings.NoErrors);
+                return;
+            }
+            form = new SearchRangeResultForm(allErrors, activeSheet);
             form.Show();
         }
 

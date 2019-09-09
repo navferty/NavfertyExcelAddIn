@@ -1,7 +1,7 @@
 ﻿using Microsoft.Office.Interop.Excel;
 using System.ComponentModel;
 
-namespace NavfertyExcelAddIn.Commons
+namespace NavfertyExcelAddIn.FindFormulaErrors
 {
     public class ErroredRange
     {

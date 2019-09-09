@@ -129,6 +129,9 @@
   <data name="Formula" xml:space="preserve">
     <value>Формула</value>
   </data>
+  <data name="NoErrors" xml:space="preserve">
+    <value>На текущем листе ошибок не найдено</value>
+  </data>
   <data name="SearchResults" xml:space="preserve">
     <value>Результаты поиска</value>
   </data>

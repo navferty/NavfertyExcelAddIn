@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Autofac.Extras.DynamicProxy;
 using Microsoft.Office.Interop.Excel;
 
-namespace NavfertyExcelAddIn.Commons
+namespace NavfertyExcelAddIn.FindFormulaErrors
 {
     public class ErrorFinder : IErrorFinder
     {

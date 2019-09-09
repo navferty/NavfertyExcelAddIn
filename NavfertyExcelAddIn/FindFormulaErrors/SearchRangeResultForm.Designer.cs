@@ -2,7 +2,7 @@
 using System.Drawing;
 using System.Windows.Forms;
 
-namespace NavfertyExcelAddIn.Commons
+namespace NavfertyExcelAddIn.FindFormulaErrors
 {
     partial class SearchRangeResultForm
     {
@@ -32,7 +32,6 @@ namespace NavfertyExcelAddIn.Commons
         /// </summary>
         private void InitializeComponent()
         {
-            Resources = new ComponentResourceManager(typeof(SearchRangeResultForm));
             ErrorType = new DataGridViewTextBoxColumn();
             Formula = new DataGridViewTextBoxColumn();
             Address = new DataGridViewTextBoxColumn();
@@ -93,7 +92,10 @@ namespace NavfertyExcelAddIn.Commons
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new System.Drawing.Size(800, 450);
             Controls.Add(RangesGridView);
-            Icon = (Icon)Resources.GetObject("ExcelIcon");
+
+            var resources = new ComponentResourceManager(typeof(SearchRangeResultForm));
+            Icon = (Icon)resources.GetObject("ExcelIcon");
+
             Name = "SearchRangeResultForm";
             TopMost = true;
             ((ISupportInitialize)(RangesGridView)).EndInit();
@@ -107,6 +109,5 @@ namespace NavfertyExcelAddIn.Commons
         private DataGridViewTextBoxColumn Formula;
         private DataGridViewTextBoxColumn Address;
         private DataGridViewTextBoxColumn WsName;
-        private ComponentResourceManager Resources;
     }
 }

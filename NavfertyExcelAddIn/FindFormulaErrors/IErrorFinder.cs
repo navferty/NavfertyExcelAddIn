@@ -1,7 +1,7 @@
 ﻿using Microsoft.Office.Interop.Excel;
 using System.Collections.Generic;
 
-namespace NavfertyExcelAddIn.Commons
+namespace NavfertyExcelAddIn.FindFormulaErrors
 {
     public interface IErrorFinder
     {
