@@ -1,9 +1,12 @@
-﻿using System.Drawing;
+﻿using System;
+using System.Linq;
+using System.Drawing;
 using System.IO;
 using System.Runtime.InteropServices;
 using System.Diagnostics.CodeAnalysis;
 
 using NavfertyExcelAddIn.ParseNumerics;
+using NavfertyExcelAddIn.FindFormulaErrors;
 using NavfertyExcelAddIn.Localization;
 
 using NLog;
@@ -13,16 +16,21 @@ using Microsoft.Office.Core;
 using Microsoft.Office.Interop.Excel;
 
 using Application = Microsoft.Office.Interop.Excel.Application;
+using System.Windows.Forms;
 
 namespace NavfertyExcelAddIn
 {
     [ComVisible(true)]
     [SuppressMessage("Style", "IDE0060:Remove unused parameter", Justification = "Ribbon callbacks must have certain signature")]
-    public class NavfertyRibbon : IRibbonExtensibility
+    public class NavfertyRibbon : IRibbonExtensibility, IDisposable
     {
         private static readonly IContainer container = Registry.CreateContainer();
         private readonly ILogger logger = LogManager.GetCurrentClassLogger();
         private Application App => Globals.ThisAddIn.Application;
+
+        #region Forms
+        private SearchRangeResultForm form;
+        #endregion
 
         public NavfertyRibbon()
         {
@@ -118,6 +126,28 @@ namespace NavfertyExcelAddIn
 
             // TODO
         }
+
+        public void FindErrors(IRibbonControl ribbonControl)
+        {
+            var activeSheet = (Worksheet)App.ActiveSheet;
+            var range = activeSheet.UsedRange;
+
+            ErroredRange[] allErrors;
+            using (var scope = container.BeginLifetimeScope())
+            {
+                var errorFinder = scope.Resolve<IErrorFinder>();
+                allErrors = errorFinder.GetAllErrorCells(range).ToArray();
+            }
+
+            if (allErrors.Length == 0)
+            {
+                MessageBox.Show(UIStrings.NoErrors);
+                return;
+            }
+            form = new SearchRangeResultForm(allErrors, activeSheet);
+            form.Show();
+        }
+
         public void CreateSampleXml(IRibbonControl ribbonControl)
         {
             logger.Debug("CreateSampleXml");
@@ -136,7 +166,7 @@ namespace NavfertyExcelAddIn
         }
         public Bitmap GetImage(string imageName)
         {
-            return (Bitmap)RibbonImages.ResourceManager.GetObject(imageName);
+            return (Bitmap)RibbonIcons.ResourceManager.GetObject(imageName);
         }
         #endregion
 
@@ -149,6 +179,12 @@ namespace NavfertyExcelAddIn
             {
                 return resourceReader.ReadToEnd();
             }
+        }
+
+        public void Dispose()
+        {
+            form?.Dispose();
+            container.Dispose();
         }
         #endregion
     }

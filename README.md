@@ -20,3 +20,4 @@
 
 
 *Used icons are designed by iconarchive, Flaticon*
+*"Find errors" icon made by turkkub from www.flaticon.com*

@@ -179,7 +179,7 @@
     </Reference>
     <Reference Include="Microsoft.Office.Interop.Excel, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c">
       <Private>False</Private>
-      <EmbedInteropTypes>True</EmbedInteropTypes>
+      <EmbedInteropTypes>False</EmbedInteropTypes>
     </Reference>
     <Reference Include="stdole, Version=7.0.3300.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
       <Private>False</Private>
@@ -196,7 +196,17 @@
     can be found.
   -->
   <ItemGroup>
-    <Compile Include="ExceptionLogger.cs" />
+    <Compile Include="FindFormulaErrors\SearchRangeResultForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FindFormulaErrors\SearchRangeResultForm.Designer.cs">
+      <DependentUpon>SearchRangeResultForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Commons\EnumExtensions.cs" />
+    <Compile Include="FindFormulaErrors\ErrorFinder.cs" />
+    <Compile Include="FindFormulaErrors\IErrorFinder.cs" />
+    <Compile Include="FindFormulaErrors\ErroredRange.cs" />
+    <Compile Include="Commons\ExceptionLogger.cs" />
     <Compile Include="NavfertyRibbon.cs" />
     <Compile Include="ParseNumerics\DecimalParser.cs" />
     <Compile Include="ParseNumerics\INumericParser.cs" />
@@ -204,8 +214,23 @@
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="RibbonIcons.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RibbonIcons.resx</DependentUpon>
+    </Compile>
     <Compile Include="UnprotectWorkbook\IWbUnprotector.cs" />
     <Compile Include="UnprotectWorkbook\WbUnprotector.cs" />
+    <None Include="Resources\validateXml.png" />
+    <None Include="Resources\unprotectWorkbook.png" />
+    <None Include="Resources\unmergeCells.png" />
+    <None Include="Resources\trimSpaces.png" />
+    <None Include="Resources\toggleCase.png" />
+    <None Include="Resources\parseNumerics.png" />
+    <None Include="Resources\highlightDuplicates.png" />
+    <None Include="Resources\cutNames.png" />
+    <None Include="Resources\createSampleXml.png" />
+    <None Include="Resources\findErrors.png" />
     <None Include="app.config" />
     <None Include="NavfertyExcelAddIn_TemporaryKey.pfx" />
     <Content Include="NLog.config">
@@ -224,11 +249,6 @@
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
     <Compile Include="Registry.cs" />
-    <Compile Include="RibbonImages.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>RibbonImages.resx</DependentUpon>
-    </Compile>
     <Compile Include="ThisAddIn.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -239,42 +259,45 @@
       <DependentUpon>ThisAddIn.Designer.xml</DependentUpon>
     </Compile>
     <AppDesigner Include="Properties\" />
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="Localization\RibbonLabels.Designer.cs">
-      <DesignTime>True</DesignTime>
-    </Compile>
     <Compile Include="Localization\UIStrings.Designer.cs">
+      <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>UIStrings.resx</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="Localization\RibbonLabels.en-US.resx" />
-    <EmbeddedResource Include="Localization\RibbonLabels.ru-RU.resx" />
-    <EmbeddedResource Include="Localization\UIStrings.en-US.resx">
+    <Compile Include="Localization\RibbonLabels.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RibbonLabels.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="FindFormulaErrors\SearchRangeResultForm.resx">
+      <DependentUpon>SearchRangeResultForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Localization\RibbonLabels.resx">
       <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>RibbonLabels.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Localization\RibbonLabels.ru-RU.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>RibbonLabels.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Localization\UIStrings.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>UIStrings.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Localization\UIStrings.ru-RU.resx">
       <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>UIStrings.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="NavfertyRibbon.xml" />
-    <EmbeddedResource Include="RibbonImages.resx">
+    <EmbeddedResource Include="RibbonIcons.resx">
       <Generator>ResXFileCodeGenerator</Generator>
-      <SubType>Designer</SubType>
-      <LastGenOutput>RibbonImages.Designer.cs</LastGenOutput>
+      <LastGenOutput>RibbonIcons.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
-  <ItemGroup>
-    <Content Include="RibbonImages\unprotectWorkbook.png" />
-    <Content Include="RibbonImages\parseNumerics.png" />
-    <Content Include="RibbonImages\validateXml.png" />
-    <Content Include="RibbonImages\highlightDuplicates.png" />
-    <Content Include="RibbonImages\toggleCase.png" />
-    <Content Include="RibbonImages\cutNames.png" />
-    <Content Include="RibbonImages\unmergeCells.png" />
-    <Content Include="RibbonImages\trimSpaces.png" />
-    <Content Include="RibbonImages\createSampleXml.png" />
-    <Content Include="RibbonImages\parseNumerics.png" />
-  </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

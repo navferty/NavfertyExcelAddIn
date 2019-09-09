@@ -13,6 +13,7 @@
           <button id="ToggleCase" getLabel="GetLabel" onAction="ToggleCase" image="toggleCase" size="large" keytip="T" />
           <button id="TrimSpaces" getLabel="GetLabel" onAction="TrimSpaces" image="trimSpaces" size="large" keytip="R" />
           <button id="UnmergeCells" getLabel="GetLabel" onAction="UnmergeCells" image="unmergeCells" size="large" keytip="M" />
+          <button id="FindErrors" getLabel="GetLabel" onAction="FindErrors" image="findErrors" size="large" keytip="M" />
       </group>
       <group id="XmlToolsGroup" getLabel="GetLabel">
           <button id="CreateSampleXml" getLabel="GetLabel" onAction="CreateSampleXml" image="createSampleXml" size="large" keytip="X" />
