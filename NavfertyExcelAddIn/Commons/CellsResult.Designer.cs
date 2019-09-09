@@ -31,6 +31,7 @@ namespace NavfertyExcelAddIn.Commons
         /// </summary>
         private void InitializeComponent()
         {
+            Resources = new ComponentResourceManager(typeof(CellsResult));
             ErrorType = new DataGridViewTextBoxColumn();
             Formula = new DataGridViewTextBoxColumn();
             Address = new DataGridViewTextBoxColumn();
@@ -43,33 +44,33 @@ namespace NavfertyExcelAddIn.Commons
             // ErrorType
             // 
             ErrorType.DataPropertyName = "ErrorType";
-            ErrorType.HeaderText = "ErrorType";
             ErrorType.Name = "ErrorType";
             ErrorType.ReadOnly = true;
+            ErrorType.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
 
             // 
             // Formula
             // 
             Formula.DataPropertyName = "Formula";
-            Formula.HeaderText = "Formula";
             Formula.Name = "Formula";
             Formula.ReadOnly = true;
+            Formula.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
 
             // 
             // Address
             // 
             Address.DataPropertyName = "Address";
-            Address.HeaderText = "Address";
             Address.Name = "Address";
             Address.ReadOnly = true;
+            Address.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
 
             // 
             // WsName
             // 
             WsName.DataPropertyName = "WsName";
-            WsName.HeaderText = "WsName";
             WsName.Name = "WsName";
             WsName.ReadOnly = true;
+            WsName.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
 
             // 
             // RangesGridView
@@ -94,8 +95,8 @@ namespace NavfertyExcelAddIn.Commons
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new System.Drawing.Size(800, 450);
             Controls.Add(RangesGridView);
+            Icon = ((System.Drawing.Icon)(Resources.GetObject("$Icon")));
             Name = "CellsResult";
-            Text = "CellsResult";
             TopMost = true;
             ((System.ComponentModel.ISupportInitialize)(RangesGridView)).EndInit();
             ResumeLayout(false);
@@ -108,5 +109,6 @@ namespace NavfertyExcelAddIn.Commons
         private DataGridViewTextBoxColumn Formula;
         private DataGridViewTextBoxColumn Address;
         private DataGridViewTextBoxColumn WsName;
+        private ComponentResourceManager Resources;
     }
 }

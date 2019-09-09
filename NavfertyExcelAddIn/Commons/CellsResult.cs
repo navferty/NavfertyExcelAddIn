@@ -18,6 +18,12 @@ namespace NavfertyExcelAddIn.Commons
         public CellsResult(IReadOnlyCollection<ErroredRange> ranges)
         {
             InitializeComponent();
+            
+            ErrorType.HeaderText = Localization.UIStrings.ErrorType;
+            Formula.HeaderText = Localization.UIStrings.Formula;
+            Address.HeaderText = Localization.UIStrings.Address;
+            WsName.HeaderText = Localization.UIStrings.WsName;
+            Text = Localization.UIStrings.SearchResults;
 
             items = ranges.Select(r => new ListRangeItem(r)).ToArray();
             RangesGridView.DataSource = items;

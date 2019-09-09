@@ -153,4 +153,7 @@
   <data name="FindErrors" xml:space="preserve">
     <value>Find Formula Errors on Current Sheet</value>
   </data>
+  <data name="CopyAsMarkdown" xml:space="preserve">
+    <value>Copy as Markdown</value>
+  </data>
 </root>
