@@ -9,7 +9,20 @@ namespace NavfertyExcelAddIn.FindFormulaErrors
     {
         public IEnumerable<ErroredRange> GetAllErrorCells(Range range)
         {
-            var values = (object[,])range.Value;
+            var rangeValue = range.Value;
+
+            if (rangeValue == null)
+                yield break;
+
+            // only single cell exists on sheet
+            if (!(rangeValue is object[,] values))
+            {
+                if (IsXlCvErr(rangeValue))
+                {
+                    yield return new ErroredRange(range, (CVErrEnum)rangeValue);
+                }
+                yield break;
+            }
 
             int upperI = values.GetUpperBound(0); // Columns
             int upperJ = values.GetUpperBound(1); // Rows
