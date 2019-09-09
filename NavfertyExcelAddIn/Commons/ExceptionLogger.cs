@@ -5,7 +5,7 @@ using Castle.DynamicProxy;
 using System.Windows.Forms;
 using NavfertyExcelAddIn.Localization;
 
-namespace NavfertyExcelAddIn
+namespace NavfertyExcelAddIn.Commons
 {
     [DebuggerStepThrough]
     public class ExceptionLogger : IInterceptor

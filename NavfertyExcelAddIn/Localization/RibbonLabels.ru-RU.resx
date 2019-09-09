@@ -150,4 +150,10 @@
   <data name="XmlToolsGroup" xml:space="preserve">
     <value>Работа с XML</value>
   </data>
+  <data name="FindErrors" xml:space="preserve">
+    <value>Найти все ошибки на листе</value>
+  </data>
+  <data name="CopyAsMarkdown" xml:space="preserve">
+    <value>Копировать в Markdown</value>
+  </data>
 </root>
