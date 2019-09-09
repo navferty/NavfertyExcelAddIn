@@ -97,7 +97,7 @@ namespace NavfertyExcelAddIn.FindFormulaErrors
             Icon = (Icon)resources.GetObject("ExcelIcon");
 
             Name = "SearchRangeResultForm";
-            TopMost = true;
+            TopMost = false;
             ((ISupportInitialize)(RangesGridView)).EndInit();
             ResumeLayout(false);
 
