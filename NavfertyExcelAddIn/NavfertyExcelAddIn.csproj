@@ -196,11 +196,11 @@
     can be found.
   -->
   <ItemGroup>
-    <Compile Include="Commons\CellsResult.cs">
+    <Compile Include="Commons\SearchRangeResultForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Commons\CellsResult.Designer.cs">
-      <DependentUpon>CellsResult.cs</DependentUpon>
+    <Compile Include="Commons\SearchRangeResultForm.Designer.cs">
+      <DependentUpon>SearchRangeResultForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Commons\EnumExtensions.cs" />
     <Compile Include="Commons\ErrorFinder.cs" />
@@ -271,8 +271,8 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Commons\CellsResult.resx">
-      <DependentUpon>CellsResult.cs</DependentUpon>
+    <EmbeddedResource Include="Commons\SearchRangeResultForm.resx">
+      <DependentUpon>SearchRangeResultForm.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Localization\RibbonLabels.resx">

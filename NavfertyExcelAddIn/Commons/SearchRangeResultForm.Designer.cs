@@ -1,9 +1,10 @@
 ﻿using System.ComponentModel;
+using System.Drawing;
 using System.Windows.Forms;
 
 namespace NavfertyExcelAddIn.Commons
 {
-    partial class CellsResult
+    partial class SearchRangeResultForm
     {
         /// <summary>
         /// Required designer variable.
@@ -31,13 +32,13 @@ namespace NavfertyExcelAddIn.Commons
         /// </summary>
         private void InitializeComponent()
         {
-            Resources = new ComponentResourceManager(typeof(CellsResult));
+            Resources = new ComponentResourceManager(typeof(SearchRangeResultForm));
             ErrorType = new DataGridViewTextBoxColumn();
             Formula = new DataGridViewTextBoxColumn();
             Address = new DataGridViewTextBoxColumn();
             WsName = new DataGridViewTextBoxColumn();
             RangesGridView = new DataGridView();
-            ((System.ComponentModel.ISupportInitialize)(RangesGridView)).BeginInit();
+            ((ISupportInitialize)(RangesGridView)).BeginInit();
             SuspendLayout();
 
             // 
@@ -46,7 +47,6 @@ namespace NavfertyExcelAddIn.Commons
             ErrorType.DataPropertyName = "ErrorType";
             ErrorType.Name = "ErrorType";
             ErrorType.ReadOnly = true;
-            ErrorType.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
 
             // 
             // Formula
@@ -54,7 +54,7 @@ namespace NavfertyExcelAddIn.Commons
             Formula.DataPropertyName = "Formula";
             Formula.Name = "Formula";
             Formula.ReadOnly = true;
-            Formula.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            Formula.Width = 250;
 
             // 
             // Address
@@ -62,7 +62,6 @@ namespace NavfertyExcelAddIn.Commons
             Address.DataPropertyName = "Address";
             Address.Name = "Address";
             Address.ReadOnly = true;
-            Address.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
 
             // 
             // WsName
@@ -70,7 +69,6 @@ namespace NavfertyExcelAddIn.Commons
             WsName.DataPropertyName = "WsName";
             WsName.Name = "WsName";
             WsName.ReadOnly = true;
-            WsName.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
 
             // 
             // RangesGridView
@@ -78,8 +76,8 @@ namespace NavfertyExcelAddIn.Commons
             RangesGridView.AllowUserToAddRows = false;
             RangesGridView.AllowUserToDeleteRows = false;
             RangesGridView.AllowUserToOrderColumns = true;
-            RangesGridView.Anchor
-                = ((AnchorStyles)((((AnchorStyles.Top | AnchorStyles.Bottom) | AnchorStyles.Left) | AnchorStyles.Right)));
+            RangesGridView.Anchor =
+                ((AnchorStyles)((((AnchorStyles.Top | AnchorStyles.Bottom) | AnchorStyles.Left) | AnchorStyles.Right)));
             RangesGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             RangesGridView.Columns.AddRange(new DataGridViewColumn[] { ErrorType, Formula, Address, WsName });
             RangesGridView.Location = new System.Drawing.Point(12, 12);
@@ -89,16 +87,16 @@ namespace NavfertyExcelAddIn.Commons
             RangesGridView.TabIndex = 0;
 
             // 
-            // CellsResult
+            // SearchRangeResultForm
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new System.Drawing.Size(800, 450);
             Controls.Add(RangesGridView);
-            Icon = ((System.Drawing.Icon)(Resources.GetObject("$Icon")));
-            Name = "CellsResult";
+            Icon = (Icon)Resources.GetObject("ExcelIcon");
+            Name = "SearchRangeResultForm";
             TopMost = true;
-            ((System.ComponentModel.ISupportInitialize)(RangesGridView)).EndInit();
+            ((ISupportInitialize)(RangesGridView)).EndInit();
             ResumeLayout(false);
 
         }

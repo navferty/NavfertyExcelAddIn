@@ -10,12 +10,12 @@ using Application = Microsoft.Office.Interop.Excel.Application;
 
 namespace NavfertyExcelAddIn.Commons
 {
-    public partial class CellsResult : Form
+    public partial class SearchRangeResultForm : Form
     {
         private readonly IList<ListRangeItem> items;
         private Application App => Globals.ThisAddIn.Application;
 
-        public CellsResult(IReadOnlyCollection<ErroredRange> ranges)
+        public SearchRangeResultForm(IReadOnlyCollection<ErroredRange> ranges)
         {
             InitializeComponent();
             
@@ -28,6 +28,7 @@ namespace NavfertyExcelAddIn.Commons
             items = ranges.Select(r => new ListRangeItem(r)).ToArray();
             RangesGridView.DataSource = items;
             RangesGridView.SelectionChanged += OnSelectionChanged;
+            RangesGridView.AutoGenerateColumns = false;
         }
 
         private void OnSelectionChanged(object sender, EventArgs e)

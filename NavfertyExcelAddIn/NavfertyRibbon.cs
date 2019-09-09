@@ -28,7 +28,7 @@ namespace NavfertyExcelAddIn
         private Application App => Globals.ThisAddIn.Application;
 
         #region Forms
-        private CellsResult form;
+        private SearchRangeResultForm form;
         #endregion
 
         public NavfertyRibbon()
@@ -136,7 +136,7 @@ namespace NavfertyExcelAddIn
                 var errorFinder = scope.Resolve<IErrorFinder>();
                 allErrors = errorFinder.GetAllErrorCells(range).ToArray();
             }
-            form = new CellsResult(allErrors);
+            form = new SearchRangeResultForm(allErrors);
             form.Show();
         }
 
