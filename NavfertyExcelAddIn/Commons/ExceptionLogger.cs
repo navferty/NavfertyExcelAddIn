@@ -2,7 +2,6 @@
 using System.Diagnostics;
 using NLog;
 using Castle.DynamicProxy;
-using System.Windows.Forms;
 using NavfertyExcelAddIn.Localization;
 
 namespace NavfertyExcelAddIn.Commons
@@ -11,6 +10,12 @@ namespace NavfertyExcelAddIn.Commons
     public class ExceptionLogger : IInterceptor
     {
         private readonly ILogger logger = LogManager.GetCurrentClassLogger();
+        private readonly IDialogService dialogService;
+
+        public ExceptionLogger(IDialogService dialogService)
+        {
+            this.dialogService = dialogService;
+        }
 
         public void Intercept(IInvocation invocation)
         {
@@ -21,7 +26,7 @@ namespace NavfertyExcelAddIn.Commons
             catch (Exception ex)
             {
                 logger.Error(ex);
-                MessageBox.Show(string.Format(UIStrings.ErrorMessage, ex.Message));
+                dialogService.ShowError(string.Format(UIStrings.ErrorMessage, ex.Message));
                 throw;
             }
         }

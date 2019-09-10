@@ -1,12 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Microsoft.Office.Interop.Excel;
 
 namespace NavfertyExcelAddIn.FindFormulaErrors
 {
     public class ErrorFinder : IErrorFinder
     {
-        public IEnumerable<ErroredRange> GetAllErrorCells(Range range)
+        public IReadOnlyCollection<ErroredRange> GetAllErrorCells(Range range)
+        {
+            return GetErroredCells(range).ToArray();
+        }
+
+        private IEnumerable<ErroredRange> GetErroredCells(Range range)
         {
             var rangeValue = range.Value;
 

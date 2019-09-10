@@ -5,6 +5,6 @@ namespace NavfertyExcelAddIn.FindFormulaErrors
 {
     public interface IErrorFinder
     {
-        IEnumerable<ErroredRange> GetAllErrorCells(Range range);
+        IReadOnlyCollection<ErroredRange> GetAllErrorCells(Range range);
     }
 }

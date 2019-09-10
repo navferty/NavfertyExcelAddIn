@@ -120,6 +120,12 @@
   <data name="Address" xml:space="preserve">
     <value>Адрес ячейки</value>
   </data>
+  <data name="CannotUnlockPleaseSaveAsXml" xml:space="preserve">
+    <value>Для разброкировки содержимого сохраните книгу в формате .xlsx или .xlsm</value>
+  </data>
+  <data name="Error" xml:space="preserve">
+    <value>Ошибка</value>
+  </data>
   <data name="ErrorMessage" xml:space="preserve">
     <value>Произошла ошибка: {0}</value>
   </data>
@@ -129,11 +135,26 @@
   <data name="Formula" xml:space="preserve">
     <value>Формула</value>
   </data>
+  <data name="Info" xml:space="preserve">
+    <value>Внимание</value>
+  </data>
   <data name="NoErrors" xml:space="preserve">
     <value>На текущем листе ошибок не найдено</value>
   </data>
   <data name="SearchResults" xml:space="preserve">
     <value>Результаты поиска</value>
+  </data>
+  <data name="ShowVersionMessage" xml:space="preserve">
+    <value>Надстройка Navferty, публикуется под лицензией MIT. Версия </value>
+  </data>
+  <data name="UnsavedChangesWillBeLostPrompt" xml:space="preserve">
+    <value>Несохранённые изменения будут утеряны. Книга может оказаться повреждённой: настоятельно рекомендуется предварительно создать копию. Продолжить?</value>
+  </data>
+  <data name="VbaUnprotected" xml:space="preserve">
+    <value>Проект VBA разблокирован. Чтобы получить доступ к содержимому VBA-проекта, откройте свойста проекта в редакторе VBE, и на вкладке Protection установите любой пароль и нажмите OK. После этого Вы можете удалить пароль путем снятия опции Lock project for viewing.</value>
+  </data>
+  <data name="Warning" xml:space="preserve">
+    <value>Внимание</value>
   </data>
   <data name="WsName" xml:space="preserve">
     <value>Имя листа</value>
