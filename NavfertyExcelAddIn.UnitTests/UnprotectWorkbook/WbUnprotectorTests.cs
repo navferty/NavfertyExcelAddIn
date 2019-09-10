@@ -26,7 +26,7 @@ namespace NavfertyExcelAddIn.UnitTests.UnprotectWorkbook
         }
 
         [TestMethod]
-        [Priority(0)]
+        [Description("IgnoreCI")]
         public void UnprotectWorkbookAndWorksheet_CanEditAndAddWorksheet()
         {
             var dialogService = new Mock<IDialogService>(MockBehavior.Loose);
