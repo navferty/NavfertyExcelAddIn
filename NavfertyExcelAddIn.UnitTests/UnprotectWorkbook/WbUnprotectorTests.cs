@@ -26,7 +26,8 @@ namespace NavfertyExcelAddIn.UnitTests.UnprotectWorkbook
         }
 
         [TestMethod]
-        public void Test()
+        [Priority(0)]
+        public void UnprotectWorkbookAndWorksheet_CanEditAndAddWorksheet()
         {
             var dialogService = new Mock<IDialogService>(MockBehavior.Loose);
             wbUnprotector = new WbUnprotector(dialogService.Object);
