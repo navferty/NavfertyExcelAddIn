@@ -46,4 +46,4 @@ steps:
   inputs:
     platform: '$(buildPlatform)'
     configuration: '$(buildConfiguration)'
-    testFiltercriteria: 'Name<>UnprotectWorkbookAndWorksheet_CanEditAndAddWorksheet'
+    testFiltercriteria: 'Name=UnprotectWorkbookAndWorksheet_CanEditAndAddWorksheet'
