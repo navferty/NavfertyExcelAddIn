@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Linq;
+using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
-using System.Windows.Forms;
 using System.Runtime.InteropServices;
 using System.Diagnostics.CodeAnalysis;
 
@@ -10,6 +10,7 @@ using NavfertyExcelAddIn.ParseNumerics;
 using NavfertyExcelAddIn.FindFormulaErrors;
 using NavfertyExcelAddIn.UnprotectWorkbook;
 using NavfertyExcelAddIn.Localization;
+using NavfertyExcelAddIn.Commons;
 
 using NLog;
 using Autofac;
@@ -27,6 +28,8 @@ namespace NavfertyExcelAddIn
     {
         private static readonly IContainer container = Registry.CreateContainer();
         private readonly ILogger logger = LogManager.GetCurrentClassLogger();
+        private readonly IDialogService dialogService = container.Resolve<IDialogService>();
+
         private Application App => Globals.ThisAddIn.Application;
 
         #region Forms
@@ -76,12 +79,11 @@ namespace NavfertyExcelAddIn
 
             if (extension != "xlsx" && extension != "xlsm")
             {
-                MessageBox.Show(UIStrings.CannotUnlockPleaseSaveAsXml);
+                dialogService.ShowError(UIStrings.CannotUnlockPleaseSaveAsXml);
                 return;
             }
 
-            if (MessageBox.Show(UIStrings.UnsavedChangesWillBeLostPrompt,
-                UIStrings.Warning, MessageBoxButtons.YesNo, MessageBoxIcon.Question) != DialogResult.Yes)
+            if (!dialogService.Ask(UIStrings.UnsavedChangesWillBeLostPrompt, UIStrings.Warning))
             {
                 return;
             }
@@ -158,16 +160,16 @@ namespace NavfertyExcelAddIn
             var activeSheet = (Worksheet)App.ActiveSheet;
             var range = activeSheet.UsedRange;
 
-            ErroredRange[] allErrors;
+            IReadOnlyCollection<ErroredRange> allErrors;
             using (var scope = container.BeginLifetimeScope())
             {
                 var errorFinder = scope.Resolve<IErrorFinder>();
-                allErrors = errorFinder.GetAllErrorCells(range).ToArray();
+                allErrors = errorFinder.GetAllErrorCells(range);
             }
 
-            if (allErrors.Length == 0)
+            if (allErrors.Count == 0)
             {
-                MessageBox.Show(UIStrings.NoErrors);
+                dialogService.ShowInfo(UIStrings.NoErrors);
                 return;
             }
             form = new SearchRangeResultForm(allErrors, activeSheet);

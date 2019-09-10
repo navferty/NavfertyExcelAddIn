@@ -3,15 +3,21 @@ using System.IO;
 using System.IO.Compression;
 using System.Linq;
 using System.Text;
-using System.Windows.Forms;
 using System.Xml;
-
+using NavfertyExcelAddIn.Commons;
 using NavfertyExcelAddIn.Localization;
 
 namespace NavfertyExcelAddIn.UnprotectWorkbook
 {
     public class WbUnprotector : IWbUnprotector
     {
+        private readonly IDialogService dialogService;
+
+        public WbUnprotector(IDialogService dialogService)
+        {
+            this.dialogService = dialogService;
+        }
+
         public void UnprotectWorkbookWithAllWorksheets(string path)
         {
             using (var zip = ZipFile.Open(path, ZipArchiveMode.Update))
@@ -81,7 +87,7 @@ namespace NavfertyExcelAddIn.UnprotectWorkbook
                 UnlockVba(vbaStream);
             }
 
-            MessageBox.Show(UIStrings.VbaUnprotected);
+            dialogService.ShowInfo(UIStrings.VbaUnprotected);
         }
 
         private void UnlockVba(Stream stream)

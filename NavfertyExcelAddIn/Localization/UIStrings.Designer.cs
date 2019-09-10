@@ -79,6 +79,15 @@ namespace NavfertyExcelAddIn.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Error.
+        /// </summary>
+        internal static string Error {
+            get {
+                return ResourceManager.GetString("Error", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Error occured: {0}.
         /// </summary>
         internal static string ErrorMessage {
@@ -106,6 +115,15 @@ namespace NavfertyExcelAddIn.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Info.
+        /// </summary>
+        internal static string Info {
+            get {
+                return ResourceManager.GetString("Info", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Found no errors on current worksheet.
         /// </summary>
         internal static string NoErrors {
@@ -120,6 +138,15 @@ namespace NavfertyExcelAddIn.Localization {
         internal static string SearchResults {
             get {
                 return ResourceManager.GetString("SearchResults", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Navferty Excle add-in. Published under MIT licence. Version .
+        /// </summary>
+        internal static string ShowVersionMessage {
+            get {
+                return ResourceManager.GetString("ShowVersionMessage", resourceCulture);
             }
         }
         

@@ -14,6 +14,9 @@ namespace NavfertyExcelAddIn
         {
             var builder = new ContainerBuilder();
 
+            builder.RegisterType<DialogService>()
+                .As<IDialogService>();
+
             builder.RegisterType<WbUnprotector>()
                 .As<IWbUnprotector>()
                 .EnableInterfaceInterceptors()
@@ -29,7 +32,7 @@ namespace NavfertyExcelAddIn
                 .EnableInterfaceInterceptors()
                 .InterceptedBy(typeof(ExceptionLogger));
 
-            builder.Register(c => new ExceptionLogger());
+            builder.RegisterType<ExceptionLogger>();
 
 
             return builder.Build();
