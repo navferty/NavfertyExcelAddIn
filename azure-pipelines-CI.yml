@@ -46,5 +46,6 @@ steps:
   inputs:
     platform: '$(buildPlatform)'
     configuration: '$(buildConfiguration)'
+    # tests depending on Interop.Excel - run locally
     testFiltercriteria: 'Name!=UnprotectWorkbookAndWorksheet_CanEditAndAddWorksheet
-                        &Name!=Range_NoErrors'
+                        &Name!=UnprotectWorkbookAndWorksheet_CanEditAndAddWorksheet' # more tests
