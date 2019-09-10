@@ -2,11 +2,13 @@
 using System.Linq;
 using System.Drawing;
 using System.IO;
+using System.Windows.Forms;
 using System.Runtime.InteropServices;
 using System.Diagnostics.CodeAnalysis;
 
 using NavfertyExcelAddIn.ParseNumerics;
 using NavfertyExcelAddIn.FindFormulaErrors;
+using NavfertyExcelAddIn.UnprotectWorkbook;
 using NavfertyExcelAddIn.Localization;
 
 using NLog;
@@ -16,7 +18,6 @@ using Microsoft.Office.Core;
 using Microsoft.Office.Interop.Excel;
 
 using Application = Microsoft.Office.Interop.Excel.Application;
-using System.Windows.Forms;
 
 namespace NavfertyExcelAddIn
 {
@@ -68,7 +69,32 @@ namespace NavfertyExcelAddIn
 
         public void UnprotectWorkbook(IRibbonControl ribbonControl)
         {
+            var wb = App.ActiveWorkbook;
+            var path = wb.FullName;
 
+            var extension = path.Split('.').LastOrDefault();
+
+            if (extension != "xlsx" && extension != "xlsm")
+            {
+                MessageBox.Show(UIStrings.CannotUnlockPleaseSaveAsXml);
+                return;
+            }
+
+            if (MessageBox.Show(UIStrings.UnsavedChangesWillBeLostPrompt,
+                UIStrings.Warning, MessageBoxButtons.YesNo, MessageBoxIcon.Question) != DialogResult.Yes)
+            {
+                return;
+            }
+
+            wb.Close(false);
+
+            using (var scope = container.BeginLifetimeScope())
+            {
+                var wbUnprotector = scope.Resolve<IWbUnprotector>();
+                wbUnprotector.UnprotectWorkbookWithAllWorksheets(path);
+            }
+
+            App.Workbooks.Open(path);
         }
 
         public void CutNames(IRibbonControl ribbonControl)
@@ -158,6 +184,7 @@ namespace NavfertyExcelAddIn
             logger.Debug("ValidateXml");
             // TODO
         }
+        #endregion
 
         #region Utils
         public string GetLabel(IRibbonControl ribbonControl)
@@ -168,7 +195,6 @@ namespace NavfertyExcelAddIn
         {
             return (Bitmap)RibbonIcons.ResourceManager.GetObject(imageName);
         }
-        #endregion
 
         private static string GetResourceText()
         {

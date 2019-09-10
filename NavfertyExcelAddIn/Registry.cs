@@ -1,8 +1,10 @@
 ﻿using Autofac;
 using Autofac.Extras.DynamicProxy;
+
 using NavfertyExcelAddIn.ParseNumerics;
 using NavfertyExcelAddIn.FindFormulaErrors;
 using NavfertyExcelAddIn.Commons;
+using NavfertyExcelAddIn.UnprotectWorkbook;
 
 namespace NavfertyExcelAddIn
 {
@@ -11,6 +13,11 @@ namespace NavfertyExcelAddIn
         public static IContainer CreateContainer()
         {
             var builder = new ContainerBuilder();
+
+            builder.RegisterType<WbUnprotector>()
+                .As<IWbUnprotector>()
+                .EnableInterfaceInterceptors()
+                .InterceptedBy(typeof(ExceptionLogger));
 
             builder.RegisterType<ErrorFinder>()
                 .As<IErrorFinder>()

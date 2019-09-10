@@ -70,6 +70,15 @@ namespace NavfertyExcelAddIn.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Cannot unlock workbook contents because of wrong workbook format. Please save workbook as xlsx or xlsm and try again.
+        /// </summary>
+        internal static string CannotUnlockPleaseSaveAsXml {
+            get {
+                return ResourceManager.GetString("CannotUnlockPleaseSaveAsXml", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Error occured: {0}.
         /// </summary>
         internal static string ErrorMessage {
@@ -111,6 +120,33 @@ namespace NavfertyExcelAddIn.Localization {
         internal static string SearchResults {
             get {
                 return ResourceManager.GetString("SearchResults", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Any unsaved changes will be lost. Active workbook may become corrupted. It is strongly recommended to create backup. Continue?.
+        /// </summary>
+        internal static string UnsavedChangesWillBeLostPrompt {
+            get {
+                return ResourceManager.GetString("UnsavedChangesWillBeLostPrompt", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to VBA project unprotected. To enable viewing source code go to VBA project properties in VBE editor, tab Protection, set any password and press OK. Then you can disable password by unchecking the option Lock project for viewing..
+        /// </summary>
+        internal static string VbaUnprotected {
+            get {
+                return ResourceManager.GetString("VbaUnprotected", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Warning!.
+        /// </summary>
+        internal static string Warning {
+            get {
+                return ResourceManager.GetString("Warning", resourceCulture);
             }
         }
         

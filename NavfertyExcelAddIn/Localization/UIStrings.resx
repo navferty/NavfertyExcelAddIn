@@ -120,6 +120,9 @@
   <data name="Address" xml:space="preserve">
     <value>Cell Address</value>
   </data>
+  <data name="CannotUnlockPleaseSaveAsXml" xml:space="preserve">
+    <value>Cannot unlock workbook contents because of wrong workbook format. Please save workbook as xlsx or xlsm and try again</value>
+  </data>
   <data name="ErrorMessage" xml:space="preserve">
     <value>Error occured: {0}</value>
   </data>
@@ -134,6 +137,15 @@
   </data>
   <data name="SearchResults" xml:space="preserve">
     <value>Search Results</value>
+  </data>
+  <data name="UnsavedChangesWillBeLostPrompt" xml:space="preserve">
+    <value>Any unsaved changes will be lost. Active workbook may become corrupted. It is strongly recommended to create backup. Continue?</value>
+  </data>
+  <data name="VbaUnprotected" xml:space="preserve">
+    <value>VBA project unprotected. To enable viewing source code go to VBA project properties in VBE editor, tab Protection, set any password and press OK. Then you can disable password by unchecking the option Lock project for viewing.</value>
+  </data>
+  <data name="Warning" xml:space="preserve">
+    <value>Warning!</value>
   </data>
   <data name="WsName" xml:space="preserve">
     <value>Worksheet Name</value>
