@@ -118,7 +118,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="Address" xml:space="preserve">
-    <value>Cell Address</value>
+    <value>Range Address</value>
   </data>
   <data name="CannotUnlockPleaseSaveAsXml" xml:space="preserve">
     <value>Cannot unlock workbook contents because of wrong workbook format. Please save workbook as xlsx or xlsm and try again</value>
@@ -128,9 +128,6 @@
   </data>
   <data name="ErrorMessage" xml:space="preserve">
     <value>Error occured: {0}</value>
-  </data>
-  <data name="ErrorType" xml:space="preserve">
-    <value>Error Type</value>
   </data>
   <data name="Formula" xml:space="preserve">
     <value>Formula</value>

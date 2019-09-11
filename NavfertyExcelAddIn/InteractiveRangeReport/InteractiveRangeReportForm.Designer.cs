@@ -2,9 +2,9 @@
 using System.Drawing;
 using System.Windows.Forms;
 
-namespace NavfertyExcelAddIn.FindFormulaErrors
+namespace NavfertyExcelAddIn.InteractiveRangeReport
 {
-    partial class SearchRangeResultForm
+    partial class InteractiveRangeReportForm
     {
         /// <summary>
         /// Required designer variable.
@@ -32,28 +32,28 @@ namespace NavfertyExcelAddIn.FindFormulaErrors
         /// </summary>
         private void InitializeComponent()
         {
-            ErrorType = new DataGridViewTextBoxColumn();
-            Formula = new DataGridViewTextBoxColumn();
+            ErrorMessage = new DataGridViewTextBoxColumn();
+            Value = new DataGridViewTextBoxColumn();
             Address = new DataGridViewTextBoxColumn();
-            WsName = new DataGridViewTextBoxColumn();
+            WorksheetName = new DataGridViewTextBoxColumn();
             RangesGridView = new DataGridView();
             ((ISupportInitialize)(RangesGridView)).BeginInit();
             SuspendLayout();
 
             // 
-            // ErrorType
+            // ErrorMessage
             // 
-            ErrorType.DataPropertyName = "ErrorType";
-            ErrorType.Name = "ErrorType";
-            ErrorType.ReadOnly = true;
+            ErrorMessage.DataPropertyName = "ErrorMessage";
+            ErrorMessage.Name = "ErrorMessage";
+            ErrorMessage.ReadOnly = true;
 
             // 
-            // Formula
+            // Value
             // 
-            Formula.DataPropertyName = "Formula";
-            Formula.Name = "Formula";
-            Formula.ReadOnly = true;
-            Formula.Width = 250;
+            Value.DataPropertyName = "Value";
+            Value.Name = "Value";
+            Value.ReadOnly = true;
+            Value.Width = 250;
 
             // 
             // Address
@@ -63,11 +63,11 @@ namespace NavfertyExcelAddIn.FindFormulaErrors
             Address.ReadOnly = true;
 
             // 
-            // WsName
+            // WorksheetName
             // 
-            WsName.DataPropertyName = "WsName";
-            WsName.Name = "WsName";
-            WsName.ReadOnly = true;
+            WorksheetName.DataPropertyName = "WorksheetName";
+            WorksheetName.Name = "WorksheetName";
+            WorksheetName.ReadOnly = true;
 
             // 
             // RangesGridView
@@ -78,7 +78,7 @@ namespace NavfertyExcelAddIn.FindFormulaErrors
             RangesGridView.Anchor =
                 ((AnchorStyles)((((AnchorStyles.Top | AnchorStyles.Bottom) | AnchorStyles.Left) | AnchorStyles.Right)));
             RangesGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            RangesGridView.Columns.AddRange(new DataGridViewColumn[] { ErrorType, Formula, Address, WsName });
+            RangesGridView.Columns.AddRange(new DataGridViewColumn[] { ErrorMessage, Value, Address, WorksheetName });
             RangesGridView.Location = new System.Drawing.Point(12, 12);
             RangesGridView.Name = "RangesGridView";
             RangesGridView.ReadOnly = true;
@@ -93,7 +93,7 @@ namespace NavfertyExcelAddIn.FindFormulaErrors
             ClientSize = new System.Drawing.Size(800, 450);
             Controls.Add(RangesGridView);
 
-            var resources = new ComponentResourceManager(typeof(SearchRangeResultForm));
+            var resources = new ComponentResourceManager(typeof(InteractiveRangeReportForm));
             Icon = (Icon)resources.GetObject("ExcelIcon");
 
             Name = "SearchRangeResultForm";
@@ -105,9 +105,9 @@ namespace NavfertyExcelAddIn.FindFormulaErrors
         #endregion
 
         private DataGridView RangesGridView;
-        private DataGridViewTextBoxColumn ErrorType;
-        private DataGridViewTextBoxColumn Formula;
+        private DataGridViewTextBoxColumn ErrorMessage;
+        private DataGridViewTextBoxColumn Value;
         private DataGridViewTextBoxColumn Address;
-        private DataGridViewTextBoxColumn WsName;
+        private DataGridViewTextBoxColumn WorksheetName;
     }
 }

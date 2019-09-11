@@ -206,7 +206,7 @@
     <Compile Include="FindFormulaErrors\CVErrEnum.cs" />
     <Compile Include="DataValidation\CellsValueValidator.cs" />
     <Compile Include="DataValidation\IValidator.cs" />
-    <Compile Include="DataValidation\ValidationError.cs" />
+    <Compile Include="InteractiveRangeReport\InteractiveErrorItem.cs" />
     <Compile Include="DataValidation\ICellsValueValidator.cs" />
     <Compile Include="DataValidation\ValidationResult.cs" />
     <Compile Include="DataValidation\ValidatorFactory.cs" />
@@ -221,6 +221,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ValidationMessages.resx</DependentUpon>
     </Compile>
+    <Compile Include="DataValidation\ValidationType.cs" />
     <Compile Include="WorksheetCellsEditing\ICellsToMarkdownReader.cs" />
     <Compile Include="WorksheetCellsEditing\CellsToMarkdownReader.cs" />
     <Compile Include="WorksheetCellsEditing\IDuplicatesHighlighter.cs" />
@@ -233,16 +234,15 @@
     <Compile Include="Commons\DialogService.cs" />
     <Compile Include="Commons\EnumerableExtensions.cs" />
     <Compile Include="Commons\IDialogService.cs" />
-    <Compile Include="FindFormulaErrors\SearchRangeResultForm.cs">
+    <Compile Include="InteractiveRangeReport\InteractiveRangeReportForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FindFormulaErrors\SearchRangeResultForm.Designer.cs">
-      <DependentUpon>SearchRangeResultForm.cs</DependentUpon>
+    <Compile Include="InteractiveRangeReport\InteractiveRangeReportForm.Designer.cs">
+      <DependentUpon>InteractiveRangeReportForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Commons\EnumExtensions.cs" />
     <Compile Include="FindFormulaErrors\ErrorFinder.cs" />
     <Compile Include="FindFormulaErrors\IErrorFinder.cs" />
-    <Compile Include="FindFormulaErrors\ErroredRange.cs" />
     <Compile Include="Commons\ExceptionLogger.cs" />
     <Compile Include="WorksheetCellsEditing\ICellsUnmerger.cs" />
     <Compile Include="NavfertyRibbon.cs" />
@@ -310,8 +310,8 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="FindFormulaErrors\SearchRangeResultForm.resx">
-      <DependentUpon>SearchRangeResultForm.cs</DependentUpon>
+    <EmbeddedResource Include="InteractiveRangeReport\InteractiveRangeReportForm.resx">
+      <DependentUpon>InteractiveRangeReportForm.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Localization\RibbonLabels.resx">
@@ -338,9 +338,7 @@
       <LastGenOutput>RibbonIcons.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="InteractiveRangeReport\" />
-  </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

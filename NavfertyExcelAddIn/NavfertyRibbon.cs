@@ -12,6 +12,7 @@ using NavfertyExcelAddIn.FindFormulaErrors;
 using NavfertyExcelAddIn.ParseNumerics;
 using NavfertyExcelAddIn.UnprotectWorkbook;
 using NavfertyExcelAddIn.WorksheetCellsEditing;
+using NavfertyExcelAddIn.InteractiveRangeReport;
 using NavfertyExcelAddIn.Localization;
 using NavfertyExcelAddIn.Commons;
 
@@ -46,7 +47,7 @@ namespace NavfertyExcelAddIn
         private Application App => Globals.ThisAddIn.Application;
 
         #region Forms
-        private SearchRangeResultForm form;
+        private InteractiveRangeReportForm form;
         #endregion
 
         public NavfertyRibbon()
@@ -205,14 +206,14 @@ namespace NavfertyExcelAddIn
 
             logger.Debug($"ValidateValues. Range selected is {range.Address}, validation type {validationType}");
 
-            IReadOnlyCollection<ValidationError> results;
+            IReadOnlyCollection<InteractiveErrorItem> results;
             using (var scope = container.BeginLifetimeScope())
             {
                 var validator = scope.Resolve<ICellsValueValidator>();
                 results = validator.Validate(range, validationType);
             }
 
-            form = new SearchRangeResultForm(results, activeSheet);
+            form = new InteractiveRangeReportForm(results, activeSheet);
             form.Show();
         }
 
@@ -221,7 +222,7 @@ namespace NavfertyExcelAddIn
             var activeSheet = (Worksheet)App.ActiveSheet;
             var range = activeSheet.UsedRange;
 
-            IReadOnlyCollection<ErroredRange> allErrors;
+            IReadOnlyCollection<InteractiveErrorItem> allErrors;
             using (var scope = container.BeginLifetimeScope())
             {
                 var errorFinder = scope.Resolve<IErrorFinder>();
@@ -233,7 +234,7 @@ namespace NavfertyExcelAddIn
                 dialogService.ShowInfo(UIStrings.NoErrors);
                 return;
             }
-            form = new SearchRangeResultForm(allErrors, activeSheet);
+            form = new InteractiveRangeReportForm(allErrors, activeSheet);
             form.Show();
         }
 

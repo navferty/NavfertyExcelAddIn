@@ -129,9 +129,6 @@
   <data name="ErrorMessage" xml:space="preserve">
     <value>Произошла ошибка: {0}</value>
   </data>
-  <data name="ErrorType" xml:space="preserve">
-    <value>Тип ошибки</value>
-  </data>
   <data name="Formula" xml:space="preserve">
     <value>Формула</value>
   </data>

@@ -37,7 +37,7 @@ namespace NavfertyExcelAddIn.UnitTests.FindFormulaErrors
             var result = errorFinder.GetAllErrorCells(worksheetUsedRange.Object).ToArray();
 
             Assert.AreEqual(1, result.Length);
-            Assert.AreEqual(CVErrEnum.ErrGettingData, result.First().ErrorType);
+            Assert.AreEqual(CVErrEnum.ErrGettingData, result.First().ErrorMessage);
         }
 
         [TestMethod]
@@ -62,7 +62,7 @@ namespace NavfertyExcelAddIn.UnitTests.FindFormulaErrors
             var result = errorFinder.GetAllErrorCells(worksheetUsedRange.Object).ToArray();
 
             Assert.AreEqual(1, result.Length);
-            Assert.AreEqual(CVErrEnum.ErrNA, result.First().ErrorType);
+            Assert.AreEqual(CVErrEnum.ErrNA, result.First().ErrorMessage);
         }
 
         [TestMethod]

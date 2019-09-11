@@ -61,7 +61,7 @@ namespace NavfertyExcelAddIn.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Cell Address.
+        ///   Looks up a localized string similar to Range Address.
         /// </summary>
         internal static string Address {
             get {
@@ -93,15 +93,6 @@ namespace NavfertyExcelAddIn.Localization {
         internal static string ErrorMessage {
             get {
                 return ResourceManager.GetString("ErrorMessage", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Error Type.
-        /// </summary>
-        internal static string ErrorType {
-            get {
-                return ResourceManager.GetString("ErrorType", resourceCulture);
             }
         }
         
