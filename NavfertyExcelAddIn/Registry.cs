@@ -5,6 +5,8 @@ using NavfertyExcelAddIn.ParseNumerics;
 using NavfertyExcelAddIn.FindFormulaErrors;
 using NavfertyExcelAddIn.Commons;
 using NavfertyExcelAddIn.UnprotectWorkbook;
+using NavfertyExcelAddIn.WorksheetCellsEditing;
+using NavfertyExcelAddIn.DataValidation;
 
 namespace NavfertyExcelAddIn
 {
@@ -16,6 +18,31 @@ namespace NavfertyExcelAddIn
 
             builder.RegisterType<DialogService>()
                 .As<IDialogService>();
+
+            builder.RegisterType<CellsValueValidator>()
+                .As<ICellsValueValidator>()
+                .EnableInterfaceInterceptors()
+                .InterceptedBy(typeof(ExceptionLogger));
+
+            builder.RegisterType<ValidatorFactory>()
+                .As<IValidatorFactory>()
+                .EnableInterfaceInterceptors()
+                .InterceptedBy(typeof(ExceptionLogger));
+
+            builder.RegisterType<CellsToMarkdownReader>()
+                .As<ICellsToMarkdownReader>()
+                .EnableInterfaceInterceptors()
+                .InterceptedBy(typeof(ExceptionLogger));
+
+            builder.RegisterType<EmptySpaceTrimmer>()
+                .As<IEmptySpaceTrimmer>()
+                .EnableInterfaceInterceptors()
+                .InterceptedBy(typeof(ExceptionLogger));
+
+            builder.RegisterType<CaseToggler>()
+                .As<ICaseToggler>()
+                .EnableInterfaceInterceptors()
+                .InterceptedBy(typeof(ExceptionLogger));
 
             builder.RegisterType<CellsUnmerger>()
                 .As<ICellsUnmerger>()

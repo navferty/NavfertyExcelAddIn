@@ -59,5 +59,185 @@ namespace NavfertyExcelAddIn.Localization {
                 resourceCulture = value;
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Commons.
+        /// </summary>
+        internal static string CommonGroup {
+            get {
+                return ResourceManager.GetString("CommonGroup", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Copy as Markdown.
+        /// </summary>
+        internal static string CopyAsMarkdown {
+            get {
+                return ResourceManager.GetString("CopyAsMarkdown", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Create Sample XML based on XSD.
+        /// </summary>
+        internal static string CreateSampleXml {
+            get {
+                return ResourceManager.GetString("CreateSampleXml", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cut Names.
+        /// </summary>
+        internal static string CutNames {
+            get {
+                return ResourceManager.GetString("CutNames", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Find Formula Errors on Current Sheet.
+        /// </summary>
+        internal static string FindErrors {
+            get {
+                return ResourceManager.GetString("FindErrors", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Highlight Duplicates.
+        /// </summary>
+        internal static string HighlightDuplicates {
+            get {
+                return ResourceManager.GetString("HighlightDuplicates", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Parse Numerics.
+        /// </summary>
+        internal static string ParseNumerics {
+            get {
+                return ResourceManager.GetString("ParseNumerics", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Toggle Case.
+        /// </summary>
+        internal static string ToggleCase {
+            get {
+                return ResourceManager.GetString("ToggleCase", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Trim Spaces.
+        /// </summary>
+        internal static string TrimSpaces {
+            get {
+                return ResourceManager.GetString("TrimSpaces", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Unmerge Cells.
+        /// </summary>
+        internal static string UnmergeCells {
+            get {
+                return ResourceManager.GetString("UnmergeCells", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Unprotect Workbook.
+        /// </summary>
+        internal static string UnprotectWorkbook {
+            get {
+                return ResourceManager.GetString("UnprotectWorkbook", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ValidateValuesButton.
+        /// </summary>
+        internal static string ValidateValuesButton {
+            get {
+                return ResourceManager.GetString("ValidateValuesButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Date.
+        /// </summary>
+        internal static string ValidateValuesDate {
+            get {
+                return ResourceManager.GetString("ValidateValuesDate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Numerics.
+        /// </summary>
+        internal static string ValidateValuesNumerics {
+            get {
+                return ResourceManager.GetString("ValidateValuesNumerics", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ValidateValuesSplitButton.
+        /// </summary>
+        internal static string ValidateValuesSplitButton {
+            get {
+                return ResourceManager.GetString("ValidateValuesSplitButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to TinOrganization.
+        /// </summary>
+        internal static string ValidateValuesTinOrganization {
+            get {
+                return ResourceManager.GetString("ValidateValuesTinOrganization", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to TinPersonal.
+        /// </summary>
+        internal static string ValidateValuesTinPersonal {
+            get {
+                return ResourceManager.GetString("ValidateValuesTinPersonal", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Xml.
+        /// </summary>
+        internal static string ValidateValuesXml {
+            get {
+                return ResourceManager.GetString("ValidateValuesXml", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Validate XML with XSD.
+        /// </summary>
+        internal static string ValidateXml {
+            get {
+                return ResourceManager.GetString("ValidateXml", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to XML Tools.
+        /// </summary>
+        internal static string XmlToolsGroup {
+            get {
+                return ResourceManager.GetString("XmlToolsGroup", resourceCulture);
+            }
+        }
     }
 }

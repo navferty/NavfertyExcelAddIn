@@ -3,7 +3,9 @@ using System.Linq;
 
 using Microsoft.Office.Interop.Excel;
 
-namespace NavfertyExcelAddIn.Commons
+using NavfertyExcelAddIn.Commons;
+
+namespace NavfertyExcelAddIn.WorksheetCellsEditing
 {
     public class CellsUnmerger : ICellsUnmerger
     {

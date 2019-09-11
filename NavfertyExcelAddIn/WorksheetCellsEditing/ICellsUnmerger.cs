@@ -1,6 +1,6 @@
 ﻿using Microsoft.Office.Interop.Excel;
 
-namespace NavfertyExcelAddIn.Commons
+namespace NavfertyExcelAddIn.WorksheetCellsEditing
 {
     public interface ICellsUnmerger
     {

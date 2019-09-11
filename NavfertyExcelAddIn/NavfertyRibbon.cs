@@ -5,10 +5,13 @@ using System.Drawing;
 using System.IO;
 using System.Runtime.InteropServices;
 using System.Diagnostics.CodeAnalysis;
+using System.Windows.Forms;
 
-using NavfertyExcelAddIn.ParseNumerics;
+using NavfertyExcelAddIn.DataValidation;
 using NavfertyExcelAddIn.FindFormulaErrors;
+using NavfertyExcelAddIn.ParseNumerics;
 using NavfertyExcelAddIn.UnprotectWorkbook;
+using NavfertyExcelAddIn.WorksheetCellsEditing;
 using NavfertyExcelAddIn.Localization;
 using NavfertyExcelAddIn.Commons;
 
@@ -29,6 +32,16 @@ namespace NavfertyExcelAddIn
         private static readonly IContainer container = Registry.CreateContainer();
         private readonly ILogger logger = LogManager.GetCurrentClassLogger();
         private readonly IDialogService dialogService = container.Resolve<IDialogService>();
+
+        private readonly Dictionary<string, ValidationType> validationTypeByButtonId =
+            new Dictionary<string, ValidationType>
+            {
+                { "ValidateValuesNumerics", ValidationType.Numeric },
+                { "ValidateValuesXml", ValidationType.Xml },
+                { "ValidateValuesDate", ValidationType.Date },
+                { "ValidateValuesTinPersonal", ValidationType.TinPersonal },
+                { "ValidateValuesTinOrganization", ValidationType.TinOrganization }
+            };
 
         private Application App => Globals.ThisAddIn.Application;
 
@@ -120,36 +133,48 @@ namespace NavfertyExcelAddIn
 
             logger.Debug($"HighlightDuplicates. Range selected is {selection.Address}");
 
-            // TODO
+            using (var scope = container.BeginLifetimeScope())
+            {
+                var duplicatesHighlighter = scope.Resolve<IDuplicatesHighlighter>();
+                duplicatesHighlighter.HighlightDuplicates(selection);
+            }
         }
 
         public void ToggleCase(IRibbonControl ribbonControl)
         {
-             var selection = (Range)App.Selection;
+            var selection = (Range)App.Selection;
 
             if (selection == null)
                 return;
 
             logger.Debug($"ToggleCase. Range selected is {selection.Address}");
 
-            // TODO
+            using (var scope = container.BeginLifetimeScope())
+            {
+                var caseToggler = scope.Resolve<ICaseToggler>();
+                caseToggler.ToggleCase(selection);
+            }
         }
 
         public void TrimSpaces(IRibbonControl ribbonControl)
         {
-             var selection = (Range)App.Selection;
+            var selection = (Range)App.Selection;
 
             if (selection == null)
                 return;
 
             logger.Debug($"TrimSpaces. Range selected is {selection.Address}");
 
-            // TODO
+            using (var scope = container.BeginLifetimeScope())
+            {
+                var trimmer = scope.Resolve<IEmptySpaceTrimmer>();
+                trimmer.TrimSpaces(selection);
+            }
         }
 
         public void UnmergeCells(IRibbonControl ribbonControl)
         {
-             var selection = (Range)App.Selection;
+            var selection = (Range)App.Selection;
 
             if (selection == null)
                 return;
@@ -166,14 +191,29 @@ namespace NavfertyExcelAddIn
 
         public void ValidateValues(IRibbonControl ribbonControl)
         {
-            var selection = (Range)App.Selection;
+            var activeSheet = (Worksheet)App.ActiveSheet;
+            var range = activeSheet.UsedRange;
 
-            if (selection == null)
+            if (range == null)
                 return;
 
-            logger.Debug($"UnmergeCells. Range selected is {selection.Address}");
+            if (!validationTypeByButtonId.TryGetValue(ribbonControl.Id, out var validationType))
+            {
+                dialogService.ShowError($"Invalid control id '{ribbonControl.Id}'");
+                throw new ArgumentOutOfRangeException($"Invalid control id '{ribbonControl.Id}'");
+            }
 
-            // TODO
+            logger.Debug($"ValidateValues. Range selected is {range.Address}, validation type {validationType}");
+
+            IReadOnlyCollection<ValidationError> results;
+            using (var scope = container.BeginLifetimeScope())
+            {
+                var validator = scope.Resolve<ICellsValueValidator>();
+                results = validator.Validate(range, validationType);
+            }
+
+            form = new SearchRangeResultForm(results, activeSheet);
+            form.Show();
         }
 
         public void FindErrors(IRibbonControl ribbonControl)
@@ -195,6 +235,28 @@ namespace NavfertyExcelAddIn
             }
             form = new SearchRangeResultForm(allErrors, activeSheet);
             form.Show();
+        }
+
+        public void CopyAsMarkdown(IRibbonControl ribbonControl)
+        {
+            var selection = (Range)App.Selection;
+
+            if (selection == null)
+                return;
+
+            logger.Debug($"CopyAsMarkdown. Range selected is {selection.Address}");
+
+            string table;
+            using (var scope = container.BeginLifetimeScope())
+            {
+                var markdownReader = scope.Resolve<ICellsToMarkdownReader>();
+                table = markdownReader.ReadToMarkdown(selection);
+            }
+
+            if (!string.IsNullOrWhiteSpace(table))
+            {
+                Clipboard.SetText(table);
+            }
         }
 
         #region XML Tools

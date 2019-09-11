@@ -4,20 +4,31 @@
           onLoad="RibbonLoad" loadImage="GetImage">
   <ribbon>
     <tabs>
-      <tab idQ="n:NavfertyAddInTab" label="Navferty's Tools" keytip="NT" >
+      <tab idQ="n:NavfertyAddInTab" label="Navferty's Tools" keytip="NT">
         <group id="CommonGroup" getLabel="GetLabel">
           <button id="ParseNumerics" getLabel="GetLabel" onAction="ParseNumerics" image="parseNumerics" size="large" keytip="P" />
-          <button id="UnprotectWorkbook" getLabel="GetLabel" onAction="UnprotectWorkbook" image="unprotectWorkbook" size="large" keytip="U" />
+          <button id="UnprotectWorkbook" getLabel="GetLabel" onAction="UnprotectWorkbook" image="unprotectWorkbook" size="large" keytip="UP" />
           <button id="CutNames" getLabel="GetLabel" onAction="CutNames" image="cutNames" size="large" keytip="C" />
           <button id="HighlightDuplicates" getLabel="GetLabel" onAction="HighlightDuplicates" image="highlightDuplicates" size="large" keytip="D" />
           <button id="ToggleCase" getLabel="GetLabel" onAction="ToggleCase" image="toggleCase" size="large" keytip="T" />
           <button id="TrimSpaces" getLabel="GetLabel" onAction="TrimSpaces" image="trimSpaces" size="large" keytip="R" />
-          <button id="UnmergeCells" getLabel="GetLabel" onAction="UnmergeCells" image="unmergeCells" size="large" keytip="M" />
-          <button id="FindErrors" getLabel="GetLabel" onAction="FindErrors" image="findErrors" size="large" keytip="M" />
-      </group>
+          <button id="UnmergeCells" getLabel="GetLabel" onAction="UnmergeCells" image="unmergeCells" size="large" keytip="UM" />
+          <button id="FindErrors" getLabel="GetLabel" onAction="FindErrors" image="findErrors" size="large" keytip="E" />
+          <button id="CopyAsMarkdown" getLabel="GetLabel" onAction="CopyAsMarkdown" image="copyAsMarkdown" size="large" keytip="MD" />
+          <splitButton id="ValidateValuesSplitButton" size="large" keytip="VV">
+            <button id="ValidateValuesButton" imageMso="TableTestValidationRules" getLabel="GetLabel" />
+            <menu id="menu">
+              <button id="ValidateValuesNumerics" getLabel="GetLabel" imageMso="TableTestValidationRules" onAction="ValidateValues" keytip="N" />
+              <button id="ValidateValuesXml" getLabel="GetLabel" imageMso="TableTestValidationRules" onAction="ValidateValues" keytip="X" />
+              <button id="ValidateValuesDate" getLabel="GetLabel" imageMso="TableTestValidationRules" onAction="ValidateValues" keytip="D" />
+              <button id="ValidateValuesTinPersonal" getLabel="GetLabel" imageMso="TableTestValidationRules" onAction="ValidateValues" keytip="P" />
+              <button id="ValidateValuesTinOrganization" getLabel="GetLabel" imageMso="TableTestValidationRules" onAction="ValidateValues" keytip="O" />
+            </menu>
+          </splitButton>
+        </group>
       <group id="XmlToolsGroup" getLabel="GetLabel">
           <button id="CreateSampleXml" getLabel="GetLabel" onAction="CreateSampleXml" image="createSampleXml" size="large" keytip="X" />
-          <button id="ValidateXml" getLabel="GetLabel" onAction="ValidateXml" image="validateXml" size="large" keytip="V" />
+          <button id="ValidateXml" getLabel="GetLabel" onAction="ValidateXml" image="validateXml" size="large" keytip="VX" />
       </group>
       </tab>
     </tabs>
