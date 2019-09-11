@@ -16,7 +16,7 @@ namespace NavfertyExcelAddIn.FindFormulaErrors
 
         private IEnumerable<InteractiveErrorItem> GetErroredCells(Range range)
         {
-            var rangeValue = range.Value;
+            object rangeValue = range.Value;
             var worksheetName = range.Worksheet.Name;
 
             if (rangeValue == null)
@@ -30,7 +30,7 @@ namespace NavfertyExcelAddIn.FindFormulaErrors
                     yield return new InteractiveErrorItem
                     {
                         Range = range,
-                        Value = rangeValue,
+                        Value = range.Formula[false, false],
                         ErrorMessage = ((CVErrEnum)rangeValue).GetEnumDescription(),
                         Address = range.Address[false, false],
                         WorksheetName = worksheetName
@@ -53,7 +53,7 @@ namespace NavfertyExcelAddIn.FindFormulaErrors
                         yield return new InteractiveErrorItem
                         {
                             Range = currentRange,
-                            Value = currentRange.Formula,
+                            Value = currentRange.Formula[false, false],
                             ErrorMessage = ((CVErrEnum)value).GetEnumDescription(),
                             Address = currentRange.Address[false, false],
                             WorksheetName = worksheetName
