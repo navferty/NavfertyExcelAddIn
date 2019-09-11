@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using NLog;
 using Microsoft.Office.Interop.Excel;
 using NavfertyExcelAddIn.Commons;
@@ -25,7 +24,7 @@ namespace NavfertyExcelAddIn.DataValidation
 
             range.ForEachCell(c => CheckCell(c, validator, errors, range.Worksheet.Name));
 
-            throw new NotImplementedException();
+            return errors.ToArray();
         }
 
         private void CheckCell(Range cell, IValidator validator, ICollection<InteractiveErrorItem> errors, string wsName)
@@ -50,7 +49,6 @@ namespace NavfertyExcelAddIn.DataValidation
                 Range = cell,
                 Value = value.ToString(),
                 ErrorMessage = result.Message,
-                //Info = $"Invalid value '{cell.Value}', {result.Message}",
                 Address = cell.Address[false, false],
                 WorksheetName = wsName
             };

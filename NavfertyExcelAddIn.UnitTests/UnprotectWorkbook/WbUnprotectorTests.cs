@@ -26,7 +26,7 @@ namespace NavfertyExcelAddIn.UnitTests.UnprotectWorkbook
         }
 
         [TestMethod]
-        // ignored in azure-pipelines-CI.yml 
+        // ignored in azure-pipelines-CI.yml by name
         public void UnprotectWorkbookAndWorksheet_CanEditAndAddWorksheet()
         {
             var dialogService = new Mock<IDialogService>(MockBehavior.Loose);
