@@ -31,7 +31,7 @@ namespace NavfertyExcelAddIn.WorksheetCellsEditing
         {
             return cells
                 .Where(x => !string.IsNullOrEmpty(x.Value.ToString()))
-                .GroupBy(x => x.ToString().ToLowerInvariant(), new ValueEqualityComparer())
+                .GroupBy(x => ((object)x.Value).ToString().ToLowerInvariant(), new ValueEqualityComparer())
                 .Where(x => x.Count() > 1)
                 .ToDictionary(x => x.Key, x => x.ToArray());
         }

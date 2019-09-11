@@ -70,17 +70,17 @@ namespace NavfertyExcelAddIn
 
         public void ParseNumerics(IRibbonControl ribbonControl)
         {
-            var selection = (Range)App.Selection;
+            var range = GetSelectionOrUsedRange(App.ActiveSheet);
 
-            if (selection == null)
+            if (range == null)
                 return;
 
-            logger.Debug($"Parse numerics for range {selection.Address}");
+            logger.Debug($"Parse numerics for range {range.Address}");
 
             using (var scope = container.BeginLifetimeScope())
             {
                 var parser = scope.Resolve<INumericParser>();
-                parser.Parse(selection);
+                parser.Parse(range);
             }
         }
 
@@ -88,6 +88,8 @@ namespace NavfertyExcelAddIn
         {
             var wb = App.ActiveWorkbook;
             var path = wb.FullName;
+
+            logger.Debug($"UnprotectWorkbook {path}");
 
             var extension = path.Split('.').LastOrDefault();
 
@@ -115,77 +117,77 @@ namespace NavfertyExcelAddIn
 
         public void CutNames(IRibbonControl ribbonControl)
         {
-            var selection = (Range)App.Selection;
+            var range = GetSelectionOrUsedRange(App.ActiveSheet);
 
-            if (selection == null)
+            if (range == null)
                 return;
 
-            logger.Debug($"CutNames. Range selected is {selection.Address}");
+            logger.Debug($"CutNames. Range selected is {range.Address}");
 
             // TODO
         }
 
         public void HighlightDuplicates(IRibbonControl ribbonControl)
         {
-            var selection = (Range)App.Selection;
+            var range = GetSelectionOrUsedRange(App.ActiveSheet);
 
-            if (selection == null)
+            if (range == null)
                 return;
 
-            logger.Debug($"HighlightDuplicates. Range selected is {selection.Address}");
+            logger.Debug($"HighlightDuplicates. Range selected is {range.Address}");
 
             using (var scope = container.BeginLifetimeScope())
             {
                 var duplicatesHighlighter = scope.Resolve<IDuplicatesHighlighter>();
-                duplicatesHighlighter.HighlightDuplicates(selection);
+                duplicatesHighlighter.HighlightDuplicates(range);
             }
         }
 
         public void ToggleCase(IRibbonControl ribbonControl)
         {
-            var selection = (Range)App.Selection;
+            var range = GetSelectionOrUsedRange(App.ActiveSheet);
 
-            if (selection == null)
+            if (range == null)
                 return;
 
-            logger.Debug($"ToggleCase. Range selected is {selection.Address}");
+            logger.Debug($"ToggleCase. Range selected is {range.Address}");
 
             using (var scope = container.BeginLifetimeScope())
             {
                 var caseToggler = scope.Resolve<ICaseToggler>();
-                caseToggler.ToggleCase(selection);
+                caseToggler.ToggleCase(range);
             }
         }
 
         public void TrimSpaces(IRibbonControl ribbonControl)
         {
-            var selection = (Range)App.Selection;
+            var range = GetSelectionOrUsedRange(App.ActiveSheet);
 
-            if (selection == null)
+            if (range == null)
                 return;
 
-            logger.Debug($"TrimSpaces. Range selected is {selection.Address}");
+            logger.Debug($"TrimSpaces. Range selected is {range.Address}");
 
             using (var scope = container.BeginLifetimeScope())
             {
                 var trimmer = scope.Resolve<IEmptySpaceTrimmer>();
-                trimmer.TrimSpaces(selection);
+                trimmer.TrimSpaces(range);
             }
         }
 
         public void UnmergeCells(IRibbonControl ribbonControl)
         {
-            var selection = (Range)App.Selection;
+            var range = GetSelectionOrUsedRange(App.ActiveSheet);
 
-            if (selection == null)
+            if (range == null)
                 return;
 
-            logger.Debug($"UnmergeCells. Range selected is {selection.Address}");
+            logger.Debug($"UnmergeCells. Range selected is {range.Address}");
             
             using (var scope = container.BeginLifetimeScope())
             {
                 var cellsUnmerger = scope.Resolve<ICellsUnmerger>();
-                cellsUnmerger.Unmerge(selection);
+                cellsUnmerger.Unmerge(range);
             }
 
         }
@@ -193,10 +195,12 @@ namespace NavfertyExcelAddIn
         public void ValidateValues(IRibbonControl ribbonControl)
         {
             var activeSheet = (Worksheet)App.ActiveSheet;
-            var range = activeSheet.UsedRange;
+            var range = GetSelectionOrUsedRange(activeSheet);
 
             if (range == null)
                 return;
+
+            logger.Debug($"ValidateValues. Range selected is {range.Address}");
 
             if (!validationTypeByButtonId.TryGetValue(ribbonControl.Id, out var validationType))
             {
@@ -220,7 +224,12 @@ namespace NavfertyExcelAddIn
         public void FindErrors(IRibbonControl ribbonControl)
         {
             var activeSheet = (Worksheet)App.ActiveSheet;
-            var range = activeSheet.UsedRange;
+            var range = GetSelectionOrUsedRange(activeSheet);
+
+            if (range == null)
+                return;
+
+            logger.Debug($"FindErrors. Range selected is {range.Address}");
 
             IReadOnlyCollection<InteractiveErrorItem> allErrors;
             using (var scope = container.BeginLifetimeScope())
@@ -240,18 +249,18 @@ namespace NavfertyExcelAddIn
 
         public void CopyAsMarkdown(IRibbonControl ribbonControl)
         {
-            var selection = (Range)App.Selection;
+            var range = GetSelectionOrUsedRange(App.ActiveSheet);
 
-            if (selection == null)
+            if (range == null)
                 return;
 
-            logger.Debug($"CopyAsMarkdown. Range selected is {selection.Address}");
+            logger.Debug($"CopyAsMarkdown. Range selected is {range.Address}");
 
             string table;
             using (var scope = container.BeginLifetimeScope())
             {
                 var markdownReader = scope.Resolve<ICellsToMarkdownReader>();
-                table = markdownReader.ReadToMarkdown(selection);
+                table = markdownReader.ReadToMarkdown(range);
             }
 
             if (!string.IsNullOrWhiteSpace(table))
@@ -293,6 +302,15 @@ namespace NavfertyExcelAddIn
             {
                 return resourceReader.ReadToEnd();
             }
+        }
+
+        private Range GetSelectionOrUsedRange(Worksheet activeSheet)
+        {
+            var selection = (Range)App.Selection;
+
+            return selection.Cells.Count > 1
+                ? selection
+                : activeSheet.UsedRange;
         }
 
         public void Dispose()

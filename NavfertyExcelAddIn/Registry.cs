@@ -34,6 +34,11 @@ namespace NavfertyExcelAddIn
                 .EnableInterfaceInterceptors()
                 .InterceptedBy(typeof(ExceptionLogger));
 
+            builder.RegisterType<DuplicatesHighlighter>()
+                .As<IDuplicatesHighlighter>()
+                .EnableInterfaceInterceptors()
+                .InterceptedBy(typeof(ExceptionLogger));
+
             builder.RegisterType<EmptySpaceTrimmer>()
                 .As<IEmptySpaceTrimmer>()
                 .EnableInterfaceInterceptors()

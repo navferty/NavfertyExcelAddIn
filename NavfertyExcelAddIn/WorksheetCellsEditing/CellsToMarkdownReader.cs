@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using System.Linq;
+using System.Text;
 using Microsoft.Office.Interop.Excel;
 using NavfertyExcelAddIn.Commons;
 
@@ -10,6 +11,8 @@ namespace NavfertyExcelAddIn.WorksheetCellsEditing
         {
             var markdown = new StringBuilder();
 
+            var isHeaderRow = true;
+
             foreach (Range row in range.Rows)
             {
                 foreach (Range cell in row.Cells)
@@ -20,6 +23,17 @@ namespace NavfertyExcelAddIn.WorksheetCellsEditing
                 }
                 markdown.Append('|');
                 markdown.Append("\r\n");
+
+                if (isHeaderRow)
+                {
+                    Enumerable
+                        .Repeat("|---", range.Columns.Count)
+                        .ForEach(x => markdown.Append(x));
+
+                    markdown.Append("|\r\n");
+
+                    isHeaderRow = false;
+                }
             }
 
             return markdown.ToString();

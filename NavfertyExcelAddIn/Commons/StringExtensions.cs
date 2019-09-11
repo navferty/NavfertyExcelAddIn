@@ -1,4 +1,5 @@
-﻿using System.Text.RegularExpressions;
+﻿using System.Text;
+using System.Text.RegularExpressions;
 using NLog;
 
 namespace NavfertyExcelAddIn.Commons
@@ -25,7 +26,7 @@ namespace NavfertyExcelAddIn.Commons
 
             logger.Debug($"'{value}' => '{newValue}'");
 
-            return value;
+            return newValue;
         }
     }
 }
