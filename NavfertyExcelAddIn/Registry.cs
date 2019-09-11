@@ -17,6 +17,11 @@ namespace NavfertyExcelAddIn
             builder.RegisterType<DialogService>()
                 .As<IDialogService>();
 
+            builder.RegisterType<CellsUnmerger>()
+                .As<ICellsUnmerger>()
+                .EnableInterfaceInterceptors()
+                .InterceptedBy(typeof(ExceptionLogger));
+
             builder.RegisterType<WbUnprotector>()
                 .As<IWbUnprotector>()
                 .EnableInterfaceInterceptors()

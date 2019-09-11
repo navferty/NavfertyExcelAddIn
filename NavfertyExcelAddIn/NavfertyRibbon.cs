@@ -110,6 +110,7 @@ namespace NavfertyExcelAddIn
 
             // TODO
         }
+
         public void HighlightDuplicates(IRibbonControl ribbonControl)
         {
             var selection = (Range)App.Selection;
@@ -121,6 +122,7 @@ namespace NavfertyExcelAddIn
 
             // TODO
         }
+
         public void ToggleCase(IRibbonControl ribbonControl)
         {
              var selection = (Range)App.Selection;
@@ -132,6 +134,7 @@ namespace NavfertyExcelAddIn
 
             // TODO
         }
+
         public void TrimSpaces(IRibbonControl ribbonControl)
         {
              var selection = (Range)App.Selection;
@@ -143,9 +146,27 @@ namespace NavfertyExcelAddIn
 
             // TODO
         }
+
         public void UnmergeCells(IRibbonControl ribbonControl)
         {
              var selection = (Range)App.Selection;
+
+            if (selection == null)
+                return;
+
+            logger.Debug($"UnmergeCells. Range selected is {selection.Address}");
+            
+            using (var scope = container.BeginLifetimeScope())
+            {
+                var cellsUnmerger = scope.Resolve<ICellsUnmerger>();
+                cellsUnmerger.Unmerge(selection);
+            }
+
+        }
+
+        public void ValidateValues(IRibbonControl ribbonControl)
+        {
+            var selection = (Range)App.Selection;
 
             if (selection == null)
                 return;
@@ -176,6 +197,7 @@ namespace NavfertyExcelAddIn
             form.Show();
         }
 
+        #region XML Tools
         public void CreateSampleXml(IRibbonControl ribbonControl)
         {
             logger.Debug("CreateSampleXml");
@@ -186,6 +208,7 @@ namespace NavfertyExcelAddIn
             logger.Debug("ValidateXml");
             // TODO
         }
+        #endregion
         #endregion
 
         #region Utils
