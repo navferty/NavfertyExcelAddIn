@@ -7,7 +7,12 @@ namespace NavfertyExcelAddIn.ParseNumerics
     {
         public void Parse(Range selection)
         {
-            selection.ApplyForEachCellOfType<string, decimal?>(s => s.ParseDecimal());
+            selection.ApplyForEachCellOfType<string, object>(
+                value =>
+                {
+                    var newValue = value.ParseDecimal();
+                    return (object)newValue ?? value;
+                });
         }
     }
 }

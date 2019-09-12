@@ -68,7 +68,7 @@ namespace NavfertyExcelAddIn.Commons
                     if (value is TIn s)
                     {
                         var newValue = transform(s);
-                        if (newValue != null && (object)newValue != value) // TODO check boxing time on million values
+                        if ((object)newValue != value) // TODO check boxing time on million values
                         {
                             isChanged = true;
                             values[i, j] = newValue;

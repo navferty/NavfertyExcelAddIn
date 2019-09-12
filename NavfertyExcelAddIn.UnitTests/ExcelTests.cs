@@ -1,4 +1,5 @@
-﻿using System.Reflection;
+﻿using System.Collections;
+using System.Reflection;
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
@@ -42,6 +43,11 @@ namespace NavfertyExcelAddIn.UnitTests
             range.Setup(x => x.get_Value(Missing.Value))
                 .Returns(values ?? new object[,] { { "asd", "dsa" }, { 123.456d, (int)CVErrEnum.ErrNA } });
 
+            var areas = new Mock<Areas>(MockBehavior.Strict);
+            areas.As<IEnumerable>().Setup(x => x.GetEnumerator()).Returns(new[] { range.Object }.GetEnumerator());
+
+            range.Setup(x => x.Areas).Returns(areas.Object);
+
             var cell = GetCellStub(values);
 
             range.Setup(x => x.Cells[It.IsAny<int>(), It.IsAny<int>()]).Returns(cell.Object);
@@ -49,10 +55,10 @@ namespace NavfertyExcelAddIn.UnitTests
             return range;
         }
 
-        protected Mock<Range> GetCellStub(object value = null)
+        protected Mock<Range> GetCellStub(object value)
         {
             var cell = new Mock<Range>(MockBehavior.Loose);
-            cell.Setup(x => x.get_Value(Missing.Value)).Returns(value ?? "asd");
+            cell.Setup(x => x.get_Value(Missing.Value)).Returns(value);
             return cell;
         }
     }

@@ -21,7 +21,7 @@ namespace NavfertyExcelAddIn.WorksheetCellsEditing
                 .Value
                 .ToString();
 
-            if (firstValue == null)
+            if (string.IsNullOrEmpty(firstValue))
             {
                 return;
             }

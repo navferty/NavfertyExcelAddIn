@@ -89,7 +89,10 @@
     <Compile Include="ParseNumerics\NumericParserTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UnprotectWorkbook\WbUnprotectorTests.cs" />
+    <Compile Include="WorksheetCellsEditing\CaseTogglerTests.cs" />
+    <Compile Include="WorksheetCellsEditing\CellsToMarkdownReaderTests.cs" />
     <Compile Include="WorksheetCellsEditing\DuplicatesHighlighterTests.cs" />
+    <Compile Include="WorksheetCellsEditing\EmptySpaceTrimmerTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

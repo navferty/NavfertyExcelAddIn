@@ -12,10 +12,11 @@ namespace NavfertyExcelAddIn.WorksheetCellsEditing
             var markdown = new StringBuilder();
 
             var isHeaderRow = true;
+            int columnsCount = range.Columns.Count;
 
-            foreach (Range row in range.Rows)
+            foreach (Range row in range.Rows.Cast<Range>())
             {
-                foreach (Range cell in row.Cells)
+                foreach (Range cell in row.Cells.Cast<Range>())
                 {
                     markdown.Append('|');
                     var value = (string)cell.Value?.ToString();
@@ -27,7 +28,7 @@ namespace NavfertyExcelAddIn.WorksheetCellsEditing
                 if (isHeaderRow)
                 {
                     Enumerable
-                        .Repeat("|---", range.Columns.Count)
+                        .Repeat("|---", columnsCount)
                         .ForEach(x => markdown.Append(x));
 
                     markdown.Append("|\r\n");
