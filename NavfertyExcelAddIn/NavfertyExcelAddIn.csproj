@@ -202,19 +202,50 @@
     can be found.
   -->
   <ItemGroup>
+    <Compile Include="Commons\RangeExtensions.cs" />
+    <Compile Include="Commons\StringExtensions.cs" />
+    <Compile Include="FindFormulaErrors\CVErrEnum.cs" />
+    <Compile Include="DataValidation\CellsValueValidator.cs" />
+    <Compile Include="DataValidation\IValidator.cs" />
+    <Compile Include="InteractiveRangeReport\InteractiveErrorItem.cs" />
+    <Compile Include="DataValidation\ICellsValueValidator.cs" />
+    <Compile Include="DataValidation\ValidationResult.cs" />
+    <Compile Include="DataValidation\ValidatorFactory.cs" />
+    <Compile Include="DataValidation\Validators\DateValidator.cs" />
+    <Compile Include="DataValidation\Validators\NumericValidator.cs" />
+    <Compile Include="DataValidation\Validators\XmlTextValidator.cs" />
+    <Compile Include="DataValidation\Validators\TinOrganizationValidator.cs" />
+    <Compile Include="DataValidation\Validators\TinPersonalValidator.cs" />
+    <Compile Include="DataValidation\IValidatorFactory.cs" />
+    <Compile Include="Localization\ValidationMessages.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ValidationMessages.resx</DependentUpon>
+    </Compile>
+    <Compile Include="DataValidation\ValidationType.cs" />
+    <Compile Include="WorksheetCellsEditing\ICellsToMarkdownReader.cs" />
+    <Compile Include="WorksheetCellsEditing\CellsToMarkdownReader.cs" />
+    <Compile Include="WorksheetCellsEditing\IDuplicatesHighlighter.cs" />
+    <Compile Include="WorksheetCellsEditing\IEmptySpaceTrimmer.cs" />
+    <Compile Include="WorksheetCellsEditing\DuplicatesHighlighter.cs" />
+    <Compile Include="WorksheetCellsEditing\EmptySpaceTrimmer.cs" />
+    <Compile Include="WorksheetCellsEditing\ICaseToggler.cs" />
+    <Compile Include="WorksheetCellsEditing\CaseToggler.cs" />
+    <Compile Include="WorksheetCellsEditing\CellsUnmerger.cs" />
     <Compile Include="Commons\DialogService.cs" />
+    <Compile Include="Commons\EnumerableExtensions.cs" />
     <Compile Include="Commons\IDialogService.cs" />
-    <Compile Include="FindFormulaErrors\SearchRangeResultForm.cs">
+    <Compile Include="InteractiveRangeReport\InteractiveRangeReportForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FindFormulaErrors\SearchRangeResultForm.Designer.cs">
-      <DependentUpon>SearchRangeResultForm.cs</DependentUpon>
+    <Compile Include="InteractiveRangeReport\InteractiveRangeReportForm.Designer.cs">
+      <DependentUpon>InteractiveRangeReportForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Commons\EnumExtensions.cs" />
     <Compile Include="FindFormulaErrors\ErrorFinder.cs" />
     <Compile Include="FindFormulaErrors\IErrorFinder.cs" />
-    <Compile Include="FindFormulaErrors\ErroredRange.cs" />
     <Compile Include="Commons\ExceptionLogger.cs" />
+    <Compile Include="WorksheetCellsEditing\ICellsUnmerger.cs" />
     <Compile Include="NavfertyRibbon.cs" />
     <Compile Include="ParseNumerics\DecimalParser.cs" />
     <Compile Include="ParseNumerics\INumericParser.cs" />
@@ -229,6 +260,7 @@
     </Compile>
     <Compile Include="UnprotectWorkbook\IWbUnprotector.cs" />
     <Compile Include="UnprotectWorkbook\WbUnprotector.cs" />
+    <None Include="Resources\markdown.png" />
     <None Include="Resources\validateXml.png" />
     <None Include="Resources\unprotectWorkbook.png" />
     <None Include="Resources\unmergeCells.png" />
@@ -279,8 +311,8 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="FindFormulaErrors\SearchRangeResultForm.resx">
-      <DependentUpon>SearchRangeResultForm.cs</DependentUpon>
+    <EmbeddedResource Include="InteractiveRangeReport\InteractiveRangeReportForm.resx">
+      <DependentUpon>InteractiveRangeReportForm.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Localization\RibbonLabels.resx">
@@ -296,6 +328,10 @@
     <EmbeddedResource Include="Localization\UIStrings.ru-RU.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>UIStrings.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Localization\ValidationMessages.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>ValidationMessages.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="NavfertyRibbon.xml" />
     <EmbeddedResource Include="RibbonIcons.resx">

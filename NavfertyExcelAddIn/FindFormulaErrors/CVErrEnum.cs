@@ -1,20 +1,7 @@
-﻿using Microsoft.Office.Interop.Excel;
-using System.ComponentModel;
+﻿using System.ComponentModel;
 
 namespace NavfertyExcelAddIn.FindFormulaErrors
 {
-    public class ErroredRange
-    {
-        public ErroredRange(Range range, CVErrEnum errorType)
-        {
-            Range = range;
-            ErrorType = errorType;
-        }
-
-        public Range Range { get; }
-        public CVErrEnum ErrorType { get; } 
-    }
-
     public enum CVErrEnum : int
     {
         

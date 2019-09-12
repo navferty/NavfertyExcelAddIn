@@ -2,19 +2,22 @@
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.Office.Interop.Excel;
+using NavfertyExcelAddIn.Commons;
+using NavfertyExcelAddIn.InteractiveRangeReport;
 
 namespace NavfertyExcelAddIn.FindFormulaErrors
 {
     public class ErrorFinder : IErrorFinder
     {
-        public IReadOnlyCollection<ErroredRange> GetAllErrorCells(Range range)
+        public IReadOnlyCollection<InteractiveErrorItem> GetAllErrorCells(Range range)
         {
             return GetErroredCells(range).ToArray();
         }
 
-        private IEnumerable<ErroredRange> GetErroredCells(Range range)
+        private IEnumerable<InteractiveErrorItem> GetErroredCells(Range range)
         {
-            var rangeValue = range.Value;
+            object rangeValue = range.Value;
+            var worksheetName = range.Worksheet.Name;
 
             if (rangeValue == null)
                 yield break;
@@ -24,7 +27,14 @@ namespace NavfertyExcelAddIn.FindFormulaErrors
             {
                 if (IsXlCvErr(rangeValue))
                 {
-                    yield return new ErroredRange(range, (CVErrEnum)rangeValue);
+                    yield return new InteractiveErrorItem
+                    {
+                        Range = range,
+                        Value = range.GetFormula(),
+                        ErrorMessage = ((CVErrEnum)rangeValue).GetEnumDescription(),
+                        Address = range.GetRelativeAddress(),
+                        WorksheetName = worksheetName
+                    };
                 }
                 yield break;
             }
@@ -39,7 +49,15 @@ namespace NavfertyExcelAddIn.FindFormulaErrors
                     var value = values[i, j];
                     if (IsXlCvErr(value))
                     {
-                        yield return new ErroredRange((Range)range.Cells[i, j], (CVErrEnum)value);
+                        var currentRange = (Range)range.Cells[i, j];
+                        yield return new InteractiveErrorItem
+                        {
+                            Range = currentRange,
+                            Value = currentRange.GetFormula(),
+                            ErrorMessage = ((CVErrEnum)value).GetEnumDescription(),
+                            Address = currentRange.GetRelativeAddress(),
+                            WorksheetName = worksheetName
+                        };
                     }
                 }
             }

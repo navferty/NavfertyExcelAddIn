@@ -117,64 +117,19 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="ParseNumerics" xml:space="preserve">
-    <value>Parse Numerics</value>
+  <data name="NotMathesPatternNDigits1" xml:space="preserve">
+    <value>Not mathes pattern ({0} digits)</value>
   </data>
-  <data name="UnprotectWorkbook" xml:space="preserve">
-    <value>Unprotect Workbook</value>
+  <data name="NthDigitShouldBeAs4" xml:space="preserve">
+    <value>{0}th digit '{1}' should be '{2}' (as '{3} % 11 % 10')</value>
   </data>
-  <data name="CutNames" xml:space="preserve">
-    <value>Cut Names</value>
+  <data name="ValueCantBeConvertedToDate" xml:space="preserve">
+    <value>Value can not be converted to date</value>
   </data>
-  <data name="HighlightDuplicates" xml:space="preserve">
-    <value>Highlight Duplicates</value>
+  <data name="ValueContainsInvalidChars" xml:space="preserve">
+    <value>Value contains invalid chars</value>
   </data>
-  <data name="ToggleCase" xml:space="preserve">
-    <value>Toggle Case</value>
-  </data>
-  <data name="TrimSpaces" xml:space="preserve">
-    <value>Trim Spaces</value>
-  </data>
-  <data name="UnmergeCells" xml:space="preserve">
-    <value>Unmerge Cells</value>
-  </data>
-  <data name="ValidateXml" xml:space="preserve">
-    <value>Validate XML with XSD</value>
-  </data>
-  <data name="CreateSampleXml" xml:space="preserve">
-    <value>Create Sample XML based on XSD</value>
-  </data>
-  <data name="CommonGroup" xml:space="preserve">
-    <value>Commons</value>
-  </data>
-  <data name="XmlToolsGroup" xml:space="preserve">
-    <value>XML Tools</value>
-  </data>
-  <data name="FindErrors" xml:space="preserve">
-    <value>Find Formula Errors on Current Sheet</value>
-  </data>
-  <data name="CopyAsMarkdown" xml:space="preserve">
-    <value>Copy as Markdown</value>
-  </data>
-  <data name="ValidateValuesButton" xml:space="preserve">
-    <value>ValidateValuesButton</value>
-  </data>
-  <data name="ValidateValuesDate" xml:space="preserve">
-    <value>Date</value>
-  </data>
-  <data name="ValidateValuesNumerics" xml:space="preserve">
-    <value>Numerics</value>
-  </data>
-  <data name="ValidateValuesSplitButton" xml:space="preserve">
-    <value>ValidateValuesSplitButton</value>
-  </data>
-  <data name="ValidateValuesTinOrganization" xml:space="preserve">
-    <value>TinOrganization</value>
-  </data>
-  <data name="ValidateValuesTinPersonal" xml:space="preserve">
-    <value>TinPersonal</value>
-  </data>
-  <data name="ValidateValuesXml" xml:space="preserve">
-    <value>Xml</value>
+  <data name="ValueNotNumeric" xml:space="preserve">
+    <value>Value is not numeric</value>
   </data>
 </root>

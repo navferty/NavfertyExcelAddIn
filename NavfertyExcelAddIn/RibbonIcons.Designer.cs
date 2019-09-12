@@ -63,6 +63,16 @@ namespace NavfertyExcelAddIn {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap copyAsMarkdown {
+            get {
+                object obj = ResourceManager.GetObject("copyAsMarkdown", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap createSampleXml {
             get {
                 object obj = ResourceManager.GetObject("createSampleXml", resourceCulture);
