@@ -81,6 +81,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DataValidation\CellsValueValidatorTests.cs" />
     <Compile Include="DataValidation\DataValidatorTests.cs" />
     <Compile Include="ExcelTests.cs" />
     <Compile Include="FindFormulaErrors\ErrorFinderTests.cs" />

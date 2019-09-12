@@ -9,7 +9,6 @@ namespace NavfertyExcelAddIn.DataValidation
     public class CellsValueValidator : ICellsValueValidator
     {
         private readonly IValidatorFactory validatorFactory;
-        private readonly Logger logger = LogManager.GetCurrentClassLogger();
 
         public CellsValueValidator(IValidatorFactory validatorFactory)
         {
@@ -29,13 +28,13 @@ namespace NavfertyExcelAddIn.DataValidation
 
         private void CheckCell(Range cell, IValidator validator, ICollection<InteractiveErrorItem> errors, string wsName)
         {
-            if (string.IsNullOrEmpty(cell.Value?.ToString()))
+            // Value instead of Value2 can return datetime
+            var value = (object)cell.Value;
+
+            if (string.IsNullOrEmpty(value?.ToString()))
             {
                 return;
             }
-
-            // Value instead of Value2 can return datetime
-            var value = (object)cell.Value;
 
             ValidationResult result = validator.CheckValue(value);
 
@@ -49,7 +48,7 @@ namespace NavfertyExcelAddIn.DataValidation
                 Range = cell,
                 Value = value.ToString(),
                 ErrorMessage = result.Message,
-                Address = cell.Address[false, false],
+                Address = cell.GetRelativeAddress(),
                 WorksheetName = wsName
             };
 
