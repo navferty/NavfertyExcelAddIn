@@ -13,7 +13,6 @@ namespace NavfertyExcelAddIn.UnitTests.WorksheetCellsEditing
     public class CellsToMarkdownReaderTests : ExcelTests
     {
         private Mock<Range> selection;
-        private Mock<Range> cell;
 
         private CellsToMarkdownReader cellsToMarkdownReader;
 
@@ -22,27 +21,14 @@ namespace NavfertyExcelAddIn.UnitTests.WorksheetCellsEditing
         {
             base.BeforeEachTest();
 
-            selection = GetRangeStub();
-            cell = new Mock<Range>();
+            selection = new Mock<Range>();
 
-            var rows = new Mock<Range>();
-            rows.As<IEnumerable>()
-                .Setup(x => x.GetEnumerator())
-                .Returns(new [] { rows.Object, rows.Object, rows.Object }.GetEnumerator());
+            selection.Setup(x => x.Columns).Returns(selection.Object);
+            selection.Setup(x => x.Count).Returns(3);
 
-            var cells = new Mock<Range>();
-            cells.As<IEnumerable>()
-                .SetupSequence(x => x.GetEnumerator())
-                .Returns(new [] { cell.Object, cell.Object, cell.Object }.GetEnumerator())
-                .Returns(new [] { cell.Object, cell.Object, cell.Object }.GetEnumerator())
-                .Returns(new [] { cell.Object, cell.Object, cell.Object }.GetEnumerator());
-
-            selection.Setup(x => x.Rows).Returns(rows.Object);
-            rows.Setup(x => x.Cells).Returns(cells.Object);
-
-            var columns = new Mock<Range>();
-            columns.Setup(x => x.Count).Returns(3);
-            selection.Setup(x => x.Columns).Returns(columns.Object);
+            selection.Setup(x => x.Rows).Returns(selection.Object);
+            selection.Setup(x => x.Cells).Returns(selection.Object);
+            selection.Setup(x => x.GetEnumerator()).Returns(GetRangeEnumerator);
 
             cellsToMarkdownReader = new CellsToMarkdownReader();
         }
@@ -50,7 +36,7 @@ namespace NavfertyExcelAddIn.UnitTests.WorksheetCellsEditing
         [TestMethod]
         public void ReadTableAsMarkdown()
         {
-            var setup = cell.SetupSequence(x => x.get_Value(Missing.Value));
+            var setup = selection.SetupSequence(x => x.get_Value(Missing.Value));
             for (var i = 0; i < 9; i++)
             {
                 setup = setup.Returns(new string((char)('a' + i), 3));
@@ -64,6 +50,13 @@ namespace NavfertyExcelAddIn.UnitTests.WorksheetCellsEditing
 |ddd|eee|fff|
 |ggg|hhh|iii|
 ", result);
+        }
+
+        private IEnumerator GetRangeEnumerator()
+        {
+            yield return selection.Object;
+            yield return selection.Object;
+            yield return selection.Object;
         }
     }
 }

@@ -14,9 +14,9 @@ namespace NavfertyExcelAddIn.WorksheetCellsEditing
             var isHeaderRow = true;
             int columnsCount = range.Columns.Count;
 
-            foreach (Range row in range.Rows.Cast<Range>())
+            foreach (Range row in range.Rows)
             {
-                foreach (Range cell in row.Cells.Cast<Range>())
+                foreach (Range cell in row.Cells)
                 {
                     markdown.Append('|');
                     var value = (string)cell.Value?.ToString();
