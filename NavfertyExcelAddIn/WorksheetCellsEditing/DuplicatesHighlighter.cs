@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.Office.Interop.Excel;
+using NavfertyExcelAddIn.Commons;
 using NLog;
 
 namespace NavfertyExcelAddIn.WorksheetCellsEditing
@@ -20,9 +21,9 @@ namespace NavfertyExcelAddIn.WorksheetCellsEditing
             var colors = GetUnionRanges(valueGroups);
 
             // set colorIndex for each range
-            foreach (var currentRange in colors.Keys)
+            foreach (var rangeByColor in colors)
             {
-			    currentRange.Interior.ColorIndex = colors[currentRange];
+			    rangeByColor.Value.SetColor(rangeByColor.Key);
             }
 
         }
@@ -30,43 +31,39 @@ namespace NavfertyExcelAddIn.WorksheetCellsEditing
         private Dictionary<string, Range[]> ExtractDuplicates(IEnumerable<Range> cells)
         {
             return cells
-                .Where(x => !string.IsNullOrEmpty(x.Value.ToString()))
                 .GroupBy(x => ((object)x.Value).ToString().ToLowerInvariant(), new ValueEqualityComparer())
-                .Where(x => x.Count() > 1)
+                .Where(x => x.Count() > 1 && !string.IsNullOrEmpty(x.Key))
                 .ToDictionary(x => x.Key, x => x.ToArray());
         }
 
-        private Dictionary<Range, int> GetUnionRanges(Dictionary<string, Range[]> valueGroups)
+        private Dictionary<int, Range> GetUnionRanges(Dictionary<string, Range[]> valueGroups)
         {
-            var colors = new Dictionary<Range, int>();
+            var rangesByColors = new Dictionary<int, Range>();
             var colorIndexCounter = 3;
 
             // for each of duplicates group make range
             foreach (var group in valueGroups)
             {
-                var unionRange = GetUnion(group.Value);
-                colors.Add(unionRange, colorIndexCounter++ % 57); // fill with colors from 3 to 57
+                var unionRange = group.Value.Aggregate((current, cell) => current.Union(cell));
+                
+                // fill with colors from 3 to 57
+                int colorIndex = colorIndexCounter++ % 57;
 
-                logger.Debug(() =>
-                    $"Grouped cells with value {group.Key}, range is {unionRange.Address}, {group.Value.Length} items");
+                if (rangesByColors.TryGetValue(colorIndex, out var range))
+                {
+                    rangesByColors[colorIndex] = range.Union(unionRange);
+                    logger.Debug(() =>
+                        $"For value {group.Key} add range {unionRange.Address} to union with same " +
+                        $"colorIndex {colorIndex}, with {group.Value.Length} items");
+                }
+                else
+                {
+                    rangesByColors.Add(colorIndex, unionRange);
+                    logger.Debug(() =>
+                        $"Grouped cells with value {group.Key}, range is {unionRange.Address}, {group.Value.Length} items");
+                }
             }
-            return colors;
-        }
-
-        private Range GetUnion(IReadOnlyCollection<Range> cells)
-        {
-            var cellsArr = cells.ToArray();
-
-            var app = Globals.ThisAddIn.Application;
-
-            var firstCell = cellsArr.First();
-
-            if (cells.Count == 1)
-                return firstCell;
-
-            return cellsArr
-                // .Skip(1)
-                .Aggregate(firstCell, (current, cell) => app.Union(current, cell));
+            return rangesByColors;
         }
 
         private class ValueEqualityComparer : IEqualityComparer<string>

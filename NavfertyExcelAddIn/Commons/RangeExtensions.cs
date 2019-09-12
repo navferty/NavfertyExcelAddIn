@@ -20,11 +20,22 @@ namespace NavfertyExcelAddIn.Commons
         public static string GetRelativeAddress(this Range range)
             => rangeExtensionsImplementation.GetRelativeAddress(range);
 
+        public static Range Union(this Range current, Range range)
+            => rangeExtensionsImplementation.Union(current, range);
+
+        public static void SetColor(this Range range, int ColorIndex)
+            => rangeExtensionsImplementation.SetColor(range, ColorIndex);
+
         private class RangeExtensionsImplementation : IRangeExtensionsImplementation
         {
+            private Application App => Globals.ThisAddIn.Application;
             public string GetFormula(Range range) => (string)range.Formula;
 
             public string GetRelativeAddress(Range range) => range.Address[false, false];
+
+            public void SetColor(Range range, int colorIndex) => range.Interior.ColorIndex = colorIndex;
+
+            public Range Union(Range r1, Range r2) => App.Union(r1, r2);
         }
     }
 
@@ -32,5 +43,7 @@ namespace NavfertyExcelAddIn.Commons
     {
         string GetFormula(Range range);
         string GetRelativeAddress(Range range);
+        void SetColor(Range range, int colorIndex);
+        Range Union(Range r1, Range r2);
     }
 }
