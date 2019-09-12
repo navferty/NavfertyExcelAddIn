@@ -30,9 +30,9 @@ namespace NavfertyExcelAddIn.FindFormulaErrors
                     yield return new InteractiveErrorItem
                     {
                         Range = range,
-                        Value = range.Formula[false, false],
+                        Value = range.GetFormula(),
                         ErrorMessage = ((CVErrEnum)rangeValue).GetEnumDescription(),
-                        Address = range.Address[false, false],
+                        Address = range.GetRelativeAddress(),
                         WorksheetName = worksheetName
                     };
                 }
@@ -53,9 +53,9 @@ namespace NavfertyExcelAddIn.FindFormulaErrors
                         yield return new InteractiveErrorItem
                         {
                             Range = currentRange,
-                            Value = currentRange.Formula[false, false],
+                            Value = currentRange.GetFormula(),
                             ErrorMessage = ((CVErrEnum)value).GetEnumDescription(),
-                            Address = currentRange.Address[false, false],
+                            Address = currentRange.GetRelativeAddress(),
                             WorksheetName = worksheetName
                         };
                     }

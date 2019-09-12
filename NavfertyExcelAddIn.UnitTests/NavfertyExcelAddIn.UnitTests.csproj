@@ -81,6 +81,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ExcelTests.cs" />
     <Compile Include="FindFormulaErrors\ErrorFinderTests.cs" />
     <Compile Include="ParseNumerics\DecimalParserTests.cs" />
     <Compile Include="ParseNumerics\NumericParserTests.cs" />

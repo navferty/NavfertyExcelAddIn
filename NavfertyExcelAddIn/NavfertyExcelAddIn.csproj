@@ -202,6 +202,7 @@
     can be found.
   -->
   <ItemGroup>
+    <Compile Include="Commons\RangeExtensions.cs" />
     <Compile Include="Commons\StringExtensions.cs" />
     <Compile Include="FindFormulaErrors\CVErrEnum.cs" />
     <Compile Include="DataValidation\CellsValueValidator.cs" />
