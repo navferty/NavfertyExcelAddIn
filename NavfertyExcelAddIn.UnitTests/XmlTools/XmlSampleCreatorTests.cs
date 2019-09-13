@@ -17,7 +17,7 @@ namespace NavfertyExcelAddIn.UnitTests.XmlTools
 
         private XmlSampleCreator xmlSampleCreator;
 
-        private const string XsdFile = "/XmlTools/Samples/NO_PRIB_1_002_00_05_07_05.xsd";
+        private const string XsdFile = "XmlTools/Samples/NO_PRIB_1_002_00_05_07_05.xsd";
 
         [TestInitialize]
         public override void BeforeEachTest()
@@ -64,7 +64,7 @@ namespace NavfertyExcelAddIn.UnitTests.XmlTools
                 .Setup(x => x.AskForFiles(false, FileType.Xsd))
                 .Returns(new[] { GetFilePath(XsdFile) });
 
-            var path = $@"C:\temp\temp{DateTime.Now:yyyy-MM-d_HH-mm-ss}.xml";
+            var path = GetFilePath($"sample_{DateTime.Now:yyyy-MM-d_HH-mm-ss}.xml");
             Assert.IsFalse(File.Exists(path));
 
             dialogService

@@ -67,7 +67,7 @@ namespace NavfertyExcelAddIn.UnitTests
 
         protected string GetFilePath(string fileName)
         {
-            return Path.Combine(TestContext.TestDir, $"../../NavfertyExcelAddIn.UnitTests/bin/Debug/{fileName}");
+            return Path.Combine(Directory.GetCurrentDirectory(), fileName);
         }
     }
 }
