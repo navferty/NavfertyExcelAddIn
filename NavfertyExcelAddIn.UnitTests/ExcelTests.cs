@@ -9,12 +9,15 @@ using NavfertyExcelAddIn.FindFormulaErrors;
 
 using Microsoft.Office.Interop.Excel;
 using Range = Microsoft.Office.Interop.Excel.Range;
+using System.IO;
 
 namespace NavfertyExcelAddIn.UnitTests
 {
     [TestClass]
     public abstract class ExcelTests
     {
+        public TestContext TestContext { get; set; }
+
         protected Mock<IRangeExtensionsImplementation> rangeExtensions;
 
         [TestInitialize]
@@ -60,6 +63,11 @@ namespace NavfertyExcelAddIn.UnitTests
             var cell = new Mock<Range>(MockBehavior.Loose);
             cell.Setup(x => x.get_Value(Missing.Value)).Returns(value);
             return cell;
+        }
+
+        protected string GetFilePath(string fileName)
+        {
+            return Path.Combine(TestContext.TestDir, $"../../NavfertyExcelAddIn.UnitTests/bin/Debug/{fileName}");
         }
     }
 }

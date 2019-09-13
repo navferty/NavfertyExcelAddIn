@@ -93,12 +93,28 @@
     <Compile Include="WorksheetCellsEditing\CellsToMarkdownReaderTests.cs" />
     <Compile Include="WorksheetCellsEditing\DuplicatesHighlighterTests.cs" />
     <Compile Include="WorksheetCellsEditing\EmptySpaceTrimmerTests.cs" />
+    <Compile Include="XmlTools\XmlSampleCreatorTests.cs" />
+    <Compile Include="XmlTools\XmlValidatorTests.cs" />
+    <Compile Include="XmlTools\XsdSchemaValidatorTests.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="XmlTools\Samples\Прибыль_Correct.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="XmlTools\Samples\Прибыль_Incorrect.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="XmlTools\Samples\Прибыль_Invalid.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <None Include="app.config" />
     <None Include="packages.config" />
     <None Include="NLog.config" />
     <Content Include="UnprotectWorkbook\ProtectedWorkbook.xlsx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="XmlTools\Samples\NO_PRIB_1_002_00_05_07_05.xsd">
+      <SubType>Designer</SubType>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
