@@ -155,6 +155,9 @@
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="XmlSampleGenerator, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Xml.XMLGen.1.0.0\lib\XmlSampleGenerator.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Microsoft.Office.Tools.v4.0.Framework, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
@@ -202,6 +205,7 @@
     can be found.
   -->
   <ItemGroup>
+    <Compile Include="Commons\FileExtensionFilter.cs" />
     <Compile Include="Commons\RangeExtensions.cs" />
     <Compile Include="Commons\StringExtensions.cs" />
     <Compile Include="FindFormulaErrors\CVErrEnum.cs" />
@@ -217,6 +221,9 @@
     <Compile Include="DataValidation\Validators\TinOrganizationValidator.cs" />
     <Compile Include="DataValidation\Validators\TinPersonalValidator.cs" />
     <Compile Include="DataValidation\IValidatorFactory.cs" />
+    <Compile Include="XmlTools\IXmlValidator.cs" />
+    <Compile Include="XmlTools\IXsdSchemaValidator.cs" />
+    <Compile Include="XmlTools\IXmlSampleCreator.cs" />
     <Compile Include="Localization\ValidationMessages.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -260,6 +267,9 @@
     </Compile>
     <Compile Include="UnprotectWorkbook\IWbUnprotector.cs" />
     <Compile Include="UnprotectWorkbook\WbUnprotector.cs" />
+    <Compile Include="XmlTools\XmlSampleCreator.cs" />
+    <Compile Include="XmlTools\XmlValidator.cs" />
+    <Compile Include="XmlTools\XsdSchemaValidator.cs" />
     <None Include="Resources\markdown.png" />
     <None Include="Resources\validateXml.png" />
     <None Include="Resources\unprotectWorkbook.png" />

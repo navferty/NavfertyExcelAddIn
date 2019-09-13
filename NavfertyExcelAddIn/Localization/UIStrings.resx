@@ -144,6 +144,9 @@
   <data name="ShowVersionMessage" xml:space="preserve">
     <value>Navferty Excle add-in. Published under MIT licence. Version </value>
   </data>
+  <data name="SuccessfullyValidatedMessage" xml:space="preserve">
+    <value>Successfully validated, no errors or warnings detected</value>
+  </data>
   <data name="UnsavedChangesWillBeLostPrompt" xml:space="preserve">
     <value>Any unsaved changes will be lost. Active workbook may become corrupted. It is strongly recommended to create backup. Continue?</value>
   </data>

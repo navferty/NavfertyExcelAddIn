@@ -142,6 +142,15 @@ namespace NavfertyExcelAddIn.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Successfully validated, no errors or warnings detected.
+        /// </summary>
+        internal static string SuccessfullyValidatedMessage {
+            get {
+                return ResourceManager.GetString("SuccessfullyValidatedMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Any unsaved changes will be lost. Active workbook may become corrupted. It is strongly recommended to create backup. Continue?.
         /// </summary>
         internal static string UnsavedChangesWillBeLostPrompt {

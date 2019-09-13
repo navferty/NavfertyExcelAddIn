@@ -144,6 +144,9 @@
   <data name="ShowVersionMessage" xml:space="preserve">
     <value>Надстройка Navferty, публикуется под лицензией MIT. Версия </value>
   </data>
+  <data name="SuccessfullyValidatedMessage" xml:space="preserve">
+    <value>Валидация успешна, ошибок не обнаружено</value>
+  </data>
   <data name="UnsavedChangesWillBeLostPrompt" xml:space="preserve">
     <value>Несохранённые изменения будут утеряны. Книга может оказаться повреждённой: настоятельно рекомендуется предварительно создать копию. Продолжить?</value>
   </data>
