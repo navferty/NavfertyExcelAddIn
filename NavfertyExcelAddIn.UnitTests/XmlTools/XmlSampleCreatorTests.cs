@@ -11,7 +11,7 @@ using NavfertyExcelAddIn.XmlTools;
 namespace NavfertyExcelAddIn.UnitTests.XmlTools
 {
     [TestClass]
-    class XmlSampleCreatorTests : ExcelTests
+    public class XmlSampleCreatorTests : ExcelTests
     {
         private Mock<IDialogService> dialogService;
 
