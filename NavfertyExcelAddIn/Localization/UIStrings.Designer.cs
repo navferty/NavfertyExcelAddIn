@@ -185,5 +185,41 @@ namespace NavfertyExcelAddIn.Localization {
                 return ResourceManager.GetString("WsName", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Element.
+        /// </summary>
+        internal static string XmlValidationReport_ElementName {
+            get {
+                return ResourceManager.GetString("XmlValidationReport_ElementName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Message.
+        /// </summary>
+        internal static string XmlValidationReport_Message {
+            get {
+                return ResourceManager.GetString("XmlValidationReport_Message", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Severity.
+        /// </summary>
+        internal static string XmlValidationReport_Severity {
+            get {
+                return ResourceManager.GetString("XmlValidationReport_Severity", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Value.
+        /// </summary>
+        internal static string XmlValidationReport_Value {
+            get {
+                return ResourceManager.GetString("XmlValidationReport_Value", resourceCulture);
+            }
+        }
     }
 }

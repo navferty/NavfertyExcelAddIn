@@ -336,14 +336,12 @@
       <LastGenOutput>UIStrings.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Localization\UIStrings.ru-RU.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>UIStrings.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
+    <EmbeddedResource Include="Localization\UIStrings.ru-RU.resx"/>
     <EmbeddedResource Include="Localization\ValidationMessages.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>ValidationMessages.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="Localization\ValidationMessages.ru-RU.resx" />
     <EmbeddedResource Include="NavfertyRibbon.xml" />
     <EmbeddedResource Include="RibbonIcons.resx">
       <Generator>ResXFileCodeGenerator</Generator>

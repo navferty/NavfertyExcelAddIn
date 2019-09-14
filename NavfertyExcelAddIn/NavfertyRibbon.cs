@@ -283,6 +283,7 @@ namespace NavfertyExcelAddIn
         public void ValidateXml(IRibbonControl ribbonControl)
         {
             logger.Debug("ValidateXml pressed");
+
             using (var scope = container.BeginLifetimeScope())
             {
                 var validator = scope.Resolve<IXmlValidator>();

@@ -1,7 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-
+using Microsoft.Office.Interop.Excel;
 using NavfertyExcelAddIn.Commons;
 using NavfertyExcelAddIn.Localization;
 
@@ -13,12 +14,15 @@ namespace NavfertyExcelAddIn.XmlTools
     {
         private readonly IDialogService dialogService;
         private readonly IXsdSchemaValidator xsdValidator;
+        private readonly Application excelApp;
+
         private readonly Logger logger = LogManager.GetCurrentClassLogger();
 
-        public XmlValidator(IDialogService dialogService, IXsdSchemaValidator xsdValidator)
+        public XmlValidator(IDialogService dialogService, IXsdSchemaValidator xsdValidator, Application excelApp)
         {
             this.dialogService = dialogService;
             this.xsdValidator = xsdValidator;
+            this.excelApp = excelApp;
         }
 
         public void Validate()
@@ -45,27 +49,31 @@ namespace NavfertyExcelAddIn.XmlTools
 
             logger.Debug($"Try to validate {xmlFileName} by {string.Join(", ", xsdFileNames)}");
 
-            var validationErrors = xsdValidator.Validate(xmlFileName, xsdFileNames);
+            var errors = xsdValidator.Validate(xmlFileName, xsdFileNames);
 
-            if (!validationErrors.Any())
+            if (!errors.Any())
             {
                 dialogService.ShowInfo(UIStrings.SuccessfullyValidatedMessage);
                 return;
             }
 
-            // dialogService.ShowInfo(UIStrings.SuccessfullyValidatedMessage);
-            logger.Debug($"{validationErrors.Count} errors");
+            logger.Debug($"{errors.Count} errors");
 
-            // TODO write errors to excel worksheet in created workbook
-            dialogService.ShowInfo($"Validation messages:\r\n" + string.Join("\r\n", validationErrors));
+            var ws = (Worksheet)excelApp.Workbooks.Add().Worksheets[1];
+            ((Range)ws.Cells[1, 1]).Value = UIStrings.XmlValidationReport_Severity;
+            ((Range)ws.Cells[1, 2]).Value = UIStrings.XmlValidationReport_ElementName;
+            ((Range)ws.Cells[1, 3]).Value = UIStrings.XmlValidationReport_Value;
+            ((Range)ws.Cells[1, 4]).Value = UIStrings.XmlValidationReport_Message;
 
-            //var headers = new[] { new CellItem(1, 1, "Errors"), new CellItem(1, 2, "Warnings") };
-            //var i = 2;
-            //var errors = xsdValidator.Errors.Select(error => new CellItem(i++, 1, error)).ToList();
-            //i = 2;
-            //var warnings = xsdValidator.Warnings.Select(warning => new CellItem(i++, 2, warning)).ToList();
-            //var cells = headers.Concat(errors).Concat(warnings).ToList();
-            //_excelAdapter.WriteCellsToNewSheet(cells, $"Errors {DateTime.Now:yy-MM-dd HH-mm-ss}");
+            var i = 2;
+            foreach (var error in errors)
+            {
+                ((Range)ws.Cells[i, 1]).Value = error.Severity.ToString();
+                ((Range)ws.Cells[i, 2]).Value = error.ElementName;
+                ((Range)ws.Cells[i, 3]).Value = error.Value;
+                ((Range)ws.Cells[i, 4]).Value = error.Message;
+                i++;
+            }
         }
     }
 }

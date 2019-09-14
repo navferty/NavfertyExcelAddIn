@@ -159,4 +159,16 @@
   <data name="WsName" xml:space="preserve">
     <value>Имя листа</value>
   </data>
+  <data name="XmlValidationReport_ElementName" xml:space="preserve">
+    <value>Элемент</value>
+  </data>
+  <data name="XmlValidationReport_Message" xml:space="preserve">
+    <value>Ошибка</value>
+  </data>
+  <data name="XmlValidationReport_Severity" xml:space="preserve">
+    <value>Уровень</value>
+  </data>
+  <data name="XmlValidationReport_Value" xml:space="preserve">
+    <value>Значение</value>
+  </data>
 </root>
