@@ -81,24 +81,43 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Builders\RangeBuilder.cs" />
+    <Compile Include="Builders\TestDataBuilder.cs" />
     <Compile Include="DataValidation\CellsValueValidatorTests.cs" />
     <Compile Include="DataValidation\DataValidatorTests.cs" />
-    <Compile Include="ExcelTests.cs" />
+    <Compile Include="TestsBase.cs" />
     <Compile Include="FindFormulaErrors\ErrorFinderTests.cs" />
     <Compile Include="ParseNumerics\DecimalParserTests.cs" />
     <Compile Include="ParseNumerics\NumericParserTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RangeExtensionsImplementationStub.cs" />
     <Compile Include="UnprotectWorkbook\WbUnprotectorTests.cs" />
     <Compile Include="WorksheetCellsEditing\CaseTogglerTests.cs" />
     <Compile Include="WorksheetCellsEditing\CellsToMarkdownReaderTests.cs" />
     <Compile Include="WorksheetCellsEditing\DuplicatesHighlighterTests.cs" />
     <Compile Include="WorksheetCellsEditing\EmptySpaceTrimmerTests.cs" />
+    <Compile Include="XmlTools\XmlSampleCreatorTests.cs" />
+    <Compile Include="XmlTools\XmlValidatorTests.cs" />
+    <Compile Include="XmlTools\XsdSchemaValidatorTests.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="XmlTools\Samples\Прибыль_Correct.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="XmlTools\Samples\Прибыль_Incorrect.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="XmlTools\Samples\Прибыль_Invalid.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <None Include="app.config" />
     <None Include="packages.config" />
     <None Include="NLog.config" />
     <Content Include="UnprotectWorkbook\ProtectedWorkbook.xlsx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="XmlTools\Samples\NO_PRIB_1_002_00_05_07_05.xsd">
+      <SubType>Designer</SubType>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>

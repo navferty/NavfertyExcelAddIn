@@ -144,6 +144,9 @@
   <data name="ShowVersionMessage" xml:space="preserve">
     <value>Надстройка Navferty, публикуется под лицензией MIT. Версия </value>
   </data>
+  <data name="SuccessfullyValidatedMessage" xml:space="preserve">
+    <value>Валидация успешна, ошибок не обнаружено</value>
+  </data>
   <data name="UnsavedChangesWillBeLostPrompt" xml:space="preserve">
     <value>Несохранённые изменения будут утеряны. Книга может оказаться повреждённой: настоятельно рекомендуется предварительно создать копию. Продолжить?</value>
   </data>
@@ -155,5 +158,17 @@
   </data>
   <data name="WsName" xml:space="preserve">
     <value>Имя листа</value>
+  </data>
+  <data name="XmlValidationReport_ElementName" xml:space="preserve">
+    <value>Элемент</value>
+  </data>
+  <data name="XmlValidationReport_Message" xml:space="preserve">
+    <value>Ошибка</value>
+  </data>
+  <data name="XmlValidationReport_Severity" xml:space="preserve">
+    <value>Уровень</value>
+  </data>
+  <data name="XmlValidationReport_Value" xml:space="preserve">
+    <value>Значение</value>
   </data>
 </root>

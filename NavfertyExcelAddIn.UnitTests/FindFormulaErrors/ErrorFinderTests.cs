@@ -1,18 +1,15 @@
 ﻿using System.Linq;
-using System.Reflection;
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Moq;
 
 using NavfertyExcelAddIn.FindFormulaErrors;
 using NavfertyExcelAddIn.Commons;
-
-using Range = Microsoft.Office.Interop.Excel.Range;
+using NavfertyExcelAddIn.UnitTests.Builders;
 
 namespace NavfertyExcelAddIn.UnitTests.FindFormulaErrors
 {
     [TestClass]
-    public class ErrorFinderTests : ExcelTests
+    public class ErrorFinderTests : TestsBase
     {
         private ErrorFinder errorFinder;
 
@@ -22,9 +19,9 @@ namespace NavfertyExcelAddIn.UnitTests.FindFormulaErrors
             errorFinder = new ErrorFinder();
 
             var values = new object[,] { { 1d, "1", "abc" }, { "123.123", "321 , 321", null } };
-            var worksheetUsedRange = SetUpRangeWithValue(values);
+            var range = new RangeBuilder().WithWorksheet().WithSingleValue(values).Build();
 
-            var result = errorFinder.GetAllErrorCells(worksheetUsedRange.Object).ToArray();
+            var result = errorFinder.GetAllErrorCells(range).ToArray();
 
             Assert.AreEqual(0, result.Length);
         }
@@ -35,9 +32,10 @@ namespace NavfertyExcelAddIn.UnitTests.FindFormulaErrors
             errorFinder = new ErrorFinder();
 
             var values = new object[,] { { 1d, "1", "abc" }, { (int)CVErrEnum.ErrGettingData, "321 , 321", null } };
-            var worksheetUsedRange = SetUpRangeWithValue(values);
+            var range = new RangeBuilder().WithWorksheet().WithCells().WithSingleValue(values).Build();
+            SetRangeExtentionsStub();
 
-            var result = errorFinder.GetAllErrorCells(worksheetUsedRange.Object).ToArray();
+            var result = errorFinder.GetAllErrorCells(range).ToArray();
 
             Assert.AreEqual(1, result.Length);
             Assert.AreEqual(CVErrEnum.ErrGettingData.GetEnumDescription(), result.First().ErrorMessage);
@@ -48,9 +46,9 @@ namespace NavfertyExcelAddIn.UnitTests.FindFormulaErrors
         {
             errorFinder = new ErrorFinder();
 
-            Mock<Range> worksheetUsedRange = SetUpRangeWithValue("1");
+            var range = new RangeBuilder().WithWorksheet().WithSingleValue("1").Build();
 
-            var result = errorFinder.GetAllErrorCells(worksheetUsedRange.Object).ToArray();
+            var result = errorFinder.GetAllErrorCells(range).ToArray();
 
             Assert.AreEqual(0, result.Length);
         }
@@ -60,9 +58,12 @@ namespace NavfertyExcelAddIn.UnitTests.FindFormulaErrors
         {
             errorFinder = new ErrorFinder();
 
-            Mock<Range> worksheetUsedRange = SetUpRangeWithValue((int)CVErrEnum.ErrNA);
+            var range = new RangeBuilder().WithWorksheet().WithSingleValue((int)CVErrEnum.ErrNA).Build();
 
-            var result = errorFinder.GetAllErrorCells(worksheetUsedRange.Object).ToArray();
+            SetRangeExtentionsStub();
+
+
+            var result = errorFinder.GetAllErrorCells(range).ToArray();
 
             Assert.AreEqual(1, result.Length);
             Assert.AreEqual(CVErrEnum.ErrNA.GetEnumDescription(), result.First().ErrorMessage);
@@ -73,18 +74,11 @@ namespace NavfertyExcelAddIn.UnitTests.FindFormulaErrors
         {
             errorFinder = new ErrorFinder();
 
-            Mock<Range> worksheetUsedRange = SetUpRangeWithValue(null);
+            var range = new RangeBuilder().WithWorksheet().WithSingleValue(null).Build();
 
-            var result = errorFinder.GetAllErrorCells(worksheetUsedRange.Object).ToArray();
+            var result = errorFinder.GetAllErrorCells(range).ToArray();
 
             Assert.AreEqual(0, result.Length);
-        }
-
-        private Mock<Range> SetUpRangeWithValue(object rangeValue)
-        {
-            var range = GetRangeStub();
-            range.SetupGet(x => x.get_Value(Missing.Value)).Returns(rangeValue);
-            return range;
         }
     }
 }

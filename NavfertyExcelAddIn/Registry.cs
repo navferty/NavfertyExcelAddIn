@@ -7,6 +7,7 @@ using NavfertyExcelAddIn.Commons;
 using NavfertyExcelAddIn.UnprotectWorkbook;
 using NavfertyExcelAddIn.WorksheetCellsEditing;
 using NavfertyExcelAddIn.DataValidation;
+using NavfertyExcelAddIn.XmlTools;
 
 namespace NavfertyExcelAddIn
 {
@@ -66,6 +67,21 @@ namespace NavfertyExcelAddIn
 
             builder.RegisterType<NumericParser>()
                 .As<INumericParser>()
+                .EnableInterfaceInterceptors()
+                .InterceptedBy(typeof(ExceptionLogger));
+
+            builder.RegisterType<XmlValidator> ()
+                .As<IXmlValidator>()
+                .EnableInterfaceInterceptors()
+                .InterceptedBy(typeof(ExceptionLogger));
+
+            builder.RegisterType<XsdSchemaValidator>()
+                .As<IXsdSchemaValidator>()
+                .EnableInterfaceInterceptors()
+                .InterceptedBy(typeof(ExceptionLogger));
+
+            builder.RegisterType<XmlSampleCreator>()
+                .As<IXmlSampleCreator>()
                 .EnableInterfaceInterceptors()
                 .InterceptedBy(typeof(ExceptionLogger));
 

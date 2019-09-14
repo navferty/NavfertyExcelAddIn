@@ -10,17 +10,15 @@ using Range = Microsoft.Office.Interop.Excel.Range;
 namespace NavfertyExcelAddIn.UnitTests.WorksheetCellsEditing
 {
     [TestClass]
-    public class CellsToMarkdownReaderTests : ExcelTests
+    public class CellsToMarkdownReaderTests : TestsBase
     {
         private Mock<Range> selection;
 
         private CellsToMarkdownReader cellsToMarkdownReader;
 
         [TestInitialize]
-        public override void BeforeEachTest()
+        public void BeforeEachTest()
         {
-            base.BeforeEachTest();
-
             selection = new Mock<Range>();
 
             selection.Setup(x => x.Columns).Returns(selection.Object);

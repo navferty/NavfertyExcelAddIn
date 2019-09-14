@@ -53,14 +53,14 @@ namespace NavfertyExcelAddIn.WorksheetCellsEditing
                 {
                     rangesByColors[colorIndex] = range.Union(unionRange);
                     logger.Debug(() =>
-                        $"For value {group.Key} add range {unionRange.Address} to union with same " +
+                        $"For value {group.Key} add range {unionRange.GetRelativeAddress()} to union with same " +
                         $"colorIndex {colorIndex}, with {group.Value.Length} items");
                 }
                 else
                 {
                     rangesByColors.Add(colorIndex, unionRange);
                     logger.Debug(() =>
-                        $"Grouped cells with value {group.Key}, range is {unionRange.Address}, {group.Value.Length} items");
+                        $"Grouped cells with value {group.Key}, range is {unionRange.GetRelativeAddress()}, {group.Value.Length} items");
                 }
             }
             return rangesByColors;

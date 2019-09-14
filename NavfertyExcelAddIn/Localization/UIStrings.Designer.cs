@@ -142,6 +142,15 @@ namespace NavfertyExcelAddIn.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Successfully validated, no errors or warnings detected.
+        /// </summary>
+        internal static string SuccessfullyValidatedMessage {
+            get {
+                return ResourceManager.GetString("SuccessfullyValidatedMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Any unsaved changes will be lost. Active workbook may become corrupted. It is strongly recommended to create backup. Continue?.
         /// </summary>
         internal static string UnsavedChangesWillBeLostPrompt {
@@ -174,6 +183,42 @@ namespace NavfertyExcelAddIn.Localization {
         internal static string WsName {
             get {
                 return ResourceManager.GetString("WsName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Element.
+        /// </summary>
+        internal static string XmlValidationReport_ElementName {
+            get {
+                return ResourceManager.GetString("XmlValidationReport_ElementName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Message.
+        /// </summary>
+        internal static string XmlValidationReport_Message {
+            get {
+                return ResourceManager.GetString("XmlValidationReport_Message", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Severity.
+        /// </summary>
+        internal static string XmlValidationReport_Severity {
+            get {
+                return ResourceManager.GetString("XmlValidationReport_Severity", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Value.
+        /// </summary>
+        internal static string XmlValidationReport_Value {
+            get {
+                return ResourceManager.GetString("XmlValidationReport_Value", resourceCulture);
             }
         }
     }

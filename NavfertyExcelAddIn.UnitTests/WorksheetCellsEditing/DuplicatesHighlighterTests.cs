@@ -3,28 +3,21 @@ using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 using Moq;
+using NavfertyExcelAddIn.UnitTests.Builders;
 using NavfertyExcelAddIn.WorksheetCellsEditing;
 using Range = Microsoft.Office.Interop.Excel.Range;
 
 namespace NavfertyExcelAddIn.UnitTests.WorksheetCellsEditing
 {
     [TestClass]
-    public class DuplicatesHighlighterTests : ExcelTests
+    public class DuplicatesHighlighterTests : TestsBase
     {
-        private Mock<Range> selection;
-        private Mock<Range> union;
-
         private DuplicatesHighlighter duplicatesHighlighter;
 
         [TestInitialize]
-        public override void BeforeEachTest()
+        public void BeforeEachTest()
         {
-            base.BeforeEachTest();
-
-            selection = GetRangeStub();
-            union = GetRangeStub();
-
-            rangeExtensions.Setup(x => x.Union(It.IsAny<Range>(), It.IsAny<Range>())).Returns(union.Object);
+            SetRangeExtentionsStub();
 
             duplicatesHighlighter = new DuplicatesHighlighter();
         }
@@ -34,32 +27,35 @@ namespace NavfertyExcelAddIn.UnitTests.WorksheetCellsEditing
         {
             var cells = new[]
             {
-                GetCellStub("a"),
-                GetCellStub("b"),
-                GetCellStub("c"),
-                GetCellStub("a"),
-                GetCellStub("b"),
-                GetCellStub("qwe"),
-                GetCellStub(2d),
-                GetCellStub(3d),
-                GetCellStub(2d)
+                new RangeBuilder().WithSingleValue("abc").Build(),
+                new RangeBuilder().WithSingleValue("a").Build(),
+                new RangeBuilder().WithSingleValue("b").Build(),
+                new RangeBuilder().WithSingleValue("c").Build(),
+                new RangeBuilder().WithSingleValue("a").Build(),
+                new RangeBuilder().WithSingleValue("b").Build(),
+                new RangeBuilder().WithSingleValue("qwe").Build(),
+                new RangeBuilder().WithSingleValue(2d).Build(),
+                new RangeBuilder().WithSingleValue(3d).Build(),
+                new RangeBuilder().WithSingleValue(2d).Build()
             };
-            selection.As<IEnumerable>().Setup(x => x.GetEnumerator()).Returns(cells.Select(c => c.Object).GetEnumerator());
+            var selection = new RangeBuilder().WithEnumrableRanges(cells).Build();
 
-            duplicatesHighlighter.HighlightDuplicates(selection.Object);
 
-            rangeExtensions.Verify(x => x.SetColor(It.IsAny<Range>(), It.IsAny<int>()), Times.Exactly(3));
+            duplicatesHighlighter.HighlightDuplicates(selection);
+
+            Assert.AreEqual(3, RangeExtensionsStub.SetColorInvocations.Count());
         }
 
         [TestMethod]
         public void HighlightDuplicates_ManyItemsWithSameColors_Success()
         {
-            var cells = Enumerable.Range(1, 1000).Select(x => GetCellStub((x % 100).ToString()));
-            selection.As<IEnumerable>().Setup(x => x.GetEnumerator()).Returns(cells.Select(c => c.Object).GetEnumerator());
+            var cells = Enumerable.Range(1, 1000).Select(x => new RangeBuilder().WithSingleValue((x % 100).ToString()).Build());
+            var selection = new RangeBuilder().WithEnumrableRanges(cells).Build();
 
-            duplicatesHighlighter.HighlightDuplicates(selection.Object);
+            duplicatesHighlighter.HighlightDuplicates(selection);
 
-            rangeExtensions.Verify(x => x.SetColor(It.IsAny<Range>(), It.IsAny<int>()), Times.Exactly(57)); // all 57 colors
+            // all 57 colors
+            Assert.AreEqual(57, RangeExtensionsStub.SetColorInvocations.Count());
         }
     }
 }

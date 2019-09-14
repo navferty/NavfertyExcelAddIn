@@ -12,12 +12,11 @@ using Range = Microsoft.Office.Interop.Excel.Range;
 namespace NavfertyExcelAddIn.UnitTests.UnprotectWorkbook
 {
     [TestClass]
-    public class WbUnprotectorTests
+    public class WbUnprotectorTests : TestsBase
     {
         private WbUnprotector wbUnprotector;
         private Application app;
 
-        public TestContext TestContext { get; set; }
 
         [TestInitialize]
         public void Initialize()
@@ -31,8 +30,8 @@ namespace NavfertyExcelAddIn.UnitTests.UnprotectWorkbook
         {
             var dialogService = new Mock<IDialogService>(MockBehavior.Loose);
             wbUnprotector = new WbUnprotector(dialogService.Object);
-            var path = Path.Combine(TestContext.TestDir,
-                $"../../NavfertyExcelAddIn.UnitTests/bin/Debug/UnprotectWorkbook/ProtectedWorkbook.xlsx");
+
+            var path = GetFilePath("UnprotectWorkbook/ProtectedWorkbook.xlsx");
 
             Assert.IsTrue(File.Exists(path));
 

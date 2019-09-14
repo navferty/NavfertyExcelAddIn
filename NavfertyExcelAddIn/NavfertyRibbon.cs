@@ -13,6 +13,7 @@ using NavfertyExcelAddIn.ParseNumerics;
 using NavfertyExcelAddIn.UnprotectWorkbook;
 using NavfertyExcelAddIn.WorksheetCellsEditing;
 using NavfertyExcelAddIn.InteractiveRangeReport;
+using NavfertyExcelAddIn.XmlTools;
 using NavfertyExcelAddIn.Localization;
 using NavfertyExcelAddIn.Commons;
 
@@ -30,6 +31,7 @@ namespace NavfertyExcelAddIn
     [SuppressMessage("Style", "IDE0060:Remove unused parameter", Justification = "Ribbon callbacks must have certain signature")]
     public class NavfertyRibbon : IRibbonExtensibility, IDisposable
     {
+        #region Private members
         private static readonly IContainer container = Registry.CreateContainer();
         private readonly ILogger logger = LogManager.GetCurrentClassLogger();
         private readonly IDialogService dialogService = container.Resolve<IDialogService>();
@@ -49,11 +51,7 @@ namespace NavfertyExcelAddIn
         #region Forms
         private InteractiveRangeReportForm form;
         #endregion
-
-        public NavfertyRibbon()
-        {
-            // TODO
-        }
+        #endregion
 
         #region IRibbonExtensibility
         public string GetCustomUI(string ribbonID)
@@ -65,9 +63,10 @@ namespace NavfertyExcelAddIn
         #region Ribbon callbacks
         public void RibbonLoad(IRibbonUI ribbonUI)
         {
-            // TODO
+            logger.Debug($"Ribbon loaded");
         }
 
+        #region Common tools
         public void ParseNumerics(IRibbonControl ribbonControl)
         {
             var range = GetSelectionOrUsedRange(App.ActiveSheet);
@@ -183,7 +182,7 @@ namespace NavfertyExcelAddIn
                 return;
 
             logger.Debug($"UnmergeCells. Range selected is {range.Address}");
-            
+
             using (var scope = container.BeginLifetimeScope())
             {
                 var cellsUnmerger = scope.Resolve<ICellsUnmerger>();
@@ -268,17 +267,28 @@ namespace NavfertyExcelAddIn
                 Clipboard.SetText(table);
             }
         }
+        #endregion
 
         #region XML Tools
         public void CreateSampleXml(IRibbonControl ribbonControl)
         {
-            logger.Debug("CreateSampleXml");
-            // TODO
+            logger.Debug("CreateSampleXml pressed");
+
+            using (var scope = container.BeginLifetimeScope())
+            {
+                var xmlSampleCreator = scope.Resolve<IXmlSampleCreator>();
+                xmlSampleCreator.CreateSampleXml();
+            }
         }
         public void ValidateXml(IRibbonControl ribbonControl)
         {
-            logger.Debug("ValidateXml");
-            // TODO
+            logger.Debug("ValidateXml pressed");
+
+            using (var scope = container.BeginLifetimeScope())
+            {
+                var validator = scope.Resolve<IXmlValidator>();
+                validator.Validate(App);
+            }
         }
         #endregion
         #endregion

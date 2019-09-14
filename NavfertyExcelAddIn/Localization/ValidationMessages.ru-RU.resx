@@ -117,58 +117,19 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Address" xml:space="preserve">
-    <value>Range Address</value>
+  <data name="NotMathesPatternNDigits1" xml:space="preserve">
+    <value>Не соответствует установленному шаблону ({0} цифр)</value>
   </data>
-  <data name="CannotUnlockPleaseSaveAsXml" xml:space="preserve">
-    <value>Cannot unlock workbook contents because of wrong workbook format. Please save workbook as xlsx or xlsm and try again</value>
+  <data name="NthDigitShouldBeAs4" xml:space="preserve">
+    <value>Проверочная цифра {1} на месте {0} должна быть {2} (как остаток от деления {3} на 11 на 10)</value>
   </data>
-  <data name="Error" xml:space="preserve">
-    <value>Error</value>
+  <data name="ValueCantBeConvertedToDate" xml:space="preserve">
+    <value>Формат значения не соответствует дате</value>
   </data>
-  <data name="ErrorMessage" xml:space="preserve">
-    <value>Error occured: {0}</value>
+  <data name="ValueContainsInvalidChars" xml:space="preserve">
+    <value>Значение содержит недопустимые символы</value>
   </data>
-  <data name="Formula" xml:space="preserve">
-    <value>Formula</value>
-  </data>
-  <data name="Info" xml:space="preserve">
-    <value>Info</value>
-  </data>
-  <data name="NoErrors" xml:space="preserve">
-    <value>Found no errors on current worksheet</value>
-  </data>
-  <data name="SearchResults" xml:space="preserve">
-    <value>Search Results</value>
-  </data>
-  <data name="ShowVersionMessage" xml:space="preserve">
-    <value>Navferty Excle add-in. Published under MIT licence. Version </value>
-  </data>
-  <data name="SuccessfullyValidatedMessage" xml:space="preserve">
-    <value>Successfully validated, no errors or warnings detected</value>
-  </data>
-  <data name="UnsavedChangesWillBeLostPrompt" xml:space="preserve">
-    <value>Any unsaved changes will be lost. Active workbook may become corrupted. It is strongly recommended to create backup. Continue?</value>
-  </data>
-  <data name="VbaUnprotected" xml:space="preserve">
-    <value>VBA project unprotected. To enable viewing source code go to VBA project properties in VBE editor, tab Protection, set any password and press OK. Then you can disable password by unchecking the option Lock project for viewing.</value>
-  </data>
-  <data name="Warning" xml:space="preserve">
-    <value>Warning!</value>
-  </data>
-  <data name="WsName" xml:space="preserve">
-    <value>Worksheet Name</value>
-  </data>
-  <data name="XmlValidationReport_ElementName" xml:space="preserve">
-    <value>Element</value>
-  </data>
-  <data name="XmlValidationReport_Message" xml:space="preserve">
-    <value>Message</value>
-  </data>
-  <data name="XmlValidationReport_Severity" xml:space="preserve">
-    <value>Severity</value>
-  </data>
-  <data name="XmlValidationReport_Value" xml:space="preserve">
-    <value>Value</value>
+  <data name="ValueNotNumeric" xml:space="preserve">
+    <value>Значение не соответствует числовому формату</value>
   </data>
 </root>
