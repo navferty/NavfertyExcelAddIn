@@ -1,28 +1,21 @@
-﻿using System.Collections;
-using System.Reflection;
-
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 
 using NavfertyExcelAddIn.WorksheetCellsEditing;
 using NavfertyExcelAddIn.FindFormulaErrors;
-
-using Range = Microsoft.Office.Interop.Excel.Range;
+using NavfertyExcelAddIn.UnitTests.Builders;
 
 namespace NavfertyExcelAddIn.UnitTests.WorksheetCellsEditing
 {
     [TestClass]
     public class CaseTogglerTests : TestsBase
     {
-        private Mock<Range> selection;
-
         private CaseToggler caseToggler;
 
         [TestInitialize]
         public void BeforeEachTest()
         {
-            selection = GetRangeStub();
-            selection.Setup(x => x.set_Value(It.IsAny<object>(), It.IsAny<object>()));
+            SetRangeExtentionsStub();
 
             caseToggler = new CaseToggler();
         }
@@ -30,16 +23,20 @@ namespace NavfertyExcelAddIn.UnitTests.WorksheetCellsEditing
         [TestMethod]
         public void ToggleCase_SingleCell_Converted()
         {
-            var value = "abc";
-            selection.As<IEnumerable>().Setup(x => x.GetEnumerator()).Returns(new[] { GetCellStub("abc").Object }.GetEnumerator());
-            selection.Setup(x => x.get_Value(Missing.Value)).Returns(value);
+            var rangeBuilder = new RangeBuilder()
+                .WithEnumrableRanges(new[] { new RangeBuilder().WithSingleValue("abc").Build() })
+                .WithWorksheet()
+                .WithAreas()
+                .WithSingleValue("abc")
+                .WithSetValue();
+            var selection = rangeBuilder.Build();
 
-            caseToggler.ToggleCase(selection.Object);
+            caseToggler.ToggleCase(selection);
 
 
             var expected = "ABC";
-            selection.Verify(x => x.set_Value(It.IsAny<object>(), It.IsAny<string>()), Times.Once);
-            selection.Verify(x => x.set_Value(It.IsAny<object>(), It.Is<string>(v => expected == v)));
+            rangeBuilder.MockObject.Verify(x => x.set_Value(It.IsAny<object>(), It.IsAny<string>()), Times.Once);
+            rangeBuilder.MockObject.Verify(x => x.set_Value(It.IsAny<object>(), It.Is<string>(v => expected == v)));
         }
 
         [TestMethod]
@@ -51,10 +48,17 @@ namespace NavfertyExcelAddIn.UnitTests.WorksheetCellsEditing
                 { "jkl", "123", 123d },
                 { "", null, (int)CVErrEnum.ErrNA }
             };
-            selection.As<IEnumerable>().Setup(x => x.GetEnumerator()).Returns(new[] { GetCellStub("abc").Object }.GetEnumerator());
-            selection.Setup(x => x.get_Value(Missing.Value)).Returns(values);
+            var firstCell = new RangeBuilder().WithSingleValue(values[0, 0]).Build();
 
-            caseToggler.ToggleCase(selection.Object);
+            var rangeBuilder = new RangeBuilder()
+                .WithEnumrableRanges(new[] { firstCell })
+                .WithMultipleValue(values)
+                .WithWorksheet()
+                .WithAreas()
+                .WithSetValue();
+            var selection = rangeBuilder.Build();
+
+            caseToggler.ToggleCase(selection);
 
 
             var expected = new object[,]
@@ -63,8 +67,8 @@ namespace NavfertyExcelAddIn.UnitTests.WorksheetCellsEditing
                 { "JKL", "123", 123d },
                 { "", null, (int)CVErrEnum.ErrNA }
             };
-            selection.Verify(x => x.set_Value(It.IsAny<object>(), It.IsAny<object[,]>()), Times.Once);
-            selection.Verify(x => x.set_Value(It.IsAny<object>(), It.Is<object[,]>(v => AssertAssignedValue(expected, v))));
+            rangeBuilder.MockObject.Verify(x => x.set_Value(It.IsAny<object>(), It.IsAny<object[,]>()), Times.Once);
+            rangeBuilder.MockObject.Verify(x => x.set_Value(It.IsAny<object>(), It.Is<object[,]>(v => AssertAssignedValue(expected, v))));
         }
         private bool AssertAssignedValue(object[,] expected, object[,] value)
         {
@@ -81,14 +85,20 @@ namespace NavfertyExcelAddIn.UnitTests.WorksheetCellsEditing
         [DataRow("a", "A")]
         public void ToggleCase_ConvertedRightOrder(string initial, string result)
         {
-            selection.As<IEnumerable>().Setup(x => x.GetEnumerator()).Returns(new[] { GetCellStub(initial).Object }.GetEnumerator());
-            selection.Setup(x => x.get_Value(Missing.Value)).Returns(initial);
+            var firstCell = new RangeBuilder().WithSingleValue(initial).Build();
+            var rangeBuilder = new RangeBuilder()
+                    .WithEnumrableRanges(new[] { firstCell })
+                    .WithSingleValue(initial)
+                    .WithWorksheet()
+                    .WithAreas()
+                    .WithSetValue();
+            var selection = rangeBuilder.Build();
 
-            caseToggler.ToggleCase(selection.Object);
+            caseToggler.ToggleCase(selection);
 
 
-            selection.Verify(x => x.set_Value(It.IsAny<object>(), It.IsAny<string>()), Times.Once);
-            selection.Verify(x => x.set_Value(It.IsAny<object>(), It.Is<string>(v => result == v)));
+            rangeBuilder.MockObject.Verify(x => x.set_Value(It.IsAny<object>(), It.IsAny<string>()), Times.Once);
+            rangeBuilder.MockObject.Verify(x => x.set_Value(It.IsAny<object>(), It.Is<string>(v => result == v)));
         }
 
         [TestMethod]
@@ -99,19 +109,28 @@ namespace NavfertyExcelAddIn.UnitTests.WorksheetCellsEditing
                 { "", "123", 123d },
                 { "", null, (int)CVErrEnum.ErrNA }
             };
-            selection.As<IEnumerable>().Setup(x => x.GetEnumerator()).Returns(
-                new[]
-                {
-                    GetCellStub("").Object, GetCellStub("123").Object, GetCellStub(123d).Object,
-                    GetCellStub("").Object, GetCellStub(null).Object, GetCellStub((int)CVErrEnum.ErrNA).Object
-                }.GetEnumerator());
+            var cells = new[]
+            {
+                new RangeBuilder().WithSingleValue("").Build(),
+                new RangeBuilder().WithSingleValue("123").Build(),
+                new RangeBuilder().WithSingleValue(123d).Build(),
+                new RangeBuilder().WithSingleValue("").Build(),
+                new RangeBuilder().WithSingleValue(null).Build(),
+                new RangeBuilder().WithSingleValue((int)CVErrEnum.ErrNA).Build()
+            };
+            var rangeBuilder = new RangeBuilder()
+                .WithEnumrableRanges(cells)
+                .WithMultipleValue(values)
+                .WithWorksheet()
+                .WithAreas()
+                .WithSetValue();
 
-            selection.Setup(x => x.get_Value(Missing.Value)).Returns(values);
+            var selection = rangeBuilder.Build();
 
 
-            caseToggler.ToggleCase(selection.Object);
+            caseToggler.ToggleCase(selection);
 
-            selection.Verify(x => x.set_Value(It.IsAny<object>(), It.IsAny<object[,]>()), Times.Never);
+            rangeBuilder.MockObject.Verify(x => x.set_Value(It.IsAny<object>(), It.IsAny<object[,]>()), Times.Never);
         }
     }
 }

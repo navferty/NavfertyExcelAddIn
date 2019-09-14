@@ -7,6 +7,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 
 using NavfertyExcelAddIn.DataValidation;
+using NavfertyExcelAddIn.UnitTests.Builders;
 
 using Range = Microsoft.Office.Interop.Excel.Range;
 
@@ -15,7 +16,6 @@ namespace NavfertyExcelAddIn.UnitTests.DataValidation
     [TestClass]
     public class CellsValueValidatorTests : TestsBase
     {
-        private Mock<Range> selection;
         private Mock<IValidator> validator;
 
         private CellsValueValidator cellsValidator;
@@ -23,7 +23,7 @@ namespace NavfertyExcelAddIn.UnitTests.DataValidation
         [TestInitialize]
         public void BeforeEachTest()
         {
-            selection = GetRangeStub();
+            SetRangeExtentionsStub();
 
             validator = new Mock<IValidator>(MockBehavior.Strict);
 
@@ -37,12 +37,9 @@ namespace NavfertyExcelAddIn.UnitTests.DataValidation
         public void Validate_All_Success()
         {
             validator.Setup(x => x.CheckValue(It.IsAny<object>())).Returns(ValidationResult.Success);
-            selection
-                .As<IEnumerable>()
-                .Setup(x => x.GetEnumerator())
-                .Returns(Enumerable.Range(0, 10).Select(z => GetCellStub(z).Object).GetEnumerator());
+            var selection = new RangeBuilder().WithEnumrableRanges().WithWorksheet().Build();
 
-            var result = cellsValidator.Validate(selection.Object, ValidationType.Xml);
+            var result = cellsValidator.Validate(selection, ValidationType.Xml);
 
             Assert.AreEqual(0, result.Count);
         }
@@ -51,12 +48,9 @@ namespace NavfertyExcelAddIn.UnitTests.DataValidation
         public void Validate_All_Fail()
         {
             validator.Setup(x => x.CheckValue(It.IsAny<object>())).Returns(ValidationResult.Fail(string.Empty));
-            selection
-                .As<IEnumerable>()
-                .Setup(x => x.GetEnumerator())
-                .Returns(Enumerable.Range(0, 10).Select(z => GetCellStub(z).Object).GetEnumerator());
+            var selection = new RangeBuilder().WithEnumrableRanges().WithWorksheet().Build();
 
-            var result = cellsValidator.Validate(selection.Object, ValidationType.Xml);
+            var result = cellsValidator.Validate(selection, ValidationType.Xml);
 
             Assert.AreEqual(10, result.Count);
         }
@@ -66,18 +60,18 @@ namespace NavfertyExcelAddIn.UnitTests.DataValidation
         {
             var cells = new[]
             {
-                GetCellStub(true),
-                GetCellStub(true),
-                GetCellStub(false),
-                GetCellStub("")
+                new RangeBuilder().WithSingleValue(true).Build(),
+                new RangeBuilder().WithSingleValue(true).Build(),
+                new RangeBuilder().WithSingleValue(false).Build(),
+                new RangeBuilder().WithSingleValue("").Build()
             };
-            selection.As<IEnumerable>().Setup(x => x.GetEnumerator()).Returns(cells.Select(c => c.Object).GetEnumerator());
+            var selection = new RangeBuilder().WithEnumrableRanges(cells).WithWorksheet().Build();
 
             validator
                 .Setup(x => x.CheckValue(It.IsAny<object>()))
                 .Returns((bool x) => x ? ValidationResult.Success : ValidationResult.Fail("Fail =("));
 
-            var result = cellsValidator.Validate(selection.Object, ValidationType.Xml);
+            var result = cellsValidator.Validate(selection, ValidationType.Xml);
 
             Assert.AreEqual(1, result.Count);
             validator.Verify(x => x.CheckValue(It.IsAny<object>()), Times.Exactly(3));
@@ -86,9 +80,9 @@ namespace NavfertyExcelAddIn.UnitTests.DataValidation
         [TestMethod]
         public void Validate_NoCells()
         {
-            selection.As<IEnumerable>().Setup(x => x.GetEnumerator()).Returns(Array.Empty<Range>().GetEnumerator());
+            var selection = new RangeBuilder().WithEnumrableRanges(Array.Empty<Range>()).Build();
 
-            var result = cellsValidator.Validate(selection.Object, ValidationType.Xml);
+            var result = cellsValidator.Validate(selection, ValidationType.Xml);
 
             Assert.AreEqual(0, result.Count);
         }

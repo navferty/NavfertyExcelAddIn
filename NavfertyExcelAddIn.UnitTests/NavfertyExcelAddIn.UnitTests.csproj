@@ -81,6 +81,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Builders\RangeBuilder.cs" />
+    <Compile Include="Builders\TestDataBuilder.cs" />
     <Compile Include="DataValidation\CellsValueValidatorTests.cs" />
     <Compile Include="DataValidation\DataValidatorTests.cs" />
     <Compile Include="TestsBase.cs" />

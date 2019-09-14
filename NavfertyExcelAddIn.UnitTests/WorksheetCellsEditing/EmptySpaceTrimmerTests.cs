@@ -1,27 +1,22 @@
-﻿using System.Collections;
-using System.Reflection;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
+
 using NavfertyExcelAddIn.FindFormulaErrors;
 using NavfertyExcelAddIn.WorksheetCellsEditing;
-
-using Range = Microsoft.Office.Interop.Excel.Range;
+using NavfertyExcelAddIn.UnitTests.Builders;
 
 namespace NavfertyExcelAddIn.UnitTests.WorksheetCellsEditing
 {
     [TestClass]
     public class EmptySpaceTrimmerTests : TestsBase
     {
-        private Mock<Range> selection;
-
         private EmptySpaceTrimmer emptySpaceTrimmer;
 
         [TestInitialize]
         public void BeforeEachTest()
         {
-            selection = GetRangeStub();
-            selection.Setup(x => x.set_Value(It.IsAny<object>(), It.IsAny<object>()));
+            SetRangeExtentionsStub();
 
             emptySpaceTrimmer = new EmptySpaceTrimmer();
         }
@@ -30,15 +25,20 @@ namespace NavfertyExcelAddIn.UnitTests.WorksheetCellsEditing
         public void TrimSpaces_SingleCell_Converted()
         {
             var value = "a   \r\nb     c\t";
-            selection.As<IEnumerable>().Setup(x => x.GetEnumerator()).Returns(new[] { GetCellStub("abc").Object }.GetEnumerator());
-            selection.Setup(x => x.get_Value(Missing.Value)).Returns(value);
+            var rangeBuilder = new RangeBuilder()
+                .WithWorksheet()
+                .WithAreas()
+                .WithSingleValue(value)
+                .WithSetValue();
+            var selection = rangeBuilder.Build();
 
-            emptySpaceTrimmer.TrimSpaces(selection.Object);
+
+            emptySpaceTrimmer.TrimSpaces(selection);
 
 
             var expected = "a b c";
-            selection.Verify(x => x.set_Value(It.IsAny<object>(), It.IsAny<string>()), Times.Once);
-            selection.Verify(x => x.set_Value(It.IsAny<object>(), It.Is<string>(v => expected == v)));
+            rangeBuilder.MockObject.Verify(x => x.set_Value(It.IsAny<object>(), It.IsAny<string>()), Times.Once);
+            rangeBuilder.MockObject.Verify(x => x.set_Value(It.IsAny<object>(), It.Is<string>(v => expected == v)));
         }
 
         [TestMethod]
@@ -50,10 +50,15 @@ namespace NavfertyExcelAddIn.UnitTests.WorksheetCellsEditing
                 { "jk\r\nl", "   \r\n   \t", "   " },
                 { "", null, (int)CVErrEnum.ErrNA }
             };
-            selection.Setup(x => x.get_Value(Missing.Value)).Returns(values);
+            var rangeBuilder = new RangeBuilder()
+                .WithWorksheet()
+                .WithAreas()
+                .WithMultipleValue(values)
+                .WithSetValue();
+            var selection = rangeBuilder.Build();
 
 
-            emptySpaceTrimmer.TrimSpaces(selection.Object);
+            emptySpaceTrimmer.TrimSpaces(selection);
 
             var expected = new object[,]
             {
@@ -61,8 +66,8 @@ namespace NavfertyExcelAddIn.UnitTests.WorksheetCellsEditing
                 { "jk l", null, null },
                 { null, null, (int)CVErrEnum.ErrNA }
             };
-            selection.Verify(x => x.set_Value(It.IsAny<object>(), It.IsAny<object[,]>()), Times.Once);
-            selection.Verify(x => x.set_Value(It.IsAny<object>(), It.Is<object[,]>(v => AssertAssignedValue(expected, v))));
+            rangeBuilder.MockObject.Verify(x => x.set_Value(It.IsAny<object>(), It.IsAny<object[,]>()), Times.Once);
+            rangeBuilder.MockObject.Verify(x => x.set_Value(It.IsAny<object>(), It.Is<object[,]>(v => AssertAssignedValue(expected, v))));
         }
         private bool AssertAssignedValue(object[,] expected, object[,] value)
         {
