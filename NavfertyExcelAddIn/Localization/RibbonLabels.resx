@@ -157,7 +157,7 @@
     <value>Copy as Markdown</value>
   </data>
   <data name="ValidateValuesButton" xml:space="preserve">
-    <value>ValidateValuesButton</value>
+    <value>Validate Values</value>
   </data>
   <data name="ValidateValuesDate" xml:space="preserve">
     <value>Date</value>
@@ -165,16 +165,13 @@
   <data name="ValidateValuesNumerics" xml:space="preserve">
     <value>Numerics</value>
   </data>
-  <data name="ValidateValuesSplitButton" xml:space="preserve">
-    <value>ValidateValuesSplitButton</value>
-  </data>
   <data name="ValidateValuesTinOrganization" xml:space="preserve">
-    <value>TinOrganization</value>
+    <value>Russian TIN (Organization)</value>
   </data>
   <data name="ValidateValuesTinPersonal" xml:space="preserve">
-    <value>TinPersonal</value>
+    <value>Russian TIN (Personal)</value>
   </data>
   <data name="ValidateValuesXml" xml:space="preserve">
-    <value>Xml</value>
+    <value>XML contents text</value>
   </data>
 </root>

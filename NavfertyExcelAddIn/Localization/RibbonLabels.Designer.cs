@@ -160,7 +160,7 @@ namespace NavfertyExcelAddIn.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to ValidateValuesButton.
+        ///   Looks up a localized string similar to Validate Values.
         /// </summary>
         internal static string ValidateValuesButton {
             get {
@@ -187,16 +187,7 @@ namespace NavfertyExcelAddIn.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to ValidateValuesSplitButton.
-        /// </summary>
-        internal static string ValidateValuesSplitButton {
-            get {
-                return ResourceManager.GetString("ValidateValuesSplitButton", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to TinOrganization.
+        ///   Looks up a localized string similar to Russian TIN (Organization).
         /// </summary>
         internal static string ValidateValuesTinOrganization {
             get {
@@ -205,7 +196,7 @@ namespace NavfertyExcelAddIn.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to TinPersonal.
+        ///   Looks up a localized string similar to Russian TIN (Personal).
         /// </summary>
         internal static string ValidateValuesTinPersonal {
             get {
@@ -214,7 +205,7 @@ namespace NavfertyExcelAddIn.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Xml.
+        ///   Looks up a localized string similar to XML contents text.
         /// </summary>
         internal static string ValidateValuesXml {
             get {
