@@ -1,5 +1,8 @@
-﻿using System.Collections;
+﻿using System.IO;
+using System.Collections;
+using System.Globalization;
 using System.Reflection;
+using System.Threading;
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
@@ -9,27 +12,28 @@ using NavfertyExcelAddIn.FindFormulaErrors;
 
 using Microsoft.Office.Interop.Excel;
 using Range = Microsoft.Office.Interop.Excel.Range;
-using System.IO;
 
 namespace NavfertyExcelAddIn.UnitTests
 {
     [TestClass]
-    public abstract class ExcelTests
+    public abstract class TestsBase
     {
+        protected RangeExtensionsImplementationStub RangeExtensionsStub { get; set; }
+
         public TestContext TestContext { get; set; }
 
-        protected Mock<IRangeExtensionsImplementation> rangeExtensions;
 
-        [TestInitialize]
-        public virtual void BeforeEachTest()
+        protected void SetRangeExtentionsStub()
         {
-            // TODO make separate stub class
-            rangeExtensions = new Mock<IRangeExtensionsImplementation>(MockBehavior.Strict);
-            rangeExtensions.Setup(x => x.GetFormula(It.IsAny<Range>())).Returns("=1+1");
-            rangeExtensions.Setup(x => x.GetRelativeAddress(It.IsAny<Range>())).Returns("A1");
-            rangeExtensions.Setup(x => x.SetColor(It.IsAny<Range>(), It.IsAny<int>()));
+            RangeExtensionsStub = new RangeExtensionsImplementationStub();
+            RangeExtensions.ResetImplementation(RangeExtensionsStub);
+        }
 
-            RangeExtensions.ResetImplementation(rangeExtensions.Object);
+        protected void SetCulture(string culture = "en-US")
+        {
+            var cultureInfo = CultureInfo.GetCultureInfo(culture);
+            Thread.CurrentThread.CurrentCulture = cultureInfo;
+            Thread.CurrentThread.CurrentUICulture = cultureInfo;
         }
 
         // TODO make as builder 'Builder.WithValue(value)' etc.

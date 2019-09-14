@@ -268,6 +268,7 @@
     <Compile Include="UnprotectWorkbook\IWbUnprotector.cs" />
     <Compile Include="UnprotectWorkbook\WbUnprotector.cs" />
     <Compile Include="XmlTools\XmlSampleCreator.cs" />
+    <Compile Include="XmlTools\XmlValidationError.cs" />
     <Compile Include="XmlTools\XmlValidator.cs" />
     <Compile Include="XmlTools\XsdSchemaValidator.cs" />
     <None Include="Resources\markdown.png" />

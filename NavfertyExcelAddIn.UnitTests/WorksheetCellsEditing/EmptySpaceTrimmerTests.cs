@@ -11,17 +11,15 @@ using Range = Microsoft.Office.Interop.Excel.Range;
 namespace NavfertyExcelAddIn.UnitTests.WorksheetCellsEditing
 {
     [TestClass]
-    public class EmptySpaceTrimmerTests : ExcelTests
+    public class EmptySpaceTrimmerTests : TestsBase
     {
         private Mock<Range> selection;
 
         private EmptySpaceTrimmer emptySpaceTrimmer;
 
         [TestInitialize]
-        public override void BeforeEachTest()
+        public void BeforeEachTest()
         {
-            base.BeforeEachTest();
-
             selection = GetRangeStub();
             selection.Setup(x => x.set_Value(It.IsAny<object>(), It.IsAny<object>()));
 

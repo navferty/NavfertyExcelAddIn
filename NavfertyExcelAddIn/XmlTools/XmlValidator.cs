@@ -31,7 +31,7 @@ namespace NavfertyExcelAddIn.XmlTools
             }
 
             // allow multiple xsd files as one schema
-            var xsdFileNames = dialogService.AskForFiles(true, FileType.Xsd).ToArray();
+            var xsdFileNames = dialogService.AskForFiles(true, FileType.Xsd);
 
             if (string.IsNullOrEmpty(xsdFileNames.FirstOrDefault()))
             {

@@ -4,15 +4,12 @@ using System.IO;
 using System.Linq;
 using System.Xml;
 using System.Xml.Schema;
-using NLog;
 
 namespace NavfertyExcelAddIn.XmlTools
 {
     public class XsdSchemaValidator : IXsdSchemaValidator
     {
-        // private readonly Logger logger = LogManager.GetCurrentClassLogger();
-
-        public IReadOnlyCollection<string> Validate(string xmlFilename, IReadOnlyCollection<string> schemas)
+        public IReadOnlyCollection<XmlValidationError> Validate(string xmlFilename, IReadOnlyCollection<string> schemas)
         {
             var settings = new XmlReaderSettings { ValidationType = ValidationType.Schema };
             foreach (var schema in schemas)
@@ -21,7 +18,7 @@ namespace NavfertyExcelAddIn.XmlTools
                 settings.Schemas.Add(loadedSchema);
             }
 
-            var validationErrors = new List<string>();
+            var validationErrors = new List<XmlValidationError>();
 
             settings.ValidationEventHandler += (object sender, ValidationEventArgs e)
                 => validationErrors.Add(TransformError((XmlReader)sender, e));
@@ -58,7 +55,13 @@ namespace NavfertyExcelAddIn.XmlTools
             return schema;
         }
 
-        private string TransformError(XmlReader reader, ValidationEventArgs e) =>
-            $"{e.Severity.ToString()}. {reader.Name}: '{reader.Value}': {e.Message}";
+        private XmlValidationError TransformError(XmlReader reader, ValidationEventArgs e)
+        {
+            var severity = e.Severity == XmlSeverityType.Error
+                ? ValidationErrorSeverity.Error
+                : ValidationErrorSeverity.Warning;
+
+            return new XmlValidationError(severity, e.Message, reader.Value, reader.Name);
+        }
     }
 }

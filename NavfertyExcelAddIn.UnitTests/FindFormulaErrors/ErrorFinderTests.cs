@@ -12,7 +12,7 @@ using Range = Microsoft.Office.Interop.Excel.Range;
 namespace NavfertyExcelAddIn.UnitTests.FindFormulaErrors
 {
     [TestClass]
-    public class ErrorFinderTests : ExcelTests
+    public class ErrorFinderTests : TestsBase
     {
         private ErrorFinder errorFinder;
 
@@ -36,6 +36,7 @@ namespace NavfertyExcelAddIn.UnitTests.FindFormulaErrors
 
             var values = new object[,] { { 1d, "1", "abc" }, { (int)CVErrEnum.ErrGettingData, "321 , 321", null } };
             var worksheetUsedRange = SetUpRangeWithValue(values);
+            SetRangeExtentionsStub();
 
             var result = errorFinder.GetAllErrorCells(worksheetUsedRange.Object).ToArray();
 
@@ -61,6 +62,9 @@ namespace NavfertyExcelAddIn.UnitTests.FindFormulaErrors
             errorFinder = new ErrorFinder();
 
             Mock<Range> worksheetUsedRange = SetUpRangeWithValue((int)CVErrEnum.ErrNA);
+
+            SetRangeExtentionsStub();
+
 
             var result = errorFinder.GetAllErrorCells(worksheetUsedRange.Object).ToArray();
 

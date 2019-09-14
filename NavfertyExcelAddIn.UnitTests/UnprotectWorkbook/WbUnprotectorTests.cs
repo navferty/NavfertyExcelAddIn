@@ -12,7 +12,7 @@ using Range = Microsoft.Office.Interop.Excel.Range;
 namespace NavfertyExcelAddIn.UnitTests.UnprotectWorkbook
 {
     [TestClass]
-    public class WbUnprotectorTests : ExcelTests
+    public class WbUnprotectorTests : TestsBase
     {
         private WbUnprotector wbUnprotector;
         private Application app;

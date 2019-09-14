@@ -11,7 +11,7 @@ using NavfertyExcelAddIn.XmlTools;
 namespace NavfertyExcelAddIn.UnitTests.XmlTools
 {
     [TestClass]
-    public class XmlSampleCreatorTests : ExcelTests
+    public class XmlSampleCreatorTests : TestsBase
     {
         private Mock<IDialogService> dialogService;
 
@@ -20,10 +20,8 @@ namespace NavfertyExcelAddIn.UnitTests.XmlTools
         private const string XsdFile = "XmlTools/Samples/NO_PRIB_1_002_00_05_07_05.xsd";
 
         [TestInitialize]
-        public override void BeforeEachTest()
+        public void BeforeEachTest()
         {
-            base.BeforeEachTest();
-
             dialogService = new Mock<IDialogService>(MockBehavior.Strict);
 
             xmlSampleCreator = new XmlSampleCreator(dialogService.Object);

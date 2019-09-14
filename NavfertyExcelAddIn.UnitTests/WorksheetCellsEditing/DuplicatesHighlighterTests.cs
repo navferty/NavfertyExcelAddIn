@@ -9,22 +9,18 @@ using Range = Microsoft.Office.Interop.Excel.Range;
 namespace NavfertyExcelAddIn.UnitTests.WorksheetCellsEditing
 {
     [TestClass]
-    public class DuplicatesHighlighterTests : ExcelTests
+    public class DuplicatesHighlighterTests : TestsBase
     {
         private Mock<Range> selection;
-        private Mock<Range> union;
 
         private DuplicatesHighlighter duplicatesHighlighter;
 
         [TestInitialize]
-        public override void BeforeEachTest()
+        public void BeforeEachTest()
         {
-            base.BeforeEachTest();
-
             selection = GetRangeStub();
-            union = GetRangeStub();
 
-            rangeExtensions.Setup(x => x.Union(It.IsAny<Range>(), It.IsAny<Range>())).Returns(union.Object);
+            SetRangeExtentionsStub();
 
             duplicatesHighlighter = new DuplicatesHighlighter();
         }
@@ -48,7 +44,7 @@ namespace NavfertyExcelAddIn.UnitTests.WorksheetCellsEditing
 
             duplicatesHighlighter.HighlightDuplicates(selection.Object);
 
-            rangeExtensions.Verify(x => x.SetColor(It.IsAny<Range>(), It.IsAny<int>()), Times.Exactly(3));
+            Assert.AreEqual(3, RangeExtensionsStub.SetColorInvocations.Count());
         }
 
         [TestMethod]
@@ -59,7 +55,8 @@ namespace NavfertyExcelAddIn.UnitTests.WorksheetCellsEditing
 
             duplicatesHighlighter.HighlightDuplicates(selection.Object);
 
-            rangeExtensions.Verify(x => x.SetColor(It.IsAny<Range>(), It.IsAny<int>()), Times.Exactly(57)); // all 57 colors
+            // all 57 colors
+            Assert.AreEqual(57, RangeExtensionsStub.SetColorInvocations.Count());
         }
     }
 }

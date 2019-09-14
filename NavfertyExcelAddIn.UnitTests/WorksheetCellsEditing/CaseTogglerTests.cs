@@ -12,17 +12,15 @@ using Range = Microsoft.Office.Interop.Excel.Range;
 namespace NavfertyExcelAddIn.UnitTests.WorksheetCellsEditing
 {
     [TestClass]
-    public class CaseTogglerTests : ExcelTests
+    public class CaseTogglerTests : TestsBase
     {
         private Mock<Range> selection;
 
         private CaseToggler caseToggler;
 
         [TestInitialize]
-        public override void BeforeEachTest()
+        public void BeforeEachTest()
         {
-            base.BeforeEachTest();
-
             selection = GetRangeStub();
             selection.Setup(x => x.set_Value(It.IsAny<object>(), It.IsAny<object>()));
 

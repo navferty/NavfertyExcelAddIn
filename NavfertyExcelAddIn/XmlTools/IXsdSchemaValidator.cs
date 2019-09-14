@@ -4,6 +4,6 @@ namespace NavfertyExcelAddIn.XmlTools
 {
     public interface IXsdSchemaValidator
     {
-        IReadOnlyCollection<string> Validate(string xmlFilename, IReadOnlyCollection<string> schemas);
+        IReadOnlyCollection<XmlValidationError> Validate(string xmlFilename, IReadOnlyCollection<string> schemas);
     }
 }

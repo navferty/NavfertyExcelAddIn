@@ -13,7 +13,7 @@ using Range = Microsoft.Office.Interop.Excel.Range;
 namespace NavfertyExcelAddIn.UnitTests.DataValidation
 {
     [TestClass]
-    public class CellsValueValidatorTests : ExcelTests
+    public class CellsValueValidatorTests : TestsBase
     {
         private Mock<Range> selection;
         private Mock<IValidator> validator;
@@ -21,10 +21,8 @@ namespace NavfertyExcelAddIn.UnitTests.DataValidation
         private CellsValueValidator cellsValidator;
 
         [TestInitialize]
-        public override void BeforeEachTest()
+        public void BeforeEachTest()
         {
-            base.BeforeEachTest();
-
             selection = GetRangeStub();
 
             validator = new Mock<IValidator>(MockBehavior.Strict);
