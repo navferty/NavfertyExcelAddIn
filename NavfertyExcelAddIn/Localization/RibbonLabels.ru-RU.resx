@@ -156,4 +156,22 @@
   <data name="CopyAsMarkdown" xml:space="preserve">
     <value>Копировать в Markdown</value>
   </data>
+  <data name="ValidateValuesButton" xml:space="preserve">
+    <value>Валидация значений</value>
+  </data>
+  <data name="ValidateValuesDate" xml:space="preserve">
+    <value>Дата</value>
+  </data>
+  <data name="ValidateValuesNumerics" xml:space="preserve">
+    <value>Число</value>
+  </data>
+  <data name="ValidateValuesTinOrganization" xml:space="preserve">
+    <value>ИНН ЮЛ</value>
+  </data>
+  <data name="ValidateValuesTinPersonal" xml:space="preserve">
+    <value>ИНН ФЛ</value>
+  </data>
+  <data name="ValidateValuesXml" xml:space="preserve">
+    <value>Текст для XML</value>
+  </data>
 </root>
