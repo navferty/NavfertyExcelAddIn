@@ -23,7 +23,7 @@ namespace NavfertyExcelAddIn.Commons
                 {FileType.Excel, new FileExtensionFilter("Excel files", "*.xls; *.xlsx; *.xlsm; *.xlsb")},
                 {FileType.Xml, new FileExtensionFilter("XML Files", "*.xml")},
                 {FileType.Xsd, new FileExtensionFilter("XSD Files", "*.xsd")},
-                {FileType.Pdf, new FileExtensionFilter(@"PDF files", "*.pdf")}
+                {FileType.Pdf, new FileExtensionFilter("PDF files", "*.pdf")}
             };
 
         public void ShowError(string message)

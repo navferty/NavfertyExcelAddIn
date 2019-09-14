@@ -80,6 +80,11 @@ namespace NavfertyExcelAddIn
                 .EnableInterfaceInterceptors()
                 .InterceptedBy(typeof(ExceptionLogger));
 
+            builder.RegisterType<XmlSampleCreator>()
+                .As<IXmlSampleCreator>()
+                .EnableInterfaceInterceptors()
+                .InterceptedBy(typeof(ExceptionLogger));
+
             builder.RegisterType<ExceptionLogger>();
 
 

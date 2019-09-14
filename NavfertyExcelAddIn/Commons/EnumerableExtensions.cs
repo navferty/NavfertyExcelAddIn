@@ -26,7 +26,7 @@ namespace NavfertyExcelAddIn.Commons
 
         public static void ApplyForEachCellOfType<TIn, TOut>(this Range range, Func<TIn, TOut> transform)
         {
-            logger.Debug($"Apply transformation to range '{range.Address}' on worksheet '{range.Worksheet.Name}'");
+            logger.Debug($"Apply transformation to range '{range.GetRelativeAddress()}' on worksheet '{range.Worksheet.Name}'");
 
             foreach (Range area in range.Areas)
             {

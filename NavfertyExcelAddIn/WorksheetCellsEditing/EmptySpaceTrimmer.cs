@@ -10,7 +10,7 @@ namespace NavfertyExcelAddIn.WorksheetCellsEditing
 
         public void TrimSpaces(Range range)
         {
-            logger.Info($"Trim spaces for range {range.Address}");
+            logger.Info($"Trim spaces for range {range.GetRelativeAddress()}");
 
             range.ApplyForEachCellOfType<string, string>(value => value.TrimSpaces());
         }
