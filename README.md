@@ -25,7 +25,7 @@
 ## Highlight duplications ##
 Fill different droups of duplicated values with different colors.
 
-![Navferty's Tools Ribbon Tab in MS Excel](images/Duplicates.png =450x)
+![Navferty's Tools Ribbon Tab in MS Excel](images/Duplicates.png =450x300)
 
 
 ## Parse Numerics ##
