@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using Microsoft.Office.Interop.Excel;
@@ -14,18 +13,16 @@ namespace NavfertyExcelAddIn.XmlTools
     {
         private readonly IDialogService dialogService;
         private readonly IXsdSchemaValidator xsdValidator;
-        private readonly Application excelApp;
 
         private readonly Logger logger = LogManager.GetCurrentClassLogger();
 
-        public XmlValidator(IDialogService dialogService, IXsdSchemaValidator xsdValidator, Application excelApp)
+        public XmlValidator(IDialogService dialogService, IXsdSchemaValidator xsdValidator)
         {
             this.dialogService = dialogService;
             this.xsdValidator = xsdValidator;
-            this.excelApp = excelApp;
         }
 
-        public void Validate()
+        public void Validate(Application excelApp)
         {
             var xmlFileName = dialogService.AskForFiles(false, FileType.Xml).FirstOrDefault();
 

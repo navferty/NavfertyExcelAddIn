@@ -30,7 +30,7 @@ namespace NavfertyExcelAddIn.UnitTests.XmlTools
 
             SetupApplicationForAddWorkbook();
 
-            validator = new XmlValidator(dialogService.Object, xsdSchemaValidator.Object, app.Object);
+            validator = new XmlValidator(dialogService.Object, xsdSchemaValidator.Object);
         }
 
         [TestMethod]
@@ -41,7 +41,7 @@ namespace NavfertyExcelAddIn.UnitTests.XmlTools
                 .Returns(Array.Empty<string>());
 
 
-            validator.Validate();
+            validator.Validate(app.Object);
 
             dialogService.VerifyAll();
         }
@@ -58,7 +58,7 @@ namespace NavfertyExcelAddIn.UnitTests.XmlTools
                 .Returns(Array.Empty<string>());
 
 
-            validator.Validate();
+            validator.Validate(app.Object);
 
             dialogService.VerifyAll();
         }
@@ -74,7 +74,7 @@ namespace NavfertyExcelAddIn.UnitTests.XmlTools
                 .Returns(new[] { "file.xml" });
 
 
-            var ex = Assert.ThrowsException<ArgumentException>(() => validator.Validate());
+            var ex = Assert.ThrowsException<ArgumentException>(() => validator.Validate(app.Object));
 
             Assert.AreEqual("One or more files not found", ex.Message);
             dialogService.VerifyAll();
@@ -100,7 +100,7 @@ namespace NavfertyExcelAddIn.UnitTests.XmlTools
 
             SetCulture();
 
-            validator.Validate();
+            validator.Validate(app.Object);
 
             dialogService.VerifyAll();
             dialogService.Verify(x => x.ShowInfo(It.Is<string>(s => s.Contains("Successfully"))));
@@ -123,7 +123,7 @@ namespace NavfertyExcelAddIn.UnitTests.XmlTools
 
             SetCulture();
 
-            validator.Validate();
+            validator.Validate(app.Object);
 
             range.Verify(x => x.set_Value(It.IsAny<object>(), It.Is<string>(s => s.Contains("element name"))));
             range.Verify(x => x.set_Value(It.IsAny<object>(), It.IsAny<string>()), Times.Exactly(8));

@@ -1,7 +1,9 @@
-﻿namespace NavfertyExcelAddIn.XmlTools
+﻿using Microsoft.Office.Interop.Excel;
+
+namespace NavfertyExcelAddIn.XmlTools
 {
     public interface IXmlValidator
     {
-        void Validate();
+        void Validate(Application excelApp);
     }
 }

@@ -287,7 +287,7 @@ namespace NavfertyExcelAddIn
             using (var scope = container.BeginLifetimeScope())
             {
                 var validator = scope.Resolve<IXmlValidator>();
-                validator.Validate();
+                validator.Validate(App);
             }
         }
         #endregion
