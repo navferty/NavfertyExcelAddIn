@@ -65,7 +65,7 @@ Check values in selected cells as numerics, valid dates, valid text for XML cont
 
 
 ## Find all cells containing errors ##
-Find all cells with errors like '#VALUE!' on current worksheet.
+Find all cells with errors like '#VALUE!', '#REF!' etc. on current worksheet.
 
 ![Navferty's Tools Ribbon Tab in MS Excel](images/FindErrorValues.png)
 
