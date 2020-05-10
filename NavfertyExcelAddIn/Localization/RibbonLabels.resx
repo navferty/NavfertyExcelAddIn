@@ -123,7 +123,7 @@
   <data name="UnprotectWorkbook" xml:space="preserve">
     <value>Unprotect Workbook</value>
   </data>
-  <data name="CutNames" xml:space="preserve">
+  <data name="CutNamesButton" xml:space="preserve">
     <value>Cut Names</value>
   </data>
   <data name="HighlightDuplicates" xml:space="preserve">
@@ -173,5 +173,8 @@
   </data>
   <data name="ValidateValuesXml" xml:space="preserve">
     <value>XML contents text</value>
+  </data>
+  <data name="EditShortenings" xml:space="preserve">
+    <value>Edit Shortenings Dictionary</value>
   </data>
 </root>

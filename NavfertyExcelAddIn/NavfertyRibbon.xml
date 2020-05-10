@@ -8,7 +8,12 @@
         <group id="CommonGroup" getLabel="GetLabel">
           <button id="ParseNumerics" getLabel="GetLabel" onAction="ParseNumerics" image="parseNumerics" size="large" keytip="P" />
           <button id="UnprotectWorkbook" getLabel="GetLabel" onAction="UnprotectWorkbook" image="unprotectWorkbook" size="large" keytip="UP" />
-          <button id="CutNames" getLabel="GetLabel" onAction="CutNames" image="cutNames" size="large" keytip="C" />
+          <splitButton id="CutNamesSplitButton" size="large" keytip="C">
+            <button id="CutNamesButton" onAction="CutNames" image="cutNames" getLabel="GetLabel" />
+            <menu id="CutNamesMenu">
+              <button id="EditShortenings" getLabel="GetLabel" imageMso="ImeDictionaryUpdate" onAction="EditShortenings" keytip="ES" />
+            </menu>
+          </splitButton>
           <button id="HighlightDuplicates" getLabel="GetLabel" onAction="HighlightDuplicates" image="highlightDuplicates" size="large" keytip="D" />
           <button id="ToggleCase" getLabel="GetLabel" onAction="ToggleCase" image="toggleCase" size="large" keytip="T" />
           <button id="TrimSpaces" getLabel="GetLabel" onAction="TrimSpaces" image="trimSpaces" size="large" keytip="R" />
@@ -17,7 +22,7 @@
           <button id="CopyAsMarkdown" getLabel="GetLabel" onAction="CopyAsMarkdown" image="copyAsMarkdown" size="large" keytip="MD" />
           <splitButton id="ValidateValuesSplitButton" size="large" keytip="VV">
             <button id="ValidateValuesButton" imageMso="TableTestValidationRules" getLabel="GetLabel" />
-            <menu id="menu">
+            <menu id="ValidateValuesMenu">
               <button id="ValidateValuesNumerics" getLabel="GetLabel" imageMso="TableTestValidationRules" onAction="ValidateValues" keytip="N" />
               <button id="ValidateValuesXml" getLabel="GetLabel" imageMso="TableTestValidationRules" onAction="ValidateValues" keytip="X" />
               <button id="ValidateValuesDate" getLabel="GetLabel" imageMso="TableTestValidationRules" onAction="ValidateValues" keytip="D" />

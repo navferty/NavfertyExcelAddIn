@@ -123,7 +123,7 @@
   <data name="UnprotectWorkbook" xml:space="preserve">
     <value>Снять защиту книги и листов</value>
   </data>
-  <data name="CutNames" xml:space="preserve">
+  <data name="CutNamesButton" xml:space="preserve">
     <value>Сократить имена организаций</value>
   </data>
   <data name="HighlightDuplicates" xml:space="preserve">
@@ -173,5 +173,8 @@
   </data>
   <data name="ValidateValuesXml" xml:space="preserve">
     <value>Текст для XML</value>
+  </data>
+  <data name="EditShortenings" xml:space="preserve">
+    <value>Редактировать словарь сокращений</value>
   </data>
 </root>

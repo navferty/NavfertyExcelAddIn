@@ -90,9 +90,18 @@ namespace NavfertyExcelAddIn.Localization {
         /// <summary>
         ///   Looks up a localized string similar to Cut Names.
         /// </summary>
-        internal static string CutNames {
+        internal static string CutNamesButton {
             get {
-                return ResourceManager.GetString("CutNames", resourceCulture);
+                return ResourceManager.GetString("CutNamesButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Edit Shortenings Dictionary.
+        /// </summary>
+        internal static string EditShortenings {
+            get {
+                return ResourceManager.GetString("EditShortenings", resourceCulture);
             }
         }
         

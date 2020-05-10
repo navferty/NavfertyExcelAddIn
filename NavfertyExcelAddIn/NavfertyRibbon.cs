@@ -126,6 +126,11 @@ namespace NavfertyExcelAddIn
             // TODO
         }
 
+        public void EditShortenings(IRibbonControl ribbonControl)
+        {
+            // open form
+        }
+
         public void HighlightDuplicates(IRibbonControl ribbonControl)
         {
             var range = GetSelectionOrUsedRange(App.ActiveSheet);
