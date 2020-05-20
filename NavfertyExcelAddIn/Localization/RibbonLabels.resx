@@ -174,4 +174,7 @@
   <data name="ValidateValuesXml" xml:space="preserve">
     <value>XML contents text</value>
   </data>
+  <data name="Transliterate" xml:space="preserve">
+    <value>Transliterate</value>
+  </data>
 </root>

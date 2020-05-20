@@ -16,6 +16,7 @@ using NavfertyExcelAddIn.InteractiveRangeReport;
 using NavfertyExcelAddIn.XmlTools;
 using NavfertyExcelAddIn.Localization;
 using NavfertyExcelAddIn.Commons;
+using NavfertyExcelAddIn.Transliterate;
 
 using NLog;
 using Autofac;
@@ -81,6 +82,19 @@ namespace NavfertyExcelAddIn
                 var parser = scope.Resolve<INumericParser>();
                 parser.Parse(range);
             }
+        }
+
+        public void Transliterate(IRibbonControl ribbonControl)
+        {
+            var transliterator = GetService<ITransliterator>();
+
+            Range selection = GetSelectionOrUsedRange(App.ActiveSheet);
+            selection.ApplyForEachCellOfType<string, object>(
+                value =>
+                {
+                    var newValue = transliterator.Transliterate(value);
+                    return (object)newValue ?? value;
+                });
         }
 
         public void UnprotectWorkbook(IRibbonControl ribbonControl)
@@ -301,6 +315,12 @@ namespace NavfertyExcelAddIn
         public Bitmap GetImage(string imageName)
         {
             return (Bitmap)RibbonIcons.ResourceManager.GetObject(imageName);
+        }
+
+        private T GetService<T>()
+        {
+            using (var scope = container.BeginLifetimeScope())
+                return scope.Resolve<T>();
         }
 
         private static string GetResourceText()
