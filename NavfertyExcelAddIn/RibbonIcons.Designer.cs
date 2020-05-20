@@ -141,7 +141,7 @@ namespace NavfertyExcelAddIn {
         }
         
         /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
         /// </summary>
         internal static System.Drawing.Bitmap trimSpaces {
             get {
