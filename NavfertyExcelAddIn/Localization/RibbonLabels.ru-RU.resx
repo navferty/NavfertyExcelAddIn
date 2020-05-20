@@ -174,4 +174,7 @@
   <data name="ValidateValuesXml" xml:space="preserve">
     <value>Текст для XML</value>
   </data>
+  <data name="Transliterate" xml:space="preserve">
+    <value>Транслитерация</value>
+  </data>
 </root>

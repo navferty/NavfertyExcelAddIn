@@ -221,6 +221,9 @@
     <Compile Include="DataValidation\Validators\TinOrganizationValidator.cs" />
     <Compile Include="DataValidation\Validators\TinPersonalValidator.cs" />
     <Compile Include="DataValidation\IValidatorFactory.cs" />
+    <Compile Include="Transliterate\ITransliterator.cs" />
+    <Compile Include="Transliterate\CyrillicToLatinFallback.cs" />
+    <Compile Include="Transliterate\Transliterator.cs" />
     <Compile Include="XmlTools\IXmlValidator.cs" />
     <Compile Include="XmlTools\IXsdSchemaValidator.cs" />
     <Compile Include="XmlTools\IXmlSampleCreator.cs" />
@@ -271,6 +274,7 @@
     <Compile Include="XmlTools\XmlValidationError.cs" />
     <Compile Include="XmlTools\XmlValidator.cs" />
     <Compile Include="XmlTools\XsdSchemaValidator.cs" />
+    <None Include="Resources\transliterate.png" />
     <None Include="Resources\markdown.png" />
     <None Include="Resources\validateXml.png" />
     <None Include="Resources\unprotectWorkbook.png" />
@@ -329,14 +333,17 @@
     <EmbeddedResource Include="Localization\RibbonLabels.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>RibbonLabels.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Localization\RibbonLabels.ru-RU.resx" />
+    <EmbeddedResource Include="Localization\RibbonLabels.ru-RU.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="Localization\UIStrings.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>UIStrings.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Localization\UIStrings.ru-RU.resx"/>
+    <EmbeddedResource Include="Localization\UIStrings.ru-RU.resx" />
     <EmbeddedResource Include="Localization\ValidationMessages.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>ValidationMessages.Designer.cs</LastGenOutput>
@@ -346,6 +353,7 @@
     <EmbeddedResource Include="RibbonIcons.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>RibbonIcons.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup />
