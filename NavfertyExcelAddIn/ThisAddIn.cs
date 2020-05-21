@@ -5,6 +5,7 @@ namespace NavfertyExcelAddIn
 {
     public partial class ThisAddIn
     {
+
         protected override IRibbonExtensibility CreateRibbonExtensibilityObject()
         {
             return new NavfertyRibbon();
@@ -12,7 +13,10 @@ namespace NavfertyExcelAddIn
 
         private void ThisAddInStartup(object sender, EventArgs e)
         {
-            // TODO
+            System.Threading.Thread.CurrentThread.CurrentUICulture =
+                new System.Globalization.CultureInfo(
+                    Application.LanguageSettings.get_LanguageID(
+                        Microsoft.Office.Core.MsoAppLanguageID.msoLanguageIDUI));
         }
 
         private void ThisAddInShutdown(object sender, EventArgs e)
