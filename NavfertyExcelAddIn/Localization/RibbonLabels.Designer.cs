@@ -133,6 +133,15 @@ namespace NavfertyExcelAddIn.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Transliterate.
+        /// </summary>
+        internal static string Transliterate {
+            get {
+                return ResourceManager.GetString("Transliterate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Trim Spaces.
         /// </summary>
         internal static string TrimSpaces {

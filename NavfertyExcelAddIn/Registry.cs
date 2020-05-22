@@ -8,6 +8,7 @@ using NavfertyExcelAddIn.UnprotectWorkbook;
 using NavfertyExcelAddIn.WorksheetCellsEditing;
 using NavfertyExcelAddIn.DataValidation;
 using NavfertyExcelAddIn.XmlTools;
+using NavfertyExcelAddIn.Transliterate;
 
 namespace NavfertyExcelAddIn
 {
@@ -67,6 +68,11 @@ namespace NavfertyExcelAddIn
 
             builder.RegisterType<NumericParser>()
                 .As<INumericParser>()
+                .EnableInterfaceInterceptors()
+                .InterceptedBy(typeof(ExceptionLogger));
+
+            builder.RegisterType<Transliterator>()
+                .As<ITransliterator>()
                 .EnableInterfaceInterceptors()
                 .InterceptedBy(typeof(ExceptionLogger));
 

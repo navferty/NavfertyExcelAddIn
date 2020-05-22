@@ -133,6 +133,16 @@ namespace NavfertyExcelAddIn {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap transliterate {
+            get {
+                object obj = ResourceManager.GetObject("transliterate", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap trimSpaces {
             get {
                 object obj = ResourceManager.GetObject("trimSpaces", resourceCulture);
