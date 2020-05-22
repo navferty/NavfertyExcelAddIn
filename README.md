@@ -45,6 +45,13 @@ Toggle text case in selected cells (UPPERCASE->lowercase->Camel Case).
 ![Navferty's Tools Ribbon Tab in MS Excel](images/ToggleCase4.png)
 
 
+## Transliterate ##
+Transliterate text contents from cyrillic to latin in selected cells (based on ICAO transliteration standard).
+
+![Navferty's Tools Ribbon Tab in MS Excel](images/Transliterate1.png)
+![Navferty's Tools Ribbon Tab in MS Excel](images/Transliterate2.png)
+
+
 ## Unmerge Cells ##
 ![Navferty's Tools Ribbon Tab in MS Excel](images/Unmerge1.png)
 ![Navferty's Tools Ribbon Tab in MS Excel](images/Unmerge2.png)
