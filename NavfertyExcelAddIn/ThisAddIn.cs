@@ -1,5 +1,6 @@
 ﻿using System;
 using Microsoft.Office.Core;
+using System.Threading;
 
 namespace NavfertyExcelAddIn
 {
@@ -13,10 +14,14 @@ namespace NavfertyExcelAddIn
 
         private void ThisAddInStartup(object sender, EventArgs e)
         {
-            System.Threading.Thread.CurrentThread.CurrentUICulture =
+            Thread.CurrentThread.CurrentUICulture =
                 new System.Globalization.CultureInfo(
                     Application.LanguageSettings.get_LanguageID(
-                        Microsoft.Office.Core.MsoAppLanguageID.msoLanguageIDUI));
+                        MsoAppLanguageID.msoLanguageIDUI));
+            Thread.CurrentThread.CurrentCulture =
+                new System.Globalization.CultureInfo(
+                    Application.LanguageSettings.get_LanguageID(
+                        MsoAppLanguageID.msoLanguageIDUI));
         }
 
         private void ThisAddInShutdown(object sender, EventArgs e)
