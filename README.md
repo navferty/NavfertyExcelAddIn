@@ -125,6 +125,3 @@ The solution is build in Azure, you can download installation files from there:
 After installation process is completed, run (or restart) Excel application, and you will see new tab:
 
 ![Navferty's Tools Ribbon Tab in MS Excel](images/Install4.png)
-
-*Used icons are designed by iconarchive, Flaticon*
-*"Find errors" icon made by turkkub from www.flaticon.com*
