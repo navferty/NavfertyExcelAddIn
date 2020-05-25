@@ -7,7 +7,13 @@
       <tab idQ="n:NavfertyAddInTab" label="Navferty's Tools" keytip="ZX">
         <group id="CommonGroup" getLabel="GetLabel">
           <button id="ParseNumerics" getLabel="GetLabel" onAction="ParseNumerics" image="parseNumerics" size="large" keytip="P" />
-          <button id="Transliterate" getLabel="GetLabel" onAction="Transliterate" image="transliterate" size="large" keytip="TL" />
+          <splitButton id="TransliterateSplitButton" size="large" keytip="TL">
+            <button id="TransliterateButton" getLabel="GetLabel" image="transliterate" keytip="TL" />
+            <menu id="TransliterateSplitButtonMenu">
+              <button id="Transliterate" getLabel="GetLabel" image="transliterate" onAction="Transliterate" keytip="T" />
+              <button id="ReplaceChars" getLabel="GetLabel" image="transliterate" onAction="ReplaceChars" keytip="R" />
+            </menu>
+          </splitButton>
           <button id="UnprotectWorkbook" getLabel="GetLabel" onAction="UnprotectWorkbook" image="unprotectWorkbook" size="large" keytip="UP" />
           <button id="CutNames" getLabel="GetLabel" onAction="CutNames" image="cutNames" size="large" keytip="C" />
           <button id="HighlightDuplicates" getLabel="GetLabel" onAction="HighlightDuplicates" image="highlightDuplicates" size="large" keytip="D" />

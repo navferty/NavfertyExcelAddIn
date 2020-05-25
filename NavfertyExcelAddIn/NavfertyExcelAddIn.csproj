@@ -211,6 +211,7 @@
     <Compile Include="FindFormulaErrors\CVErrEnum.cs" />
     <Compile Include="DataValidation\CellsValueValidator.cs" />
     <Compile Include="DataValidation\IValidator.cs" />
+    <Compile Include="Transliterate\ICyrillicLettersReplacer.cs" />
     <Compile Include="InteractiveRangeReport\InteractiveErrorItem.cs" />
     <Compile Include="DataValidation\ICellsValueValidator.cs" />
     <Compile Include="DataValidation\ValidationResult.cs" />
@@ -221,6 +222,7 @@
     <Compile Include="DataValidation\Validators\TinOrganizationValidator.cs" />
     <Compile Include="DataValidation\Validators\TinPersonalValidator.cs" />
     <Compile Include="DataValidation\IValidatorFactory.cs" />
+    <Compile Include="Transliterate\CyrillicLettersReplacer.cs" />
     <Compile Include="Transliterate\ITransliterator.cs" />
     <Compile Include="Transliterate\CyrillicToLatinFallback.cs" />
     <Compile Include="Transliterate\Transliterator.cs" />
