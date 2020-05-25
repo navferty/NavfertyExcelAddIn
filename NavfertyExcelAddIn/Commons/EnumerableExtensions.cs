@@ -49,41 +49,41 @@ namespace NavfertyExcelAddIn.Commons
                 return;
             }
 
-            if (!(rangeValue is double))
+            // minimize number of COM calls to excel
+            if (!(rangeValue is object[,] values))
+                return;
+
+            values = (object[,])rangeValue;
+
+            int upperI = values.GetUpperBound(0); // Columns
+            int upperJ = values.GetUpperBound(1); // Rows
+
+            var isChanged = false;
+
+            logger.Debug($"Converting columns from {values.GetLowerBound(0)} to {upperI}, " +
+                $"rows from {values.GetLowerBound(1)} to {upperJ}");
+
+            for (int i = values.GetLowerBound(0); i <= upperI; i++)
             {
-                // minimize number of COM calls to excel
-                var values = (object[,])rangeValue;
-
-                int upperI = values.GetUpperBound(0); // Columns
-                int upperJ = values.GetUpperBound(1); // Rows
-
-                var isChanged = false;
-
-                logger.Debug($"Converting columns from {values.GetLowerBound(0)} to {upperI}, " +
-                    $"rows from {values.GetLowerBound(1)} to {upperJ}");
-
-                for (int i = values.GetLowerBound(0); i <= upperI; i++)
+                for (int j = values.GetLowerBound(1); j <= upperJ; j++)
                 {
-                    for (int j = values.GetLowerBound(1); j <= upperJ; j++)
+                    var value = values[i, j];
+                    if (value is TIn s)
                     {
-                        var value = values[i, j];
-                        if (value is TIn s)
+                        var newValue = transform(s);
+                        if ((object)newValue != value) // TODO check boxing time on million values
                         {
-                            var newValue = transform(s);
-                            if ((object)newValue != value) // TODO check boxing time on million values
-                            {
-                                isChanged = true;
-                                values[i, j] = newValue;
-                            }
+                            isChanged = true;
+                            values[i, j] = newValue;
                         }
                     }
                 }
+            }
 
-                if (isChanged)
-                {
-                    logger.Debug("Some values were converted, writing to worksheet");
-                    range.Value = values;
-                }
+            if (isChanged)
+            {
+                logger.Debug("Some values were converted, writing to worksheet");
+                range.Value = values;
             }
         }
     }
