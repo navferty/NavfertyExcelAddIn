@@ -16,6 +16,7 @@ using NavfertyExcelAddIn.InteractiveRangeReport;
 using NavfertyExcelAddIn.XmlTools;
 using NavfertyExcelAddIn.Localization;
 using NavfertyExcelAddIn.Commons;
+using NavfertyExcelAddIn.StringifyNumerics;
 using NavfertyExcelAddIn.Transliterate;
 
 using NLog;
@@ -81,6 +82,27 @@ namespace NavfertyExcelAddIn
             {
                 var parser = scope.Resolve<INumericParser>();
                 parser.Parse(range);
+            }
+        }
+
+        public void NumberToWordsEnglish(IRibbonControl ribbonControl) =>
+            StringifyNumerics(SupportedCulture.English);
+        public void NumberToWordsRussian(IRibbonControl ribbonControl) =>
+            StringifyNumerics(SupportedCulture.Russian);
+
+        private void StringifyNumerics(SupportedCulture supportedCulture)
+        {
+            using (var scope = container.BeginLifetimeScope())
+            {
+                var stringifier = scope.ResolveKeyed<INumericStringifier>(supportedCulture);
+
+                Range selection = GetSelectionOrUsedRange(App.ActiveSheet);
+                selection.ApplyForEachCellOfType<double, object>(
+                    value =>
+                    {
+                        var newValue = stringifier.StringifyNumber(value);
+                        return (object)newValue ?? value;
+                    });
             }
         }
 

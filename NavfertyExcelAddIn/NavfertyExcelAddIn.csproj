@@ -221,6 +221,10 @@
     <Compile Include="DataValidation\Validators\TinOrganizationValidator.cs" />
     <Compile Include="DataValidation\Validators\TinPersonalValidator.cs" />
     <Compile Include="DataValidation\IValidatorFactory.cs" />
+    <Compile Include="StringifyNumerics\EnglishNumericStringifier.cs" />
+    <Compile Include="StringifyNumerics\INumericStringifier.cs" />
+    <Compile Include="StringifyNumerics\RussianNumericStringifier.cs" />
+    <Compile Include="SupportedCulture.cs" />
     <Compile Include="Transliterate\ITransliterator.cs" />
     <Compile Include="Transliterate\CyrillicToLatinFallback.cs" />
     <Compile Include="Transliterate\Transliterator.cs" />
