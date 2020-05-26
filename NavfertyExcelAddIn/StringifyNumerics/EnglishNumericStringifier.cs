@@ -8,14 +8,29 @@ namespace NavfertyExcelAddIn.StringifyNumerics
 		public string StringifyNumber(double number)
 		{
 			var mainPart = Convert.ToInt32(number);
-			int fractionalPart = (int)Math.Round((number - mainPart) * 1000);
 
 			var main = NumberToWords(mainPart);
-			var fractional = NumberToWords(fractionalPart);
-			return main +
-				(fractionalPart == 0
-					? string.Empty
-					: " point " + fractional + " thousandths");
+			var fractional = GeconverttFractionalPart(number, mainPart);
+			var result = main + fractional;
+			return result.Trim();
+		}
+
+		private static string GeconverttFractionalPart(double number, int mainPart)
+		{
+			int fractionalPart = (int)Math.Round((number - mainPart) * 1000);
+			if (fractionalPart == 0)
+				return string.Empty;
+
+			(int Multiplyer, string Word) power;
+
+			if (fractionalPart % 100 == 0)
+				power = (100, "tenths");
+			else if (fractionalPart % 10 == 0)
+				power = (10, "hundredths");
+			else
+				power = (1, "thousandths");
+
+			return " and " + NumberToWords(fractionalPart / power.Multiplyer) + " " + power.Word;
 		}
 
 		private static string NumberToWords(int input)

@@ -42,7 +42,19 @@ namespace NavfertyExcelAddIn.StringifyNumerics
 			thousands = FixThousands(thousands);
 
 			int fractionalPart = (int)Math.Round((number - (int)number) * 1000);
-			var fractionalName = GetMultiplierName(fractionalPart, "тысячные", "тысячных", "тысячная");
+
+			(int Multiplyer, string Word1, string Word2, string Word3) power;
+
+			if (fractionalPart % 100 == 0)
+				power = (100, "десятых", "десятых", "десятая");
+			else if (fractionalPart % 10 == 0)
+				power = (10, "сотых", "сотых", "сотая");
+			else
+				power = (1, "тысячных", "тысячных", "тысячная");
+
+			fractionalPart /= power.Multiplyer;
+
+			var fractionalName = GetMultiplierName(fractionalPart, power.Word1, power.Word2, power.Word3);
 			var fractional = fractionalPart == 0
 				? string.Empty
 				: " и " + allNumbers[fractionalPart] + " " + fractionalName;
@@ -72,6 +84,8 @@ namespace NavfertyExcelAddIn.StringifyNumerics
 		{
 			var result = number.Replace("один целая", "одна целая");
 			result = result.Replace("два целых", "две целых");
+			result = result.Replace("два тысячных", "две тысячных");
+			result = result.Replace("один тысячная", "одна тысячная");
 			return result;
 		}
 
