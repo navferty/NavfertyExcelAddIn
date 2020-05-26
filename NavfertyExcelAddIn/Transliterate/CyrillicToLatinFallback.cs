@@ -116,7 +116,7 @@ namespace NavfertyExcelAddIn.Transliterate
 
 		public override bool Fallback(char charUnknown, int index)
 		{
-			if (charUnknown < '\u0410' || charUnknown > '\u044F')
+			if (!table.ContainsKey(charUnknown))
 				return false;
 
 			buffer = table[charUnknown];
