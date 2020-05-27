@@ -143,6 +143,16 @@ namespace NavfertyExcelAddIn {
         /// <summary>
         ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap stringifyNumericsFr {
+            get {
+                object obj = ResourceManager.GetObject("stringifyNumericsFr", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap stringifyNumericsRu {
             get {
                 object obj = ResourceManager.GetObject("stringifyNumericsRu", resourceCulture);
