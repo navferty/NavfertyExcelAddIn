@@ -338,6 +338,10 @@ namespace NavfertyExcelAddIn
         {
             return (Bitmap)RibbonIcons.ResourceManager.GetObject(imageName);
         }
+        public string GetSupertip(IRibbonControl ribbonControl)
+        {
+            return RibbonSupertips.ResourceManager.GetString(ribbonControl.Id);
+        }
 
         private T GetService<T>()
         {

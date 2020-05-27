@@ -22,14 +22,14 @@ namespace NavfertyExcelAddIn.Localization {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class RibbonLabels {
+    internal class RibbonSupertips {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal RibbonLabels() {
+        internal RibbonSupertips() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace NavfertyExcelAddIn.Localization {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("NavfertyExcelAddIn.Localization.RibbonLabels", typeof(RibbonLabels).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("NavfertyExcelAddIn.Localization.RibbonSupertips", typeof(RibbonSupertips).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,25 +61,7 @@ namespace NavfertyExcelAddIn.Localization {
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на Commons.
-        /// </summary>
-        internal static string CommonGroup {
-            get {
-                return ResourceManager.GetString("CommonGroup", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Ищет локализованную строку, похожую на Converting Values.
-        /// </summary>
-        internal static string ConvertingValues {
-            get {
-                return ResourceManager.GetString("ConvertingValues", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Ищет локализованную строку, похожую на Copy as Markdown.
+        ///   Ищет локализованную строку, похожую на Saves the selected range of values to the clipboard using Markdown markup..
         /// </summary>
         internal static string CopyAsMarkdown {
             get {
@@ -88,16 +70,7 @@ namespace NavfertyExcelAddIn.Localization {
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на Create Sample XML based on XSD.
-        /// </summary>
-        internal static string CreateSampleXml {
-            get {
-                return ResourceManager.GetString("CreateSampleXml", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Ищет локализованную строку, похожую на Cut Names.
+        ///   Ищет локализованную строку, похожую на In the development....
         /// </summary>
         internal static string CutNames {
             get {
@@ -106,7 +79,7 @@ namespace NavfertyExcelAddIn.Localization {
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на Find Formula Errors on Current Sheet.
+        ///   Ищет локализованную строку, похожую на Finds all cells in the specified range that have any errors (#)..
         /// </summary>
         internal static string FindErrors {
             get {
@@ -115,16 +88,7 @@ namespace NavfertyExcelAddIn.Localization {
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на Formatting Values.
-        /// </summary>
-        internal static string FormattingValues {
-            get {
-                return ResourceManager.GetString("FormattingValues", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Ищет локализованную строку, похожую на Highlight Duplicates.
+        ///   Ищет локализованную строку, похожую на Paints groups of duplicates with different colors..
         /// </summary>
         internal static string HighlightDuplicates {
             get {
@@ -133,7 +97,7 @@ namespace NavfertyExcelAddIn.Localization {
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на Parse Numerics.
+        ///   Ищет локализованную строку, похожую на Converts the cell data type to a numeric one..
         /// </summary>
         internal static string ParseNumerics {
             get {
@@ -142,7 +106,7 @@ namespace NavfertyExcelAddIn.Localization {
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на Replace Chars &apos;У&apos; -&gt; &apos;Y&apos;.
+        ///   Ищет локализованную строку, похожую на Changes similar letters of the Russian and English alphabets, for example: &apos;У&apos; - &gt; &apos;Y&apos;..
         /// </summary>
         internal static string ReplaceChars {
             get {
@@ -151,7 +115,7 @@ namespace NavfertyExcelAddIn.Localization {
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на Stringify Numerics.
+        ///   Ищет локализованную строку, похожую на Rewrites the numeric value of the cell with words. The default is the Russian language..
         /// </summary>
         internal static string StringifyNumericsButton {
             get {
@@ -160,7 +124,7 @@ namespace NavfertyExcelAddIn.Localization {
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на On English.
+        ///   Ищет локализованную строку, похожую на Rewrites the numeric value of a cell in English with words..
         /// </summary>
         internal static string StringifyNumericsEn {
             get {
@@ -169,7 +133,7 @@ namespace NavfertyExcelAddIn.Localization {
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на On Russian.
+        ///   Ищет локализованную строку, похожую на Rewrites the numeric value of a cell in Russian with words..
         /// </summary>
         internal static string StringifyNumericsRu {
             get {
@@ -178,7 +142,7 @@ namespace NavfertyExcelAddIn.Localization {
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на Toggle Case.
+        ///   Ищет локализованную строку, похожую на Changes the case of all words in the cell. Replacement order: lowercase, uppercase, first capital, lowercase....
         /// </summary>
         internal static string ToggleCase {
             get {
@@ -187,7 +151,7 @@ namespace NavfertyExcelAddIn.Localization {
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на With Transliteration &apos;У&apos; -&gt; &apos;U&apos;.
+        ///   Ищет локализованную строку, похожую на Changes the Russian alphabet to English using transliteration, for example: &apos;У&apos; - &gt; &apos;U&apos;..
         /// </summary>
         internal static string Transliterate {
             get {
@@ -196,7 +160,7 @@ namespace NavfertyExcelAddIn.Localization {
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на Replace.
+        ///   Ищет локализованную строку, похожую на Full using transliteration (by default) or partial replacement of the Russian alphabet (by analogy) with English. Example of transliteration: &apos;У&apos; - &gt; &apos;U&apos;, example of substitution by analogy:&apos; У &apos; - &gt; &apos;Y&apos;..
         /// </summary>
         internal static string TransliterateButton {
             get {
@@ -205,7 +169,7 @@ namespace NavfertyExcelAddIn.Localization {
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на Trim Spaces.
+        ///   Ищет локализованную строку, похожую на Reduces the groups of spaces between the entered parts of the cell value to one..
         /// </summary>
         internal static string TrimSpaces {
             get {
@@ -214,7 +178,7 @@ namespace NavfertyExcelAddIn.Localization {
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на Unmerge Cells.
+        ///   Ищет локализованную строку, похожую на Parts of the cell duplicate their content..
         /// </summary>
         internal static string UnmergeCells {
             get {
@@ -223,83 +187,11 @@ namespace NavfertyExcelAddIn.Localization {
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на Unprotect Workbook.
-        /// </summary>
-        internal static string UnprotectWorkbook {
-            get {
-                return ResourceManager.GetString("UnprotectWorkbook", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Ищет локализованную строку, похожую на Validate Values.
+        ///   Ищет локализованную строку, похожую на Checking that values meet certain standards. Use the pop-up list to select a standard..
         /// </summary>
         internal static string ValidateValuesButton {
             get {
                 return ResourceManager.GetString("ValidateValuesButton", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Ищет локализованную строку, похожую на Date.
-        /// </summary>
-        internal static string ValidateValuesDate {
-            get {
-                return ResourceManager.GetString("ValidateValuesDate", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Ищет локализованную строку, похожую на Numerics.
-        /// </summary>
-        internal static string ValidateValuesNumerics {
-            get {
-                return ResourceManager.GetString("ValidateValuesNumerics", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Ищет локализованную строку, похожую на Russian TIN (Organization).
-        /// </summary>
-        internal static string ValidateValuesTinOrganization {
-            get {
-                return ResourceManager.GetString("ValidateValuesTinOrganization", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Ищет локализованную строку, похожую на Russian TIN (Personal).
-        /// </summary>
-        internal static string ValidateValuesTinPersonal {
-            get {
-                return ResourceManager.GetString("ValidateValuesTinPersonal", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Ищет локализованную строку, похожую на XML contents text.
-        /// </summary>
-        internal static string ValidateValuesXml {
-            get {
-                return ResourceManager.GetString("ValidateValuesXml", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Ищет локализованную строку, похожую на Validate XML with XSD.
-        /// </summary>
-        internal static string ValidateXml {
-            get {
-                return ResourceManager.GetString("ValidateXml", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Ищет локализованную строку, похожую на XML Tools.
-        /// </summary>
-        internal static string XmlToolsGroup {
-            get {
-                return ResourceManager.GetString("XmlToolsGroup", resourceCulture);
             }
         }
     }

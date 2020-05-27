@@ -221,6 +221,16 @@
     <Compile Include="DataValidation\Validators\TinOrganizationValidator.cs" />
     <Compile Include="DataValidation\Validators\TinPersonalValidator.cs" />
     <Compile Include="DataValidation\IValidatorFactory.cs" />
+    <Compile Include="Localization\RibbonSupertips.Designer.cs">
+      <DependentUpon>RibbonSupertips.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Localization\RibbonSupertips.ru-RU.Designer.cs">
+      <DependentUpon>RibbonSupertips.ru-RU.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Include="StringifyNumerics\EnglishNumericStringifier.cs" />
     <Compile Include="StringifyNumerics\INumericStringifier.cs" />
     <Compile Include="StringifyNumerics\RussianNumericStringifier.cs" />
@@ -278,6 +288,9 @@
     <Compile Include="XmlTools\XmlValidationError.cs" />
     <Compile Include="XmlTools\XmlValidator.cs" />
     <Compile Include="XmlTools\XsdSchemaValidator.cs" />
+    <None Include="Resources\stringifyNumerics.png" />
+    <None Include="Resources\stringifyNumericsRu.png" />
+    <None Include="Resources\stringifyNumericsEn.png" />
     <None Include="Resources\transliterate.png" />
     <None Include="Resources\markdown.png" />
     <None Include="Resources\validateXml.png" />
@@ -332,6 +345,16 @@
   <ItemGroup>
     <EmbeddedResource Include="InteractiveRangeReport\InteractiveRangeReportForm.resx">
       <DependentUpon>InteractiveRangeReportForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Localization\RibbonSupertips.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>RibbonSupertips.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Localization\RibbonSupertips.ru-RU.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>RibbonSupertips.ru-RU.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Localization\RibbonLabels.resx">
