@@ -50,7 +50,8 @@ namespace NavfertyExcelAddIn.Commons
             }
 
             // minimize number of COM calls to excel
-            var values = (object[,])rangeValue;
+            if (!(rangeValue is object[,] values))
+                return;
 
             int upperI = values.GetUpperBound(0); // Columns
             int upperJ = values.GetUpperBound(1); // Rows
