@@ -233,6 +233,7 @@
     </Compile>
     <Compile Include="StringifyNumerics\EnglishNumericStringifier.cs" />
     <Compile Include="StringifyNumerics\INumericStringifier.cs" />
+    <Compile Include="StringifyNumerics\FrenchNumericStringifier.cs" />
     <Compile Include="StringifyNumerics\RussianNumericStringifier.cs" />
     <Compile Include="SupportedCulture.cs" />
     <Compile Include="Transliterate\ITransliterator.cs" />
