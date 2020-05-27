@@ -53,8 +53,6 @@ namespace NavfertyExcelAddIn.Commons
             if (!(rangeValue is object[,] values))
                 return;
 
-            values = (object[,])rangeValue;
-
             int upperI = values.GetUpperBound(0); // Columns
             int upperJ = values.GetUpperBound(1); // Rows
 
