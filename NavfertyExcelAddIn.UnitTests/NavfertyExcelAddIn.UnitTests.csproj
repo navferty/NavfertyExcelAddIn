@@ -85,6 +85,7 @@
     <Compile Include="Builders\TestDataBuilder.cs" />
     <Compile Include="DataValidation\CellsValueValidatorTests.cs" />
     <Compile Include="DataValidation\DataValidatorTests.cs" />
+    <Compile Include="StringifyNumerics\FrenchNumericStringifierTests.cs" />
     <Compile Include="StringifyNumerics\RussianNumericStringifierTests.cs" />
     <Compile Include="StringifyNumerics\EnglishNumericStringifierTests.cs" />
     <Compile Include="TestsBase.cs" />
