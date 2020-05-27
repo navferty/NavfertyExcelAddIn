@@ -17,8 +17,8 @@ namespace NavfertyExcelAddIn.UnitTests.Transliterate
 		[TestMethod]
 		[DataRow("Карл у Клары украл кораллы", "Karl u Klary ukral korally")]
 		[DataRow("Слишком много ножек у сороконожек", "Slishkom mnogo nozhek u sorokonozhek")]
-		[DataRow("абвгдеёжзийклмнопрстуфхцчшщъыьэюя", "abvgdezhziiklmnoprstufkhtschshshchieyeiuia")]
-		[DataRow("АБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯ", "ABVGDEZhZIIKLMNOPRSTUFKhTsChShShchIeYEIuIa")]
+		[DataRow("абвгдеёжзийклмнопрстуфхцчшщъыьэюя", "abvgdeezhziiklmnoprstufkhtschshshchieyeiuia")]
+		[DataRow("АБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯ", "ABVGDEEZhZIIKLMNOPRSTUFKhTsChShShchIeYEIuIa")]
 		public void Transliterate(string input, string expected)
 		{
 			var output = transliterator.Transliterate(input);

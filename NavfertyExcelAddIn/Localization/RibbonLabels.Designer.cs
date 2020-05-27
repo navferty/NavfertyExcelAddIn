@@ -124,6 +124,15 @@ namespace NavfertyExcelAddIn.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Replace Chars &apos;У&apos; -&gt; &apos;Y&apos;.
+        /// </summary>
+        internal static string ReplaceChars {
+            get {
+                return ResourceManager.GetString("ReplaceChars", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Toggle Case.
         /// </summary>
         internal static string ToggleCase {
@@ -133,11 +142,20 @@ namespace NavfertyExcelAddIn.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Transliterate.
+        ///   Looks up a localized string similar to Transliterate &apos;У&apos; -&gt; &apos;U&apos;.
         /// </summary>
         internal static string Transliterate {
             get {
                 return ResourceManager.GetString("Transliterate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Transliterate.
+        /// </summary>
+        internal static string TransliterateButton {
+            get {
+                return ResourceManager.GetString("TransliterateButton", resourceCulture);
             }
         }
         

@@ -84,6 +84,19 @@ namespace NavfertyExcelAddIn
             }
         }
 
+        public void ReplaceChars(IRibbonControl ribbonControl)
+        {
+            var replacer = GetService<ICyrillicLettersReplacer>();
+
+            Range selection = GetSelectionOrUsedRange(App.ActiveSheet);
+            selection.ApplyForEachCellOfType<string, object>(
+                value =>
+                {
+                    var newValue = replacer.ReplaceCyrillicCharsWithLatin(value);
+                    return (object)newValue ?? value;
+                });
+        }
+
         public void Transliterate(IRibbonControl ribbonControl)
         {
             var transliterator = GetService<ITransliterator>();

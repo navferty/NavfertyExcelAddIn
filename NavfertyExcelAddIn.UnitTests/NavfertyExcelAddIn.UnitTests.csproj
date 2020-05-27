@@ -91,6 +91,7 @@
     <Compile Include="ParseNumerics\NumericParserTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RangeExtensionsImplementationStub.cs" />
+    <Compile Include="Transliterate\CyrillicLettersReplacerTests.cs" />
     <Compile Include="Transliterate\TransliteratorTests.cs" />
     <Compile Include="UnprotectWorkbook\WbUnprotectorTests.cs" />
     <Compile Include="WorksheetCellsEditing\CaseTogglerTests.cs" />

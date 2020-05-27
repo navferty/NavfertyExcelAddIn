@@ -175,6 +175,12 @@
     <value>Текст для XML</value>
   </data>
   <data name="Transliterate" xml:space="preserve">
+    <value>Транслитерация 'У' -&gt; 'U'</value>
+  </data>
+  <data name="ReplaceChars" xml:space="preserve">
+    <value>Замена букв на аналоги 'У' -&gt; 'Y'</value>
+  </data>
+  <data name="TransliterateButton" xml:space="preserve">
     <value>Транслитерация</value>
   </data>
 </root>
