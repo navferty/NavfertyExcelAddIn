@@ -19,6 +19,7 @@ namespace NavfertyExcelAddIn.Transliterate
 				{ '\u0413', "G" },
 				{ '\u0414', "D" },
 				{ '\u0415', "E" },
+				{ '\u0401', "E" }, // Ё
 				{ '\u0416', "Zh" },
 				{ '\u0417', "Z" },
 				{ '\u0418', "I" },
@@ -53,6 +54,7 @@ namespace NavfertyExcelAddIn.Transliterate
 				{ '\u0433', "g" },
 				{ '\u0434', "d" },
 				{ '\u0435', "e" },
+				{ '\u0451', "e" }, // ё
 				{ '\u0436', "zh" },
 				{ '\u0437', "z" },
 				{ '\u0438', "i" },
@@ -114,7 +116,7 @@ namespace NavfertyExcelAddIn.Transliterate
 
 		public override bool Fallback(char charUnknown, int index)
 		{
-			if (charUnknown < '\u0410' || charUnknown > '\u044F')
+			if (!table.ContainsKey(charUnknown))
 				return false;
 
 			buffer = table[charUnknown];
