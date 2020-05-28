@@ -82,6 +82,11 @@ namespace NavfertyExcelAddIn
                 .EnableInterfaceInterceptors()
                 .InterceptedBy(typeof(ExceptionLogger));
 
+            builder.RegisterType<FrenchNumericStringifier>()
+                .Keyed<INumericStringifier>(SupportedCulture.French)
+                .EnableInterfaceInterceptors()
+                .InterceptedBy(typeof(ExceptionLogger));
+
             builder.RegisterType<CyrillicLettersReplacer>()
                 .As<ICyrillicLettersReplacer>()
                 .EnableInterfaceInterceptors()

@@ -3,6 +3,7 @@
 	public enum SupportedCulture
 	{
 		English,
-		Russian
+		Russian,
+		French
 	}
 }

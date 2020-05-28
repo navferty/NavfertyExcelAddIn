@@ -13,7 +13,7 @@ namespace NavfertyExcelAddIn.StringifyNumerics
 			InitializeFirstThousand();
 		}
 
-		// thanks for pikabu.ru/@iakki
+		// thanks to pikabu.ru/@iakki for idea of algorythm
 		public string StringifyNumber(double number)
 		{
 			if (number == 0)

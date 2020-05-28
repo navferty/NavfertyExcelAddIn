@@ -13,7 +13,7 @@ namespace NavfertyExcelAddIn.StringifyNumerics
 			InitializeFirstThousand();
 		}
 
-		// thanks for pikabu.ru/@iakki
+		// thanks to pikabu.ru/@iakki for idea of algorythm
 		public string StringifyNumber(double number)
 		{
 			if (number == 0)
@@ -35,36 +35,43 @@ namespace NavfertyExcelAddIn.StringifyNumerics
 				: allNumbers[millionsNumber] + " " + millionsName + " ";
 
 			var thousandsNumber = (int)((number % 1_000_000) / 1_000);
-			var thousandsName = GetMultiplierName(thousandsNumber, "mille");
+			var thousandsName = "mille";
 			var thousands = thousandsNumber == 0
 				? string.Empty
 				: allNumbers[thousandsNumber] + " " + thousandsName + " ";
 			thousands = FixThousands(thousands);
 
-			int fractionalPart = (int)Math.Round((number - (int)number) * 1000);
+			int fractionalPart = (int)Math.Round((number - (long)number) * 1000);
 
-			(int Multiplyer, int ZeroPaddingLeft) power;
+			int zeroPaddingLeft;
+			int zeroPaddingRight;
 
 			if (fractionalPart > 100)
-				power = (100, 0);
+				zeroPaddingLeft = 0;
 			else if (fractionalPart > 10)
-				power = (10, 1);
+				zeroPaddingLeft = 1;
 			else
-				power = (1, 2);
+				zeroPaddingLeft = 2;
 
-			fractionalPart /= power.Multiplyer;
+			if (fractionalPart % 100 == 0)
+				zeroPaddingRight = 2;
+			else if (fractionalPart % 10 == 0)
+				zeroPaddingRight =1;
+			else
+				zeroPaddingRight = 0;
+
+			fractionalPart /= (int)Math.Pow(10, zeroPaddingRight);
 
 			var fractional = fractionalPart == 0
 				? string.Empty
-				: string.Concat(Enumerable.Repeat(" zéro", power.ZeroPaddingLeft))
+				: string.Concat(Enumerable.Repeat(" zéro", zeroPaddingLeft))
 					+ " " + allNumbers[fractionalPart]; // 0,003 - zero virgule zero zero trois
 
-			var numbers = (int)(number) % 1000;
+			var numbers = (int)(number % 1000);
 
 			var ending = number != 0
 				?  allNumbers[numbers] + (fractionalPart != 0 ? " virgule" : string.Empty)
 				: string.Empty;
-			//ending = FixIfHasFraction(ending);
 			if (numbers == 0 && fractionalPart == 0)
 				ending = string.Empty;
 
@@ -77,14 +84,6 @@ namespace NavfertyExcelAddIn.StringifyNumerics
 			var result = thousands.Replace("un mille", "mille");
 			return result;
 		}
-		//private string FixIfHasFraction(string number)
-		//{
-		//	var result = number.Replace("один целая", "одна целая");
-		//	result = result.Replace("два целых", "две целых");
-		//	result = result.Replace("два тысячных", "две тысячных");
-		//	result = result.Replace("один тысячная", "одна тысячная");
-		//	return result;
-		//}
 
 		private static string GetMultiplierName(int thousandsNumber, string name)
 		{
