@@ -355,11 +355,7 @@ namespace NavfertyExcelAddIn
 
 		private Range GetSelectionOrUsedRange(Worksheet activeSheet)
 		{
-			var selection = (Range)App.Selection;
-
-			return selection.Cells.Count > 1
-				? selection
-				: activeSheet.UsedRange;
+			return (Range)App.Selection;
 		}
 
 		[SuppressMessage("Design", "CA1063:Implement IDisposable Correctly", Justification = "<Pending>")]
