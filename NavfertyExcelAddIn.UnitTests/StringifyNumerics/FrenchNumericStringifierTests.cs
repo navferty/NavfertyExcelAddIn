@@ -26,6 +26,7 @@ namespace NavfertyExcelAddIn.UnitTests.StringifyNumerics
 		[DataRow(1.03, "un virgule zéro trois")]
 		[DataRow(0.023, "zéro virgule zéro vingt-trois")]
 		[DataRow(0.003, "zéro virgule zéro zéro trois")]
+		[DataRow(0.0003, "zéro")]
 		[DataRow(1000, "mille")]
 		[DataRow(9_000_000_000, "neuf milliards")]
 		[DataRow(1_234_567, "un million deux cent trente-quatre mille cinq cent soixante-sept")]

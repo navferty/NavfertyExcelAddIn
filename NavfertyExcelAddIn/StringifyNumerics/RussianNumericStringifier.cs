@@ -16,32 +16,35 @@ namespace NavfertyExcelAddIn.StringifyNumerics
 		// thanks to pikabu.ru/@iakki for idea of algorythm
 		public string StringifyNumber(double number)
 		{
-			if (number == 0)
+			if (number >= 1_000_000_000_000)
+				return null;
+
+			if (Math.Abs(number) < 0.001)
 				return "ноль";
 
 			if (number < 0)
 				return "минус " + StringifyNumber(Math.Abs(number));
 
-			var billionsNumber = (int)(number / 1000000000);
-			var billionsName = GetMultiplierName(billionsNumber, "тысячи", "тысяч", "тысяча");
+			var billionsNumber = (int)(number / 1_000_000_000);
+			var billionsName = GetMultiplierName(billionsNumber, "миллиарда", "миллиардов", "миллиард");
 			var billions = billionsNumber == 0
 				? string.Empty
 				: allNumbers[billionsNumber] + " " + billionsName + " ";
 
-			var millionsNumber = (int)((number % 1000000000) / 1000000);
+			var millionsNumber = (int)((number % 1_000_000_000) / 1_000_000);
 			var millionsName = GetMultiplierName(millionsNumber, "миллиона", "миллионов", "миллион");
 			var millions = millionsNumber == 0
 				? string.Empty
 				: allNumbers[millionsNumber] + " " + millionsName + " ";
 
-			var thousandsNumber = (int)((number % 1000000) / 1000);
+			var thousandsNumber = (int)((number % 1_000_000) / 1_000);
 			var thousandsName = GetMultiplierName(thousandsNumber, "тысячи", "тысяч", "тысяча");
 			var thousands = thousandsNumber == 0
 				? string.Empty
 				: allNumbers[thousandsNumber] + " " + thousandsName + " ";
 			thousands = FixThousands(thousands);
 
-			int fractionalPart = (int)Math.Round((number - (int)number) * 1000);
+			int fractionalPart = (int)Math.Round((number - (long)number) * 1000);
 
 			(int Multiplyer, string Word1, string Word2, string Word3) power;
 
@@ -59,7 +62,7 @@ namespace NavfertyExcelAddIn.StringifyNumerics
 				? string.Empty
 				: " и " + allNumbers[fractionalPart] + " " + fractionalName;
 
-			var numbers = (int)(number) % 1000;
+			var numbers = (int)(number % 1000);
 			// TODO what about currency... can user select currency in addition?
 			// var endingName = GetMultiplierName(numbers, "российских рубля", "российских рублей", "российский рубль");
 			var endingName = GetMultiplierName(numbers, "целых", "целых", "целая");

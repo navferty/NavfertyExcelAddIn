@@ -16,7 +16,10 @@ namespace NavfertyExcelAddIn.StringifyNumerics
 		// thanks to pikabu.ru/@iakki for idea of algorythm
 		public string StringifyNumber(double number)
 		{
-			if (number == 0)
+			if (number >= 1_000_000_000_000)
+				return null;
+
+			if (Math.Abs(number) < 0.001)
 				return "zéro";
 
 			if (number < 0)

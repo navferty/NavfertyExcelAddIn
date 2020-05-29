@@ -7,6 +7,12 @@ namespace NavfertyExcelAddIn.StringifyNumerics
 	{
 		public string StringifyNumber(double number)
 		{
+			if (number >= 1_000_000_000)
+				return null;
+
+			if (Math.Abs(number) < 0.001)
+				return "zero";
+
 			var mainPart = Convert.ToInt32(number);
 
 			var main = NumberToWords(mainPart);
@@ -39,11 +45,10 @@ namespace NavfertyExcelAddIn.StringifyNumerics
 				return "zero";
 
 			var number = Math.Abs(input);
-
-			var sb = new StringBuilder();
 			if (input < 0)
 				return "minus " + NumberToWords(number);
 
+			var sb = new StringBuilder();
 			if ((number / 1000000) > 0)
 			{
 				sb.Append(NumberToWords(number / 1000000) + " million ");
