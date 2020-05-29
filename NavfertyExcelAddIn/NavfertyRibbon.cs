@@ -1,29 +1,30 @@
 ﻿using System;
-using System.Linq;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Drawing;
 using System.IO;
+using System.Linq;
 using System.Runtime.InteropServices;
-using System.Diagnostics.CodeAnalysis;
 using System.Windows.Forms;
 
-using NavfertyExcelAddIn.DataValidation;
-using NavfertyExcelAddIn.FindFormulaErrors;
-using NavfertyExcelAddIn.ParseNumerics;
-using NavfertyExcelAddIn.UnprotectWorkbook;
-using NavfertyExcelAddIn.WorksheetCellsEditing;
-using NavfertyExcelAddIn.InteractiveRangeReport;
-using NavfertyExcelAddIn.XmlTools;
-using NavfertyExcelAddIn.Localization;
-using NavfertyExcelAddIn.Commons;
-using NavfertyExcelAddIn.StringifyNumerics;
-using NavfertyExcelAddIn.Transliterate;
-
-using NLog;
 using Autofac;
 
 using Microsoft.Office.Core;
 using Microsoft.Office.Interop.Excel;
+
+using NavfertyExcelAddIn.Commons;
+using NavfertyExcelAddIn.DataValidation;
+using NavfertyExcelAddIn.FindFormulaErrors;
+using NavfertyExcelAddIn.InteractiveRangeReport;
+using NavfertyExcelAddIn.Localization;
+using NavfertyExcelAddIn.ParseNumerics;
+using NavfertyExcelAddIn.StringifyNumerics;
+using NavfertyExcelAddIn.Transliterate;
+using NavfertyExcelAddIn.UnprotectWorkbook;
+using NavfertyExcelAddIn.WorksheetCellsEditing;
+using NavfertyExcelAddIn.XmlTools;
+
+using NLog;
 
 using Application = Microsoft.Office.Interop.Excel.Application;
 

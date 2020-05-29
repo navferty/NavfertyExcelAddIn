@@ -2,8 +2,8 @@
 
 namespace NavfertyExcelAddIn.ParseNumerics
 {
-    public interface INumericParser
-    {
-        void Parse(Range selection);
-    }
+	public interface INumericParser
+	{
+		void Parse(Range selection);
+	}
 }

@@ -1,11 +1,11 @@
 ﻿namespace NavfertyExcelAddIn.DataValidation
 {
-    public enum ValidationType
-    {
-        Numeric,
-        Xml,
-        Date,
-        TinPersonal,
-        TinOrganization
-    }
+	public enum ValidationType
+	{
+		Numeric,
+		Xml,
+		Date,
+		TinPersonal,
+		TinOrganization
+	}
 }

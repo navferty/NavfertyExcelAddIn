@@ -1,4 +1,5 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+
 using NavfertyExcelAddIn.StringifyNumerics;
 
 namespace NavfertyExcelAddIn.UnitTests.StringifyNumerics

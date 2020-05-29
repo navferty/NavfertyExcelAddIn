@@ -1,7 +1,7 @@
 ﻿namespace NavfertyExcelAddIn.XmlTools
 {
-    public interface IXmlSampleCreator
-    {
-        void CreateSampleXml();
-    }
+	public interface IXmlSampleCreator
+	{
+		void CreateSampleXml();
+	}
 }

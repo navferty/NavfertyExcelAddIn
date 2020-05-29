@@ -59,7 +59,7 @@ namespace NavfertyExcelAddIn.StringifyNumerics
 			if (fractionalPart % 100 == 0)
 				zeroPaddingRight = 2;
 			else if (fractionalPart % 10 == 0)
-				zeroPaddingRight =1;
+				zeroPaddingRight = 1;
 			else
 				zeroPaddingRight = 0;
 
@@ -73,7 +73,7 @@ namespace NavfertyExcelAddIn.StringifyNumerics
 			var numbers = (int)(number % 1000);
 
 			var ending = number != 0
-				?  allNumbers[numbers] + (fractionalPart != 0 ? " virgule" : string.Empty)
+				? allNumbers[numbers] + (fractionalPart != 0 ? " virgule" : string.Empty)
 				: string.Empty;
 			if (numbers == 0 && fractionalPart == 0)
 				ending = string.Empty;

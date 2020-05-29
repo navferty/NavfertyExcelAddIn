@@ -2,8 +2,8 @@
 
 namespace NavfertyExcelAddIn.WorksheetCellsEditing
 {
-    public interface ICellsToMarkdownReader
-    {
-        string ReadToMarkdown(Range range);
-    }
+	public interface ICellsToMarkdownReader
+	{
+		string ReadToMarkdown(Range range);
+	}
 }

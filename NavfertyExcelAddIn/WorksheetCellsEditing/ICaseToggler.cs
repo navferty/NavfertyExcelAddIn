@@ -2,8 +2,8 @@
 
 namespace NavfertyExcelAddIn.WorksheetCellsEditing
 {
-    public interface ICaseToggler
-    {
-        void ToggleCase(Range range);
-    }
+	public interface ICaseToggler
+	{
+		void ToggleCase(Range range);
+	}
 }

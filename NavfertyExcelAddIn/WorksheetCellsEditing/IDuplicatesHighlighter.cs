@@ -2,8 +2,8 @@
 
 namespace NavfertyExcelAddIn.WorksheetCellsEditing
 {
-    public interface IDuplicatesHighlighter
-    {
-        void HighlightDuplicates(Range range);
-    }
+	public interface IDuplicatesHighlighter
+	{
+		void HighlightDuplicates(Range range);
+	}
 }

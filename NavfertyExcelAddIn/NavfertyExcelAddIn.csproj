@@ -227,11 +227,6 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
-    <Compile Include="Localization\RibbonSupertips.ru-RU.Designer.cs">
-      <DependentUpon>RibbonSupertips.ru-RU.resx</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-    </Compile>
     <Compile Include="StringifyNumerics\EnglishNumericStringifier.cs" />
     <Compile Include="StringifyNumerics\INumericStringifier.cs" />
     <Compile Include="StringifyNumerics\FrenchNumericStringifier.cs" />
@@ -357,8 +352,6 @@
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Localization\RibbonSupertips.ru-RU.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>RibbonSupertips.ru-RU.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Localization\RibbonLabels.resx">

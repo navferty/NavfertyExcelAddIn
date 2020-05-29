@@ -67,7 +67,7 @@ namespace NavfertyExcelAddIn.StringifyNumerics
 			// var endingName = GetMultiplierName(numbers, "российских рубля", "российских рублей", "российский рубль");
 			var endingName = GetMultiplierName(numbers, "целых", "целых", "целая");
 			var ending = number != 0
-				?  allNumbers[numbers] + (fractionalPart != 0 ? " " + endingName : string.Empty)
+				? allNumbers[numbers] + (fractionalPart != 0 ? " " + endingName : string.Empty)
 				: string.Empty;
 			ending = FixIfHasFraction(ending);
 			if (numbers == 0 && fractionalPart == 0)

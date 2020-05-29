@@ -2,8 +2,8 @@
 
 namespace NavfertyExcelAddIn.WorksheetCellsEditing
 {
-    public interface ICellsUnmerger
-    {
-        void Unmerge(Range range);
-    }
+	public interface ICellsUnmerger
+	{
+		void Unmerge(Range range);
+	}
 }

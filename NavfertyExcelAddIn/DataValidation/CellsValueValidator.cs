@@ -1,58 +1,59 @@
 ﻿using System.Collections.Generic;
-using NLog;
+
 using Microsoft.Office.Interop.Excel;
+
 using NavfertyExcelAddIn.Commons;
 using NavfertyExcelAddIn.InteractiveRangeReport;
 
 namespace NavfertyExcelAddIn.DataValidation
 {
-    public class CellsValueValidator : ICellsValueValidator
-    {
-        private readonly IValidatorFactory validatorFactory;
+	public class CellsValueValidator : ICellsValueValidator
+	{
+		private readonly IValidatorFactory validatorFactory;
 
-        public CellsValueValidator(IValidatorFactory validatorFactory)
-        {
-            this.validatorFactory = validatorFactory;
-        }
+		public CellsValueValidator(IValidatorFactory validatorFactory)
+		{
+			this.validatorFactory = validatorFactory;
+		}
 
-        public IReadOnlyCollection<InteractiveErrorItem> Validate(Range range, ValidationType validationType)
-        {
+		public IReadOnlyCollection<InteractiveErrorItem> Validate(Range range, ValidationType validationType)
+		{
 			var validator = validatorFactory.CreateValidator(validationType);
 
-            var errors = new List<InteractiveErrorItem>();
+			var errors = new List<InteractiveErrorItem>();
 
-            range.ForEachCell(c => CheckCell(c, validator, errors, range.Worksheet.Name));
+			range.ForEachCell(c => CheckCell(c, validator, errors, range.Worksheet.Name));
 
-            return errors.ToArray();
-        }
+			return errors.ToArray();
+		}
 
-        private void CheckCell(Range cell, IValidator validator, ICollection<InteractiveErrorItem> errors, string wsName)
-        {
-            // Value instead of Value2 can return datetime
-            var value = (object)cell.Value;
+		private void CheckCell(Range cell, IValidator validator, ICollection<InteractiveErrorItem> errors, string wsName)
+		{
+			// Value instead of Value2 can return datetime
+			var value = (object)cell.Value;
 
-            if (string.IsNullOrEmpty(value?.ToString()))
-            {
-                return;
-            }
+			if (string.IsNullOrEmpty(value?.ToString()))
+			{
+				return;
+			}
 
-            ValidationResult result = validator.CheckValue(value);
+			ValidationResult result = validator.CheckValue(value);
 
-            if (result.IsSuccess)
-            {
-                return;
-            }
+			if (result.IsSuccess)
+			{
+				return;
+			}
 
-            var error = new InteractiveErrorItem
-            {
-                Range = cell,
-                Value = value.ToString(),
-                ErrorMessage = result.Message,
-                Address = cell.GetRelativeAddress(),
-                WorksheetName = wsName
-            };
+			var error = new InteractiveErrorItem
+			{
+				Range = cell,
+				Value = value.ToString(),
+				ErrorMessage = result.Message,
+				Address = cell.GetRelativeAddress(),
+				WorksheetName = wsName
+			};
 
-            errors.Add(error);
-        }
-    }
+			errors.Add(error);
+		}
+	}
 }
