@@ -1,4 +1,5 @@
 # Navferty's Excel Add-In
+
 ## Common tools for MS Excel ##
 
 ![Navferty's Tools Ribbon Tab in MS Excel](images/NavfertyToolsRibbonEn.png)
@@ -42,6 +43,13 @@ Toggle text case in selected cells (UPPERCASE->lowercase->Camel Case).
 ![Navferty's Tools Ribbon Tab in MS Excel](images/ToggleCase2.png)
 ![Navferty's Tools Ribbon Tab in MS Excel](images/ToggleCase3.png)
 ![Navferty's Tools Ribbon Tab in MS Excel](images/ToggleCase4.png)
+
+
+## Transliterate ##
+Transliterate text contents from cyrillic to latin in selected cells (based on ICAO transliteration standard).
+
+![Navferty's Tools Ribbon Tab in MS Excel](images/Transliterate1.png)
+![Navferty's Tools Ribbon Tab in MS Excel](images/Transliterate2.png)
 
 
 ## Unmerge Cells ##
@@ -101,20 +109,26 @@ Check XML file with XSD schema. Select xml and xsd files, and report with all va
 
 # How to install #
 
-The solution is build in Azure, you can download installation files from there.
-Visit https://navferty.visualstudio.com/NavfertyExcelAddIn/_build?definitionId=3
-then select latest build and download installation files as build artifacts:
+The solution is build in Azure, you can download installation files from there:
+
+* Visit https://navferty.visualstudio.com/NavfertyExcelAddIn/_build?definitionId=3
+
+* Select latest build of 'NavfertyExcelAddIn - Publish' pipeline:
 
 ![Navferty's Tools Ribbon Tab in MS Excel](images/Install1.png)
+
+* Download published installation files:
+
 ![Navferty's Tools Ribbon Tab in MS Excel](images/Install2.png)
 
-Extract files to a folder and run '.vsto' file. *Using desktop folder is recommended - for installing updates you will need to do it from the same folder that was used to install add-in for the first time!*
+* Extract files to a folder and run '.vsto' file:
+
+> Using desktop folder is highly recommended - installing updates
+> is permitted only from the same folder where it was installed
+> for the first time!
 
 ![Navferty's Tools Ribbon Tab in MS Excel](images/Install3.png)
 
 After installation process is completed, run (or restart) Excel application, and you will see new tab:
 
 ![Navferty's Tools Ribbon Tab in MS Excel](images/Install4.png)
-
-*Used icons are designed by iconarchive, Flaticon*
-*"Find errors" icon made by turkkub from www.flaticon.com*

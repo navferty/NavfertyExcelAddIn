@@ -174,6 +174,33 @@
   <data name="ValidateValuesXml" xml:space="preserve">
     <value>Текст для XML</value>
   </data>
+  <data name="Transliterate" xml:space="preserve">
+    <value>Транслитерацией 'У' -&gt; 'U'</value>
+  </data>
+  <data name="ReplaceChars" xml:space="preserve">
+    <value>На аналоги 'У' -&gt; 'Y'</value>
+  </data>
+  <data name="TransliterateButton" xml:space="preserve">
+    <value>Заменить</value>
+  </data>
+  <data name="ConvertingValues" xml:space="preserve">
+    <value>Преобразование значений</value>
+  </data>
+  <data name="FormattingValues" xml:space="preserve">
+    <value>Форматирование значений</value>
+  </data>
+  <data name="StringifyNumericsButton" xml:space="preserve">
+    <value>Преобразовать в слова</value>
+  </data>
+  <data name="StringifyNumericsEn" xml:space="preserve">
+    <value>На английском</value>
+  </data>
+  <data name="StringifyNumericsRu" xml:space="preserve">
+    <value>На русском</value>
+  </data>
+  <data name="StringifyNumericsFr" xml:space="preserve">
+    <value>На французском</value>
+  </data>
   <data name="EditShortenings" xml:space="preserve">
     <value>Редактировать словарь сокращений</value>
   </data>

@@ -70,6 +70,15 @@ namespace NavfertyExcelAddIn.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Converting Values.
+        /// </summary>
+        internal static string ConvertingValues {
+            get {
+                return ResourceManager.GetString("ConvertingValues", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Copy as Markdown.
         /// </summary>
         internal static string CopyAsMarkdown {
@@ -115,6 +124,15 @@ namespace NavfertyExcelAddIn.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Formatting Values.
+        /// </summary>
+        internal static string FormattingValues {
+            get {
+                return ResourceManager.GetString("FormattingValues", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Highlight Duplicates.
         /// </summary>
         internal static string HighlightDuplicates {
@@ -133,11 +151,74 @@ namespace NavfertyExcelAddIn.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Replace Chars &apos;У&apos; -&gt; &apos;Y&apos;.
+        /// </summary>
+        internal static string ReplaceChars {
+            get {
+                return ResourceManager.GetString("ReplaceChars", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Stringify Numerics.
+        /// </summary>
+        internal static string StringifyNumericsButton {
+            get {
+                return ResourceManager.GetString("StringifyNumericsButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ...to English.
+        /// </summary>
+        internal static string StringifyNumericsEn {
+            get {
+                return ResourceManager.GetString("StringifyNumericsEn", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ...to French.
+        /// </summary>
+        internal static string StringifyNumericsFr {
+            get {
+                return ResourceManager.GetString("StringifyNumericsFr", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ...to Russian.
+        /// </summary>
+        internal static string StringifyNumericsRu {
+            get {
+                return ResourceManager.GetString("StringifyNumericsRu", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Toggle Case.
         /// </summary>
         internal static string ToggleCase {
             get {
                 return ResourceManager.GetString("ToggleCase", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to With Transliteration &apos;У&apos; -&gt; &apos;U&apos;.
+        /// </summary>
+        internal static string Transliterate {
+            get {
+                return ResourceManager.GetString("Transliterate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Replace.
+        /// </summary>
+        internal static string TransliterateButton {
+            get {
+                return ResourceManager.GetString("TransliterateButton", resourceCulture);
             }
         }
         
