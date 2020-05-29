@@ -118,87 +118,52 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="ParseNumerics" xml:space="preserve">
-    <value>Parse Numerics</value>
-  </data>
-  <data name="UnprotectWorkbook" xml:space="preserve">
-    <value>Unprotect Workbook</value>
+    <value>Converts the cell data type to a numeric one.</value>
   </data>
   <data name="CutNames" xml:space="preserve">
-    <value>Cut Names</value>
+    <value>In the development...</value>
   </data>
   <data name="HighlightDuplicates" xml:space="preserve">
-    <value>Highlight Duplicates</value>
+    <value>Paints groups of duplicates with different colors.</value>
   </data>
   <data name="ToggleCase" xml:space="preserve">
-    <value>Toggle Case</value>
+    <value>Changes the case of all words in the cell. Replacement order: lowercase, uppercase, first capital, lowercase...</value>
   </data>
   <data name="TrimSpaces" xml:space="preserve">
-    <value>Trim Spaces</value>
+    <value>Reduces the groups of spaces between the entered parts of the cell value to one.</value>
   </data>
   <data name="UnmergeCells" xml:space="preserve">
-    <value>Unmerge Cells</value>
-  </data>
-  <data name="ValidateXml" xml:space="preserve">
-    <value>Validate XML with XSD</value>
-  </data>
-  <data name="CreateSampleXml" xml:space="preserve">
-    <value>Create Sample XML based on XSD</value>
-  </data>
-  <data name="CommonGroup" xml:space="preserve">
-    <value>Commons</value>
-  </data>
-  <data name="XmlToolsGroup" xml:space="preserve">
-    <value>XML Tools</value>
+    <value>Parts of the cell duplicate their content.</value>
   </data>
   <data name="FindErrors" xml:space="preserve">
-    <value>Find Formula Errors on Current Sheet</value>
+    <value>Finds all cells in the specified range that have any errors (#).</value>
   </data>
   <data name="CopyAsMarkdown" xml:space="preserve">
-    <value>Copy as Markdown</value>
-  </data>
-  <data name="ValidateValuesButton" xml:space="preserve">
-    <value>Validate Values</value>
-  </data>
-  <data name="ValidateValuesDate" xml:space="preserve">
-    <value>Date</value>
-  </data>
-  <data name="ValidateValuesNumerics" xml:space="preserve">
-    <value>Numerics</value>
-  </data>
-  <data name="ValidateValuesTinOrganization" xml:space="preserve">
-    <value>Russian TIN (Organization)</value>
-  </data>
-  <data name="ValidateValuesTinPersonal" xml:space="preserve">
-    <value>Russian TIN (Personal)</value>
-  </data>
-  <data name="ValidateValuesXml" xml:space="preserve">
-    <value>XML contents text</value>
+    <value>Saves the selected range of values to the clipboard using Markdown markup.</value>
   </data>
   <data name="Transliterate" xml:space="preserve">
-    <value>With Transliteration 'У' -&gt; 'U'</value>
+    <value>Changes the Russian alphabet to English using transliteration, for example: 'У' - &gt; 'U'.</value>
   </data>
   <data name="TransliterateButton" xml:space="preserve">
-    <value>Replace</value>
+    <value>Full using transliteration (by default) or partial replacement of the Russian alphabet (by analogy) with English. Example of transliteration: 'У' - &gt; 'U', example of substitution by analogy:' У ' - &gt; 'Y'.</value>
   </data>
   <data name="ReplaceChars" xml:space="preserve">
-    <value>Replace Chars 'У' -&gt; 'Y'</value>
-  </data>
-  <data name="ConvertingValues" xml:space="preserve">
-    <value>Converting Values</value>
-  </data>
-  <data name="FormattingValues" xml:space="preserve">
-    <value>Formatting Values</value>
+    <value>Changes similar letters of the Russian and English alphabets, for example: 'У' - &gt; 'Y'.</value>
   </data>
   <data name="StringifyNumericsButton" xml:space="preserve">
-    <value>Stringify Numerics</value>
+    <value>Rewrites the numeric value of the cell with words. The default is the Russian language.
+Allows rewriting values in range -999 billion to 999 billion, with precision up to thousandths.</value>
   </data>
   <data name="StringifyNumericsEn" xml:space="preserve">
-    <value>...to English</value>
+    <value>Rewrites the numeric value of a cell in English with words.</value>
   </data>
   <data name="StringifyNumericsRu" xml:space="preserve">
-    <value>...to Russian</value>
+    <value>Rewrites the numeric value of a cell in Russian with words.</value>
+  </data>
+  <data name="ValidateValuesButton" xml:space="preserve">
+    <value>Checking that values meet certain standards. Use the pop-up list to select a standard.</value>
   </data>
   <data name="StringifyNumericsFr" xml:space="preserve">
-    <value>...to French</value>
+    <value>Rewrites the numeric value of a cell in French with words.</value>
   </data>
 </root>

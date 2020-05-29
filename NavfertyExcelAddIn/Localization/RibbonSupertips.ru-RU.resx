@@ -118,87 +118,52 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="ParseNumerics" xml:space="preserve">
-    <value>Parse Numerics</value>
-  </data>
-  <data name="UnprotectWorkbook" xml:space="preserve">
-    <value>Unprotect Workbook</value>
+    <value>Преобразовывает тип данных ячейки в числовой.</value>
   </data>
   <data name="CutNames" xml:space="preserve">
-    <value>Cut Names</value>
+    <value>В разработке...</value>
   </data>
   <data name="HighlightDuplicates" xml:space="preserve">
-    <value>Highlight Duplicates</value>
+    <value>Закрашивает группы дубликатов разным цветом.</value>
   </data>
   <data name="ToggleCase" xml:space="preserve">
-    <value>Toggle Case</value>
+    <value>Меняет регистр всех слов ячейки. Порядок замены: нижний регистр, верхний регистр, первая заглавная, нижний регистр...</value>
   </data>
   <data name="TrimSpaces" xml:space="preserve">
-    <value>Trim Spaces</value>
+    <value>Сокращает группы пробелов между введёнными частями значения ячейки до одного.</value>
   </data>
   <data name="UnmergeCells" xml:space="preserve">
-    <value>Unmerge Cells</value>
-  </data>
-  <data name="ValidateXml" xml:space="preserve">
-    <value>Validate XML with XSD</value>
-  </data>
-  <data name="CreateSampleXml" xml:space="preserve">
-    <value>Create Sample XML based on XSD</value>
-  </data>
-  <data name="CommonGroup" xml:space="preserve">
-    <value>Commons</value>
-  </data>
-  <data name="XmlToolsGroup" xml:space="preserve">
-    <value>XML Tools</value>
+    <value>Разделяет ячейки с дублированием их содержимого.</value>
   </data>
   <data name="FindErrors" xml:space="preserve">
-    <value>Find Formula Errors on Current Sheet</value>
+    <value>Находит в указанном диапазоне все ячейки, имеющие любые ошибки (#).</value>
   </data>
   <data name="CopyAsMarkdown" xml:space="preserve">
-    <value>Copy as Markdown</value>
-  </data>
-  <data name="ValidateValuesButton" xml:space="preserve">
-    <value>Validate Values</value>
-  </data>
-  <data name="ValidateValuesDate" xml:space="preserve">
-    <value>Date</value>
-  </data>
-  <data name="ValidateValuesNumerics" xml:space="preserve">
-    <value>Numerics</value>
-  </data>
-  <data name="ValidateValuesTinOrganization" xml:space="preserve">
-    <value>Russian TIN (Organization)</value>
-  </data>
-  <data name="ValidateValuesTinPersonal" xml:space="preserve">
-    <value>Russian TIN (Personal)</value>
-  </data>
-  <data name="ValidateValuesXml" xml:space="preserve">
-    <value>XML contents text</value>
+    <value>Сохраняет выделенный диапазон значений в буфер обмена с использованием разметки Markdown.</value>
   </data>
   <data name="Transliterate" xml:space="preserve">
-    <value>With Transliteration 'У' -&gt; 'U'</value>
+    <value>Меняет русский алфавит на английский с использованием транслитерации, например: 'У' -&gt; 'U'.</value>
   </data>
   <data name="TransliterateButton" xml:space="preserve">
-    <value>Replace</value>
+    <value>Полная с использованием транслитерации (по умолчанию) или частичная замена русского алфавита (по аналогии) на английский. Пример транслитерации: 'У' -&gt; 'U', пример замены по аналогии: 'У' -&gt; 'Y'.</value>
   </data>
   <data name="ReplaceChars" xml:space="preserve">
-    <value>Replace Chars 'У' -&gt; 'Y'</value>
-  </data>
-  <data name="ConvertingValues" xml:space="preserve">
-    <value>Converting Values</value>
-  </data>
-  <data name="FormattingValues" xml:space="preserve">
-    <value>Formatting Values</value>
+    <value>Меняет схожие буквы русского и английского алфавитов, например: 'У' -&gt; 'Y'.</value>
   </data>
   <data name="StringifyNumericsButton" xml:space="preserve">
-    <value>Stringify Numerics</value>
+    <value>Переписывает словами числовое значение ячейки. По умолчанию используется русский язык.
+Диапазон значений от -999 миллиардов до 999 миллиардов, с точностью до тысячных.</value>
   </data>
   <data name="StringifyNumericsEn" xml:space="preserve">
-    <value>...to English</value>
+    <value>Переписывает словами числовое значение ячейки на английском языке.</value>
   </data>
   <data name="StringifyNumericsRu" xml:space="preserve">
-    <value>...to Russian</value>
+    <value>Переписывает словами числовое значение ячейки на русском языке.</value>
+  </data>
+  <data name="ValidateValuesButton" xml:space="preserve">
+    <value>Проверка на соответствие значений определённым стандартам. Используйте всплывающий список для выбора стандарта.</value>
   </data>
   <data name="StringifyNumericsFr" xml:space="preserve">
-    <value>...to French</value>
+    <value>Переписывает словами числовое значение ячейки на французском языке.</value>
   </data>
 </root>

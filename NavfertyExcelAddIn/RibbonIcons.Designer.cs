@@ -123,6 +123,46 @@ namespace NavfertyExcelAddIn {
         /// <summary>
         ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap stringifyNumerics {
+            get {
+                object obj = ResourceManager.GetObject("stringifyNumerics", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap stringifyNumericsEn {
+            get {
+                object obj = ResourceManager.GetObject("stringifyNumericsEn", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap stringifyNumericsFr {
+            get {
+                object obj = ResourceManager.GetObject("stringifyNumericsFr", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap stringifyNumericsRu {
+            get {
+                object obj = ResourceManager.GetObject("stringifyNumericsRu", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap toggleCase {
             get {
                 object obj = ResourceManager.GetObject("toggleCase", resourceCulture);

@@ -1,14 +1,15 @@
 ﻿using Autofac;
 using Autofac.Extras.DynamicProxy;
 
-using NavfertyExcelAddIn.ParseNumerics;
-using NavfertyExcelAddIn.FindFormulaErrors;
 using NavfertyExcelAddIn.Commons;
+using NavfertyExcelAddIn.DataValidation;
+using NavfertyExcelAddIn.FindFormulaErrors;
+using NavfertyExcelAddIn.ParseNumerics;
+using NavfertyExcelAddIn.StringifyNumerics;
+using NavfertyExcelAddIn.Transliterate;
 using NavfertyExcelAddIn.UnprotectWorkbook;
 using NavfertyExcelAddIn.WorksheetCellsEditing;
-using NavfertyExcelAddIn.DataValidation;
 using NavfertyExcelAddIn.XmlTools;
-using NavfertyExcelAddIn.Transliterate;
 
 namespace NavfertyExcelAddIn
 {
@@ -68,6 +69,21 @@ namespace NavfertyExcelAddIn
 
             builder.RegisterType<NumericParser>()
                 .As<INumericParser>()
+                .EnableInterfaceInterceptors()
+                .InterceptedBy(typeof(ExceptionLogger));
+
+            builder.RegisterType<RussianNumericStringifier>()
+                .Keyed<INumericStringifier>(SupportedCulture.Russian)
+                .EnableInterfaceInterceptors()
+                .InterceptedBy(typeof(ExceptionLogger));
+
+            builder.RegisterType<EnglishNumericStringifier>()
+                .Keyed<INumericStringifier>(SupportedCulture.English)
+                .EnableInterfaceInterceptors()
+                .InterceptedBy(typeof(ExceptionLogger));
+
+            builder.RegisterType<FrenchNumericStringifier>()
+                .Keyed<INumericStringifier>(SupportedCulture.French)
                 .EnableInterfaceInterceptors()
                 .InterceptedBy(typeof(ExceptionLogger));
 

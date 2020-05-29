@@ -22,14 +22,14 @@ namespace NavfertyExcelAddIn.Localization {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class RibbonLabels {
+    internal class RibbonSupertips {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal RibbonLabels() {
+        internal RibbonSupertips() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace NavfertyExcelAddIn.Localization {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("NavfertyExcelAddIn.Localization.RibbonLabels", typeof(RibbonLabels).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("NavfertyExcelAddIn.Localization.RibbonSupertips", typeof(RibbonSupertips).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,25 +61,7 @@ namespace NavfertyExcelAddIn.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Commons.
-        /// </summary>
-        internal static string CommonGroup {
-            get {
-                return ResourceManager.GetString("CommonGroup", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Converting Values.
-        /// </summary>
-        internal static string ConvertingValues {
-            get {
-                return ResourceManager.GetString("ConvertingValues", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Copy as Markdown.
+        ///   Looks up a localized string similar to Saves the selected range of values to the clipboard using Markdown markup..
         /// </summary>
         internal static string CopyAsMarkdown {
             get {
@@ -88,16 +70,7 @@ namespace NavfertyExcelAddIn.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Create Sample XML based on XSD.
-        /// </summary>
-        internal static string CreateSampleXml {
-            get {
-                return ResourceManager.GetString("CreateSampleXml", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Cut Names.
+        ///   Looks up a localized string similar to In the development....
         /// </summary>
         internal static string CutNames {
             get {
@@ -106,7 +79,7 @@ namespace NavfertyExcelAddIn.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Find Formula Errors on Current Sheet.
+        ///   Looks up a localized string similar to Finds all cells in the specified range that have any errors (#)..
         /// </summary>
         internal static string FindErrors {
             get {
@@ -115,16 +88,7 @@ namespace NavfertyExcelAddIn.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Formatting Values.
-        /// </summary>
-        internal static string FormattingValues {
-            get {
-                return ResourceManager.GetString("FormattingValues", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Highlight Duplicates.
+        ///   Looks up a localized string similar to Paints groups of duplicates with different colors..
         /// </summary>
         internal static string HighlightDuplicates {
             get {
@@ -133,7 +97,7 @@ namespace NavfertyExcelAddIn.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Parse Numerics.
+        ///   Looks up a localized string similar to Converts the cell data type to a numeric one..
         /// </summary>
         internal static string ParseNumerics {
             get {
@@ -142,7 +106,7 @@ namespace NavfertyExcelAddIn.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Replace Chars &apos;У&apos; -&gt; &apos;Y&apos;.
+        ///   Looks up a localized string similar to Changes similar letters of the Russian and English alphabets, for example: &apos;У&apos; - &gt; &apos;Y&apos;..
         /// </summary>
         internal static string ReplaceChars {
             get {
@@ -151,7 +115,8 @@ namespace NavfertyExcelAddIn.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Stringify Numerics.
+        ///   Looks up a localized string similar to Rewrites the numeric value of the cell with words. The default is the Russian language.
+        ///Allows rewriting values in range -999 billion to 999 billion, with precision up to thousandths..
         /// </summary>
         internal static string StringifyNumericsButton {
             get {
@@ -160,7 +125,7 @@ namespace NavfertyExcelAddIn.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to ...to English.
+        ///   Looks up a localized string similar to Rewrites the numeric value of a cell in English with words..
         /// </summary>
         internal static string StringifyNumericsEn {
             get {
@@ -169,7 +134,7 @@ namespace NavfertyExcelAddIn.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to ...to French.
+        ///   Looks up a localized string similar to Rewrites the numeric value of a cell in French with words..
         /// </summary>
         internal static string StringifyNumericsFr {
             get {
@@ -178,7 +143,7 @@ namespace NavfertyExcelAddIn.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to ...to Russian.
+        ///   Looks up a localized string similar to Rewrites the numeric value of a cell in Russian with words..
         /// </summary>
         internal static string StringifyNumericsRu {
             get {
@@ -187,7 +152,7 @@ namespace NavfertyExcelAddIn.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Toggle Case.
+        ///   Looks up a localized string similar to Changes the case of all words in the cell. Replacement order: lowercase, uppercase, first capital, lowercase....
         /// </summary>
         internal static string ToggleCase {
             get {
@@ -196,7 +161,7 @@ namespace NavfertyExcelAddIn.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to With Transliteration &apos;У&apos; -&gt; &apos;U&apos;.
+        ///   Looks up a localized string similar to Changes the Russian alphabet to English using transliteration, for example: &apos;У&apos; - &gt; &apos;U&apos;..
         /// </summary>
         internal static string Transliterate {
             get {
@@ -205,7 +170,7 @@ namespace NavfertyExcelAddIn.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Replace.
+        ///   Looks up a localized string similar to Full using transliteration (by default) or partial replacement of the Russian alphabet (by analogy) with English. Example of transliteration: &apos;У&apos; - &gt; &apos;U&apos;, example of substitution by analogy:&apos; У &apos; - &gt; &apos;Y&apos;..
         /// </summary>
         internal static string TransliterateButton {
             get {
@@ -214,7 +179,7 @@ namespace NavfertyExcelAddIn.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Trim Spaces.
+        ///   Looks up a localized string similar to Reduces the groups of spaces between the entered parts of the cell value to one..
         /// </summary>
         internal static string TrimSpaces {
             get {
@@ -223,7 +188,7 @@ namespace NavfertyExcelAddIn.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Unmerge Cells.
+        ///   Looks up a localized string similar to Parts of the cell duplicate their content..
         /// </summary>
         internal static string UnmergeCells {
             get {
@@ -232,83 +197,11 @@ namespace NavfertyExcelAddIn.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Unprotect Workbook.
-        /// </summary>
-        internal static string UnprotectWorkbook {
-            get {
-                return ResourceManager.GetString("UnprotectWorkbook", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Validate Values.
+        ///   Looks up a localized string similar to Checking that values meet certain standards. Use the pop-up list to select a standard..
         /// </summary>
         internal static string ValidateValuesButton {
             get {
                 return ResourceManager.GetString("ValidateValuesButton", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Date.
-        /// </summary>
-        internal static string ValidateValuesDate {
-            get {
-                return ResourceManager.GetString("ValidateValuesDate", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Numerics.
-        /// </summary>
-        internal static string ValidateValuesNumerics {
-            get {
-                return ResourceManager.GetString("ValidateValuesNumerics", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Russian TIN (Organization).
-        /// </summary>
-        internal static string ValidateValuesTinOrganization {
-            get {
-                return ResourceManager.GetString("ValidateValuesTinOrganization", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Russian TIN (Personal).
-        /// </summary>
-        internal static string ValidateValuesTinPersonal {
-            get {
-                return ResourceManager.GetString("ValidateValuesTinPersonal", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to XML contents text.
-        /// </summary>
-        internal static string ValidateValuesXml {
-            get {
-                return ResourceManager.GetString("ValidateValuesXml", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Validate XML with XSD.
-        /// </summary>
-        internal static string ValidateXml {
-            get {
-                return ResourceManager.GetString("ValidateXml", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to XML Tools.
-        /// </summary>
-        internal static string XmlToolsGroup {
-            get {
-                return ResourceManager.GetString("XmlToolsGroup", resourceCulture);
             }
         }
     }
