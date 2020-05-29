@@ -38,9 +38,9 @@
 
         <group id="FormattingValues" getLabel="GetLabel" autoScale="1">
 
-          <!-- Commented out until this function is ready
           <button id="CutNames" getLabel="GetLabel" onAction="CutNames" image="cutNames"
-                  size="large" keytip="C" getScreentip="GetLabel" getSupertip="GetSupertip"/>-->
+                  size="large" keytip="C" getScreentip="GetLabel" getSupertip="GetSupertip"
+                  visible="false"/> <!-- Disabled until feature is ready -->
 
           <button id="ToggleCase" getLabel="GetLabel" onAction="ToggleCase" image="toggleCase"
                   size="large" keytip="TC" getScreentip="GetLabel" getSupertip="GetSupertip"/>
