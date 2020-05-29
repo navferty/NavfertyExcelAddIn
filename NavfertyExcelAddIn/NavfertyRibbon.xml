@@ -39,14 +39,12 @@
         <group id="FormattingValues" getLabel="GetLabel" autoScale="1">
           
           <splitButton id="CutNamesSplitButton" size="large" keytip="C" visible="false"> <!-- Disabled until feature is ready -->
-            <button id="CutNamesButton" onAction="CutNames" image="cutNames" getLabel="GetLabel" />
+            <button id="CutNamesButton" onAction="CutNames" image="cutNames" getLabel="GetLabel"
+                    getScreentip="GetLabel" getSupertip="GetSupertip"/>
             <menu id="CutNamesMenu">
               <button id="EditShortenings" getLabel="GetLabel" imageMso="ImeDictionaryUpdate" onAction="EditShortenings" keytip="ES" />
             </menu>
           </splitButton>
-          <button id="CutNames" getLabel="GetLabel" onAction="CutNames" image="cutNames"
-                  size="large" keytip="C" getScreentip="GetLabel" getSupertip="GetSupertip"
-                  visible="false"/> <!-- Disabled until feature is ready -->
 
           <button id="ToggleCase" getLabel="GetLabel" onAction="ToggleCase" image="toggleCase"
                   size="large" keytip="TC" getScreentip="GetLabel" getSupertip="GetSupertip"/>
