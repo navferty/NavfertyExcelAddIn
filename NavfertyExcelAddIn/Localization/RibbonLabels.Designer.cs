@@ -70,7 +70,7 @@ namespace NavfertyExcelAddIn.Localization {
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на Converting Values.
+        ///   Looks up a localized string similar to Converting Values.
         /// </summary>
         internal static string ConvertingValues {
             get {
@@ -79,7 +79,7 @@ namespace NavfertyExcelAddIn.Localization {
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на Copy as Markdown.
+        ///   Looks up a localized string similar to Copy as Markdown.
         /// </summary>
         internal static string CopyAsMarkdown {
             get {
@@ -88,7 +88,7 @@ namespace NavfertyExcelAddIn.Localization {
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на Create Sample XML based on XSD.
+        ///   Looks up a localized string similar to Create Sample XML based on XSD.
         /// </summary>
         internal static string CreateSampleXml {
             get {
@@ -97,7 +97,7 @@ namespace NavfertyExcelAddIn.Localization {
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на Cut Names.
+        ///   Looks up a localized string similar to Cut Names.
         /// </summary>
         internal static string CutNames {
             get {
@@ -106,7 +106,7 @@ namespace NavfertyExcelAddIn.Localization {
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на Find Formula Errors on Current Sheet.
+        ///   Looks up a localized string similar to Find Formula Errors on Current Sheet.
         /// </summary>
         internal static string FindErrors {
             get {
@@ -115,7 +115,7 @@ namespace NavfertyExcelAddIn.Localization {
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на Formatting Values.
+        ///   Looks up a localized string similar to Formatting Values.
         /// </summary>
         internal static string FormattingValues {
             get {
@@ -124,7 +124,7 @@ namespace NavfertyExcelAddIn.Localization {
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на Highlight Duplicates.
+        ///   Looks up a localized string similar to Highlight Duplicates.
         /// </summary>
         internal static string HighlightDuplicates {
             get {
@@ -133,7 +133,7 @@ namespace NavfertyExcelAddIn.Localization {
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на Parse Numerics.
+        ///   Looks up a localized string similar to Parse Numerics.
         /// </summary>
         internal static string ParseNumerics {
             get {
@@ -151,7 +151,7 @@ namespace NavfertyExcelAddIn.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Toggle Case.
+        ///   Looks up a localized string similar to Stringify Numerics.
         /// </summary>
         internal static string StringifyNumericsButton {
             get {
@@ -160,7 +160,7 @@ namespace NavfertyExcelAddIn.Localization {
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на On English.
+        ///   Looks up a localized string similar to ...to English.
         /// </summary>
         internal static string StringifyNumericsEn {
             get {
@@ -169,7 +169,16 @@ namespace NavfertyExcelAddIn.Localization {
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на On Russian.
+        ///   Looks up a localized string similar to ...to French.
+        /// </summary>
+        internal static string StringifyNumericsFr {
+            get {
+                return ResourceManager.GetString("StringifyNumericsFr", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ...to Russian.
         /// </summary>
         internal static string StringifyNumericsRu {
             get {
@@ -178,7 +187,7 @@ namespace NavfertyExcelAddIn.Localization {
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на Toggle Case.
+        ///   Looks up a localized string similar to Toggle Case.
         /// </summary>
         internal static string ToggleCase {
             get {
@@ -187,7 +196,7 @@ namespace NavfertyExcelAddIn.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Transliterate &apos;У&apos; -&gt; &apos;U&apos;.
+        ///   Looks up a localized string similar to With Transliteration &apos;У&apos; -&gt; &apos;U&apos;.
         /// </summary>
         internal static string Transliterate {
             get {
@@ -196,7 +205,7 @@ namespace NavfertyExcelAddIn.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Transliterate.
+        ///   Looks up a localized string similar to Replace.
         /// </summary>
         internal static string TransliterateButton {
             get {
@@ -214,7 +223,7 @@ namespace NavfertyExcelAddIn.Localization {
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на Unmerge Cells.
+        ///   Looks up a localized string similar to Unmerge Cells.
         /// </summary>
         internal static string UnmergeCells {
             get {
@@ -223,7 +232,7 @@ namespace NavfertyExcelAddIn.Localization {
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на Unprotect Workbook.
+        ///   Looks up a localized string similar to Unprotect Workbook.
         /// </summary>
         internal static string UnprotectWorkbook {
             get {
@@ -232,7 +241,7 @@ namespace NavfertyExcelAddIn.Localization {
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на Validate Values.
+        ///   Looks up a localized string similar to Validate Values.
         /// </summary>
         internal static string ValidateValuesButton {
             get {
@@ -241,7 +250,7 @@ namespace NavfertyExcelAddIn.Localization {
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на Date.
+        ///   Looks up a localized string similar to Date.
         /// </summary>
         internal static string ValidateValuesDate {
             get {
@@ -250,7 +259,7 @@ namespace NavfertyExcelAddIn.Localization {
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на Numerics.
+        ///   Looks up a localized string similar to Numerics.
         /// </summary>
         internal static string ValidateValuesNumerics {
             get {
@@ -259,7 +268,7 @@ namespace NavfertyExcelAddIn.Localization {
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на Russian TIN (Organization).
+        ///   Looks up a localized string similar to Russian TIN (Organization).
         /// </summary>
         internal static string ValidateValuesTinOrganization {
             get {
@@ -268,7 +277,7 @@ namespace NavfertyExcelAddIn.Localization {
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на Russian TIN (Personal).
+        ///   Looks up a localized string similar to Russian TIN (Personal).
         /// </summary>
         internal static string ValidateValuesTinPersonal {
             get {
@@ -277,7 +286,7 @@ namespace NavfertyExcelAddIn.Localization {
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на XML contents text.
+        ///   Looks up a localized string similar to XML contents text.
         /// </summary>
         internal static string ValidateValuesXml {
             get {
@@ -286,7 +295,7 @@ namespace NavfertyExcelAddIn.Localization {
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на Validate XML with XSD.
+        ///   Looks up a localized string similar to Validate XML with XSD.
         /// </summary>
         internal static string ValidateXml {
             get {
@@ -295,7 +304,7 @@ namespace NavfertyExcelAddIn.Localization {
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на XML Tools.
+        ///   Looks up a localized string similar to XML Tools.
         /// </summary>
         internal static string XmlToolsGroup {
             get {

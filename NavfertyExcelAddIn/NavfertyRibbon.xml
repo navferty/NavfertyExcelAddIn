@@ -30,7 +30,7 @@
                       onAction="NumberToWordsRussian" keytip="SR" getScreentip="GetLabel" getSupertip="GetSupertip"/>
               <button id="StringifyNumericsEn" getLabel="GetLabel" image="stringifyNumericsEn"
                       onAction="NumberToWordsEnglish" keytip="SE" getScreentip="GetLabel" getSupertip="GetSupertip"/>
-              <button id="StringifyNumericsFr" getLabel="GetLabel" image="stringifyNumericsEn"
+              <button id="StringifyNumericsFr" getLabel="GetLabel" image="stringifyNumericsFr"
                       onAction="NumberToWordsFrench" keytip="SF" getScreentip="GetLabel" getSupertip="GetSupertip"/>
             </menu>
           </splitButton>

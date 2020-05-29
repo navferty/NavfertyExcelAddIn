@@ -193,9 +193,12 @@
     <value>Stringify Numerics</value>
   </data>
   <data name="StringifyNumericsEn" xml:space="preserve">
-    <value>On English</value>
+    <value>...to English</value>
   </data>
   <data name="StringifyNumericsRu" xml:space="preserve">
-    <value>On Russian</value>
+    <value>...to Russian</value>
+  </data>
+  <data name="StringifyNumericsFr" xml:space="preserve">
+    <value>...to French</value>
   </data>
 </root>

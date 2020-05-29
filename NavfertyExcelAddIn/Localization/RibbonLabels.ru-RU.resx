@@ -198,4 +198,7 @@
   <data name="StringifyNumericsRu" xml:space="preserve">
     <value>На русском</value>
   </data>
+  <data name="StringifyNumericsFr" xml:space="preserve">
+    <value>На французском</value>
+  </data>
 </root>
