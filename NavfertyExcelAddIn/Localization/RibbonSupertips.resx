@@ -151,7 +151,8 @@
     <value>Changes similar letters of the Russian and English alphabets, for example: 'У' - &gt; 'Y'.</value>
   </data>
   <data name="StringifyNumericsButton" xml:space="preserve">
-    <value>Rewrites the numeric value of the cell with words. The default is the Russian language.</value>
+    <value>Rewrites the numeric value of the cell with words. The default is the Russian language.
+Allows rewriting values in range -999 billion to 999 billion, with precision up to thousandths.</value>
   </data>
   <data name="StringifyNumericsEn" xml:space="preserve">
     <value>Rewrites the numeric value of a cell in English with words.</value>
@@ -161,5 +162,8 @@
   </data>
   <data name="ValidateValuesButton" xml:space="preserve">
     <value>Checking that values meet certain standards. Use the pop-up list to select a standard.</value>
+  </data>
+  <data name="StringifyNumericsFr" xml:space="preserve">
+    <value>Rewrites the numeric value of a cell in French with words.</value>
   </data>
 </root>

@@ -7,13 +7,13 @@ namespace NavfertyExcelAddIn.StringifyNumerics
 	{
 		public string StringifyNumber(double number)
 		{
-			if (number >= 1_000_000_000)
+			if (number >= 1_000_000_000_000)
 				return null;
 
 			if (Math.Abs(number) < 0.001)
 				return "zero";
 
-			var mainPart = Convert.ToInt32(number);
+			var mainPart = Convert.ToInt64(number);
 
 			var main = NumberToWords(mainPart);
 			var fractional = GeconverttFractionalPart(number, mainPart);
@@ -21,9 +21,9 @@ namespace NavfertyExcelAddIn.StringifyNumerics
 			return result.Trim();
 		}
 
-		private static string GeconverttFractionalPart(double number, int mainPart)
+		private static string GeconverttFractionalPart(double number, long mainPart)
 		{
-			int fractionalPart = (int)Math.Round((number - mainPart) * 1000);
+			int fractionalPart = (int)Math.Abs(Math.Round((number - mainPart) * 1000));
 			if (fractionalPart == 0)
 				return string.Empty;
 
@@ -39,7 +39,7 @@ namespace NavfertyExcelAddIn.StringifyNumerics
 			return " and " + NumberToWords(fractionalPart / power.Multiplyer) + " " + power.Word;
 		}
 
-		private static string NumberToWords(int input)
+		private static string NumberToWords(long input)
 		{
 			if (input == 0)
 				return "zero";
@@ -49,16 +49,22 @@ namespace NavfertyExcelAddIn.StringifyNumerics
 				return "minus " + NumberToWords(number);
 
 			var sb = new StringBuilder();
-			if ((number / 1000000) > 0)
+			if ((number / 1_000_000_000) > 0)
 			{
-				sb.Append(NumberToWords(number / 1000000) + " million ");
-				number %= 1000000;
+				sb.Append(NumberToWords(number / 1_000_000_000) + " billion ");
+				number %= 1_000_000_000;
 			}
 
-			if ((number / 1000) > 0)
+			if ((number / 1_000_000) > 0)
 			{
-				sb.Append(NumberToWords(number / 1000) + " thousand ");
-				number %= 1000;
+				sb.Append(NumberToWords(number / 1_000_000) + " million ");
+				number %= 1_000_000;
+			}
+
+			if ((number / 1_000) > 0)
+			{
+				sb.Append(NumberToWords(number / 1_000) + " thousand ");
+				number %= 1_000;
 			}
 
 			if ((number / 100) > 0)
