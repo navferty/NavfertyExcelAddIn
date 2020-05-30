@@ -11,6 +11,7 @@ variables:
   solution: '$(Build.SourcesDirectory)/NavfertyExcelAddIn.sln'
   buildPlatform: 'Any CPU'
   buildConfiguration: 'Release'
+  buildId: '$(Build.BuildId)'
 
 steps:
 - task: NuGetToolInstaller@1
@@ -38,7 +39,7 @@ steps:
     solution: '$(solution)'
     platform: '$(buildPlatform)'
     configuration: '$(buildConfiguration)'
-    msbuildArgs: '$(msbuildArgs)'
+    msbuildArgs: '$(msbuildArgs) /p:Version="1.$(minorVersion).$(patchVersion).$(buildId)"'
 
 - task: CopyFiles@2
   inputs:
