@@ -2,31 +2,31 @@
 
 namespace NavfertyExcelAddIn.FindFormulaErrors
 {
-    public enum CVErrEnum : int
-    {
-        
-        [Description("#DIV/0!")]
-        ErrDiv0 = -2146826281,
-        
-        [Description("#GETTING_DATA")]
-        ErrGettingData = -2146826245,
+	public enum CVErrEnum : int
+	{
 
-        [Description("#N/A")]
-        ErrNA = -2146826246,
+		[Description("#DIV/0!")]
+		ErrDiv0 = -2146826281,
 
-        [Description("#NAME?")]
-        ErrName = -2146826259,
+		[Description("#GETTING_DATA")]
+		ErrGettingData = -2146826245,
 
-        [Description("#NULL!")]
-        ErrNull = -2146826288,
+		[Description("#N/A")]
+		ErrNA = -2146826246,
 
-        [Description("#NUM!")]
-        ErrNum = -2146826252,
+		[Description("#NAME?")]
+		ErrName = -2146826259,
 
-        [Description("#REF!")]
-        ErrRef = -2146826265,
+		[Description("#NULL!")]
+		ErrNull = -2146826288,
 
-        [Description("#VALUE!")]
-        ErrValue = -2146826273
-    }
+		[Description("#NUM!")]
+		ErrNum = -2146826252,
+
+		[Description("#REF!")]
+		ErrRef = -2146826265,
+
+		[Description("#VALUE!")]
+		ErrValue = -2146826273
+	}
 }

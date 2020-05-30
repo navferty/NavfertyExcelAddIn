@@ -1,7 +1,7 @@
 ﻿namespace NavfertyExcelAddIn.DataValidation
 {
-    public interface IValidatorFactory
-    {
-        IValidator CreateValidator(ValidationType validationType);
-    }
+	public interface IValidatorFactory
+	{
+		IValidator CreateValidator(ValidationType validationType);
+	}
 }

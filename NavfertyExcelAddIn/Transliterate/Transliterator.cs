@@ -18,7 +18,7 @@ namespace NavfertyExcelAddIn.Transliterate
 			var encoder = encoding.GetEncoder();
 			var decoder = encoding.GetDecoder();
 
-			var inputChars =input.ToCharArray();
+			var inputChars = input.ToCharArray();
 
 			// Encode characters
 			var byteCount = encoder.GetByteCount(

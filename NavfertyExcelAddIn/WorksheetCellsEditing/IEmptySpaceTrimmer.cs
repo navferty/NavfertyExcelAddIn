@@ -2,8 +2,8 @@
 
 namespace NavfertyExcelAddIn.WorksheetCellsEditing
 {
-    public interface IEmptySpaceTrimmer
-    {
-        void TrimSpaces(Range range);
-    }
+	public interface IEmptySpaceTrimmer
+	{
+		void TrimSpaces(Range range);
+	}
 }

@@ -1,7 +1,7 @@
 ﻿namespace NavfertyExcelAddIn.DataValidation
 {
-    public interface IValidator
-    {
+	public interface IValidator
+	{
 		ValidationResult CheckValue(object cellValue);
-    }
+	}
 }
