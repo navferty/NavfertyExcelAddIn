@@ -7,6 +7,7 @@ using NavfertyExcelAddIn.FindFormulaErrors;
 using NavfertyExcelAddIn.ParseNumerics;
 using NavfertyExcelAddIn.StringifyNumerics;
 using NavfertyExcelAddIn.Transliterate;
+using NavfertyExcelAddIn.Undo;
 using NavfertyExcelAddIn.UnprotectWorkbook;
 using NavfertyExcelAddIn.WorksheetCellsEditing;
 using NavfertyExcelAddIn.XmlTools;
@@ -114,6 +115,8 @@ namespace NavfertyExcelAddIn
 
 			builder.RegisterType<ExceptionLogger>();
 
+			builder.RegisterType<UndoManager>()
+				.SingleInstance();
 
 			return builder.Build();
 		}

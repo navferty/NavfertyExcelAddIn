@@ -201,4 +201,7 @@
   <data name="StringifyNumericsFr" xml:space="preserve">
     <value>На французском</value>
   </data>
+  <data name="UndoLastAction" xml:space="preserve">
+    <value>Отменить последнее действие</value>
+  </data>
 </root>

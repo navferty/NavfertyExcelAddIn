@@ -236,6 +236,7 @@
     <Compile Include="Transliterate\ITransliterator.cs" />
     <Compile Include="Transliterate\CyrillicToLatinFallback.cs" />
     <Compile Include="Transliterate\Transliterator.cs" />
+    <Compile Include="Undo\UndoManager.cs" />
     <Compile Include="XmlTools\IXmlValidator.cs" />
     <Compile Include="XmlTools\IXsdSchemaValidator.cs" />
     <Compile Include="XmlTools\IXmlSampleCreator.cs" />
