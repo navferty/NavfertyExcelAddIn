@@ -39,7 +39,7 @@ steps:
     solution: '$(solution)'
     platform: '$(buildPlatform)'
     configuration: '$(buildConfiguration)'
-    msbuildArgs: '$(msbuildArgs) /p:Version=0.4.3.0'
+    msbuildArgs: '$(msbuildArgs) /p:Version="0.4.3.0"'
 
 - task: CopyFiles@2
   inputs:
