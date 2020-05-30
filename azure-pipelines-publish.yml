@@ -38,8 +38,8 @@ steps:
   inputs:
     solution: '$(solution)'
     platform: '$(buildPlatform)'
-    configuration: '$(buildConfiguration)'
-    msbuildArgs: '$(msbuildArgs) /p:VersionNumber=1.0.0.$(buildId)'
+    configuration: '$(buildConfiguration);VersionAssembly=0.1.2.$(buildId)'
+    msbuildArgs: '$(msbuildArgs)'
 
 - task: CopyFiles@2
   inputs:
