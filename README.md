@@ -1,3 +1,5 @@
+##### Документация написана на английском языке. На русском доступна по [ссылке](READMI_RU.md).
+
 # Navferty's Excel Add-In
 
 ## Common tools for MS Excel ##
