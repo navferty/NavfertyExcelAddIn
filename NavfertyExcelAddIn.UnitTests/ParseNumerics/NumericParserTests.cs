@@ -35,10 +35,15 @@ namespace NavfertyExcelAddIn.UnitTests.ParseNumerics
 			Expression<Func<Range, string>> getAddress = x => x.get_Address(It.IsAny<object>(), It.IsAny<object>(),
 								It.IsAny<XlReferenceStyle>(), It.IsAny<object>(), It.IsAny<object>());
 			selection.SetupGet(getAddress).Returns("Address");
+			selection.SetupGet(x => x.Row).Returns(1);
+			selection.SetupGet(x => x.Column).Returns(1);
 
 			var ws = new Mock<Worksheet>(MockBehavior.Strict);
+			var wb = new Mock<Workbook>(MockBehavior.Strict);
 			ws.Setup(x => x.Name).Returns("WsName");
+			wb.Setup(x => x.Name).Returns("WbName");
 			selection.Setup(x => x.Worksheet).Returns(ws.Object);
+			ws.Setup(x => x.Parent).Returns(wb.Object);
 
 			var areas = new Mock<Areas>(MockBehavior.Strict);
 			areas.Setup(x => x.GetEnumerator()).Returns(new[] { selection.Object }.GetEnumerator());
@@ -49,7 +54,7 @@ namespace NavfertyExcelAddIn.UnitTests.ParseNumerics
 
 		private bool VerifyParsed(object[,] parsedValues)
 		{
-			var expected = new object[,] { { 1, 1m, "abc" }, { 123.123m, 321.321m, null } };
+			var expected = new object[,] { { 1, 1d, "abc" }, { 123.123d, 321.321d, null } };
 			CollectionAssert.AreEqual(expected, parsedValues);
 			return true;
 		}

@@ -188,6 +188,15 @@ namespace NavfertyExcelAddIn.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Undo the latest action done with this add-in. The undo is possible for certain functions in the sections &apos;Converting Values&apos; and &apos;Formatting Values&apos; and only in case the cells&apos; values have not been changed after that action..
+        /// </summary>
+        internal static string UndoLastAction {
+            get {
+                return ResourceManager.GetString("UndoLastAction", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Parts of the cell duplicate their content..
         /// </summary>
         internal static string UnmergeCells {

@@ -223,6 +223,15 @@ namespace NavfertyExcelAddIn.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Undo Last Action.
+        /// </summary>
+        internal static string UndoLastAction {
+            get {
+                return ResourceManager.GetString("UndoLastAction", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Unmerge Cells.
         /// </summary>
         internal static string UnmergeCells {

@@ -10,6 +10,7 @@ using NavfertyExcelAddIn.FindFormulaErrors;
 using Areas = Microsoft.Office.Interop.Excel.Areas;
 using Range = Microsoft.Office.Interop.Excel.Range;
 using Worksheet = Microsoft.Office.Interop.Excel.Worksheet;
+using Workbook = Microsoft.Office.Interop.Excel.Workbook;
 
 namespace NavfertyExcelAddIn.UnitTests.Builders
 {
@@ -24,6 +25,10 @@ namespace NavfertyExcelAddIn.UnitTests.Builders
 		{
 			ws = new Mock<Worksheet>(MockBehavior.Loose);
 			ws.Setup(x => x.Name).Returns(wsName);
+
+			var parentWb = new Mock<Workbook>(MockBehavior.Loose);
+			parentWb.Setup(x => x.Name).Returns("Book1");
+			ws.Setup(x => x.Parent).Returns(parentWb);
 			MockObject.Setup(x => x.Worksheet).Returns(ws.Object);
 
 			return this;
@@ -42,6 +47,8 @@ namespace NavfertyExcelAddIn.UnitTests.Builders
 				.Returns(new[] { MockObject.Object }.GetEnumerator());
 
 			MockObject.Setup(x => x.Areas).Returns(areas.Object);
+			MockObject.Setup(x => x.Row).Returns(42);
+			MockObject.Setup(x => x.Column).Returns(42);
 			return this;
 		}
 

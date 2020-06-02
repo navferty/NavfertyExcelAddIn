@@ -20,6 +20,7 @@ using NavfertyExcelAddIn.Localization;
 using NavfertyExcelAddIn.ParseNumerics;
 using NavfertyExcelAddIn.StringifyNumerics;
 using NavfertyExcelAddIn.Transliterate;
+using NavfertyExcelAddIn.Undo;
 using NavfertyExcelAddIn.UnprotectWorkbook;
 using NavfertyExcelAddIn.WorksheetCellsEditing;
 using NavfertyExcelAddIn.XmlTools;
@@ -35,10 +36,13 @@ namespace NavfertyExcelAddIn
 	[SuppressMessage("Design", "CA1063:Implement IDisposable Correctly", Justification = "Class contains only manages disposable resources")]
 	public class NavfertyRibbon : IRibbonExtensibility, IDisposable
 	{
+		#region Public static members
+		public static readonly IContainer Container = Registry.CreateContainer();
+		#endregion
+
 		#region Private members
-		private static readonly IContainer container = Registry.CreateContainer();
 		private readonly ILogger logger = LogManager.GetCurrentClassLogger();
-		private readonly IDialogService dialogService = container.Resolve<IDialogService>();
+		private readonly IDialogService dialogService = Container.Resolve<IDialogService>();
 
 		private readonly Dictionary<string, ValidationType> validationTypeByButtonId =
 			new Dictionary<string, ValidationType>
@@ -71,6 +75,12 @@ namespace NavfertyExcelAddIn
 		}
 
 		#region Common tools
+		public void UndoLastAction(IRibbonControl ribbonControl)
+		{
+			var undoManager = GetService<UndoManager>();
+			undoManager.UndoLastAction(App.ActiveSheet);
+		}
+
 		public void ParseNumerics(IRibbonControl ribbonControl)
 		{
 			var range = GetSelectionOrUsedRange(App.ActiveSheet);
@@ -93,18 +103,15 @@ namespace NavfertyExcelAddIn
 
 		private void StringifyNumerics(SupportedCulture supportedCulture)
 		{
-			using (var scope = container.BeginLifetimeScope())
-			{
-				var stringifier = scope.ResolveKeyed<INumericStringifier>(supportedCulture);
+			var stringifier = Container.ResolveKeyed<INumericStringifier>(supportedCulture);
 
-				Range selection = GetSelectionOrUsedRange(App.ActiveSheet);
-				selection.ApplyForEachCellOfType<double, object>(
-					value =>
-					{
-						var newValue = stringifier.StringifyNumber(value);
-						return (object)newValue ?? value;
-					});
-			}
+			Range selection = GetSelectionOrUsedRange(App.ActiveSheet);
+			selection.ApplyForEachCellOfType<double, object>(
+				value =>
+				{
+					var newValue = stringifier.StringifyNumber(value);
+					return (object)newValue ?? value;
+				});
 		}
 
 		public void ReplaceChars(IRibbonControl ribbonControl)
@@ -339,8 +346,7 @@ namespace NavfertyExcelAddIn
 
 		private T GetService<T>()
 		{
-			using (var scope = container.BeginLifetimeScope())
-				return scope.Resolve<T>();
+			return Container.Resolve<T>();
 		}
 
 		private static string GetResourceText()
@@ -363,7 +369,7 @@ namespace NavfertyExcelAddIn
 		public void Dispose()
 		{
 			form?.Dispose();
-			container.Dispose();
+			Container.Dispose();
 		}
 		#endregion
 	}

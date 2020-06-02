@@ -166,4 +166,7 @@ Allows rewriting values in range -999 billion to 999 billion, with precision up 
   <data name="StringifyNumericsFr" xml:space="preserve">
     <value>Rewrites the numeric value of a cell in French with words.</value>
   </data>
+  <data name="UndoLastAction" xml:space="preserve">
+    <value>Undo the latest action done with this add-in. The undo is possible for certain functions in the sections 'Converting Values' and 'Formatting Values' and only in case the cells' values have not been changed after that action.</value>
+  </data>
 </root>

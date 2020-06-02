@@ -1,4 +1,6 @@
-﻿using Microsoft.Office.Interop.Excel;
+﻿using System;
+
+using Microsoft.Office.Interop.Excel;
 
 using NavfertyExcelAddIn.Commons;
 
@@ -12,7 +14,10 @@ namespace NavfertyExcelAddIn.ParseNumerics
 				value =>
 				{
 					var newValue = value.ParseDecimal();
-					return (object)newValue ?? value;
+					if (newValue.HasValue)
+						// Excel stores numerics as Double
+						return (object)Convert.ToDouble(newValue);
+					return (object)value;
 				});
 		}
 	}
