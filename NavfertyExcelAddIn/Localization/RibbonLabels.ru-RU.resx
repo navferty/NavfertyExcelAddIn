@@ -151,7 +151,7 @@
     <value>Работа с XML</value>
   </data>
   <data name="FindErrors" xml:space="preserve">
-    <value>Найти все ошибки на листе</value>
+    <value>Найти все ошибки в выделенном диапазоне</value>
   </data>
   <data name="CopyAsMarkdown" xml:space="preserve">
     <value>Копировать в Markdown</value>
@@ -200,5 +200,11 @@
   </data>
   <data name="StringifyNumericsFr" xml:space="preserve">
     <value>На французском</value>
+  </data>
+  <data name="Control" xml:space="preserve">
+    <value>Управление</value>
+  </data>
+  <data name="UndoLastAction" xml:space="preserve">
+    <value>Отменить последнее действие</value>
   </data>
 </root>

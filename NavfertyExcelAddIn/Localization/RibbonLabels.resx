@@ -151,7 +151,7 @@
     <value>XML Tools</value>
   </data>
   <data name="FindErrors" xml:space="preserve">
-    <value>Find Formula Errors on Current Sheet</value>
+    <value>Find Formula Errors in the selected range</value>
   </data>
   <data name="CopyAsMarkdown" xml:space="preserve">
     <value>Copy as Markdown</value>
@@ -200,5 +200,11 @@
   </data>
   <data name="StringifyNumericsFr" xml:space="preserve">
     <value>...to French</value>
+  </data>
+  <data name="Control" xml:space="preserve">
+    <value>Control</value>
+  </data>
+  <data name="UndoLastAction" xml:space="preserve">
+    <value>Undo Last Action</value>
   </data>
 </root>

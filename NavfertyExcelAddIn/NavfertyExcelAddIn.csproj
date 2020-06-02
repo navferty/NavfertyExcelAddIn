@@ -286,6 +286,9 @@
     <Compile Include="XmlTools\XmlValidationError.cs" />
     <Compile Include="XmlTools\XmlValidator.cs" />
     <Compile Include="XmlTools\XsdSchemaValidator.cs" />
+    <None Include="Resources\replaceChars.png" />
+    <None Include="Resources\replace.png" />
+    <None Include="Resources\undo.png" />
     <None Include="Resources\stringifyNumericsFr.png" />
     <None Include="Resources\stringifyNumerics.png" />
     <None Include="Resources\stringifyNumericsRu.png" />

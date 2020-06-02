@@ -5,19 +5,22 @@
   <ribbon>
     <tabs>
       <tab idQ="n:NavfertyAddInTab" label="Navferty's Tools" keytip="ZX">
-
+				<group id="Control" getLabel="GetLabel" autoScale="1">
+					<button id="UndoLastAction" getLabel="GetLabel" onAction="UndoLastAction" size="large"
+                  image="undo" keytip="UN" getScreentip="GetLabel" getSupertip="GetSupertip"/>
+				</group>
         <group id="ConvertingValues" getLabel="GetLabel" autoScale="1">
           <button id="ParseNumerics" getLabel="GetLabel" onAction="ParseNumerics"
                   image="parseNumerics" size="large" keytip="P"
                   getScreentip="GetLabel" getSupertip="GetSupertip"/>
 
           <splitButton id="TransliterateSplitButton" size="large" keytip="TL">
-            <button id="TransliterateButton" getLabel="GetLabel" image="transliterate"
+            <button id="TransliterateButton" getLabel="GetLabel" image="replace"
                     onAction="Transliterate" keytip="TL" getScreentip="GetLabel" getSupertip="GetSupertip"/>
             <menu id="TransliterateSplitButtonMenu" itemSize="large">
               <button id="Transliterate" getLabel="GetLabel" image="transliterate"
                       onAction="Transliterate" keytip="T" getScreentip="GetLabel" getSupertip="GetSupertip"/>
-              <button id="ReplaceChars" getLabel="GetLabel" image="transliterate"
+              <button id="ReplaceChars" getLabel="GetLabel" image="replaceChars"
                       onAction="ReplaceChars" keytip="R" getScreentip="GetLabel" getSupertip="GetSupertip"/>
             </menu>
           </splitButton>
