@@ -70,6 +70,15 @@ namespace NavfertyExcelAddIn.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Control.
+        /// </summary>
+        internal static string Control {
+            get {
+                return ResourceManager.GetString("Control", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Converting Values.
         /// </summary>
         internal static string ConvertingValues {
@@ -106,7 +115,7 @@ namespace NavfertyExcelAddIn.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Find Formula Errors on Current Sheet.
+        ///   Looks up a localized string similar to Find Formula Errors in the selected range.
         /// </summary>
         internal static string FindErrors {
             get {
