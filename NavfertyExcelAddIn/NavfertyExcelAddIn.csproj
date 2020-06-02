@@ -30,14 +30,14 @@
     <DefineConstants>VSTO40</DefineConstants>
     <BootstrapperEnabled>true</BootstrapperEnabled>
     <PublishUrl>опубликовать\</PublishUrl>
-    <InstallUrl />
+    <InstallUrl>http://navferty.ru/</InstallUrl>
     <TargetCulture>ru</TargetCulture>
     <ApplicationVersion>$(Version)</ApplicationVersion>
     <AutoIncrementApplicationRevision>true</AutoIncrementApplicationRevision>
     <UpdateEnabled>true</UpdateEnabled>
     <UpdateInterval>7</UpdateInterval>
     <UpdateIntervalUnits>days</UpdateIntervalUnits>
-    <IsWebBootstrapper>False</IsWebBootstrapper>
+    <IsWebBootstrapper>True</IsWebBootstrapper>
     <ProductName>NavfertyExcelAddIn</ProductName>
     <PublisherName />
     <SupportUrl />
