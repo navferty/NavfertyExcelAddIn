@@ -62,5 +62,5 @@ steps:
     remoteDirectory: '/' #/upload/$(Build.BuildId)/
     clean: false
     cleanContents: false
-    preservePaths: false
+    preservePaths: true
     trustSSL: true
