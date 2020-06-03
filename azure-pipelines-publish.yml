@@ -57,7 +57,7 @@ steps:
     serverUrl: 'ftps://ftp.navferty.ru'
     username: '$(ftpUsername)'
     password: '$(ftpPassword)'
-    rootDirectory: 'uploads'
+    rootDirectory: ''
     filePatterns: '**'
     remoteDirectory: '/upload/$(Build.BuildId)/'
     clean: false
