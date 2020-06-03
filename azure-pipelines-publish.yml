@@ -50,3 +50,17 @@ steps:
     PathtoPublish: '$(Build.ArtifactStagingDirectory)'
     ArtifactName: 'InstallationFiles'
     publishLocation: 'Container'
+
+- task: FtpUpload@2
+  inputs:
+    credentialsOption: 'inputs'
+    serverUrl: 'ftps://ftp.navferty.ru'
+    username: '$(ftpUsername)'
+    password: '$(ftpPassword)'
+    rootDirectory: '$(Build.ArtifactStagingDirectory)'
+    filePatterns: '**'
+    remoteDirectory: '/' # navferty.ru/deploy/
+    clean: false
+    cleanContents: true
+    preservePaths: true
+    trustSSL: true
