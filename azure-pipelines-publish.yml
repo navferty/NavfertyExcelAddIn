@@ -54,10 +54,10 @@ steps:
 - task: FtpUpload@2
   inputs:
     credentialsOption: 'inputs'
-    serverUrl: 'ftp.navferty.ru'
+    serverUrl: 'ftps://ftp.navferty.ru'
     username: '$(ftpUsername)'
     password: '$(ftpPassword)'
-    rootDirectory: 'ftps://navferty.ru'
+    rootDirectory: 'uploads'
     filePatterns: '**'
     remoteDirectory: '/upload/$(Build.BuildId)/'
     clean: false
