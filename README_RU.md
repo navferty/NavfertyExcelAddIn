@@ -1,4 +1,4 @@
-##### The documentation is written in Russian&#58642;. Available in English at the [link](README.md).
+##### The documentation is written in Russian. Available in English at the [link](README.md).
 
 # Excel-надстройка Navferty's Tools
 
