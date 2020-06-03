@@ -64,3 +64,4 @@ steps:
     cleanContents: false
     preservePaths: true
     trustSSL: true
+    customCmds: 'delete /NavfertyExcelAddIn.vsto'
