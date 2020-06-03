@@ -59,9 +59,8 @@ steps:
     password: '$(ftpPassword)'
     rootDirectory: '$(Build.ArtifactStagingDirectory)'
     filePatterns: '**'
-    remoteDirectory: '/'
+    remoteDirectory: '/deploy'
     clean: false
-    cleanContents: false
+    cleanContents: true
     preservePaths: true
     trustSSL: true
-    customCmds: 'mdelete NavfertyExcelAddIn.vsto'
