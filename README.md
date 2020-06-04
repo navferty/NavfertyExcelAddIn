@@ -1,4 +1,4 @@
-##### Документация написана на английском языке. На русском доступна по [ссылке](README_RU.md).
+![](images/ru.png) [Russian](README_RU.md) | ![](images/en.png) **English**
 
 # Navferty's Excel Add-In
 
@@ -71,7 +71,7 @@
 
     |||
     |:-:|---|
-    |![](images/icons/transliterate.png)|The entire Russian alphabet is completely changed to English. For example, the letter "Ж" will be replaced with "Zh", and the letter "Щ" with "Shch".|
+    |![](images/icons/transliterate.png)|The entire Russian alphabet is completely changed to English. For example, the letter "Ж" will be replaced with "Zh", and the letter "Щ" with "Shch". Based on ICAO Doc [9303](https://www.icao.int/publications/Documents/9303_p3_cons_en.pdf).|
 
     <details>
       <summary>View screenshots</summary>

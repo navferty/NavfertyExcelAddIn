@@ -1,4 +1,4 @@
-##### The documentation is written in Russian&#58642;. Available in English at the [link](README.md).
+![](images/ru.png) **Russian** | ![](images/en.png) [English](readme.md)
 
 # Excel-надстройка Navferty's Tools
 
@@ -71,7 +71,7 @@
 
     |||
     |:-:|---|
-    |![](images/icons/transliterate.png)|Полностью меняется весь русский алфавит на английский. Например, буква "Ж" заменится на "Zh", а буква "Щ" - на "Shch".|
+    |![](images/icons/transliterate.png)|Полностью меняется весь русский алфавит на английский. Например, буква "Ж" заменится на "Zh", а буква "Щ" - на "Shch". Основано на документе ИКАО [9303](https://www.icao.int/publications/Documents/9303_p3_cons_ru.pdf).|
 
     <details>
       <summary>Посмотреть скриншоты</summary>
