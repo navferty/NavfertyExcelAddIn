@@ -108,6 +108,12 @@ namespace NavfertyExcelAddIn.Undo
 			{
 				for (int j = currentValue.GetLowerBound(1); j <= upperJ; j++)
 				{
+					if (currentValue[i, j] == null && values[i, j] == null)
+						continue;
+
+					if (currentValue[i, j] == null || values[i, j] == null)
+						return true;
+
 					if (!currentValue[i, j].Equals(values[i, j]))
 						return true;
 				}

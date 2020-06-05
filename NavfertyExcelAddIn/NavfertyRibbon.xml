@@ -5,13 +5,11 @@
   <ribbon>
     <tabs>
       <tab idQ="n:NavfertyAddInTab" label="Navferty's Tools" keytip="ZX">
-				<group id="Control" getLabel="GetLabel" autoScale="1">
-					<button id="UndoLastAction" getLabel="GetLabel" onAction="UndoLastAction" size="large"
-                  image="undo" keytip="UN" getScreentip="GetLabel" getSupertip="GetSupertip"/>
-				</group>
-        <group id="ConvertingValues" getLabel="GetLabel" autoScale="1">
+        <group id="Control" getLabel="GetLabel" autoScale="1">
           <button id="UndoLastAction" getLabel="GetLabel" onAction="UndoLastAction" size="large"
-                  imageMso="Undo" keytip="UN" getScreentip="GetLabel" getSupertip="GetSupertip"/>
+                  image="undo" keytip="UN" getScreentip="GetLabel" getSupertip="GetSupertip"/>
+        </group>
+        <group id="ConvertingValues" getLabel="GetLabel" autoScale="1">
 
           <button id="ParseNumerics" getLabel="GetLabel" onAction="ParseNumerics"
                   image="parseNumerics" size="large" keytip="P"
