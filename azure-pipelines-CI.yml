@@ -50,3 +50,29 @@ steps:
     # tests depending on Interop.Excel - run locally
     testFiltercriteria: 'Name!=UnprotectWorkbookAndWorksheet_CanEditAndAddWorksheet
                         &Name!=UnprotectWorkbookAndWorksheet_CanEditAndAddWorksheet' # more tests
+
+- task: DotNetCoreCLI@2
+  inputs:
+    command: custom
+    custom: tool
+    arguments: install --tool-path . dotnet-reportgenerator-globaltool
+  displayName: Install ReportGenerator tool
+
+- script: reportgenerator -reports:$(Agent.TempDirectory)/**/coverage.cobertura.xml -targetdir:$(Build.SourcesDirectory)/coverlet/reports -reporttypes:"Cobertura"
+  displayName: 'Create reports'
+
+- task: PublishCodeCoverageResults@1
+  displayName: 'Publish code coverage'
+  inputs:
+    codeCoverageTool: Cobertura
+    summaryFileLocation: $(Build.SourcesDirectory)/coverlet/reports/Cobertura.xml  
+
+# - task: PublishCodeCoverageResults@1
+#   inputs:
+#     codeCoverageTool: 'JaCoCo'
+#     summaryFileLocation: '$(Build.SourcesDirectory)/TestResults/Coverage/coverage.cobertura.xml'
+
+# - task: PublishCodeCoverageResults@1
+#   inputs:
+    #codeCoverageTool: 'JaCoCo' # Options: cobertura, jaCoCo
+    # summaryFileLocation: 'D:\a\_temp\TestResults\83c71d21-d7a1-4aab-bb35-85bbacdd8f41\VssAdministrator_fv-az630 2020-06-10 20_20_23.coverage'
