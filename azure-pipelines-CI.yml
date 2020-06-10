@@ -51,6 +51,20 @@ steps:
     testFiltercriteria: 'Name!=UnprotectWorkbookAndWorksheet_CanEditAndAddWorksheet
                         &Name!=UnprotectWorkbookAndWorksheet_CanEditAndAddWorksheet' # more tests
 
+# https://stackoverflow.com/questions/30215324/vstest-code-coverage-report-in-jenkins
+- task: PowerShell@2
+  inputs:
+    targetType: 'inline'
+    script: |
+      $coverageFile = $(get-ChildItem -Path .\TestResults -Recurse -Include *coverage)[0]
+      $xmlCoverageFile = ".\TestResults\vstest.coveragexml"
+      Add-Type -path "C:\Program Files (x86)\Microsoft Visual Studio 12.0\Common7\IDE\PrivateAssemblies\Microsoft.VisualStudio.Coverage.Analysis.dll"
+      [string[]] $executablePaths = @($coverageFile)
+      [string[]] $symbolPaths = @()
+      $info = [Microsoft.VisualStudio.Coverage.Analysis.CoverageInfo]::CreateFromFile($coverageFile, $executablePaths, $symbolPaths);
+      $data = $info.BuildDataSet()
+      $data.WriteXml($xmlCoverageFile)
+
 - task: DotNetCoreCLI@2
   inputs:
     command: custom
@@ -65,7 +79,8 @@ steps:
   displayName: 'Publish code coverage'
   inputs:
     codeCoverageTool: Cobertura
-    summaryFileLocation: $(Build.SourcesDirectory)/coverlet/reports/Cobertura.xml  
+    summaryFileLocation: '.\TestResults\vstest.coveragexml'
+     # $(Build.SourcesDirectory)/coverlet/reports/Cobertura.xml  
 
 # - task: PublishCodeCoverageResults@1
 #   inputs:
