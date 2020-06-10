@@ -55,8 +55,9 @@ steps:
 - task: PowerShell@2
   inputs:
     targetType: 'inline'
-      # Add-Type -path "C:\Program Files (x86)\Microsoft Visual Studio 12.0\Common7\IDE\PrivateAssemblies\Microsoft.VisualStudio.Coverage.Analysis.dll"
     script: |
+      $dllPath = $(get-ChildItem -Path D:/ -Recurse -Include *Microsoft.VisualStudio.Coverage.Analysis.dll)[0]
+      Add-Type -path $dllPath
       $coverageFile = $(get-ChildItem -Path $(Agent.TempDirectory)/TestResults -Recurse -Include *coverage)[0]
       $xmlCoverageFile = ".\TestResults\vstest.coveragexml"
       [string[]] $executablePaths = @($coverageFile)
