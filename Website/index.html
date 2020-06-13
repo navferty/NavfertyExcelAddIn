@@ -1,0 +1,75 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html">
+    <link rel="stylesheet" href="style.css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Navferty Excel Add-In</title>
+
+    <script>
+        function getCookie(name) {
+            let matches = document.cookie.match(new RegExp(
+                "(?:^|; )" + name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') + "=([^;]*)"
+            ));
+            return matches ? decodeURIComponent(matches[1]) : undefined;
+        }
+        if (!getCookie("lng")) document.cookie = "lng=en";
+
+        function SetLanguage(x) {
+            if (getCookie("lng") != x) {
+                document.cookie = "lng=" + x;
+                ChangeLanguage();
+            }
+        }
+
+        function ChangeLanguage() {
+            var xhr = new XMLHttpRequest();
+            xhr.open('POST', getCookie("lng") + '.html', false);
+            xhr.onreadystatechange = function () {
+                if (this.readyState !== 4) return;
+                if (this.status !== 200) return;
+                document.getElementById('content').innerHTML = this.responseText;
+            }
+            xhr.send();
+            if (getCookie("lng") == "ru") {
+                document.getElementById('head_name').innerHTML = "Надстройка Navferty Excel Add-In";
+                document.title = "Надстройка Navferty Excel Add-In";
+            } else if (getCookie("lng") == "en") {
+                document.getElementById('head_name').innerHTML = "Navferty's Excel Add-In";
+                document.title = "Navferty's Excel Add-In";
+            }
+            var elements = document.querySelectorAll('h2, h3');
+            for (let el of elements) {
+                var href = el.getAttribute('data-anchor');
+                if (!href)
+                    continue;
+                var articleDiv = document.querySelector("div.nvgt");
+                var elem = document.createElement("a");
+                var pdng = '1em';
+                if (el.localName == 'h3') pdng = '1.5em';
+                elem.class = 'nav_tab';
+                elem.href = "#" + href;
+                elem.innerHTML = '<p>' + el.innerHTML + '</p>';
+                //elem.style.paddingLeft = pdng;
+                articleDiv.appendChild(elem);
+            }
+        }
+    </script>
+</head>
+
+<body onload="ChangeLanguage()">
+    <div class="top_nav">
+        <div id="head_name"></div>
+        <div onclick="SetLanguage('ru')">Russian</div>
+        <div onclick="SetLanguage('en')">English</div>
+    </div>
+    <div id="container">
+        <div id="left_nav" class="nvgt"></div>
+        <div id="content"></div>
+    </div>
+    <div class="footer">Navferty 2020</div>
+</body>
+
+</html>
