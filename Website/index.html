@@ -40,7 +40,7 @@
             var navigationMenu = document.querySelector("#left_nav");
             navigationMenu.innerHTML = '';
             for (let header of allHeaders) {
-                var href = header.getAttribute('data-anchor');
+                var href = header.id;
                 if (!href)
                     continue;
                 var link = document.createElement("a");
