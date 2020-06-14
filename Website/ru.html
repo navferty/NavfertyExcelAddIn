@@ -1,25 +1,28 @@
 <h1>Надстройка Navferty Excel Add-In</h1>
+
 <img class="illustration" id="imnav" src="images/NavfertyToolsRibbonRu.png" alt="Пример установки сертификата">
 
-<p>Это страница установки надстройки</p>
+<p>
+    Добро пожаловать на официальную страницу проекта. Здесь Вы можете скачать установочный файл. Больше информации о
+    проекте, а также запросы на новые функции, сообщения о проблемах, исходный код - на <a
+        href="https://github.com/navferty/NavfertyExcelAddIn">странице проекта на GitHub</a>
+</p>
 
-<a href="https://github.com/navferty/NavfertyExcelAddIn">Страница проекта на GitHub</a>
+<a id='how-to-install'></a>
+<h2 data-anchor='how-to-install'>Как установить</h2>
 
 <p>Для установки надстройки скачайте и запустите <a href="./setup/setup.exe">установочный файл</a></p>
 
-<p>
-    К сожалению, пока не удалось получить доверенный сертификат, поэтому пока для установки необходимо
-    установить сертификат следующим образом:
-</p>
+<details>
+    <summary>Если возникнет проблема с установкой из-за сертификата, для установки необходимо
+        импортировать сертификат следующим образом:</summary>
+    <img src="./cert-install.png" alt="Пример установки сертификата">
+</details>
 
-<img src="./cert-install.png" alt="Пример установки сертификата">
+<h2>Описание функций</h2>
 
-<p>Надеюсь, скоро получится получить нормальный сертификат... =)</p>
-
-<h1>Описание функций</h1>
-
-<h2 class="zag" id="-1">Управление</h2>
-<h3 id="-2">Отменить последнее действие</h3>
+<a id="parsenumerics"></a>
+<h3 data-anchor="parsenumerics">Парсинг числовых значений</h3>
 <table>
     <thead>
         <tr>
@@ -30,31 +33,8 @@
     <tbody>
         <tr>
             <td style="text-align:left;">
-                <img src="https://github.com/navferty/NavfertyExcelAddIn/raw/master/images/icons/undo.png" alt="">
-            </td>
-            <td>
-                Отменить последнее действие, совершённое с помощью данной надстройки. Отмена возможна для некоторых функций в
-                разделах 'Преобразование значений' и 'Форматирование значений' и только, если диапазон ячеек не редактировался
-                после совершения действия.
-            </td>
-        </tr>
-    </tbody>
-</table>
-<p><a href="#excel-надстройка-navfertys-tools">Наверх</a></p>
-<hr>
-<h2 class="zag" id="-3">Преобразование значений</h2>
-<h3 id="-4">Парсинг числовых значений</h3>
-<table>
-    <thead>
-        <tr>
-            <th style="text-align:left;"></th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td style="text-align:left;">
-                <img src="https://github.com/navferty/NavfertyExcelAddIn/raw/master/images/icons/parseNumerics.png" alt="">
+                <img src="https://github.com/navferty/NavfertyExcelAddIn/raw/master/images/icons/parseNumerics.png"
+                    alt="Parse Numerics icon">
             </td>
             <td>Преобразование чисел, сохраненных в виде текста, в числовой формат.</td>
         </tr>
@@ -66,13 +46,14 @@
     <p></p>
     <p>
         <img src="https://github.com/navferty/NavfertyExcelAddIn/raw/master/images/ParseNumerics1.png"
-             alt="Navferty's Tools Ribbon Tab in MS Excel">
+            alt="Navferty's Tools Ribbon Tab in MS Excel">
         <img src="https://github.com/navferty/NavfertyExcelAddIn/raw/master/images/ParseNumerics2.png"
-             alt="Navferty's Tools Ribbon Tab in MS Excel">
+            alt="Navferty's Tools Ribbon Tab in MS Excel">
     </p>
 </details>
 <p></p>
-<h3 id="-5">Заменить</h3>
+<a id="replace"></a>
+<h3 data-anchor="replace">Заменить</h3>
 <table>
     <thead>
         <tr>
@@ -90,8 +71,9 @@
     </tbody>
 </table>
 <ul>
+    <a id="withtransliteration"></a>
     <li>
-        <h4 id="-19">Транслитерацией</h4>
+        <h4 data-anchor="withtransliteration">Транслитерацией</h4>
         <table>
             <thead>
                 <tr>
@@ -102,11 +84,14 @@
             <tbody>
                 <tr>
                     <td style="text-align:left;">
-                        <img src="https://github.com/navferty/NavfertyExcelAddIn/raw/master/images/icons/transliterate.png" alt="">
+                        <img src="https://github.com/navferty/NavfertyExcelAddIn/raw/master/images/icons/transliterate.png"
+                            alt="">
                     </td>
                     <td>
-                        Полностью меняется весь русский алфавит на английский. Например, буква "Ж" заменится на "Zh", а буква "Щ"
-                        - на "Shch". Основано на документе ИКАО <a href="https://www.icao.int/publications/Documents/9303_p3_cons_ru.pdf">9303</a>.
+                        Полностью меняется весь русский алфавит на английский. Например, буква "Ж" заменится на "Zh", а
+                        буква "Щ"
+                        - на "Shch". Основано на документе ИКАО <a
+                            href="https://www.icao.int/publications/Documents/9303_p3_cons_ru.pdf">9303</a>.
                     </td>
                 </tr>
             </tbody>
@@ -117,15 +102,16 @@
             <p></p>
             <p>
                 <img src="https://github.com/navferty/NavfertyExcelAddIn/raw/master/images/Transliterate1.png"
-                     alt="Navferty's Tools Ribbon Tab in MS Excel">
+                    alt="Navferty's Tools Ribbon Tab in MS Excel">
                 <img src="https://github.com/navferty/NavfertyExcelAddIn/raw/master/images/Transliterate2.png"
-                     alt="Navferty's Tools Ribbon Tab in MS Excel">
+                    alt="Navferty's Tools Ribbon Tab in MS Excel">
             </p>
         </details>
         <p></p>
     </li>
+    <a id="replacechars"></a>
     <li>
-        <h4 id="-20">На аналоги</h4>
+        <h4 data-anchor="replacechars">На аналоги</h4>
         <table>
             <thead>
                 <tr>
@@ -136,10 +122,12 @@
             <tbody>
                 <tr>
                     <td style="text-align:left;">
-                        <img src="https://github.com/navferty/NavfertyExcelAddIn/raw/master/images/icons/replaceChars.png" alt="">
+                        <img src="https://github.com/navferty/NavfertyExcelAddIn/raw/master/images/icons/replaceChars.png"
+                            alt="">
                     </td>
                     <td>
-                        Заменятся только схожие по верхнему регистру буквы алфавитов, такие как: Аа, Вв, Ее, Кк, Мм, Нн, Оо, Рр,
+                        Заменятся только схожие по верхнему регистру буквы алфавитов, такие как: Аа, Вв, Ее, Кк, Мм, Нн,
+                        Оо, Рр,
                         Сс, Тт, Уу, Хх.
                     </td>
                 </tr>
@@ -151,15 +139,16 @@
             <p></p>
             <p>
                 <img src="https://github.com/navferty/NavfertyExcelAddIn/raw/master/images/ReplaceChars1.png"
-                     alt="Navferty's Tools Ribbon Tab in MS Excel">
+                    alt="Navferty's Tools Ribbon Tab in MS Excel">
                 <img src="https://github.com/navferty/NavfertyExcelAddIn/raw/master/images/ReplaceChars2.png"
-                     alt="Navferty's Tools Ribbon Tab in MS Excel">
+                    alt="Navferty's Tools Ribbon Tab in MS Excel">
             </p>
         </details>
         <p></p>
     </li>
 </ul>
-<h3 id="-6">Преобразовать в слова</h3>
+<a id="stringifynumerics"></a>
+<h3 data-anchor="stringifynumerics">Преобразовать в слова</h3>
 <table>
     <thead>
         <tr>
@@ -170,10 +159,12 @@
     <tbody>
         <tr>
             <td style="text-align:left;">
-                <img src="https://github.com/navferty/NavfertyExcelAddIn/raw/master/images/icons/stringifyNumerics.png" alt="">
+                <img src="https://github.com/navferty/NavfertyExcelAddIn/raw/master/images/icons/stringifyNumerics.png"
+                    alt="">
             </td>
             <td>
-                Переписывает числовые значения в текст с расшифровкой<br>- На русском<br>- На английском<br>- На французском
+                Переписывает числовые значения в текст с расшифровкой<br>- На русском<br>- На английском<br>- На
+                французском
             </td>
         </tr>
     </tbody>
@@ -184,16 +175,17 @@
     <p></p>
     <p>
         <img src="https://github.com/navferty/NavfertyExcelAddIn/raw/master/images/Stringify1.png"
-             alt="Navferty's Tools Ribbon Tab in MS Excel">
+            alt="Navferty's Tools Ribbon Tab in MS Excel">
         <img src="https://github.com/navferty/NavfertyExcelAddIn/raw/master/images/Stringify2.png"
-             alt="Navferty's Tools Ribbon Tab in MS Excel">
+            alt="Navferty's Tools Ribbon Tab in MS Excel">
     </p>
 </details>
 <p></p>
 <p><a href="#excel-надстройка-navfertys-tools">Наверх</a></p>
 <hr>
-<h2 class="zag" id="-7">Форматирование значений</h2>
-<h3 id="-8">Изменить регистр</h3>
+
+<a id="togglecase"></a>
+<h3 data-anchor="togglecase">Изменить регистр</h3>
 <table>
     <thead>
         <tr>
@@ -219,17 +211,19 @@
     <p></p>
     <p>
         <img src="https://github.com/navferty/NavfertyExcelAddIn/raw/master/images/ToggleCase1.png"
-             alt="Navferty's Tools Ribbon Tab in MS Excel">
+            alt="Navferty's Tools Ribbon Tab in MS Excel">
         <img src="https://github.com/navferty/NavfertyExcelAddIn/raw/master/images/ToggleCase2.png"
-             alt="Navferty's Tools Ribbon Tab in MS Excel">
+            alt="Navferty's Tools Ribbon Tab in MS Excel">
         <img src="https://github.com/navferty/NavfertyExcelAddIn/raw/master/images/ToggleCase3.png"
-             alt="Navferty's Tools Ribbon Tab in MS Excel">
+            alt="Navferty's Tools Ribbon Tab in MS Excel">
         <img src="https://github.com/navferty/NavfertyExcelAddIn/raw/master/images/ToggleCase4.png"
-             alt="Navferty's Tools Ribbon Tab in MS Excel">
+            alt="Navferty's Tools Ribbon Tab in MS Excel">
     </p>
 </details>
 <p></p>
-<h3 id="-9">Удалить пробелы</h3>
+
+<a id="trimspaces"></a>
+<h3 data-anchor="trimspaces">Удалить пробелы</h3>
 <table>
     <thead>
         <tr>
@@ -243,7 +237,8 @@
                 <img src="https://github.com/navferty/NavfertyExcelAddIn/raw/master/images/icons/trimSpaces.png" alt="">
             </td>
             <td>
-                Очистить текстовое содержимое выделенных ячеек от лишних пробелов. Удаляет повторные пробелы и переносы строк,
+                Очистить текстовое содержимое выделенных ячеек от лишних пробелов. Удаляет повторные пробелы и переносы
+                строк,
                 а также начальные и конечных пробелы в ячейках, имеющих текстовый формат.
             </td>
         </tr>
@@ -255,16 +250,17 @@
     <p></p>
     <p>
         <img src="https://github.com/navferty/NavfertyExcelAddIn/raw/master/images/TrimSpaces1.png"
-             alt="Navferty's Tools Ribbon Tab in MS Excel">
+            alt="Navferty's Tools Ribbon Tab in MS Excel">
         <img src="https://github.com/navferty/NavfertyExcelAddIn/raw/master/images/TrimSpaces2.png"
-             alt="Navferty's Tools Ribbon Tab in MS Excel">
+            alt="Navferty's Tools Ribbon Tab in MS Excel">
     </p>
 </details>
 <p></p>
 <p><a href="#excel-надстройка-navfertys-tools">Наверх</a></p>
 <hr>
-<h2 class="zag" id="-10">Общие</h2>
-<h3 id="-11">Снять защиту с книги и листов</h3>
+
+<a id="unprotectworkbook"></a>
+<h3 data-anchor="unprotectworkbook">Снять защиту с книги и листов</h3>
 <table>
     <thead>
         <tr>
@@ -275,17 +271,22 @@
     <tbody>
         <tr>
             <td style="text-align:left;">
-                <img src="https://github.com/navferty/NavfertyExcelAddIn/raw/master/images/icons/unprotectWorkbook.png" alt="">
+                <img src="https://github.com/navferty/NavfertyExcelAddIn/raw/master/images/icons/unprotectWorkbook.png"
+                    alt="">
             </td>
             <td>
-                Позволяет снять защиту со всех листов открытой книги, как и защиту всей книги, в отсутствие пароля, а также
-                разблокировать VBA проект (при его наличии), на который установлен пароль. Функция не распространяется на
+                Позволяет снять защиту со всех листов открытой книги, как и защиту всей книги, в отсутствие пароля, а
+                также
+                разблокировать VBA проект (при его наличии), на который установлен пароль. Функция не распространяется
+                на
                 зашифрованные книги.
             </td>
         </tr>
     </tbody>
 </table>
-<h3 id="-12">Множественная подсветка дублей</h3>
+
+<a id="highlightduplications"></a>
+<h3 data-anchor="highlightduplications">Множественная подсветка дублей</h3>
 <table>
     <thead>
         <tr>
@@ -296,10 +297,12 @@
     <tbody>
         <tr>
             <td style="text-align:left;">
-                <img src="https://github.com/navferty/NavfertyExcelAddIn/raw/master/images/icons/highlightDuplicates.png" alt="">
+                <img src="https://github.com/navferty/NavfertyExcelAddIn/raw/master/images/icons/highlightDuplicates.png"
+                    alt="">
             </td>
             <td>
-                Устанавливает цвет ячеек, которые содержат повторяющиеся значения, в выделенном диапазоне. Различные цвета
+                Устанавливает цвет ячеек, которые содержат повторяющиеся значения, в выделенном диапазоне. Различные
+                цвета
                 соответствуют разным группам дублей.
             </td>
         </tr>
@@ -311,11 +314,13 @@
     <p></p>
     <p>
         <img src="https://github.com/navferty/NavfertyExcelAddIn/raw/master/images/Duplicates.png"
-             alt="Navferty's Tools Ribbon Tab in MS Excel">
+            alt="Navferty's Tools Ribbon Tab in MS Excel">
     </p>
 </details>
 <p></p>
-<h3 id="-13">Разъединение ячеек с заполнением</h3>
+
+<a id="unmergecells"></a>
+<h3 data-anchor="unmergecells">Разъединение ячеек с заполнением</h3>
 <table>
     <thead>
         <tr>
@@ -326,7 +331,8 @@
     <tbody>
         <tr>
             <td style="text-align:left;">
-                <img src="https://github.com/navferty/NavfertyExcelAddIn/raw/master/images/icons/unmergeCells.png" alt="">
+                <img src="https://github.com/navferty/NavfertyExcelAddIn/raw/master/images/icons/unmergeCells.png"
+                    alt="">
             </td>
             <td>Отменяет объединение ячеек, с одновременным заполнением разъединенных ячеек исходым значением.</td>
         </tr>
@@ -338,13 +344,15 @@
     <p></p>
     <p>
         <img src="https://github.com/navferty/NavfertyExcelAddIn/raw/master/images/Unmerge1.png"
-             alt="Navferty's Tools Ribbon Tab in MS Excel">
+            alt="Navferty's Tools Ribbon Tab in MS Excel">
         <img src="https://github.com/navferty/NavfertyExcelAddIn/raw/master/images/Unmerge2.png"
-             alt="Navferty's Tools Ribbon Tab in MS Excel">
+            alt="Navferty's Tools Ribbon Tab in MS Excel">
     </p>
 </details>
 <p></p>
-<h3 id="-14">Найти все ошибки в выделенном диапазоне</h3>
+
+<a id="findallcellscontainingerrors"></a>
+<h3 data-anchor="findallcellscontainingerrors">Найти все ошибки в выделенном диапазоне</h3>
 <table>
     <thead>
         <tr>
@@ -370,11 +378,13 @@
     <p></p>
     <p>
         <img src="https://github.com/navferty/NavfertyExcelAddIn/raw/master/images/FindErrorValues.png"
-             alt="Navferty's Tools Ribbon Tab in MS Excel">
+            alt="Navferty's Tools Ribbon Tab in MS Excel">
     </p>
 </details>
 <p></p>
-<h3 id="markdown">Копировать в Markdown</h3>
+
+<a id="copyasmarkdown"></a>
+<h3 data-anchor="copyasmarkdown">Копировать в Markdown</h3>
 <table>
     <thead>
         <tr>
@@ -385,7 +395,8 @@
     <tbody>
         <tr>
             <td style="text-align:left;">
-                <img src="https://github.com/navferty/NavfertyExcelAddIn/raw/master/images/icons/parseNumerics.png" alt="">
+                <img src="https://github.com/navferty/NavfertyExcelAddIn/raw/master/images/icons/parseNumerics.png"
+                    alt="">
             </td>
             <td>Копировать в буфер обмена выделенный фрагмент как таблица Markdown.</td>
         </tr>
@@ -397,11 +408,13 @@
     <p></p>
     <p>
         <img src="https://github.com/navferty/NavfertyExcelAddIn/raw/master/images/ExportToMarkdown.png"
-             alt="Navferty's Tools Ribbon Tab in MS Excel">
+            alt="Navferty's Tools Ribbon Tab in MS Excel">
     </p>
 </details>
 <p></p>
-<h3 id="-15">Валидация значений</h3>
+
+<a id="validatevalues"></a>
+<h3 data-anchor="validatevalues">Валидация значений</h3>
 <table>
     <thead>
         <tr>
@@ -416,9 +429,12 @@
             </td>
             <td>
                 <p>
-                    Проверить значения ячеек в выделенном диапазоне на соответствие определённому формату.<br><br>Поддерживаемые
-                    форматы:<br>- Число<br>- Дата<br>- ИНН ФЛ* (12 цифр, с двумя проверочными цифрами)<br>- ИНН ЮЛ* (10 цифр, с
-                    одной проверочной цифрой)<br>- Текст для XML (отсутствие символов <code>&lt;</code> и <code>&gt;</code> и иных
+                    Проверить значения ячеек в выделенном диапазоне на соответствие определённому
+                    формату.<br><br>Поддерживаемые
+                    форматы:<br>- Число<br>- Дата<br>- ИНН ФЛ* (12 цифр, с двумя проверочными цифрами)<br>- ИНН ЮЛ* (10
+                    цифр, с
+                    одной проверочной цифрой)<br>- Текст для XML (отсутствие символов <code>&lt;</code> и
+                    <code>&gt;</code> и иных
                     невалидных для содержимого XML)<br><br>* <em>
                         - Корректность ИНН не гарантирует существование организации или
                         физического лица, которому бы принадлежал этот ИНН
@@ -434,14 +450,15 @@
     <p></p>
     <p>
         <img src="https://github.com/navferty/NavfertyExcelAddIn/raw/master/images/Validate.png"
-             alt="Navferty's Tools Ribbon Tab in MS Excel">
+            alt="Navferty's Tools Ribbon Tab in MS Excel">
     </p>
 </details>
 <p></p>
 <p><a href="#excel-надстройка-navfertys-tools">Наверх</a></p>
 <hr>
-<h2 class="zag" id="xml">Работа с XML</h2>
-<h3 id="xmlxsd">Создать образец XML (по XSD)</h3>
+
+<a id="createsamplexmlbasedonxsd"></a>
+<h3 data-anchor="createsamplexmlbasedonxsd">Создать образец XML (по XSD)</h3>
 <table>
     <thead>
         <tr>
@@ -452,10 +469,12 @@
     <tbody>
         <tr>
             <td style="text-align:left;">
-                <img src="https://github.com/navferty/NavfertyExcelAddIn/raw/master/images/icons/createSampleXml.png" alt="">
+                <img src="https://github.com/navferty/NavfertyExcelAddIn/raw/master/images/icons/createSampleXml.png"
+                    alt="">
             </td>
             <td>
-                Сгенерировать пример XML-файла по xsd-схеме. Позволяет получить наглядное представление о структуре xml-файла
+                Сгенерировать пример XML-файла по xsd-схеме. Позволяет получить наглядное представление о структуре
+                xml-файла
                 при наличии XSD-файла со схемой.
             </td>
         </tr>
@@ -540,7 +559,9 @@
     <p></p>
 </details>
 <p></p>
-<h3 id="xmlxsd-1">Валидация XML по XSD</h3>
+
+<a id="validatexmlwithxsd"></a>
+<h3 data-anchor="validatexmlwithxsd">Валидация XML по XSD</h3>
 <table>
     <thead>
         <tr>
@@ -551,10 +572,12 @@
     <tbody>
         <tr>
             <td style="text-align:left;">
-                <img src="https://github.com/navferty/NavfertyExcelAddIn/raw/master/images/icons/validateXml.png" alt="">
+                <img src="https://github.com/navferty/NavfertyExcelAddIn/raw/master/images/icons/validateXml.png"
+                    alt="">
             </td>
             <td>
-                Проверить соответствие xml-файла на основе XSD-схемы. Список ошибок будет выведен на лист в новой книге MS
+                Проверить соответствие xml-файла на основе XSD-схемы. Список ошибок будет выведен на лист в новой книге
+                MS
                 Excel.
             </td>
         </tr>
@@ -580,7 +603,8 @@
             <td>Количество</td>
             <td>
                 Элемент "Количество" недействителен: значение "-5" недействительно с точки зрения его типа данных
-                "http://www.w3.org/2001/XMLSchema:positiveInteger" — Значение "-5" недопустимо мало или недопустимо велико для
+                "http://www.w3.org/2001/XMLSchema:positiveInteger" — Значение "-5" недопустимо мало или недопустимо
+                велико для
                 PositiveInteger.
             </td>
         </tr>
@@ -596,55 +620,32 @@
 </table>
 <p><a href="#excel-надстройка-navfertys-tools">Наверх</a></p>
 <hr>
-<h2 class="zag" id="-16">В разработке</h2>
-<h3 id="-17">Сократить название организаций</h3>
-<p>Позволяет сократить тип организации до аббревиатуры (ООО, ПАО, ОАО и др.).</p>
+
+<a id="undolastaction"></a>
+<h2 data-anchor="undolastaction">Отменить последнее действие</h2>
+<table>
+    <thead>
+        <tr>
+            <th style="text-align:left;"></th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:left;">
+                <img src="https://github.com/navferty/NavfertyExcelAddIn/raw/master/images/icons/undo.png" alt="">
+            </td>
+            <td>
+                Отменить последнее действие, совершённое с помощью данной надстройки. Отмена возможна для некоторых
+                функций в
+                разделах 'Преобразование значений' и 'Форматирование значений' и только, если диапазон ячеек не
+                редактировался
+                после совершения действия.
+            </td>
+        </tr>
+    </tbody>
+</table>
 <p><a href="#excel-надстройка-navfertys-tools">Наверх</a></p>
 <hr>
-<h2 class="zag" id="-18">Инструкция по установке</h2>
-<p>Решение построено в Azure, вы можете скачать установочные файлы оттуда:</p>
-<ul>
-    <li>
-        <p>Посетите https://navferty.visualstudio.com/NavfertyExcelAddIn/_build?definitionId=3</p>
-    </li>
-    <li>
-        <p>Выберите последнюю версию сборки 'NavfertyExcelAddIn - Publish':</p>
-        <p>
-            <img src="https://github.com/navferty/NavfertyExcelAddIn/raw/master/images/Install1.png"
-                 alt="Navferty's Tools Ribbon Tab in MS Excel">
-        </p>
-    </li>
-    <li>
-        <p>Загрузите опубликованные установочные файлы:</p>
-        <p>
-            <img src="https://github.com/navferty/NavfertyExcelAddIn/raw/master/images/Install2.png"
-                 alt="Navferty's Tools Ribbon Tab in MS Excel">
-        </p>
-    </li>
-    <li>
-        <p>Извлеките файлы в папку и запустите файл '.vsto':</p>
-    </li>
-</ul>
-<blockquote>
-    <p>
-        Настоятельно рекомендуется использовать папку рабочего стола - установка обновлений разрешена только из той папки,
-        из которой надстройка была установлена в первый раз!
-    </p>
-</blockquote>
-<p>
-    <img src="https://github.com/navferty/NavfertyExcelAddIn/raw/master/images/Install3.png"
-         alt="Navferty's Tools Ribbon Tab in MS Excel">
-</p>
-<ul>
-    <li>
-        <p>
-            После завершения процесса установки запустите (или перезагрузите) приложение Excel, и вы увидите новую вкладку:
-        </p>
-        <p>
-            <img src="https://github.com/navferty/NavfertyExcelAddIn/raw/master/images/Install4.png"
-                 alt="Navferty's Tools Ribbon Tab in MS Excel">
-        </p>
-    </li>
-</ul>
-<p><a href="#excel-надстройка-navfertys-tools">Наверх</a></p>
+
 </div>
