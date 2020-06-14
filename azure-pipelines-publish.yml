@@ -52,6 +52,21 @@ steps:
     publishLocation: 'Container'
 
 - task: FtpUpload@2
+  name: 'UploadWebsite'
+  inputs:
+    credentialsOption: 'inputs'
+    serverUrl: 'ftps://ftp.navferty.ru'
+    username: '$(ftpUsername)'
+    password: '$(ftpPassword)'
+    rootDirectory: '$(Build.SourcesDirectory)/Website/'
+    filePatterns: '**'
+    remoteDirectory: '/' # navferty.ru/website
+    clean: false
+    cleanContents: true
+    preservePaths: true
+    trustSSL: true
+
+- task: FtpUpload@2
   name: 'UploadInstallationFiles'
   inputs:
     credentialsOption: 'inputs'
@@ -61,21 +76,6 @@ steps:
     rootDirectory: '$(Build.ArtifactStagingDirectory)'
     filePatterns: '**'
     remoteDirectory: '/deploy/' # navferty.ru/deploy
-    clean: false
-    cleanContents: true
-    preservePaths: true
-    trustSSL: true
-
-- task: FtpUpload@2
-  name: 'UploadWebsite'
-  inputs:
-    credentialsOption: 'inputs'
-    serverUrl: 'ftps://ftp.navferty.ru'
-    username: '$(ftpUsername)'
-    password: '$(ftpPassword)'
-    rootDirectory: '$(Build.SourcesDirectory)/Website/'
-    filePatterns: '**'
-    remoteDirectory: '/website/' # navferty.ru/website
     clean: false
     cleanContents: true
     preservePaths: true
