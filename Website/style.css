@@ -1,7 +1,6 @@
 body {
     margin: 0;
     background-color: rgb(243, 243, 243);
-    max-width: 100%;
 }
 
 .top_nav {
@@ -14,23 +13,23 @@ body {
     z-index: 1;
 }
 
-    .top_nav div {
-        display: inline-block;
-        padding: 0.5em 1em 0.5em 1em;
-        font-size: 1.5em;
-    }
+.top_nav div {
+    display: inline-block;
+    padding: 0.5em 1em 0.5em 1em;
+    font-size: 1.5em;
+}
 
-    .top_nav :first-child {
-        left: 0;
-    }
+.top_nav :first-child {
+    left: 0;
+}
 
-    .top_nav :nth-child(n+2) {
-        float: right;
-    }
+.top_nav :nth-child(n+2) {
+    float: right;
+}
 
-        .top_nav :nth-child(n+2):hover {
-            background-color: rgb(14, 92, 47);
-        }
+.top_nav :nth-child(n+2):hover {
+    background-color: rgb(14, 92, 47);
+}
 
 #container {
     position: relative;
@@ -53,32 +52,32 @@ body {
     background-color: lightgray;
 }
 
-    #left_nav p {
-        padding: 0.5em 1em 0.5em 1em;
-        margin: 0;
-    }
+#left_nav p {
+    padding: 0.5em 1em 0.5em 1em;
+    margin: 0;
+}
 
-        #left_nav p:first-child {
-            font-size: 1.2em;
-        }
+#left_nav p:first-child {
+    font-size: 1.2em;
+}
 
-        #left_nav p:nth-child(2n + 2) {
-            background-color: rgb(215, 215, 215);
-        }
+#left_nav p:nth-child(2n + 2) {
+    background-color: rgb(215, 215, 215);
+}
 
-    #left_nav a:nth-child(n + 2):hover {
-        background-color: rgb(243, 243, 243);
-        box-shadow: 0 0 0.5em 0 lightgray;
-    }
+#left_nav a:nth-child(n + 2):hover {
+    background-color: rgb(243, 243, 243);
+    box-shadow: 0 0 0.5em 0 lightgray;
+}
 
-    #left_nav a {
-        text-decoration: none;
-        color: rgb(100, 100, 100);
-    }
+#left_nav a {
+    text-decoration: none;
+    color: rgb(100, 100, 100);
+}
 
-        #left_nav a:hover {
-            color: black;
-        }
+#left_nav a:hover {
+    color: black;
+}
 
 #content {
     position: relative;
@@ -88,9 +87,9 @@ body {
     background-color: rgb(243, 243, 243);
 }
 
-    #content img {
-        max-width: 100%;
-    }
+#content img {
+    max-width: 100%;
+}
 
 #content {
     overflow: hidden;
@@ -101,6 +100,11 @@ body {
     content: "";
     height: 3em;
     margin-top: -3em;
+}
+
+.icons {
+    float: left;
+    margin-right: 2em;
 }
 
 .footer {
