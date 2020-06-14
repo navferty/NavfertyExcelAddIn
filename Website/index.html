@@ -9,61 +9,72 @@
     <title>Navferty Excel Add-In</title>
 
     <script>
-        function getCookie(name) {
-            let matches = document.cookie.match(new RegExp(
-                "(?:^|; )" + name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') + "=([^;]*)"
-            ));
-            return matches ? decodeURIComponent(matches[1]) : undefined;
-        }
-        if (!getCookie("lng")) document.cookie = "lng=en";
+        getUserLanguage = () => localStorage.getItem('lng');
 
-        function SetLanguage(x) {
-            if (getCookie("lng") != x) {
-                document.cookie = "lng=" + x;
-                ChangeLanguage();
-            }
+        setUserLanguage = (name) => {
+            localStorage.setItem('lng', name);
+            changeLanguage();
         }
 
-        function ChangeLanguage() {
-            var xhr = new XMLHttpRequest();
-            xhr.open('POST', getCookie("lng") + '.html', false);
-            xhr.onreadystatechange = function () {
-                if (this.readyState !== 4) return;
-                if (this.status !== 200) return;
-                document.getElementById('content').innerHTML = this.responseText;
+        if (!getUserLanguage())
+            setUserLanguage("en");
+
+
+        async function changeLanguage() {
+            let lang = getUserLanguage();
+            document.getElementById('content').innerHTML = await loadContents(lang + '.html');
+            let title;
+            if (lang == "ru") {
+                title = "Надстройка Navferty Excel Add-In";
+            } else if (lang == "en") {
+                title = "Navferty's Excel Add-In";
+            } else {
+                console.warn(`Invalid lang: ${lang}!`);
+                title = "Navferty's Excel Add-In";
             }
-            xhr.send();
-            if (getCookie("lng") == "ru") {
-                document.getElementById('head_name').innerHTML = "Надстройка Navferty Excel Add-In";
-                document.title = "Надстройка Navferty Excel Add-In";
-            } else if (getCookie("lng") == "en") {
-                document.getElementById('head_name').innerHTML = "Navferty's Excel Add-In";
-                document.title = "Navferty's Excel Add-In";
-            }
-            var elements = document.querySelectorAll('h2, h3');
-            for (let el of elements) {
-                var href = el.getAttribute('data-anchor');
+
+            document.getElementById('head_name').innerHTML = title;
+            document.title = title;
+
+            var allHeaders = document.querySelectorAll('h2, h3');
+            var navigationMenu = document.querySelector("#left_nav");
+            navigationMenu.innerHTML = '';
+            for (let header of allHeaders) {
+                var href = header.getAttribute('data-anchor');
                 if (!href)
                     continue;
-                var articleDiv = document.querySelector("div.nvgt");
-                var elem = document.createElement("a");
-                var pdng = '1em';
-                if (el.localName == 'h3') pdng = '1.5em';
-                elem.class = 'nav_tab';
-                elem.href = "#" + href;
-                elem.innerHTML = '<p>' + el.innerHTML + '</p>';
-                //elem.style.paddingLeft = pdng;
-                articleDiv.appendChild(elem);
+                var link = document.createElement("a");
+                link.class = 'nav_tab';
+                link.href = "#" + href;
+                link.innerHTML = '<p>' + header.innerHTML + '</p>';
+                navigationMenu.appendChild(link);
             }
+        }
+
+        function loadContents(url) {
+            return new Promise(function (resolve, reject) {
+                var xhr = new XMLHttpRequest();
+                xhr.open('GET', url, true);
+                xhr.responseType = 'text';
+                xhr.onload = function () {
+                    var status = xhr.status;
+                    if (status == 200) {
+                        resolve(xhr.responseText);
+                    } else {
+                        reject(status);
+                    }
+                };
+                xhr.send();
+            });
         }
     </script>
 </head>
 
-<body onload="ChangeLanguage()">
+<body onload="changeLanguage()">
     <div class="top_nav">
         <div id="head_name"></div>
-        <div onclick="SetLanguage('ru')">Russian</div>
-        <div onclick="SetLanguage('en')">English</div>
+        <div onclick="setUserLanguage('ru');">Russian</div>
+        <div onclick="setUserLanguage('en');">English</div>
     </div>
     <div id="container">
         <div id="left_nav" class="nvgt"></div>
