@@ -30,7 +30,7 @@
     <DefineConstants>VSTO40</DefineConstants>
     <BootstrapperEnabled>true</BootstrapperEnabled>
     <PublishUrl>опубликовать\</PublishUrl>
-    <InstallUrl>http://navferty.ru/deploy/</InstallUrl>
+    <InstallUrl>https://www.navferty.ru/deploy/</InstallUrl>
     <TargetCulture>ru</TargetCulture>
     <ApplicationVersion>$(Version)</ApplicationVersion>
     <AutoIncrementApplicationRevision>true</AutoIncrementApplicationRevision>
