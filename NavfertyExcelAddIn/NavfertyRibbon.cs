@@ -362,7 +362,12 @@ namespace NavfertyExcelAddIn
 
 		private Range GetSelectionOrUsedRange(Worksheet activeSheet)
 		{
-			return (Range)App.Selection;
+			var selection = (Range)App.Selection;
+			var allCells = activeSheet.Cells.Rows.EntireRow;
+			var isEntireSheetSelected = allCells.GetRelativeAddress() == selection.GetRelativeAddress();
+			return isEntireSheetSelected
+				? activeSheet.UsedRange
+				: selection;
 		}
 
 		[SuppressMessage("Design", "CA1063:Implement IDisposable Correctly", Justification = "<Pending>")]
