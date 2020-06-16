@@ -4,39 +4,27 @@
 
 ![Navferty's Tools Ribbon Tab in MS Excel](images/NavfertyToolsRibbonEn.png)
 
-## Navigation
-  - [Control](#control)
-    - [Undo Last Action](#undo-last-action)
-  - [Converting Values](#converting-values)
-    - [Parse Numerics](#parse-numerics)
-    - [Replace](#replace)
-      - [With Transliteration](#with-transliteration)
-      - [Replace Chars](#replace-chars)
-    - [Stringify Numerics](#stringify-numerics)
-  - [Formatting Values](#formatting-values)
-    - [Toggle Case](#toggle-case)
-    - [Trim Spaces](#trim-spaces)
-  - [Commons](#commons)
-    - [Unprotect Workbook](#unprotect-workbook)
-    - [Highlight Duplicates](#highlight-duplications)
-    - [Unmerge Cells](#unmerge-cells)
-    - [Find Formula Errors in the selected range](#find-all-cells-containing-errors)
-    - [Copy as Markdown](#copy-as-markdown)
-    - [Validate Values](#validate-values)
-  - [XML Tools](#xml-tools)
-    - [Create Sample XML based on XSD](#create-sample-xml-based-on-xsd)
-    - [Validate XML with XSD](#validate-xml-with-xsd)
+## Available features
+ - [Undo Last Action](#undo-last-action)
+ - [Parse Numerics](#parse-numerics)
+ - [Replace Chars (Transliteration or analogues)](#replace)
+ - [Stringify Numerics to Words](#stringify-numerics-into-words)
+ - [Toggle Case](#toggle-case)
+ - [Trim Spaces](#trim-spaces)
+ - [Unprotect Workbook](#unprotect-workbook)
+ - [Highlight Duplicates](#highlight-duplications)
+ - [Unmerge Cells](#unmerge-cells)
+ - [Find Formula Errors in the selected range](#find-all-cells-containing-errors)
+ - [Copy as Markdown](#copy-as-markdown)
+ - [Validate Values](#validate-values)
+ - [Create Sample XML based on XSD](#create-sample-xml-based-on-xsd)
+ - [Validate XML with XSD](#validate-xml-with-xsd)
 
-  - [In the development](#in-the-development)
-    - [Cut Names](#cut-names)
-
-  - [How to install](#how-to-install)
+## [How to install](#how-to-install)
 
 ---
 
-## Control
-
-### Undo Last Action
+## Undo Last Action
 
 |||
 |:-:|---|
@@ -46,9 +34,7 @@
 
 ---
 
-## Converting Values
-
-### Parse Numerics
+## Parse Numerics
 
 |||
 |:-:|---|
@@ -61,13 +47,13 @@
 ![Navferty's Tools Ribbon Tab in MS Excel](images/ParseNumerics2.png)
 </details>
 
-### Replace
+## Replace
 
 |||
 |:-:|---|
 |![](images/icons/replace.png)|Replace Russian characters in the match table.|
 
-*   #### With Transliteration
+*   ### Transliteration
 
     |||
     |:-:|---|
@@ -80,7 +66,7 @@
     ![Navferty's Tools Ribbon Tab in MS Excel](images/Transliterate2.png)
     </details>
 
-* #### Replace Chars
+* ### Replace Chars
 
     |||
     |:-:|---|
@@ -93,7 +79,7 @@
     ![Navferty's Tools Ribbon Tab in MS Excel](images/ReplaceChars2.png)
     </details>
 
-### Stringify Numerics
+## Stringify Numerics into Words
 
 |||
 |:-:|---|
@@ -110,9 +96,7 @@
 
 ---
 
-## Formatting Values
-
-### Toggle Case
+## Toggle Case
 
 |||
 |:-:|---|
@@ -127,7 +111,7 @@
 ![Navferty's Tools Ribbon Tab in MS Excel](images/ToggleCase4.png)
 </details>
 
-### Trim Spaces
+## Trim Spaces
 
 |||
 |:-:|---|
@@ -144,15 +128,13 @@
 
 ---
 
-## Commons
-
-### Unprotect Workbook
+## Unprotect Workbook
 
 |||
 |:-:|---|
 |![](images/icons/unprotectWorkbook.png)|Allows you to unprotect all the pages of an open book as the entire book, no password, and also unlock VBA project (if any) to which the password is set. This feature does not apply to encrypted books.|
 
-### Highlight duplications
+## Highlight duplications
 
 |||
 |:-:|---|
@@ -164,7 +146,7 @@
 ![Navferty's Tools Ribbon Tab in MS Excel](images/Duplicates.png)
 </details>
 
-### Unmerge Cells
+## Unmerge Cells
 
 |||
 |:-:|---|
@@ -177,7 +159,7 @@
 ![Navferty's Tools Ribbon Tab in MS Excel](images/Unmerge2.png)
 </details>
 
-### Find all cells containing errors
+## Find all cells containing errors
 
 |||
 |:-:|---|
@@ -189,7 +171,7 @@
 ![Navferty's Tools Ribbon Tab in MS Excel](images/FindErrorValues.png)
 </details>
 
-### Copy as Markdown
+## Copy as Markdown
 
 |||
 |:-:|---|
@@ -201,7 +183,7 @@
 ![Navferty's Tools Ribbon Tab in MS Excel](images/ExportToMarkdown.png)
 </details>
 
-### Validate values
+## Validate values
 
 |||
 |:-:|---|
@@ -217,9 +199,7 @@
 
 ---
 
-## XML Tools
-
-### Create Sample XML based on XSD
+## Create Sample XML based on XSD
 
 |||
 |:-:|---|
@@ -314,7 +294,7 @@ The following xml-file will be generated:
 ```
 </details>
 
-### Validate XML with XSD
+## Validate XML with XSD
 
 |||
 |:-:|---|
@@ -327,16 +307,6 @@ Sample error report
 |Error|city|The element 'shipto' has invalid child element 'city'. List of possible elements expected: 'address'.|
 |Error|quantity|The 'quantity' element is invalid - The value '-5' is invalid according to its datatype 'http://www.w3.org/2001/XMLSchema:positiveInteger' - Value '-5' was either too large or too small for PositiveInteger.|
 |Error|price|The 'price' element is invalid - The value 'asdasd' is invalid according to its datatype 'http://www.w3.org/2001/XMLSchema:decimal' - The string 'не число' is not a valid Decimal value.|
-
-[Up](#navfertys-excel-add-in)
-
----
-
-## In the development
-
-### Cut Names
-
-Allows you to reduce the type of organization to an abbreviation (LLC, PAO, JSC, etc.).
 
 [Up](#navfertys-excel-add-in)
 
