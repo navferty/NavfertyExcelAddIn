@@ -344,7 +344,18 @@ Allows you to reduce the type of organization to an abbreviation (LLC, PAO, JSC,
 
 ## How to install
 
-The solution is build in Azure, you can download installation files from there:
+### Offline install
+
+You can install the add-in from official website of the project:
+[navferty.ru](https://www.navferty.ru). Just download and run the setup.exe file.
+
+You may need to manually import the self-signed certificate before the installation process can be finished.
+
+The installation process also requires internet connection to load latest version.
+
+### Offline install
+
+The solution is build in Azure, you can download full archive with installation files from there:
 
 * Visit https://navferty.visualstudio.com/NavfertyExcelAddIn/_build?definitionId=3
 
