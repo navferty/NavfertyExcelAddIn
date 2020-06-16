@@ -20,7 +20,7 @@
  - [Create Sample XML based on XSD](#create-sample-xml-based-on-xsd)
  - [Validate XML with XSD](#validate-xml-with-xsd)
 
-## [How to install](#how-to-install)
+## [How to install](#how-to-install-the-add-in)
 
 ---
 
@@ -312,9 +312,9 @@ Sample error report
 
 ---
 
-## How to install
+## How to Install the Add-In
 
-### Offline install
+### Online Install
 
 You can install the add-in from official website of the project:
 [navferty.ru](https://www.navferty.ru). Just download and run the setup.exe file.
@@ -323,7 +323,7 @@ You may need to manually import the self-signed certificate before the installat
 
 The installation process also requires internet connection to load latest version.
 
-### Offline install
+### Offline Install
 
 The solution is build in Azure, you can download full archive with installation files from there:
 
