@@ -1,6 +1,6 @@
-<h1 id = "top" class = "zag">Надстройка Navferty Excel Add-In</h1>
+<h1 id="top" class="zag">Надстройка Navferty Excel Add-In</h1>
 
-<img class="illustration" id="imnav" src="images/NavfertyToolsRibbonRu.png" alt="Пример установки сертификата">
+<img class="illustration" id="imnav" src="images/NavfertyToolsRibbonRu.png">
 
 <p>
     Добро пожаловать на официальную страницу проекта. Здесь Вы можете скачать установочный файл. Больше информации о
@@ -10,607 +10,295 @@
 
 <h2 id="how-to-install" class="zag">Как установить</h2>
 
-<p>Для установки надстройки скачайте и запустите <a href="./setup/setup.exe">установочный файл</a></p>
+<p>Для установки надстройки скачайте и запустите <a href="./setup/setup.exe">установочный файл</a>.</p>
 
 <details>
-    <summary>Если возникнет проблема с установкой из-за сертификата, для установки необходимо
-        импортировать сертификат следующим образом:</summary>
+    <summary>Если возникнет проблема с установкой из-за сертификата, то для установки необходимо импортировать
+        сертификат следующим образом (нажмите, чтобы развернуть спойлер)</summary>
     <img src="./cert-install.png" alt="Пример установки сертификата">
 </details>
-
 <hr>
 
 <h2>Описание функций</h2>
 
 <h3 id="parsenumerics" class="zag">Парсинг числовых значений</h3>
-<img class="icons" alt="Parse Numerics icon"
-    src="images/icons/parseNumerics.png">
-<p>Преобразование чисел, сохраненных в виде текста, в числовой формат.</p>
-<details>
+<img class="icons" alt="Иконка Парсинг числовых значений" src="images/icons/parseNumerics.png">
+<p class="dscrptn">Преобразование чисел, сохраненных в виде текста, в числовой формат.</p>
+<details class="more">
     <summary>Посмотреть скриншоты</summary>
-    <img src="images/ParseNumerics1.png" alt="Navferty's Tools Ribbon Tab in MS Excel">
-    <img src="images/ParseNumerics2.png" alt="Navferty's Tools Ribbon Tab in MS Excel">
+    <img src="images/ParseNumerics1.png" alt="Описание работы функции">
+    <img src="images/ParseNumerics2.png" alt="Описание работы функции">
 </details>
 
 <h3 id="replace" class="zag">Заменить</h3>
-<img class="icons" alt=""
-    src="images/icons/replace.png">
-<p>Замена русских символов по таблицам соответствия.</p>
+<img class="icons" alt="Иконка Заменить" src="images/icons/replace.png">
+<p class="dscrptn">Замена русских символов по таблицам соответствия.</p>
 
-<ul>
+<ul class="more">
     <li>
         <h4 id="withtransliteration" class="zag">Транслитерацией</h4>
-        <table>
-            <thead>
-                <tr>
-                    <th style="text-align:left;"></th>
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td style="text-align:left;">
-                        <img src="images/icons/transliterate.png"
-                            alt="">
-                    </td>
-                    <td>
-                        Полностью меняется весь русский алфавит на английский. Например, буква "Ж" заменится на "Zh", а
-                        буква "Щ"
-                        - на "Shch". Основано на документе ИКАО <a
-                            href="https://www.icao.int/publications/Documents/9303_p3_cons_ru.pdf">9303</a>.
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-        <p></p>
-        <details>
+        <img class="icons" alt="Иконка Транслитерации" src="images/icons/transliterate.png">
+        <p class="dscrptn">Полностью меняется весь русский алфавит на английский. Например, буква "Ж" заменится на "Zh",
+            а буква "Щ" - на "Shch". Основано на документе ИКАО <a
+                href="https://www.icao.int/publications/Documents/9303_p3_cons_ru.pdf">9303</a>.</p>
+        <details class="more">
             <summary>Посмотреть скриншоты</summary>
-            <p></p>
-            <p>
-                <img src="images/Transliterate1.png"
-                    alt="Navferty's Tools Ribbon Tab in MS Excel">
-                <img src="images/Transliterate2.png"
-                    alt="Navferty's Tools Ribbon Tab in MS Excel">
-            </p>
+            <img src="images/Transliterate1.png" alt="Описание работы функции">
+            <img src="images/Transliterate2.png" alt="Описание работы функции">
         </details>
-        <p></p>
     </li>
-
     <li>
         <h4 id="replacechars" class="zag">На аналоги</h4>
-        <table>
-            <thead>
-                <tr>
-                    <th style="text-align:left;"></th>
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td style="text-align:left;">
-                        <img src="images/icons/replaceChars.png"
-                            alt="">
-                    </td>
-                    <td>
-                        Заменятся только схожие по верхнему регистру буквы алфавитов, такие как: Аа, Вв, Ее, Кк, Мм, Нн,
-                        Оо, Рр,
-                        Сс, Тт, Уу, Хх.
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-        <p></p>
-        <details>
+        <img class="icons" alt="Иконка Замены на аналоги" src="images/icons/replaceChars.png">
+        <p class="dscrptn">Заменятся только схожие по верхнему регистру буквы алфавитов, такие как: Аа, Вв, Ее, Кк, Мм,
+            Нн, Оо, Рр, Сс, Тт, Уу, Хх.</p>
+        <details class="more">
             <summary>Посмотреть скриншоты</summary>
-            <p></p>
-            <p>
-                <img src="images/ReplaceChars1.png"
-                    alt="Navferty's Tools Ribbon Tab in MS Excel">
-                <img src="images/ReplaceChars2.png"
-                    alt="Navferty's Tools Ribbon Tab in MS Excel">
-            </p>
+            <img src="images/ReplaceChars1.png" alt="Описание работы функции">
+            <img src="images/ReplaceChars2.png" alt="Описание работы функции">
         </details>
-        <p></p>
     </li>
 </ul>
 
 <h3 id="stringifynumerics" class="zag">Преобразовать в слова</h3>
-<table>
-    <thead>
-        <tr>
-            <th style="text-align:left;"></th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td style="text-align:left;">
-                <img src="images/icons/stringifyNumerics.png"
-                    alt="">
-            </td>
-            <td>
-                Переписывает числовые значения в текст с расшифровкой<br>- На русском<br>- На английском<br>- На
-                французском
-            </td>
-        </tr>
-    </tbody>
-</table>
-<p></p>
-<details>
+<img class="icons" alt="Иконка Преобразовать в слова" src="images/icons/stringifyNumerics.png">
+<p class="dscrptn">Переписывает числовые значения в текст с расшифровкой<br>- На русском<br>- На английском<br>- На
+    французском</p>
+<details class="more">
     <summary>Посмотреть скриншоты</summary>
-    <p></p>
-    <p>
-        <img src="images/Stringify1.png"
-            alt="Navferty's Tools Ribbon Tab in MS Excel">
-        <img src="images/Stringify2.png"
-            alt="Navferty's Tools Ribbon Tab in MS Excel">
-    </p>
+    <img src="images/Stringify1.png" alt="Описание работы функции">
+    <img src="images/Stringify2.png" alt="Описание работы функции">
 </details>
-<p></p>
+
 <p><a href="#top">Наверх</a></p>
 <hr>
-
 
 <h3 id="togglecase" class="zag">Изменить регистр</h3>
-<table>
-    <thead>
-        <tr>
-            <th style="text-align:left;"></th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td style="text-align:left;">
-                <img src="images/icons/toggleCase.png" alt="">
-            </td>
-            <td>
-                Переключение регистра для текстовых значений в выделенных ячейках по схеме:<br><code>Абвгд</code> -&gt;
-                <code>абвгд</code> -&gt; <code>АБВГД</code>
-            </td>
-        </tr>
-    </tbody>
-</table>
-<p></p>
-<details>
+<img class="icons" alt="Иконка Изменить регистр" src="images/icons/toggleCase.png">
+<p class="dscrptn">Переключение регистра для текстовых значений в выделенных ячейках по схеме:<br><code>Абвгд -&gt; абвгд
+    -&gt; АБВГД</code></p>
+<details class="more">
     <summary>Посмотреть скриншоты</summary>
-    <p></p>
-    <p>
-        <img src="images/ToggleCase1.png"
-            alt="Navferty's Tools Ribbon Tab in MS Excel">
-        <img src="images/ToggleCase2.png"
-            alt="Navferty's Tools Ribbon Tab in MS Excel">
-        <img src="images/ToggleCase3.png"
-            alt="Navferty's Tools Ribbon Tab in MS Excel">
-        <img src="images/ToggleCase4.png"
-            alt="Navferty's Tools Ribbon Tab in MS Excel">
-    </p>
+    <img src="images/ToggleCase1.png" alt="Описание работы функции">
+    <img src="images/ToggleCase2.png" alt="Описание работы функции">
+    <img src="images/ToggleCase3.png" alt="Описание работы функции">
+    <img src="images/ToggleCase4.png" alt="Описание работы функции">
 </details>
-<p></p>
-
 
 <h3 id="trimspaces" class="zag">Удалить пробелы</h3>
-<table>
-    <thead>
-        <tr>
-            <th style="text-align:left;"></th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td style="text-align:left;">
-                <img src="images/icons/trimSpaces.png" alt="">
-            </td>
-            <td>
-                Очистить текстовое содержимое выделенных ячеек от лишних пробелов. Удаляет повторные пробелы и переносы
-                строк,
-                а также начальные и конечных пробелы в ячейках, имеющих текстовый формат.
-            </td>
-        </tr>
-    </tbody>
-</table>
-<p></p>
-<details>
+<img class="icons" alt="Иконка Удалить пробелы" src="images/icons/trimSpaces.png">
+<p class="dscrptn">Очистить текстовое содержимое выделенных ячеек от лишних пробелов. Удаляет повторные пробелы и
+    переносы строк, а
+    также начальные и конечных пробелы в ячейках, имеющих текстовый формат.</p>
+<details class="more">
     <summary>Посмотреть скриншоты</summary>
-    <p></p>
-    <p>
-        <img src="images/TrimSpaces1.png"
-            alt="Navferty's Tools Ribbon Tab in MS Excel">
-        <img src="images/TrimSpaces2.png"
-            alt="Navferty's Tools Ribbon Tab in MS Excel">
-    </p>
+    <img src="images/TrimSpaces1.png" alt="Описание работы функции">
+    <img src="images/TrimSpaces2.png" alt="Описание работы функции">
 </details>
-<p></p>
+
 <p><a href="#top">Наверх</a></p>
 <hr>
-
 
 <h3 id="unprotectworkbook" class="zag">Снять защиту с книги и листов</h3>
-<table>
-    <thead>
-        <tr>
-            <th style="text-align:left;"></th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td style="text-align:left;">
-                <img src="images/icons/unprotectWorkbook.png"
-                    alt="">
-            </td>
-            <td>
-                Позволяет снять защиту со всех листов открытой книги, как и защиту всей книги, в отсутствие пароля, а
-                также
-                разблокировать VBA проект (при его наличии), на который установлен пароль. Функция не распространяется
-                на
-                зашифрованные книги.
-            </td>
-        </tr>
-    </tbody>
-</table>
-
+<img class="icons" alt="Иконка Снять защиту с книги и листов" src="images/icons/unprotectWorkbook.png">
+<p class="dscrptn">Позволяет снять защиту со всех листов открытой книги, как и защиту всей книги, в отсутствие пароля, а
+    также разблокировать VBA проект (при его наличии), на который установлен пароль. Функция не распространяется на
+    зашифрованные книги.</p>
 
 <h3 id="highlightduplications" class="zag">Множественная подсветка дублей</h3>
-<table>
-    <thead>
-        <tr>
-            <th style="text-align:left;"></th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td style="text-align:left;">
-                <img src="images/icons/highlightDuplicates.png"
-                    alt="">
-            </td>
-            <td>
-                Устанавливает цвет ячеек, которые содержат повторяющиеся значения, в выделенном диапазоне. Различные
-                цвета
-                соответствуют разным группам дублей.
-            </td>
-        </tr>
-    </tbody>
-</table>
-<p></p>
-<details>
+<img class="icons" alt="Иконка Множественной подсветки дублей" src="images/icons/highlightDuplicates.png">
+<p class="dscrptn">Устанавливает цвет ячеек, которые содержат повторяющиеся значения, в выделенном диапазоне. Различные
+    цвета
+    соответствуют разным группам дублей.</p>
+<details class="more">
     <summary>Посмотреть скриншот</summary>
-    <p></p>
-    <p>
-        <img src="images/Duplicates.png"
-            alt="Navferty's Tools Ribbon Tab in MS Excel">
-    </p>
+    <img src="images/Duplicates.png" alt="Описание работы функции">
 </details>
-<p></p>
-
 
 <h3 id="unmergecells" class="zag">Разъединение ячеек с заполнением</h3>
-<table>
-    <thead>
-        <tr>
-            <th style="text-align:left;"></th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td style="text-align:left;">
-                <img src="images/icons/unmergeCells.png"
-                    alt="">
-            </td>
-            <td>Отменяет объединение ячеек, с одновременным заполнением разъединенных ячеек исходым значением.</td>
-        </tr>
-    </tbody>
-</table>
-<p></p>
-<details>
+<img class="icons" alt="Иконка Разъединения ячеек с заполнением" src="images/icons/unmergeCells.png">
+<p class="dscrptn">Отменяет объединение ячеек, с одновременным заполнением разъединенных ячеек исходым значением.</p>
+<details class="more">
     <summary>Посмотреть скриншоты</summary>
-    <p></p>
-    <p>
-        <img src="images/Unmerge1.png"
-            alt="Navferty's Tools Ribbon Tab in MS Excel">
-        <img src="images/Unmerge2.png"
-            alt="Navferty's Tools Ribbon Tab in MS Excel">
-    </p>
+    <img src="images/Unmerge1.png" alt="Описание работы функции">
+    <img src="images/Unmerge2.png" alt="Описание работы функции">
 </details>
-<p></p>
-
 
 <h3 id="findallcellscontainingerrors" class="zag">Найти все ошибки в выделенном диапазоне</h3>
-<table>
-    <thead>
-        <tr>
-            <th style="text-align:left;"></th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td style="text-align:left;">
-                <img src="images/icons/findErrors.png" alt="">
-            </td>
-            <td>
-                Поиск всех ячеек в выделенных ячейках, которые содержат ошибки вычислений:<br><br>Виды ошибок в MS
-                Excel:<br><code>#Н/Д</code><br><code>#ИМЯ?</code><br><code>#ДЕЛ/0!</code><br><code>#ССЫЛКА!</code><br><code>#ЗНАЧ!</code><br><code>#ЧИСЛО!</code><br><code>#ПУСТО!</code>
-            </td>
-        </tr>
-    </tbody>
-</table>
-<p></p>
-<details>
+<img class="icons" alt="Иконка Найти все ошибки в выделенном диапазоне" src="images/icons/findErrors.png">
+<p class="dscrptn">Поиск всех ячеек в выделенных ячейках, которые содержат ошибки вычислений:<br><br>Виды ошибок в MS
+    Excel:<br><code>#Н/Д</code><br><code>#ИМЯ?</code><br><code>#ДЕЛ/0!</code><br><code>#ССЫЛКА!</code><br><code>#ЗНАЧ!</code><br><code>#ЧИСЛО!</code><br><code>#ПУСТО!</code>
+</p>
+<details class="more">
     <summary>Посмотреть скриншот</summary>
-    <p></p>
-    <p>
-        <img src="images/FindErrorValues.png"
-            alt="Navferty's Tools Ribbon Tab in MS Excel">
-    </p>
+    <img src="images/FindErrorValues.png" alt="Описание работы функции">
 </details>
-<p></p>
-
 
 <h3 id="copyasmarkdown" class="zag">Копировать в Markdown</h3>
-<table>
-    <thead>
-        <tr>
-            <th style="text-align:left;"></th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td style="text-align:left;">
-                <img src="images/icons/parseNumerics.png"
-                    alt="">
-            </td>
-            <td>Копировать в буфер обмена выделенный фрагмент как таблица Markdown.</td>
-        </tr>
-    </tbody>
-</table>
-<p></p>
-<details>
+<img class="icons" alt="Иконка Копировать в Markdown" src="images/icons/parseNumerics.png">
+<p class="dscrptn">Копировать в буфер обмена выделенный фрагмент как таблица Markdown.</p>
+<details class="more">
     <summary>Посмотреть скриншот</summary>
-    <p></p>
-    <p>
-        <img src="images/ExportToMarkdown.png"
-            alt="Navferty's Tools Ribbon Tab in MS Excel">
-    </p>
+    <img src="images/ExportToMarkdown.png" alt="Описание работы функции">
 </details>
-<p></p>
-
 
 <h3 id="validatevalues" class="zag">Валидация значений</h3>
-<table>
-    <thead>
-        <tr>
-            <th style="text-align:left;"></th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td style="text-align:left;">
-                <img src="images/icons/validation.png" alt="">
-            </td>
-            <td>
-                <p>
-                    Проверить значения ячеек в выделенном диапазоне на соответствие определённому
-                    формату.<br><br>Поддерживаемые
-                    форматы:<br>- Число<br>- Дата<br>- ИНН ФЛ* (12 цифр, с двумя проверочными цифрами)<br>- ИНН ЮЛ* (10
-                    цифр, с
-                    одной проверочной цифрой)<br>- Текст для XML (отсутствие символов <code>&lt;</code> и
-                    <code>&gt;</code> и иных
-                    невалидных для содержимого XML)<br><br>* <em>
-                        - Корректность ИНН не гарантирует существование организации или
-                        физического лица, которому бы принадлежал этот ИНН
-                    </em>
-                </p>
-            </td>
-        </tr>
-    </tbody>
-</table>
-<p></p>
-<details>
+<img class="icons" alt="Иконка Валидации значений" src="images/icons/validation.png">
+<p class="dscrptn">Проверить значения ячеек в выделенном диапазоне на соответствие определённому
+    формату.<br><br>Поддерживаемые
+    форматы:<br>
+    <code>- Число</code><br>
+    <code>- Дата</code><br>
+    <code>- ИНН ФЛ* (12 цифр, с двумя проверочными цифрами)</code><br>
+    <code>- ИНН ЮЛ* (10 цифр, с одной проверочной цифрой)</code><br>
+    <code>- Текст для XML (отсутствие символов &lt; и &gt; и иных невалидных для содержимого XML)</code><br><br>
+    <em>* - Корректность ИНН не гарантирует существование организации или физического лица,
+        которому бы принадлежал этот ИНН</em></p>
+<details class="more">
     <summary>Посмотреть скриншот</summary>
-    <p></p>
-    <p>
-        <img src="images/Validate.png"
-            alt="Navferty's Tools Ribbon Tab in MS Excel">
-    </p>
+    <img src="images/Validate.png" alt="Описание работы функции">
 </details>
-<p></p>
+
 <p><a href="#top">Наверх</a></p>
 <hr>
-
 
 <h3 id="createsamplexmlbasedonxsd" class="zag">Создать образец XML (по XSD)</h3>
-<table>
-    <thead>
-        <tr>
-            <th style="text-align:left;"></th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td style="text-align:left;">
-                <img src="images/icons/createSampleXml.png"
-                    alt="">
-            </td>
-            <td>
-                Сгенерировать пример XML-файла по xsd-схеме. Позволяет получить наглядное представление о структуре
-                xml-файла
-                при наличии XSD-файла со схемой.
-            </td>
-        </tr>
-    </tbody>
-</table>
-<p>
-    Например, для приведённой ниже схемы
+<img class="icons" alt="Иконка Создания образца XML" src="images/icons/createSampleXml.png">
+<p class="dscrptn">Сгенерировать пример XML-файла по xsd-схеме. Позволяет получить наглядное представление о структуре
+    xml-файла при
+    наличии XSD-файла со схемой. Например, для приведённой ниже схемы
 </p>
-<details>
+<details class="more">
     <summary>Образец схемы - sample.xsd</summary>
-    <p></p>
-    <pre><code class="xml language-xml">&lt;?xml version="1.0" encoding="UTF-8" ?&gt;
-&lt;xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"&gt;
+    <pre>
+        &lt;?xml version="1.0" encoding="UTF-8" ?&gt;
+        &lt;xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"&gt;
 
-&lt;xs:element name="КорневойЭлемент"&gt;
-  &lt;xs:complexType&gt;
-    &lt;xs:sequence&gt;
-      &lt;xs:element name="Заголовок" type="xs:string"/&gt;
-      &lt;xs:element name="Адресат"&gt;
+        &lt;xs:element name="КорневойЭлемент"&gt;
         &lt;xs:complexType&gt;
-          &lt;xs:sequence&gt;
-            &lt;xs:element name="Имя" type="xs:string"/&gt;
-            &lt;xs:element name="Адрес" type="xs:string"/&gt;
-            &lt;xs:element name="Город" type="xs:string"/&gt;
-            &lt;xs:element name="Страна" type="xs:string"/&gt;
-          &lt;/xs:sequence&gt;
+            &lt;xs:sequence&gt;
+            &lt;xs:element name="Заголовок" type="xs:string"/&gt;
+            &lt;xs:element name="Адресат"&gt;
+                &lt;xs:complexType&gt;
+                &lt;xs:sequence&gt;
+                    &lt;xs:element name="Имя" type="xs:string"/&gt;
+                    &lt;xs:element name="Адрес" type="xs:string"/&gt;
+                    &lt;xs:element name="Город" type="xs:string"/&gt;
+                    &lt;xs:element name="Страна" type="xs:string"/&gt;
+                &lt;/xs:sequence&gt;
+                &lt;/xs:complexType&gt;
+            &lt;/xs:element&gt;
+            &lt;xs:element name="Элемент" maxOccurs="3"&gt;
+                &lt;xs:complexType&gt;
+                &lt;xs:sequence&gt;
+                    &lt;xs:element name="Название" type="xs:string"/&gt;
+                    &lt;xs:element name="Описание" type="xs:string" minOccurs="0"/&gt;
+                    &lt;xs:element name="Количество" type="xs:positiveInteger"/&gt;
+                    &lt;xs:element name="Цена" type="xs:decimal"/&gt;
+                &lt;/xs:sequence&gt;
+                &lt;/xs:complexType&gt;
+            &lt;/xs:element&gt;
+            &lt;/xs:sequence&gt;
+            &lt;xs:attribute name="Идентификатор" type="xs:string" use="required"/&gt;
         &lt;/xs:complexType&gt;
-      &lt;/xs:element&gt;
-      &lt;xs:element name="Элемент" maxOccurs="3"&gt;
-        &lt;xs:complexType&gt;
-          &lt;xs:sequence&gt;
-            &lt;xs:element name="Название" type="xs:string"/&gt;
-            &lt;xs:element name="Описание" type="xs:string" minOccurs="0"/&gt;
-            &lt;xs:element name="Количество" type="xs:positiveInteger"/&gt;
-            &lt;xs:element name="Цена" type="xs:decimal"/&gt;
-          &lt;/xs:sequence&gt;
-        &lt;/xs:complexType&gt;
-      &lt;/xs:element&gt;
-    &lt;/xs:sequence&gt;
-    &lt;xs:attribute name="Идентификатор" type="xs:string" use="required"/&gt;
-  &lt;/xs:complexType&gt;
-&lt;/xs:element&gt;
+        &lt;/xs:element&gt;
 
-&lt;/xs:schema&gt;
-</code></pre>
-    <p></p>
+        &lt;/xs:schema&gt;
+    </pre>
 </details>
-<p></p>
-<p>Будет сформирован такой xml-файл:</p>
-<p></p>
-<details>
-    <summary>Результат генерации - sample.xml</summary>
-    <p></p>
-    <pre><code class="xml language-xml">&lt;КорневойЭлемент xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" Идентификатор="Идентификатор1"&gt;
-  &lt;Заголовок&gt;Заголовок1&lt;/Заголовок&gt;
-  &lt;Адресат&gt;
-    &lt;Имя&gt;Имя1&lt;/Имя&gt;
-    &lt;Адрес&gt;Адрес1&lt;/Адрес&gt;
-    &lt;Город&gt;Город1&lt;/Город&gt;
-    &lt;Страна&gt;Страна1&lt;/Страна&gt;
-  &lt;/Адресат&gt;
-  &lt;Элемент&gt;
-    &lt;Название&gt;Название1&lt;/Название&gt;
-    &lt;Описание&gt;Описание1&lt;/Описание&gt;
-    &lt;Количество&gt;1&lt;/Количество&gt;
-    &lt;Цена&gt;1&lt;/Цена&gt;
-  &lt;/Элемент&gt;
-  &lt;Элемент&gt;
-    &lt;Название&gt;Название2&lt;/Название&gt;
-    &lt;Описание&gt;Описание2&lt;/Описание&gt;
-    &lt;Количество&gt;79228162514264337593543950335&lt;/Количество&gt;
-    &lt;Цена&gt;-79228162514264337593543950335&lt;/Цена&gt;
-  &lt;/Элемент&gt;
-  &lt;Элемент&gt;
-    &lt;Название&gt;Название3&lt;/Название&gt;
-    &lt;Описание&gt;Описание3&lt;/Описание&gt;
-    &lt;Количество&gt;2&lt;/Количество&gt;
-    &lt;Цена&gt;79228162514264337593543950335&lt;/Цена&gt;
-  &lt;/Элемент&gt;
-&lt;/КорневойЭлемент&gt;
-</code></pre>
-    <p></p>
-</details>
-<p></p>
 
+<div class="more">
+    <p>Будет сформирован такой xml-файл:</p>
+
+    <details>
+        <summary>Результат генерации - sample.xml</summary>
+        <pre>
+        &lt;КорневойЭлемент xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" Идентификатор="Идентификатор1"&gt;
+        &lt;Заголовок&gt;Заголовок1&lt;/Заголовок&gt;
+        &lt;Адресат&gt;
+            &lt;Имя&gt;Имя1&lt;/Имя&gt;
+            &lt;Адрес&gt;Адрес1&lt;/Адрес&gt;
+            &lt;Город&gt;Город1&lt;/Город&gt;
+            &lt;Страна&gt;Страна1&lt;/Страна&gt;
+        &lt;/Адресат&gt;
+        &lt;Элемент&gt;
+            &lt;Название&gt;Название1&lt;/Название&gt;
+            &lt;Описание&gt;Описание1&lt;/Описание&gt;
+            &lt;Количество&gt;1&lt;/Количество&gt;
+            &lt;Цена&gt;1&lt;/Цена&gt;
+        &lt;/Элемент&gt;
+        &lt;Элемент&gt;
+            &lt;Название&gt;Название2&lt;/Название&gt;
+            &lt;Описание&gt;Описание2&lt;/Описание&gt;
+            &lt;Количество&gt;79228162514264337593543950335&lt;/Количество&gt;
+            &lt;Цена&gt;-79228162514264337593543950335&lt;/Цена&gt;
+        &lt;/Элемент&gt;
+        &lt;Элемент&gt;
+            &lt;Название&gt;Название3&lt;/Название&gt;
+            &lt;Описание&gt;Описание3&lt;/Описание&gt;
+            &lt;Количество&gt;2&lt;/Количество&gt;
+            &lt;Цена&gt;79228162514264337593543950335&lt;/Цена&gt;
+        &lt;/Элемент&gt;
+        &lt;/КорневойЭлемент&gt;
+    </pre>
+    </details>
+</div>
 
 <h3 id="validatexmlwithxsd" class="zag">Валидация XML по XSD</h3>
-<table>
-    <thead>
-        <tr>
-            <th style="text-align:left;"></th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td style="text-align:left;">
-                <img src="images/icons/validateXml.png"
-                    alt="">
-            </td>
-            <td>
-                Проверить соответствие xml-файла на основе XSD-схемы. Список ошибок будет выведен на лист в новой книге
-                MS
-                Excel.
-            </td>
-        </tr>
-    </tbody>
-</table>
-<p>Пример отчёта о проверке:</p>
-<table>
-    <thead>
-        <tr>
-            <th>Уровень</th>
-            <th>Элемент</th>
-            <th>Ошибка</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td>Error</td>
-            <td>Город</td>
-            <td>Элемент "Адресат" имеет недопустимый дочерний элемент "Город". Список ожидаемых элементов: "Адрес".</td>
-        </tr>
-        <tr>
-            <td>Error</td>
-            <td>Количество</td>
-            <td>
-                Элемент "Количество" недействителен: значение "-5" недействительно с точки зрения его типа данных
-                "http://www.w3.org/2001/XMLSchema:positiveInteger" — Значение "-5" недопустимо мало или недопустимо
-                велико для
-                PositiveInteger.
-            </td>
-        </tr>
-        <tr>
-            <td>Error</td>
-            <td>Цена</td>
-            <td>
-                Элемент "Цена" недействителен: значение "не число" недействительно с точки зрения его типа данных
-                "http://www.w3.org/2001/XMLSchema:decimal" — Строка "не число" не является допустимым значением Decimal.
-            </td>
-        </tr>
-    </tbody>
-</table>
+<img class="icons" alt="Иконка Валидации XML" src="images/icons/validateXml.png">
+<p class="dscrptn">Проверить соответствие xml-файла на основе XSD-схемы. Список ошибок будет выведен на лист в новой
+    книге MS Excel.</p>
+<div class="more">
+    <p>Пример отчёта о проверке:</p>
+    <div class="tbl">
+        <table>
+            <thead>
+                <tr>
+                    <th>Уровень</th>
+                    <th>Элемент</th>
+                    <th>Ошибка</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Error</td>
+                    <td>Город</td>
+                    <td>Элемент "Адресат" имеет недопустимый дочерний элемент "Город". Список ожидаемых элементов:
+                        "Адрес".
+                    </td>
+                </tr>
+                <tr>
+                    <td>Error</td>
+                    <td>Количество</td>
+                    <td>Элемент "Количество" недействителен: значение "-5" недействительно с точки зрения его типа
+                        данных
+                        "http://www.w3.org/2001/XMLSchema:positiveInteger" — Значение "-5" недопустимо мало или
+                        недопустимо
+                        велико для PositiveInteger.
+                    </td>
+                </tr>
+                <tr>
+                    <td>Error</td>
+                    <td>Цена</td>
+                    <td>Элемент "Цена" недействителен: значение "не число" недействительно с точки зрения его типа
+                        данных
+                        "http://www.w3.org/2001/XMLSchema:decimal" — Строка "не число" не является допустимым значением
+                        Decimal.
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
 <p><a href="#top">Наверх</a></p>
 <hr>
 
-
 <h2 id="undolastaction" class="zag">Отменить последнее действие</h2>
-<table>
-    <thead>
-        <tr>
-            <th style="text-align:left;"></th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td style="text-align:left;">
-                <img src="images/icons/undo.png" alt="">
-            </td>
-            <td>
-                Отменить последнее действие, совершённое с помощью данной надстройки. Отмена возможна для некоторых
-                функций в
-                разделах 'Преобразование значений' и 'Форматирование значений' и только, если диапазон ячеек не
-                редактировался
-                после совершения действия.
-            </td>
-        </tr>
-    </tbody>
-</table>
-<p><a href="#top">Наверх</a></p>
+<img class="icons" alt="Иконка Отмены последнего действия" src="images/icons/undo.png">
+<p class="dscrptn">Отменить последнее действие, совершённое с помощью данной надстройки. Отмена возможна для некоторых
+    функций в
+    разделах 'Преобразование значений' и 'Форматирование значений' и только, если диапазон ячеек не редактировался после
+    совершения действия.</p>
 
-</div>
+<p><a href="#top">Наверх</a></p>
