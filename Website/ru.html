@@ -126,8 +126,15 @@
 
 <h3 id="findallcellscontainingerrors" class="zag">Найти все ошибки в выделенном диапазоне</h3>
 <img class="icons" alt="Иконка Найти все ошибки в выделенном диапазоне" src="images/icons/findErrors.png">
-<p class="dscrptn">Поиск всех ячеек в выделенных ячейках, которые содержат ошибки вычислений:<br><br>Виды ошибок в MS
-    Excel:<br><code>#Н/Д</code><br><code>#ИМЯ?</code><br><code>#ДЕЛ/0!</code><br><code>#ССЫЛКА!</code><br><code>#ЗНАЧ!</code><br><code>#ЧИСЛО!</code><br><code>#ПУСТО!</code>
+<p class="dscrptn">Поиск всех ячеек в выделенных ячейках, которые содержат ошибки вычислений:<br><br>
+    Виды ошибок в MS Excel:<br>
+    <code>#Н/Д</code><br>
+    <code>#ИМЯ?</code><br>
+    <code>#ДЕЛ/0!</code><br>
+    <code>#ССЫЛКА!</code><br>
+    <code>#ЗНАЧ!</code><br>
+    <code>#ЧИСЛО!</code><br>
+    <code>#ПУСТО!</code>
 </p>
 <details class="more">
     <summary>Посмотреть скриншот</summary>
@@ -145,13 +152,12 @@
 <h3 id="validatevalues" class="zag">Валидация значений</h3>
 <img class="icons" alt="Иконка Валидации значений" src="images/icons/validation.png">
 <p class="dscrptn">Проверить значения ячеек в выделенном диапазоне на соответствие определённому
-    формату.<br><br>Поддерживаемые
-    форматы:<br>
-    <code>- Число</code><br>
-    <code>- Дата</code><br>
-    <code>- ИНН ФЛ* (12 цифр, с двумя проверочными цифрами)</code><br>
-    <code>- ИНН ЮЛ* (10 цифр, с одной проверочной цифрой)</code><br>
-    <code>- Текст для XML (отсутствие символов &lt; и &gt; и иных невалидных для содержимого XML)</code><br><br>
+    формату.<br><br>Поддерживаемые форматы:<br>
+    - Число<br>
+    - Дата<br>
+    - ИНН ФЛ* (12 цифр, с двумя проверочными цифрами)<br>
+    - ИНН ЮЛ* (10 цифр, с одной проверочной цифрой)<br>
+    - Текст для XML (отсутствие символов &lt; и &gt; и иных невалидных для содержимого XML)<br><br>
     <em>* - Корректность ИНН не гарантирует существование организации или физического лица,
         которому бы принадлежал этот ИНН</em></p>
 <details class="more">
@@ -168,9 +174,10 @@
     xml-файла при
     наличии XSD-файла со схемой. Например, для приведённой ниже схемы
 </p>
-<details class="more">
-    <summary>Образец схемы - sample.xsd</summary>
-    <pre>
+<div class="more">
+    <details>
+        <summary>Образец схемы - sample.xsd</summary>
+        <pre>
         &lt;?xml version="1.0" encoding="UTF-8" ?&gt;
         &lt;xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"&gt;
 
@@ -204,10 +211,9 @@
         &lt;/xs:element&gt;
 
         &lt;/xs:schema&gt;
-    </pre>
-</details>
+        </pre>
+    </details>
 
-<div class="more">
     <p>Будет сформирован такой xml-файл:</p>
 
     <details>
@@ -240,7 +246,7 @@
             &lt;Цена&gt;79228162514264337593543950335&lt;/Цена&gt;
         &lt;/Элемент&gt;
         &lt;/КорневойЭлемент&gt;
-    </pre>
+        </pre>
     </details>
 </div>
 
