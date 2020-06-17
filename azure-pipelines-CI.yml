@@ -46,7 +46,8 @@ steps:
   inputs:
     platform: '$(buildPlatform)'
     configuration: '$(buildConfiguration)'
-    codeCoverageEnabled: true
+    # manually collecting coverage in next task
+    codeCoverageEnabled: false
     # tests depending on Interop.Excel - run locally
     testFiltercriteria: 'Name!=UnprotectWorkbookAndWorksheet_CanEditAndAddWorksheet
                         &Name!=UnprotectWorkbookAndWorksheet_CanEditAndAddWorksheet' # more tests
