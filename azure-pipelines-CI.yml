@@ -42,46 +42,72 @@ steps:
     platform: '$(buildPlatform)'
     configuration: '$(buildConfiguration)'
 
-- task: VSTest@2
-  inputs:
-    platform: '$(buildPlatform)'
-    configuration: '$(buildConfiguration)'
-    codeCoverageEnabled: true
-    # tests depending on Interop.Excel - run locally
-    testFiltercriteria: 'Name!=UnprotectWorkbookAndWorksheet_CanEditAndAddWorksheet
-                        &Name!=UnprotectWorkbookAndWorksheet_CanEditAndAddWorksheet' # more tests
+# - task: VSTest@2
+#   inputs:
+#     platform: '$(buildPlatform)'
+#     configuration: '$(buildConfiguration)'
+#     codeCoverageEnabled: true
+#     # tests depending on Interop.Excel - run locally
+#     testFiltercriteria: 'Name!=UnprotectWorkbookAndWorksheet_CanEditAndAddWorksheet
+#                         &Name!=UnprotectWorkbookAndWorksheet_CanEditAndAddWorksheet' # more tests
 
-# https://stackoverflow.com/questions/30215324/vstest-code-coverage-report-in-jenkins
 - task: PowerShell@2
   inputs:
     targetType: 'inline'
     script: |
-      $dllPath = $(get-ChildItem -Path D:/ -Recurse -Include *Microsoft.VisualStudio.Coverage.Analysis.dll)[0]
-      Add-Type -path $dllPath
-      $coverageFile = $(get-ChildItem -Path $(Agent.TempDirectory)/TestResults -Recurse -Include *coverage)[0]
-      $xmlCoverageFile = ".\TestResults\vstest.coveragexml"
-      [string[]] $executablePaths = @($coverageFile)
-      [string[]] $symbolPaths = @()
-      $info = [Microsoft.VisualStudio.Coverage.Analysis.CoverageInfo]::CreateFromFile($coverageFile, $executablePaths, $symbolPaths);
-      $data = $info.BuildDataSet()
-      $data.WriteXml($xmlCoverageFile)
+      "install tools:"
+      &dotnet tool install dotnet-reportgenerator-globaltool --tool-path . --version 4.0.12
+      &dotnet tool install coverlet.console --tool-path . --version 1.4.1
 
-- task: DotNetCoreCLI@2
-  inputs:
-    command: custom
-    custom: tool
-    arguments: install --tool-path . dotnet-reportgenerator-globaltool
-  displayName: Install ReportGenerator tool
+      "`nmake reports dir:"
+      mkdir .\reports
 
-- script: reportgenerator -reports:$(Agent.TempDirectory)/TestResults/**/*.coverage -targetdir:$(Build.SourcesDirectory)/coverlet/reports -reporttypes:"Cobertura"
-  displayName: 'Create reports'
+      "`nrun tests:"
+      $unitTestFile = gci -Recurse | ?{ $_.FullName -like "*bin\*Tests.dll" }
+      Write-Host "`$unitTestFile value: $unitTestFile"
 
-- task: PublishCodeCoverageResults@1
-  displayName: 'Publish code coverage'
-  inputs:
-    codeCoverageTool: Cobertura
-    summaryFileLocation: '.\TestResults\vstest.coveragexml'
-     # $(Build.SourcesDirectory)/coverlet/reports/Cobertura.xml  
+      $coverlet = "$pwd\coverlet.exe"
+
+      "calling $coverlet for $($unitTestFile.FullName)"
+      &$coverlet $unitTestFile.FullName --target "dotnet" --targetargs "vstest $($unitTestFile.FullName) --logger:trx" --format "cobertura"
+
+      "`ngenerate report(s)"
+      gci -Recurse | 
+          ?{ $_.Name -eq "coverage.cobertura.xml" } | 
+          %{ &"$pwd\reportgenerator.exe" "-reports:$($_.FullName)" "-targetdir:reports" "-reporttypes:HTMLInline;HTMLChart" }
+
+
+# https://stackoverflow.com/questions/30215324/vstest-code-coverage-report-in-jenkins
+# - task: PowerShell@2
+#   inputs:
+#     targetType: 'inline'
+#     script: |
+#       $dllPath = $(get-ChildItem -Path D:/ -Recurse -Include *Microsoft.VisualStudio.Coverage.Analysis.dll)[0]
+#       Add-Type -path $dllPath
+#       $coverageFile = $(get-ChildItem -Path $(Agent.TempDirectory)/TestResults -Recurse -Include *coverage)[0]
+#       $xmlCoverageFile = ".\TestResults\vstest.coveragexml"
+#       [string[]] $executablePaths = @($coverageFile)
+#       [string[]] $symbolPaths = @()
+#       $info = [Microsoft.VisualStudio.Coverage.Analysis.CoverageInfo]::CreateFromFile($coverageFile, $executablePaths, $symbolPaths);
+#       $data = $info.BuildDataSet()
+#       $data.WriteXml($xmlCoverageFile)
+
+# - task: DotNetCoreCLI@2
+#   inputs:
+#     command: custom
+#     custom: tool
+#     arguments: install --tool-path . dotnet-reportgenerator-globaltool
+#   displayName: Install ReportGenerator tool
+
+# - script: reportgenerator -reports:$(Agent.TempDirectory)/TestResults/**/*.coverage -targetdir:$(Build.SourcesDirectory)/coverlet/reports -reporttypes:"Cobertura"
+#   displayName: 'Create reports'
+
+# - task: PublishCodeCoverageResults@1
+#   displayName: 'Publish code coverage'
+#   inputs:
+#     codeCoverageTool: Cobertura
+#     summaryFileLocation: '.\TestResults\vstest.coveragexml'
+#      # $(Build.SourcesDirectory)/coverlet/reports/Cobertura.xml  
 
 # - task: PublishCodeCoverageResults@1
 #   inputs:
