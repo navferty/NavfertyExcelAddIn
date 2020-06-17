@@ -42,14 +42,14 @@ steps:
     platform: '$(buildPlatform)'
     configuration: '$(buildConfiguration)'
 
-# - task: VSTest@2
-#   inputs:
-#     platform: '$(buildPlatform)'
-#     configuration: '$(buildConfiguration)'
-#     codeCoverageEnabled: true
-#     # tests depending on Interop.Excel - run locally
-#     testFiltercriteria: 'Name!=UnprotectWorkbookAndWorksheet_CanEditAndAddWorksheet
-#                         &Name!=UnprotectWorkbookAndWorksheet_CanEditAndAddWorksheet' # more tests
+- task: VSTest@2
+  inputs:
+    platform: '$(buildPlatform)'
+    configuration: '$(buildConfiguration)'
+    codeCoverageEnabled: true
+    # tests depending on Interop.Excel - run locally
+    testFiltercriteria: 'Name!=UnprotectWorkbookAndWorksheet_CanEditAndAddWorksheet
+                        &Name!=UnprotectWorkbookAndWorksheet_CanEditAndAddWorksheet' # more tests
 
 - task: PowerShell@2
   inputs:
