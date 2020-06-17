@@ -80,7 +80,7 @@ steps:
 - task: PublishCodeCoverageResults@1
   inputs:
     codeCoverageTool: 'Cobertura'
-    summaryFileLocation: './reports/'
+    summaryFileLocation: '$(Build.SourcesDirectory)'
 
 
 
