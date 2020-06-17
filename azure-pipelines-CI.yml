@@ -23,6 +23,7 @@ steps:
     restoreSolution: '$(solution)'
 
 - task: PowerShell@2
+  name: 'ImportCertificate'
   inputs:
     targetType: 'inline'
     script: |
@@ -53,6 +54,7 @@ steps:
                         &Name!=UnprotectWorkbookAndWorksheet_CanEditAndAddWorksheet' # more tests
 
 - task: PowerShell@2
+  name: 'CollectCodeCoverage'
   inputs:
     targetType: 'inline'
     script: |
