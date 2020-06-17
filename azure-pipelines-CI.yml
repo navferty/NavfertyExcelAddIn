@@ -77,6 +77,13 @@ steps:
           %{ &"$pwd\reportgenerator.exe" "-reports:$($_.FullName)" "-targetdir:reports" "-reporttypes:HTMLInline;HTMLChart" }
 
 
+- task: PublishCodeCoverageResults@1
+  inputs:
+    codeCoverageTool: 'Cobertura'
+    summaryFileLocation: './reports/'
+
+
+
 # https://stackoverflow.com/questions/30215324/vstest-code-coverage-report-in-jenkins
 # - task: PowerShell@2
 #   inputs:
