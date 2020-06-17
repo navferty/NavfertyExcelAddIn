@@ -19,7 +19,6 @@
         if (!getUserLanguage())
             setUserLanguage("en");
 
-
         async function changeLanguage() {
             let lang = getUserLanguage();
             document.getElementById('content').innerHTML = await loadContents(lang + '.html');
