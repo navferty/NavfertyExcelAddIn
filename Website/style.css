@@ -1,15 +1,21 @@
 body {
     margin: 0;
-    background-color: rgb(243, 243, 243);
+    background-color: rgb(215, 215, 220);
+}
+
+#container {
+    position: relative;
+    width: 80%;
+    margin: 5em 10% 0 10%;
+    box-shadow: 0 0 1em 0 lightgray;
+    min-height: 100%;
 }
 
 .top_nav {
-    position: fixed;
+    position: sticky;
     top: 0;
-    width: 100%;
-    background-color: rgb(33, 115, 70);
+    background-color: rgb(3, 40, 85);
     color: white;
-    box-shadow: 0 0 0.5em 0 gray;
     z-index: 1;
 }
 
@@ -28,15 +34,8 @@ body {
 }
 
 .top_nav :nth-child(n+2):hover {
-    background-color: rgb(14, 92, 47);
-}
-
-#container {
-    position: relative;
-    width: 80%;
-    margin: 5em auto 2em auto;
-    box-shadow: 0 0 0.5em 0 lightgray;
-    min-height: 100%;
+    background-color: white;
+    color: rgb(3, 40, 85);
 }
 
 #left_nav {
@@ -49,7 +48,7 @@ body {
     word-wrap: break-word;
     padding-top: 2em;
     padding-bottom: 2em;
-    background-color: #ddd;
+    background-color: rgb(235, 235, 240);
 }
 
 #left_nav p {
@@ -75,16 +74,12 @@ body {
     display: inline-block;
     padding: 2em;
     width: calc(80% - 4em);
-    /* background-color: rgb(243, 243, 243); */
     background-color: white;
+    overflow: hidden;
 }
 
 #content img {
     max-width: 100%;
-}
-
-#content {
-    overflow: hidden;
 }
 
 .zag:before {
@@ -132,13 +127,35 @@ ul.more {
 }
 
 .footer {
+    position: relative;
+    left: 10%;
     text-align: center;
-    width: 100%;
-    margin-bottom: 2em;
+    width: calc(80% - 1em);
+    padding: 0.5em;
+    background-color: rgb(3, 40, 85);
+    color: white;
+    float: inline-start;
+    margin-bottom: 5em;
+    z-index: 1;
 }
 
 @media (orientation: portrait) {
     #container {
         width: 100%;
+        margin: 0;
+    }
+
+    .top_nav div{
+        font-size: 1em;
+    }
+
+    #left_nav {
+        top: 2em;
+    }
+    
+    .footer {
+        width: calc(100% - 1em);
+        margin: 0;
+        left: 0;
     }
 }
