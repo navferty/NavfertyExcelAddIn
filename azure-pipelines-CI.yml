@@ -23,6 +23,7 @@ steps:
     restoreSolution: '$(solution)'
 
 - task: PowerShell@2
+  name: 'ImportCertificate'
   inputs:
     targetType: 'inline'
     script: |
@@ -46,6 +47,40 @@ steps:
   inputs:
     platform: '$(buildPlatform)'
     configuration: '$(buildConfiguration)'
+    # manually collecting coverage in next task
+    codeCoverageEnabled: false
     # tests depending on Interop.Excel - run locally
     testFiltercriteria: 'Name!=UnprotectWorkbookAndWorksheet_CanEditAndAddWorksheet
                         &Name!=UnprotectWorkbookAndWorksheet_CanEditAndAddWorksheet' # more tests
+
+- task: PowerShell@2
+  name: 'CollectCodeCoverage'
+  inputs:
+    targetType: 'inline'
+    script: |
+      "install tools:"
+      &dotnet tool install dotnet-reportgenerator-globaltool --tool-path . --version 4.0.12
+      &dotnet tool install coverlet.console --tool-path . --version 1.4.1
+
+      "`nmake reports dir:"
+      mkdir .\reports
+
+      "`nrun tests:"
+      $unitTestFile = gci -Recurse | ?{ $_.FullName -like "*bin\*Tests.dll" }
+      Write-Host "`$unitTestFile value: $unitTestFile"
+
+      $coverlet = "$pwd\coverlet.exe"
+
+      "calling $coverlet for $($unitTestFile.FullName)"
+      &$coverlet $unitTestFile.FullName --target "dotnet" --targetargs "vstest $($unitTestFile.FullName) --logger:trx" --format "cobertura"
+
+      "`ngenerate report(s)"
+      gci -Recurse | 
+          ?{ $_.Name -eq "coverage.cobertura.xml" } | 
+          %{ &"$pwd\reportgenerator.exe" "-reports:$($_.FullName)" "-targetdir:reports" "-reporttypes:HTMLInline;HTMLChart" }
+
+
+- task: PublishCodeCoverageResults@1
+  inputs:
+    codeCoverageTool: 'Cobertura'
+    summaryFileLocation: '$(Build.SourcesDirectory)/coverage.cobertura.xml'
