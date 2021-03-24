@@ -51,20 +51,20 @@ steps:
     ArtifactName: 'InstallationFiles'
     publishLocation: 'Container'
 
-- task: FtpUpload@2
-  name: 'UploadWebsite'
-  inputs:
-    credentialsOption: 'inputs'
-    serverUrl: 'ftps://ftp.navferty.ru'
-    username: '$(ftpUsername)'
-    password: '$(ftpPassword)'
-    rootDirectory: '$(Build.SourcesDirectory)/Website/'
-    filePatterns: '**'
-    remoteDirectory: '/' # navferty.ru/website
-    clean: false
-    cleanContents: true
-    preservePaths: true
-    trustSSL: true
+# - task: FtpUpload@2
+#   name: 'UploadWebsite'
+#   inputs:
+#     credentialsOption: 'inputs'
+#     serverUrl: 'ftps://ftp.navferty.ru'
+#     username: '$(ftpUsername)'
+#     password: '$(ftpPassword)'
+#     rootDirectory: '$(Build.SourcesDirectory)/Website/'
+#     filePatterns: '**'
+#     remoteDirectory: '/' # navferty.ru/website
+#     clean: false
+#     cleanContents: true
+#     preservePaths: true
+#     trustSSL: true
 
 - task: FtpUpload@2
   name: 'UploadInstallationFiles'
