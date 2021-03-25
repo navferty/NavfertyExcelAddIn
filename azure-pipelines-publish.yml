@@ -51,6 +51,7 @@ steps:
     ArtifactName: 'InstallationFiles'
     publishLocation: 'Container'
 
+# The website with exe file can not be uploaded (ftp hosting policies)
 # - task: FtpUpload@2
 #   name: 'UploadWebsite'
 #   inputs:
@@ -74,7 +75,10 @@ steps:
     username: '$(ftpUsername)'
     password: '$(ftpPassword)'
     rootDirectory: '$(Build.ArtifactStagingDirectory)'
-    filePatterns: '**'
+    filePatterns: |
+      **/*.deploy
+      **/*.manifest
+      **/*.vsto
     remoteDirectory: '/deploy/' # navferty.ru/deploy
     clean: false
     cleanContents: true
