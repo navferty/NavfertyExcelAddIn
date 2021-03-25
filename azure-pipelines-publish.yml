@@ -75,7 +75,7 @@ steps:
     username: '$(ftpUsername)'
     password: '$(ftpPassword)'
     rootDirectory: '$(Build.ArtifactStagingDirectory)'
-    filePatterns: '**/*.deploy,**/*.manifest,**/*.vsto'
+    filePatterns: '**/*.deploy **/*.manifest **/*.vsto'
     remoteDirectory: '/deploy/' # navferty.ru/deploy
     clean: false
     cleanContents: true
