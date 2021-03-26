@@ -55,5 +55,24 @@ namespace NavfertyExcelAddIn.UnitTests.WorksheetCellsEditing
 			// all 57 colors
 			Assert.AreEqual(57, RangeExtensionsStub.SetColorInvocations.Count());
 		}
+
+		[TestMethod]
+		public void HighlightDuplicates_SomeCellsAreNull_Success()
+		{
+			var cells = new[]
+			{
+				new RangeBuilder().WithSingleValue(1).Build(),
+				new RangeBuilder().WithSingleValue(2).Build(),
+				new RangeBuilder().WithSingleValue(3).Build(),
+				null,
+				new RangeBuilder().WithSingleValue(3).Build(),
+				new RangeBuilder().WithSingleValue(4).Build(),
+			};
+			var selection = new RangeBuilder().WithEnumrableRanges(cells).Build();
+
+			duplicatesHighlighter.HighlightDuplicates(selection);
+
+			Assert.AreEqual(1, RangeExtensionsStub.SetColorInvocations.Count());
+		}
 	}
 }
