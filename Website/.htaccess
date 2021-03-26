@@ -1,4 +1,3 @@
 RewriteEngine On
-RewriteCond %{HTTPS} off [OR]
-RewriteCond %{HTTP_HOST} !^www\.navferty\.ru$ [NC]
-RewriteRule ^(.*)$ https://www.navferty.ru/$1 [L,R=301]
+RewriteCond %{HTTPS} off
+RewriteRule ^(.*)$ https://navferty.ru/$1 [L,R=301]
