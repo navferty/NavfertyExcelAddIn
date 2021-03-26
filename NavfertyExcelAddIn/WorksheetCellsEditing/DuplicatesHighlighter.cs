@@ -34,6 +34,7 @@ namespace NavfertyExcelAddIn.WorksheetCellsEditing
 		private Dictionary<string, Range[]> ExtractDuplicates(IEnumerable<Range> cells)
 		{
 			return cells
+				.Where(x => x != null)
 				.GroupBy(x => ((object)x.Value)?.ToString().ToLowerInvariant(), new ValueEqualityComparer())
 				.Where(x => x.Count() > 1 && !string.IsNullOrEmpty(x.Key))
 				.ToDictionary(x => x.Key, x => x.ToArray());
