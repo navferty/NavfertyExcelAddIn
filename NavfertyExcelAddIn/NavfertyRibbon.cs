@@ -296,6 +296,9 @@ namespace NavfertyExcelAddIn
 			if (range == null)
 				return;
 
+			if (range.Count == 1)
+				range = activeSheet.UsedRange;
+
 			logger.Debug($"FindErrors. Range selected is {range.Address}");
 
 			IReadOnlyCollection<InteractiveErrorItem> allErrors;
