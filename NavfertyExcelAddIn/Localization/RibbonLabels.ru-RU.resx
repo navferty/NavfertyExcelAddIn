@@ -207,4 +207,13 @@
   <data name="UndoLastAction" xml:space="preserve">
     <value>Отменить последнее действие</value>
   </data>
+  <data name="SwitchReferenceStyle" xml:space="preserve">
+    <value>Изменить стиль ссылок (A1/R1C1)</value>
+  </data>
+  <data name="ToggleSheetLabels" xml:space="preserve">
+    <value>Отобразить/скрыть значки листов</value>
+  </data>
+  <data name="ViewGroup" xml:space="preserve">
+    <value>Вид</value>
+  </data>
 </root>

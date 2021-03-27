@@ -82,6 +82,11 @@
           </splitButton>
         </group>
 
+        <group id="ViewGroup" getLabel="GetLabel" autoScale="1">
+          <button id="ToggleSheetLabels" getLabel="GetLabel" onAction="ToggleSheetLabels" size="normal" keytip="TS"/>
+          <button id="SwitchReferenceStyle" getLabel="GetLabel" onAction="SwitchReferenceStyle" size="normal" keytip="RS"/>
+        </group>
+
         <group id="XmlToolsGroup" getLabel="GetLabel" autoScale="1">
           <button id="CreateSampleXml" getLabel="GetLabel" onAction="CreateSampleXml" image="createSampleXml"
                   size="large" keytip="X"/>
