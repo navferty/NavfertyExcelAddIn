@@ -74,6 +74,29 @@ namespace NavfertyExcelAddIn
 			logger.Debug($"Ribbon loaded");
 		}
 
+		#region View Group
+		public void ToggleSheetLabels(IRibbonControl ribbonControl)
+		{
+			if (App.ActiveWindow != null)
+				App.ActiveWindow.DisplayWorkbookTabs = !App.ActiveWindow.DisplayWorkbookTabs;
+		}
+		public void SwitchReferenceStyle(IRibbonControl ribbonControl)
+		{
+			if (App.ActiveWindow == null)
+				return;
+
+			switch (App.ReferenceStyle)
+			{
+				case XlReferenceStyle.xlA1:
+					App.ReferenceStyle = XlReferenceStyle.xlR1C1;
+					break;
+				case XlReferenceStyle.xlR1C1:
+					App.ReferenceStyle = XlReferenceStyle.xlA1;
+					break;
+			}
+		}
+		#endregion
+
 		#region Common tools
 		public void UndoLastAction(IRibbonControl ribbonControl)
 		{

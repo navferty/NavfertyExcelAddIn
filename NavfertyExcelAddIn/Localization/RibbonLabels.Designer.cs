@@ -196,11 +196,29 @@ namespace NavfertyExcelAddIn.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Switch Reference Style (A1/R1C1).
+        /// </summary>
+        internal static string SwitchReferenceStyle {
+            get {
+                return ResourceManager.GetString("SwitchReferenceStyle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Toggle Case.
         /// </summary>
         internal static string ToggleCase {
             get {
                 return ResourceManager.GetString("ToggleCase", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Toggle Sheet Labels Display.
+        /// </summary>
+        internal static string ToggleSheetLabels {
+            get {
+                return ResourceManager.GetString("ToggleSheetLabels", resourceCulture);
             }
         }
         
@@ -318,6 +336,15 @@ namespace NavfertyExcelAddIn.Localization {
         internal static string ValidateXml {
             get {
                 return ResourceManager.GetString("ValidateXml", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to View.
+        /// </summary>
+        internal static string ViewGroup {
+            get {
+                return ResourceManager.GetString("ViewGroup", resourceCulture);
             }
         }
         
