@@ -61,7 +61,7 @@ namespace NavfertyExcelAddIn.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Saves the selected range of values to the clipboard using Markdown markup..
+        ///   Looks up a localized string similar to Save the selected range of values to the clipboard using Markdown markup..
         /// </summary>
         internal static string CopyAsMarkdown {
             get {
@@ -79,7 +79,7 @@ namespace NavfertyExcelAddIn.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Finds all cells in the specified range that have any errors (#)..
+        ///   Looks up a localized string similar to Find all cells in the specified range that have any errors (#)..
         /// </summary>
         internal static string FindErrors {
             get {
@@ -88,7 +88,7 @@ namespace NavfertyExcelAddIn.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Paints groups of duplicates with different colors..
+        ///   Looks up a localized string similar to Paint groups of duplicates with different colors..
         /// </summary>
         internal static string HighlightDuplicates {
             get {
@@ -97,7 +97,7 @@ namespace NavfertyExcelAddIn.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Converts the cell data type to a numeric one..
+        ///   Looks up a localized string similar to Convert the cell data type to a numeric one..
         /// </summary>
         internal static string ParseNumerics {
             get {
@@ -106,7 +106,7 @@ namespace NavfertyExcelAddIn.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Changes similar letters of the Russian and English alphabets, for example: &apos;У&apos; - &gt; &apos;Y&apos;..
+        ///   Looks up a localized string similar to Change similar letters of the Russian and English alphabets, for example: &apos;У&apos; - &gt; &apos;Y&apos;..
         /// </summary>
         internal static string ReplaceChars {
             get {
@@ -115,7 +115,7 @@ namespace NavfertyExcelAddIn.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Rewrites the numeric value of the cell with words. The default is the Russian language.
+        ///   Looks up a localized string similar to Rewrite the numeric value of the cell with words. The default is the Russian language.
         ///Allows rewriting values in range -999 billion to 999 billion, with precision up to thousandths..
         /// </summary>
         internal static string StringifyNumericsButton {
@@ -125,7 +125,7 @@ namespace NavfertyExcelAddIn.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Rewrites the numeric value of a cell in English with words..
+        ///   Looks up a localized string similar to Rewrite the numeric value of a cell in English with words..
         /// </summary>
         internal static string StringifyNumericsEn {
             get {
@@ -134,7 +134,7 @@ namespace NavfertyExcelAddIn.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Rewrites the numeric value of a cell in French with words..
+        ///   Looks up a localized string similar to Rewrite the numeric value of a cell in French with words..
         /// </summary>
         internal static string StringifyNumericsFr {
             get {
@@ -143,7 +143,7 @@ namespace NavfertyExcelAddIn.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Rewrites the numeric value of a cell in Russian with words..
+        ///   Looks up a localized string similar to Rewrite the numeric value of a cell in Russian with words..
         /// </summary>
         internal static string StringifyNumericsRu {
             get {
@@ -152,7 +152,7 @@ namespace NavfertyExcelAddIn.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Changes the case of all words in the cell. Replacement order: lowercase, uppercase, first capital, lowercase....
+        ///   Looks up a localized string similar to Change the case of all words in the cell. Replacement order: lowercase, uppercase, first capital, lowercase....
         /// </summary>
         internal static string ToggleCase {
             get {
@@ -161,7 +161,7 @@ namespace NavfertyExcelAddIn.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Changes the Russian alphabet to English using transliteration, for example: &apos;У&apos; - &gt; &apos;U&apos;..
+        ///   Looks up a localized string similar to Change the Russian alphabet to English using transliteration, for example: &apos;У&apos; - &gt; &apos;U&apos;..
         /// </summary>
         internal static string Transliterate {
             get {
@@ -179,7 +179,7 @@ namespace NavfertyExcelAddIn.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Reduces the groups of spaces between the entered parts of the cell value to one..
+        ///   Looks up a localized string similar to Trim extra spaces, tabs and &apos;new line&apos; symbols..
         /// </summary>
         internal static string TrimSpaces {
             get {
@@ -197,7 +197,7 @@ namespace NavfertyExcelAddIn.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Parts of the cell duplicate their content..
+        ///   Looks up a localized string similar to Split merged cells and fill each cell with original content..
         /// </summary>
         internal static string UnmergeCells {
             get {
@@ -206,7 +206,7 @@ namespace NavfertyExcelAddIn.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Checking that values meet certain standards. Use the pop-up list to select a standard..
+        ///   Looks up a localized string similar to Checking values against standards selected with drop down..
         /// </summary>
         internal static string ValidateValuesButton {
             get {
