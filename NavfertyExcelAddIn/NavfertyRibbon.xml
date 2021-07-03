@@ -48,8 +48,17 @@
 
           <button id="ToggleCase" getLabel="GetLabel" onAction="ToggleCase" image="toggleCase"
                   size="large" keytip="TC" getScreentip="GetLabel" getSupertip="GetSupertip"/>
-          <button id="TrimSpaces" getLabel="GetLabel" onAction="TrimSpaces" image="trimSpaces"
-                  size="large" keytip="R" getScreentip="GetLabel" getSupertip="GetSupertip"/>
+
+          <splitButton id="TrimSpacesSplitButton" size="large" >
+            <button id="TrimSpaces" getLabel="GetLabel" onAction="TrimSpaces" image="trimSpaces"
+                    keytip="R" getScreentip="GetLabel" getSupertip="GetSupertip"/>
+              <menu>
+                <button id="RemoveAllSpaces" getLabel="GetLabel" onAction="RemoveAllSpaces" image="removeAllSpaces"
+                        keytip="A" getScreentip="GetLabel" getSupertip="GetSupertip"/>
+                <button id="TrimExtraSpaces" getLabel="GetLabel" onAction="TrimExtraSpaces" image="trimExtraSpaces"
+                        keytip="E" getScreentip="GetLabel" getSupertip="GetSupertip"/>
+              </menu>
+          </splitButton>
         </group>
 
         <group id="CommonGroup" getLabel="GetLabel" autoScale="1">

@@ -133,7 +133,7 @@
     <value>Изменить регистр</value>
   </data>
   <data name="TrimSpaces" xml:space="preserve">
-    <value>Удалить пробелы</value>
+    <value>Очистить пробелы</value>
   </data>
   <data name="UnmergeCells" xml:space="preserve">
     <value>Разъединение ячеек с заполнением</value>
@@ -215,5 +215,11 @@
   </data>
   <data name="ViewGroup" xml:space="preserve">
     <value>Вид</value>
+  </data>
+  <data name="RemoveAllSpaces" xml:space="preserve">
+    <value>Удалить все пробелы</value>
+  </data>
+  <data name="TrimExtraSpaces" xml:space="preserve">
+    <value>Очистить лишние пробелы</value>
   </data>
 </root>

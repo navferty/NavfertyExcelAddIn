@@ -130,7 +130,7 @@
     <value>Change the case of all words in the cell. Replacement order: lowercase, uppercase, first capital, lowercase...</value>
   </data>
   <data name="TrimSpaces" xml:space="preserve">
-    <value>Trim extra spaces, tabs and 'new line' symbols.</value>
+    <value>Trim or remove spaces, tabs and 'new line' symbols.</value>
   </data>
   <data name="UnmergeCells" xml:space="preserve">
     <value>Split merged cells and fill each cell with original content.</value>
@@ -168,5 +168,11 @@ Allows rewriting values in range -999 billion to 999 billion, with precision up 
   </data>
   <data name="UndoLastAction" xml:space="preserve">
     <value>Undo the latest action done with this add-in. The undo is possible for certain functions in the sections 'Converting Values' and 'Formatting Values' and only in case the cells' values have not been changed after that action.</value>
+  </data>
+  <data name="RemoveAllSpaces" xml:space="preserve">
+    <value>Remove all spaces in selected cells or entire sheet</value>
+  </data>
+  <data name="TrimExtraSpaces" xml:space="preserve">
+    <value>Trim extra spaces in cell values. Remove all trailing spaces, replace duplicated spaces in the middle of cell values.</value>
   </data>
 </root>

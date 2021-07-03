@@ -151,6 +151,15 @@ namespace NavfertyExcelAddIn.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Remove All Spaces.
+        /// </summary>
+        internal static string RemoveAllSpaces {
+            get {
+                return ResourceManager.GetString("RemoveAllSpaces", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Replace Chars &apos;У&apos; -&gt; &apos;Y&apos;.
         /// </summary>
         internal static string ReplaceChars {
@@ -237,6 +246,15 @@ namespace NavfertyExcelAddIn.Localization {
         internal static string TransliterateButton {
             get {
                 return ResourceManager.GetString("TransliterateButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Trim Extra Spaces.
+        /// </summary>
+        internal static string TrimExtraSpaces {
+            get {
+                return ResourceManager.GetString("TrimExtraSpaces", resourceCulture);
             }
         }
         

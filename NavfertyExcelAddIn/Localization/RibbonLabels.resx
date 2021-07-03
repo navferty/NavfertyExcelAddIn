@@ -216,4 +216,10 @@
   <data name="ViewGroup" xml:space="preserve">
     <value>View</value>
   </data>
+  <data name="RemoveAllSpaces" xml:space="preserve">
+    <value>Remove All Spaces</value>
+  </data>
+  <data name="TrimExtraSpaces" xml:space="preserve">
+    <value>Trim Extra Spaces</value>
+  </data>
 </root>
