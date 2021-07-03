@@ -33,7 +33,7 @@ namespace NavfertyExcelAddIn.UnitTests.WorksheetCellsEditing
 			var selection = rangeBuilder.Build();
 
 
-			emptySpaceTrimmer.TrimSpaces(selection);
+			emptySpaceTrimmer.TrimExtraSpaces(selection);
 
 
 			var expected = "a b c";
@@ -58,7 +58,7 @@ namespace NavfertyExcelAddIn.UnitTests.WorksheetCellsEditing
 			var selection = rangeBuilder.Build();
 
 
-			emptySpaceTrimmer.TrimSpaces(selection);
+			emptySpaceTrimmer.TrimExtraSpaces(selection);
 
 			var expected = new object[,]
 			{
@@ -69,6 +69,55 @@ namespace NavfertyExcelAddIn.UnitTests.WorksheetCellsEditing
 			rangeBuilder.MockObject.Verify(x => x.set_Value(It.IsAny<object>(), It.IsAny<object[,]>()), Times.Once);
 			rangeBuilder.MockObject.Verify(x => x.set_Value(It.IsAny<object>(), It.Is<object[,]>(v => AssertAssignedValue(expected, v))));
 		}
+
+		[TestMethod]
+		public void RemoveAllSpaces_EmptyValue_Null()
+		{
+			var value = "   \r\n     \t";
+			var rangeBuilder = new RangeBuilder()
+				.WithWorksheet()
+				.WithAreas()
+				.WithSingleValue(value)
+				.WithSetValue();
+			var selection = rangeBuilder.Build();
+
+
+			emptySpaceTrimmer.RemoveAllSpaces(selection);
+
+
+			rangeBuilder.MockObject.Verify(x => x.set_Value(It.IsAny<object>(), It.IsAny<string>()), Times.Once);
+			rangeBuilder.MockObject.Verify(x => x.set_Value(It.IsAny<object>(), It.Is<string>(v => v == null)));
+		}
+
+		[TestMethod]
+		public void RemoveAllSpaces_AllValues_NoSpacesLeft()
+		{
+			var values = new object[,]
+			{
+				{ "abc ", " def", "  g h i\t" },
+				{ "jk\r\nl", "   \r\n   \t", "   " },
+				{ "", null, (int)CVErrEnum.ErrNA }
+			};
+			var rangeBuilder = new RangeBuilder()
+				.WithWorksheet()
+				.WithAreas()
+				.WithMultipleValue(values)
+				.WithSetValue();
+			var selection = rangeBuilder.Build();
+
+
+			emptySpaceTrimmer.RemoveAllSpaces(selection);
+
+			var expected = new object[,]
+			{
+				{ "abc", "def", "ghi" },
+				{ "jkl", null, null },
+				{ null, null, (int)CVErrEnum.ErrNA }
+			};
+			rangeBuilder.MockObject.Verify(x => x.set_Value(It.IsAny<object>(), It.IsAny<object[,]>()), Times.Once);
+			rangeBuilder.MockObject.Verify(x => x.set_Value(It.IsAny<object>(), It.Is<object[,]>(v => AssertAssignedValue(expected, v))));
+		}
+
 		private bool AssertAssignedValue(object[,] expected, object[,] value)
 		{
 			CollectionAssert.AreEquivalent(expected, value);

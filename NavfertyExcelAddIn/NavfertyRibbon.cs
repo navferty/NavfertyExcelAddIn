@@ -234,16 +234,35 @@ namespace NavfertyExcelAddIn
 
 		public void TrimSpaces(IRibbonControl ribbonControl)
 		{
+			TrimExtraSpaces(ribbonControl);
+		}
+
+		public void TrimExtraSpaces(IRibbonControl ribbonControl)
+		{
 			var range = GetSelectionOrUsedRange(App.ActiveSheet);
 
 			if (range == null)
 				return;
 
-			logger.Debug($"TrimSpaces. Range selected is {range.Address}");
+			logger.Debug($"{nameof(TrimExtraSpaces)}. Range selected is {range.Address}");
 
 
 			var trimmer = GetService<IEmptySpaceTrimmer>();
-			trimmer.TrimSpaces(range);
+			trimmer.TrimExtraSpaces(range);
+		}
+
+		public void RemoveAllSpaces(IRibbonControl ribbonControl)
+		{
+			var range = GetSelectionOrUsedRange(App.ActiveSheet);
+
+			if (range == null)
+				return;
+
+			logger.Debug($"{nameof(RemoveAllSpaces)}. Range selected is {range.Address}");
+
+
+			var trimmer = GetService<IEmptySpaceTrimmer>();
+			trimmer.RemoveAllSpaces(range);
 		}
 
 		public void UnmergeCells(IRibbonControl ribbonControl)
@@ -389,6 +408,10 @@ namespace NavfertyExcelAddIn
 		private Range GetSelectionOrUsedRange(Worksheet activeSheet)
 		{
 			var selection = (Range)App.Selection;
+
+			if (activeSheet == null || selection == null)
+				return null;
+
 			var allCells = activeSheet.Cells.Rows.EntireRow;
 			var isEntireSheetSelected = allCells.GetRelativeAddress() == selection.GetRelativeAddress();
 			return isEntireSheetSelected

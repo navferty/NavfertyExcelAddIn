@@ -1,4 +1,6 @@
-﻿using Microsoft.Office.Interop.Excel;
+﻿using System.Linq;
+
+using Microsoft.Office.Interop.Excel;
 
 using NavfertyExcelAddIn.Commons;
 
@@ -10,11 +12,24 @@ namespace NavfertyExcelAddIn.WorksheetCellsEditing
 	{
 		private static readonly ILogger logger = LogManager.GetCurrentClassLogger();
 
-		public void TrimSpaces(Range range)
+		public void TrimExtraSpaces(Range range)
 		{
 			logger.Info($"Trim spaces for range {range.GetRelativeAddress()}");
 
 			range.ApplyForEachCellOfType<string, string>(value => value.TrimSpaces());
+		}
+
+		public void RemoveAllSpaces(Range range)
+		{
+			logger.Info($"Trim spaces for range {range.GetRelativeAddress()}");
+
+			range.ApplyForEachCellOfType<string, string>(value =>
+			{
+				if (string.IsNullOrWhiteSpace(value))
+					return null;
+
+				return new string(value.Where(c => !char.IsWhiteSpace(c)).ToArray());
+			});
 		}
 	}
 }

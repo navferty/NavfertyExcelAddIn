@@ -106,6 +106,15 @@ namespace NavfertyExcelAddIn.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Remove all spaces in selected cells or entire sheet.
+        /// </summary>
+        internal static string RemoveAllSpaces {
+            get {
+                return ResourceManager.GetString("RemoveAllSpaces", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Change similar letters of the Russian and English alphabets, for example: &apos;У&apos; - &gt; &apos;Y&apos;..
         /// </summary>
         internal static string ReplaceChars {
@@ -179,7 +188,16 @@ namespace NavfertyExcelAddIn.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Trim extra spaces, tabs and &apos;new line&apos; symbols..
+        ///   Looks up a localized string similar to Trim extra spaces in cell values. Remove all trailing spaces, replace duplicated spaces in the middle of cell values..
+        /// </summary>
+        internal static string TrimExtraSpaces {
+            get {
+                return ResourceManager.GetString("TrimExtraSpaces", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Trim or remove spaces, tabs and &apos;new line&apos; symbols..
         /// </summary>
         internal static string TrimSpaces {
             get {
