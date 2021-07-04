@@ -60,6 +60,7 @@
               </menu>
           </splitButton>
 
+          <!-- Icons are temporary used from ImagesMso gallery -->
           <button id="RepairConditionalFormat" getLabel="GetLabel" onAction="RepairConditionalFormat"
                   imageMso="ConditionalFormattingHighlightCompareColumns"
                   size="large" keytip="CF" getScreentip="GetLabel" getSupertip="GetSupertip"/>
@@ -96,8 +97,11 @@
         </group>
 
         <group id="ViewGroup" getLabel="GetLabel" autoScale="1">
-          <button id="ToggleSheetLabels" getLabel="GetLabel" onAction="ToggleSheetLabels" size="normal" keytip="TS"/>
-          <button id="SwitchReferenceStyle" getLabel="GetLabel" onAction="SwitchReferenceStyle" size="normal" keytip="RS"/>
+          <!-- Icons are temporary used from ImagesMso gallery -->
+          <button id="ToggleSheetLabels" getLabel="GetLabel" imageMso="NameCreateFromSelection"
+                  onAction="ToggleSheetLabels" size="normal" keytip="TS"/>
+          <button id="SwitchReferenceStyle" getLabel="GetLabel" imageMso="DatasheetView"
+                  onAction="SwitchReferenceStyle" size="normal" keytip="RS"/>
         </group>
 
         <group id="XmlToolsGroup" getLabel="GetLabel" autoScale="1">
