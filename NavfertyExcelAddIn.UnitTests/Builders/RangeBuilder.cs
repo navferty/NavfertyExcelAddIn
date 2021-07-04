@@ -43,7 +43,7 @@ namespace NavfertyExcelAddIn.UnitTests.Builders
 		public RangeBuilder WithAreas()
 		{
 			areas = new Mock<Areas>(MockBehavior.Strict);
-			areas.As<IEnumerable>().Setup(x => x.GetEnumerator())
+			areas.Setup(x => x.GetEnumerator())
 				.Returns(new[] { MockObject.Object }.GetEnumerator());
 
 			MockObject.Setup(x => x.Areas).Returns(areas.Object);
