@@ -50,8 +50,8 @@ steps:
     # manually collecting coverage in next task
     codeCoverageEnabled: false
     # tests depending on Interop.Excel - run locally
-    testFiltercriteria: 'Name!=UnprotectWorkbookAndWorksheet_CanEditAndAddWorksheet
-                        &Name!=UnprotectWorkbookAndWorksheet_CanEditAndAddWorksheet' # more tests
+    # https://github.com/microsoft/vstest-docs/blob/master/docs/filter.md
+    testFiltercriteria: 'TestCategory!=Automation'
 
 - task: PowerShell@2
   name: 'CollectCodeCoverage'
