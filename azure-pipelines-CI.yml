@@ -51,7 +51,7 @@ steps:
     codeCoverageEnabled: false
     # tests depending on Interop.Excel - run locally
     # https://github.com/microsoft/vstest-docs/blob/master/docs/filter.md
-    testFiltercriteria: 'TestCategory=Automation'
+    testFiltercriteria: 'TestCategory!=Automation'
 
 - task: PowerShell@2
   name: 'CollectCodeCoverage'
