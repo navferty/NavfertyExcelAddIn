@@ -48,6 +48,11 @@ namespace NavfertyExcelAddIn
 				.EnableInterfaceInterceptors()
 				.InterceptedBy(typeof(ExceptionLogger));
 
+			builder.RegisterType<ConditionalFormatFixer>()
+				.As<IConditionalFormatFixer>()
+				.EnableInterfaceInterceptors()
+				.InterceptedBy(typeof(ExceptionLogger));
+
 			builder.RegisterType<CaseToggler>()
 				.As<ICaseToggler>()
 				.EnableInterfaceInterceptors()

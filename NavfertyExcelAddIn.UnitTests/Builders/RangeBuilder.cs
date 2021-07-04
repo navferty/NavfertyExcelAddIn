@@ -8,6 +8,7 @@ using Moq;
 using NavfertyExcelAddIn.FindFormulaErrors;
 
 using Areas = Microsoft.Office.Interop.Excel.Areas;
+using Application = Microsoft.Office.Interop.Excel.Application;
 using Range = Microsoft.Office.Interop.Excel.Range;
 using Worksheet = Microsoft.Office.Interop.Excel.Worksheet;
 using Workbook = Microsoft.Office.Interop.Excel.Workbook;
@@ -19,12 +20,23 @@ namespace NavfertyExcelAddIn.UnitTests.Builders
 		private Mock<Worksheet> ws;
 		private Mock<Areas> areas;
 
+		private Range[] ranges;
+
 		public Mock<Range> MockObject { get; private set; } = new Mock<Range>(MockBehavior.Strict);
 
 		public RangeBuilder WithWorksheet(string wsName = "Sheet1")
 		{
 			ws = new Mock<Worksheet>(MockBehavior.Loose);
 			ws.Setup(x => x.Name).Returns(wsName);
+
+			var app = new Mock<Application>(MockBehavior.Strict);
+			app.SetupGet(x => x.CutCopyMode).Returns(Microsoft.Office.Interop.Excel.XlCutCopyMode.xlCopy);
+			app.SetupSet(x => x.CutCopyMode = It.IsAny<Microsoft.Office.Interop.Excel.XlCutCopyMode>());
+
+			ws.Setup(x => x.Application).Returns(app.Object);
+
+			ws.SetupGet(x => x.get_Range(It.IsAny<object>(), It.IsAny<object>()))
+				.Returns(MockObject.Object);
 
 			var parentWb = new Mock<Workbook>(MockBehavior.Loose);
 			parentWb.Setup(x => x.Name).Returns("Book1");
@@ -52,6 +64,56 @@ namespace NavfertyExcelAddIn.UnitTests.Builders
 			return this;
 		}
 
+		public RangeBuilder WithIndexer(IEnumerable<Range> ranges = null)
+		{
+			this.ranges = ranges?.ToArray()
+				?? Enumerable.Range(0, 10).Select(z => new RangeBuilder().WithSingleValue(z).Build()).ToArray();
+			MockObject
+				.Setup(x => x[It.IsAny<int>(), Missing.Value])
+				.Returns(new InvocationFunc(i => this.ranges[(int)i.Arguments.First() - 1]));
+			return this;
+		}
+
+		public RangeBuilder WithRows()
+		{
+			MockObject.Setup(x => x.Rows).Returns(MockObject.Object);
+			return this;
+		}
+
+		public RangeBuilder WithCopy()
+		{
+			MockObject.Setup(x => x.Copy(It.IsAny<Missing>())).Returns(MockObject.Object);
+			return this;
+		}
+
+		public RangeBuilder WithPaste()
+		{
+			MockObject
+				.Setup(x => x.PasteSpecial(
+					It.IsAny<Microsoft.Office.Interop.Excel.XlPasteType>(),
+					It.IsAny<Microsoft.Office.Interop.Excel.XlPasteSpecialOperation>(),
+					It.IsAny<object>(),
+					It.IsAny<object>()))
+				.Returns(MockObject.Object);
+
+			return this;
+		}
+
+		public RangeBuilder WithCount(int count)
+		{
+			MockObject.Setup(x => x.Count).Returns(count);
+			return this;
+		}
+
+		public RangeBuilder WithConditionalFormatting(int rulesCount)
+		{
+			var f = new Mock<Microsoft.Office.Interop.Excel.FormatConditions>(MockBehavior.Strict);
+			f.Setup(x => x.Count).Returns(rulesCount);
+			f.Setup(x => x.Delete());
+			MockObject.Setup(x => x.FormatConditions).Returns(f.Object);
+			return this;
+		}
+
 		public RangeBuilder WithSingleValue(object value)
 		{
 			MockObject.Setup(x => x.get_Value(Missing.Value)).Returns(value);
@@ -73,12 +135,13 @@ namespace NavfertyExcelAddIn.UnitTests.Builders
 
 		public RangeBuilder WithEnumrableRanges(IEnumerable<Range> ranges = null)
 		{
-			var r = ranges ?? Enumerable.Range(0, 10).Select(z => new RangeBuilder().WithSingleValue(z).Build());
+			this.ranges = ranges?.ToArray()
+				?? Enumerable.Range(0, 10).Select(z => new RangeBuilder().WithSingleValue(z).Build()).ToArray();
 
 			MockObject
 				.As<IEnumerable>()
 				.Setup(x => x.GetEnumerator())
-				.Returns(r.GetEnumerator());
+				.Returns(this.ranges.GetEnumerator());
 			return this;
 		}
 

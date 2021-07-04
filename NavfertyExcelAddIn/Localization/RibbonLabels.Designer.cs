@@ -160,6 +160,15 @@ namespace NavfertyExcelAddIn.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Repair Conditional Formatting.
+        /// </summary>
+        internal static string RepairConditionalFormat {
+            get {
+                return ResourceManager.GetString("RepairConditionalFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Replace Chars &apos;У&apos; -&gt; &apos;Y&apos;.
         /// </summary>
         internal static string ReplaceChars {

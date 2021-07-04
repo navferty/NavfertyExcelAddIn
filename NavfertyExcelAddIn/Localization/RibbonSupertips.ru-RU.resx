@@ -175,4 +175,7 @@
   <data name="TrimExtraSpaces" xml:space="preserve">
     <value>Удаляет пробелы по краям значений ячеек, заменяет дублированные пробелы внутри значений ячеек до одного.</value>
   </data>
+  <data name="RepairConditionalFormat" xml:space="preserve">
+    <value>Применяет правила условного форматирования для выделенной таблицы, взяв за образец правила из первой строки выделенного диапазона.</value>
+  </data>
 </root>
