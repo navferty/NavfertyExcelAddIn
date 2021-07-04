@@ -222,4 +222,7 @@
   <data name="TrimExtraSpaces" xml:space="preserve">
     <value>Очистить лишние пробелы</value>
   </data>
+  <data name="RepairConditionalFormat" xml:space="preserve">
+    <value>Починить условное форматирование</value>
+  </data>
 </root>

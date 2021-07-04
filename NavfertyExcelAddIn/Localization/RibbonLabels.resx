@@ -222,4 +222,7 @@
   <data name="TrimExtraSpaces" xml:space="preserve">
     <value>Trim Extra Spaces</value>
   </data>
+  <data name="RepairConditionalFormat" xml:space="preserve">
+    <value>Repair Conditional Formatting</value>
+  </data>
 </root>

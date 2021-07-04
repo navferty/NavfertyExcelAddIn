@@ -265,6 +265,19 @@ namespace NavfertyExcelAddIn
 			trimmer.RemoveAllSpaces(range);
 		}
 
+		public void RepairConditionalFormat(IRibbonControl ribbonControl)
+		{
+			var range = GetSelectionOrUsedRange(App.ActiveSheet);
+			if (range == null)
+				return;
+
+			logger.Debug($"{nameof(RepairConditionalFormat)}. Range selected is {range.Address}");
+
+			var formatFixer = GetService<IConditionalFormatFixer>();
+			formatFixer.FillRange(range);
+		}
+
+
 		public void UnmergeCells(IRibbonControl ribbonControl)
 		{
 			var range = GetSelectionOrUsedRange(App.ActiveSheet);

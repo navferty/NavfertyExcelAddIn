@@ -175,4 +175,7 @@ Allows rewriting values in range -999 billion to 999 billion, with precision up 
   <data name="TrimExtraSpaces" xml:space="preserve">
     <value>Trim extra spaces in cell values. Remove all trailing spaces, replace duplicated spaces in the middle of cell values.</value>
   </data>
+  <data name="RepairConditionalFormat" xml:space="preserve">
+    <value>Fill conditional formatting in entire table, with rules based on first table row</value>
+  </data>
 </root>

@@ -115,6 +115,15 @@ namespace NavfertyExcelAddIn.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Fill conditional formatting in entire table, with rules based on first table row.
+        /// </summary>
+        internal static string RepairConditionalFormat {
+            get {
+                return ResourceManager.GetString("RepairConditionalFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Change similar letters of the Russian and English alphabets, for example: &apos;У&apos; - &gt; &apos;Y&apos;..
         /// </summary>
         internal static string ReplaceChars {

@@ -43,7 +43,7 @@
         <group id="FormattingValues" getLabel="GetLabel" autoScale="1">
 
           <button id="CutNames" getLabel="GetLabel" onAction="CutNames" image="cutNames"
-                  size="large" keytip="C" getScreentip="GetLabel" getSupertip="GetSupertip"
+                  size="large" keytip="CN" getScreentip="GetLabel" getSupertip="GetSupertip"
                   visible="false"/> <!-- Disabled until feature is ready -->
 
           <button id="ToggleCase" getLabel="GetLabel" onAction="ToggleCase" image="toggleCase"
@@ -53,12 +53,16 @@
             <button id="TrimSpaces" getLabel="GetLabel" onAction="TrimSpaces" image="trimSpaces"
                     keytip="R" getScreentip="GetLabel" getSupertip="GetSupertip"/>
               <menu>
-                <button id="RemoveAllSpaces" getLabel="GetLabel" onAction="RemoveAllSpaces" image="removeAllSpaces"
+                <button id="RemoveAllSpaces" getLabel="GetLabel" onAction="RemoveAllSpaces" image="trimSpaces"
                         keytip="A" getScreentip="GetLabel" getSupertip="GetSupertip"/>
-                <button id="TrimExtraSpaces" getLabel="GetLabel" onAction="TrimExtraSpaces" image="trimExtraSpaces"
+                <button id="TrimExtraSpaces" getLabel="GetLabel" onAction="TrimExtraSpaces" image="trimSpaces"
                         keytip="E" getScreentip="GetLabel" getSupertip="GetSupertip"/>
               </menu>
           </splitButton>
+
+          <button id="RepairConditionalFormat" getLabel="GetLabel" onAction="RepairConditionalFormat"
+                  imageMso="ConditionalFormattingHighlightCompareColumns"
+                  size="large" keytip="CF" getScreentip="GetLabel" getSupertip="GetSupertip"/>
         </group>
 
         <group id="CommonGroup" getLabel="GetLabel" autoScale="1">

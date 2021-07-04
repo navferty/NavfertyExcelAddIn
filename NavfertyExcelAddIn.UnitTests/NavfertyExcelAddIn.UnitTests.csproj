@@ -100,6 +100,7 @@
     <Compile Include="UnprotectWorkbook\WbUnprotectorTests.cs" />
     <Compile Include="WorksheetCellsEditing\CaseTogglerTests.cs" />
     <Compile Include="WorksheetCellsEditing\CellsToMarkdownReaderTests.cs" />
+    <Compile Include="WorksheetCellsEditing\ConditionalFormatFixerTests.cs" />
     <Compile Include="WorksheetCellsEditing\DuplicatesHighlighterTests.cs" />
     <Compile Include="WorksheetCellsEditing\EmptySpaceTrimmerTests.cs" />
     <Compile Include="XmlTools\XmlSampleCreatorTests.cs" />
