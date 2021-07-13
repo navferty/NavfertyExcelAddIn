@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Drawing;
 using System.IO;
@@ -64,7 +65,13 @@ namespace NavfertyExcelAddIn
 		#region IRibbonExtensibility
 		public string GetCustomUI(string ribbonID)
 		{
-			return GetResourceText();
+			var sw = Stopwatch.StartNew();
+			logger.Debug($"{nameof(GetCustomUI)} - {ribbonID}");
+
+			var customUiXml = GetResourceText();
+
+			logger.Debug($"{nameof(GetCustomUI)} got xml for {sw.Elapsed}");
+			return customUiXml;
 		}
 		#endregion
 
@@ -391,15 +398,54 @@ namespace NavfertyExcelAddIn
 		#region Utils
 		public string GetLabel(IRibbonControl ribbonControl)
 		{
-			return RibbonLabels.ResourceManager.GetString(ribbonControl.Id);
+			var sw = Stopwatch.StartNew();
+			logger.Debug($"{nameof(GetLabel)} - {ribbonControl?.Id}");
+			try
+			{
+				var label = RibbonLabels.ResourceManager.GetString(ribbonControl.Id);
+				logger.Debug($"{nameof(GetLabel)} - {ribbonControl?.Id}: '{label}'. Elapsed {sw.Elapsed}");
+				return label;
+			}
+			catch (Exception ex)
+			{
+				logger.Error($"{nameof(GetLabel)} - {ribbonControl?.Id} error after {sw.Elapsed}:");
+				logger.Error(ex);
+				return ribbonControl?.Id;
+			}
 		}
 		public Bitmap GetImage(string imageName)
 		{
-			return (Bitmap)RibbonIcons.ResourceManager.GetObject(imageName);
+			var sw = Stopwatch.StartNew();
+			logger.Debug($"{nameof(GetImage)} - {imageName}");
+			try
+			{
+				var bitmap = (Bitmap)RibbonIcons.ResourceManager.GetObject(imageName);
+				logger.Debug($"{nameof(GetImage)} - {imageName}: '{bitmap?.Size}'. Elapsed {sw.Elapsed}");
+				return bitmap;
+			}
+			catch (Exception ex)
+			{
+				logger.Error($"{nameof(GetImage)} - {imageName} error after {sw.Elapsed}:");
+				logger.Error(ex);
+				return null;
+			}
 		}
 		public string GetSupertip(IRibbonControl ribbonControl)
 		{
-			return RibbonSupertips.ResourceManager.GetString(ribbonControl.Id);
+			var sw = Stopwatch.StartNew();
+			logger.Debug($"{nameof(GetSupertip)} - {ribbonControl?.Id}");
+			try
+			{
+				var superTip = RibbonSupertips.ResourceManager.GetString(ribbonControl.Id);
+				logger.Debug($"{nameof(GetSupertip)} - {ribbonControl?.Id}: '{superTip}'. Elapsed {sw.Elapsed}");
+				return superTip;
+			}
+			catch (Exception ex)
+			{
+				logger.Error($"{nameof(GetSupertip)} - {ribbonControl?.Id} error after {sw.Elapsed}:");
+				logger.Error(ex);
+				return ribbonControl?.Id;
+			}
 		}
 
 		private T GetService<T>()
