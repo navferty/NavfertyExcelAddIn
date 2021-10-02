@@ -79,6 +79,7 @@ namespace NavfertyExcelAddIn.ParseNumerics
 			return $"{positiveFormat};{negativeFormat}";
 		}
 
+<<<<<<< HEAD
 		public static bool operator ==(NumericParseResult obj1, NumericParseResult obj2)
 		{
 			if ((obj1 is null) && (obj2 is null)) return true;
@@ -101,6 +102,19 @@ namespace NavfertyExcelAddIn.ParseNumerics
 
 		public override bool Equals(object obj)
 			=> !(obj is null) && (obj.GetType() == typeof(NumericParseResult) && (this == obj as NumericParseResult));
+=======
+
+		public static bool operator ==(NumericParseResult obj1, NumericParseResult obj2)
+			=> (obj1.ConvertedValue.Equals(obj2.ConvertedValue)
+			&& obj1.Currency == obj2.Currency
+			&& obj1.IsMoney == obj2.IsMoney);
+
+		public static bool operator !=(NumericParseResult obj1, NumericParseResult obj2)
+			=> !(obj1 == obj2);
+
+		public override bool Equals(object obj)
+			=> (null != obj) && (obj.GetType() == typeof(NumericParseResult) && (this == obj as NumericParseResult));
+>>>>>>> 1a6c523 (fix azure-pipelines-publish.yml)
 
 
 

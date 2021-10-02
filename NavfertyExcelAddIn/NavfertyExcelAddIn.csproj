@@ -1,5 +1,6 @@
 ﻿<Project ToolsVersion="16.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+<<<<<<< HEAD
   <!--
     This section defines project-level properties.
 
@@ -16,6 +17,24 @@
     RootNamespace
       In C#, this specifies the namespace given to new files. In VB, all objects are
       wrapped in this namespace at runtime.
+=======
+  <!--
+    This section defines project-level properties.
+
+    AssemblyName
+      Name of the output assembly.
+    Configuration
+      Specifies a default value for debug.
+    OutputType
+      Must be "Library" for VSTO.
+    Platform
+      Specifies what CPU the output of this project can run on.
+    NoStandardLibraries
+      Set to "false" for VSTO.
+    RootNamespace
+      In C#, this specifies the namespace given to new files. In VB, all objects are
+      wrapped in this namespace at runtime.
+>>>>>>> 1a6c523 (fix azure-pipelines-publish.yml)
   -->
   <PropertyGroup>
     <ProjectTypeGuids>{BAA0C2D2-18E2-41B9-852F-F413020CAA33};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -64,6 +83,7 @@
     </BootstrapperPackage>
   </ItemGroup>
   <PropertyGroup>
+<<<<<<< HEAD
     <!--
       OfficeApplication
         Add-in host application
@@ -85,6 +105,29 @@
       Output path of project relative to the project file.
     WarningLevel
       Warning level for the compiler.
+=======
+    <!--
+      OfficeApplication
+        Add-in host application
+    -->
+    <OfficeApplication>Excel</OfficeApplication>
+  </PropertyGroup>
+  <!--
+    This section defines properties that are set when the "Debug" configuration is selected.
+
+    DebugSymbols
+      If "true", create symbols (.pdb). If "false", do not create symbols.
+    DefineConstants
+      Constants defined for the preprocessor.
+    EnableUnmanagedDebugging
+      If "true", starting the debugger will attach both managed and unmanaged debuggers.
+    Optimize
+      If "true", optimize the build output. If "false", do not optimize.
+    OutputPath
+      Output path of project relative to the project file.
+    WarningLevel
+      Warning level for the compiler.
+>>>>>>> 1a6c523 (fix azure-pipelines-publish.yml)
   -->
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -95,6 +138,7 @@
     <DefineConstants>$(DefineConstants);DEBUG;TRACE</DefineConstants>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+<<<<<<< HEAD
   <!--
     This section defines properties that are set when the "Release" configuration is selected.
 
@@ -110,6 +154,23 @@
       Output path of project relative to the project file.
     WarningLevel
       Warning level for the compiler.
+=======
+  <!--
+    This section defines properties that are set when the "Release" configuration is selected.
+
+    DebugSymbols
+      If "true", create symbols (.pdb). If "false", do not create symbols.
+    DefineConstants
+      Constants defined for the preprocessor.
+    EnableUnmanagedDebugging
+      If "true", starting the debugger will attach both managed and unmanaged debuggers.
+    Optimize
+      If "true", optimize the build output. If "false", do not optimize.
+    OutputPath
+      Output path of project relative to the project file.
+    WarningLevel
+      Warning level for the compiler.
+>>>>>>> 1a6c523 (fix azure-pipelines-publish.yml)
   -->
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -119,8 +180,13 @@
     <DefineConstants>$(DefineConstants);TRACE</DefineConstants>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+<<<<<<< HEAD
   <!--
     This section specifies references for the project.
+=======
+  <!--
+    This section specifies references for the project.
+>>>>>>> 1a6c523 (fix azure-pipelines-publish.yml)
   -->
   <ItemGroup>
     <Reference Include="Accessibility" />
@@ -217,6 +283,7 @@
       <Private>False</Private>
     </Reference>
   </ItemGroup>
+<<<<<<< HEAD
   <!--
     This section defines the user source files that are part of the project.
      
@@ -226,6 +293,17 @@
     a text file or XML file).
     The "AppDesigner" element specifies the directory where the application properties files
     can be found.
+=======
+  <!--
+    This section defines the user source files that are part of the project.
+     
+    A "Compile" element specifies a source file to compile.
+    An "EmbeddedResource" element specifies an .resx file for embedded resources.
+    A "None" element specifies a file that is not to be passed to the compiler (for instance, 
+    a text file or XML file).
+    The "AppDesigner" element specifies the directory where the application properties files
+    can be found.
+>>>>>>> 1a6c523 (fix azure-pipelines-publish.yml)
   -->
   <ItemGroup>
     <Compile Include="Commons\FileExtensionFilter.cs" />
@@ -235,6 +313,7 @@
     <Compile Include="DataValidation\CellsValueValidator.cs" />
     <Compile Include="DataValidation\IValidator.cs" />
     <Compile Include="ParseNumerics\NumericParseResult.cs" />
+<<<<<<< HEAD
     <Compile Include="WorksheetProtectUnprotect\frmAskWorksheetProtectionPassword.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -243,6 +322,8 @@
     </Compile>
     <Compile Include="WorksheetProtectUnprotect\WorksheetRow.cs" />
     <Compile Include="WorksheetProtectUnprotect\IWsProtectorUnprotector.cs" />
+=======
+>>>>>>> 1a6c523 (fix azure-pipelines-publish.yml)
     <Compile Include="Transliterate\ICyrillicLettersReplacer.cs" />
     <Compile Include="InteractiveRangeReport\InteractiveErrorItem.cs" />
     <Compile Include="DataValidation\ICellsValueValidator.cs" />
@@ -271,7 +352,10 @@
     <Compile Include="Undo\UndoManager.cs" />
     <Compile Include="WorksheetCellsEditing\ConditionalFormatFixer.cs" />
     <Compile Include="WorksheetCellsEditing\IConditionalFormatFixer.cs" />
+<<<<<<< HEAD
     <Compile Include="WorksheetProtectUnprotect\WsProtectorUnprotector.cs" />
+=======
+>>>>>>> 1a6c523 (fix azure-pipelines-publish.yml)
     <Compile Include="XmlTools\IXmlValidator.cs" />
     <Compile Include="XmlTools\IXsdSchemaValidator.cs" />
     <Compile Include="XmlTools\IXmlSampleCreator.cs" />
@@ -420,9 +504,12 @@
       <LastGenOutput>RibbonIcons.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+<<<<<<< HEAD
     <EmbeddedResource Include="WorksheetProtectUnprotect\frmAskWorksheetProtectionPassword.resx">
       <DependentUpon>frmAskWorksheetProtectionPassword.cs</DependentUpon>
     </EmbeddedResource>
+=======
+>>>>>>> 1a6c523 (fix azure-pipelines-publish.yml)
   </ItemGroup>
   <ItemGroup />
   <PropertyGroup>
@@ -436,7 +523,11 @@
     <ManifestCertificateThumbprint>2975ABEDFA1CC05163C654F2960024090F026B6C</ManifestCertificateThumbprint>
   </PropertyGroup>
   <PropertyGroup>
+<<<<<<< HEAD
     <ManifestKeyFile>NavfertyExcelAddIn_TemporaryKey.pfx</ManifestKeyFile>
+=======
+    <ManifestKeyFile>NavfertyExcelAddIn_1_TemporaryKey.pfx</ManifestKeyFile>
+>>>>>>> 1a6c523 (fix azure-pipelines-publish.yml)
   </PropertyGroup>
   <!-- Include the build rules for a C# project. -->
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
