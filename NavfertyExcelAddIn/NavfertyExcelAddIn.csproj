@@ -234,6 +234,7 @@
     <Compile Include="FindFormulaErrors\CVErrEnum.cs" />
     <Compile Include="DataValidation\CellsValueValidator.cs" />
     <Compile Include="DataValidation\IValidator.cs" />
+    <Compile Include="ParseNumerics\NumericParseResult.cs" />
     <Compile Include="Transliterate\ICyrillicLettersReplacer.cs" />
     <Compile Include="InteractiveRangeReport\InteractiveErrorItem.cs" />
     <Compile Include="DataValidation\ICellsValueValidator.cs" />
@@ -312,6 +313,7 @@
     <Compile Include="XmlTools\XmlValidationError.cs" />
     <Compile Include="XmlTools\XmlValidator.cs" />
     <Compile Include="XmlTools\XsdSchemaValidator.cs" />
+    <None Include="NavfertyExcelAddIn_1_TemporaryKey.pfx" />
     <None Include="Resources\replaceChars.png" />
     <None Include="Resources\replace.png" />
     <None Include="Resources\undo.png" />
@@ -419,10 +421,10 @@
     <SignManifests>true</SignManifests>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestCertificateThumbprint>8A194674EFEB140748CD131659BF16EE09C2361A</ManifestCertificateThumbprint>
+    <ManifestCertificateThumbprint>2975ABEDFA1CC05163C654F2960024090F026B6C</ManifestCertificateThumbprint>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestKeyFile>NavfertyExcelAddIn_TemporaryKey.pfx</ManifestKeyFile>
+    <ManifestKeyFile>NavfertyExcelAddIn_1_TemporaryKey.pfx</ManifestKeyFile>
   </PropertyGroup>
   <!-- Include the build rules for a C# project. -->
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
