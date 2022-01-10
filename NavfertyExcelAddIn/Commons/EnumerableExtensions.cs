@@ -29,7 +29,7 @@ namespace NavfertyExcelAddIn.Commons
 
 		public static void ForEachCell(this Range range, Action<Range> action)
 		{
-			// TODO rewrite to use less read-write calls to interop (like Range.Value)
+			// TODO rewrite to use less read-write calls to interop (like Range.Value) (may be use try/finally with selection.Worksheet.EnableCalculation = false/true?;
 			range.Cast<Range>().ForEach(action);
 		}
 
@@ -109,6 +109,50 @@ namespace NavfertyExcelAddIn.Commons
 					Height = upperI,
 					Width = upperJ
 				});
+			}
+		}
+
+		/// <summary>Allow acces to Range object from transform func</summary>
+		public static void ApplyForEachCellOfType<TIn, TOut>(this Range range, Func<TIn, Range, TOut> transform)
+		{
+			logger.Debug($"Apply transformation to range '{range.GetRelativeAddress()}' on worksheet '{range.Worksheet.Name}'");
+
+			undoManager.StartNewAction(range);
+
+			foreach (Range area in range.Areas)
+			{
+				ApplyToArea(area, transform);
+			}
+		}
+
+		// TODO check boxing time on million values
+		/// <summary>Allow acces to Range object from transform func may be slower than Old</summary>
+		private static void ApplyToArea<TIn, TOut>(Range range, Func<TIn, Range, TOut> transform)
+		{
+			foreach (Range cell in range.Cells)
+			{
+				var cellValue = cell.Value;
+				if (!(cellValue is null))
+				{
+
+					if (cellValue is TIn currentValue)
+					{
+						// TODO transform func may chabge format of cell, and we need to allow undo this, but set/restore cell formating has so weird api...
+						var newValue = transform(currentValue, cell);
+						if (!newValue.Equals(currentValue))
+						{
+							cell.Value = newValue;
+							var undoItem = new UndoItem
+							{
+								OldValue = currentValue,
+								NewValue = newValue,
+								ColumnIndex = cell.Column,
+								RowIndex = cell.Row
+							};
+							undoManager.PushUndoItem(undoItem);
+						}
+					}
+				}
 			}
 		}
 	}
