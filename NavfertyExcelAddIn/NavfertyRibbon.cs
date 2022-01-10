@@ -24,6 +24,7 @@ using NavfertyExcelAddIn.Transliterate;
 using NavfertyExcelAddIn.Undo;
 using NavfertyExcelAddIn.UnprotectWorkbook;
 using NavfertyExcelAddIn.WorksheetCellsEditing;
+using NavfertyExcelAddIn.WorksheetProtectorUnprotector;
 using NavfertyExcelAddIn.XmlTools;
 
 using NLog;
@@ -197,6 +198,18 @@ namespace NavfertyExcelAddIn
 			wbUnprotector.UnprotectWorkbookWithAllWorksheets(path);
 
 			App.Workbooks.Open(path);
+		}
+
+		public void ProtectUnprotectWorksheets(IRibbonControl ribbonControl)
+		{
+			var wb = App.ActiveWorkbook;
+			if (wb is null) return;
+
+			var path = wb.FullName;
+			logger.Debug($"ProtectUnprotectWorksheets {path}");
+
+			var wsProtectorUnprotector = GetService<IWsProtectorUnprotector>();
+			wsProtectorUnprotector.ProtectUnprotectSelectedWorksheets(wb);
 		}
 
 		public void CutNames(IRibbonControl ribbonControl)

@@ -235,6 +235,14 @@
     <Compile Include="DataValidation\CellsValueValidator.cs" />
     <Compile Include="DataValidation\IValidator.cs" />
     <Compile Include="ParseNumerics\NumericParseResult.cs" />
+    <Compile Include="WorksheetProtectUnprotect\frmAskWorksheetProtectionPassword.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="WorksheetProtectUnprotect\frmAskWorksheetProtectionPassword.Designer.cs">
+      <DependentUpon>frmAskWorksheetProtectionPassword.cs</DependentUpon>
+    </Compile>
+    <Compile Include="WorksheetProtectUnprotect\WorksheetRow.cs" />
+    <Compile Include="WorksheetProtectUnprotect\IWsProtectorUnprotector.cs" />
     <Compile Include="Transliterate\ICyrillicLettersReplacer.cs" />
     <Compile Include="InteractiveRangeReport\InteractiveErrorItem.cs" />
     <Compile Include="DataValidation\ICellsValueValidator.cs" />
@@ -263,6 +271,7 @@
     <Compile Include="Undo\UndoManager.cs" />
     <Compile Include="WorksheetCellsEditing\ConditionalFormatFixer.cs" />
     <Compile Include="WorksheetCellsEditing\IConditionalFormatFixer.cs" />
+    <Compile Include="WorksheetProtectUnprotect\WsProtectorUnprotector.cs" />
     <Compile Include="XmlTools\IXmlValidator.cs" />
     <Compile Include="XmlTools\IXsdSchemaValidator.cs" />
     <Compile Include="XmlTools\IXmlSampleCreator.cs" />
@@ -411,6 +420,9 @@
       <LastGenOutput>RibbonIcons.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="WorksheetProtectUnprotect\frmAskWorksheetProtectionPassword.resx">
+      <DependentUpon>frmAskWorksheetProtectionPassword.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup />
   <PropertyGroup>
@@ -424,7 +436,7 @@
     <ManifestCertificateThumbprint>2975ABEDFA1CC05163C654F2960024090F026B6C</ManifestCertificateThumbprint>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestKeyFile>NavfertyExcelAddIn_1_TemporaryKey.pfx</ManifestKeyFile>
+    <ManifestKeyFile>NavfertyExcelAddIn_TemporaryKey.pfx</ManifestKeyFile>
   </PropertyGroup>
   <!-- Include the build rules for a C# project. -->
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
