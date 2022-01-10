@@ -17,7 +17,7 @@ namespace NavfertyExcelAddIn.ParseNumerics
 		{
 			if (string.IsNullOrWhiteSpace(value))
 			{
-				return null;// new NumericParseResult();
+				return null;
 			}
 
 			var v = SpacesPattern.Replace(value, match => string.Empty);
@@ -29,7 +29,7 @@ namespace NavfertyExcelAddIn.ParseNumerics
 
 			if (!DecimalPattern.IsMatch(value))
 			{
-				return null; //new NumericParseResult();
+				return null;
 			}
 
 			if (v.Contains(",") && v.Contains("."))
@@ -38,7 +38,7 @@ namespace NavfertyExcelAddIn.ParseNumerics
 				var c = v[last];
 				return v.CountChars(c) == 1
 					? v.TryParse(c == '.' ? Format.Dot : Format.Comma)
-					: null;// new NumericParseResult();
+					: null;
 			}
 
 			if (v.Contains(","))
@@ -70,8 +70,11 @@ namespace NavfertyExcelAddIn.ParseNumerics
 				: (decimal?)null;
 		}
 
+		/// <summary>Chache for all known currency symbols from Globalization</summary>
+		static string[] _allCurrencySymbolsCache = null;
+
 		//static System.Collections.Generic.Dictionary<string, System.Globalization.CultureInfo> _dicCultures = null;
-		static string[] _allCurrencySymbols = null;
+
 		private static NumericParseResult TryParse(this string value, Format info)
 		{
 			var formatInfo = (NumberFormatInfo)NumberFormatInfo.InvariantInfo.Clone();
@@ -98,13 +101,13 @@ namespace NavfertyExcelAddIn.ParseNumerics
 			//decimal.TryParse не может разобрать строку со значком любой валюты, кроме валюты текущей культуры,
 			//и символ валюты должен располагаться в правильном месте (как требуется в конкретной культуре)!!!
 
-			if (_allCurrencySymbols == null)//Fill once static currency symbols list
+			if (_allCurrencySymbolsCache == null)//Fill once static currency symbols list
 			{
-				_allCurrencySymbols = (from ci in System.Globalization.CultureInfo.GetCultures(CultureTypes.AllCultures)
-									   let curSymb = ci.NumberFormat.CurrencySymbol
-									   where (null != curSymb && !string.IsNullOrWhiteSpace(curSymb.Trim()))
-									   orderby curSymb ascending
-									   select curSymb).Distinct().ToArray();
+				_allCurrencySymbolsCache = (from ci in System.Globalization.CultureInfo.GetCultures(CultureTypes.AllCultures)
+											let curSymb = ci.NumberFormat.CurrencySymbol
+											where (null != curSymb && !string.IsNullOrWhiteSpace(curSymb.Trim()))
+											orderby curSymb ascending
+											select curSymb).Distinct().ToArray();
 
 				/*			
 				Вообще, надо бы хранить Dictionary<CurrencySymbols/CultureInfo>, 
@@ -127,16 +130,16 @@ namespace NavfertyExcelAddIn.ParseNumerics
 			}
 
 			//detect how many currency symbols contains our source string...
-			var currenciesInValue = _allCurrencySymbols.Where(cur => value.Contains(cur));
+			var currenciesInValue = _allCurrencySymbolsCache.Where(cur => value.Contains(cur));
 			if (currenciesInValue.Count() == 1)// TODO: Если строка содержит несколько разных символов валют, сечас не преобразовываем ,т.к. приоритет валют неизвестен
 			{
 				var curSymb = currenciesInValue.First();
-				//Remove found currency from source string
+				//Remove found currencySymbol from source string
 				var valueWithoutCurrencySymbol = value.Replace(curSymb, string.Empty);
 				valueParsed = decimal.TryParse(valueWithoutCurrencySymbol, NumberStyles.Currency, formatInfo, out result);
 				if (!valueParsed)
 				{
-					return null;// new NumericParseResult();
+					return null;
 				}
 
 				//System.Windows.Forms.MessageBox.Show($"Parsed value: '{value}, valueWithoutCurrencySymbol: {valueWithoutCurrencySymbol}', result: {result}, currency: {curSymb}");
@@ -144,7 +147,7 @@ namespace NavfertyExcelAddIn.ParseNumerics
 			}
 
 			//Not found any currency symbols, or found more than one!
-			return null;// new NumericParseResult();
+			return null;
 		}
 
 		private enum Format
