@@ -20,7 +20,7 @@ namespace NavfertyExcelAddIn.ParseNumerics
 		{
 			if (string.IsNullOrWhiteSpace(value))
 			{
-				return null;
+				return new NumericParseResult();
 			}
 
 			var v = SpacesPattern.Replace(value, match => string.Empty);
@@ -32,7 +32,7 @@ namespace NavfertyExcelAddIn.ParseNumerics
 
 			if (!DecimalPattern.IsMatch(value))
 			{
-				return null;
+				return new NumericParseResult();
 			}
 
 			if (v.Contains(",") && v.Contains("."))
@@ -41,7 +41,7 @@ namespace NavfertyExcelAddIn.ParseNumerics
 				var c = v[last];
 				return v.CountChars(c) == 1
 					? v.TryParse(c == '.' ? Format.Dot : Format.Comma)
-					: null;
+					: new NumericParseResult();
 			}
 
 			if (v.Contains(","))
@@ -139,30 +139,9 @@ namespace NavfertyExcelAddIn.ParseNumerics
 			// добавить тест-кейсов на формат валют
 			//formatInfo.CurrencyNegativePattern = 8;
 			//formatInfo.CurrencyPositivePattern = 3;
-
-			var valueParsed = decimal.TryParse(value, NumberStyles.Currency, formatInfo, out decimal result);
-			if (valueParsed) return new NumericParseResult(result);//Parsed without our help
-
-			//decimal.TryParse не может разобрать строку со значком любой валюты, кроме валюты текущей культуры,
-			//и символ валюты должен располагаться в правильном месте (как требуется в конкретной культуре)!!!
-			//Поэтому помогаем руками разобрать строку с произвольной валютой...
-
-			//detect how many currency symbols contains source string...
-			var currenciesInValue = GetAllCurrencySymbols().Where(cur => value.Contains(cur));
-			if (currenciesInValue.Count() == 1)// TODO: Если строка содержит несколько разных символов валют, не преобразовываем, т.к. приоритет валют не ясен
-			{
-				var curSymb = currenciesInValue.First();
-				//Remove found currencySymbol from source string
-				var valueWithoutCurrencySymbol = value.Replace(curSymb, string.Empty);
-				valueParsed = decimal.TryParse(valueWithoutCurrencySymbol, NumberStyles.Currency, formatInfo, out result);
-				if (valueParsed)
-				{
-					//System.Windows.Forms.MessageBox.Show($"Parsed value: '{value}, valueWithoutCurrencySymbol: {valueWithoutCurrencySymbol}', result: {result}, currency: {curSymb}");
-					return new NumericParseResult(result, curSymb);
-				}
-				//It was not possible to parse the line, even after removing the currencySymbol, most likely this is not about money at all...
-			}
-			return null;//Not found any currency symbols, or found more than one, or even not number...
+			return decimal.TryParse(value, NumberStyles.Currency, formatInfo, out decimal result)
+				? result
+				: (decimal?)null;
 		}
 
 		private enum Format
