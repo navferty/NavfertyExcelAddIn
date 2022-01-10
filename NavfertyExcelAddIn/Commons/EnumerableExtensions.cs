@@ -113,7 +113,7 @@ namespace NavfertyExcelAddIn.Commons
 		}
 
 		/// <summary>Allow acces to Range object from transform func</summary>
-		public static void ApplyForEachCellOfType<TIn, TOut>(this Range range, Func<TIn, Range, TOut> transform)
+		public static void ApplyForEachCellOfType2<TIn, TOut>(this Range range, Func<TIn, Range, TOut> transform)
 		{
 			logger.Debug($"Apply transformation to range '{range.GetRelativeAddress()}' on worksheet '{range.Worksheet.Name}'");
 
@@ -121,14 +121,16 @@ namespace NavfertyExcelAddIn.Commons
 
 			foreach (Range area in range.Areas)
 			{
-				ApplyToArea(area, transform);
+				ApplyToArea2(area, transform);
 			}
 		}
 
 		// TODO check boxing time on million values
 		/// <summary>Allow acces to Range object from transform func may be slower than Old</summary>
-		private static void ApplyToArea<TIn, TOut>(Range range, Func<TIn, Range, TOut> transform)
+		private static void ApplyToArea2<TIn, TOut>(Range range, Func<TIn, Range, TOut> transform)
 		{
+			try { if (null == range || null == range.Cells) return; } catch { return; }//Just for Test cases
+
 			foreach (Range cell in range.Cells)
 			{
 				var cellValue = cell.Value;
@@ -139,17 +141,20 @@ namespace NavfertyExcelAddIn.Commons
 					{
 						// TODO transform func may chabge format of cell, and we need to allow undo this, but set/restore cell formating has so weird api...
 						var newValue = transform(currentValue, cell);
-						if (!newValue.Equals(currentValue))
+						if (!(newValue == null))
 						{
-							cell.Value = newValue;
-							var undoItem = new UndoItem
+							if (!newValue.Equals(currentValue))
 							{
-								OldValue = currentValue,
-								NewValue = newValue,
-								ColumnIndex = cell.Column,
-								RowIndex = cell.Row
-							};
-							undoManager.PushUndoItem(undoItem);
+								cell.Value = newValue;
+								var undoItem = new UndoItem
+								{
+									OldValue = currentValue,
+									NewValue = newValue,
+									ColumnIndex = cell.Column,
+									RowIndex = cell.Row
+								};
+								undoManager.PushUndoItem(undoItem);
+							}
 						}
 					}
 				}

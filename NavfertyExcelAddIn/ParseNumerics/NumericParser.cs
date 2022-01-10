@@ -15,16 +15,17 @@ namespace NavfertyExcelAddIn.ParseNumerics
 			const string EXCEL_CURRENCY_FORMAT_TEMPLATE_LAT = @"_-{CUR}* # ##0.00_-;-{CUR}* # ##0.00_-;_-{CUR}* ""-""??_-;_-@_-";
 			const string CURRENCY_TEMPLATE = @"{CUR}";
 
-			var autoCalcEnabled = selection.Worksheet.EnableCalculation;
+			bool autoCalcEnabled = false;
+			try { autoCalcEnabled = selection.Worksheet.EnableCalculation; } catch { }
 			if (autoCalcEnabled) selection.Worksheet.EnableCalculation = false;
 			try
 			{
 
-				selection.ApplyForEachCellOfType<string, object>(
+				selection.ApplyForEachCellOfType2<string, object>(
 					(value, cell) =>
 					 {
 						 var pdResult = value.ParseDecimal();
-						 if (!pdResult.ConvertedValue.HasValue)
+						 if (null == pdResult || !pdResult.ConvertedValue.HasValue)
 							 return (object)value;
 
 						 //Parsed Ok...

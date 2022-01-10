@@ -17,7 +17,7 @@ namespace NavfertyExcelAddIn.ParseNumerics
 		{
 			if (string.IsNullOrWhiteSpace(value))
 			{
-				return new NumericParseResult();
+				return null;// new NumericParseResult();
 			}
 
 			var v = SpacesPattern.Replace(value, match => string.Empty);
@@ -29,7 +29,7 @@ namespace NavfertyExcelAddIn.ParseNumerics
 
 			if (!DecimalPattern.IsMatch(value))
 			{
-				return new NumericParseResult();
+				return null; //new NumericParseResult();
 			}
 
 			if (v.Contains(",") && v.Contains("."))
@@ -38,7 +38,7 @@ namespace NavfertyExcelAddIn.ParseNumerics
 				var c = v[last];
 				return v.CountChars(c) == 1
 					? v.TryParse(c == '.' ? Format.Dot : Format.Comma)
-					: new NumericParseResult();
+					: null;// new NumericParseResult();
 			}
 
 			if (v.Contains(","))
@@ -128,7 +128,7 @@ namespace NavfertyExcelAddIn.ParseNumerics
 
 			//detect how many currency symbols contains our source string...
 			var currenciesInValue = _allCurrencySymbols.Where(cur => value.Contains(cur));
-			if (currenciesInValue.Count() >= 1)// TODO: Если строка содержит несколько разных символов валют надо что-то сделать... 
+			if (currenciesInValue.Count() == 1)// TODO: Если строка содержит несколько разных символов валют, сечас не преобразовываем ,т.к. приоритет валют неизвестен
 			{
 				var curSymb = currenciesInValue.First();
 				//Remove found currency from source string
@@ -136,7 +136,7 @@ namespace NavfertyExcelAddIn.ParseNumerics
 				valueParsed = decimal.TryParse(valueWithoutCurrencySymbol, NumberStyles.Currency, formatInfo, out result);
 				if (!valueParsed)
 				{
-					return new NumericParseResult();
+					return null;// new NumericParseResult();
 				}
 
 				//System.Windows.Forms.MessageBox.Show($"Parsed value: '{value}, valueWithoutCurrencySymbol: {valueWithoutCurrencySymbol}', result: {result}, currency: {curSymb}");
@@ -144,7 +144,7 @@ namespace NavfertyExcelAddIn.ParseNumerics
 			}
 
 			//Not found any currency symbols, or found more than one!
-			return new NumericParseResult();
+			return null;// new NumericParseResult();
 		}
 
 		private enum Format

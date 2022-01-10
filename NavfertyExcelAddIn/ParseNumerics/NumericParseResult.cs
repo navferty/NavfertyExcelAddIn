@@ -16,9 +16,6 @@ namespace NavfertyExcelAddIn.ParseNumerics
 		public readonly string Currency = "";
 		public readonly bool IsMoney = false;
 
-
-		public NumericParseResult() { }
-
 		public NumericParseResult(decimal? value, string curr = "")
 		{
 			ConvertedValue = value;
@@ -26,12 +23,14 @@ namespace NavfertyExcelAddIn.ParseNumerics
 			IsMoney = (null != Currency && !string.IsNullOrEmpty(Currency));
 		}
 
-		public bool IsCurrencyFromCurrentCulture() => (_currencySystem == Currency);
+		public bool IsCurrencyFromCurrentCulture()
+			=> (_currencySystem == Currency);
 
-		public bool IsCurrencyFromRU() => (_currencyRu == Currency);
+		public bool IsCurrencyFromRU()
+			=> (_currencyRu == Currency);
 
 		/// <summary>This code is sample from internet - WAS NOT CHECKED!!!</summary>
-		public static string GetCurrencyFormat(CultureInfo culture = null)
+		private static string GetCurrencyFormat(CultureInfo culture = null)
 		{
 			if (culture == null) culture = CultureInfo.CurrentCulture;
 
@@ -80,6 +79,17 @@ namespace NavfertyExcelAddIn.ParseNumerics
 			return $"{positiveFormat};{negativeFormat}";
 		}
 
+
+		public static bool operator ==(NumericParseResult obj1, NumericParseResult obj2)
+			=> (obj1.ConvertedValue.Equals(obj2.ConvertedValue)
+			&& obj1.Currency == obj2.Currency
+			&& obj1.IsMoney == obj2.IsMoney);
+
+		public static bool operator !=(NumericParseResult obj1, NumericParseResult obj2)
+			=> !(obj1 == obj2);
+
+		public override bool Equals(object obj)
+			=> (null != obj) && (obj.GetType() == typeof(NumericParseResult) && (this == obj as NumericParseResult));
 
 
 
