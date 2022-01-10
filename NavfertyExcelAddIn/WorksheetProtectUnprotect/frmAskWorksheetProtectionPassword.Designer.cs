@@ -160,7 +160,14 @@
             // 
             // frmAskWorksheetProtectionPassword
             // 
+<<<<<<< HEAD
+<<<<<<< HEAD
             this.AcceptButton = this.btnExecProtectionAction;
+=======
+>>>>>>> add758c (creating ProtectUnprotectSelectedWorksheets)
+=======
+            this.AcceptButton = this.btnExecProtectionAction;
+>>>>>>> 2bbf414 (v1 finished)
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(553, 280);

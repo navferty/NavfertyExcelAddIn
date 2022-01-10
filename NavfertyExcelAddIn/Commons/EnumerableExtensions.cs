@@ -113,7 +113,19 @@ namespace NavfertyExcelAddIn.Commons
 		}
 
 		/// <summary>Allow acces to Range object from transform func</summary>
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
 		public static void ApplyForEachCellOfType2<TIn, TOut>(this Range range, Func<TIn, Range, TOut> transform)
+=======
+		public static void ApplyForEachCellOfType<TIn, TOut>(this Range range, Func<TIn, Range, TOut> transform)
+>>>>>>> ad4a2ca (iss_29 v3)
+=======
+		public static void ApplyForEachCellOfType<TIn, TOut>(this Range range, Func<TIn, Range, TOut> transform)
+>>>>>>> 28f09b2 (iss_29 v3)
+=======
+		public static void ApplyForEachCellOfType2<TIn, TOut>(this Range range, Func<TIn, Range, TOut> transform)
+>>>>>>> 7fe5d79 (Added tests)
 		{
 			logger.Debug($"Apply transformation to range '{range.GetRelativeAddress()}' on worksheet '{range.Worksheet.Name}'");
 
@@ -121,16 +133,45 @@ namespace NavfertyExcelAddIn.Commons
 
 			foreach (Range area in range.Areas)
 			{
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
 				ApplyToArea2(area, transform);
+=======
+				ApplyToArea(area, transform);
+>>>>>>> ad4a2ca (iss_29 v3)
+=======
+				ApplyToArea(area, transform);
+>>>>>>> 28f09b2 (iss_29 v3)
+=======
+				ApplyToArea2(area, transform);
+>>>>>>> 7fe5d79 (Added tests)
 			}
 		}
 
 		// TODO check boxing time on million values
 		/// <summary>Allow acces to Range object from transform func may be slower than Old</summary>
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
 		private static void ApplyToArea2<TIn, TOut>(Range range, Func<TIn, Range, TOut> transform)
 		{
 			try { if (null == range || null == range.Cells) return; } catch { return; }//Just for Test cases
 
+=======
+		private static void ApplyToArea<TIn, TOut>(Range range, Func<TIn, Range, TOut> transform)
+		{
+>>>>>>> ad4a2ca (iss_29 v3)
+=======
+		private static void ApplyToArea<TIn, TOut>(Range range, Func<TIn, Range, TOut> transform)
+		{
+>>>>>>> 28f09b2 (iss_29 v3)
+=======
+		private static void ApplyToArea2<TIn, TOut>(Range range, Func<TIn, Range, TOut> transform)
+		{
+			try { if (null == range || null == range.Cells) return; } catch { return; }//Just for Test cases
+
+>>>>>>> 7fe5d79 (Added tests)
 			foreach (Range cell in range.Cells)
 			{
 				var cellValue = cell.Value;
@@ -141,6 +182,9 @@ namespace NavfertyExcelAddIn.Commons
 					{
 						// TODO transform func may chabge format of cell, and we need to allow undo this, but set/restore cell formating has so weird api...
 						var newValue = transform(currentValue, cell);
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
 						if (!(newValue == null))
 						{
 							if (!newValue.Equals(currentValue))
@@ -155,6 +199,39 @@ namespace NavfertyExcelAddIn.Commons
 								};
 								undoManager.PushUndoItem(undoItem);
 							}
+=======
+=======
+>>>>>>> 28f09b2 (iss_29 v3)
+						if (!newValue.Equals(currentValue))
+=======
+						if (!(newValue == null))
+>>>>>>> 7fe5d79 (Added tests)
+						{
+							if (!newValue.Equals(currentValue))
+							{
+<<<<<<< HEAD
+								OldValue = currentValue,
+								NewValue = newValue,
+								ColumnIndex = cell.Column,
+								RowIndex = cell.Row
+							};
+							undoManager.PushUndoItem(undoItem);
+<<<<<<< HEAD
+>>>>>>> ad4a2ca (iss_29 v3)
+=======
+>>>>>>> 28f09b2 (iss_29 v3)
+=======
+								cell.Value = newValue;
+								var undoItem = new UndoItem
+								{
+									OldValue = currentValue,
+									NewValue = newValue,
+									ColumnIndex = cell.Column,
+									RowIndex = cell.Row
+								};
+								undoManager.PushUndoItem(undoItem);
+							}
+>>>>>>> 7fe5d79 (Added tests)
 						}
 					}
 				}

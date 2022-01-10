@@ -1,23 +1,10 @@
 ﻿<Project ToolsVersion="16.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
 <<<<<<< HEAD
-  <!--
-    This section defines project-level properties.
-
-    AssemblyName
-      Name of the output assembly.
-    Configuration
-      Specifies a default value for debug.
-    OutputType
-      Must be "Library" for VSTO.
-    Platform
-      Specifies what CPU the output of this project can run on.
-    NoStandardLibraries
-      Set to "false" for VSTO.
-    RootNamespace
-      In C#, this specifies the namespace given to new files. In VB, all objects are
-      wrapped in this namespace at runtime.
+<<<<<<< HEAD
+<<<<<<< HEAD
 =======
+>>>>>>> 785ccda (Update NavfertyExcelAddIn/NavfertyExcelAddIn.csproj)
   <!--
     This section defines project-level properties.
 
@@ -34,7 +21,32 @@
     RootNamespace
       In C#, this specifies the namespace given to new files. In VB, all objects are
       wrapped in this namespace at runtime.
+<<<<<<< HEAD
+=======
+=======
+>>>>>>> ad4a2ca (iss_29 v3)
+  <!--
+    This section defines project-level properties.
+
+    AssemblyName
+      Name of the output assembly.
+    Configuration
+      Specifies a default value for debug.
+    OutputType
+      Must be "Library" for VSTO.
+    Platform
+      Specifies what CPU the output of this project can run on.
+    NoStandardLibraries
+      Set to "false" for VSTO.
+    RootNamespace
+      In C#, this specifies the namespace given to new files. In VB, all objects are
+      wrapped in this namespace at runtime.
+<<<<<<< HEAD
 >>>>>>> 1a6c523 (fix azure-pipelines-publish.yml)
+=======
+>>>>>>> ad4a2ca (iss_29 v3)
+=======
+>>>>>>> 785ccda (Update NavfertyExcelAddIn/NavfertyExcelAddIn.csproj)
   -->
   <PropertyGroup>
     <ProjectTypeGuids>{BAA0C2D2-18E2-41B9-852F-F413020CAA33};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -84,6 +96,8 @@
   </ItemGroup>
   <PropertyGroup>
 <<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
     <!--
       OfficeApplication
         Add-in host application
@@ -106,6 +120,8 @@
     WarningLevel
       Warning level for the compiler.
 =======
+=======
+>>>>>>> ad4a2ca (iss_29 v3)
     <!--
       OfficeApplication
         Add-in host application
@@ -127,7 +143,33 @@
       Output path of project relative to the project file.
     WarningLevel
       Warning level for the compiler.
+<<<<<<< HEAD
 >>>>>>> 1a6c523 (fix azure-pipelines-publish.yml)
+=======
+>>>>>>> ad4a2ca (iss_29 v3)
+=======
+    <!--
+      OfficeApplication
+        Add-in host application
+    -->
+    <OfficeApplication>Excel</OfficeApplication>
+  </PropertyGroup>
+  <!--
+    This section defines properties that are set when the "Debug" configuration is selected.
+
+    DebugSymbols
+      If "true", create symbols (.pdb). If "false", do not create symbols.
+    DefineConstants
+      Constants defined for the preprocessor.
+    EnableUnmanagedDebugging
+      If "true", starting the debugger will attach both managed and unmanaged debuggers.
+    Optimize
+      If "true", optimize the build output. If "false", do not optimize.
+    OutputPath
+      Output path of project relative to the project file.
+    WarningLevel
+      Warning level for the compiler.
+>>>>>>> 785ccda (Update NavfertyExcelAddIn/NavfertyExcelAddIn.csproj)
   -->
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -139,22 +181,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
 <<<<<<< HEAD
-  <!--
-    This section defines properties that are set when the "Release" configuration is selected.
-
-    DebugSymbols
-      If "true", create symbols (.pdb). If "false", do not create symbols.
-    DefineConstants
-      Constants defined for the preprocessor.
-    EnableUnmanagedDebugging
-      If "true", starting the debugger will attach both managed and unmanaged debuggers.
-    Optimize
-      If "true", optimize the build output. If "false", do not optimize.
-    OutputPath
-      Output path of project relative to the project file.
-    WarningLevel
-      Warning level for the compiler.
+<<<<<<< HEAD
+<<<<<<< HEAD
 =======
+>>>>>>> 785ccda (Update NavfertyExcelAddIn/NavfertyExcelAddIn.csproj)
   <!--
     This section defines properties that are set when the "Release" configuration is selected.
 
@@ -170,7 +200,31 @@
       Output path of project relative to the project file.
     WarningLevel
       Warning level for the compiler.
+<<<<<<< HEAD
+=======
+=======
+>>>>>>> ad4a2ca (iss_29 v3)
+  <!--
+    This section defines properties that are set when the "Release" configuration is selected.
+
+    DebugSymbols
+      If "true", create symbols (.pdb). If "false", do not create symbols.
+    DefineConstants
+      Constants defined for the preprocessor.
+    EnableUnmanagedDebugging
+      If "true", starting the debugger will attach both managed and unmanaged debuggers.
+    Optimize
+      If "true", optimize the build output. If "false", do not optimize.
+    OutputPath
+      Output path of project relative to the project file.
+    WarningLevel
+      Warning level for the compiler.
+<<<<<<< HEAD
 >>>>>>> 1a6c523 (fix azure-pipelines-publish.yml)
+=======
+>>>>>>> ad4a2ca (iss_29 v3)
+=======
+>>>>>>> 785ccda (Update NavfertyExcelAddIn/NavfertyExcelAddIn.csproj)
   -->
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -181,12 +235,22 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
 <<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
   <!--
     This section specifies references for the project.
 =======
   <!--
     This section specifies references for the project.
 >>>>>>> 1a6c523 (fix azure-pipelines-publish.yml)
+=======
+  <!--
+    This section specifies references for the project.
+>>>>>>> ad4a2ca (iss_29 v3)
+=======
+  <!--
+    This section specifies references for the project.
+>>>>>>> 785ccda (Update NavfertyExcelAddIn/NavfertyExcelAddIn.csproj)
   -->
   <ItemGroup>
     <Reference Include="Accessibility" />
@@ -284,16 +348,10 @@
     </Reference>
   </ItemGroup>
 <<<<<<< HEAD
-  <!--
-    This section defines the user source files that are part of the project.
-     
-    A "Compile" element specifies a source file to compile.
-    An "EmbeddedResource" element specifies an .resx file for embedded resources.
-    A "None" element specifies a file that is not to be passed to the compiler (for instance, 
-    a text file or XML file).
-    The "AppDesigner" element specifies the directory where the application properties files
-    can be found.
+<<<<<<< HEAD
+<<<<<<< HEAD
 =======
+>>>>>>> 785ccda (Update NavfertyExcelAddIn/NavfertyExcelAddIn.csproj)
   <!--
     This section defines the user source files that are part of the project.
      
@@ -303,7 +361,25 @@
     a text file or XML file).
     The "AppDesigner" element specifies the directory where the application properties files
     can be found.
+<<<<<<< HEAD
+=======
+=======
+>>>>>>> ad4a2ca (iss_29 v3)
+  <!--
+    This section defines the user source files that are part of the project.
+     
+    A "Compile" element specifies a source file to compile.
+    An "EmbeddedResource" element specifies an .resx file for embedded resources.
+    A "None" element specifies a file that is not to be passed to the compiler (for instance, 
+    a text file or XML file).
+    The "AppDesigner" element specifies the directory where the application properties files
+    can be found.
+<<<<<<< HEAD
 >>>>>>> 1a6c523 (fix azure-pipelines-publish.yml)
+=======
+>>>>>>> ad4a2ca (iss_29 v3)
+=======
+>>>>>>> 785ccda (Update NavfertyExcelAddIn/NavfertyExcelAddIn.csproj)
   -->
   <ItemGroup>
     <Compile Include="Commons\FileExtensionFilter.cs" />
@@ -314,6 +390,11 @@
     <Compile Include="DataValidation\IValidator.cs" />
     <Compile Include="ParseNumerics\NumericParseResult.cs" />
 <<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> add758c (creating ProtectUnprotectSelectedWorksheets)
     <Compile Include="WorksheetProtectUnprotect\frmAskWorksheetProtectionPassword.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -324,6 +405,11 @@
     <Compile Include="WorksheetProtectUnprotect\IWsProtectorUnprotector.cs" />
 =======
 >>>>>>> 1a6c523 (fix azure-pipelines-publish.yml)
+=======
+>>>>>>> ad4a2ca (iss_29 v3)
+=======
+    <Compile Include="WorksheetProtectUnprotect\IWsProtectorUnprotector.cs" />
+>>>>>>> ff0f47d (iss 41 initial)
     <Compile Include="Transliterate\ICyrillicLettersReplacer.cs" />
     <Compile Include="InteractiveRangeReport\InteractiveErrorItem.cs" />
     <Compile Include="DataValidation\ICellsValueValidator.cs" />
@@ -353,9 +439,16 @@
     <Compile Include="WorksheetCellsEditing\ConditionalFormatFixer.cs" />
     <Compile Include="WorksheetCellsEditing\IConditionalFormatFixer.cs" />
 <<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
     <Compile Include="WorksheetProtectUnprotect\WsProtectorUnprotector.cs" />
 =======
 >>>>>>> 1a6c523 (fix azure-pipelines-publish.yml)
+=======
+>>>>>>> ad4a2ca (iss_29 v3)
+=======
+    <Compile Include="WorksheetProtectUnprotect\WsProtectorUnprotector.cs" />
+>>>>>>> ff0f47d (iss 41 initial)
     <Compile Include="XmlTools\IXmlValidator.cs" />
     <Compile Include="XmlTools\IXsdSchemaValidator.cs" />
     <Compile Include="XmlTools\IXmlSampleCreator.cs" />
@@ -505,11 +598,20 @@
       <SubType>Designer</SubType>
     </EmbeddedResource>
 <<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
     <EmbeddedResource Include="WorksheetProtectUnprotect\frmAskWorksheetProtectionPassword.resx">
       <DependentUpon>frmAskWorksheetProtectionPassword.cs</DependentUpon>
     </EmbeddedResource>
 =======
 >>>>>>> 1a6c523 (fix azure-pipelines-publish.yml)
+=======
+>>>>>>> ad4a2ca (iss_29 v3)
+=======
+    <EmbeddedResource Include="WorksheetProtectUnprotect\frmAskWorksheetProtectionPassword.resx">
+      <DependentUpon>frmAskWorksheetProtectionPassword.cs</DependentUpon>
+    </EmbeddedResource>
+>>>>>>> add758c (creating ProtectUnprotectSelectedWorksheets)
   </ItemGroup>
   <ItemGroup />
   <PropertyGroup>
@@ -520,14 +622,32 @@
     <SignManifests>true</SignManifests>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestCertificateThumbprint>2975ABEDFA1CC05163C654F2960024090F026B6C</ManifestCertificateThumbprint>
+    <ManifestCertificateThumbprint>8A194674EFEB140748CD131659BF16EE09C2361A</ManifestCertificateThumbprint>
+
   </PropertyGroup>
   <PropertyGroup>
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
 <<<<<<< HEAD
     <ManifestKeyFile>NavfertyExcelAddIn_TemporaryKey.pfx</ManifestKeyFile>
 =======
     <ManifestKeyFile>NavfertyExcelAddIn_1_TemporaryKey.pfx</ManifestKeyFile>
 >>>>>>> 1a6c523 (fix azure-pipelines-publish.yml)
+=======
+    <ManifestKeyFile>NavfertyExcelAddIn_1_TemporaryKey.pfx</ManifestKeyFile>
+>>>>>>> ad4a2ca (iss_29 v3)
+=======
+    <ManifestKeyFile>NavfertyExcelAddIn_TemporaryKey.pfx</ManifestKeyFile>
+>>>>>>> cf9501c (changed NavfertyExcelAddIn_1_TemporaryKey.pfx to NavfertyExcelAddIn_TemporaryKey.pfx in cproj)
+=======
+    <ManifestKeyFile>NavfertyExcelAddIn_TemporaryKey.pfx</ManifestKeyFile>
+>>>>>>> a288647 (iss_29 changed NavfertyExcelAddIn_1_TemporaryKey.pfx to NavfertyExcelAddIn_TemporaryKey.pfx in cproj)
+=======
+    <ManifestKeyFile>NavfertyExcelAddIn_TemporaryKey.pfx</ManifestKeyFile>
+
+>>>>>>> c353813 (Update NavfertyExcelAddIn/NavfertyExcelAddIn.csproj)
   </PropertyGroup>
   <!-- Include the build rules for a C# project. -->
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
