@@ -203,23 +203,10 @@ namespace NavfertyExcelAddIn
 		public void ProtectUnprotectWorksheets(IRibbonControl ribbonControl)
 		{
 			var wb = App.ActiveWorkbook;
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> add758c (creating ProtectUnprotectSelectedWorksheets)
 			if (wb is null) return;
 
 			var path = wb.FullName;
 			logger.Debug($"ProtectUnprotectWorksheets {path}");
-=======
-			//var path = wb.FullName;
-			//logger.Debug($"ProtectUnprotectWorksheets {path}");
->>>>>>> ff0f47d (iss 41 initial)
-=======
-			var path = wb.FullName;
-			logger.Debug($"ProtectUnprotectWorksheets {path}");
->>>>>>> c7b6234 (Changed Ribbon)
 
 			var wsProtectorUnprotector = GetService<IWsProtectorUnprotector>();
 			wsProtectorUnprotector.ProtectUnprotectSelectedWorksheets(wb);

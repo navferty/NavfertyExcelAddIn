@@ -129,15 +129,6 @@
   <data name="ErrorMessage" xml:space="preserve">
     <value>Произошла ошибка: {0}</value>
   </data>
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-  <data name="Execute" xml:space="preserve">
-    <value>Выполнить</value>
-  </data>
->>>>>>> add758c (creating ProtectUnprotectSelectedWorksheets)
-=======
->>>>>>> 2bbf414 (v1 finished)
   <data name="Formula" xml:space="preserve">
     <value>Формула</value>
   </data>
@@ -147,35 +138,12 @@
   <data name="NoErrors" xml:space="preserve">
     <value>На текущем листе ошибок не найдено</value>
   </data>
-<<<<<<< HEAD
-<<<<<<< HEAD
   <data name="NoMatchingWorkSheets" xml:space="preserve">
     <value>Нет подходящих листов в книге</value>
-=======
-  <data name="Password" xml:space="preserve">
-    <value>Пароль:</value>
-  </data>
-  <data name="ProtectionForSheets" xml:space="preserve">
-    <value>защиту следующих листов книги:</value>
-  </data>
-  <data name="Protection_Clear" xml:space="preserve">
-    <value>Снять</value>
-  </data>
-  <data name="Protection_Set" xml:space="preserve">
-    <value>Установить</value>
->>>>>>> add758c (creating ProtectUnprotectSelectedWorksheets)
-=======
-  <data name="NoMatchingWorkSheets" xml:space="preserve">
-    <value>Нет подходящих листов в книге</value>
->>>>>>> 2bbf414 (v1 finished)
   </data>
   <data name="SearchResults" xml:space="preserve">
     <value>Результаты поиска</value>
   </data>
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> 2bbf414 (v1 finished)
   <data name="SheetProtectionFlag_Contents" xml:space="preserve">
     <value>содержимое</value>
   </data>
@@ -206,11 +174,6 @@
   <data name="SheetProtection_Set" xml:space="preserve">
     <value>Установить</value>
   </data>
-<<<<<<< HEAD
-=======
->>>>>>> add758c (creating ProtectUnprotectSelectedWorksheets)
-=======
->>>>>>> 2bbf414 (v1 finished)
   <data name="ShowVersionMessage" xml:space="preserve">
     <value>Надстройка Navferty, публикуется под лицензией MIT. Версия </value>
   </data>

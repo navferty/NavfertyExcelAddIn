@@ -97,21 +97,6 @@ namespace NavfertyExcelAddIn.Localization {
         }
         
         /// <summary>
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-        ///   Looks up a localized string similar to Execute.
-        /// </summary>
-        internal static string Execute {
-            get {
-                return ResourceManager.GetString("Execute", resourceCulture);
-            }
-        }
-        
-        /// <summary>
->>>>>>> add758c (creating ProtectUnprotectSelectedWorksheets)
-=======
->>>>>>> 2bbf414 (v1 finished)
         ///   Looks up a localized string similar to Formula.
         /// </summary>
         internal static string Formula {
@@ -139,54 +124,11 @@ namespace NavfertyExcelAddIn.Localization {
         }
         
         /// <summary>
-<<<<<<< HEAD
-<<<<<<< HEAD
         ///   Looks up a localized string similar to No matching sheets in the workbook.
         /// </summary>
         internal static string NoMatchingWorkSheets {
             get {
                 return ResourceManager.GetString("NoMatchingWorkSheets", resourceCulture);
-=======
-        ///   Looks up a localized string similar to Password:.
-=======
-        ///   Looks up a localized string similar to No matching sheets in the workbook.
->>>>>>> 2bbf414 (v1 finished)
-        /// </summary>
-        internal static string NoMatchingWorkSheets {
-            get {
-<<<<<<< HEAD
-                return ResourceManager.GetString("Password", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Clear.
-        /// </summary>
-        internal static string Protection_Clear {
-            get {
-                return ResourceManager.GetString("Protection_Clear", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Set.
-        /// </summary>
-        internal static string Protection_Set {
-            get {
-                return ResourceManager.GetString("Protection_Set", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to protection for sheets:.
-        /// </summary>
-        internal static string ProtectionForSheets {
-            get {
-                return ResourceManager.GetString("ProtectionForSheets", resourceCulture);
->>>>>>> add758c (creating ProtectUnprotectSelectedWorksheets)
-=======
-                return ResourceManager.GetString("NoMatchingWorkSheets", resourceCulture);
->>>>>>> 2bbf414 (v1 finished)
             }
         }
         
@@ -200,10 +142,6 @@ namespace NavfertyExcelAddIn.Localization {
         }
         
         /// <summary>
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> 2bbf414 (v1 finished)
         ///   Looks up a localized string similar to Clear.
         /// </summary>
         internal static string SheetProtection_Clear {
@@ -294,11 +232,6 @@ namespace NavfertyExcelAddIn.Localization {
         }
         
         /// <summary>
-<<<<<<< HEAD
-=======
->>>>>>> add758c (creating ProtectUnprotectSelectedWorksheets)
-=======
->>>>>>> 2bbf414 (v1 finished)
         ///   Looks up a localized string similar to Navferty Excle add-in. Published under MIT licence. Version .
         /// </summary>
         internal static string ShowVersionMessage {

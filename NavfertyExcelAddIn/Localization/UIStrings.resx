@@ -129,15 +129,6 @@
   <data name="ErrorMessage" xml:space="preserve">
     <value>Error occured: {0}</value>
   </data>
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-  <data name="Execute" xml:space="preserve">
-    <value>Execute</value>
-  </data>
->>>>>>> add758c (creating ProtectUnprotectSelectedWorksheets)
-=======
->>>>>>> 2bbf414 (v1 finished)
   <data name="Formula" xml:space="preserve">
     <value>Formula</value>
   </data>
@@ -147,35 +138,12 @@
   <data name="NoErrors" xml:space="preserve">
     <value>Found no errors on current worksheet</value>
   </data>
-<<<<<<< HEAD
-<<<<<<< HEAD
   <data name="NoMatchingWorkSheets" xml:space="preserve">
     <value>No matching sheets in the workbook</value>
-=======
-  <data name="Password" xml:space="preserve">
-    <value>Password:</value>
-  </data>
-  <data name="ProtectionForSheets" xml:space="preserve">
-    <value>protection for sheets:</value>
-  </data>
-  <data name="Protection_Clear" xml:space="preserve">
-    <value>Clear</value>
-  </data>
-  <data name="Protection_Set" xml:space="preserve">
-    <value>Set</value>
->>>>>>> add758c (creating ProtectUnprotectSelectedWorksheets)
-=======
-  <data name="NoMatchingWorkSheets" xml:space="preserve">
-    <value>No matching sheets in the workbook</value>
->>>>>>> 2bbf414 (v1 finished)
   </data>
   <data name="SearchResults" xml:space="preserve">
     <value>Search Results</value>
   </data>
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> 2bbf414 (v1 finished)
   <data name="SheetProtectionFlag_Contents" xml:space="preserve">
     <value>contents</value>
   </data>
@@ -206,11 +174,6 @@
   <data name="SheetProtection_Set" xml:space="preserve">
     <value>Set</value>
   </data>
-<<<<<<< HEAD
-=======
->>>>>>> add758c (creating ProtectUnprotectSelectedWorksheets)
-=======
->>>>>>> 2bbf414 (v1 finished)
   <data name="ShowVersionMessage" xml:space="preserve">
     <value>Navferty Excle add-in. Published under MIT licence. Version </value>
   </data>
