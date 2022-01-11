@@ -1,5 +1,8 @@
-﻿using System.Globalization;
+﻿using System.Collections.Generic;
+using System.Diagnostics;
+using System.Globalization;
 using System.Linq;
+using System.Text;
 using System.Text.RegularExpressions;
 
 namespace NavfertyExcelAddIn.ParseNumerics
@@ -81,6 +84,37 @@ namespace NavfertyExcelAddIn.ParseNumerics
 					where (null != curSymb && !string.IsNullOrWhiteSpace(curSymb.Trim()))
 					orderby curSymb ascending
 					select curSymb).Distinct().ToArray();
+
+			/*			
+			var culturesByCurrency = CultureInfo.GetCultures(CultureTypes.AllCultures)
+				.Where(ci => ci.Parent == CultureInfo.InvariantCulture)
+				.Select(ci => new { ci, ci.NumberFormat.CurrencySymbol })
+				.Where(x => !string.IsNullOrWhiteSpace(x.CurrencySymbol))
+				.GroupBy(x => x.CurrencySymbol)
+				.Select(x => new { Symbol = x.First().CurrencySymbol, Cultures = x.Select(z => z.ci).ToArray() })
+				.ToDictionary(x => x.Symbol, x => x.Cultures);
+
+
+			StringBuilder sb = new StringBuilder();
+			sb.AppendLine("Currency\tCount\tCultures");
+			var yyy = (from kvp in culturesByCurrency
+					   orderby kvp.Value.Length descending
+					   select new { Currency = kvp.Key, CultureCount = kvp.Value.Length, aCultures = kvp.Value }).ToArray();
+
+			yyy.ToList().ForEach(x =>
+			{
+				var aCultures = (from ci in x.aCultures
+								 let name = ci.NativeName
+								 orderby name ascending
+								 select $"{name} ({ci.Name})").ToArray();
+
+				var sCultures = string.Join(", ", aCultures);
+				sb.AppendLine($"{x.Currency}\t{x.CultureCount}\t{sCultures}");
+			});			 
+
+			var ss = sb.ToString();
+			Debug.WriteLine(ss);
+			*/
 
 			return _allCurrencySymbolsCache;
 		}
