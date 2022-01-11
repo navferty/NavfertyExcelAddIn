@@ -228,6 +228,7 @@
     can be found.
   -->
   <ItemGroup>
+    <Compile Include="Commons\WinAPIExtensions.cs" />
     <Compile Include="Commons\FileExtensionFilter.cs" />
     <Compile Include="Commons\RangeExtensions.cs" />
     <Compile Include="Commons\StringExtensions.cs" />

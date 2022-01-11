@@ -1,15 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 using Microsoft.Office.Interop.Excel;
 
+using NavfertyExcelAddIn.Commons;
 using NavfertyExcelAddIn.Localization;
 
 namespace NavfertyExcelAddIn.WorksheetProtectorUnprotector
@@ -35,7 +31,7 @@ namespace NavfertyExcelAddIn.WorksheetProtectorUnprotector
 			this.wb = wb;
 
 
-			Text = RibbonLabels.ProtectUnprotectWorksheets;
+			Text = $"{RibbonLabels.ProtectUnprotectWorksheets} '{wb.Name}'";
 			radioModeProtect.Text = UIStrings.SheetProtection_Set;
 			radioModeUnProtect.Text = UIStrings.SheetProtection_Clear;
 
@@ -51,11 +47,14 @@ namespace NavfertyExcelAddIn.WorksheetProtectorUnprotector
 
 		private void OnFormLoad()
 		{
+			txtPWD.SetVistaCueBanner(UIStrings.SheetProtection_PasswordBanner);
+
 			OnSelectProtectAction();
 
 			radioModeProtect.CheckedChanged += (s, e) => OnSelectProtectAction();
 			lstWorksheets.ItemCheck += OnSheetInListChecked;
 			btnExecProtectionAction.Click += (s, e) => OnExecProtectAction();
+
 		}
 
 		private bool hasSheetsToProcess = false;
@@ -83,7 +82,6 @@ namespace NavfertyExcelAddIn.WorksheetProtectorUnprotector
 					int i = 0;
 					lstWorksheets.Items.Cast<WorksheetRow>().ToList().ForEach(item =>
 					{
-						//lstWorksheets.SetItemChecked(i, !item.Sheet.ProtectionMode);
 						lstWorksheets.SetItemChecked(i, true);
 						i++;
 					});
@@ -100,8 +98,7 @@ namespace NavfertyExcelAddIn.WorksheetProtectorUnprotector
 			}
 			finally
 			{
-				lstWorksheets.Enabled = hasSheetsToProcess;
-
+				lstWorksheets.Enabled = hasSheetsToProcess;//Disable listbox if it have not valid items
 				AfterSheetChecked();
 				Cursor = Cursors.Default;
 			}
@@ -197,6 +194,14 @@ namespace NavfertyExcelAddIn.WorksheetProtectorUnprotector
 			//refill list of sheets with updated protectiob status
 			OnSelectProtectAction();
 		}
+
+
+
+
+
+
+
+
 
 	}
 }

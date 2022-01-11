@@ -169,6 +169,15 @@ namespace NavfertyExcelAddIn.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Enter password for worksheets (not required)....
+        /// </summary>
+        internal static string SheetProtection_PasswordBanner {
+            get {
+                return ResourceManager.GetString("SheetProtection_PasswordBanner", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Protected.
         /// </summary>
         internal static string SheetProtection_Protected {

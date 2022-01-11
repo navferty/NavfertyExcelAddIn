@@ -71,9 +71,9 @@
             // btnExecProtectionAction
             // 
             this.btnExecProtectionAction.Dock = System.Windows.Forms.DockStyle.Right;
-            this.btnExecProtectionAction.Location = new System.Drawing.Point(428, 237);
+            this.btnExecProtectionAction.Location = new System.Drawing.Point(406, 229);
             this.btnExecProtectionAction.Name = "btnExecProtectionAction";
-            this.btnExecProtectionAction.Size = new System.Drawing.Size(106, 24);
+            this.btnExecProtectionAction.Size = new System.Drawing.Size(128, 32);
             this.btnExecProtectionAction.TabIndex = 0;
             this.btnExecProtectionAction.Text = "Set / clear";
             this.btnExecProtectionAction.UseVisualStyleBackColor = true;
@@ -122,14 +122,14 @@
             this.lstWorksheets.IntegralHeight = false;
             this.lstWorksheets.Location = new System.Drawing.Point(3, 62);
             this.lstWorksheets.Name = "lstWorksheets";
-            this.lstWorksheets.Size = new System.Drawing.Size(531, 131);
+            this.lstWorksheets.Size = new System.Drawing.Size(531, 123);
             this.lstWorksheets.TabIndex = 4;
             // 
             // lblPWD
             // 
             this.lblPWD.AutoSize = true;
             this.lblPWD.Dock = System.Windows.Forms.DockStyle.Right;
-            this.lblPWD.Location = new System.Drawing.Point(3, 200);
+            this.lblPWD.Location = new System.Drawing.Point(3, 192);
             this.lblPWD.Name = "lblPWD";
             this.lblPWD.Size = new System.Drawing.Size(27, 26);
             this.lblPWD.TabIndex = 5;
@@ -140,7 +140,7 @@
             // 
             this.txtPWD.Dock = System.Windows.Forms.DockStyle.Top;
             this.txtPWD.HideSelection = false;
-            this.txtPWD.Location = new System.Drawing.Point(36, 203);
+            this.txtPWD.Location = new System.Drawing.Point(36, 195);
             this.txtPWD.Name = "txtPWD";
             this.txtPWD.Size = new System.Drawing.Size(498, 20);
             this.txtPWD.TabIndex = 6;
@@ -153,7 +153,7 @@
             this.panel1.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.tlpMain.SetColumnSpan(this.panel1, 2);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel1.Location = new System.Drawing.Point(3, 199);
+            this.panel1.Location = new System.Drawing.Point(3, 191);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(531, 1);
             this.panel1.TabIndex = 7;

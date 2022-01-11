@@ -165,6 +165,9 @@
   <data name="SheetProtection_Password" xml:space="preserve">
     <value>Пароль:</value>
   </data>
+  <data name="SheetProtection_PasswordBanner" xml:space="preserve">
+    <value>Укажите пароль для листов (необязательно)...</value>
+  </data>
   <data name="SheetProtection_Protected" xml:space="preserve">
     <value>Защищено</value>
   </data>

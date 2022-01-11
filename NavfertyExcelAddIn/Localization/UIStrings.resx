@@ -165,6 +165,9 @@
   <data name="SheetProtection_Password" xml:space="preserve">
     <value>Password:</value>
   </data>
+  <data name="SheetProtection_PasswordBanner" xml:space="preserve">
+    <value>Enter password for worksheets (not required)...</value>
+  </data>
   <data name="SheetProtection_Protected" xml:space="preserve">
     <value>Protected</value>
   </data>
