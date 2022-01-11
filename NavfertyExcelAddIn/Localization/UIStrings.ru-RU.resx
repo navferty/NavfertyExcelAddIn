@@ -129,9 +129,6 @@
   <data name="ErrorMessage" xml:space="preserve">
     <value>Произошла ошибка: {0}</value>
   </data>
-  <data name="Execute" xml:space="preserve">
-    <value>Выполнить</value>
-  </data>
   <data name="Formula" xml:space="preserve">
     <value>Формула</value>
   </data>
@@ -141,20 +138,41 @@
   <data name="NoErrors" xml:space="preserve">
     <value>На текущем листе ошибок не найдено</value>
   </data>
-  <data name="Password" xml:space="preserve">
-    <value>Пароль:</value>
-  </data>
-  <data name="ProtectionForSheets" xml:space="preserve">
-    <value>защиту следующих листов книги:</value>
-  </data>
-  <data name="Protection_Clear" xml:space="preserve">
-    <value>Снять</value>
-  </data>
-  <data name="Protection_Set" xml:space="preserve">
-    <value>Установить</value>
+  <data name="NoMatchingWorkSheets" xml:space="preserve">
+    <value>Нет подходящих листов в книге</value>
   </data>
   <data name="SearchResults" xml:space="preserve">
     <value>Результаты поиска</value>
+  </data>
+  <data name="SheetProtectionFlag_Contents" xml:space="preserve">
+    <value>содержимое</value>
+  </data>
+  <data name="SheetProtectionFlag_DrawingObjects" xml:space="preserve">
+    <value>фигуры</value>
+  </data>
+  <data name="SheetProtectionFlag_Scenarios" xml:space="preserve">
+    <value>сценарии</value>
+  </data>
+  <data name="SheetProtectionFlag_UI" xml:space="preserve">
+    <value>пользовательский интерфейс</value>
+  </data>
+  <data name="SheetProtection_Clear" xml:space="preserve">
+    <value>Снять</value>
+  </data>
+  <data name="SheetProtection_Execute" xml:space="preserve">
+    <value>Выполнить</value>
+  </data>
+  <data name="SheetProtection_Password" xml:space="preserve">
+    <value>Пароль:</value>
+  </data>
+  <data name="SheetProtection_Protected" xml:space="preserve">
+    <value>Защищено</value>
+  </data>
+  <data name="SheetProtection_ProtectionForSheets" xml:space="preserve">
+    <value>защиту следующих листов книги:</value>
+  </data>
+  <data name="SheetProtection_Set" xml:space="preserve">
+    <value>Установить</value>
   </data>
   <data name="ShowVersionMessage" xml:space="preserve">
     <value>Надстройка Navferty, публикуется под лицензией MIT. Версия </value>
