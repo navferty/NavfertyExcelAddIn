@@ -203,6 +203,8 @@ namespace NavfertyExcelAddIn
 		public void ProtectUnprotectWorksheets(IRibbonControl ribbonControl)
 		{
 			var wb = App.ActiveWorkbook;
+			if (wb is null) return;
+
 			var path = wb.FullName;
 			logger.Debug($"ProtectUnprotectWorksheets {path}");
 

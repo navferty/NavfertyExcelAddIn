@@ -129,6 +129,9 @@
   <data name="ErrorMessage" xml:space="preserve">
     <value>Error occured: {0}</value>
   </data>
+  <data name="Execute" xml:space="preserve">
+    <value>Execute</value>
+  </data>
   <data name="Formula" xml:space="preserve">
     <value>Formula</value>
   </data>
@@ -137,6 +140,18 @@
   </data>
   <data name="NoErrors" xml:space="preserve">
     <value>Found no errors on current worksheet</value>
+  </data>
+  <data name="Password" xml:space="preserve">
+    <value>Password:</value>
+  </data>
+  <data name="ProtectionForSheets" xml:space="preserve">
+    <value>protection for sheets:</value>
+  </data>
+  <data name="Protection_Clear" xml:space="preserve">
+    <value>Clear</value>
+  </data>
+  <data name="Protection_Set" xml:space="preserve">
+    <value>Set</value>
   </data>
   <data name="SearchResults" xml:space="preserve">
     <value>Search Results</value>
@@ -155,6 +170,9 @@
   </data>
   <data name="Warning" xml:space="preserve">
     <value>Warning!</value>
+  </data>
+  <data name="WorkSheetsNotFound" xml:space="preserve">
+    <value>Workbook '{0}' have no worksheets!</value>
   </data>
   <data name="WsName" xml:space="preserve">
     <value>Worksheet Name</value>

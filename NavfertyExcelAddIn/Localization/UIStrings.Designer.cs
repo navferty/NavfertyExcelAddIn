@@ -19,7 +19,7 @@ namespace NavfertyExcelAddIn.Localization {
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     internal class UIStrings {
@@ -97,6 +97,15 @@ namespace NavfertyExcelAddIn.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Execute.
+        /// </summary>
+        internal static string Execute {
+            get {
+                return ResourceManager.GetString("Execute", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Formula.
         /// </summary>
         internal static string Formula {
@@ -120,6 +129,42 @@ namespace NavfertyExcelAddIn.Localization {
         internal static string NoErrors {
             get {
                 return ResourceManager.GetString("NoErrors", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Password:.
+        /// </summary>
+        internal static string Password {
+            get {
+                return ResourceManager.GetString("Password", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Clear.
+        /// </summary>
+        internal static string Protection_Clear {
+            get {
+                return ResourceManager.GetString("Protection_Clear", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Set.
+        /// </summary>
+        internal static string Protection_Set {
+            get {
+                return ResourceManager.GetString("Protection_Set", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to protection for sheets:.
+        /// </summary>
+        internal static string ProtectionForSheets {
+            get {
+                return ResourceManager.GetString("ProtectionForSheets", resourceCulture);
             }
         }
         
@@ -174,6 +219,15 @@ namespace NavfertyExcelAddIn.Localization {
         internal static string Warning {
             get {
                 return ResourceManager.GetString("Warning", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Workbook &apos;{0}&apos; have no worksheets!.
+        /// </summary>
+        internal static string WorkSheetsNotFound {
+            get {
+                return ResourceManager.GetString("WorkSheetsNotFound", resourceCulture);
             }
         }
         
