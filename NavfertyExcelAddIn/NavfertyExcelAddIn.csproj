@@ -425,7 +425,8 @@
 
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestKeyFile>NavfertyExcelAddIn_1_TemporaryKey.pfx</ManifestKeyFile>
+    <ManifestKeyFile>NavfertyExcelAddIn_TemporaryKey.pfx</ManifestKeyFile>
+
   </PropertyGroup>
   <!-- Include the build rules for a C# project. -->
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
