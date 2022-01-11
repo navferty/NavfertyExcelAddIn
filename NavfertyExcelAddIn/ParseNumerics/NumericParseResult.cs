@@ -79,17 +79,28 @@ namespace NavfertyExcelAddIn.ParseNumerics
 			return $"{positiveFormat};{negativeFormat}";
 		}
 
-
 		public static bool operator ==(NumericParseResult obj1, NumericParseResult obj2)
-			=> (obj1.ConvertedValue.Equals(obj2.ConvertedValue)
-			&& obj1.Currency == obj2.Currency
-			&& obj1.IsMoney == obj2.IsMoney);
+		{
+			if ((obj1 is null) && (obj2 is null)) return true;
+			if (obj1 is null) return false;
+
+			return obj1.ConvertedValue == obj2.ConvertedValue
+				&& obj1.Currency == obj2.Currency
+				&& obj1.IsMoney == obj2.IsMoney;
+		}
 
 		public static bool operator !=(NumericParseResult obj1, NumericParseResult obj2)
-			=> !(obj1 == obj2);
+		{
+			if ((obj1 is null) && (obj2 is null)) return false;
+			if (obj1 is null) return true;
+
+			return !(obj1.ConvertedValue == obj2.ConvertedValue
+				&& obj1.Currency == obj2.Currency
+				&& obj1.IsMoney == obj2.IsMoney);
+		}
 
 		public override bool Equals(object obj)
-			=> (null != obj) && (obj.GetType() == typeof(NumericParseResult) && (this == obj as NumericParseResult));
+			=> !(obj is null) && (obj.GetType() == typeof(NumericParseResult) && (this == obj as NumericParseResult));
 
 
 
