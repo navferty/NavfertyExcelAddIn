@@ -129,9 +129,6 @@
   <data name="ErrorMessage" xml:space="preserve">
     <value>Error occured: {0}</value>
   </data>
-  <data name="Execute" xml:space="preserve">
-    <value>Execute</value>
-  </data>
   <data name="Formula" xml:space="preserve">
     <value>Formula</value>
   </data>
@@ -141,20 +138,41 @@
   <data name="NoErrors" xml:space="preserve">
     <value>Found no errors on current worksheet</value>
   </data>
-  <data name="Password" xml:space="preserve">
-    <value>Password:</value>
-  </data>
-  <data name="ProtectionForSheets" xml:space="preserve">
-    <value>protection for sheets:</value>
-  </data>
-  <data name="Protection_Clear" xml:space="preserve">
-    <value>Clear</value>
-  </data>
-  <data name="Protection_Set" xml:space="preserve">
-    <value>Set</value>
+  <data name="NoMatchingWorkSheets" xml:space="preserve">
+    <value>No matching sheets in the workbook</value>
   </data>
   <data name="SearchResults" xml:space="preserve">
     <value>Search Results</value>
+  </data>
+  <data name="SheetProtectionFlag_Contents" xml:space="preserve">
+    <value>contents</value>
+  </data>
+  <data name="SheetProtectionFlag_DrawingObjects" xml:space="preserve">
+    <value>shapes</value>
+  </data>
+  <data name="SheetProtectionFlag_Scenarios" xml:space="preserve">
+    <value>scenarios</value>
+  </data>
+  <data name="SheetProtectionFlag_UI" xml:space="preserve">
+    <value>user interface</value>
+  </data>
+  <data name="SheetProtection_Clear" xml:space="preserve">
+    <value>Clear</value>
+  </data>
+  <data name="SheetProtection_Execute" xml:space="preserve">
+    <value>Execute</value>
+  </data>
+  <data name="SheetProtection_Password" xml:space="preserve">
+    <value>Password:</value>
+  </data>
+  <data name="SheetProtection_Protected" xml:space="preserve">
+    <value>Protected</value>
+  </data>
+  <data name="SheetProtection_ProtectionForSheets" xml:space="preserve">
+    <value>protection for sheets:</value>
+  </data>
+  <data name="SheetProtection_Set" xml:space="preserve">
+    <value>Set</value>
   </data>
   <data name="ShowVersionMessage" xml:space="preserve">
     <value>Navferty Excle add-in. Published under MIT licence. Version </value>

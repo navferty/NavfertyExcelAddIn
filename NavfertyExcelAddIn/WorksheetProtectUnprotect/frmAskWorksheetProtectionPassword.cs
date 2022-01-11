@@ -36,54 +36,109 @@ namespace NavfertyExcelAddIn.WorksheetProtectorUnprotector
 
 
 			Text = RibbonLabels.ProtectUnprotectWorksheets;
-			radioModeProtect.Text = UIStrings.Protection_Set;
-			radioModeUnProtect.Text = UIStrings.Protection_Clear;
+			radioModeProtect.Text = UIStrings.SheetProtection_Set;
+			radioModeUnProtect.Text = UIStrings.SheetProtection_Clear;
 
-			lblModeDesription.Text = UIStrings.ProtectionForSheets;
-			lblPWD.Text = UIStrings.Password;
+			lblModeDesription.Text = UIStrings.SheetProtection_ProtectionForSheets;
+			lblPWD.Text = UIStrings.SheetProtection_Password;
+			txtPWD.Text = string.Empty;
 
-			btnExecProtectionAction.Text = UIStrings.Execute;
+			btnExecProtectionAction.Text = UIStrings.SheetProtection_Execute;
 			btnExecProtectionAction.Enabled = false;
 
 			this.Load += (s, e) => OnFormLoad();
-
 		}
 
 		private void OnFormLoad()
 		{
 			OnSelectProtectAction();
+
 			radioModeProtect.CheckedChanged += (s, e) => OnSelectProtectAction();
+			lstWorksheets.ItemCheck += OnSheetInListChecked;
 			btnExecProtectionAction.Click += (s, e) => OnExecProtectAction();
 		}
 
+		private bool hasSheetsToProcess = false;
+
 		private void OnSelectProtectAction()
 		{
+
 			Cursor = Cursors.WaitCursor;
 			try
 			{
+				hasSheetsToProcess = false;
 
 				bool bProtect = radioModeProtect.Checked;
-
 				var rows = GetSheets().Cast<Worksheet>()
-					.Where(ws => !(ws.ProtectionMode == bProtect))
-					.Select(ws => new WorksheetRow(ws)).ToArray();
+					.Select(ws => new WorksheetRow(ws))
+					.Where(wsr => (wsr.HasAnyProtectedObjects() != bProtect))
+					.ToArray();
+
+				hasSheetsToProcess = rows.Any();
 
 				lstWorksheets.Items.Clear();
-				lstWorksheets.Items.AddRange(rows);
-
-				int i = 0;
-				lstWorksheets.Items.Cast<WorksheetRow>().ToList().ForEach(item =>
+				if (hasSheetsToProcess)
 				{
-					//lstWorksheets.SetItemChecked(i, !item.Sheet.ProtectionMode);
-					lstWorksheets.SetItemChecked(i, true);
-					i++;
-				});
-
-				txtPWD.Enabled = rows.Any();
-				btnExecProtectionAction.Enabled = rows.Any();
+					lstWorksheets.Items.AddRange(rows);
+					int i = 0;
+					lstWorksheets.Items.Cast<WorksheetRow>().ToList().ForEach(item =>
+					{
+						//lstWorksheets.SetItemChecked(i, !item.Sheet.ProtectionMode);
+						lstWorksheets.SetItemChecked(i, true);
+						i++;
+					});
+				}
+				else
+				{
+					lstWorksheets.Items.Add(UIStrings.NoMatchingWorkSheets);
+				}
 
 			}
-			finally { Cursor = Cursors.Default; }
+			catch (Exception ex)
+			{
+				creator.dialogService.ShowError(ex.Message);
+			}
+			finally
+			{
+				lstWorksheets.Enabled = hasSheetsToProcess;
+
+				AfterSheetChecked();
+				Cursor = Cursors.Default;
+			}
+		}
+
+		private void OnSheetInListChecked(object sender, ItemCheckEventArgs e)
+		{
+			//inside OnSheetInListChecked() handler, lst.CheckedItems still not return actual row checked staus before methos finished
+			//we create small timer, which delays row checking after we exited OnSheetInListChecked.
+
+			var tmrUIProcessPause = new System.Windows.Forms.Timer()
+			{
+				Interval = 100, //set as short time as we can, to only allow to finish OnSheetInListChecked(), but not allow any overheaded UI events...
+				Enabled = false //do not start timer untill we finish it's setup
+			};
+			tmrUIProcessPause.Tick += (s, te) =>
+			{
+				//This Work!!!
+				tmrUIProcessPause.Stop();//first stop and dispose our timer, to avoid double execution
+				tmrUIProcessPause.Dispose();
+
+				AfterSheetChecked();//Now start real row checking processing...
+			};
+
+
+			tmrUIProcessPause.Start();//Start pause timer
+
+			//now we exit from event handler, but our delayed (timered) AfterSheetChecked must be run...
+		}
+
+		private void AfterSheetChecked()
+		{
+			var rowsToProcees = lstWorksheets.CheckedItems.Cast<WorksheetRow>().ToArray();
+			hasSheetsToProcess = rowsToProcees.Any();
+
+			txtPWD.Enabled = hasSheetsToProcess;
+			btnExecProtectionAction.Enabled = hasSheetsToProcess;
 		}
 
 		private void OnExecProtectAction()
@@ -92,9 +147,14 @@ namespace NavfertyExcelAddIn.WorksheetProtectorUnprotector
 			try
 			{
 				var rowsToProcees = lstWorksheets.CheckedItems.Cast<WorksheetRow>().ToArray();
-				if (!rowsToProcees.Any()) return;
+				if (!rowsToProcees.Any())
+				{
+					creator.dialogService.ShowError(UIStrings.NoMatchingWorkSheets);
+					return;
+				}
 
 				var pwd = txtPWD.Text;
+				bool hasPWD = (null != pwd) && (!string.IsNullOrEmpty(pwd));
 				bool bProtect = radioModeProtect.Checked;
 				bool wasErrorsInProcessingSheets = false;
 
@@ -102,7 +162,21 @@ namespace NavfertyExcelAddIn.WorksheetProtectorUnprotector
 				{
 					try
 					{
-						item.Sheet.Protect(Password: pwd);
+						Worksheet ws = item.Sheet;
+						if (bProtect)
+						{
+							if (hasPWD)
+								ws.Protect(Password: pwd);
+							else
+								ws.Protect();
+						}
+						else
+						{
+							if (hasPWD)
+								ws.Unprotect(Password: pwd);
+							else
+								ws.Unprotect();
+						}
 					}
 					catch (Exception ex)
 					{
@@ -112,6 +186,7 @@ namespace NavfertyExcelAddIn.WorksheetProtectorUnprotector
 				});
 				if (!wasErrorsInProcessingSheets) DialogResult = DialogResult.OK;
 
+				//was any errors, do not close dialog
 			}
 			catch (Exception ex)
 			{
@@ -119,11 +194,9 @@ namespace NavfertyExcelAddIn.WorksheetProtectorUnprotector
 			}
 			finally { Cursor = Cursors.Default; }
 
-			//refill sheets list with updated protectiob status
+			//refill list of sheets with updated protectiob status
 			OnSelectProtectAction();
 		}
-
-
 
 	}
 }
