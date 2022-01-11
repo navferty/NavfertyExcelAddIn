@@ -225,4 +225,7 @@
   <data name="RepairConditionalFormat" xml:space="preserve">
     <value>Repair Conditional Formatting</value>
   </data>
+  <data name="ProtectUnprotectWorksheets" xml:space="preserve">
+    <value>Protect unprotect selected Worksheets</value>
+  </data>
 </root>
