@@ -70,10 +70,20 @@ namespace NavfertyExcelAddIn.ParseNumerics
 				: (decimal?)null;
 		}
 
+		private static string[] _allCurrencySymbolsCache = null;
 		/// <summary>Chache for all known currency symbols from Globalization</summary>
-		static string[] _allCurrencySymbolsCache = null;
+		private static string[] GetAllCurrencySymbols()
+		{
+			//Fill once on first query
+			_allCurrencySymbolsCache = _allCurrencySymbolsCache
+				?? (from ci in CultureInfo.GetCultures(CultureTypes.AllCultures)
+					let curSymb = ci.NumberFormat.CurrencySymbol
+					where (null != curSymb && !string.IsNullOrWhiteSpace(curSymb.Trim()))
+					orderby curSymb ascending
+					select curSymb).Distinct().ToArray();
 
-		//static System.Collections.Generic.Dictionary<string, System.Globalization.CultureInfo> _dicCultures = null;
+			return _allCurrencySymbolsCache;
+		}
 
 		private static NumericParseResult TryParse(this string value, Format info)
 		{
@@ -96,58 +106,28 @@ namespace NavfertyExcelAddIn.ParseNumerics
 			//formatInfo.CurrencyPositivePattern = 3;
 
 			var valueParsed = decimal.TryParse(value, NumberStyles.Currency, formatInfo, out decimal result);
-			if (valueParsed) return new NumericParseResult(result);
+			if (valueParsed) return new NumericParseResult(result);//Parsed without our help
 
 			//decimal.TryParse не может разобрать строку со значком любой валюты, кроме валюты текущей культуры,
 			//и символ валюты должен располагаться в правильном месте (как требуется в конкретной культуре)!!!
+			//Поэтому помогаем руками разобрать строку с произвольной валютой...
 
-			if (_allCurrencySymbolsCache == null)//Fill once static currency symbols list
-			{
-				_allCurrencySymbolsCache = (from ci in System.Globalization.CultureInfo.GetCultures(CultureTypes.AllCultures)
-											let curSymb = ci.NumberFormat.CurrencySymbol
-											where (null != curSymb && !string.IsNullOrWhiteSpace(curSymb.Trim()))
-											orderby curSymb ascending
-											select curSymb).Distinct().ToArray();
-
-				/*			
-				Вообще, надо бы хранить Dictionary<CurrencySymbols/CultureInfo>, 
-				чтобы выбрать по коду валюты соответствующую культуру и по ней строить форматирование валютной страки...
-				но у нескольких РАЗНЫХ культур часто одинаковые знаки валюты, и хз какую использовать...
-
-				_dicCultures = new System.Collections.Generic.Dictionary<string, System.Globalization.CultureInfo>();
-				var cultures = (from cult in System.Globalization.CultureInfo.GetCultures(CultureTypes.NeutralCultures)
-								where ((cult != null)
-								&& (cult.Parent == System.Globalization.CultureInfo.InvariantCulture)
-								&& (null != cult.NumberFormat.CurrencySymbol)
-								&& (!string.IsNullOrWhiteSpace(cult.NumberFormat.CurrencySymbol.Trim())))
-								orderby cult.NumberFormat.CurrencySymbol ascending, cult.EnglishName ascending
-								select cult)
-								.GroupBy(ci => ci.NumberFormat.CurrencySymbol)
-								.Select(g => g.First()).ToArray();
-
-				cultures.ToList().ForEach(cult => _dicCultures.Add(cult.NumberFormat.CurrencySymbol, cult));
-				*/
-			}
-
-			//detect how many currency symbols contains our source string...
-			var currenciesInValue = _allCurrencySymbolsCache.Where(cur => value.Contains(cur));
-			if (currenciesInValue.Count() == 1)// TODO: Если строка содержит несколько разных символов валют, сечас не преобразовываем ,т.к. приоритет валют неизвестен
+			//detect how many currency symbols contains source string...
+			var currenciesInValue = GetAllCurrencySymbols().Where(cur => value.Contains(cur));
+			if (currenciesInValue.Count() == 1)// TODO: Если строка содержит несколько разных символов валют, не преобразовываем, т.к. приоритет валют не ясен
 			{
 				var curSymb = currenciesInValue.First();
 				//Remove found currencySymbol from source string
 				var valueWithoutCurrencySymbol = value.Replace(curSymb, string.Empty);
 				valueParsed = decimal.TryParse(valueWithoutCurrencySymbol, NumberStyles.Currency, formatInfo, out result);
-				if (!valueParsed)
+				if (valueParsed)
 				{
-					return null;
+					//System.Windows.Forms.MessageBox.Show($"Parsed value: '{value}, valueWithoutCurrencySymbol: {valueWithoutCurrencySymbol}', result: {result}, currency: {curSymb}");
+					return new NumericParseResult(result, curSymb);
 				}
-
-				//System.Windows.Forms.MessageBox.Show($"Parsed value: '{value}, valueWithoutCurrencySymbol: {valueWithoutCurrencySymbol}', result: {result}, currency: {curSymb}");
-				return new NumericParseResult(result, curSymb);
+				//It was not possible to parse the line, even after removing the currencySymbol, most likely this is not about money at all...
 			}
-
-			//Not found any currency symbols, or found more than one!
-			return null;
+			return null;//Not found any currency symbols, or found more than one, or even not number...
 		}
 
 		private enum Format
