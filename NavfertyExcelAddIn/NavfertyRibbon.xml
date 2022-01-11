@@ -69,11 +69,14 @@
 
 				<group id="CommonGroup" getLabel="GetLabel" autoScale="1">
 					<button id="UnprotectWorkbook" getLabel="GetLabel" onAction="UnprotectWorkbook"
-							image="unprotectWorkbook" size="large" keytip="UP"/>
+							image="unprotectWorkbook" size="large" keytip="FP" getScreentip="GetLabel" getSupertip="GetSupertip"/>
+
 					<button id="ProtectUnprotectWorksheets" getLabel="GetLabel" onAction="ProtectUnprotectWorksheets"
-						  image="unprotectWorkbook" size="large" keytip="UP"/>
+						  image="unprotectWorkbook" size="large" keytip="WP" getScreentip="GetLabel" getSupertip="GetSupertip"/>
+
 					<button id="HighlightDuplicates" getLabel="GetLabel" onAction="HighlightDuplicates"
 							image="highlightDuplicates" size="large" keytip="D" getScreentip="GetLabel" getSupertip="GetSupertip"/>
+
 					<button id="UnmergeCells" getLabel="GetLabel" onAction="UnmergeCells" image="unmergeCells"
 							size="large" keytip="UM" getScreentip="GetLabel" getSupertip="GetSupertip"/>
 					<button id="FindErrors" getLabel="GetLabel" onAction="FindErrors" image="findErrors"

@@ -121,7 +121,7 @@
     <value>Парсинг числовых значений</value>
   </data>
   <data name="UnprotectWorkbook" xml:space="preserve">
-    <value>Снять защиту книги и листов</value>
+    <value>Защита файла</value>
   </data>
   <data name="CutNames" xml:space="preserve">
     <value>Сократить имена организаций</value>
@@ -226,6 +226,6 @@
     <value>Починить условное форматирование</value>
   </data>
   <data name="ProtectUnprotectWorksheets" xml:space="preserve">
-    <value>Защита выбранных листов книги</value>
+    <value>Защита листов</value>
   </data>
 </root>

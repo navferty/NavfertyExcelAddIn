@@ -151,7 +151,7 @@ namespace NavfertyExcelAddIn.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Protect unprotect selected Worksheets.
+        ///   Looks up a localized string similar to Worksheets protection.
         /// </summary>
         internal static string ProtectUnprotectWorksheets {
             get {
@@ -304,7 +304,7 @@ namespace NavfertyExcelAddIn.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Unprotect Workbook.
+        ///   Looks up a localized string similar to Remove file protection.
         /// </summary>
         internal static string UnprotectWorkbook {
             get {
