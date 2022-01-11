@@ -85,7 +85,8 @@ namespace NavfertyExcelAddIn.ParseNumerics
 					orderby curSymb ascending
 					select curSymb).Distinct().ToArray();
 
-			/*			
+			/* 
+			 //code for get currency/countries relation for excel 'Cultures.xlsx'
 			var culturesByCurrency = CultureInfo.GetCultures(CultureTypes.AllCultures)
 				.Where(ci => ci.Parent == CultureInfo.InvariantCulture)
 				.Select(ci => new { ci, ci.NumberFormat.CurrencySymbol })
