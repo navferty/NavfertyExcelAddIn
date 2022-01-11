@@ -16,9 +16,6 @@ namespace NavfertyExcelAddIn.ParseNumerics
 		public readonly string Currency = "";
 		public readonly bool IsMoney = false;
 
-
-		public NumericParseResult() { }
-
 		public NumericParseResult(decimal? value, string curr = "")
 		{
 			ConvertedValue = value;
@@ -29,8 +26,11 @@ namespace NavfertyExcelAddIn.ParseNumerics
 		public bool IsCurrencyFromCurrentCulture()
 			=> (_currencySystem == Currency);
 
+		public bool IsCurrencyFromRU()
+			=> (_currencyRu == Currency);
 
 		/// <summary>This code is sample from internet - WAS NOT CHECKED!!!</summary>
+		private static string GetCurrencyFormat(CultureInfo culture = null)
 		{
 			if (culture == null) culture = CultureInfo.CurrentCulture;
 

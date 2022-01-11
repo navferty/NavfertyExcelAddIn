@@ -13,48 +13,28 @@ using NavfertyExcelAddIn.Localization;
 
 namespace NavfertyExcelAddIn.WorksheetProtectorUnprotector
 {
-    public class WsProtectorUnprotector : IWsProtectorUnprotector
-    {
-        private readonly IDialogService dialogService;
+	public class WsProtectorUnprotector : IWsProtectorUnprotector
+	{
 
-        internal readonly IDialogService dialogService;
-        private Microsoft.Office.Interop.Excel.Application App => Globals.ThisAddIn.Application;
+		internal readonly IDialogService dialogService;
+		private Microsoft.Office.Interop.Excel.Application App => Globals.ThisAddIn.Application;
 
-        public WsProtectorUnprotector(IDialogService dialogService)
-            => this.dialogService = dialogService;
+		public WsProtectorUnprotector(IDialogService dialogService)
+			=> this.dialogService = dialogService;
 
-        public void ProtectUnprotectSelectedWorksheets(Workbook wb)
-        {
-            Sheets wbSheets = wb.Worksheets;
-            if (wbSheets.Count < 1)
-            {
-                dialogService.ShowError(string.Format(UIStrings.WorkSheetsNotFound, wb.FullName));
-            }
-        }
+		public void ProtectUnprotectSelectedWorksheets(Workbook wb)
+		{
+			Sheets wbSheets = wb.Worksheets;
+			if (wbSheets.Count < 1)
+			{
+				dialogService.ShowError(string.Format(UIStrings.WorkSheetsNotFound, wb.FullName));
+			}
 
 			using (var f = new frmAskWorksheetProtectionPassword(this, wb))
-		{
-		}
-				}
-
-
-				// replace "DPB" to "DPx"
-				ss[position.First() + 2] = Encoding.UTF8.GetBytes("x").First(); //120
-stream.Position = 0;
-stream.Write(ss, 0, ss.Length);
+			{
+				if (f.ShowDialog() != DialogResult.OK) return;
 			}
+			//MessageBox.Show($"ProtectUnprotectWorksheets {wb.FullName}", wb.FullName);
 		}
-
-		private static IReadOnlyCollection<int> StartingIndex(byte[] main, byte[] sequence)
-{
-    var index = Enumerable.Range(0, main.Length - sequence.Length + 1);
-    for (var i = 0; i < sequence.Length; i++)
-    {
-        index = index.Where(n => main[n + i] == sequence[i]).ToArray();
-    }
-    return index.ToArray();
-}
-*/
-
 	}
 }

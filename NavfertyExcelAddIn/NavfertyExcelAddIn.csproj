@@ -235,6 +235,13 @@
     <Compile Include="DataValidation\CellsValueValidator.cs" />
     <Compile Include="DataValidation\IValidator.cs" />
     <Compile Include="ParseNumerics\NumericParseResult.cs" />
+    <Compile Include="WorksheetProtectUnprotect\frmAskWorksheetProtectionPassword.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="WorksheetProtectUnprotect\frmAskWorksheetProtectionPassword.Designer.cs">
+      <DependentUpon>frmAskWorksheetProtectionPassword.cs</DependentUpon>
+    </Compile>
+    <Compile Include="WorksheetProtectUnprotect\WorksheetRow.cs" />
     <Compile Include="WorksheetProtectUnprotect\IWsProtectorUnprotector.cs" />
     <Compile Include="Transliterate\ICyrillicLettersReplacer.cs" />
     <Compile Include="InteractiveRangeReport\InteractiveErrorItem.cs" />
@@ -426,12 +433,10 @@
     <SignManifests>true</SignManifests>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestCertificateThumbprint>8A194674EFEB140748CD131659BF16EE09C2361A</ManifestCertificateThumbprint>
-
+    <ManifestCertificateThumbprint>2975ABEDFA1CC05163C654F2960024090F026B6C</ManifestCertificateThumbprint>
   </PropertyGroup>
   <PropertyGroup>
     <ManifestKeyFile>NavfertyExcelAddIn_TemporaryKey.pfx</ManifestKeyFile>
-
   </PropertyGroup>
   <!-- Include the build rules for a C# project. -->
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
