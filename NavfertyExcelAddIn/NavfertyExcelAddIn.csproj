@@ -424,7 +424,7 @@
     <ManifestCertificateThumbprint>2975ABEDFA1CC05163C654F2960024090F026B6C</ManifestCertificateThumbprint>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestKeyFile>NavfertyExcelAddIn_1_TemporaryKey.pfx</ManifestKeyFile>
+    <ManifestKeyFile>NavfertyExcelAddIn_TemporaryKey.pfx</ManifestKeyFile>
   </PropertyGroup>
   <!-- Include the build rules for a C# project. -->
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
