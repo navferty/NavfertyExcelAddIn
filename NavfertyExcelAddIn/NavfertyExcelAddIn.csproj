@@ -235,6 +235,7 @@
     <Compile Include="DataValidation\CellsValueValidator.cs" />
     <Compile Include="DataValidation\IValidator.cs" />
     <Compile Include="ParseNumerics\NumericParseResult.cs" />
+    <Compile Include="WorksheetProtectUnprotect\IWsProtectorUnprotector.cs" />
     <Compile Include="Transliterate\ICyrillicLettersReplacer.cs" />
     <Compile Include="InteractiveRangeReport\InteractiveErrorItem.cs" />
     <Compile Include="DataValidation\ICellsValueValidator.cs" />
@@ -263,6 +264,7 @@
     <Compile Include="Undo\UndoManager.cs" />
     <Compile Include="WorksheetCellsEditing\ConditionalFormatFixer.cs" />
     <Compile Include="WorksheetCellsEditing\IConditionalFormatFixer.cs" />
+    <Compile Include="WorksheetProtectUnprotect\WsProtectorUnprotector.cs" />
     <Compile Include="XmlTools\IXmlValidator.cs" />
     <Compile Include="XmlTools\IXsdSchemaValidator.cs" />
     <Compile Include="XmlTools\IXmlSampleCreator.cs" />
