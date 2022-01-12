@@ -22,7 +22,7 @@ namespace NavfertyExcelAddIn.ParseNumerics
 			try
 			{
 
-				selection.ApplyForEachCellOfType<string, object>(
+				selection.ApplyForEachCellOfType2<string, object>(
 					(value, cell) =>
 					 {
 						 var pdResult = value.ParseDecimal();
