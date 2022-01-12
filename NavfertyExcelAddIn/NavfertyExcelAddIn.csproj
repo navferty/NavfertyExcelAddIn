@@ -415,15 +415,22 @@
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
   </PropertyGroup>
-  <PropertyGroup>
-    <SignManifests>true</SignManifests>
-  </PropertyGroup>
-  <PropertyGroup>
-    <ManifestCertificateThumbprint>8A194674EFEB140748CD131659BF16EE09C2361A</ManifestCertificateThumbprint>
-  </PropertyGroup>
-  <PropertyGroup>
-    <ManifestKeyFile>NavfertyExcelAddIn_TemporaryKey.pfx</ManifestKeyFile>
-  </PropertyGroup>
+	<Choose>
+		<When Condition="Exists('NavfertyExcelAddIn_uom_TemporaryKey.pfx')">
+			<PropertyGroup>
+					<SignManifests>true</SignManifests>
+				<ManifestKeyFile>NavfertyExcelAddIn_uom_TemporaryKey.pfx</ManifestKeyFile>
+				<ManifestCertificateThumbprint>2A9C33F460B4D532AD2F603B76CA85F096C65728</ManifestCertificateThumbprint>
+			</PropertyGroup>
+		</When>
+		<When Condition="!Exists('NavfertyExcelAddIn_uom_TemporaryKey.pfx')">
+			<PropertyGroup>
+					<SignManifests>true</SignManifests>
+				<ManifestKeyFile>NavfertyExcelAddIn_TemporaryKey.pfx</ManifestKeyFile>
+				<ManifestCertificateThumbprint>8A194674EFEB140748CD131659BF16EE09C2361A</ManifestCertificateThumbprint>
+			</PropertyGroup>
+		</When>
+	</Choose>
   <!-- Include the build rules for a C# project. -->
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- Include additional build rules for an Office application add-in. -->
