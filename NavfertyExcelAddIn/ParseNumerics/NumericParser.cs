@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 
 using Microsoft.Office.Interop.Excel;
 
@@ -10,15 +11,38 @@ namespace NavfertyExcelAddIn.ParseNumerics
 	{
 		public void Parse(Range selection)
 		{
-			selection.ApplyForEachCellOfType<string, object>(
-				value =>
-				{
-					var newValue = value.ParseDecimal();
-					if (newValue.HasValue)
-						// Excel stores numerics as Double
-						return (object)Convert.ToDouble(newValue);
-					return (object)value;
-				});
+			//Формат положительных;Формат отрицательных;Формат нулей;Формат текста
+			const string EXCEL_CURRENCY_FORMAT_TEMPLATE_RUS = @"_-* #,##0.00 {CUR}_-;-* #,##0.00 {CUR}_-;_-* ""-""?? {CUR}_-;_-@_-";
+			const string EXCEL_CURRENCY_FORMAT_TEMPLATE_LAT = @"_-{CUR}* # ##0.00_-;-{CUR}* # ##0.00_-;_-{CUR}* ""-""??_-;_-@_-";
+			const string CURRENCY_TEMPLATE = @"{CUR}";
+
+			bool autoCalcEnabled = false;
+			try { autoCalcEnabled = selection.Worksheet.EnableCalculation; } catch { }
+			if (autoCalcEnabled) selection.Worksheet.EnableCalculation = false;
+			try
+			{
+
+				selection.ApplyForEachCellOfType<string, object>(
+					(value, cell) =>
+					 {
+						 var pdResult = value.ParseDecimal();
+						 if (null == pdResult || !pdResult.ConvertedValue.HasValue)
+							 return (object)value;
+
+						 //Parsed Ok...
+						 if (pdResult.IsMoney)
+						 {
+							 string currencyFormat = pdResult.IsCurrencyFromRU() ? EXCEL_CURRENCY_FORMAT_TEMPLATE_RUS : EXCEL_CURRENCY_FORMAT_TEMPLATE_LAT;
+							 string curSymFmt = @"[$" + pdResult.Currency + @"]";
+							 cell.NumberFormat = currencyFormat.Replace(CURRENCY_TEMPLATE, curSymFmt);
+						 }
+						 return (object)Convert.ToDouble(pdResult.ConvertedValue.Value);// Excel stores numerics as Double
+					 });
+			}
+			finally
+			{
+				if (autoCalcEnabled) selection.Worksheet.EnableCalculation = autoCalcEnabled;//Restart sheet autorecalc
+			}
 		}
 	}
 }
