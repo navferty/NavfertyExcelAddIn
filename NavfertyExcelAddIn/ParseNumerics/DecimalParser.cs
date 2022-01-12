@@ -1,4 +1,5 @@
-﻿using System.Globalization;
+﻿using System.Drawing;
+using System.Globalization;
 using System.Linq;
 using System.Text.RegularExpressions;
 
@@ -9,12 +10,17 @@ namespace NavfertyExcelAddIn.ParseNumerics
 	/// </summary>
 	public static class DecimalParser
 	{
-		private static readonly Regex SpacesPattern = new Regex(@"\s");
-		private static readonly Regex DecimalPattern = new Regex(@"[\d\.\,\s]*");
-		private static readonly Regex ExponentPattern = new Regex(@"[-+]?\d*\.?\d+[eE][-+]?\d+");
+		private static readonly Regex SpacesPattern = new(@"\s");
+		private static readonly Regex DecimalPattern = new(@"[\d\.\,\s]*");
+		private static readonly Regex ExponentPattern = new(@"[-+]?\d*\.?\d+[eE][-+]?\d+");
 
 		public static decimal? ParseDecimal(this string value)
 		{
+
+			string? fff = null;
+			const string CS10_TEST = $"{{222";
+
+
 			if (string.IsNullOrWhiteSpace(value))
 			{
 				return null;
