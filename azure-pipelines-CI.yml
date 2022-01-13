@@ -41,6 +41,7 @@ steps:
   inputs:
     solution: '$(solution)'
     vsVersion: 'latest'
+    msbuildArchitecture: 'x64'
     platform: '$(buildPlatform)'
     configuration: '$(buildConfiguration)'
 
