@@ -1,5 +1,9 @@
-﻿using System.Globalization;
+﻿using System;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Globalization;
 using System.Linq;
+using System.Text;
 using System.Text.RegularExpressions;
 
 namespace NavfertyExcelAddIn.ParseNumerics
@@ -9,14 +13,11 @@ namespace NavfertyExcelAddIn.ParseNumerics
 	/// </summary>
 	public static class DecimalParser
 	{
-		private static readonly Regex SpacesPattern = new(@"\s");
-		private static readonly Regex DecimalPattern = new(@"[\d\.\,\s]*");
-		private static readonly Regex ExponentPattern = new(@"[-+]?\d*\.?\d+[eE][-+]?\d+");
+		private static readonly Regex SpacesPattern = new Regex(@"\s");
+		private static readonly Regex DecimalPattern = new Regex(@"[\d\.\,\s]+");
+		private static readonly Regex ExponentPattern = new Regex(@"[-+]?\d*\.?\d+[eE][-+]?\d+");
 
-		//private const string CS10_TEST = $"{{222";
-		private static readonly string? fff = null;
-
-		public static decimal? ParseDecimal(this string value)
+		public static NumericParseResult? ParseDecimal(this string value)
 		{
 			if (string.IsNullOrWhiteSpace(value))
 			{
@@ -27,7 +28,7 @@ namespace NavfertyExcelAddIn.ParseNumerics
 
 			if (ExponentPattern.IsMatch(v))
 			{
-				return v.TryParseExponent();
+				return new NumericParseResult(v.TryParseExponent());
 			}
 
 			if (!DecimalPattern.IsMatch(value))
@@ -41,7 +42,7 @@ namespace NavfertyExcelAddIn.ParseNumerics
 				var c = v[last];
 				return v.CountChars(c) == 1
 					? v.TryParse(c == '.' ? Format.Dot : Format.Comma)
-					: null;
+					: (NumericParseResult?)null;
 			}
 
 			if (v.Contains(","))
@@ -73,7 +74,14 @@ namespace NavfertyExcelAddIn.ParseNumerics
 				: (decimal?)null;
 		}
 
-		private static decimal? TryParse(this string value, Format info)
+		private static Lazy<string[]> _allCurrencySymbolsCacheLazy = new Lazy<string[]>(()
+			=> CultureInfo.GetCultures(CultureTypes.AllCultures)
+		.Select(ci => ci.NumberFormat.CurrencySymbol)
+		.Distinct()
+		.Where(cur => !string.IsNullOrWhiteSpace(cur))
+		.ToArray());
+
+		private static NumericParseResult? TryParse(this string value, Format info)
 		{
 			var formatInfo = (NumberFormatInfo)NumberFormatInfo.InvariantInfo.Clone();
 
@@ -92,9 +100,30 @@ namespace NavfertyExcelAddIn.ParseNumerics
 			// добавить тест-кейсов на формат валют
 			//formatInfo.CurrencyNegativePattern = 8;
 			//formatInfo.CurrencyPositivePattern = 3;
-			return decimal.TryParse(value, NumberStyles.Currency, formatInfo, out decimal result)
-				? result
-				: (decimal?)null;
+
+			var valueParsed = decimal.TryParse(value, NumberStyles.Currency, formatInfo, out decimal result);
+			if (valueParsed) return new NumericParseResult(result);//Parsed without our help
+
+			//decimal.TryParse не может разобрать строку со значком любой валюты, кроме валюты текущей культуры,
+			//и символ валюты должен располагаться в правильном месте (как требуется в конкретной культуре)!!!
+			//Поэтому помогаем руками разобрать строку с произвольной валютой...
+
+			//detect how many currency symbols contains source string...
+			var currenciesInValue = _allCurrencySymbolsCacheLazy.Value.Where(cur => value.Contains(cur)).ToArray();
+			if (currenciesInValue.Count() == 1)// TODO: Если строка содержит несколько разных символов валют, не преобразовываем, т.к. приоритет валют не ясен
+			{
+				var curSymb = currenciesInValue.First();
+				//Remove found currencySymbol from source string
+				var valueWithoutCurrencySymbol = value.Replace(curSymb, string.Empty);
+				valueParsed = decimal.TryParse(valueWithoutCurrencySymbol, NumberStyles.Currency, formatInfo, out result);
+				if (valueParsed)
+				{
+					//System.Windows.Forms.MessageBox.Show($"Parsed value: '{value}, valueWithoutCurrencySymbol: {valueWithoutCurrencySymbol}', result: {result}, currency: {curSymb}");
+					return new NumericParseResult(result, curSymb);
+				}
+				//It was not possible to parse the line, even after removing the currencySymbol, most likely this is not about money at all...
+			}
+			return (NumericParseResult?)null;//Not found any currency symbols, or found more than one, or even not number...
 		}
 
 		private enum Format
