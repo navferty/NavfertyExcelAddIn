@@ -49,6 +49,14 @@ namespace NavfertyExcelAddIn.UnitTests.ParseNumerics
 			areas.Setup(x => x.GetEnumerator()).Returns(new[] { selection.Object }.GetEnumerator());
 			selection.Setup(x => x.Areas).Returns(areas.Object);
 
+
+			var cells = new Mock<Range>(MockBehavior.Default);
+			cells.Setup(x => x.GetEnumerator()).Returns(new[] { selection.Object }.GetEnumerator());
+			//selection.SetupSet(x => x.get_Cells = It.Is<object[,]>(z => VerifyParsed(z)));
+			//selection.Setup(x => x.Cells).Returns(cells.Object.GetEnumerator);
+
+			//areas.Setup(x => x.ce .Cells).Returns(cells.Object);
+
 			NumericParser.Parse(selection.Object);
 		}
 
