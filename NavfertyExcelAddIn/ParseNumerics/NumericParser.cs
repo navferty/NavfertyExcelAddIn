@@ -19,6 +19,11 @@ namespace NavfertyExcelAddIn.ParseNumerics
 			bool autoCalcEnabled = false;
 			try { autoCalcEnabled = selection.Worksheet.EnableCalculation; } catch { }
 			if (autoCalcEnabled) selection.Worksheet.EnableCalculation = false;
+
+#if DEBUG
+			var sw = new Stopwatch();
+			sw.Start();
+#endif
 			try
 			{
 
@@ -42,6 +47,11 @@ namespace NavfertyExcelAddIn.ParseNumerics
 			}
 			finally
 			{
+#if DEBUG
+				sw.Stop();
+				Debug.WriteLine($"NumericParser.Parse() {sw.Elapsed.TotalMilliseconds}ms");
+#endif
+
 				if (autoCalcEnabled) selection.Worksheet.EnableCalculation = autoCalcEnabled;//Restart sheet autorecalc
 			}
 		}
