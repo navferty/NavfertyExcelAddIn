@@ -12,10 +12,10 @@ namespace NavfertyExcelAddIn.ParseNumerics
 		private static readonly string currencySymbolFromOSUserLocale = CultureInfo.CurrentCulture.NumberFormat.CurrencySymbol;
 		private static readonly string currencySymbolRu = CultureInfo.GetCultureInfo("ru").NumberFormat.CurrencySymbol;
 
-		public readonly decimal? ConvertedValue;
-		public readonly string Currency;
+		public readonly double? ConvertedValue = null;
+		public readonly string? Currency = null;
 
-		public NumericParseResult(decimal? value, string curr = null)
+		public NumericParseResult(double? value, string? curr = null)
 		{
 			ConvertedValue = value;
 			Currency = curr;

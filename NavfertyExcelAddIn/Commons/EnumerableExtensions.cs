@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 
 using Autofac;
 
@@ -19,6 +20,7 @@ namespace NavfertyExcelAddIn.Commons
 
 		private static readonly ILogger logger = LogManager.GetCurrentClassLogger();
 
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void ForEach<T>(this IEnumerable<T> source, Action<T> action)
 		{
 			foreach (T element in source)
@@ -27,12 +29,14 @@ namespace NavfertyExcelAddIn.Commons
 			}
 		}
 
-		public static void ForEachCell(this Range range, Action<Range> action)
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static void ForEachCell(this Range? range, Action<Range> action)
 		{
 			// TODO rewrite to use less read-write calls to interop (like Range.Value) (may be use try/finally with selection.Worksheet.EnableCalculation = false/true?;
-			range.Cast<Range>().ForEach(action);
+			range?.Cast<Range>().ForEach(action);
 		}
 
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void ApplyForEachCellOfType<TIn, TOut>(this Range range, Func<TIn, TOut> transform)
 		{
 			logger.Debug($"Apply transformation to range '{range.GetRelativeAddress()}' on worksheet '{range.Worksheet.Name}'");
@@ -45,6 +49,7 @@ namespace NavfertyExcelAddIn.Commons
 			}
 		}
 
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		private static void ApplyToArea<TIn, TOut>(Range range, Func<TIn, TOut> transform)
 		{
 			var rangeValue = range.Value;
@@ -113,6 +118,7 @@ namespace NavfertyExcelAddIn.Commons
 		}
 
 		/// <summary>Allow acces to Range object from transform func</summary>
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void ApplyForEachCellOfType2<TIn, TOut>(this Range range, Func<TIn, Range, TOut> transform)
 		{
 			logger.Debug($"Apply transformation to range '{range.GetRelativeAddress()}' on worksheet '{range.Worksheet.Name}'");
@@ -127,38 +133,36 @@ namespace NavfertyExcelAddIn.Commons
 
 		// TODO check boxing time on million values
 		/// <summary>Allow acces to Range object from transform func may be slower than Old</summary>
-		private static void ApplyToArea2<TIn, TOut>(Range range, Func<TIn, Range, TOut> transform)
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		private static void ApplyToArea2<TIn, TOut>(Range area, Func<TIn, Range, TOut> transform)
 		{
-			try { if (null == range || null == range.Cells) return; } catch { return; }//Just for Test cases
+			//try { if (null == range || null == range.Cells) return; } catch { return; }//TODO: Just for Test cases, remove catch and modify tests (range.Cells)
+			area?.Cells?.ForEachCell(cell =>
+		   {
+			   {
+				   var cellValue = cell.Value;
+				   if ((cellValue is null) || (cellValue is not TIn currentValue)) return;
 
-			foreach (Range cell in range.Cells)
-			{
-				var cellValue = cell.Value;
-				if (!(cellValue is null))
-				{
+				   // TODO transform func may change format of cell, and we need to allow undo this, but set/restore cell formating has so weird api...
+				   var newValue = transform(currentValue, cell);
+				   if (newValue == null) return;
 
-					if (cellValue is TIn currentValue)
-					{
-						// TODO transform func may chabge format of cell, and we need to allow undo this, but set/restore cell formating has so weird api...
-						var newValue = transform(currentValue, cell);
-						if (!(newValue == null))
-						{
-							if (!newValue.Equals(currentValue))
-							{
-								cell.Value = newValue;
-								var undoItem = new UndoItem
-								{
-									OldValue = currentValue,
-									NewValue = newValue,
-									ColumnIndex = cell.Column,
-									RowIndex = cell.Row
-								};
-								undoManager.PushUndoItem(undoItem);
-							}
-						}
-					}
-				}
-			}
+				   if (!newValue.Equals(currentValue))
+				   {
+					   cell.Value = newValue;
+					   var undoItem = new UndoItem
+					   {
+						   OldValue = currentValue,
+						   NewValue = newValue,
+						   ColumnIndex = cell.Column,
+						   RowIndex = cell.Row
+					   };
+					   undoManager.PushUndoItem(undoItem);
+				   }
+			   }
+		   });
+
 		}
 	}
 }
+
