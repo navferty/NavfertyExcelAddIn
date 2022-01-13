@@ -13,7 +13,7 @@ namespace NavfertyExcelAddIn.ParseNumerics
 		private static readonly Regex DecimalPattern = new(@"[\d\.\,\s]*");
 		private static readonly Regex ExponentPattern = new(@"[-+]?\d*\.?\d+[eE][-+]?\d+");
 
-		private const string CS10_TEST = $"{{222";
+		//private const string CS10_TEST = $"{{222";
 		private static readonly string? fff = null;
 
 		public static decimal? ParseDecimal(this string value)
