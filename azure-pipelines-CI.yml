@@ -39,7 +39,6 @@ steps:
 
 - task: VSBuild@1
   inputs:
-		vsVersion: 'latest'
     solution: '$(solution)'
     vsVersion: 'latest'
     platform: '$(buildPlatform)'
