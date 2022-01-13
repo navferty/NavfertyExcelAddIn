@@ -18,7 +18,7 @@
       wrapped in this namespace at runtime.
   -->
   <PropertyGroup>
-    <LangVersion>10.0</LangVersion>
+    <LangVersion>Latest</LangVersion>
     <Nullable>enable</Nullable>
     <NullableContextOptions>enable</NullableContextOptions>
 
