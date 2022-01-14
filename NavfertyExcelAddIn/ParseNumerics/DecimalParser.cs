@@ -104,13 +104,12 @@ namespace NavfertyExcelAddIn.ParseNumerics
 			var valueParsed = double.TryParse(value, NumberStyles.Currency, formatInfo, out double result);
 			if (valueParsed) return new NumericParseResult(result);//Parsed without our help
 
-			//decimal.TryParse не может разобрать строку со значком любой валюты, кроме валюты текущей культуры,
-			//и символ валюты должен располагаться в правильном месте (как требуется в конкретной культуре)!!!
-			//Поэтому помогаем руками разобрать строку с произвольной валютой...
+			//.TryParse cannot parse a string with a CurrencySymbol and number format not from the current user culture
+			//Therefore, we help to parse the string with an arbitrary currency manualy...
 
-			//detect how many currency symbols contains source string...
+			//detect how many different currency symbols contains source string.
 			var currenciesInValue = _allCurrencySymbolsCacheLazy.Value.Where(cur => value.Contains(cur));//.ToArray();
-			if (currenciesInValue.Count() == 1)// TODO: Если строка содержит несколько разных символов валют, не преобразовываем, т.к. приоритет валют не ясен
+			if (currenciesInValue.Count() == 1)// TODO: If the string contains several different currency symbols, do not convert, because currency priority is not clear
 			{
 				var curSymb = currenciesInValue.First();
 				//Remove found currencySymbol from source string
