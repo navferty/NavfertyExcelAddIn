@@ -178,4 +178,10 @@
   <data name="RepairConditionalFormat" xml:space="preserve">
     <value>Применяет правила условного форматирования для выделенной таблицы, взяв за образец правила из первой строки выделенного диапазона.</value>
   </data>
+  <data name="ProtectUnprotectWorksheets" xml:space="preserve">
+    <value>Установить или снять защиту листов текущей книги</value>
+  </data>
+  <data name="UnprotectWorkbook" xml:space="preserve">
+    <value>Снять защиту книги и листов (для файла)</value>
+  </data>
 </root>
