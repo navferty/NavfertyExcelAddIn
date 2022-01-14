@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
 
@@ -14,7 +15,7 @@ using Application = Microsoft.Office.Interop.Excel.Application;
 namespace NavfertyExcelAddIn.Commons
 {
 	[DebuggerStepThrough]
-	internal static class WinAPIExtensions
+	internal static class ControlsExtensions
 	{
 
 		private const string WINDLL_USER = "user32.dll";
@@ -26,41 +27,30 @@ namespace NavfertyExcelAddIn.Commons
 			[In] int wParam,
 			[In, MarshalAs(UnmanagedType.LPTStr)] string lParam);
 
-
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void SetVistaCueBanner(this TextBox ctl, string BannerText = null)
 		{
 			_ = ctl ?? throw new ArgumentNullException(nameof(ctl));
 
 			const int EM_SETCUEBANNER = 0x1501;
-			Action<TextBox, string> cbSetBannerWhenHandleReady = (t, s) =>
-				 SendMessage(t.Handle, EM_SETCUEBANNER, 0, s);
-
-			if (ctl.IsHandleCreated)
-			{
-				cbSetBannerWhenHandleReady(ctl, BannerText);
-			}
-			else
-			{
-				ctl.HandleCreated += (s, e) => cbSetBannerWhenHandleReady(s as TextBox, BannerText);
-			}
+			//Action<TextBox, string> cbSetBannerWhenHandleReady = (t, s) =>				 SendMessage(t.Handle, EM_SETCUEBANNER, 0, s);
+			ctl.RunWhenHandleReady(tb => SendMessage(tb.Handle, EM_SETCUEBANNER, 0, BannerText));
 		}
 
-		public static void SetVistaCueBanner(this ComboBox ctl, string BannerText = null)
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static void RunWhenHandleReady<T>(this T ctl, Action<Control> HandleReadyAction) where T : Control
 		{
 			_ = ctl ?? throw new ArgumentNullException(nameof(ctl));
-
-			const int CB_SETCUEBANNER = 0x1703;
-
-			Action<ComboBox, string> cbSetBannerWhenHandleReady = (t, s) =>
-					 SendMessage(t.Handle, CB_SETCUEBANNER, 0, s);
+			if (ctl.Disposing || ctl.IsDisposed) return;
 
 			if (ctl.IsHandleCreated)
 			{
-				cbSetBannerWhenHandleReady(ctl, BannerText);
+				HandleReadyAction?.Invoke(ctl);//Control handle already Exist, run immediate
 			}
 			else
 			{
-				ctl.HandleCreated += (s, e) => cbSetBannerWhenHandleReady(s as ComboBox, BannerText);
+				//Delay action when handle will be ready...
+				ctl.HandleCreated += (s, e) => HandleReadyAction?.Invoke(s as T);
 			}
 		}
 

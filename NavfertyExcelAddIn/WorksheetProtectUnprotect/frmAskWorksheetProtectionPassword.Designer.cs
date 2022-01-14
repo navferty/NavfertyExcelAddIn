@@ -83,9 +83,10 @@
             this.radioModeProtect.AutoSize = true;
             this.radioModeProtect.Checked = true;
             this.tlpMain.SetColumnSpan(this.radioModeProtect, 2);
+            this.radioModeProtect.Dock = System.Windows.Forms.DockStyle.Top;
             this.radioModeProtect.Location = new System.Drawing.Point(3, 3);
             this.radioModeProtect.Name = "radioModeProtect";
-            this.radioModeProtect.Size = new System.Drawing.Size(39, 17);
+            this.radioModeProtect.Size = new System.Drawing.Size(531, 17);
             this.radioModeProtect.TabIndex = 1;
             this.radioModeProtect.TabStop = true;
             this.radioModeProtect.Text = "set";
@@ -105,9 +106,10 @@
             // 
             this.radioModeUnProtect.AutoSize = true;
             this.tlpMain.SetColumnSpan(this.radioModeUnProtect, 2);
+            this.radioModeUnProtect.Dock = System.Windows.Forms.DockStyle.Top;
             this.radioModeUnProtect.Location = new System.Drawing.Point(3, 26);
             this.radioModeUnProtect.Name = "radioModeUnProtect";
-            this.radioModeUnProtect.Size = new System.Drawing.Size(48, 17);
+            this.radioModeUnProtect.Size = new System.Drawing.Size(531, 17);
             this.radioModeUnProtect.TabIndex = 2;
             this.radioModeUnProtect.TabStop = true;
             this.radioModeUnProtect.Text = "reset";
