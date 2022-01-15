@@ -1,14 +1,16 @@
 ﻿using System;
 using System.Data;
-using System.Linq;
+using System.Drawing;
 using System.Windows.Forms;
+using System.Linq;
 
 using Microsoft.Office.Interop.Excel;
 
 using NavfertyExcelAddIn.Commons;
 using NavfertyExcelAddIn.Localization;
 
-namespace NavfertyExcelAddIn.WorksheetProtectorUnprotector
+
+namespace NavfertyExcelAddIn.WorksheetProtectUnprotect
 {
 	public partial class frmAskWorksheetProtectionPassword : Form
 	{
@@ -42,6 +44,9 @@ namespace NavfertyExcelAddIn.WorksheetProtectorUnprotector
 			btnExecProtectionAction.Text = UIStrings.SheetProtection_Execute;
 			btnExecProtectionAction.Enabled = false;
 
+			lstWorksheets.EmptyText = UIStrings.NoMatchingWorkSheets;
+			lstWorksheets.EmptyTextAlign = ContentAlignment.MiddleCenter;
+
 			this.Load += (s, e) => OnFormLoad();
 		}
 
@@ -54,14 +59,12 @@ namespace NavfertyExcelAddIn.WorksheetProtectorUnprotector
 			radioModeProtect.CheckedChanged += (s, e) => OnSelectProtectAction();
 			lstWorksheets.ItemCheck += OnSheetInListChecked;
 			btnExecProtectionAction.Click += (s, e) => OnExecProtectAction();
-
 		}
 
 		private bool hasSheetsToProcess = false;
 
 		private void OnSelectProtectAction()
 		{
-
 			Cursor = Cursors.WaitCursor;
 			try
 			{
@@ -88,7 +91,7 @@ namespace NavfertyExcelAddIn.WorksheetProtectorUnprotector
 				}
 				else
 				{
-					lstWorksheets.Items.Add(UIStrings.NoMatchingWorkSheets);
+					//lstWorksheets.Items.Add(UIStrings.NoMatchingWorkSheets);
 				}
 
 			}
@@ -107,26 +110,9 @@ namespace NavfertyExcelAddIn.WorksheetProtectorUnprotector
 		private void OnSheetInListChecked(object sender, ItemCheckEventArgs e)
 		{
 			//inside OnSheetInListChecked() handler, lst.CheckedItems still not return actual row checked staus before methos finished
-			//we create small timer, which delays row checking after we exited OnSheetInListChecked.
-
-			var tmrUIProcessPause = new System.Windows.Forms.Timer()
-			{
-				Interval = 100, //set as short time as we can, to only allow to finish OnSheetInListChecked(), but not allow any overheaded UI events...
-				Enabled = false //do not start timer untill we finish it's setup
-			};
-			tmrUIProcessPause.Tick += (s, te) =>
-			{
-				//This Work!!!
-				tmrUIProcessPause.Stop();//first stop and dispose our timer, to avoid double execution
-				tmrUIProcessPause.Dispose();
-
-				AfterSheetChecked();//Now start real row checking processing...
-			};
-
-
-			tmrUIProcessPause.Start();//Start pause timer
-
-			//now we exit from event handler, but our delayed (timered) AfterSheetChecked must be run...
+			//we shcedule our action to execute after exit control events handler pipeline
+			((System.Action)AfterSheetChecked).RunDelayed();
+			//And now we exit from event handler, but our delayed AfterSheetChecked() will be run soon...
 		}
 
 		private void AfterSheetChecked()
@@ -140,7 +126,7 @@ namespace NavfertyExcelAddIn.WorksheetProtectorUnprotector
 
 		private void OnExecProtectAction()
 		{
-			Cursor = Cursors.WaitCursor;
+			UseWaitCursor = true;
 			try
 			{
 				var rowsToProcees = lstWorksheets.CheckedItems.Cast<WorksheetRow>().ToArray();
@@ -189,19 +175,10 @@ namespace NavfertyExcelAddIn.WorksheetProtectorUnprotector
 			{
 				creator.dialogService.ShowError(ex.Message);
 			}
-			finally { Cursor = Cursors.Default; }
+			finally { UseWaitCursor = false; }
 
 			//refill list of sheets with updated protectiob status
 			OnSelectProtectAction();
 		}
-
-
-
-
-
-
-
-
-
 	}
 }

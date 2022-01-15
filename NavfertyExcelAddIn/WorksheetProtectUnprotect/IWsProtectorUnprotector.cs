@@ -1,6 +1,6 @@
 ﻿using Microsoft.Office.Interop.Excel;
 
-namespace NavfertyExcelAddIn.WorksheetProtectorUnprotector
+namespace NavfertyExcelAddIn.WorksheetProtectUnprotect
 {
 	public interface IWsProtectorUnprotector
 	{

@@ -11,7 +11,7 @@ using Microsoft.Office.Interop.Excel;
 using NavfertyExcelAddIn.Commons;
 using NavfertyExcelAddIn.Localization;
 
-namespace NavfertyExcelAddIn.WorksheetProtectorUnprotector
+namespace NavfertyExcelAddIn.WorksheetProtectUnprotect
 {
 	public class WsProtectorUnprotector : IWsProtectorUnprotector
 	{

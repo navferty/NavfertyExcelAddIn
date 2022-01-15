@@ -24,7 +24,7 @@ using NavfertyExcelAddIn.Transliterate;
 using NavfertyExcelAddIn.Undo;
 using NavfertyExcelAddIn.UnprotectWorkbook;
 using NavfertyExcelAddIn.WorksheetCellsEditing;
-using NavfertyExcelAddIn.WorksheetProtectorUnprotector;
+using NavfertyExcelAddIn.WorksheetProtectUnprotect;
 using NavfertyExcelAddIn.XmlTools;
 
 using NLog;

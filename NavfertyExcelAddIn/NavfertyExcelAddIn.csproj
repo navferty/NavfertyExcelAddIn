@@ -231,6 +231,7 @@
     can be found.
   -->
   <ItemGroup>
+    <Compile Include="Commons\WinAPI\WinAPI.cs" />
     <Compile Include="Commons\FileExtensionFilter.cs" />
     <Compile Include="Commons\RangeExtensions.cs" />
     <Compile Include="Commons\StringExtensions.cs" />
@@ -266,6 +267,9 @@
     <Compile Include="Undo\UndoManager.cs" />
     <Compile Include="WorksheetCellsEditing\ConditionalFormatFixer.cs" />
     <Compile Include="WorksheetCellsEditing\IConditionalFormatFixer.cs" />
+    <Compile Include="WorksheetProtectUnprotect\CheckedListBoxEx.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="WorksheetProtectUnprotect\frmAskWorksheetProtectionPassword.cs">
       <SubType>Form</SubType>
     </Compile>
