@@ -54,6 +54,33 @@ namespace NavfertyExcelAddIn.Commons
 			}
 		}
 
+		/// <summary>
+		/// Usually used when you need to do an action with a slight delay after exiting the current method. 
+		/// For example, if some data will be ready only after exiting the control event handler processing branch
+		/// </summary>
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static void RunDelayed(this Action DelayedAction, int DelayInterval = 100)
+		{
+			_ = DelayedAction ?? throw new ArgumentNullException(nameof(DelayedAction));
 
+			//Use 'System.Windows.Forms.Timer' that uses some thread with caller to raise events
+			System.Windows.Forms.Timer tmrDelay = new()
+			{
+				Interval = DelayInterval,
+				Enabled = false //do not start timer untill we finish it's setup
+			};
+			tmrDelay.Tick += (s, te) =>
+			{
+				//first stop and dispose our timer, to avoid double execution
+				tmrDelay.Stop();
+				tmrDelay.Dispose();
+
+				//Now start action
+				DelayedAction.Invoke();
+			};
+
+			//Start delay timer
+			tmrDelay.Start();
+		}
 	}
 }

@@ -107,26 +107,9 @@ namespace NavfertyExcelAddIn.WorksheetProtectorUnprotector
 		private void OnSheetInListChecked(object sender, ItemCheckEventArgs e)
 		{
 			//inside OnSheetInListChecked() handler, lst.CheckedItems still not return actual row checked staus before methos finished
-			//we create small timer, which delays row checking after we exited OnSheetInListChecked.
-
-			var tmrUIProcessPause = new System.Windows.Forms.Timer()
-			{
-				Interval = 100, //set as short time as we can, to only allow to finish OnSheetInListChecked(), but not allow any overheaded UI events...
-				Enabled = false //do not start timer untill we finish it's setup
-			};
-			tmrUIProcessPause.Tick += (s, te) =>
-			{
-				//This Work!!!
-				tmrUIProcessPause.Stop();//first stop and dispose our timer, to avoid double execution
-				tmrUIProcessPause.Dispose();
-
-				AfterSheetChecked();//Now start real row checking processing...
-			};
-
-
-			tmrUIProcessPause.Start();//Start pause timer
-
-			//now we exit from event handler, but our delayed (timered) AfterSheetChecked must be run...
+			//we shcedule our action to execute after exit control events handler pipeline
+			((System.Action)AfterSheetChecked).RunDelayed();
+			//And now we exit from event handler, but our delayed AfterSheetChecked() will be run soon...
 		}
 
 		private void AfterSheetChecked()
