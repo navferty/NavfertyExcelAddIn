@@ -70,6 +70,8 @@ namespace NavfertyExcelAddIn.Commons
 				SetHandle(hdc);
 			}
 
+			public DC(IWin32Window Window) : this(Window.Handle) { }
+
 			protected override bool ReleaseHandle()
 			{
 				if (IsInvalid) return true;

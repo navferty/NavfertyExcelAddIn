@@ -58,7 +58,7 @@ namespace NavfertyExcelAddIn.WorksheetProtectUnprotect
 				return;//We paint over only if ListBox noes not have any items and and EmptyText
 
 			var rcClient = WinAPI.GetClientRect(this);
-			using (var dc = new WinAPI.DC(Handle))
+			using (var dc = new WinAPI.DC(this))
 			{
 				using (var g = dc.CreateGraphics())
 				{
