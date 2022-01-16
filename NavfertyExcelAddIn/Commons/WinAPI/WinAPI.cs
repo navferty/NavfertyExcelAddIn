@@ -31,15 +31,6 @@ namespace NavfertyExcelAddIn.Commons
 			[In, MarshalAs(UnmanagedType.LPTStr)] string lParam);
 
 		[DllImport(WINDLL_USER)]
-		private static extern IntPtr GetDC(
-			[In] IntPtr hwnd);
-
-		[DllImport(WINDLL_USER)]
-		private static extern int ReleaseDC(
-			[In] IntPtr hwnd,
-			[In] IntPtr hdc);
-
-		[DllImport(WINDLL_USER)]
 		private static extern int GetClientRect(
 			[In] IntPtr hwnd,
 			[In, Out] ref System.Drawing.Rectangle rc);
@@ -77,8 +68,6 @@ namespace NavfertyExcelAddIn.Commons
 				if (IsInvalid) return true;
 				bool bResult = ReleaseDC(hWnd, handle);
 				SetHandle(IntPtr.Zero);
-
-				Debug.WriteLine("ReleaseHandle");
 				return bResult;
 			}
 
