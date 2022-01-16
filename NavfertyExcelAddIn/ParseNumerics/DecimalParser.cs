@@ -15,7 +15,7 @@ namespace NavfertyExcelAddIn.ParseNumerics
 	/// </summary>
 	public static class DecimalParser
 	{
-		private static readonly Regex SpacesPattern = new(@"\s");
+		//private static readonly Regex SpacesPattern = new(@"\s");
 		private static readonly Regex DecimalPattern = new(@"[\d\.\,\s]+");
 		private static readonly Regex ExponentPattern = new(@"[-+]?\d*\.?\d+[eE][-+]?\d+");
 
@@ -26,7 +26,7 @@ namespace NavfertyExcelAddIn.ParseNumerics
 				return null;
 			}
 
-			var v = SpacesPattern.Replace(value, match => string.Empty);
+			var v = value.RemoveSpacesEx();
 
 			if (ExponentPattern.IsMatch(v))
 			{
@@ -64,8 +64,6 @@ namespace NavfertyExcelAddIn.ParseNumerics
 
 			return v.TryParse(Format.Dot);
 		}
-
-
 
 		private static double? TryParseExponent(this string value)
 		{

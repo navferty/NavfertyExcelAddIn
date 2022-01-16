@@ -31,5 +31,15 @@ namespace NavfertyExcelAddIn.Commons
 		public static int CountChars(this string value, char c)
 			=> value.Count(x => x == c);
 
+		/// <summary>Removes only ASCII Space char (0x32)</summary>
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		internal static string RemoveSpacesFast(this string source)
+			=> source.Replace(" ", string.Empty);
+
+		/// <summary>Removes all Unicode character which is categorized as white space.</summary>
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		internal static string RemoveSpacesEx(this string source)
+			=> string.Concat(source.Where(c => !char.IsWhiteSpace(c)));
+
 	}
 }
