@@ -114,8 +114,4 @@ namespace NavfertyExcelAddIn.Commons
 			_ => StringAlignment.Center,
 		};
 	}
-
-
-
-
 }
