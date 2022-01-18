@@ -1,4 +1,5 @@
-﻿using System.Text.RegularExpressions;
+﻿using System.Linq;
+using System.Text.RegularExpressions;
 
 using NLog;
 
@@ -22,6 +23,12 @@ namespace NavfertyExcelAddIn.Commons
 				: newValue.Trim();
 
 			return newValue;
+		}
+
+
+		public static int CountChars(this string value, char c)
+		{
+			return value.Count(x => x == c);
 		}
 	}
 }

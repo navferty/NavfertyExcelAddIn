@@ -6,15 +6,14 @@ using System.Threading.Tasks;
 
 namespace NavfertyExcelAddIn.CurrencyExchangeRates
 {
-	internal class GetCBR2
+	internal static class CBRWebServiceTest
 	{
-		void DDD()
+		static public void Test1()
 		{
-			using (var cbr = new Web.CBR.DailyInfoSoapClient())
+			using (var f = new frmExchangeRates())
 			{
-				var curses = cbr.GetCursOnDate(DateTime.Now);
+				f.ShowDialog();
 			};
 		}
-
 	}
 }

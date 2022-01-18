@@ -231,6 +231,8 @@
     can be found.
   -->
   <ItemGroup>
+    <Compile Include="Commons\ControlsExtensions_2.cs" />
+    <Compile Include="Commons\DataExtensions.cs" />
     <Compile Include="Commons\FileExtensionFilter.cs" />
     <Compile Include="Commons\RangeExtensions.cs" />
     <Compile Include="Commons\StringExtensions.cs" />
@@ -240,6 +242,12 @@
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
     <Compile Include="CurrencyExchangeRates\Class1.cs" />
+    <Compile Include="CurrencyExchangeRates\frmExchangeRates.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CurrencyExchangeRates\frmExchangeRates.Designer.cs">
+      <DependentUpon>frmExchangeRates.cs</DependentUpon>
+    </Compile>
     <Compile Include="FindFormulaErrors\CVErrEnum.cs" />
     <Compile Include="DataValidation\CellsValueValidator.cs" />
     <Compile Include="DataValidation\IValidator.cs" />
@@ -390,6 +398,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="CurrencyExchangeRates\frmExchangeRates.resx">
+      <DependentUpon>frmExchangeRates.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="InteractiveRangeReport\InteractiveRangeReportForm.resx">
       <DependentUpon>InteractiveRangeReportForm.cs</DependentUpon>
       <SubType>Designer</SubType>
@@ -434,9 +445,7 @@
   <ItemGroup>
     <WCFMetadataStorage Include="Connected Services\Web.CBR\" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="NewFolder1\" />
-  </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

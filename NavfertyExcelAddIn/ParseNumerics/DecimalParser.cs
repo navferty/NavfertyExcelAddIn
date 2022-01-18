@@ -2,6 +2,8 @@
 using System.Linq;
 using System.Text.RegularExpressions;
 
+using NavfertyExcelAddIn.Commons;
+
 namespace NavfertyExcelAddIn.ParseNumerics
 {
 	/// <summary>
@@ -59,11 +61,6 @@ namespace NavfertyExcelAddIn.ParseNumerics
 			}
 
 			return v.TryParse(Format.Dot);
-		}
-
-		private static int CountChars(this string value, char c)
-		{
-			return value.Count(x => x == c);
 		}
 
 		private static decimal? TryParseExponent(this string value)

@@ -14,7 +14,7 @@ namespace NavfertyExcelAddIn.Web.CBR {
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ServiceModel.ServiceContractAttribute(Namespace="http://web.cbr.ru/", ConfigurationName="Web.CBR.DailyInfoSoap")]
-    public interface DailyInfoSoap {
+    internal interface DailyInfoSoap {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://web.cbr.ru/SaldoXML", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
@@ -578,12 +578,12 @@ namespace NavfertyExcelAddIn.Web.CBR {
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public interface DailyInfoSoapChannel : NavfertyExcelAddIn.Web.CBR.DailyInfoSoap, System.ServiceModel.IClientChannel {
+    internal interface DailyInfoSoapChannel : NavfertyExcelAddIn.Web.CBR.DailyInfoSoap, System.ServiceModel.IClientChannel {
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public partial class DailyInfoSoapClient : System.ServiceModel.ClientBase<NavfertyExcelAddIn.Web.CBR.DailyInfoSoap>, NavfertyExcelAddIn.Web.CBR.DailyInfoSoap {
+    internal partial class DailyInfoSoapClient : System.ServiceModel.ClientBase<NavfertyExcelAddIn.Web.CBR.DailyInfoSoap>, NavfertyExcelAddIn.Web.CBR.DailyInfoSoap {
         
         public DailyInfoSoapClient() {
         }
