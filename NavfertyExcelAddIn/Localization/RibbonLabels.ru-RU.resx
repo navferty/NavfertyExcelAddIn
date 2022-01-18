@@ -118,7 +118,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="ParseNumerics" xml:space="preserve">
-    <value>Парсинг числовых значений</value>
+    <value>Парсинг чисел</value>
   </data>
   <data name="UnprotectWorkbook" xml:space="preserve">
     <value>Защита файла</value>
@@ -127,7 +127,7 @@
     <value>Сократить имена организаций</value>
   </data>
   <data name="HighlightDuplicates" xml:space="preserve">
-    <value>Множественная подсветка дублей</value>
+    <value>Подсветка дублей</value>
   </data>
   <data name="ToggleCase" xml:space="preserve">
     <value>Изменить регистр</value>
@@ -151,13 +151,13 @@
     <value>Работа с XML</value>
   </data>
   <data name="FindErrors" xml:space="preserve">
-    <value>Найти все ошибки в выделенном диапазоне</value>
+    <value>Найти все ошибки</value>
   </data>
   <data name="CopyAsMarkdown" xml:space="preserve">
     <value>Копировать в Markdown</value>
   </data>
   <data name="ValidateValuesButton" xml:space="preserve">
-    <value>Валидация значений</value>
+    <value>Валидация</value>
   </data>
   <data name="ValidateValuesDate" xml:space="preserve">
     <value>Дата</value>
@@ -190,7 +190,7 @@
     <value>Форматирование значений</value>
   </data>
   <data name="StringifyNumericsButton" xml:space="preserve">
-    <value>Преобразовать в слова</value>
+    <value>Число словами</value>
   </data>
   <data name="StringifyNumericsEn" xml:space="preserve">
     <value>На английском</value>
@@ -205,7 +205,7 @@
     <value>Управление</value>
   </data>
   <data name="UndoLastAction" xml:space="preserve">
-    <value>Отменить последнее действие</value>
+    <value>Отменить</value>
   </data>
   <data name="SwitchReferenceStyle" xml:space="preserve">
     <value>Изменить стиль ссылок (A1/R1C1)</value>
