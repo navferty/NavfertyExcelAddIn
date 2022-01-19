@@ -12,7 +12,7 @@ using System.Windows.Forms;
 
 using NavfertyExcelAddIn.Commons;
 
-namespace NavfertyExcelAddIn.CurrencyExchangeRates
+namespace NavfertyExcelAddIn.Web.CurrencyExchangeRates
 {
 	public partial class frmExchangeRates : Form
 	{

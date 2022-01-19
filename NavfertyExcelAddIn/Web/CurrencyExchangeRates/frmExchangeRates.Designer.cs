@@ -1,4 +1,4 @@
-﻿namespace NavfertyExcelAddIn.CurrencyExchangeRates
+﻿namespace NavfertyExcelAddIn.Web.CurrencyExchangeRates
 {
 	partial class frmExchangeRates
 	{
