@@ -10,10 +10,6 @@ namespace NavfertyExcelAddIn.ParseNumerics
 	{
 		public void Parse(Range selection)
 		{
-
-			Web.CurrencyExchangeRates.CBRWebServiceTest.Test1();
-
-
 			selection.ApplyForEachCellOfType<string, object>(
 				value =>
 				{

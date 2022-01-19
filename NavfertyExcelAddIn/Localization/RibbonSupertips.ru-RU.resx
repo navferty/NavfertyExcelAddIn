@@ -184,4 +184,7 @@
   <data name="UnprotectWorkbook" xml:space="preserve">
     <value>Снять защиту книги и листов (для файла)</value>
   </data>
+  <data name="CurrencyExchangeRatesSelect" xml:space="preserve">
+    <value>222222222222222222222222</value>
+  </data>
 </root>

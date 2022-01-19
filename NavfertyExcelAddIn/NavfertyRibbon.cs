@@ -408,7 +408,17 @@ namespace NavfertyExcelAddIn
 		#endregion
 
 		#region Web
+		public void CurrencyExchangeRatesSelect(IRibbonControl ribbonControl)
+		{
+			var wb = App.ActiveWorkbook;
+			if (wb is null) return;
 
+			var path = wb.FullName;
+			logger.Debug($"CurrencyExchangeRates {path}");
+
+			var webExchangeRates = GetService<Web.CurrencyExchangeRates.ICurrencyExchangeRates>();
+			webExchangeRates.ShowCurrencyExchangeRates(wb);
+		}
 		#endregion
 
 		#endregion

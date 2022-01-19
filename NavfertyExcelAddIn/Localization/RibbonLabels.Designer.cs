@@ -106,6 +106,15 @@ namespace NavfertyExcelAddIn.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Exchange rates.
+        /// </summary>
+        internal static string CurrencyExchangeRatesSelect {
+            get {
+                return ResourceManager.GetString("CurrencyExchangeRatesSelect", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Cut Names.
         /// </summary>
         internal static string CutNames {
@@ -381,6 +390,15 @@ namespace NavfertyExcelAddIn.Localization {
         internal static string ViewGroup {
             get {
                 return ResourceManager.GetString("ViewGroup", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Web tools.
+        /// </summary>
+        internal static string WebToolsGroup {
+            get {
+                return ResourceManager.GetString("WebToolsGroup", resourceCulture);
             }
         }
         

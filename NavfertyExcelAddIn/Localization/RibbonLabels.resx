@@ -228,4 +228,10 @@
   <data name="ProtectUnprotectWorksheets" xml:space="preserve">
     <value>Worksheets protection</value>
   </data>
+  <data name="CurrencyExchangeRatesSelect" xml:space="preserve">
+    <value>Exchange rates</value>
+  </data>
+  <data name="WebToolsGroup" xml:space="preserve">
+    <value>Web tools</value>
+  </data>
 </root>

@@ -124,6 +124,11 @@ namespace NavfertyExcelAddIn
 				.EnableInterfaceInterceptors()
 				.InterceptedBy(typeof(ExceptionLogger));
 
+			builder.RegisterType<Web.CurrencyExchangeRates.CurrencyExchangeRates>()
+				.As<Web.CurrencyExchangeRates.ICurrencyExchangeRates>()
+				.EnableInterfaceInterceptors()
+				.InterceptedBy(typeof(ExceptionLogger));
+
 			builder.RegisterType<ExceptionLogger>();
 
 			builder.RegisterType<UndoManager>()

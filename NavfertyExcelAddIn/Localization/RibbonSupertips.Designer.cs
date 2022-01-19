@@ -70,6 +70,15 @@ namespace NavfertyExcelAddIn.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to 111111111111111111111111.
+        /// </summary>
+        internal static string CurrencyExchangeRatesSelect {
+            get {
+                return ResourceManager.GetString("CurrencyExchangeRatesSelect", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to In the development....
         /// </summary>
         internal static string CutNames {
