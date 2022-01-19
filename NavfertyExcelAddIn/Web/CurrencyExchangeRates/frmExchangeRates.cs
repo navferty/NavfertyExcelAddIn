@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 
 using NavfertyExcelAddIn.Commons;
+using NavfertyExcelAddIn.Localization;
 
 namespace NavfertyExcelAddIn.Web.CurrencyExchangeRates
 {
@@ -42,7 +43,8 @@ namespace NavfertyExcelAddIn.Web.CurrencyExchangeRates
 
 		private void Form_Load(object sender, EventArgs e)
 		{
-			Text = $"Курсы валют по данным ЦБРФ, по отношению к {ciResult.NumberFormat.CurrencySymbol}";
+			//Text = $"Курсы валют по данным ЦБРФ, по отношению к {ciResult.NumberFormat.CurrencySymbol}";
+			Text = string.Format(UIStrings.CurrencyExchangeRates_FormTitle, UIStrings.CurrencyExchangeRates_Sources_CBRF, ciResult.NumberFormat.CurrencySymbol);
 			var dtNow = DateTime.Now;
 			dtpDate.Value = dtNow;
 			dtpDate.MaxDate = dtNow;

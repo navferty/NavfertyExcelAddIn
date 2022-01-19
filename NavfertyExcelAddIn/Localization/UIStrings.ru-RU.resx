@@ -123,6 +123,12 @@
   <data name="CannotUnlockPleaseSaveAsXml" xml:space="preserve">
     <value>Для разброкировки содержимого сохраните книгу в формате .xlsx или .xlsm</value>
   </data>
+  <data name="CurrencyExchangeRates_FormTitle" xml:space="preserve">
+    <value>Курсы валют по данным {0}, по отношению к {1}</value>
+  </data>
+  <data name="CurrencyExchangeRates_Sources_CBRF" xml:space="preserve">
+    <value>ЦБ РФ</value>
+  </data>
   <data name="Error" xml:space="preserve">
     <value>Ошибка</value>
   </data>
