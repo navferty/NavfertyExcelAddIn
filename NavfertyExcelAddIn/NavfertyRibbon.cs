@@ -406,6 +406,11 @@ namespace NavfertyExcelAddIn
 			validator.Validate(App);
 		}
 		#endregion
+
+		#region Web
+
+		#endregion
+
 		#endregion
 
 		#region Utils
