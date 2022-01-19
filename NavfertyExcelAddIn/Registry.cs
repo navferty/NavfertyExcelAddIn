@@ -10,6 +10,7 @@ using NavfertyExcelAddIn.Transliterate;
 using NavfertyExcelAddIn.Undo;
 using NavfertyExcelAddIn.UnprotectWorkbook;
 using NavfertyExcelAddIn.WorksheetCellsEditing;
+using NavfertyExcelAddIn.WorksheetProtectUnprotect;
 using NavfertyExcelAddIn.XmlTools;
 
 namespace NavfertyExcelAddIn
@@ -65,6 +66,11 @@ namespace NavfertyExcelAddIn
 
 			builder.RegisterType<WbUnprotector>()
 				.As<IWbUnprotector>()
+				.EnableInterfaceInterceptors()
+				.InterceptedBy(typeof(ExceptionLogger));
+
+			builder.RegisterType<WsProtectorUnprotector>()
+				.As<IWsProtectorUnprotector>()
 				.EnableInterfaceInterceptors()
 				.InterceptedBy(typeof(ExceptionLogger));
 

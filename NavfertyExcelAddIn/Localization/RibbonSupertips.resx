@@ -178,4 +178,10 @@ Allows rewriting values in range -999 billion to 999 billion, with precision up 
   <data name="RepairConditionalFormat" xml:space="preserve">
     <value>Fill conditional formatting in entire table, with rules based on first table row</value>
   </data>
+  <data name="ProtectUnprotectWorksheets" xml:space="preserve">
+    <value>Set or remove Worksheets protection for current Workbook</value>
+  </data>
+  <data name="UnprotectWorkbook" xml:space="preserve">
+    <value>Unprotect Workbook file</value>
+  </data>
 </root>

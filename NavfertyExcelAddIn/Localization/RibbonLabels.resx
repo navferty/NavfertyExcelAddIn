@@ -121,7 +121,7 @@
     <value>Parse Numerics</value>
   </data>
   <data name="UnprotectWorkbook" xml:space="preserve">
-    <value>Unprotect Workbook</value>
+    <value>Remove file protection</value>
   </data>
   <data name="CutNames" xml:space="preserve">
     <value>Cut Names</value>
@@ -224,5 +224,8 @@
   </data>
   <data name="RepairConditionalFormat" xml:space="preserve">
     <value>Repair Conditional Formatting</value>
+  </data>
+  <data name="ProtectUnprotectWorksheets" xml:space="preserve">
+    <value>Worksheets protection</value>
   </data>
 </root>

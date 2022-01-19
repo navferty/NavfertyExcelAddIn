@@ -231,23 +231,9 @@
     can be found.
   -->
   <ItemGroup>
-    <Compile Include="Commons\ControlsExtensions_2.cs" />
-    <Compile Include="Commons\DataExtensions.cs" />
     <Compile Include="Commons\FileExtensionFilter.cs" />
     <Compile Include="Commons\RangeExtensions.cs" />
     <Compile Include="Commons\StringExtensions.cs" />
-    <Compile Include="Connected Services\Web.CBR\Reference.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Compile>
-    <Compile Include="CurrencyExchangeRates\Class1.cs" />
-    <Compile Include="CurrencyExchangeRates\frmExchangeRates.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="CurrencyExchangeRates\frmExchangeRates.Designer.cs">
-      <DependentUpon>frmExchangeRates.cs</DependentUpon>
-    </Compile>
     <Compile Include="FindFormulaErrors\CVErrEnum.cs" />
     <Compile Include="DataValidation\CellsValueValidator.cs" />
     <Compile Include="DataValidation\IValidator.cs" />
@@ -279,6 +265,18 @@
     <Compile Include="Undo\UndoManager.cs" />
     <Compile Include="WorksheetCellsEditing\ConditionalFormatFixer.cs" />
     <Compile Include="WorksheetCellsEditing\IConditionalFormatFixer.cs" />
+    <Compile Include="WorksheetProtectUnprotect\CheckedListBoxEx.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="WorksheetProtectUnprotect\frmAskWorksheetProtectionPassword.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="WorksheetProtectUnprotect\frmAskWorksheetProtectionPassword.Designer.cs">
+      <DependentUpon>frmAskWorksheetProtectionPassword.cs</DependentUpon>
+    </Compile>
+    <Compile Include="WorksheetProtectUnprotect\IWsProtectorUnprotector.cs" />
+    <Compile Include="WorksheetProtectUnprotect\WorksheetRow.cs" />
+    <Compile Include="WorksheetProtectUnprotect\WsProtectorUnprotector.cs" />
     <Compile Include="XmlTools\IXmlValidator.cs" />
     <Compile Include="XmlTools\IXsdSchemaValidator.cs" />
     <Compile Include="XmlTools\IXmlSampleCreator.cs" />
@@ -437,6 +435,9 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>RibbonIcons.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WorksheetProtectUnprotect\frmAskWorksheetProtectionPassword.resx">
+      <DependentUpon>frmAskWorksheetProtectionPassword.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
