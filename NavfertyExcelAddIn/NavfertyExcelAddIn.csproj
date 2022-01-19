@@ -231,9 +231,21 @@
     can be found.
   -->
   <ItemGroup>
+    <Compile Include="Commons\ControlsExtensions.cs" />
+    <Compile Include="Commons\ControlsExtensions_2.cs" />
+    <Compile Include="Commons\DataExtensions.cs" />
     <Compile Include="Commons\FileExtensionFilter.cs" />
     <Compile Include="Commons\RangeExtensions.cs" />
     <Compile Include="Commons\StringExtensions.cs" />
+    <Compile Include="Commons\WinAPI\WinAPI.cs" />
+    <Compile Include="Connected Services\Web.CBR\Reference.cs" />
+    <Compile Include="CurrencyExchangeRates\Class1.cs" />
+    <Compile Include="CurrencyExchangeRates\frmExchangeRates.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CurrencyExchangeRates\frmExchangeRates.Designer.cs">
+      <DependentUpon>frmExchangeRates.cs</DependentUpon>
+    </Compile>
     <Compile Include="FindFormulaErrors\CVErrEnum.cs" />
     <Compile Include="DataValidation\CellsValueValidator.cs" />
     <Compile Include="DataValidation\IValidator.cs" />
