@@ -232,7 +232,6 @@
   -->
   <ItemGroup>
     <Compile Include="Commons\ControlsExtensions.cs" />
-    <Compile Include="Commons\ControlsExtensions_2.cs" />
     <Compile Include="Commons\DataExtensions.cs" />
     <Compile Include="Commons\FileExtensionFilter.cs" />
     <Compile Include="Commons\RangeExtensions.cs" />
