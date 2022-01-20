@@ -70,20 +70,20 @@ namespace NavfertyExcelAddIn.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 111111111111111111111111.
-        /// </summary>
-        internal static string CurrencyExchangeRatesSelect {
-            get {
-                return ResourceManager.GetString("CurrencyExchangeRatesSelect", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Create Sample XML based on XSD-file.
         /// </summary>
         internal static string CreateSampleXml {
             get {
                 return ResourceManager.GetString("CreateSampleXml", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Select A Currency Exchange Rate From An Online Source And Paste Into The Current Cell.
+        /// </summary>
+        internal static string CurrencyExchangeRatesSelect {
+            get {
+                return ResourceManager.GetString("CurrencyExchangeRatesSelect", resourceCulture);
             }
         }
         
