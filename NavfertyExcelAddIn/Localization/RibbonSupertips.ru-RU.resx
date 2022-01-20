@@ -184,4 +184,13 @@
   <data name="UnprotectWorkbook" xml:space="preserve">
     <value>Снять защиту книги и листов (для файла)</value>
   </data>
+  <data name="CreateSampleXml" xml:space="preserve">
+    <value>Создать образец XML на основе XSD-файла</value>
+  </data>
+  <data name="SwitchReferenceStyle" xml:space="preserve">
+    <value>Изменить стиль ссылок на ячейки в формулах (A1/R1C1)</value>
+  </data>
+  <data name="ToggleSheetLabels" xml:space="preserve">
+    <value>Отобразить или скрыть ярлычки листов</value>
+  </data>
 </root>
