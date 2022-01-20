@@ -13,7 +13,7 @@ using NavfertyExcelAddIn.Localization;
 
 namespace NavfertyExcelAddIn.Web.CurrencyExchangeRates
 {
-	internal class CurrencyExchangeRates : ICurrencyExchangeRates
+	public class CurrencyExchangeRates : ICurrencyExchangeRates
 	{
 		internal readonly IDialogService dialogService;
 		private Microsoft.Office.Interop.Excel.Application App => Globals.ThisAddIn.Application;
@@ -24,7 +24,15 @@ namespace NavfertyExcelAddIn.Web.CurrencyExchangeRates
 
 		public void ShowCurrencyExchangeRates(Workbook wb)
 		{
-			using (var f = new frmExchangeRates())
+			if (App.Selection == null
+				|| ((Range)App.Selection).Cells == null
+				|| ((Range)App.Selection).Cells.Count != 1)
+			{
+				dialogService.ShowError(UIStrings.CurrencyExchangeRates_NedAnyCellSelection);
+				return;
+			}
+
+			using (var f = new frmExchangeRates(this, wb))
 			{
 				if (f.ShowDialog() != DialogResult.OK) return;
 			};

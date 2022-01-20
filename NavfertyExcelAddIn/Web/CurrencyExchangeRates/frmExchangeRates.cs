@@ -10,13 +10,23 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+using Microsoft.Office.Interop.Excel;
+
 using NavfertyExcelAddIn.Commons;
 using NavfertyExcelAddIn.Localization;
+
+using DataTable = System.Data.DataTable;
 
 namespace NavfertyExcelAddIn.Web.CurrencyExchangeRates
 {
 	public partial class frmExchangeRates : Form
 	{
+		private Microsoft.Office.Interop.Excel.Application App => Globals.ThisAddIn.Application;
+
+		private readonly CurrencyExchangeRates creator = null;
+		private readonly Workbook wb = null;
+
+
 		private static readonly CultureInfo ciRU = CultureInfo.GetCultureInfo("ru-RU");
 		private static readonly CultureInfo ciUA = CultureInfo.GetCultureInfo("uk-UA");
 		//private static readonly CultureInfo ciUS = CultureInfo.GetCultureInfo("en-US");
@@ -32,7 +42,7 @@ namespace NavfertyExcelAddIn.Web.CurrencyExchangeRates
 		private string columnCurrencyTitle = "Валюта";
 		private string columnCurrencyCode = "Код";
 		private string columnCurrencyRate = "Курс";
-		private DataTable dtResult = null;
+		private System.Data.DataTable dtResult = null;
 		private static int exchangeRatesDecimalDigitsCount = 2;
 		private CultureInfo ciResult = ciRU;
 
@@ -40,11 +50,17 @@ namespace NavfertyExcelAddIn.Web.CurrencyExchangeRates
 		{
 			InitializeComponent();
 		}
+		public frmExchangeRates(CurrencyExchangeRates Creator, Workbook wb) : this()
+		{
+			this.creator = Creator;
+			this.wb = wb;
+		}
 
 		private void Form_Load(object sender, EventArgs e)
 		{
-			//Text = $"Курсы валют по данным ЦБРФ, по отношению к {ciResult.NumberFormat.CurrencySymbol}";
 			Text = string.Format(UIStrings.CurrencyExchangeRates_FormTitle, UIStrings.CurrencyExchangeRates_Sources_CBRF, ciResult.NumberFormat.CurrencySymbol);
+			btnPasteResult.Text = UIStrings.CurrencyExchangeRates_PasteToCell;
+
 			var dtNow = DateTime.Now;
 			dtpDate.Value = dtNow;
 			dtpDate.MaxDate = dtNow;
@@ -58,7 +74,7 @@ namespace NavfertyExcelAddIn.Web.CurrencyExchangeRates
 
 			//txtFilter.Setcuebanner ("фильтр строк")
 			await UpdateExchangeRates();
-			txtFilter.AttachDelayedFilter(() => FilterResultInView());
+			txtFilter.AttachDelayedFilter(() => FilterResultInView(), VistaCueBanner: UIStrings.CurrencyExchangeRates_FilterTitle);
 		}
 
 		private async void DtpDate_ValueChanged(object sender, EventArgs e)
@@ -193,6 +209,10 @@ namespace NavfertyExcelAddIn.Web.CurrencyExchangeRates
 			{
 				Debug.WriteLine($"Apply Row filter ('{sFilter}') ERROR!\n" + ex.Message);
 			}
+			finally
+			{
+				UpdatePasteButtonState();
+			}
 		}
 
 		/// <summary>
@@ -208,9 +228,56 @@ namespace NavfertyExcelAddIn.Web.CurrencyExchangeRates
 			e.Value = dRate.ToString($"C{exchangeRatesDecimalDigitsCount}", ciResult);
 		}
 
-		private void btnApplyResult_Click(object sender, EventArgs e)
+		private void UpdatePasteButtonState()
 		{
-			//
+			btnPasteResult.Enabled = gridResult.RowsAsEnumerable().Any();
+		}
+
+		private void gridResult_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+		{
+			OnPasteResult();
+		}
+
+		private void btnPasteResult_Click(object sender, EventArgs e)
+		{
+			OnPasteResult();
+		}
+
+		private void OnPasteResult()
+		{
+			try
+			{
+				if (!btnPasteResult.Enabled) return;
+
+				if (App.Selection == null
+					|| ((Range)App.Selection).Cells == null
+					|| ((Range)App.Selection).Cells.Count != 1)
+				{
+					creator.dialogService.ShowError(UIStrings.CurrencyExchangeRates_NedAnyCellSelection);
+					return;
+				}
+
+				var selRows = gridResult.SelectedRowsAsEnumerable();
+				if (selRows.Count() != 1)
+				{
+					creator.dialogService.ShowError("Надо выбрать только одну валюту для вставки!");
+					return;
+				}
+
+				var selRow = selRows.First();
+				//var exchangeRate = Convert.ToDouble(selRow.CellsAsEnumerable().Last().Value);
+				var exchangeRate = Convert.ToDecimal(selRow.CellsAsEnumerable().Last().Value);
+
+				Range selectedExcelRange = (Range)App.Selection;
+				selectedExcelRange.Value = exchangeRate;// .ToString($"C{exchangeRatesDecimalDigitsCount}", ciResult);
+
+
+				DialogResult = DialogResult.OK;
+			}
+			catch (Exception ex)
+			{
+				creator.dialogService.ShowError(ex.Message);
+			}
 		}
 	}
 }

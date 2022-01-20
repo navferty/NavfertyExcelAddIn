@@ -123,8 +123,17 @@
   <data name="CannotUnlockPleaseSaveAsXml" xml:space="preserve">
     <value>Для разброкировки содержимого сохраните книгу в формате .xlsx или .xlsm</value>
   </data>
+  <data name="CurrencyExchangeRates_FilterTitle" xml:space="preserve">
+    <value>Фильтр по наименованию и коду валюты</value>
+  </data>
   <data name="CurrencyExchangeRates_FormTitle" xml:space="preserve">
     <value>Курсы валют по данным {0}, по отношению к {1}</value>
+  </data>
+  <data name="CurrencyExchangeRates_NedAnyCellSelection" xml:space="preserve">
+    <value>Необходимо выбрать ячейку в таблице!</value>
+  </data>
+  <data name="CurrencyExchangeRates_PasteToCell" xml:space="preserve">
+    <value>Вставить в ячейку листа</value>
   </data>
   <data name="CurrencyExchangeRates_Sources_CBRF" xml:space="preserve">
     <value>ЦБ РФ</value>
