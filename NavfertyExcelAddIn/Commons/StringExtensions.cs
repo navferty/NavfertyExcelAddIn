@@ -1,4 +1,6 @@
-﻿using System.Text.RegularExpressions;
+﻿using System.Linq;
+using System.Runtime.CompilerServices;
+using System.Text.RegularExpressions;
 
 using NLog;
 
@@ -9,6 +11,7 @@ namespace NavfertyExcelAddIn.Commons
 		private static readonly ILogger logger = LogManager.GetCurrentClassLogger();
 		private static readonly Regex spacesRegex = new Regex("\\s+", RegexOptions.None);
 
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static string TrimSpaces(this string value)
 		{
 			if (string.IsNullOrWhiteSpace(value))
@@ -22,6 +25,12 @@ namespace NavfertyExcelAddIn.Commons
 				: newValue.Trim();
 
 			return newValue;
+		}
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static int CountChars(this string value, char c)
+		{
+			return value.Count(x => x == c);
 		}
 	}
 }

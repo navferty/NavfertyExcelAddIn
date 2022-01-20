@@ -231,4 +231,10 @@
   <data name="SecurityGroup" xml:space="preserve">
     <value>Data protection</value>
   </data>
+  <data name="CurrencyExchangeRatesSelect" xml:space="preserve">
+    <value>Exchange rates</value>
+  </data>
+  <data name="WebToolsGroup" xml:space="preserve">
+    <value>Web tools</value>
+  </data>
 </root>
