@@ -7,35 +7,35 @@
       <tab idQ="n:NavfertyAddInTab" label="Navferty's Tools" keytip="ZX">
         <group id="Control" getLabel="GetLabel" autoScale="1">
           <button id="UndoLastAction" getLabel="GetLabel" onAction="UndoLastAction" size="large"
-                            image="undo" keytip="UN" getScreentip="GetLabel" getSupertip="GetSupertip"/>
+                  image="undo" keytip="UN" getScreentip="GetLabel" getSupertip="GetSupertip"/>
         </group>
         <group id="ConvertingValues" getLabel="GetLabel" autoScale="1">
 
           <button id="ParseNumerics" getLabel="GetLabel" onAction="ParseNumerics"
-                            image="parseNumerics" size="large" keytip="P"
-                            getScreentip="GetLabel" getSupertip="GetSupertip"/>
+                  image="parseNumerics" size="large" keytip="P"
+                  getScreentip="GetLabel" getSupertip="GetSupertip"/>
 
           <splitButton id="TransliterateSplitButton" size="large" keytip="TL">
             <button id="TransliterateButton" getLabel="GetLabel" image="replace"
-                                onAction="Transliterate" keytip="TL" getScreentip="GetLabel" getSupertip="GetSupertip"/>
+              onAction="Transliterate" keytip="TL" getScreentip="GetLabel" getSupertip="GetSupertip"/>
             <menu id="TransliterateSplitButtonMenu" itemSize="large">
               <button id="Transliterate" getLabel="GetLabel" image="transliterate"
-                                    onAction="Transliterate" keytip="T" getScreentip="GetLabel" getSupertip="GetSupertip"/>
+                onAction="Transliterate" keytip="T" getScreentip="GetLabel" getSupertip="GetSupertip"/>
               <button id="ReplaceChars" getLabel="GetLabel" image="replaceChars"
-                                    onAction="ReplaceChars" keytip="R" getScreentip="GetLabel" getSupertip="GetSupertip"/>
+                onAction="ReplaceChars" keytip="R" getScreentip="GetLabel" getSupertip="GetSupertip"/>
             </menu>
           </splitButton>
 
           <splitButton id="StringifyNumericsSplitButton" size="large" keytip="SN">
             <button id="StringifyNumericsButton" getLabel="GetLabel" image="stringifyNumerics"
-                                onAction="NumberToWordsRussian" keytip="SN" getScreentip="GetLabel" getSupertip="GetSupertip"/>
+                    onAction="NumberToWordsRussian" keytip="SN" getScreentip="GetLabel" getSupertip="GetSupertip"/>
             <menu id="StringifyNumericsMenu" itemSize="large">
               <button id="StringifyNumericsRu" getLabel="GetLabel" image="stringifyNumericsRu"
-                                    onAction="NumberToWordsRussian" keytip="SR" getScreentip="GetLabel" getSupertip="GetSupertip"/>
+                      onAction="NumberToWordsRussian" keytip="SR" getScreentip="GetLabel" getSupertip="GetSupertip"/>
               <button id="StringifyNumericsEn" getLabel="GetLabel" image="stringifyNumericsEn"
-                                    onAction="NumberToWordsEnglish" keytip="SE" getScreentip="GetLabel" getSupertip="GetSupertip"/>
+                      onAction="NumberToWordsEnglish" keytip="SE" getScreentip="GetLabel" getSupertip="GetSupertip"/>
               <button id="StringifyNumericsFr" getLabel="GetLabel" image="stringifyNumericsFr"
-                                    onAction="NumberToWordsFrench" keytip="SF" getScreentip="GetLabel" getSupertip="GetSupertip"/>
+                      onAction="NumberToWordsFrench" keytip="SF" getScreentip="GetLabel" getSupertip="GetSupertip"/>
             </menu>
           </splitButton>
         </group>
@@ -43,78 +43,81 @@
         <group id="FormattingValues" getLabel="GetLabel" autoScale="1">
 
           <button id="CutNames" getLabel="GetLabel" onAction="CutNames" image="cutNames"
-                            size="large" keytip="CN" getScreentip="GetLabel" getSupertip="GetSupertip"
-                            visible="false"/>
+            size="large" keytip="CN" getScreentip="GetLabel" getSupertip="GetSupertip"
+            visible="false"/>
           <!-- Disabled until feature is ready -->
 
           <button id="ToggleCase" getLabel="GetLabel" onAction="ToggleCase" image="toggleCase"
-                            size="large" keytip="TC" getScreentip="GetLabel" getSupertip="GetSupertip"/>
+            size="large" keytip="TC" getScreentip="GetLabel" getSupertip="GetSupertip"/>
 
           <splitButton id="TrimSpacesSplitButton" size="large" >
             <button id="TrimSpaces" getLabel="GetLabel" onAction="TrimSpaces" image="trimSpaces"
-                                keytip="R" getScreentip="GetLabel" getSupertip="GetSupertip"/>
+              keytip="R" getScreentip="GetLabel" getSupertip="GetSupertip"/>
             <menu>
               <button id="RemoveAllSpaces" getLabel="GetLabel" onAction="RemoveAllSpaces" image="trimSpaces"
-                                    keytip="A" getScreentip="GetLabel" getSupertip="GetSupertip"/>
+                keytip="A" getScreentip="GetLabel" getSupertip="GetSupertip"/>
               <button id="TrimExtraSpaces" getLabel="GetLabel" onAction="TrimExtraSpaces" image="trimSpaces"
-                                    keytip="E" getScreentip="GetLabel" getSupertip="GetSupertip"/>
+                keytip="E" getScreentip="GetLabel" getSupertip="GetSupertip"/>
             </menu>
           </splitButton>
 
           <!-- Icons are temporary used from ImagesMso gallery -->
           <button id="RepairConditionalFormat" getLabel="GetLabel" onAction="RepairConditionalFormat"
-                            imageMso="ConditionalFormattingHighlightCompareColumns"
-                            size="large" keytip="CF" getScreentip="GetLabel" getSupertip="GetSupertip"/>
+            imageMso="ConditionalFormattingHighlightCompareColumns"
+            size="large" keytip="CF" getScreentip="GetLabel" getSupertip="GetSupertip"/>
         </group>
 
         <group id="CommonGroup" getLabel="GetLabel" autoScale="1">
-          <button id="UnprotectWorkbook" getLabel="GetLabel" onAction="UnprotectWorkbook"
-                            image="unprotectWorkbook" size="large" keytip="FP" getScreentip="GetLabel" getSupertip="GetSupertip"/>
-
-          <button id="ProtectUnprotectWorksheets" getLabel="GetLabel" onAction="ProtectUnprotectWorksheets"
-                          image="unprotectWorkbook" size="large" keytip="WP" getScreentip="GetLabel" getSupertip="GetSupertip"/>
 
           <button id="HighlightDuplicates" getLabel="GetLabel" onAction="HighlightDuplicates"
-                            image="highlightDuplicates" size="large" keytip="D" getScreentip="GetLabel" getSupertip="GetSupertip"/>
+            image="highlightDuplicates" size="large" keytip="D" getScreentip="GetLabel" getSupertip="GetSupertip"/>
 
           <button id="UnmergeCells" getLabel="GetLabel" onAction="UnmergeCells" image="unmergeCells"
-                            size="large" keytip="UM" getScreentip="GetLabel" getSupertip="GetSupertip"/>
+            size="large" keytip="UM" getScreentip="GetLabel" getSupertip="GetSupertip"/>
           <button id="FindErrors" getLabel="GetLabel" onAction="FindErrors" image="findErrors"
-                            size="large" keytip="E" getScreentip="GetLabel" getSupertip="GetSupertip"/>
+            size="large" keytip="E" getScreentip="GetLabel" getSupertip="GetSupertip"/>
           <button id="CopyAsMarkdown" getLabel="GetLabel" onAction="CopyAsMarkdown"
-                            image="copyAsMarkdown" size="large" keytip="MD" getScreentip="GetLabel" getSupertip="GetSupertip"/>
+            image="copyAsMarkdown" size="large" keytip="MD" getScreentip="GetLabel" getSupertip="GetSupertip"/>
 
           <splitButton id="ValidateValuesSplitButton" size="large" keytip="VV">
             <button id="ValidateValuesButton" imageMso="TableTestValidationRules" getLabel="GetLabel"
-                                getScreentip="GetLabel" getSupertip="GetSupertip"/>
+              getScreentip="GetLabel" getSupertip="GetSupertip"/>
             <menu id="menu">
               <button id="ValidateValuesNumerics" getLabel="GetLabel" imageMso="TableTestValidationRules"
-                                    onAction="ValidateValues" keytip="N"/>
+                onAction="ValidateValues" keytip="N"/>
               <button id="ValidateValuesXml" getLabel="GetLabel" imageMso="TableTestValidationRules"
-                                    onAction="ValidateValues" keytip="X"/>
+                onAction="ValidateValues" keytip="X"/>
               <button id="ValidateValuesDate" getLabel="GetLabel" imageMso="TableTestValidationRules"
-                                    onAction="ValidateValues" keytip="D"/>
+                onAction="ValidateValues" keytip="D"/>
               <button id="ValidateValuesTinPersonal" getLabel="GetLabel" imageMso="TableTestValidationRules"
-                                    onAction="ValidateValues" keytip="P"/>
+                onAction="ValidateValues" keytip="P"/>
               <button id="ValidateValuesTinOrganization" getLabel="GetLabel" imageMso="TableTestValidationRules"
-                                    onAction="ValidateValues" keytip="O"/>
+                onAction="ValidateValues" keytip="O"/>
             </menu>
           </splitButton>
+        </group>
+        <group id="SecurityGroup" getLabel="GetLabel" autoScale="1">
+          <button id="UnprotectWorkbook" getLabel="GetLabel" onAction="UnprotectWorkbook"
+            image="unprotectWorkbook" size="large" keytip="FP" getScreentip="GetLabel" getSupertip="GetSupertip"/>
+
+          <button id="ProtectUnprotectWorksheets" getLabel="GetLabel" onAction="ProtectUnprotectWorksheets"
+            image="unprotectWorkbook" size="large" keytip="WP" getScreentip="GetLabel" getSupertip="GetSupertip"/>
+
         </group>
 
         <group id="ViewGroup" getLabel="GetLabel" autoScale="1">
           <!-- Icons are temporary used from ImagesMso gallery -->
           <button id="ToggleSheetLabels" getLabel="GetLabel" imageMso="NameCreateFromSelection"
-                            onAction="ToggleSheetLabels" size="normal" keytip="TS"/>
+            onAction="ToggleSheetLabels" size="large" keytip="TS" getScreentip="GetLabel" getSupertip="GetSupertip"/>
           <button id="SwitchReferenceStyle" getLabel="GetLabel" imageMso="DatasheetView"
-                            onAction="SwitchReferenceStyle" size="normal" keytip="RS"/>
+            onAction="SwitchReferenceStyle" size="large" keytip="RS" getScreentip="GetLabel" getSupertip="GetSupertip"/>
         </group>
 
         <group id="XmlToolsGroup" getLabel="GetLabel" autoScale="1">
           <button id="CreateSampleXml" getLabel="GetLabel" onAction="CreateSampleXml" image="createSampleXml"
-                            size="large" keytip="X"/>
+            size="large" keytip="X" getScreentip="GetLabel" getSupertip="GetSupertip"/>
           <button id="ValidateXml" getLabel="GetLabel" onAction="ValidateXml" image="validateXml" size="large"
-                            keytip="VX"/>
+            keytip="VX" getScreentip="GetLabel" getSupertip="GetSupertip"/>
         </group>
 
         <group id="WebToolsGroup" getLabel="GetLabel" autoScale="1">
