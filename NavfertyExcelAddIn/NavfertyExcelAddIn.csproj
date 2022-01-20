@@ -267,6 +267,8 @@
     <Compile Include="Transliterate\CyrillicToLatinFallback.cs" />
     <Compile Include="Transliterate\Transliterator.cs" />
     <Compile Include="Undo\UndoManager.cs" />
+    <Compile Include="Web\CurrencyExchangeRates\Class1.cs" />
+    <Compile Include="Web\CurrencyExchangeRates\WebResultRow.cs" />
     <Compile Include="Web\CurrencyExchangeRates\CurrencyExchangeRates.cs" />
     <Compile Include="Web\CurrencyExchangeRates\frmExchangeRates.cs">
       <SubType>Form</SubType>

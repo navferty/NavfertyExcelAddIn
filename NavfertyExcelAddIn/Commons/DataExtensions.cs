@@ -37,6 +37,32 @@ namespace NavfertyExcelAddIn.Commons
 		public static IEnumerable<System.Windows.Forms.DataGridViewColumn> ColumnsAsEnumerable(this System.Windows.Forms.DataGridView grd)
 			=> grd.Columns.AsEnumerable();
 
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static IEnumerable<System.Windows.Forms.DataGridViewRow> AsEnumerable(this System.Windows.Forms.DataGridViewRowCollection rows)
+			=> rows.Cast<System.Windows.Forms.DataGridViewRow>();
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static IEnumerable<System.Windows.Forms.DataGridViewRow> RowsAsEnumerable(this System.Windows.Forms.DataGridView grd)
+			=> grd.Rows.AsEnumerable();
+
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static IEnumerable<System.Windows.Forms.DataGridViewRow> AsEnumerable(this System.Windows.Forms.DataGridViewSelectedRowCollection selrows)
+			=> selrows.Cast<System.Windows.Forms.DataGridViewRow>();
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static IEnumerable<System.Windows.Forms.DataGridViewRow> SelectedRowsAsEnumerable(this System.Windows.Forms.DataGridView grd)
+			=> grd.SelectedRows.AsEnumerable();
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static IEnumerable<System.Windows.Forms.DataGridViewCell> AsEnumerable(this System.Windows.Forms.DataGridViewCellCollection cells)
+			=> cells.Cast<System.Windows.Forms.DataGridViewCell>();
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static IEnumerable<System.Windows.Forms.DataGridViewCell> CellsAsEnumerable(this System.Windows.Forms.DataGridViewRow row)
+			=> row.Cells.AsEnumerable();
+
+
 
 
 

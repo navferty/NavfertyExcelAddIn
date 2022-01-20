@@ -79,6 +79,15 @@ namespace NavfertyExcelAddIn.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Filter by currency name and code.
+        /// </summary>
+        internal static string CurrencyExchangeRates_FilterTitle {
+            get {
+                return ResourceManager.GetString("CurrencyExchangeRates_FilterTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Exchange rates according to the {0}, in relation to the {1}.
         /// </summary>
         internal static string CurrencyExchangeRates_FormTitle {
@@ -88,11 +97,38 @@ namespace NavfertyExcelAddIn.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to You must select a cell in the table!.
+        /// </summary>
+        internal static string CurrencyExchangeRates_NedAnyCellSelection {
+            get {
+                return ResourceManager.GetString("CurrencyExchangeRates_NedAnyCellSelection", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Insert Into Worksheet Cell.
+        /// </summary>
+        internal static string CurrencyExchangeRates_PasteToCell {
+            get {
+                return ResourceManager.GetString("CurrencyExchangeRates_PasteToCell", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Central Bank of Russia.
         /// </summary>
         internal static string CurrencyExchangeRates_Sources_CBRF {
             get {
                 return ResourceManager.GetString("CurrencyExchangeRates_Sources_CBRF", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to for  {0}.
+        /// </summary>
+        internal static string CurrencyExchangeRates_UnitsFormat {
+            get {
+                return ResourceManager.GetString("CurrencyExchangeRates_UnitsFormat", resourceCulture);
             }
         }
         
