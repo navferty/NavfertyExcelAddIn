@@ -184,4 +184,13 @@ Allows rewriting values in range -999 billion to 999 billion, with precision up 
   <data name="UnprotectWorkbook" xml:space="preserve">
     <value>Unprotect Workbook file</value>
   </data>
+  <data name="CreateSampleXml" xml:space="preserve">
+    <value>Create Sample XML based on XSD-file</value>
+  </data>
+  <data name="SwitchReferenceStyle" xml:space="preserve">
+    <value>Switch Formula Reference Style (A1/R1C1)</value>
+  </data>
+  <data name="ToggleSheetLabels" xml:space="preserve">
+    <value>Show or hide worksheet tabs</value>
+  </data>
 </root>

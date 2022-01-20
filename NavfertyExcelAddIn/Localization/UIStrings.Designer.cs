@@ -115,7 +115,7 @@ namespace NavfertyExcelAddIn.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Found no errors on current worksheet.
+        ///   Looks up a localized string similar to Found no errors in range {0}.
         /// </summary>
         internal static string NoErrors {
             get {

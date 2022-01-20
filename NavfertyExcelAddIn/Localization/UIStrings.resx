@@ -136,7 +136,7 @@
     <value>Info</value>
   </data>
   <data name="NoErrors" xml:space="preserve">
-    <value>Found no errors on current worksheet</value>
+    <value>Found no errors in range {0}</value>
   </data>
   <data name="NoMatchingWorkSheets" xml:space="preserve">
     <value>No matching sheets in the workbook</value>

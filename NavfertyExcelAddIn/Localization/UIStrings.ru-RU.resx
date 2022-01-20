@@ -136,7 +136,7 @@
     <value>Внимание</value>
   </data>
   <data name="NoErrors" xml:space="preserve">
-    <value>На текущем листе ошибок не найдено</value>
+    <value>В диапазоне {0} ошибок не найдено</value>
   </data>
   <data name="NoMatchingWorkSheets" xml:space="preserve">
     <value>Нет подходящих листов в книге</value>

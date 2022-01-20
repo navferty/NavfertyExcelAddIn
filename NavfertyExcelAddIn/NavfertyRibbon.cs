@@ -360,7 +360,7 @@ namespace NavfertyExcelAddIn
 
 			if (allErrors.Count == 0)
 			{
-				dialogService.ShowInfo(UIStrings.NoErrors);
+				dialogService.ShowInfo(string.Format(UIStrings.NoErrors, range.Address));
 				return;
 			}
 			form = new InteractiveRangeReportForm(allErrors, activeSheet);

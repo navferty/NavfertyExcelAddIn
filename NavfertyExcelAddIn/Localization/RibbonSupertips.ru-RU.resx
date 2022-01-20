@@ -136,7 +136,7 @@
     <value>Разделяет объединенные ячейки с дублированием их содержимого.</value>
   </data>
   <data name="FindErrors" xml:space="preserve">
-    <value>Находит в указанном диапазоне все ячейки, имеющие любые ошибки (#).</value>
+    <value>Находит на текущем листе (или в выбранном диапазоне, если он выбран) все ячейки, имеющие любые ошибки (#).</value>
   </data>
   <data name="CopyAsMarkdown" xml:space="preserve">
     <value>Сохраняет выделенный диапазон значений в буфер обмена с использованием разметки Markdown.</value>
@@ -183,5 +183,14 @@
   </data>
   <data name="UnprotectWorkbook" xml:space="preserve">
     <value>Снять защиту книги и листов (для файла)</value>
+  </data>
+  <data name="CreateSampleXml" xml:space="preserve">
+    <value>Создать образец XML на основе XSD-файла</value>
+  </data>
+  <data name="SwitchReferenceStyle" xml:space="preserve">
+    <value>Изменить стиль ссылок на ячейки в формулах (A1/R1C1)</value>
+  </data>
+  <data name="ToggleSheetLabels" xml:space="preserve">
+    <value>Отобразить или скрыть ярлычки листов</value>
   </data>
 </root>

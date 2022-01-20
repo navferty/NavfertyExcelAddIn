@@ -11,7 +11,8 @@
  - [Stringify Numerics to Words](#stringify-numerics-into-words)
  - [Toggle Case](#toggle-case)
  - [Trim Spaces](#trim-spaces)
- - [Unprotect Workbook](#unprotect-workbook)
+ - [Remove File Protection](#remove-file-protection)
+ - [Worksheets Protection](#worksheets-protection)
  - [Highlight Duplicates](#highlight-duplications)
  - [Unmerge Cells](#unmerge-cells)
  - [Find Formula Errors in the selected range](#find-all-cells-containing-errors)
@@ -128,11 +129,17 @@
 
 ---
 
-## Unprotect Workbook
+## Remove File Protection
 
 |||
 |:-:|---|
 |![](images/icons/unprotectWorkbook.png)|Allows you to unprotect all the pages of an open book as the entire book, no password, and also unlock VBA project (if any) to which the password is set. This feature does not apply to encrypted books.|
+
+## Worksheets Protection
+
+|||
+|:-:|---|
+|![](images/icons/unprotectWorkbook.png)|Allows you to set protection on multiple worksheets at once.|
 
 ## Highlight duplications
 

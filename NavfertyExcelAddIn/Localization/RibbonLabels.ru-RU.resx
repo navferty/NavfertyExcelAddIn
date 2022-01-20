@@ -118,7 +118,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="ParseNumerics" xml:space="preserve">
-    <value>Парсинг числовых значений</value>
+    <value>В число</value>
   </data>
   <data name="UnprotectWorkbook" xml:space="preserve">
     <value>Защита файла</value>
@@ -127,22 +127,22 @@
     <value>Сократить имена организаций</value>
   </data>
   <data name="HighlightDuplicates" xml:space="preserve">
-    <value>Множественная подсветка дублей</value>
+    <value>Раскрасить дубли</value>
   </data>
   <data name="ToggleCase" xml:space="preserve">
-    <value>Изменить регистр</value>
+    <value>Регистр</value>
   </data>
   <data name="TrimSpaces" xml:space="preserve">
     <value>Очистить пробелы</value>
   </data>
   <data name="UnmergeCells" xml:space="preserve">
-    <value>Разъединение ячеек с заполнением</value>
+    <value>Разъединенить</value>
   </data>
   <data name="CreateSampleXml" xml:space="preserve">
-    <value>Создать образец XML (по XSD)</value>
+    <value>XML из XSD</value>
   </data>
   <data name="ValidateXml" xml:space="preserve">
-    <value>Валидация XML по XSD</value>
+    <value>Проверка XML по XSD</value>
   </data>
   <data name="CommonGroup" xml:space="preserve">
     <value>Общие</value>
@@ -151,13 +151,13 @@
     <value>Работа с XML</value>
   </data>
   <data name="FindErrors" xml:space="preserve">
-    <value>Найти все ошибки в выделенном диапазоне</value>
+    <value>Найти ошибки</value>
   </data>
   <data name="CopyAsMarkdown" xml:space="preserve">
-    <value>Копировать в Markdown</value>
+    <value>Markdown</value>
   </data>
   <data name="ValidateValuesButton" xml:space="preserve">
-    <value>Валидация значений</value>
+    <value>Проверка</value>
   </data>
   <data name="ValidateValuesDate" xml:space="preserve">
     <value>Дата</value>
@@ -175,13 +175,13 @@
     <value>Текст для XML</value>
   </data>
   <data name="Transliterate" xml:space="preserve">
-    <value>Транслитерацией 'У' -&gt; 'U'</value>
+    <value>Транслитерация 'У' -&gt; 'U'</value>
   </data>
   <data name="ReplaceChars" xml:space="preserve">
     <value>На аналоги 'У' -&gt; 'Y'</value>
   </data>
   <data name="TransliterateButton" xml:space="preserve">
-    <value>Заменить</value>
+    <value>Замена</value>
   </data>
   <data name="ConvertingValues" xml:space="preserve">
     <value>Преобразование значений</value>
@@ -190,7 +190,7 @@
     <value>Форматирование значений</value>
   </data>
   <data name="StringifyNumericsButton" xml:space="preserve">
-    <value>Преобразовать в слова</value>
+    <value>Число словами</value>
   </data>
   <data name="StringifyNumericsEn" xml:space="preserve">
     <value>На английском</value>
@@ -205,13 +205,13 @@
     <value>Управление</value>
   </data>
   <data name="UndoLastAction" xml:space="preserve">
-    <value>Отменить последнее действие</value>
+    <value>Отменить</value>
   </data>
   <data name="SwitchReferenceStyle" xml:space="preserve">
-    <value>Изменить стиль ссылок (A1/R1C1)</value>
+    <value>Стиль ссылок (A1/R1C1)</value>
   </data>
   <data name="ToggleSheetLabels" xml:space="preserve">
-    <value>Отобразить/скрыть значки листов</value>
+    <value>Ярлычки листов</value>
   </data>
   <data name="ViewGroup" xml:space="preserve">
     <value>Вид</value>
@@ -223,9 +223,12 @@
     <value>Очистить лишние пробелы</value>
   </data>
   <data name="RepairConditionalFormat" xml:space="preserve">
-    <value>Починить условное форматирование</value>
+    <value>Условное форматирование</value>
   </data>
   <data name="ProtectUnprotectWorksheets" xml:space="preserve">
     <value>Защита листов</value>
+  </data>
+  <data name="SecurityGroup" xml:space="preserve">
+    <value>Защита данных</value>
   </data>
 </root>

@@ -70,6 +70,15 @@ namespace NavfertyExcelAddIn.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Create Sample XML based on XSD-file.
+        /// </summary>
+        internal static string CreateSampleXml {
+            get {
+                return ResourceManager.GetString("CreateSampleXml", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to In the development....
         /// </summary>
         internal static string CutNames {
@@ -179,11 +188,29 @@ namespace NavfertyExcelAddIn.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Switch Formula Reference Style (A1/R1C1).
+        /// </summary>
+        internal static string SwitchReferenceStyle {
+            get {
+                return ResourceManager.GetString("SwitchReferenceStyle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Change the case of all words in the cell. Replacement order: lowercase, uppercase, first capital, lowercase....
         /// </summary>
         internal static string ToggleCase {
             get {
                 return ResourceManager.GetString("ToggleCase", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Show or hide worksheet tabs.
+        /// </summary>
+        internal static string ToggleSheetLabels {
+            get {
+                return ResourceManager.GetString("ToggleSheetLabels", resourceCulture);
             }
         }
         
