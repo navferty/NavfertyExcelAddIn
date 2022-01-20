@@ -26,9 +26,6 @@ namespace NavfertyExcelAddIn.Web.CurrencyExchangeRates
 		private readonly CurrencyExchangeRates creator = null;
 		private readonly Workbook wb = null;
 
-
-		private static readonly CultureInfo ciRU = CultureInfo.GetCultureInfo("ru-RU");
-		private static readonly CultureInfo ciUA = CultureInfo.GetCultureInfo("uk-UA");
 		//private static readonly CultureInfo ciUS = CultureInfo.GetCultureInfo("en-US");
 
 		private static readonly Dictionary<string, uint> vipCurrencies = new()
@@ -44,10 +41,11 @@ namespace NavfertyExcelAddIn.Web.CurrencyExchangeRates
 		private static string columnCurrencyCode = "Код";
 		private static string columnCurrencyRate = "Курс";
 
+		private Providers.IExchangeRatesDataProvider ratesProvider = null;
+
 		private System.Data.DataTable dtResult = null;
-		private static int exchangeRatesDecimalDigitsCount = 2;
-		private CultureInfo ciResult = ciRU;
-		private int columnIndex_ExchangeRate = -2;
+		private static int ratesDecimalDigitsCount = 2;
+		private int columnIndex_Rate = -2;
 
 		public frmExchangeRates()
 		{
@@ -59,10 +57,22 @@ namespace NavfertyExcelAddIn.Web.CurrencyExchangeRates
 			this.wb = wb;
 		}
 
+
 		private void Form_Load(object sender, EventArgs e)
 		{
-			Text = string.Format(UIStrings.CurrencyExchangeRates_FormTitle, UIStrings.CurrencyExchangeRates_Sources_CBRF, ciResult.NumberFormat.CurrencySymbol);
+			//Text = string.Format(UIStrings.CurrencyExchangeRates_FormTitle, UIStrings.CurrencyExchangeRates_Sources_CBRF,  ciResult.NumberFormat.CurrencySymbol);
+			Text = UIStrings.CurrencyExchangeRates_FormTitle;
+			lblSource.Text = UIStrings.CurrencyExchangeRates_Source;
 			btnPasteResult.Text = UIStrings.CurrencyExchangeRates_PasteToCell;
+			lblFilterTitle.Text = UIStrings.CurrencyExchangeRates_FilterTitle;
+
+			var availProviders = new Providers.IExchangeRatesDataProvider[] {
+				new Providers.CBRFProvider(),
+				new Providers.NBUProvider()};
+
+			ratesProvider = availProviders.First();
+			cbProvider.DataSource = availProviders;
+			cbProvider.SelectedIndex = 0;
 
 			var dtNow = DateTime.Now;
 			dtpDate.Value = dtNow;
@@ -72,30 +82,31 @@ namespace NavfertyExcelAddIn.Web.CurrencyExchangeRates
 
 		private async void Form_Displayed(object sender, EventArgs e)
 		{
-			dtpDate.ValueChanged += DtpDate_ValueChanged;
+			cbProvider.SelectedIndexChanged += async (s, e) => await UpdateExchangeRates();
+			dtpDate.ValueChanged += async (s, e) => await UpdateExchangeRates();
 			gridResult.CellFormatting += FormatCell_Rates;
 
 			await UpdateExchangeRates();
-			txtFilter.AttachDelayedFilter(() => FilterResultInView(), VistaCueBanner: UIStrings.CurrencyExchangeRates_FilterTitle);
-		}
-
-		private async void DtpDate_ValueChanged(object sender, EventArgs e)
-		{
-			await UpdateExchangeRates();
+			txtFilter.AttachDelayedFilter(() => FilterResultInView(), VistaCueBanner: UIStrings.CurrencyExchangeRates_FilterDescription);
 		}
 
 		private async Task UpdateExchangeRates()
 		{
+			if (cbProvider.SelectedIndex < 0) return;
+
 			this.UseWaitCursor = true;
 			try
 			{
+				ratesProvider = cbProvider.SelectedItem as Providers.IExchangeRatesDataProvider;
+				if (ratesProvider == null) return;
+
 				dtResult = null;
 				var dtDate = dtpDate.Value;
 				{
-					var exchangeRatesRows = await CurrencyExchangeRates.GetCurrencyExchabgeRates_CBRF(dtDate);
+					var exchangeRatesRows = await ratesProvider.GetExchabgeRatesForDate(dtDate);
 
 					//Count max decimal digits length from all rows
-					exchangeRatesDecimalDigitsCount = WebResultRow.GetMaxDecimalDigitsCount(exchangeRatesRows);
+					ratesDecimalDigitsCount = WebResultRow.GetMaxDecimalDigitsCount(exchangeRatesRows);
 
 					//Sort by priority
 					exchangeRatesRows.ToList().ForEach(wrr =>
@@ -118,7 +129,7 @@ namespace NavfertyExcelAddIn.Web.CurrencyExchangeRates
 
 						var gridColumns = new[] { colName, colISO3, colExchangeRate };
 						dtView.Columns.AddRange(gridColumns);
-						columnIndex_ExchangeRate = gridColumns.ToList().IndexOf(colExchangeRate);
+						columnIndex_Rate = gridColumns.ToList().IndexOf(colExchangeRate);
 					}
 
 					foreach (var old in exchangeRatesRows)
@@ -196,10 +207,10 @@ namespace NavfertyExcelAddIn.Web.CurrencyExchangeRates
 		{
 			if (e.Value == null || e.RowIndex == gridResult.NewRowIndex) return;
 
-			if (e.ColumnIndex != columnIndex_ExchangeRate) return;
+			if (e.ColumnIndex != columnIndex_Rate) return;
 			if (e.Value is not double dRate) return;
 
-			e.Value = dRate.ToString($"C{exchangeRatesDecimalDigitsCount}", ciResult);
+			e.Value = dRate.ToString($"C{ratesDecimalDigitsCount}", ratesProvider.GetCulture());
 		}
 
 		private void UpdatePasteButtonState()
@@ -240,7 +251,7 @@ namespace NavfertyExcelAddIn.Web.CurrencyExchangeRates
 				}
 
 				var selRow = selRows.First();
-				var exchangeRate = Convert.ToDecimal(selRow.CellsAsEnumerable().ToArray()[columnIndex_ExchangeRate].Value);
+				var exchangeRate = Convert.ToDecimal(selRow.CellsAsEnumerable().ToArray()[columnIndex_Rate].Value);
 				//TODO: Учитывать количество Units при выдаче курса!
 
 				Range selectedExcelRange = (Range)App.Selection;

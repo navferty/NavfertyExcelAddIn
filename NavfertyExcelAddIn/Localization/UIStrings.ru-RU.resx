@@ -123,11 +123,14 @@
   <data name="CannotUnlockPleaseSaveAsXml" xml:space="preserve">
     <value>Для разброкировки содержимого сохраните книгу в формате .xlsx или .xlsm</value>
   </data>
-  <data name="CurrencyExchangeRates_FilterTitle" xml:space="preserve">
+  <data name="CurrencyExchangeRates_FilterDescription" xml:space="preserve">
     <value>Фильтр по наименованию и коду валюты</value>
   </data>
+  <data name="CurrencyExchangeRates_FilterTitle" xml:space="preserve">
+    <value>Отбор строк:</value>
+  </data>
   <data name="CurrencyExchangeRates_FormTitle" xml:space="preserve">
-    <value>Курсы валют по данным {0}, по отношению к {1}</value>
+    <value>Курсы валют</value>
   </data>
   <data name="CurrencyExchangeRates_NedAnyCellSelection" xml:space="preserve">
     <value>Необходимо выбрать ячейку в таблице!</value>
@@ -135,8 +138,14 @@
   <data name="CurrencyExchangeRates_PasteToCell" xml:space="preserve">
     <value>Вставить в ячейку листа</value>
   </data>
+  <data name="CurrencyExchangeRates_Source" xml:space="preserve">
+    <value>Источник данных:</value>
+  </data>
   <data name="CurrencyExchangeRates_Sources_CBRF" xml:space="preserve">
-    <value>ЦБ РФ</value>
+    <value>Центральный банк Российской Федерации (Банк России)</value>
+  </data>
+  <data name="CurrencyExchangeRates_Sources_NBU" xml:space="preserve">
+    <value>Національний банк України</value>
   </data>
   <data name="CurrencyExchangeRates_UnitsFormat" xml:space="preserve">
     <value>за {0}</value>

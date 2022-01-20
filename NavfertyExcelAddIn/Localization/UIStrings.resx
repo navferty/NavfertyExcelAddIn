@@ -123,11 +123,14 @@
   <data name="CannotUnlockPleaseSaveAsXml" xml:space="preserve">
     <value>Cannot unlock workbook contents because of wrong workbook format. Please save workbook as xlsx or xlsm and try again</value>
   </data>
-  <data name="CurrencyExchangeRates_FilterTitle" xml:space="preserve">
+  <data name="CurrencyExchangeRates_FilterDescription" xml:space="preserve">
     <value>Filter by currency name and code</value>
   </data>
+  <data name="CurrencyExchangeRates_FilterTitle" xml:space="preserve">
+    <value>Rows Filter:</value>
+  </data>
   <data name="CurrencyExchangeRates_FormTitle" xml:space="preserve">
-    <value>Exchange rates according to the {0}, in relation to the {1}</value>
+    <value>Exchange Rates</value>
   </data>
   <data name="CurrencyExchangeRates_NedAnyCellSelection" xml:space="preserve">
     <value>You must select a cell in the table!</value>
@@ -135,8 +138,14 @@
   <data name="CurrencyExchangeRates_PasteToCell" xml:space="preserve">
     <value>Insert Into Worksheet Cell</value>
   </data>
+  <data name="CurrencyExchangeRates_Source" xml:space="preserve">
+    <value>Data Source:</value>
+  </data>
   <data name="CurrencyExchangeRates_Sources_CBRF" xml:space="preserve">
-    <value>Central Bank of Russia</value>
+    <value>Central Bank of the Russian Federation (Bank of Russia)</value>
+  </data>
+  <data name="CurrencyExchangeRates_Sources_NBU" xml:space="preserve">
+    <value>National Bank of Ukraine</value>
   </data>
   <data name="CurrencyExchangeRates_UnitsFormat" xml:space="preserve">
     <value>for  {0}</value>

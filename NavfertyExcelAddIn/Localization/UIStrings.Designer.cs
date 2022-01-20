@@ -81,6 +81,15 @@ namespace NavfertyExcelAddIn.Localization {
         /// <summary>
         ///   Looks up a localized string similar to Filter by currency name and code.
         /// </summary>
+        internal static string CurrencyExchangeRates_FilterDescription {
+            get {
+                return ResourceManager.GetString("CurrencyExchangeRates_FilterDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Rows Filter:.
+        /// </summary>
         internal static string CurrencyExchangeRates_FilterTitle {
             get {
                 return ResourceManager.GetString("CurrencyExchangeRates_FilterTitle", resourceCulture);
@@ -88,7 +97,7 @@ namespace NavfertyExcelAddIn.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Exchange rates according to the {0}, in relation to the {1}.
+        ///   Looks up a localized string similar to Exchange Rates.
         /// </summary>
         internal static string CurrencyExchangeRates_FormTitle {
             get {
@@ -115,11 +124,29 @@ namespace NavfertyExcelAddIn.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Central Bank of Russia.
+        ///   Looks up a localized string similar to Data Source:.
+        /// </summary>
+        internal static string CurrencyExchangeRates_Source {
+            get {
+                return ResourceManager.GetString("CurrencyExchangeRates_Source", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Central Bank of the Russian Federation (Bank of Russia).
         /// </summary>
         internal static string CurrencyExchangeRates_Sources_CBRF {
             get {
                 return ResourceManager.GetString("CurrencyExchangeRates_Sources_CBRF", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to National Bank of Ukraine.
+        /// </summary>
+        internal static string CurrencyExchangeRates_Sources_NBU {
+            get {
+                return ResourceManager.GetString("CurrencyExchangeRates_Sources_NBU", resourceCulture);
             }
         }
         

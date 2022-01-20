@@ -5,6 +5,8 @@ using System.Diagnostics;
 using System.IO;
 using System.IO.Compression;
 using System.Linq;
+using System.Net;
+using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -14,6 +16,8 @@ using Microsoft.Office.Interop.Excel;
 
 using NavfertyExcelAddIn.Commons;
 using NavfertyExcelAddIn.Localization;
+
+using Newtonsoft.Json;
 
 using DataTable = System.Data.DataTable;
 
@@ -48,8 +52,6 @@ namespace NavfertyExcelAddIn.Web.CurrencyExchangeRates
 
 		internal static async Task<WebResultRow[]> GetCurrencyExchabgeRates_CBRF(DateTime dt)
 		{
-			var nbu = GetCurrencyExchabgeRates_NBU(dt);
-
 			using (var cbr = new Web.CBR.DailyInfoSoapClient())
 			{
 				var dtsResult = await cbr.GetCursOnDateAsync(dt);
@@ -57,26 +59,8 @@ namespace NavfertyExcelAddIn.Web.CurrencyExchangeRates
 
 				var dtFirst = dtsResult.Tables.Cast<DataTable>().FirstOrDefault();
 				if (dtFirst == default) throw new Exception("Remote dstaset does not containt Tables!");
-
-				//Vname — Название валюты
-				//Vnom — Номинал
-				//Vcurs — Курс
-				//Vcode — ISO Цифровой код валюты
-				//VchCode — ISO Символьный код валюты
-
-				var cbrfRows = dtFirst.RowsAsEnumerable();
-				var aData = (from oldRow in cbrfRows
-							 let oldValues = oldRow.ItemArray
-							 let Vname = oldValues[0].ToString().Trim()
-							 let Vnom = Convert.ToDouble(oldValues[1])
-							 let sVcurs = oldValues[2].ToString().Trim()
-							 let Vcurs = Convert.ToDouble(sVcurs)
-							 let Vcode = Convert.ToInt32(oldValues[3])
-							 let VchCode = oldValues[4].ToString().Trim().ToUpper()
-							 let result = new WebResultRow(dt, Vname, Vnom, sVcurs, Vcode, VchCode)
-							 select result).ToArray();
-
-				return aData;
+				var rows = dtFirst.RowsAsEnumerable().Select(row => new WebResultRow(row, dt)).ToArray();
+				return rows;
 			};
 		}
 
@@ -86,20 +70,33 @@ namespace NavfertyExcelAddIn.Web.CurrencyExchangeRates
 		/// <summary>
 		/// https://bank.gov.ua/ua/open-data/api-dev
 		/// </summary>
-		internal static WebResultRow[] GetCurrencyExchabgeRates_NBU(DateTime dt)
+		internal static async Task<WebResultRow[]> GetCurrencyExchabgeRates_NBU(DateTime dt)
 		{
 			//https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange
 			//https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange?date=20200302&json
 
-			string sDateForNBU = dt.ToString("yyyymmdd");
+			string sDateForNBU = dt.ToString("yyyyMMdd");
 			var urlNBUExchangeForDate = @$"https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange?date={sDateForNBU}&json";
-			Debug.WriteLine(urlNBUExchangeForDate);
+			//Debug.WriteLine(urlNBUExchangeForDate);
+			/*
+			using (WebClient wc = new WebClient())
+			{
+				string sJson = string.Empty;
+				wc.Encoding = Encoding.UTF8;
+				sJson = await wc.DownloadStringTaskAsync(urlNBUExchangeForDate);
 
+			}			
+			*/
+			using (var htc = new HttpClient())
+			{
+				var sJson = await (await htc.GetAsync(urlNBUExchangeForDate)).
+					EnsureSuccessStatusCode().
+					Content.ReadAsStringAsync();
 
-			//System.Text.Json ddd;
-
-
-			return new WebResultRow[] { };
+				var nbuResultRows = JsonConvert.DeserializeObject<NBU.ExchangeRatesForDateRecord[]>(sJson);
+				var rows = nbuResultRows.Select(row => new WebResultRow(row)).ToArray();
+				return rows;
+			}
 		}
 	}
 }
