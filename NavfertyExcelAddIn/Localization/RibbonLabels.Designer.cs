@@ -241,7 +241,7 @@ namespace NavfertyExcelAddIn.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Case.
+        ///   Looks up a localized string similar to Text Case.
         /// </summary>
         internal static string ToggleCase {
             get {

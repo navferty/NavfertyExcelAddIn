@@ -127,7 +127,7 @@
     <value>Cut Names</value>
   </data>
   <data name="ToggleCase" xml:space="preserve">
-    <value>Case</value>
+    <value>Text Case</value>
   </data>
   <data name="TrimSpaces" xml:space="preserve">
     <value>Trim Spaces</value>
