@@ -10,6 +10,18 @@ namespace NavfertyExcelAddIn.Web.CurrencyExchangeRates.Providers
 	{
 		public abstract string Title { get; }
 
+		public abstract CultureInfo Culture { get; }
+
+		public uint Priority
+		{
+			get
+			{
+				var bIsCurrent = (Culture.LCID == CultureInfo.CurrentUICulture.LCID);
+
+				return bIsCurrent ? 1u : uint.MaxValue;
+			}
+		}
+
 		public async Task<WebResultRow[]> GetExchabgeRatesForDate(DateTime dt)
 		{
 			try
@@ -23,8 +35,6 @@ namespace NavfertyExcelAddIn.Web.CurrencyExchangeRates.Providers
 		}
 
 		protected abstract Task<WebResultRow[]> GetExchabgeRatesForDate_Core(DateTime dt);
-
-		public abstract CultureInfo Culture { get; }
 
 		public override string ToString() => Title;
 	}

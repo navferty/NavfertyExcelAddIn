@@ -66,6 +66,10 @@ namespace NavfertyExcelAddIn.Web.CurrencyExchangeRates
 				new Providers.CBRFProvider(),
 				new Providers.NBUProvider()};
 
+			availProviders = (from p in availProviders
+							  orderby p.Priority, p.Title
+							  select p).ToArray();
+
 			ratesProvider = availProviders.First();
 			cbProvider.DataSource = availProviders;
 			cbProvider.SelectedIndex = 0;
