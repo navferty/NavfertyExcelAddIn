@@ -32,7 +32,7 @@ namespace NavfertyExcelAddIn.Web.CurrencyExchangeRates.Providers
 					EnsureSuccessStatusCode().
 					Content.ReadAsStringAsync();
 
-				var nbuResultRows = JsonConvert.DeserializeObject<NBU.ExchangeRatesForDateRecord[]>(sJson);
+				var nbuResultRows = JsonConvert.DeserializeObject<NBU.JsonExchangeRatesForDateRecord[]>(sJson);
 				var rows = nbuResultRows.Select(row => new WebResultRow(row)).ToArray();
 				return rows;
 			}
