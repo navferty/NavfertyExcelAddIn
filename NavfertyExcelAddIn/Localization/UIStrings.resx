@@ -123,6 +123,15 @@
   <data name="CannotUnlockPleaseSaveAsXml" xml:space="preserve">
     <value>Cannot unlock workbook contents because of wrong workbook format. Please save workbook as xlsx or xlsm and try again</value>
   </data>
+  <data name="CurrencyExchangeRates_Error_CanSelectOnlyOneRow" xml:space="preserve">
+    <value>You can select only one row to insert!</value>
+  </data>
+  <data name="CurrencyExchangeRates_Error_NedAnyCellSelection" xml:space="preserve">
+    <value>You must select a cell in the table!</value>
+  </data>
+  <data name="CurrencyExchangeRates_Error_RemoteSource" xml:space="preserve">
+    <value>Failed to get data from online source!\nCheck network settings and internet access.</value>
+  </data>
   <data name="CurrencyExchangeRates_FilterDescription" xml:space="preserve">
     <value>Filter by currency name and code</value>
   </data>
@@ -131,9 +140,6 @@
   </data>
   <data name="CurrencyExchangeRates_FormTitle" xml:space="preserve">
     <value>Exchange Rates</value>
-  </data>
-  <data name="CurrencyExchangeRates_NedAnyCellSelection" xml:space="preserve">
-    <value>You must select a cell in the table!</value>
   </data>
   <data name="CurrencyExchangeRates_PasteToCell" xml:space="preserve">
     <value>Insert Into Worksheet Cell</value>

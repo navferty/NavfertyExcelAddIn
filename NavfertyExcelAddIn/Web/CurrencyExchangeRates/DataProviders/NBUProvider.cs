@@ -1,28 +1,43 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
-using System.Text;
+using System.Net.Http;
 using System.Threading.Tasks;
 
 using NavfertyExcelAddIn.Localization;
 
+using Newtonsoft.Json;
+
 namespace NavfertyExcelAddIn.Web.CurrencyExchangeRates.Providers
 {
-	internal class NBUProvider : IExchangeRatesDataProvider
+	internal class NBUProvider : ExchangeRatesDataProviderBaase
 	{
-		private static readonly CultureInfo ciUA = CultureInfo.GetCultureInfo("uk-UA");
+		private static readonly CultureInfo ci = CultureInfo.GetCultureInfo("uk-UA");
 
-		public string GetTitle() => UIStrings.CurrencyExchangeRates_Sources_NBU;
+		public override string Title => UIStrings.CurrencyExchangeRates_Sources_NBU;
 
-		public async Task<WebResultRow[]> GetExchabgeRatesForDate(DateTime dt)
+		protected override async Task<WebResultRow[]> GetExchabgeRatesForDate_Core(DateTime dt)
 		{
-			var exchangeRatesRows = await CurrencyExchangeRates.GetCurrencyExchabgeRates_NBU(dt);
-			return exchangeRatesRows;
+			//https://bank.gov.ua/ua/open-data/api-dev
+			//https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange
+			//https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange?date=20200302&json
+
+			string sDateForNBU = dt.ToString("yyyyMMdd");
+			var urlNBUExchangeForDate = @$"https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange?date={sDateForNBU}&json";
+			//Debug.WriteLine(urlNBUExchangeForDate);
+
+			using (var htc = new HttpClient())
+			{
+				var sJson = await (await htc.GetAsync(urlNBUExchangeForDate)).
+					EnsureSuccessStatusCode().
+					Content.ReadAsStringAsync();
+
+				var nbuResultRows = JsonConvert.DeserializeObject<NBU.ExchangeRatesForDateRecord[]>(sJson);
+				var rows = nbuResultRows.Select(row => new WebResultRow(row)).ToArray();
+				return rows;
+			}
 		}
 
-		public CultureInfo GetCulture() => ciUA;
-
-		public override string ToString() => GetTitle();
+		public override CultureInfo Culture => ci;
 	}
 }

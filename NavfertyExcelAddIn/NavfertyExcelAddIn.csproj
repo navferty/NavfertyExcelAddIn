@@ -272,7 +272,7 @@
     <Compile Include="Transliterate\Transliterator.cs" />
     <Compile Include="Undo\UndoManager.cs" />
     <Compile Include="Web\CurrencyExchangeRates\DataProviders\NBUProvider.cs" />
-    <Compile Include="Web\CurrencyExchangeRates\DataProviders\IExchangeRatesDataProvider.cs" />
+    <Compile Include="Web\CurrencyExchangeRates\DataProviders\ExchangeRatesDataProviderBaase.cs" />
     <Compile Include="Web\CurrencyExchangeRates\DataProviders\CBRFProvider.cs" />
     <Compile Include="Web\CurrencyExchangeRates\NBU\ExchangeRatesForDateRecord.cs" />
     <Compile Include="Web\CurrencyExchangeRates\WebResultRow.cs" />

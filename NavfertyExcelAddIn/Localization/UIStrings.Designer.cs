@@ -79,6 +79,33 @@ namespace NavfertyExcelAddIn.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to You can select only one row to insert!.
+        /// </summary>
+        internal static string CurrencyExchangeRates_Error_CanSelectOnlyOneRow {
+            get {
+                return ResourceManager.GetString("CurrencyExchangeRates_Error_CanSelectOnlyOneRow", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You must select a cell in the table!.
+        /// </summary>
+        internal static string CurrencyExchangeRates_Error_NedAnyCellSelection {
+            get {
+                return ResourceManager.GetString("CurrencyExchangeRates_Error_NedAnyCellSelection", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Failed to get data from online source!\nCheck network settings and internet access..
+        /// </summary>
+        internal static string CurrencyExchangeRates_Error_RemoteSource {
+            get {
+                return ResourceManager.GetString("CurrencyExchangeRates_Error_RemoteSource", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Filter by currency name and code.
         /// </summary>
         internal static string CurrencyExchangeRates_FilterDescription {
@@ -102,15 +129,6 @@ namespace NavfertyExcelAddIn.Localization {
         internal static string CurrencyExchangeRates_FormTitle {
             get {
                 return ResourceManager.GetString("CurrencyExchangeRates_FormTitle", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to You must select a cell in the table!.
-        /// </summary>
-        internal static string CurrencyExchangeRates_NedAnyCellSelection {
-            get {
-                return ResourceManager.GetString("CurrencyExchangeRates_NedAnyCellSelection", resourceCulture);
             }
         }
         

@@ -1,12 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Diagnostics;
-using System.Drawing;
-using System.Globalization;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -41,7 +37,7 @@ namespace NavfertyExcelAddIn.Web.CurrencyExchangeRates
 		private static string columnCurrencyCode = "Код";
 		private static string columnCurrencyRate = "Курс";
 
-		private Providers.IExchangeRatesDataProvider ratesProvider = null;
+		private Providers.ExchangeRatesDataProviderBaase ratesProvider = null;
 
 		private System.Data.DataTable dtResult = null;
 		private static int ratesDecimalDigitsCount = 2;
@@ -66,7 +62,7 @@ namespace NavfertyExcelAddIn.Web.CurrencyExchangeRates
 			btnPasteResult.Text = UIStrings.CurrencyExchangeRates_PasteToCell;
 			lblFilterTitle.Text = UIStrings.CurrencyExchangeRates_FilterTitle;
 
-			var availProviders = new Providers.IExchangeRatesDataProvider[] {
+			var availProviders = new Providers.ExchangeRatesDataProviderBaase[] {
 				new Providers.CBRFProvider(),
 				new Providers.NBUProvider()};
 
@@ -97,7 +93,7 @@ namespace NavfertyExcelAddIn.Web.CurrencyExchangeRates
 			this.UseWaitCursor = true;
 			try
 			{
-				ratesProvider = cbProvider.SelectedItem as Providers.IExchangeRatesDataProvider;
+				ratesProvider = cbProvider.SelectedItem as Providers.ExchangeRatesDataProviderBaase;
 				if (ratesProvider == null) return;
 
 				dtResult = null;
@@ -150,17 +146,18 @@ namespace NavfertyExcelAddIn.Web.CurrencyExchangeRates
 					var colRate = gridResult.ColumnsAsEnumerable().Last();
 					if (colRate.DefaultCellStyle != cellStyle_ExchangeRate) colRate.DefaultCellStyle = cellStyle_ExchangeRate;
 				}
-				FilterResultInView();
 				//gridResult.AutoResizeColumns();
 			}
 			catch (Exception ex)
 			{
+				dtResult = null;
 				gridResult.DataSource = null;
-				//Commons.DialogService.ReferenceEquals
-				MessageBox.Show(ex.Message);
+				creator.dialogService.ShowError(ex.Message);
 			}
 			finally
 			{
+				FilterResultInView();
+
 				this.UseWaitCursor = false;
 				this.Refresh();
 			}
@@ -171,6 +168,8 @@ namespace NavfertyExcelAddIn.Web.CurrencyExchangeRates
 			var sFilter = txtFilter.Text.Trim();
 			try
 			{
+				if (dtResult == null) return;
+
 				if (string.IsNullOrWhiteSpace(sFilter))
 				{
 					sFilter = string.Empty;
@@ -210,7 +209,7 @@ namespace NavfertyExcelAddIn.Web.CurrencyExchangeRates
 			if (e.ColumnIndex != columnIndex_Rate) return;
 			if (e.Value is not double dRate) return;
 
-			e.Value = dRate.ToString($"C{ratesDecimalDigitsCount}", ratesProvider.GetCulture());
+			e.Value = dRate.ToString($"C{ratesDecimalDigitsCount}", ratesProvider.Culture);
 		}
 
 		private void UpdatePasteButtonState()
@@ -239,14 +238,14 @@ namespace NavfertyExcelAddIn.Web.CurrencyExchangeRates
 					|| ((Range)App.Selection).Cells == null
 					|| ((Range)App.Selection).Cells.Count != 1)
 				{
-					creator.dialogService.ShowError(UIStrings.CurrencyExchangeRates_NedAnyCellSelection);
+					creator.dialogService.ShowError(UIStrings.CurrencyExchangeRates_Error_NedAnyCellSelection);
 					return;
 				}
 
 				var selRows = gridResult.SelectedRowsAsEnumerable();
 				if (selRows.Count() != 1)
 				{
-					creator.dialogService.ShowError("Надо выбрать только одну строку для вставки!");
+					creator.dialogService.ShowError(UIStrings.CurrencyExchangeRates_Error_CanSelectOnlyOneRow);
 					return;
 				}
 
