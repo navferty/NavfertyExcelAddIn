@@ -80,6 +80,12 @@ namespace NavfertyExcelAddIn.Web.CurrencyExchangeRates
 			? Name
 			: (Name + " (" + string.Format(UIStrings.CurrencyExchangeRates_UnitsFormat, Units.ToString("N0")) + ")");
 
+		public double CursFor1Unit
+		 =>
+			(Units == 1.0 || Units == 0.0)
+			? Curs
+			: (Curs / Units);
+
 
 		public static int GetMaxDecimalDigitsCount(WebResultRow[] wrr)
 		{
@@ -101,6 +107,7 @@ namespace NavfertyExcelAddIn.Web.CurrencyExchangeRates
 
 			return exchangeRatesDecimalDigitsCount;
 		}
+
 
 
 	}

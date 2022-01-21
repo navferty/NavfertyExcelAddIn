@@ -19,10 +19,8 @@ namespace NavfertyExcelAddIn.Web.CurrencyExchangeRates
 	{
 		private Microsoft.Office.Interop.Excel.Application App => Globals.ThisAddIn.Application;
 
-		private readonly CurrencyExchangeRates creator = null;
+		private readonly CurrencyExchangeRatesBuilder creator = null;
 		private readonly Workbook wb = null;
-
-		//private static readonly CultureInfo ciUS = CultureInfo.GetCultureInfo("en-US");
 
 		private static readonly Dictionary<string, uint> vipCurrencies = new()
 		{
@@ -37,17 +35,25 @@ namespace NavfertyExcelAddIn.Web.CurrencyExchangeRates
 		private static string columnCurrencyCode = "Код";
 		private static string columnCurrencyRate = "Курс";
 
-		private Providers.ExchangeRatesDataProviderBaase ratesProvider = null;
+		private const string GRID_COLUMNS_ID = "Name";
+		private const string GRID_COLUMNS_ISO = "ISO";
+		private const string GRID_COLUMNS_RATE = "Rate";
+		private Lazy<Dictionary<string, string>> dicGridColumnTitlesLazy = new(() => new Dictionary<string, string>() {
+			{ GRID_COLUMNS_ID, columnCurrencyTitle },
+			{ GRID_COLUMNS_ISO, columnCurrencyCode},
+			{ GRID_COLUMNS_RATE, columnCurrencyRate}
+		});
 
-		private System.Data.DataTable dtResult = null;
+		private Providers.ExchangeRatesDataProviderBaase ratesProvider = null;
+		private CurrencyExchangeRatesDataset.ExchangeRatesDataTable dtResult = null;
 		private static int ratesDecimalDigitsCount = 2;
-		private int columnIndex_Rate = -2;
+		//private int columnIndex_Rate = -2;
 
 		public frmExchangeRates()
 		{
 			InitializeComponent();
 		}
-		public frmExchangeRates(CurrencyExchangeRates Creator, Workbook wb) : this()
+		public frmExchangeRates(CurrencyExchangeRatesBuilder Creator, Workbook wb) : this()
 		{
 			this.creator = Creator;
 			this.wb = wb;
@@ -119,26 +125,31 @@ namespace NavfertyExcelAddIn.Web.CurrencyExchangeRates
 										 orderby r.PriorityInGrid ascending, r.Name ascending
 										 select r).ToArray();
 
-
-					var dtView = new DataTable();
+					//var dtView = new DataTable();
+					var dtView = new CurrencyExchangeRatesDataset.ExchangeRatesDataTable();
 					{
-						DataColumn colName = new(columnCurrencyTitle, typeof(string));
-						DataColumn colISO3 = new(columnCurrencyCode, typeof(string));
-						DataColumn colExchangeRate = new(columnCurrencyRate, typeof(double));
+						//DataColumn colName = new(columnCurrencyTitle, typeof(string));
+						//DataColumn colISO3 = new(columnCurrencyCode, typeof(string));
+						//DataColumn colExchangeRate = new(columnCurrencyRate, typeof(double));
 						//TODO: добавить колонку даты актуальности для строк
 
-						var gridColumns = new[] { colName, colISO3, colExchangeRate };
-						dtView.Columns.AddRange(gridColumns);
-						columnIndex_Rate = gridColumns.ToList().IndexOf(colExchangeRate);
+						//var gridColumns = new[] { colName, colISO3, colExchangeRate };
+						//dtView.Columns.AddRange(gridColumns);
+						//columnIndex_Rate = 2;// gridColumns.ToList().IndexOf(colExchangeRate);
 					}
 
-					foreach (var old in exchangeRatesRows)
+					foreach (var wrr in exchangeRatesRows)
 					{
-						var newRow = dtView.NewRow();
-						newRow.ItemArray = new object[] { old.FullNameWithUnits, old.ISOCode, old.Curs };
+						var newRow = dtView.NewExchangeRatesRow();
+						newRow.Raw = wrr;
+						newRow.Name = wrr.FullNameWithUnits;
+						newRow.ISO = wrr.ISOCode;
+						newRow.Rate = wrr.Curs;
+						//newRow.ItemArray = new object[] { old.FullNameWithUnits, old.ISOCode, old.Curs };
 						dtView.Rows.Add(newRow);
 					}
 
+					//dtView.ColumnsAsEnumerable().First().
 					dtResult = dtView;
 				};
 
@@ -147,10 +158,22 @@ namespace NavfertyExcelAddIn.Web.CurrencyExchangeRates
 
 				if (gridResult.Columns.Count > 0)
 				{
-					var colRate = gridResult.ColumnsAsEnumerable().Last();
-					if (colRate.DefaultCellStyle != cellStyle_ExchangeRate) colRate.DefaultCellStyle = cellStyle_ExchangeRate;
+					//int iColumn = 0;
+					gridResult.ColumnsAsEnumerable().ToList().ForEach(col =>
+					{
+						var bfound = dicGridColumnTitlesLazy.Value.TryGetValue(col.Name, out string FoundTitle);
+						col.Visible = bfound;//Hide columns that have not translated titles (this is raw helpers data)
+						if (bfound) col.HeaderText = FoundTitle;
+
+
+						if (col.Name == GRID_COLUMNS_RATE)
+						{
+							if (col.DefaultCellStyle != cellStyle_ExchangeRate) col.DefaultCellStyle = cellStyle_ExchangeRate;
+						}
+
+						//iColumn++;
+					});
 				}
-				//gridResult.AutoResizeColumns();
 			}
 			catch (Exception ex)
 			{
@@ -183,15 +206,19 @@ namespace NavfertyExcelAddIn.Web.CurrencyExchangeRates
 					var columnNames = dtResult.ColumnsAsEnumerable()
 						.Select(col =>
 						{
-							if (col.DataType == typeof(string)) //We can filter only text fields
-								return $"[{col.ColumnName}] LIKE '%{sFilter}%'";
+							var bIsColumnVisible = dicGridColumnTitlesLazy.Value.TryGetValue(col.ColumnName, out string FoundTitle);
+							if (bIsColumnVisible)//Filter only visible columns
+							{
+								if (col.DataType == typeof(string)) //We can filter only text fields
+									return $"[{col.ColumnName}] LIKE '%{sFilter}%'";
 
+							}
 							return "";
 						})
 						.Where(s => !string.IsNullOrWhiteSpace(s)).ToArray();
 
 					sFilter = string.Join(" OR ", columnNames);
-					//Debug.WriteLine("Row filter = " + sFilter);
+					Debug.WriteLine($"Row filter: {sFilter}");
 				}
 				dtResult.DefaultView.RowFilter = sFilter;
 			}
@@ -205,12 +232,20 @@ namespace NavfertyExcelAddIn.Web.CurrencyExchangeRates
 			}
 		}
 
+
+		private int GetGridColumnIdex(string colID)
+		{
+			var columnIDs = gridResult.ColumnsAsEnumerable().ToArray();//.Select (c=> c.Name== );
+			return Array.IndexOf(columnIDs, colID);
+		}
+
 		/// <summary> Format Rate column cells like number with thouthand separator</summary>
 		private void FormatCell_Rates(object sender, DataGridViewCellFormattingEventArgs e)
 		{
 			if (e.Value == null || e.RowIndex == gridResult.NewRowIndex) return;
 
-			if (e.ColumnIndex != columnIndex_Rate) return;
+
+			if (e.ColumnIndex != GetGridColumnIdex(GRID_COLUMNS_RATE)) return;
 			if (e.Value is not double dRate) return;
 
 			e.Value = dRate.ToString($"C{ratesDecimalDigitsCount}", ratesProvider.Culture);
@@ -254,12 +289,12 @@ namespace NavfertyExcelAddIn.Web.CurrencyExchangeRates
 				}
 
 				var selRow = selRows.First();
-				var exchangeRate = Convert.ToDecimal(selRow.CellsAsEnumerable().ToArray()[columnIndex_Rate].Value);
-				//TODO: Учитывать количество Units при выдаче курса!
+				var err = ((selRow.DataBoundItem as DataRowView).Row as CurrencyExchangeRatesDataset.ExchangeRatesRow);
+				var wrr = err.Raw as WebResultRow;
+				var exchangeRate = wrr.CursFor1Unit;
 
 				Range selectedExcelRange = (Range)App.Selection;
 				selectedExcelRange.Value = exchangeRate;
-
 
 				DialogResult = DialogResult.OK;
 			}
