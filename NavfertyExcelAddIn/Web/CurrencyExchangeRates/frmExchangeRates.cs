@@ -227,10 +227,9 @@ namespace NavfertyExcelAddIn.Web.CurrencyExchangeRates
 			}
 		}
 
-
 		private int GetGridColumnIdex(string colID)
 		{
-			var columnIDs = gridResult.ColumnsAsEnumerable().ToArray();//.Select (c=> c.Name== );
+			var columnIDs = gridResult.ColumnsAsEnumerable().Select(c => c.Name).ToArray();
 			return Array.IndexOf(columnIDs, colID);
 		}
 
@@ -239,8 +238,8 @@ namespace NavfertyExcelAddIn.Web.CurrencyExchangeRates
 		{
 			if (e.Value == null || e.RowIndex == gridResult.NewRowIndex) return;
 
-
-			if (e.ColumnIndex != GetGridColumnIdex(GRID_COLUMNS_RATE)) return;
+			var iColRate = GetGridColumnIdex(GRID_COLUMNS_RATE);
+			if (e.ColumnIndex != iColRate) return;
 			if (e.Value is not double dRate) return;
 
 			e.Value = dRate.ToString($"C{ratesDecimalDigitsCount}", ratesProvider.Culture);
