@@ -142,7 +142,7 @@ namespace NavfertyExcelAddIn.Web.CurrencyExchangeRates
 					{
 						var newRow = dtView.NewExchangeRatesRow();
 						newRow.Raw = wrr;
-						newRow.Name = wrr.FullNameWithUnits;
+						newRow.Name = wrr.DisplayName;
 						newRow.ISO = wrr.ISOCode;
 						newRow.Rate = wrr.Curs;
 						//newRow.ItemArray = new object[] { old.FullNameWithUnits, old.ISOCode, old.Curs };
