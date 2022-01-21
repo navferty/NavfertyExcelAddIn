@@ -74,7 +74,7 @@ namespace NavfertyExcelAddIn.Web.CurrencyExchangeRates
 		}
 
 
-		public string FullNameWithUnits =>
+		public string DisplayName =>
 			(Units == 1.0)
 			? Name
 			: (Name + " (" + string.Format(UIStrings.CurrencyExchangeRates_UnitsFormat, Units.ToString("N0")) + ")");
