@@ -15,19 +15,19 @@ namespace NavfertyExcelAddIn.Web.CurrencyExchangeRates
 	[TypeConverter(typeof(ExpandableObjectConverter))]
 	internal class WebResultRow
 	{
-		public readonly string Name;
+		public readonly string Name = string.Empty;
 		public readonly DateTime ValidFrom;
 
 		/// <summary>Number of units</summary>
-		public readonly double Units;
+		public readonly double Units = 1.0;
 
-		public readonly double Curs;
-		public readonly string CursAsString;
+		public readonly double Curs = 0.0;
+		public readonly string CursAsString = "";
 
 		/// <summary>Internal bank code</summary>
-		public readonly int Code;
+		public readonly int Code = 0;
 
-		public readonly string ISOCode;
+		public readonly string ISOCode = string.Empty;
 
 		public uint PriorityInGrid = uint.MaxValue;
 
@@ -61,7 +61,6 @@ namespace NavfertyExcelAddIn.Web.CurrencyExchangeRates
 
 			CursAsString = nbu.RateString;
 			var fi = (NumberFormatInfo)NumberFormatInfo.InvariantInfo.Clone();
-			//fi.CurrencyDecimalSeparator = ".";
 			fi.NumberDecimalSeparator = ".";
 			fi.NumberGroupSeparator = "";
 			fi.CurrencyGroupSeparator = "";
@@ -79,6 +78,12 @@ namespace NavfertyExcelAddIn.Web.CurrencyExchangeRates
 			(Units == 1.0)
 			? Name
 			: (Name + " (" + string.Format(UIStrings.CurrencyExchangeRates_UnitsFormat, Units.ToString("N0")) + ")");
+
+		public double CursFor1Unit
+		 =>
+			(Units == 1.0 || Units == 0.0)
+			? Curs
+			: (Curs / Units);
 
 
 		public static int GetMaxDecimalDigitsCount(WebResultRow[] wrr)
@@ -101,6 +106,7 @@ namespace NavfertyExcelAddIn.Web.CurrencyExchangeRates
 
 			return exchangeRatesDecimalDigitsCount;
 		}
+
 
 
 	}

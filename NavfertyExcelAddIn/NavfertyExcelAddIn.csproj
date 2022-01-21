@@ -275,8 +275,13 @@
     <Compile Include="Web\CurrencyExchangeRates\DataProviders\ExchangeRatesDataProviderBaase.cs" />
     <Compile Include="Web\CurrencyExchangeRates\DataProviders\CBRFProvider.cs" />
     <Compile Include="Web\CurrencyExchangeRates\DataProviders\NBU\ExchangeRatesForDateRecord.cs" />
+    <Compile Include="Web\CurrencyExchangeRates\CurrencyExchangeRatesDataset.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CurrencyExchangeRatesDataset.xsd</DependentUpon>
+    </Compile>
     <Compile Include="Web\CurrencyExchangeRates\WebResultRow.cs" />
-    <Compile Include="Web\CurrencyExchangeRates\CurrencyExchangeRates.cs" />
+    <Compile Include="Web\CurrencyExchangeRates\CurrencyExchangeRatesBuilder.cs" />
     <Compile Include="Web\CurrencyExchangeRates\frmExchangeRates.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -415,6 +420,17 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>RibbonLabels.resx</DependentUpon>
     </Compile>
+    <None Include="Web\CurrencyExchangeRates\CurrencyExchangeRatesDataset.xsc">
+      <DependentUpon>CurrencyExchangeRatesDataset.xsd</DependentUpon>
+    </None>
+    <None Include="Web\CurrencyExchangeRates\CurrencyExchangeRatesDataset.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>CurrencyExchangeRatesDataset.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Web\CurrencyExchangeRates\CurrencyExchangeRatesDataset.xss">
+      <DependentUpon>CurrencyExchangeRatesDataset.xsd</DependentUpon>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Web\CurrencyExchangeRates\frmExchangeRates.resx">

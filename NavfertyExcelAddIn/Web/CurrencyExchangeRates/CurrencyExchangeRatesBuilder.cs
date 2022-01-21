@@ -8,12 +8,12 @@ using NavfertyExcelAddIn.Localization;
 
 namespace NavfertyExcelAddIn.Web.CurrencyExchangeRates
 {
-	public class CurrencyExchangeRates : ICurrencyExchangeRates
+	public class CurrencyExchangeRatesBuilder : ICurrencyExchangeRates
 	{
 		internal readonly IDialogService dialogService;
 		private Microsoft.Office.Interop.Excel.Application App => Globals.ThisAddIn.Application;
 
-		public CurrencyExchangeRates(IDialogService dialogService)
+		public CurrencyExchangeRatesBuilder(IDialogService dialogService)
 			=> this.dialogService = dialogService;
 
 
