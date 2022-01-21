@@ -141,6 +141,15 @@
   <data name="CurrencyExchangeRates_FormTitle" xml:space="preserve">
     <value>Exchange Rates</value>
   </data>
+  <data name="CurrencyExchangeRates_GridColumn_ISO" xml:space="preserve">
+    <value>Code</value>
+  </data>
+  <data name="CurrencyExchangeRates_GridColumn_Name" xml:space="preserve">
+    <value>Currency</value>
+  </data>
+  <data name="CurrencyExchangeRates_GridColumn_Rate" xml:space="preserve">
+    <value>Exchange Rate</value>
+  </data>
   <data name="CurrencyExchangeRates_PasteToCell" xml:space="preserve">
     <value>Insert Into Worksheet Cell</value>
   </data>

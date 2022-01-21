@@ -133,6 +133,33 @@ namespace NavfertyExcelAddIn.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Code.
+        /// </summary>
+        internal static string CurrencyExchangeRates_GridColumn_ISO {
+            get {
+                return ResourceManager.GetString("CurrencyExchangeRates_GridColumn_ISO", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Currency.
+        /// </summary>
+        internal static string CurrencyExchangeRates_GridColumn_Name {
+            get {
+                return ResourceManager.GetString("CurrencyExchangeRates_GridColumn_Name", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Exchange Rate.
+        /// </summary>
+        internal static string CurrencyExchangeRates_GridColumn_Rate {
+            get {
+                return ResourceManager.GetString("CurrencyExchangeRates_GridColumn_Rate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Insert Into Worksheet Cell.
         /// </summary>
         internal static string CurrencyExchangeRates_PasteToCell {

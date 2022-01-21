@@ -29,25 +29,22 @@ namespace NavfertyExcelAddIn.Web.CurrencyExchangeRates
 			{ "GBP", 3u },
 			{ "CNY", 4u }
 		};
-		private static readonly DataGridViewCellStyle cellStyle_ExchangeRate = new() { Alignment = DataGridViewContentAlignment.MiddleRight };
+		private readonly DataGridViewCellStyle cellStyle_ExchangeRate = new() { Alignment = DataGridViewContentAlignment.MiddleRight };
 
-		private static string columnCurrencyTitle = "Валюта";
-		private static string columnCurrencyCode = "Код";
-		private static string columnCurrencyRate = "Курс";
-
-		private const string GRID_COLUMNS_ID = "Name";
+		private const string GRID_COLUMNS_NAME = "Name";
 		private const string GRID_COLUMNS_ISO = "ISO";
 		private const string GRID_COLUMNS_RATE = "Rate";
-		private Lazy<Dictionary<string, string>> dicGridColumnTitlesLazy = new(() => new Dictionary<string, string>() {
-			{ GRID_COLUMNS_ID, columnCurrencyTitle },
-			{ GRID_COLUMNS_ISO, columnCurrencyCode},
-			{ GRID_COLUMNS_RATE, columnCurrencyRate}
+		private readonly Lazy<Dictionary<string, string>> dicGridColumnTitlesLazy = new(() => new Dictionary<string, string>() {
+			{ GRID_COLUMNS_NAME, UIStrings.CurrencyExchangeRates_GridColumn_Name },
+			{ GRID_COLUMNS_ISO, UIStrings.CurrencyExchangeRates_GridColumn_ISO },
+			{ GRID_COLUMNS_RATE, UIStrings.CurrencyExchangeRates_GridColumn_Rate }
 		});
 
 		private Providers.ExchangeRatesDataProviderBaase ratesProvider = null;
 		private CurrencyExchangeRatesDataset.ExchangeRatesDataTable dtResult = null;
 		private static int ratesDecimalDigitsCount = 2;
-		//private int columnIndex_Rate = -2;
+
+
 
 		public frmExchangeRates()
 		{
@@ -59,10 +56,8 @@ namespace NavfertyExcelAddIn.Web.CurrencyExchangeRates
 			this.wb = wb;
 		}
 
-
 		private void Form_Load(object sender, EventArgs e)
 		{
-			//Text = string.Format(UIStrings.CurrencyExchangeRates_FormTitle, UIStrings.CurrencyExchangeRates_Sources_CBRF,  ciResult.NumberFormat.CurrencySymbol);
 			Text = UIStrings.CurrencyExchangeRates_FormTitle;
 			lblSource.Text = UIStrings.CurrencyExchangeRates_Source;
 			btnPasteResult.Text = UIStrings.CurrencyExchangeRates_PasteToCell;

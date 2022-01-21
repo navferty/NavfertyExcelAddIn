@@ -141,6 +141,15 @@
   <data name="CurrencyExchangeRates_FormTitle" xml:space="preserve">
     <value>Курсы валют</value>
   </data>
+  <data name="CurrencyExchangeRates_GridColumn_ISO" xml:space="preserve">
+    <value>Код</value>
+  </data>
+  <data name="CurrencyExchangeRates_GridColumn_Name" xml:space="preserve">
+    <value>Валюта</value>
+  </data>
+  <data name="CurrencyExchangeRates_GridColumn_Rate" xml:space="preserve">
+    <value>Курс</value>
+  </data>
   <data name="CurrencyExchangeRates_PasteToCell" xml:space="preserve">
     <value>Вставить в ячейку листа</value>
   </data>
