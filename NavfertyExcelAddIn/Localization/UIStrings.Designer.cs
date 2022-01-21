@@ -169,7 +169,7 @@ namespace NavfertyExcelAddIn.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to for  {0}.
+        ///   Looks up a localized string similar to for {0} units.
         /// </summary>
         internal static string CurrencyExchangeRates_UnitsFormat {
             get {

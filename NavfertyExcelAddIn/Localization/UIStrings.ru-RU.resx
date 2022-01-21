@@ -154,7 +154,7 @@
     <value>Національний банк України</value>
   </data>
   <data name="CurrencyExchangeRates_UnitsFormat" xml:space="preserve">
-    <value>за {0}</value>
+    <value>за {0} единиц</value>
   </data>
   <data name="Error" xml:space="preserve">
     <value>Ошибка</value>
