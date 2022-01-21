@@ -52,7 +52,7 @@ namespace NavfertyExcelAddIn.Web.CurrencyExchangeRates
 			PriorityInGrid = uint.MaxValue;
 		}
 
-		public WebResultRow(NBU.ExchangeRatesForDateRecord nbu)
+		public WebResultRow(Providers.NBU.JsonExchangeRatesForDateRecord nbu)
 		{
 			Name = nbu.Name;
 
@@ -101,5 +101,7 @@ namespace NavfertyExcelAddIn.Web.CurrencyExchangeRates
 
 			return exchangeRatesDecimalDigitsCount;
 		}
+
+
 	}
 }

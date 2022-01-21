@@ -16,6 +16,10 @@ namespace NavfertyExcelAddIn.Web.CurrencyExchangeRates.Providers
 
 		public override string Title => UIStrings.CurrencyExchangeRates_Sources_NBU;
 
+
+		private string rawJsonString = String.Empty;
+		private NBU.JsonExchangeRatesForDateRecord[] rawJsonRows;
+
 		protected override async Task<WebResultRow[]> GetExchabgeRatesForDate_Core(DateTime dt)
 		{
 			//https://bank.gov.ua/ua/open-data/api-dev
@@ -28,12 +32,12 @@ namespace NavfertyExcelAddIn.Web.CurrencyExchangeRates.Providers
 
 			using (var htc = new HttpClient())
 			{
-				var sJson = await (await htc.GetAsync(urlNBUExchangeForDate)).
+				rawJsonString = await (await htc.GetAsync(urlNBUExchangeForDate)).
 					EnsureSuccessStatusCode().
 					Content.ReadAsStringAsync();
 
-				var nbuResultRows = JsonConvert.DeserializeObject<NBU.ExchangeRatesForDateRecord[]>(sJson);
-				var rows = nbuResultRows.Select(row => new WebResultRow(row)).ToArray();
+				rawJsonRows = JsonConvert.DeserializeObject<NBU.JsonExchangeRatesForDateRecord[]>(rawJsonString);
+				var rows = rawJsonRows.Select(row => new WebResultRow(row)).ToArray();
 				return rows;
 			}
 		}

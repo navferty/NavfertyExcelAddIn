@@ -17,6 +17,7 @@ namespace NavfertyExcelAddIn.Web.CurrencyExchangeRates.Providers
 
 		public override CultureInfo Culture => ci;
 
+		private DataTable rawDataTable = null;
 		protected override async Task<WebResultRow[]> GetExchabgeRatesForDate_Core(DateTime dt)
 		{
 			using (var cbr = new Web.CBR.DailyInfoSoapClient())
@@ -24,9 +25,9 @@ namespace NavfertyExcelAddIn.Web.CurrencyExchangeRates.Providers
 				var dtsResult = await cbr.GetCursOnDateAsync(dt);
 				if (dtsResult == null) throw new Exception("Failed to get remote data with no errors!");
 
-				var dtFirst = dtsResult.Tables.Cast<DataTable>().FirstOrDefault();
-				if (dtFirst == default) throw new Exception("Remote dstaset does not containt Tables!");
-				var rows = dtFirst.RowsAsEnumerable().Select(row => new WebResultRow(row, dt)).ToArray();
+				rawDataTable = dtsResult.Tables.Cast<DataTable>().FirstOrDefault();
+				if (rawDataTable == default) throw new Exception("Remote dstaset does not containt Tables!");
+				var rows = rawDataTable.RowsAsEnumerable().Select(row => new WebResultRow(row, dt)).ToArray();
 				return rows;
 			};
 		}

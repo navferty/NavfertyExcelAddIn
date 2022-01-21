@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 using Newtonsoft.Json;
 
-namespace NavfertyExcelAddIn.Web.CurrencyExchangeRates.NBU
+namespace NavfertyExcelAddIn.Web.CurrencyExchangeRates.Providers.NBU
 {
-	public class ExchangeRatesForDateRecord
+	public class JsonExchangeRatesForDateRecord
 	{
 		[JsonProperty("r030")]
 		public int r030 { get; set; }
