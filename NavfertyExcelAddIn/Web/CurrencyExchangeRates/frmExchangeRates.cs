@@ -61,6 +61,9 @@ namespace NavfertyExcelAddIn.Web.CurrencyExchangeRates
 		private void Form_Load(object sender, EventArgs e)
 		{
 			Text = UIStrings.CurrencyExchangeRates_FormTitle;
+			this.KeyDown += (s, e) => { if (e.KeyCode == Keys.Escape) this.DialogResult = DialogResult.Cancel; };
+
+
 			lblSource.Text = UIStrings.CurrencyExchangeRates_Source;
 			btnPasteResult.Text = UIStrings.CurrencyExchangeRates_PasteToCell;
 			lblFilterTitle.Text = UIStrings.CurrencyExchangeRates_FilterTitle;
