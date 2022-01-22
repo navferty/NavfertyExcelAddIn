@@ -16,7 +16,7 @@ using DataTable = System.Data.DataTable;
 
 namespace NavfertyExcelAddIn.Web.CurrencyExchangeRates
 {
-	public partial class frmExchangeRates : Form
+	internal partial class frmExchangeRates : Commons.Controls.FormEx
 	{
 		private Microsoft.Office.Interop.Excel.Application App => Globals.ThisAddIn.Application;
 
@@ -61,7 +61,7 @@ namespace NavfertyExcelAddIn.Web.CurrencyExchangeRates
 		private void Form_Load(object sender, EventArgs e)
 		{
 			Text = UIStrings.CurrencyExchangeRates_FormTitle;
-			this.KeyDown += (s, e) => { if (e.KeyCode == Keys.Escape) this.DialogResult = DialogResult.Cancel; };
+			//this.KeyDown += (s, e) => { if (e.KeyCode == Keys.Escape) this.DialogResult = DialogResult.Cancel; };
 
 
 			lblSource.Text = UIStrings.CurrencyExchangeRates_Source;

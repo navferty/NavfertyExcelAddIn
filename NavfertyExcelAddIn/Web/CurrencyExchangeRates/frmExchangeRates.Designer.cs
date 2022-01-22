@@ -162,7 +162,6 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(689, 551);
             this.Controls.Add(this.tlpMain);
-            this.KeyPreview = true;
             this.MinimizeBox = false;
             this.Name = "frmExchangeRates";
             this.Padding = new System.Windows.Forms.Padding(8);

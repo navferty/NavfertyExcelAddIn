@@ -9,6 +9,8 @@ using System.Windows.Forms;
 
 namespace NavfertyExcelAddIn.Commons.Controls
 {
+
+	/// <summary>DataGridView that do not blick return key</summary>
 	internal class DataGridViewEx : System.Windows.Forms.DataGridView
 	{
 
