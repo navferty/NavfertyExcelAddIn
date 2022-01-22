@@ -28,11 +28,11 @@
 - [Разъединить](#разъединение-ячеек-с-заполнением)
 - [Найти ошибки](#найти-все-ошибки-в-выделенном-диапазоне)
 - [в Markdown](#копировать-в-markdown)
-- [Проверка](#валидация-значений)
+- [Проверка](#Проверка)
 
 ### Защита данных
 
-- [Защита файла](#снять-защиту-с-книги-и-листов)
+- [Защита файла](#Защита-файла)
 - [Защита листов](#защита-листов)
 
 ### Вид
@@ -68,13 +68,15 @@
 ![Navferty's Tools Ribbon Tab in MS Excel](images/ParseNumerics2.png)
 </details>
 
+[Наверх](#excel-надстройка-navfertys-tools)
+
 ## Замена
 
 |||
 |:-:|---|
 |![](images/icons/replace.png)|Замена русских символов по таблицам соответствия.|
 
-*   ### Транслитерация
+- ### Транслитерация
 
     |||
     |:-:|---|
@@ -87,7 +89,7 @@
     ![Navferty's Tools Ribbon Tab in MS Excel](images/Transliterate2.png)
     </details>
 
-* ### На аналоги
+- ### На аналоги
 
     |||
     |:-:|---|
@@ -99,6 +101,8 @@
     ![Navferty's Tools Ribbon Tab in MS Excel](images/ReplaceChars1.png)
     ![Navferty's Tools Ribbon Tab in MS Excel](images/ReplaceChars2.png)
     </details>
+
+[Наверх](#excel-надстройка-navfertys-tools)
 
 ## Число словами
 
@@ -115,8 +119,6 @@
 
 [Наверх](#excel-надстройка-navfertys-tools)
 
----
-
 ## Регистр
 
 |||
@@ -131,6 +133,8 @@
 ![Navferty's Tools Ribbon Tab in MS Excel](images/ToggleCase3.png)
 ![Navferty's Tools Ribbon Tab in MS Excel](images/ToggleCase4.png)
 </details>
+
+[Наверх](#excel-надстройка-navfertys-tools)
 
 ## Очистить пробелы
 
@@ -147,8 +151,6 @@
 
 [Наверх](#excel-надстройка-navfertys-tools)
 
----
-
 ## Условное форматирование
 
 |||
@@ -157,10 +159,7 @@
 
 [Наверх](#excel-надстройка-navfertys-tools)
 
-
----
-
-## Снять защиту с книги и листов
+## Защита файла
 
 |||
 |:-:|---|
