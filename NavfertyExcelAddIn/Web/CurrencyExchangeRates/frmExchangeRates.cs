@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Diagnostics;
 using System.Linq;
+using System.Reflection;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -29,6 +30,7 @@ namespace NavfertyExcelAddIn.Web.CurrencyExchangeRates
 			{ "GBP", 3u },
 			{ "CNY", 4u }
 		};
+
 		private readonly DataGridViewCellStyle cellStyle_ExchangeRate = new() { Alignment = DataGridViewContentAlignment.MiddleRight };
 
 		private const string GRID_COLUMNS_NAME = "Name";
@@ -86,7 +88,6 @@ namespace NavfertyExcelAddIn.Web.CurrencyExchangeRates
 			cbProvider.SelectedIndexChanged += async (s, e) => await UpdateExchangeRates();
 			dtpDate.ValueChanged += async (s, e) => await UpdateExchangeRates();
 			gridResult.CellFormatting += FormatCell_Rates;
-
 			await UpdateExchangeRates();
 			txtFilter.AttachDelayedFilter(() => FilterResultInView(), VistaCueBanner: UIStrings.CurrencyExchangeRates_FilterDescription);
 		}
@@ -104,48 +105,21 @@ namespace NavfertyExcelAddIn.Web.CurrencyExchangeRates
 				dtResult = null;
 				var dtDate = dtpDate.Value;
 				{
-					var exchangeRatesRows = await ratesProvider.GetExchabgeRatesForDate(dtDate);
-
-					//Count max decimal digits length from all rows
-					ratesDecimalDigitsCount = WebResultRow.GetMaxDecimalDigitsCount(exchangeRatesRows);
-
-					//Sort by priority
-					exchangeRatesRows.ToList().ForEach(wrr =>
+					dtResult = await ratesProvider.GetExchabgeRatesForDate(dtDate, wrr =>
 					{
 						var bIsVIPCurrency = vipCurrencies.TryGetValue(wrr.ISOCode, out uint iPriorityFound);
-						if (bIsVIPCurrency) wrr.PriorityInGrid = iPriorityFound;
+						return bIsVIPCurrency
+						? iPriorityFound
+						: null;
 					});
 
-					exchangeRatesRows = (from r in exchangeRatesRows
-										 orderby r.PriorityInGrid ascending, r.Name ascending
-										 select r).ToArray();
 
-					//var dtView = new DataTable();
-					var dtView = new CurrencyExchangeRatesDataset.ExchangeRatesDataTable();
-					{
-						//DataColumn colName = new(columnCurrencyTitle, typeof(string));
-						//DataColumn colISO3 = new(columnCurrencyCode, typeof(string));
-						//DataColumn colExchangeRate = new(columnCurrencyRate, typeof(double));
-						//TODO: добавить колонку даты актуальности для строк
+					// Count max decimal digits length from all rows
+					//ratesDecimalDigitsCount = WebResultRow.GetMaxDecimalDigitsCount(exchangeRatesRows);
 
-						//var gridColumns = new[] { colName, colISO3, colExchangeRate };
-						//dtView.Columns.AddRange(gridColumns);
-						//columnIndex_Rate = 2;// gridColumns.ToList().IndexOf(colExchangeRate);
-					}
-
-					foreach (var wrr in exchangeRatesRows)
-					{
-						var newRow = dtView.NewExchangeRatesRow();
-						newRow.Raw = wrr;
-						newRow.Name = wrr.DisplayName;
-						newRow.ISO = wrr.ISOCode;
-						newRow.Rate = wrr.Curs;
-						//newRow.ItemArray = new object[] { old.FullNameWithUnits, old.ISOCode, old.Curs };
-						dtView.Rows.Add(newRow);
-					}
-
-					//dtView.ColumnsAsEnumerable().First().
-					dtResult = dtView;
+					//Some rows (in Ukrainian NBU) has rates like 0.00000000698  and than all rows in grid looks weird.
+					//To avoid this, we use standart 4 digits float part
+					ratesDecimalDigitsCount = 4;
 				};
 
 				gridResult.DataSource = dtResult;
@@ -153,7 +127,6 @@ namespace NavfertyExcelAddIn.Web.CurrencyExchangeRates
 
 				if (gridResult.Columns.Count > 0)
 				{
-					//int iColumn = 0;
 					gridResult.ColumnsAsEnumerable().ToList().ForEach(col =>
 					{
 						var bfound = dicGridColumnTitlesLazy.Value.TryGetValue(col.Name, out string FoundTitle);
@@ -165,8 +138,6 @@ namespace NavfertyExcelAddIn.Web.CurrencyExchangeRates
 						{
 							if (col.DefaultCellStyle != cellStyle_ExchangeRate) col.DefaultCellStyle = cellStyle_ExchangeRate;
 						}
-
-						//iColumn++;
 					});
 				}
 			}

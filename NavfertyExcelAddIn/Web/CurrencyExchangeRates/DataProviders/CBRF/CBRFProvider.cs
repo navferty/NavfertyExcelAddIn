@@ -18,7 +18,7 @@ namespace NavfertyExcelAddIn.Web.CurrencyExchangeRates.Providers
 		public override CultureInfo Culture => ci;
 
 		private DataTable rawDataTable = null;
-		protected override async Task<WebResultRow[]> GetExchabgeRatesForDate_Core(DateTime dt)
+		protected override async Task<WebResultRow[]> DownloadWebResultRowsForDate(DateTime dt)
 		{
 			using (var cbr = new Web.CBR.DailyInfoSoapClient())
 			{

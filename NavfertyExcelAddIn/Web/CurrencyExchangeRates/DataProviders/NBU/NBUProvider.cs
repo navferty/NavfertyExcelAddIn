@@ -20,7 +20,7 @@ namespace NavfertyExcelAddIn.Web.CurrencyExchangeRates.Providers
 		private string rawJsonString = String.Empty;
 		private NBU.JsonExchangeRatesForDateRecord[] rawJsonRows;
 
-		protected override async Task<WebResultRow[]> GetExchabgeRatesForDate_Core(DateTime dt)
+		protected override async Task<WebResultRow[]> DownloadWebResultRowsForDate(DateTime dt)
 		{
 			//https://bank.gov.ua/ua/open-data/api-dev
 			//https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange

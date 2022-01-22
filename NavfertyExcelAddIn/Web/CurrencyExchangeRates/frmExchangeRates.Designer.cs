@@ -31,7 +31,7 @@
             this.btnPasteResult = new System.Windows.Forms.Button();
             this.dtpDate = new System.Windows.Forms.DateTimePicker();
             this.tlpMain = new System.Windows.Forms.TableLayoutPanel();
-            this.gridResult = new System.Windows.Forms.DataGridView();
+            this.gridResult = new NavfertyExcelAddIn.Commons.Controls.DataGridViewEx();
             this.txtFilter = new System.Windows.Forms.TextBox();
             this.cbProvider = new System.Windows.Forms.ComboBox();
             this.lblSource = new System.Windows.Forms.Label();
@@ -46,7 +46,7 @@
             this.btnPasteResult.Location = new System.Drawing.Point(496, 498);
             this.btnPasteResult.Name = "btnPasteResult";
             this.btnPasteResult.Size = new System.Drawing.Size(174, 34);
-            this.btnPasteResult.TabIndex = 3;
+            this.btnPasteResult.TabIndex = 4;
             this.btnPasteResult.Text = "Select";
             this.btnPasteResult.UseVisualStyleBackColor = true;
             this.btnPasteResult.Click += new System.EventHandler(this.btnPasteResult_Click);
@@ -57,7 +57,7 @@
             this.dtpDate.Location = new System.Drawing.Point(496, 3);
             this.dtpDate.Name = "dtpDate";
             this.dtpDate.Size = new System.Drawing.Size(174, 20);
-            this.dtpDate.TabIndex = 0;
+            this.dtpDate.TabIndex = 2;
             // 
             // tlpMain
             // 
@@ -81,7 +81,7 @@
             this.tlpMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tlpMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40F));
             this.tlpMain.Size = new System.Drawing.Size(673, 535);
-            this.tlpMain.TabIndex = 3;
+            this.tlpMain.TabIndex = 0;
             // 
             // gridResult
             // 
@@ -105,8 +105,9 @@
             this.gridResult.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
             this.gridResult.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.gridResult.Size = new System.Drawing.Size(667, 436);
+            this.gridResult.StandardEnter = true;
             this.gridResult.StandardTab = true;
-            this.gridResult.TabIndex = 2;
+            this.gridResult.TabIndex = 0;
             this.gridResult.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.gridResult_CellDoubleClick);
             // 
             // txtFilter
@@ -120,7 +121,7 @@
             this.txtFilter.Name = "txtFilter";
             this.txtFilter.ShortcutsEnabled = false;
             this.txtFilter.Size = new System.Drawing.Size(622, 20);
-            this.txtFilter.TabIndex = 1;
+            this.txtFilter.TabIndex = 3;
             // 
             // cbProvider
             // 
@@ -130,7 +131,7 @@
             this.cbProvider.Location = new System.Drawing.Point(48, 3);
             this.cbProvider.Name = "cbProvider";
             this.cbProvider.Size = new System.Drawing.Size(442, 21);
-            this.cbProvider.TabIndex = 5;
+            this.cbProvider.TabIndex = 1;
             // 
             // lblSource
             // 
@@ -139,7 +140,7 @@
             this.lblSource.Location = new System.Drawing.Point(3, 0);
             this.lblSource.Name = "lblSource";
             this.lblSource.Size = new System.Drawing.Size(39, 27);
-            this.lblSource.TabIndex = 6;
+            this.lblSource.TabIndex = 5;
             this.lblSource.Text = "source";
             this.lblSource.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
@@ -150,12 +151,13 @@
             this.lblFilterTitle.Location = new System.Drawing.Point(24, 27);
             this.lblFilterTitle.Name = "lblFilterTitle";
             this.lblFilterTitle.Size = new System.Drawing.Size(18, 26);
-            this.lblFilterTitle.TabIndex = 7;
+            this.lblFilterTitle.TabIndex = 6;
             this.lblFilterTitle.Text = "fltr";
             this.lblFilterTitle.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // frmExchangeRates
             // 
+            this.AcceptButton = this.btnPasteResult;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(689, 551);
@@ -183,7 +185,7 @@
 		private System.Windows.Forms.TableLayoutPanel tlpMain;
 		private System.Windows.Forms.TextBox txtFilter;
 		private System.Windows.Forms.ComboBox cbProvider;
-		private System.Windows.Forms.DataGridView gridResult;
+		private Commons.Controls.DataGridViewEx gridResult;
 		private System.Windows.Forms.Label lblSource;
 		private System.Windows.Forms.Label lblFilterTitle;
 	}
