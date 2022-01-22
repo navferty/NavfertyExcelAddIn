@@ -267,7 +267,7 @@
     <Compile Include="Undo\UndoManager.cs" />
     <Compile Include="WorksheetCellsEditing\ConditionalFormatFixer.cs" />
     <Compile Include="WorksheetCellsEditing\IConditionalFormatFixer.cs" />
-    <Compile Include="WorksheetProtectUnprotect\CheckedListBoxEx.cs">
+    <Compile Include="Commons\Controls\CheckedListBoxEx.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="WorksheetProtectUnprotect\frmAskWorksheetProtectionPassword.cs">

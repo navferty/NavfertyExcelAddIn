@@ -3,7 +3,7 @@ using System.ComponentModel;
 using System.Drawing;
 using NavfertyExcelAddIn.Commons;
 
-namespace NavfertyExcelAddIn.WorksheetProtectUnprotect
+namespace NavfertyExcelAddIn.Commons.Controls
 {
 	/// <summary>Used for draw custom 'EmptyText' when list does not contains items</summary>
 	internal class CheckedListBoxEx : System.Windows.Forms.CheckedListBox
