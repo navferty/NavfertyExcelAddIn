@@ -170,6 +170,7 @@ namespace NavfertyExcelAddIn.WorksheetProtectUnprotect
             this.ClientSize = new System.Drawing.Size(553, 280);
             this.Controls.Add(this.tlpMain);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            this.KeyPreview = true;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "frmAskWorksheetProtectionPassword";

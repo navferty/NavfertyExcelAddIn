@@ -32,7 +32,7 @@ namespace NavfertyExcelAddIn.WorksheetProtectUnprotect
 			this.creator = Creator;
 			this.wb = wb;
 
-
+			this.KeyDown += (s, e) => { if (e.KeyCode == Keys.Escape) this.DialogResult = DialogResult.Cancel; };
 			Text = $"{RibbonLabels.ProtectUnprotectWorksheets} '{wb.Name}'";
 			radioModeProtect.Text = UIStrings.SheetProtection_Set;
 			radioModeUnProtect.Text = UIStrings.SheetProtection_Clear;
