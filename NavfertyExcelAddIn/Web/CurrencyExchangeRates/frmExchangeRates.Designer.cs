@@ -163,6 +163,7 @@
             this.ClientSize = new System.Drawing.Size(689, 551);
             this.Controls.Add(this.tlpMain);
             this.MinimizeBox = false;
+            this.MinimumSize = new System.Drawing.Size(500, 400);
             this.Name = "frmExchangeRates";
             this.Padding = new System.Windows.Forms.Padding(8);
             this.ShowIcon = false;
