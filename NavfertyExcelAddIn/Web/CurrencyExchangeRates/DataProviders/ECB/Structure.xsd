@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://www.sdmx.org/resources/sdmxml/schemas/v2_1/common" attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://www.sdmx.org/resources/sdmxml/schemas/v2_1/common" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+	<xs:import />
+	<xs:element name="Structure">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="URN" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

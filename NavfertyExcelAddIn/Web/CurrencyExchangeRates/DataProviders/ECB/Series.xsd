@@ -1,0 +1,61 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://www.sdmx.org/resources/sdmxml/schemas/v2_1/data/generic" attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://www.sdmx.org/resources/sdmxml/schemas/v2_1/data/generic" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+	<xs:element name="Series">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="SeriesKey">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element maxOccurs="unbounded" name="Value">
+								<xs:complexType>
+									<xs:attribute name="id" type="xs:string" use="required" />
+									<xs:attribute name="value" type="xs:string" use="required" />
+								</xs:complexType>
+							</xs:element>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="Attributes">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element maxOccurs="unbounded" name="Value">
+								<xs:complexType>
+									<xs:attribute name="id" type="xs:string" use="required" />
+									<xs:attribute name="value" type="xs:string" use="required" />
+								</xs:complexType>
+							</xs:element>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="Obs">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="ObsDimension">
+								<xs:complexType>
+									<xs:attribute name="value" type="xs:date" use="required" />
+								</xs:complexType>
+							</xs:element>
+							<xs:element name="ObsValue">
+								<xs:complexType>
+									<xs:attribute name="value" type="xs:decimal" use="required" />
+								</xs:complexType>
+							</xs:element>
+							<xs:element name="Attributes">
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element maxOccurs="unbounded" name="Value">
+											<xs:complexType>
+												<xs:attribute name="id" type="xs:string" use="required" />
+												<xs:attribute name="value" type="xs:string" use="required" />
+											</xs:complexType>
+										</xs:element>
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

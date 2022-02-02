@@ -26,18 +26,4 @@ namespace NavfertyExcelAddIn.Web.CurrencyExchangeRates.Providers.NBU
 		[JsonProperty("exchangedate")]
 		public string ValidFrom { get; set; }
 	}
-
-
-
-
-
-
-
-
-
-
-
 }
-
-
-

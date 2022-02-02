@@ -70,7 +70,8 @@ namespace NavfertyExcelAddIn.Web.CurrencyExchangeRates
 
 			var availProviders = new Providers.ExchangeRatesDataProviderBaase[] {
 				new Providers.CBRFProvider(),
-				new Providers.NBUProvider()};
+				new Providers.NBUProvider(),
+				new Providers.ECBProvider()};
 
 			availProviders = (from p in availProviders
 							  orderby p.Priority, p.Title

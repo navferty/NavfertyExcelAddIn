@@ -31,6 +31,12 @@ namespace NavfertyExcelAddIn.Web.CurrencyExchangeRates
 
 		public uint PriorityInGrid = uint.MaxValue;
 
+		private WebResultRow() : base()
+		{
+			ValidFrom = DateTime.Now;
+			PriorityInGrid = uint.MaxValue;
+			Units = 1;
+		}
 		/// <summary>Contructor for CBRF record</summary>
 		public WebResultRow(DataRow row, DateTime dt)
 		{
@@ -49,10 +55,10 @@ namespace NavfertyExcelAddIn.Web.CurrencyExchangeRates
 			CursAsString = row[2].ToString().Trim();
 
 			ValidFrom = dt;
-			PriorityInGrid = uint.MaxValue;
 		}
 
-		public WebResultRow(Providers.NBU.JsonExchangeRatesForDateRecord nbu)
+		/// <summary>Constructor for NBU record</summary>
+		public WebResultRow(Providers.NBU.JsonExchangeRatesForDateRecord nbu) : this()
 		{
 			Name = nbu.Name;
 
@@ -66,12 +72,28 @@ namespace NavfertyExcelAddIn.Web.CurrencyExchangeRates
 			fi.CurrencyGroupSeparator = "";
 			var bParsed = double.TryParse(CursAsString, NumberStyles.Float, fi, out double parsedCurs);
 			if (bParsed) Curs = parsedCurs;
+		}
 
-			Units = 1;
+		/// <summary>Constructor for NBU record</summary>
+		public WebResultRow(Providers.ECB.ECBExchangeRatesRecord ecb) : this()
+		{
+			Name = ecb.Title;
+
+			ISOCode = ecb.ISO;
+			Code = 1;
+			CursAsString = ecb.ObsValue;
+
+			var fi = (NumberFormatInfo)NumberFormatInfo.InvariantInfo.Clone();
+			fi.NumberDecimalSeparator = ".";
+			fi.NumberGroupSeparator = "";
+			fi.CurrencyGroupSeparator = "";
+			var bParsed = double.TryParse(CursAsString, NumberStyles.Float, fi, out double parsedCurs);
+			if (bParsed) Curs = (1 / parsedCurs);
 
 			ValidFrom = DateTime.Now;
-			PriorityInGrid = uint.MaxValue;
 		}
+
+
 
 		public string DisplayName =>
 			(Units == 1.0)
@@ -87,7 +109,7 @@ namespace NavfertyExcelAddIn.Web.CurrencyExchangeRates
 		public static int GetMaxDecimalDigitsCount(WebResultRow[] wrr)
 		{
 			return 4;// some UA NBU records has 8 decimal numbers, and number formatted with this value looks bad!
-
+			/*			 
 			var exchangeRatesDecimalDigitsCount = wrr
 												.Select(wrr => wrr.CursAsString)
 												.Select(s =>
@@ -103,6 +125,7 @@ namespace NavfertyExcelAddIn.Web.CurrencyExchangeRates
 
 
 			return exchangeRatesDecimalDigitsCount;
+			*/
 		}
 	}
 }
