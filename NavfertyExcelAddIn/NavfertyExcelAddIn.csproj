@@ -277,6 +277,7 @@
     <Compile Include="Transliterate\CyrillicToLatinFallback.cs" />
     <Compile Include="Transliterate\Transliterator.cs" />
     <Compile Include="Undo\UndoManager.cs" />
+    <Compile Include="Web\CurrencyExchangeRates\DataProviders\CBRF\Class1.cs" />
     <Compile Include="Web\CurrencyExchangeRates\DataProviders\NBU\NBUProvider.cs" />
     <Compile Include="Web\CurrencyExchangeRates\DataProviders\ExchangeRatesDataProviderBaase.cs" />
     <Compile Include="Web\CurrencyExchangeRates\DataProviders\CBRF\CBRFProvider.cs" />
