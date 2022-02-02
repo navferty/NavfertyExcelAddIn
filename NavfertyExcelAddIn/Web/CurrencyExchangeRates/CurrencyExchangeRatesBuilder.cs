@@ -19,9 +19,8 @@ namespace NavfertyExcelAddIn.Web.CurrencyExchangeRates
 
 		public void ShowCurrencyExchangeRates(Workbook wb)
 		{
-			if (App.Selection == null
-				|| ((Range)App.Selection).Cells == null
-				|| ((Range)App.Selection).Cells.Count != 1)
+			Range? sel = App.Selection;
+			if (null == sel || sel.Cells == null || sel.Cells.Count < 1)
 			{
 				dialogService.ShowError(UIStrings.CurrencyExchangeRates_Error_NedAnyCellSelection);
 				return;

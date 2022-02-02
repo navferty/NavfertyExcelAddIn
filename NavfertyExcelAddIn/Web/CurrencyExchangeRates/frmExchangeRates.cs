@@ -227,23 +227,22 @@ namespace NavfertyExcelAddIn.Web.CurrencyExchangeRates
 		private void gridResult_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
 		{
 			if (e.RowIndex < 0) return;
-			OnPasteResult();
+			OnPasteResultToWorkSheet();
 		}
 
 		private void btnPasteResult_Click(object sender, EventArgs e)
 		{
-			OnPasteResult();
+			OnPasteResultToWorkSheet();
 		}
 
-		private void OnPasteResult()
+		private void OnPasteResultToWorkSheet()
 		{
 			try
 			{
 				if (!btnPasteResult.Enabled) return;
 
-				if (App.Selection == null
-					|| ((Range)App.Selection).Cells == null
-					|| ((Range)App.Selection).Cells.Count != 1)
+				Range? sel = App.Selection;
+				if (null == sel || sel.Cells == null || sel.Cells.Count < 1)
 				{
 					creator.dialogService.ShowError(UIStrings.CurrencyExchangeRates_Error_NedAnyCellSelection);
 					return;
@@ -261,8 +260,7 @@ namespace NavfertyExcelAddIn.Web.CurrencyExchangeRates
 				var wrr = err.Raw as WebResultRow;
 				var exchangeRate = wrr.CursFor1Unit;
 
-				Range selectedExcelRange = (Range)App.Selection;
-				selectedExcelRange.Value = exchangeRate;
+				sel.Value = exchangeRate;
 
 				DialogResult = DialogResult.OK;
 			}
