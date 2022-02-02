@@ -280,7 +280,7 @@
     <Compile Include="Web\CurrencyExchangeRates\DataProviders\NBU\NBUProvider.cs" />
     <Compile Include="Web\CurrencyExchangeRates\DataProviders\ExchangeRatesDataProviderBaase.cs" />
     <Compile Include="Web\CurrencyExchangeRates\DataProviders\CBRF\CBRFProvider.cs" />
-    <Compile Include="Web\CurrencyExchangeRates\DataProviders\NBU\ExchangeRatesForDateRecord.cs" />
+    <Compile Include="Web\CurrencyExchangeRates\DataProviders\NBU\JsonExchangeRatesForDateRecord.cs" />
     <Compile Include="Web\CurrencyExchangeRates\CurrencyExchangeRatesDataset.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
