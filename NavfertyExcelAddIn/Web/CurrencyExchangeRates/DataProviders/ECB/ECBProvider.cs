@@ -25,7 +25,7 @@ namespace NavfertyExcelAddIn.Web.CurrencyExchangeRates.Providers
 			return ciNew;
 		});
 
-		public override string Title => "ЕЦБ";
+		public override string Title => UIStrings.CurrencyExchangeRates_Sources_ECB;
 
 
 		private string rawXMLString = String.Empty;

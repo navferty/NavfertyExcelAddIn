@@ -160,6 +160,9 @@
   <data name="CurrencyExchangeRates_Sources_CBRF" xml:space="preserve">
     <value>Центральный банк Российской Федерации (Банк России)</value>
   </data>
+  <data name="CurrencyExchangeRates_Sources_ECB" xml:space="preserve">
+    <value>Европейский центральный банк</value>
+  </data>
   <data name="CurrencyExchangeRates_Sources_NBU" xml:space="preserve">
     <value>Національний банк України</value>
   </data>

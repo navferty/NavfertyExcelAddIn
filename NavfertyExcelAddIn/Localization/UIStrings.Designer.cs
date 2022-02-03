@@ -188,6 +188,15 @@ namespace NavfertyExcelAddIn.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to European Central Bank.
+        /// </summary>
+        internal static string CurrencyExchangeRates_Sources_ECB {
+            get {
+                return ResourceManager.GetString("CurrencyExchangeRates_Sources_ECB", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to National Bank of Ukraine.
         /// </summary>
         internal static string CurrencyExchangeRates_Sources_NBU {

@@ -160,6 +160,9 @@ Perhaps there is no data for the specified period, or there is no access to the 
   <data name="CurrencyExchangeRates_Sources_CBRF" xml:space="preserve">
     <value>Central Bank of the Russian Federation (Bank of Russia)</value>
   </data>
+  <data name="CurrencyExchangeRates_Sources_ECB" xml:space="preserve">
+    <value>European Central Bank</value>
+  </data>
   <data name="CurrencyExchangeRates_Sources_NBU" xml:space="preserve">
     <value>National Bank of Ukraine</value>
   </data>
