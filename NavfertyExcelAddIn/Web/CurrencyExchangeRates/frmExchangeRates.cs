@@ -100,6 +100,9 @@ namespace NavfertyExcelAddIn.Web.CurrencyExchangeRates
 		{
 			if (cbProvider.SelectedIndex < 0) return;
 
+			gridResult.EmptyText = "Загружаем данные из сети...";
+			gridResult.Refresh();
+
 			this.UseWaitCursor = true;
 			try
 			{
@@ -148,8 +151,9 @@ namespace NavfertyExcelAddIn.Web.CurrencyExchangeRates
 			catch (Exception ex)
 			{
 				dtResult = null;
+				gridResult.EmptyText = ex.Message;
 				gridResult.DataSource = null;
-				creator.dialogService.ShowError(ex.Message);
+				//creator.dialogService.ShowError(ex.Message);
 			}
 			finally
 			{
@@ -167,12 +171,16 @@ namespace NavfertyExcelAddIn.Web.CurrencyExchangeRates
 			{
 				if (dtResult == null) return;
 
+				gridResult.EmptyText = "Данные успешно загружены. Нет строк для отображения";
+
 				if (string.IsNullOrWhiteSpace(sFilter))
 				{
 					sFilter = string.Empty;
 				}
 				else
 				{
+					gridResult.EmptyText = "Нет строк соответствующих указанному фильтру.";
+
 					var columnNames = dtResult.ColumnsAsEnumerable()
 						.Select(col =>
 						{

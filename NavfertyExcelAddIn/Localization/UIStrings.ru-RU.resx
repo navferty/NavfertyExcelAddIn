@@ -130,7 +130,8 @@
     <value>Необходимо выбрать ячейку в таблице!</value>
   </data>
   <data name="CurrencyExchangeRates_Error_RemoteSource" xml:space="preserve">
-    <value>Не удалось получить данные с онлайн источника!\nПроверьте настройки сети и доступ в интернет.</value>
+    <value>Не удалось получить данные с онлайн источника!
+Возможно отсутствуют данные за указанные период, или отсутствует доступ к сети интернет.</value>
   </data>
   <data name="CurrencyExchangeRates_FilterDescription" xml:space="preserve">
     <value>Фильтр по наименованию и коду валюты</value>

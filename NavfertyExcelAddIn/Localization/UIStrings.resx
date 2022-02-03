@@ -130,7 +130,8 @@
     <value>You must select a cell in the table!</value>
   </data>
   <data name="CurrencyExchangeRates_Error_RemoteSource" xml:space="preserve">
-    <value>Failed to get data from online source!\nCheck network settings and internet access.</value>
+    <value>Failed to get data from online source!
+Perhaps there is no data for the specified period, or there is no access to the Internet.</value>
   </data>
   <data name="CurrencyExchangeRates_FilterDescription" xml:space="preserve">
     <value>Filter by currency name and code</value>

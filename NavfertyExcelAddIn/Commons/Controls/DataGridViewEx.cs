@@ -76,7 +76,7 @@ namespace NavfertyExcelAddIn.Commons.Controls
 			base.OnPaint(e);
 
 
-			emptyText = " Fuck you!";
+			//emptyText = " Fuck you!";
 
 			if ((RowCount > 0) || (string.IsNullOrWhiteSpace(emptyText))) return;
 

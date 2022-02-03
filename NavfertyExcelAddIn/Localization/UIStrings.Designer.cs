@@ -97,7 +97,8 @@ namespace NavfertyExcelAddIn.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Failed to get data from online source!\nCheck network settings and internet access..
+        ///   Looks up a localized string similar to Failed to get data from online source!
+        ///Perhaps there is no data for the specified period, or there is no access to the Internet..
         /// </summary>
         internal static string CurrencyExchangeRates_Error_RemoteSource {
             get {
