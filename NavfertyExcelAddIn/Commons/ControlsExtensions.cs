@@ -114,6 +114,16 @@ namespace NavfertyExcelAddIn.Commons
 			_ => StringAlignment.Center,
 		};
 
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static StringFormat ToStringFormat(this ContentAlignment ca)
+		{
+			var sf = new StringFormat()
+			{
+				Alignment = ca.GetAlignment(),
+				LineAlignment = ca.GetLineAlignment()
+			};
+			return sf;
+		}
 
 		#region AttachDelayedFilter
 
@@ -188,8 +198,6 @@ namespace NavfertyExcelAddIn.Commons
 
 
 		#endregion
-
-
 
 	}
 }

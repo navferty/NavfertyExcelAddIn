@@ -3,7 +3,7 @@ using System.ComponentModel;
 using System.Drawing;
 using NavfertyExcelAddIn.Commons;
 
-namespace NavfertyExcelAddIn.WorksheetProtectUnprotect
+namespace NavfertyExcelAddIn.Commons.Controls
 {
 	/// <summary>Used for draw custom 'EmptyText' when list does not contains items</summary>
 	internal class CheckedListBoxEx : System.Windows.Forms.CheckedListBox
@@ -59,20 +59,13 @@ namespace NavfertyExcelAddIn.WorksheetProtectUnprotect
 
 			var rcClient = WinAPI.GetClientRect(this);
 			using (var dc = new WinAPI.DC(this))
+			using (var g = dc.CreateGraphics())
 			{
-				using (var g = dc.CreateGraphics())
-				{
-					g.PageUnit = GraphicsUnit.Pixel;
-					var fmt = new StringFormat()
-					{
-						Alignment = emptyTextAlign.GetAlignment(),
-						LineAlignment = emptyTextAlign.GetLineAlignment()
-					};
-					using (var brText = new SolidBrush(SystemColors.ControlDarkDark))
-					{
-						g.DrawString(emptyText, Font, brText, rcClient, fmt);
-					};
-				}
+				g.PageUnit = GraphicsUnit.Pixel;
+				using (var sf = emptyTextAlign.ToStringFormat())
+				using (var brText = new SolidBrush(SystemColors.ControlDarkDark))
+					g.DrawString(emptyText, Font, brText, rcClient, sf);
+
 			}
 		}
 

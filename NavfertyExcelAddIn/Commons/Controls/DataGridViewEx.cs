@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Drawing;
 using System.Linq;
 using System.Reflection;
 using System.Text;
@@ -13,6 +14,10 @@ namespace NavfertyExcelAddIn.Commons.Controls
 	/// <summary>DataGridView that do not blick return key</summary>
 	internal class DataGridViewEx : System.Windows.Forms.DataGridView
 	{
+
+		protected string emptyText = string.Empty;
+		protected ContentAlignment emptyTextAlign = ContentAlignment.MiddleCenter;
+
 
 		/// <summary>Like StandardTab but for the Enter key.</summary>
 		[Category("Behavior"), Description("Disable default edit/advance to next row behavior of of the Enter key.")]
@@ -46,5 +51,39 @@ namespace NavfertyExcelAddIn.Commons.Controls
 			return base.ProcessDialogKey(keyData);
 		}
 
+		[Localizable(true)]
+		[DefaultValue("")]
+		[Description("Text than displayed when ListBox does not contains any items")]
+		public string EmptyText
+		{
+			get => emptyText; set { emptyText = value; Invalidate(); }
+		}
+
+		[DefaultValue(ContentAlignment.MiddleCenter)]
+		public virtual ContentAlignment EmptyTextAlign
+		{
+			get => emptyTextAlign;
+			set
+			{
+				if (value == emptyTextAlign) return;
+				emptyTextAlign = value;
+				Invalidate();
+			}
+		}
+
+		protected override void OnPaint(PaintEventArgs e)
+		{
+			base.OnPaint(e);
+
+
+			emptyText = " Fuck you!";
+
+			if ((RowCount > 0) || (string.IsNullOrWhiteSpace(emptyText))) return;
+
+			using (var sf = emptyTextAlign.ToStringFormat())
+			using (Brush brText = new SolidBrush(ForeColor))
+				e.Graphics.DrawString(emptyText, Font, brText, e.ClipRectangle, sf);
+
+		}
 	}
 }
