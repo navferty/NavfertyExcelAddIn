@@ -30,7 +30,7 @@ namespace NavfertyExcelAddIn.WorksheetProtectUnprotect
 				dialogService.ShowError(string.Format(UIStrings.WorkSheetsNotFound, wb.FullName));
 			}
 
-			using (var f = new frmAskWorksheetProtectionPassword(this, wb))
+			using (var f = new frmWorksheetsProtection(this, wb))
 			{
 				if (f.ShowDialog() != DialogResult.OK) return;
 			}

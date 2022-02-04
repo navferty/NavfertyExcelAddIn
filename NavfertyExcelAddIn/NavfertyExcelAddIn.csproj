@@ -303,11 +303,11 @@
     <Compile Include="Commons\Controls\CheckedListBoxEx.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="WorksheetProtectUnprotect\frmAskWorksheetProtectionPassword.cs">
+    <Compile Include="WorksheetProtectUnprotect\frmWorksheetsProtection.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="WorksheetProtectUnprotect\frmAskWorksheetProtectionPassword.Designer.cs">
-      <DependentUpon>frmAskWorksheetProtectionPassword.cs</DependentUpon>
+    <Compile Include="WorksheetProtectUnprotect\frmWorksheetsProtection.Designer.cs">
+      <DependentUpon>frmWorksheetsProtection.cs</DependentUpon>
     </Compile>
     <Compile Include="WorksheetProtectUnprotect\IWsProtectorUnprotector.cs" />
     <Compile Include="WorksheetProtectUnprotect\WorksheetRow.cs" />
@@ -482,8 +482,8 @@
       <LastGenOutput>RibbonIcons.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="WorksheetProtectUnprotect\frmAskWorksheetProtectionPassword.resx">
-      <DependentUpon>frmAskWorksheetProtectionPassword.cs</DependentUpon>
+    <EmbeddedResource Include="WorksheetProtectUnprotect\frmWorksheetsProtection.resx">
+      <DependentUpon>frmWorksheetsProtection.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

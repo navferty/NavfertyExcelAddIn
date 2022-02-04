@@ -12,7 +12,7 @@ using NavfertyExcelAddIn.Localization;
 
 namespace NavfertyExcelAddIn.WorksheetProtectUnprotect
 {
-	public partial class frmAskWorksheetProtectionPassword : Form
+	internal partial class frmWorksheetsProtection : Commons.Controls.FormEx
 	{
 
 		private Microsoft.Office.Interop.Excel.Application App => Globals.ThisAddIn.Application;
@@ -22,12 +22,12 @@ namespace NavfertyExcelAddIn.WorksheetProtectUnprotect
 
 		private Sheets GetSheets() => wb.Worksheets;
 
-		public frmAskWorksheetProtectionPassword()
+		public frmWorksheetsProtection()
 		{
 			InitializeComponent();
 		}
 
-		public frmAskWorksheetProtectionPassword(WsProtectorUnprotector Creator, Workbook wb) : this()
+		public frmWorksheetsProtection(WsProtectorUnprotector Creator, Workbook wb) : this()
 		{
 			this.creator = Creator;
 			this.wb = wb;

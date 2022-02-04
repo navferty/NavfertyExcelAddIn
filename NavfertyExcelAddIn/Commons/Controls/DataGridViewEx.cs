@@ -17,7 +17,6 @@ namespace NavfertyExcelAddIn.Commons.Controls
 		protected string emptyText = string.Empty;
 		protected ContentAlignment emptyTextAlign = ContentAlignment.MiddleCenter;
 
-
 		public DataGridViewEx() : base()
 		{
 			SetStyle(

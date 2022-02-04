@@ -2,7 +2,7 @@
 
 namespace NavfertyExcelAddIn.WorksheetProtectUnprotect
 {
-	partial class frmAskWorksheetProtectionPassword
+	partial class frmWorksheetsProtection
 	{
 		/// <summary>
 		/// Required designer variable.
