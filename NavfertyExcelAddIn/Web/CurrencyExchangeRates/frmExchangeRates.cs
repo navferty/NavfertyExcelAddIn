@@ -110,7 +110,7 @@ namespace NavfertyExcelAddIn.Web.CurrencyExchangeRates
 				if (ratesProvider == null) return;
 
 				dtResult = null;
-				var dtDate = dtpDate.Value;
+				var dtDate = dtpDate.Value.Date;
 				{
 					dtResult = await ratesProvider.GetExchangeRatesForDate(dtDate, wrr =>
 					{
@@ -153,7 +153,8 @@ namespace NavfertyExcelAddIn.Web.CurrencyExchangeRates
 				dtResult = null;
 				gridResult.EmptyText = ex.Message;
 				gridResult.DataSource = null;
-				//creator.dialogService.ShowError(ex.Message);
+
+				ratesProvider.Logger.Error(ex, $"{ratesProvider.GetType()} ({ratesProvider.Title}) ERROR!");
 			}
 			finally
 			{

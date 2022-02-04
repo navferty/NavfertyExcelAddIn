@@ -129,9 +129,16 @@
   <data name="CurrencyExchangeRates_Error_NedAnyCellSelection" xml:space="preserve">
     <value>You must select a cell in the table!</value>
   </data>
-  <data name="CurrencyExchangeRates_Error_RemoteSource" xml:space="preserve">
-    <value>Failed to get data from online source!
-Perhaps there is no data for the specified period, or there is no access to the Internet.</value>
+  <data name="CurrencyExchangeRates_Error_Network" xml:space="preserve">
+    <value>Failed to get data from online source due to network error!</value>
+  </data>
+  <data name="CurrencyExchangeRates_Error_NotAvailYet" xml:space="preserve">
+    <value>{0}, currently does not provide data for {1}!
+
+Please try again later, or specify a different date.</value>
+  </data>
+  <data name="CurrencyExchangeRates_Error_ParseError" xml:space="preserve">
+    <value>Unable to parse data from online source due to data format error!</value>
   </data>
   <data name="CurrencyExchangeRates_FilterDescription" xml:space="preserve">
     <value>Filter by currency name and code</value>

@@ -97,12 +97,31 @@ namespace NavfertyExcelAddIn.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Failed to get data from online source!
-        ///Perhaps there is no data for the specified period, or there is no access to the Internet..
+        ///   Looks up a localized string similar to Failed to get data from online source due to network error!.
         /// </summary>
-        internal static string CurrencyExchangeRates_Error_RemoteSource {
+        internal static string CurrencyExchangeRates_Error_Network {
             get {
-                return ResourceManager.GetString("CurrencyExchangeRates_Error_RemoteSource", resourceCulture);
+                return ResourceManager.GetString("CurrencyExchangeRates_Error_Network", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0}, currently does not provide data for {1}!
+        ///
+        ///Please try again later, or specify a different date..
+        /// </summary>
+        internal static string CurrencyExchangeRates_Error_NotAvailYet {
+            get {
+                return ResourceManager.GetString("CurrencyExchangeRates_Error_NotAvailYet", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Unable to parse data from online source due to data format error!.
+        /// </summary>
+        internal static string CurrencyExchangeRates_Error_ParseError {
+            get {
+                return ResourceManager.GetString("CurrencyExchangeRates_Error_ParseError", resourceCulture);
             }
         }
         

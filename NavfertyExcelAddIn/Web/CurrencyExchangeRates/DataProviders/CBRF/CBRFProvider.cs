@@ -12,6 +12,8 @@ using System.Xml.Linq;
 using NavfertyExcelAddIn.Commons;
 using NavfertyExcelAddIn.Localization;
 
+using NLog;
+
 namespace NavfertyExcelAddIn.Web.CurrencyExchangeRates.Providers
 {
 	internal class CBRFProvider : ExchangeRatesDataProviderBaase
@@ -22,6 +24,9 @@ namespace NavfertyExcelAddIn.Web.CurrencyExchangeRates.Providers
 
 		public override CultureInfo Culture => ci;
 
+		private readonly ILogger logger = LogManager.GetCurrentClassLogger();
+		public override ILogger Logger => logger;
+
 		private DataTable rawDataTable = null;
 		protected override async Task<WebResultRow[]> DownloadWebResultRowsForDate(DateTime dt)
 		{
@@ -29,12 +34,29 @@ namespace NavfertyExcelAddIn.Web.CurrencyExchangeRates.Providers
 			using (var cbr = new Web.CBR.DailyInfoSoapClient())
 			{
 				var dtsResult = await cbr.GetCursOnDateAsync(dt);
-				if (dtsResult == null) throw new Exception("Failed to get remote data with no errors!");
+				if (dtsResult == null)
+				{
+					logger.Error("CBR: await cbr.GetCursOnDateAsync(dt) return NULL with no errors!");
+					throw new Exception(UIStrings.CurrencyExchangeRates_Error_Network);
+				}
 
 				rawDataTable = dtsResult.Tables.Cast<DataTable>().FirstOrDefault();
-				if (rawDataTable == default) throw new Exception("Remote dstaset does not containt Tables!");
-				var rows = rawDataTable.RowsAsEnumerable().Select(row => new WebResultRow(row, dt)).ToArray();
-				return rows;
+				if (rawDataTable == default)
+				{
+					logger.Error("CBR: dstaset does not containt any Tables!");
+					throw new Exception(UIStrings.CurrencyExchangeRates_Error_Network);
+				}
+
+				try
+				{
+					var rows = rawDataTable.RowsAsEnumerable().Select(row => new WebResultRow(row, dt)).ToArray();
+					return rows;
+				}
+				catch (Exception ex)
+				{
+					logger.Error(ex, "CBR: Failed to convert 'CBR.Datatable[0].DataRow' to 'WebResultRow'!");
+					throw new Exception(UIStrings.CurrencyExchangeRates_Error_ParseError);
+				}
 			};
 		}
 	}

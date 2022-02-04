@@ -11,12 +11,16 @@ using NavfertyExcelAddIn.Localization;
 
 using Newtonsoft.Json;
 
+using NLog;
+
 namespace NavfertyExcelAddIn.Web.CurrencyExchangeRates.Providers
 {
 	internal class ECBProvider : ExchangeRatesDataProviderBaase
 	{
 		private const string C_EURO_ISO = "EUR";
 		private const char C_EURO = '€';
+
+
 
 		private static readonly Lazy<CultureInfo> ci = new Lazy<CultureInfo>(() =>
 		{
@@ -27,28 +31,53 @@ namespace NavfertyExcelAddIn.Web.CurrencyExchangeRates.Providers
 
 		public override string Title => UIStrings.CurrencyExchangeRates_Sources_ECB;
 
+		private readonly ILogger logger = LogManager.GetCurrentClassLogger();
+		public override ILogger Logger => logger;
 
-		private string rawXMLString = String.Empty;
-		private NBU.JsonExchangeRatesForDateRecord[] rawJsonRows;
+		private string rawXML = String.Empty;
+		private ECB.ECBExchangeRatesRecord[] rawRows = Array.Empty<ECB.ECBExchangeRatesRecord>();
+		private HttpClient web = new();
 
 		protected override async Task<WebResultRow[]> DownloadWebResultRowsForDate(DateTime dt)
 		{
+			rawXML = String.Empty;
+			rawRows = Array.Empty<ECB.ECBExchangeRatesRecord>();
+
 			//https://sdw-wsrest.ecb.europa.eu/service/data/EXR?startPeriod=2022-02-01&endPeriod=2022-02-01
 			string sDate = dt.ToString("yyyy-MM-dd");
 			var urlECBExchangeForDate = @$"https://sdw-wsrest.ecb.europa.eu/service/data/EXR?startPeriod={sDate}&endPeriod={sDate}";
-			Debug.WriteLine(urlECBExchangeForDate);
+			logger.Debug($"ECB: ExchangeRates query url: {urlECBExchangeForDate}");
 
-			using (var htc = new HttpClient())
+			rawXML = await (await web.GetAsync(urlECBExchangeForDate)).
+				EnsureSuccessStatusCode().
+				Content.ReadAsStringAsync();
+
+			if (string.IsNullOrWhiteSpace(rawXML))
 			{
-				var rawECBString = await (await htc.GetAsync(urlECBExchangeForDate)).
-					EnsureSuccessStatusCode().
-					Content.ReadAsStringAsync();
+				logger.Error("ECB: web service answer xml = null!");
+				throw new Exception(UIStrings.CurrencyExchangeRates_Error_Network);
+			}
 
-				if (string.IsNullOrWhiteSpace(rawECBString)) throw new Exception("Нет данных на указанную дату");
+			try
+			{
+				rawRows = ParseECBXml(rawXML);
+			}
+			catch (Exception ex)
+			{
+				logger.Error(ex, $"ECB: Failed to parse xml:\n{rawXML}");
+				throw new Exception(UIStrings.CurrencyExchangeRates_Error_ParseError);
+			}
 
+			try
+			{
+				return rawRows.Select(row => new WebResultRow(row)).ToArray();
+			}
+			catch (Exception ex)
+			{
+				logger.Error(ex, "ECB: Failed to convert 'ECBExchangeRatesRecord' to 'WebResultRow'!");
 
-				var rows = ParseECBXml(rawECBString);
-				return rows.Select(row => new WebResultRow(row)).ToArray();
+				throw new Exception(UIStrings.CurrencyExchangeRates_Error_ParseError);
+
 			}
 		}
 

@@ -129,9 +129,16 @@
   <data name="CurrencyExchangeRates_Error_NedAnyCellSelection" xml:space="preserve">
     <value>Необходимо выбрать ячейку в таблице!</value>
   </data>
-  <data name="CurrencyExchangeRates_Error_RemoteSource" xml:space="preserve">
-    <value>Не удалось получить данные с онлайн источника!
-Возможно отсутствуют данные за указанные период, или отсутствует доступ к сети интернет.</value>
+  <data name="CurrencyExchangeRates_Error_Network" xml:space="preserve">
+    <value>Не удалось получить данные с онлайн источника из-за сетевой ошибки!</value>
+  </data>
+  <data name="CurrencyExchangeRates_Error_NotAvailYet" xml:space="preserve">
+    <value>{0}, на данный момент, не предоставляет данных за {1}!
+
+Попробуйте повторить запрос позже, или укажите другую дату.</value>
+  </data>
+  <data name="CurrencyExchangeRates_Error_ParseError" xml:space="preserve">
+    <value>Не удалось разобрать данные с онлайн источника из-за ошибки в формате данных!</value>
   </data>
   <data name="CurrencyExchangeRates_FilterDescription" xml:space="preserve">
     <value>Фильтр по наименованию и коду валюты</value>
