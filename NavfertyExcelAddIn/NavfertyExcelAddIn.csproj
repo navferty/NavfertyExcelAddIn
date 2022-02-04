@@ -237,7 +237,6 @@
   <ItemGroup>
     <Compile Include="Commons\FileExtensionFilter.cs" />
     <Compile Include="Commons\RangeExtensions.cs" />
-    <Compile Include="Commons\StringExtensions.cs" />
     <Compile Include="Connected Services\Web.CBR\Reference.cs" />
     <Compile Include="FindFormulaErrors\CVErrEnum.cs" />
     <Compile Include="DataValidation\CellsValueValidator.cs" />
@@ -327,7 +326,6 @@
     <Compile Include="InteractiveRangeReport\InteractiveRangeReportForm.Designer.cs">
       <DependentUpon>InteractiveRangeReportForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Commons\EnumExtensions.cs" />
     <Compile Include="FindFormulaErrors\ErrorFinder.cs" />
     <Compile Include="FindFormulaErrors\IErrorFinder.cs" />
     <Compile Include="Commons\ExceptionLogger.cs" />

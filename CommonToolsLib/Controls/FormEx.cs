@@ -9,7 +9,6 @@ namespace NavfertyCommon.Controls
 		public FormEx() : base()
 		{
 			base.KeyPreview = true;
-			//this.KeyDown += (s, e) => { if (e.KeyCode == Keys.Escape) this.DialogResult = DialogResult.Cancel; };
 			this.CloseByESC = true;
 		}
 
@@ -19,7 +18,7 @@ namespace NavfertyCommon.Controls
 
 		/// <summary>Close form by pressing ESC key</summary>
 		[DefaultValue(true)]
-		public bool CloseByESC = true;
+		public bool CloseByESC { get; set; } = true;
 
 		protected override void OnKeyDown(KeyEventArgs e)
 		{

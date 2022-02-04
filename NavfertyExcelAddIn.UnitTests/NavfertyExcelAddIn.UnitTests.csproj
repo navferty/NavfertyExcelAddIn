@@ -129,6 +129,10 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\CommonToolsLib\CommonToolsLib.csproj">
+      <Project>{f14665a1-a035-4c8e-845e-f00029c8181a}</Project>
+      <Name>CommonToolsLib</Name>
+    </ProjectReference>
     <ProjectReference Include="..\NavfertyExcelAddIn\NavfertyExcelAddIn.csproj">
       <Project>{DEF56C38-95B1-4CFC-8B27-70FEA7A35D78}</Project>
       <Name>NavfertyExcelAddIn</Name>

@@ -3,6 +3,8 @@ using System.Text;
 
 using Microsoft.Office.Interop.Excel;
 
+using NavfertyCommon;
+
 using NavfertyExcelAddIn.Commons;
 
 namespace NavfertyExcelAddIn.WorksheetCellsEditing

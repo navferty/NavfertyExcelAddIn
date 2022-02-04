@@ -1,8 +1,7 @@
 ﻿using System.Globalization;
-using System.Linq;
 using System.Text.RegularExpressions;
 
-using NavfertyExcelAddIn.Commons;
+using NavfertyCommon;
 
 namespace NavfertyExcelAddIn.ParseNumerics
 {

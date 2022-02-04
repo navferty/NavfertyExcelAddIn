@@ -39,7 +39,7 @@ namespace NavfertyCommon.Controls
 			return base.IsInputKey(keyData);
 		}
 
-		private static MethodInfo _Control_ProcessDialogKey = typeof(Control).GetMethod("ProcessDialogKey", BindingFlags.Instance | BindingFlags.NonPublic);
+		private static readonly MethodInfo _Control_ProcessDialogKey = typeof(Control).GetMethod("ProcessDialogKey", BindingFlags.Instance | BindingFlags.NonPublic);
 
 		protected override bool ProcessDialogKey(Keys keyData)
 		{

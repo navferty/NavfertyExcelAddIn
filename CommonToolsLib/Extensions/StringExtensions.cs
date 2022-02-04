@@ -2,13 +2,11 @@
 using System.Runtime.CompilerServices;
 using System.Text.RegularExpressions;
 
-using NLog;
-
-namespace NavfertyExcelAddIn.Commons
+namespace NavfertyCommon
 {
 	public static class StringExtensions
 	{
-		private static readonly ILogger logger = LogManager.GetCurrentClassLogger();
+		//private static readonly ILogger logger = LogManager.GetCurrentClassLogger();
 		private static readonly Regex spacesRegex = new Regex("\\s+", RegexOptions.None);
 
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
