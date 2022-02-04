@@ -112,7 +112,7 @@ namespace NavfertyExcelAddIn.Web.CurrencyExchangeRates
 				dtResult = null;
 				var dtDate = dtpDate.Value;
 				{
-					dtResult = await ratesProvider.GetExchabgeRatesForDate(dtDate, wrr =>
+					dtResult = await ratesProvider.GetExchangeRatesForDate(dtDate, wrr =>
 					{
 						var bIsVIPCurrency = vipCurrencies.TryGetValue(wrr.ISOCode, out uint iPriorityFound);
 						return bIsVIPCurrency

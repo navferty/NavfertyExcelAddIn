@@ -24,7 +24,7 @@ namespace NavfertyExcelAddIn.Web.CurrencyExchangeRates.Providers
 			}
 		}
 
-		public async Task<CurrencyExchangeRatesDataset.ExchangeRatesDataTable> GetExchabgeRatesForDate(DateTime dt, Func<WebResultRow, uint?> cbGetCurrencyPriority)
+		public async Task<CurrencyExchangeRatesDataset.ExchangeRatesDataTable> GetExchangeRatesForDate(DateTime dt, Func<WebResultRow, uint?> cbGetCurrencyPriority)
 		{
 			try
 			{
