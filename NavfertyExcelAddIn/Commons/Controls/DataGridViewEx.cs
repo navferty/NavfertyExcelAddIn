@@ -10,7 +10,6 @@ using System.Windows.Forms;
 
 namespace NavfertyExcelAddIn.Commons.Controls
 {
-
 	/// <summary>DataGridView that do not blick return key</summary>
 	internal class DataGridViewEx : System.Windows.Forms.DataGridView
 	{
@@ -18,6 +17,16 @@ namespace NavfertyExcelAddIn.Commons.Controls
 		protected string emptyText = string.Empty;
 		protected ContentAlignment emptyTextAlign = ContentAlignment.MiddleCenter;
 
+
+		public DataGridViewEx() : base()
+		{
+			SetStyle(
+				ControlStyles.ResizeRedraw
+				| ControlStyles.AllPaintingInWmPaint
+				| ControlStyles.DoubleBuffer
+				| ControlStyles.OptimizedDoubleBuffer
+				, true);
+		}
 
 		/// <summary>Like StandardTab but for the Enter key.</summary>
 		[Category("Behavior"), Description("Disable default edit/advance to next row behavior of of the Enter key.")]
@@ -71,19 +80,27 @@ namespace NavfertyExcelAddIn.Commons.Controls
 			}
 		}
 
+		protected override void OnPaintBackground(PaintEventArgs e)
+		{
+			base.OnPaintBackground(e);
+
+			Graphics g = e.Graphics;
+			g.Clear(BackgroundColor);
+		}
 		protected override void OnPaint(PaintEventArgs e)
 		{
 			base.OnPaint(e);
-
-
-			//emptyText = " Fuck you!";
-
 			if ((RowCount > 0) || (string.IsNullOrWhiteSpace(emptyText))) return;
+
+			Graphics g = e.Graphics;
+
+
+			g.SetClip(ClientRectangle);
+			g.Clear(BackgroundColor);
 
 			using (var sf = emptyTextAlign.ToStringFormat())
 			using (Brush brText = new SolidBrush(ForeColor))
-				e.Graphics.DrawString(emptyText, Font, brText, e.ClipRectangle, sf);
-
+				g.DrawString(emptyText, Font, brText, ClientRectangle, sf);
 		}
 	}
 }
