@@ -1,23 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
-using System.Linq;
-using System.Reflection;
 using System.Runtime.CompilerServices;
-using System.Runtime.InteropServices;
 using System.Windows.Forms;
 
-using Microsoft.Office.Core;
 
-using NavfertyExcelAddIn.Localization;
-
-using Application = Microsoft.Office.Interop.Excel.Application;
-
-namespace NavfertyExcelAddIn.Commons
+namespace NavfertyCommon
 {
 	[DebuggerStepThrough]
-	internal static class ControlsExtensions
+	public static class ControlsExtensions
 	{
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void SetVistaCueBanner(this TextBox ctl, string BannerText = null)

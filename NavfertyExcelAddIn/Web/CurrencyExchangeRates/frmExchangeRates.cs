@@ -3,20 +3,19 @@ using System.Collections.Generic;
 using System.Data;
 using System.Diagnostics;
 using System.Linq;
-using System.Reflection;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
 using Microsoft.Office.Interop.Excel;
 
+using NavfertyCommon;
+
 using NavfertyExcelAddIn.Commons;
 using NavfertyExcelAddIn.Localization;
 
-using DataTable = System.Data.DataTable;
-
 namespace NavfertyExcelAddIn.Web.CurrencyExchangeRates
 {
-	internal partial class frmExchangeRates : Commons.Controls.FormEx
+	internal partial class frmExchangeRates : NavfertyCommon.Controls.FormEx
 	{
 		private Microsoft.Office.Interop.Excel.Application App => Globals.ThisAddIn.Application;
 

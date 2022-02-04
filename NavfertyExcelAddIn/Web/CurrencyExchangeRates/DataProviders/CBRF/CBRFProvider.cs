@@ -1,15 +1,11 @@
 ﻿using System;
 using System.Data;
-using System.Diagnostics;
-using System.Dynamic;
 using System.Globalization;
 using System.Linq;
-using System.Net.Http;
 using System.Threading.Tasks;
-using System.Xml;
-using System.Xml.Linq;
 
-using NavfertyExcelAddIn.Commons;
+using NavfertyCommon;
+
 using NavfertyExcelAddIn.Localization;
 
 using NLog;

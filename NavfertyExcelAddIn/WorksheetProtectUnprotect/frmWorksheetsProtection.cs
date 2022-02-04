@@ -1,18 +1,18 @@
 ﻿using System;
 using System.Data;
 using System.Drawing;
-using System.Windows.Forms;
 using System.Linq;
+using System.Windows.Forms;
 
 using Microsoft.Office.Interop.Excel;
 
-using NavfertyExcelAddIn.Commons;
-using NavfertyExcelAddIn.Localization;
+using NavfertyCommon;
 
+using NavfertyExcelAddIn.Localization;
 
 namespace NavfertyExcelAddIn.WorksheetProtectUnprotect
 {
-	internal partial class frmWorksheetsProtection : Commons.Controls.FormEx
+	internal partial class frmWorksheetsProtection : NavfertyCommon.Controls.FormEx
 	{
 
 		private Microsoft.Office.Interop.Excel.Application App => Globals.ThisAddIn.Application;

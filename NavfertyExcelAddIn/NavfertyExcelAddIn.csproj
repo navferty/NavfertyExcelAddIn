@@ -235,18 +235,9 @@
     can be found.
   -->
   <ItemGroup>
-    <Compile Include="Commons\ControlsExtensions.cs" />
-    <Compile Include="Commons\Controls\FormEx.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Commons\Controls\DataGridViewEx.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Commons\DataExtensions.cs" />
     <Compile Include="Commons\FileExtensionFilter.cs" />
     <Compile Include="Commons\RangeExtensions.cs" />
     <Compile Include="Commons\StringExtensions.cs" />
-    <Compile Include="Commons\WinAPI\WinAPI.cs" />
     <Compile Include="Connected Services\Web.CBR\Reference.cs" />
     <Compile Include="FindFormulaErrors\CVErrEnum.cs" />
     <Compile Include="DataValidation\CellsValueValidator.cs" />
@@ -300,9 +291,6 @@
     <Compile Include="Web\CurrencyExchangeRates\ICurrencyExchangeRates.cs" />
     <Compile Include="WorksheetCellsEditing\ConditionalFormatFixer.cs" />
     <Compile Include="WorksheetCellsEditing\IConditionalFormatFixer.cs" />
-    <Compile Include="Commons\Controls\CheckedListBoxEx.cs">
-      <SubType>Component</SubType>
-    </Compile>
     <Compile Include="WorksheetProtectUnprotect\frmWorksheetsProtection.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -491,6 +479,12 @@
   </ItemGroup>
   <ItemGroup>
     <WCFMetadataStorage Include="Connected Services\Web.CBR\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CommonToolsLib\CommonToolsLib.csproj">
+      <Project>{f14665a1-a035-4c8e-845e-f00029c8181a}</Project>
+      <Name>CommonToolsLib</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup />
   <PropertyGroup>

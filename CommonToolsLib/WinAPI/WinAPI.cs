@@ -1,17 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Diagnostics;
 using System.Drawing;
-using System.Linq;
 using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 using Microsoft.Win32.SafeHandles;
 
-namespace NavfertyExcelAddIn.Commons
+namespace NavfertyCommon
 {
 	internal static class WinAPI
 	{

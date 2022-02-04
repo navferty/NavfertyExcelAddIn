@@ -1,17 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
+﻿using System.ComponentModel;
 using System.Drawing;
-using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace NavfertyExcelAddIn.Commons.Controls
+
+namespace NavfertyCommon.Controls
 {
 	/// <summary>DataGridView that do not blick return key</summary>
-	internal class DataGridViewEx : System.Windows.Forms.DataGridView
+	public class DataGridViewEx : System.Windows.Forms.DataGridView
 	{
 
 		protected string emptyText = string.Empty;
