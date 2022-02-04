@@ -57,32 +57,12 @@ namespace NavfertyExcelAddIn.Web.CurrencyExchangeRates.Providers
 			var doc = new XmlDocument();
 			doc.LoadXml(xmlText);
 
-			var ChildNodesAsAttributes = new Func<XmlNode, Dictionary<string, string>>(node =>
-			{
-				var attrsList = node.ChildNodes.Cast<XmlElement>().ToArray();
-				var dic = attrsList
-				.Where(attr => (attr.Attributes.Count == 1 || attr.Attributes.Count == 2))
-				.Select(attr =>
-				{
-					var nodeAttributes = attr.Attributes.Cast<XmlAttribute>().ToArray();
-					string Key = attr.LocalName;
-					string Vaue = nodeAttributes[0].Value;
-
-					if (nodeAttributes.Length == 2)
-					{
-						Key = nodeAttributes[0].Value;
-						Vaue = nodeAttributes[1].Value;
-					}
-					return new { Key, Vaue };
-				}).ToArray().ToDictionary(x => x.Key, x => x.Vaue);
-
-				return dic;
-			});
-
-			var xSeriesKeys = doc.GetElementsByTagName("generic:Series").Cast<XmlElement>().ToArray();
-			var rawRows = xSeriesKeys
-				.Select(nodeSeries => new ECB.ECBExchangeRatesRecord(nodeSeries))
-				.Where(x => x.CurrencyDenom == C_EURO_ISO)
+			//Get all xml nodes with <generic:Series> tag.
+			//This tag is about some asset exchange rate. Not only money!
+			var seriesTags = doc.GetElementsByTagName("generic:Series").Cast<XmlElement>().ToArray();
+			var rawRows = seriesTags
+				.Select(tagSeries => new ECB.ECBExchangeRatesRecord(tagSeries))
+				.Where(x => x.CurrencyDenom == C_EURO_ISO)//Select only rates related to Euro ('EUR'). Full list contains many other asset exchange rates.
 				.ToArray();
 
 			return rawRows;
