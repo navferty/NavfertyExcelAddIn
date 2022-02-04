@@ -13,6 +13,8 @@ using Autofac;
 using Microsoft.Office.Core;
 using Microsoft.Office.Interop.Excel;
 
+using NavfertyCommon;
+
 using NavfertyExcelAddIn.Commons;
 using NavfertyExcelAddIn.DataValidation;
 using NavfertyExcelAddIn.FindFormulaErrors;

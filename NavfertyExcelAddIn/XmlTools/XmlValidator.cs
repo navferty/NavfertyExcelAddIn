@@ -4,7 +4,8 @@ using System.Linq;
 
 using Microsoft.Office.Interop.Excel;
 
-using NavfertyExcelAddIn.Commons;
+using NavfertyCommon;
+
 using NavfertyExcelAddIn.Localization;
 
 using NLog;

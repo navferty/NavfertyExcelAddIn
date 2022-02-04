@@ -6,6 +6,8 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 using Moq;
 
+using NavfertyCommon;
+
 using NavfertyExcelAddIn.Commons;
 using NavfertyExcelAddIn.UnitTests.Builders;
 using NavfertyExcelAddIn.XmlTools;

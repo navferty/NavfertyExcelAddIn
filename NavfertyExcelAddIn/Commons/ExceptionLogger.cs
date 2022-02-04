@@ -3,6 +3,8 @@ using System.Diagnostics;
 
 using Castle.DynamicProxy;
 
+using NavfertyCommon;
+
 using NavfertyExcelAddIn.Localization;
 
 using NLog;

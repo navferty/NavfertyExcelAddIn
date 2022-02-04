@@ -54,6 +54,7 @@
     <Compile Include="Extensions\DataExtensions.cs" />
     <Compile Include="Extensions\EnumExtensions.cs" />
     <Compile Include="Extensions\StringExtensions.cs" />
+    <Compile Include="Interfaces\IDialogService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="WinAPI\WinAPI.cs" />
   </ItemGroup>

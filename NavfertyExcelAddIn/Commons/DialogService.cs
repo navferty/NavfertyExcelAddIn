@@ -6,6 +6,8 @@ using System.Windows.Forms;
 
 using Microsoft.Office.Core;
 
+using NavfertyCommon;
+
 using NavfertyExcelAddIn.Localization;
 
 using Application = Microsoft.Office.Interop.Excel.Application;

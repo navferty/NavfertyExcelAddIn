@@ -1,6 +1,8 @@
 ﻿using Autofac;
 using Autofac.Extras.DynamicProxy;
 
+using NavfertyCommon;
+
 using NavfertyExcelAddIn.Commons;
 using NavfertyExcelAddIn.DataValidation;
 using NavfertyExcelAddIn.FindFormulaErrors;

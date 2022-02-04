@@ -1,10 +1,11 @@
-﻿using System.Windows.Forms;
-
+﻿
 using Microsoft.Office.Interop.Excel;
 
-using NavfertyExcelAddIn.Commons;
+using NavfertyCommon;
+
 using NavfertyExcelAddIn.Localization;
 
+#nullable enable
 
 namespace NavfertyExcelAddIn.Web.CurrencyExchangeRates
 {
@@ -26,10 +27,10 @@ namespace NavfertyExcelAddIn.Web.CurrencyExchangeRates
 				return;
 			}
 
-			using (var f = new frmExchangeRates(this, wb))
-			{
-				if (f.ShowDialog() != DialogResult.OK) return;
-			};
+			var rslt = frmExchangeRates.SelectExchageRates(dialogService);
+			if (rslt == null) return;
+			var exchangeRate = rslt.CursFor1Unit;
+			sel.Value = exchangeRate;
 		}
 	}
 }

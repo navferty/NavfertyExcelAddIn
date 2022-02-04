@@ -5,7 +5,7 @@ using System.Xml;
 
 using Microsoft.Xml.XMLGen;
 
-using NavfertyExcelAddIn.Commons;
+using NavfertyCommon;
 
 using NLog;
 

@@ -319,7 +319,6 @@
     <Compile Include="WorksheetCellsEditing\CellsUnmerger.cs" />
     <Compile Include="Commons\DialogService.cs" />
     <Compile Include="Commons\EnumerableExtensions.cs" />
-    <Compile Include="Commons\IDialogService.cs" />
     <Compile Include="InteractiveRangeReport\InteractiveRangeReportForm.cs">
       <SubType>Form</SubType>
     </Compile>

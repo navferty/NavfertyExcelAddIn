@@ -1,25 +1,27 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Data;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-using Microsoft.Office.Interop.Excel;
-
 using NavfertyCommon;
 
+using NavfertyExcelAddIn.Commons;
 using NavfertyExcelAddIn.Localization;
+
+#nullable enable
 
 namespace NavfertyExcelAddIn.Web.CurrencyExchangeRates
 {
 	internal partial class frmExchangeRates : NavfertyCommon.Controls.FormEx
 	{
-		private Microsoft.Office.Interop.Excel.Application App => Globals.ThisAddIn.Application;
+		//private Microsoft.Office.Interop.Excel.Application App => Globals.ThisAddIn.Application;
 
-		private readonly CurrencyExchangeRatesBuilder creator = null;
-		private readonly Workbook wb = null;
+		private readonly IDialogService dialogService;
+		//private readonly Workbook wb = null;
 
 		private static readonly Dictionary<string, uint> vipCurrencies = new()
 		{
@@ -45,15 +47,17 @@ namespace NavfertyExcelAddIn.Web.CurrencyExchangeRates
 		private static int ratesDecimalDigitsCount = 2;
 
 
-
+		/// <summary>Just for designer</summary>
+		[EditorBrowsable(EditorBrowsableState.Never)]
 		public frmExchangeRates()
 		{
 			InitializeComponent();
 		}
-		public frmExchangeRates(CurrencyExchangeRatesBuilder Creator, Workbook wb) : this()
+
+		private frmExchangeRates(IDialogService ds) : this()
 		{
-			this.creator = Creator;
-			this.wb = wb;
+			dialogService = ds;
+			//this.wb = wb;
 		}
 
 		private void Form_Load(object sender, EventArgs e)
@@ -247,33 +251,35 @@ namespace NavfertyExcelAddIn.Web.CurrencyExchangeRates
 			{
 				if (!btnPasteResult.Enabled) return;
 
-				Range? sel = App.Selection;
-				if (null == sel || sel.Cells == null || sel.Cells.Count < 1)
-				{
-					creator.dialogService.ShowError(UIStrings.CurrencyExchangeRates_Error_NedAnyCellSelection);
-					return;
-				}
 
 				var selRows = gridResult.SelectedRowsAsEnumerable();
 				if (selRows.Count() != 1)
 				{
-					creator.dialogService.ShowError(UIStrings.CurrencyExchangeRates_Error_CanSelectOnlyOneRow);
+					dialogService.ShowError(UIStrings.CurrencyExchangeRates_Error_CanSelectOnlyOneRow);
 					return;
 				}
 
 				var selRow = selRows.First();
 				var err = ((selRow.DataBoundItem as DataRowView).Row as CurrencyExchangeRatesDataset.ExchangeRatesRow);
-				var wrr = err.Raw as WebResultRow;
-				var exchangeRate = wrr.CursFor1Unit;
-
-				sel.Value = exchangeRate;
-
+				this.SelectedExchangeRate = err.Raw as WebResultRow;
+				//var exchangeRate = wrr.CursFor1Unit;
 				DialogResult = DialogResult.OK;
 			}
 			catch (Exception ex)
 			{
-				creator.dialogService.ShowError(ex.Message);
+				dialogService.ShowError(ex.Message);
 			}
+		}
+
+		private WebResultRow? SelectedExchangeRate = null;
+
+		public static WebResultRow? SelectExchageRates(IDialogService dialogService)
+		{
+			using (var f = new frmExchangeRates(dialogService))
+			{
+				if (f.ShowDialog() != DialogResult.OK) return null;
+				return f.SelectedExchangeRate;
+			};
 		}
 	}
 }

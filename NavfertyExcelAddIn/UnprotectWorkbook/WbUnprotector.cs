@@ -5,7 +5,8 @@ using System.Linq;
 using System.Text;
 using System.Xml;
 
-using NavfertyExcelAddIn.Commons;
+using NavfertyCommon;
+
 using NavfertyExcelAddIn.Localization;
 
 namespace NavfertyExcelAddIn.UnprotectWorkbook

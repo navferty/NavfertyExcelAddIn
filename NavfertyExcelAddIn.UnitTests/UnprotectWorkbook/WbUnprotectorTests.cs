@@ -6,7 +6,8 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 using Moq;
 
-using NavfertyExcelAddIn.Commons;
+using NavfertyCommon;
+
 using NavfertyExcelAddIn.UnprotectWorkbook;
 
 using Range = Microsoft.Office.Interop.Excel.Range;
