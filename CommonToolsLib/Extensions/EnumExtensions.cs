@@ -4,6 +4,8 @@ using System.Diagnostics;
 using System.Linq;
 using System.Runtime.CompilerServices;
 
+#nullable enable
+
 namespace NavfertyCommon
 {
 	[DebuggerStepThrough]

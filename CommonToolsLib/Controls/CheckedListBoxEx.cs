@@ -2,6 +2,7 @@
 using System.Drawing;
 using System.Windows.Forms;
 
+#nullable enable
 
 namespace NavfertyCommon
 {

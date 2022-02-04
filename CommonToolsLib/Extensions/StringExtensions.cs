@@ -2,6 +2,8 @@
 using System.Runtime.CompilerServices;
 using System.Text.RegularExpressions;
 
+#nullable enable
+
 namespace NavfertyCommon
 {
 	public static class StringExtensions
@@ -10,13 +12,13 @@ namespace NavfertyCommon
 		private static readonly Regex spacesRegex = new Regex("\\s+", RegexOptions.None);
 
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		public static string TrimSpaces(this string value)
+		public static string? TrimSpaces(this string? value)
 		{
 			if (string.IsNullOrWhiteSpace(value))
 				return null;
 
 			// replace any single or multiple space chars with single space
-			var newValue = spacesRegex.Replace(value, " ");
+			var newValue = spacesRegex.Replace(value!, " ");
 
 			newValue = string.IsNullOrEmpty(newValue)
 				? null

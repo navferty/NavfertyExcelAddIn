@@ -5,6 +5,8 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Windows.Forms;
 
+#nullable enable
+
 namespace NavfertyCommon
 {
 	[DebuggerStepThrough]

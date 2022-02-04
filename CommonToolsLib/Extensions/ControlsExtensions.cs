@@ -4,6 +4,7 @@ using System.Drawing;
 using System.Runtime.CompilerServices;
 using System.Windows.Forms;
 
+#nullable enable
 
 namespace NavfertyCommon
 {
@@ -11,7 +12,7 @@ namespace NavfertyCommon
 	public static class ControlsExtensions
 	{
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		public static void SetVistaCueBanner(this TextBox ctl, string BannerText = null)
+		public static void SetVistaCueBanner(this TextBox ctl, string? BannerText = null)
 		{
 			_ = ctl ?? throw new ArgumentNullException(nameof(ctl));
 			ctl.RunWhenHandleReady(tb => WinAPI.SendMessage(
@@ -34,7 +35,7 @@ namespace NavfertyCommon
 			else
 			{
 				//Delay action when handle will be ready...
-				ctl.HandleCreated += (s, e) => HandleReadyAction?.Invoke(s as T);
+				ctl.HandleCreated += (s, e) => HandleReadyAction?.Invoke((T)s);
 			}
 		}
 

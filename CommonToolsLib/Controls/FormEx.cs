@@ -1,6 +1,8 @@
 ﻿using System.ComponentModel;
 using System.Windows.Forms;
 
+#nullable enable
+
 namespace NavfertyCommon.Controls
 {
 	/// <summary>Form than closes by ESC key</summary>

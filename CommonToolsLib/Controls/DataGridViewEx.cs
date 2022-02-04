@@ -3,6 +3,7 @@ using System.Drawing;
 using System.Reflection;
 using System.Windows.Forms;
 
+#nullable enable
 
 namespace NavfertyCommon.Controls
 {

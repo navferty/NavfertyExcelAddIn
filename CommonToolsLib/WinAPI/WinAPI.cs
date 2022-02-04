@@ -6,6 +6,8 @@ using System.Windows.Forms;
 
 using Microsoft.Win32.SafeHandles;
 
+#nullable enable
+
 namespace NavfertyCommon
 {
 	internal static class WinAPI
@@ -23,7 +25,7 @@ namespace NavfertyCommon
 			[In] IntPtr hwnd,
 			[In, MarshalAs(UnmanagedType.I4)] WinAPI.WindowMessages wMsg,
 			[In] int wParam,
-			[In, MarshalAs(UnmanagedType.LPTStr)] string lParam);
+			[In, MarshalAs(UnmanagedType.LPTStr)] string? lParam);
 
 		[DllImport(WINDLL_USER)]
 		private static extern int GetClientRect(
