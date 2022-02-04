@@ -27,8 +27,9 @@ namespace NavfertyExcelAddIn.Web.CurrencyExchangeRates
 				return;
 			}
 
-			var rslt = frmExchangeRates.SelectExchageRates(dialogService);
-			if (rslt == null) return;
+			var rslt = frmExchangeRates.SelectExchageRate(dialogService);
+			if (rslt == null) return;//User cancel
+
 			var exchangeRate = rslt.CursFor1Unit;
 			sel.Value = exchangeRate;
 		}

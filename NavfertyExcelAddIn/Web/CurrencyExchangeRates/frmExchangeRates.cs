@@ -9,7 +9,6 @@ using System.Windows.Forms;
 
 using NavfertyCommon;
 
-using NavfertyExcelAddIn.Commons;
 using NavfertyExcelAddIn.Localization;
 
 #nullable enable
@@ -18,10 +17,7 @@ namespace NavfertyExcelAddIn.Web.CurrencyExchangeRates
 {
 	internal partial class frmExchangeRates : NavfertyCommon.Controls.FormEx
 	{
-		//private Microsoft.Office.Interop.Excel.Application App => Globals.ThisAddIn.Application;
-
-		private readonly IDialogService dialogService;
-		//private readonly Workbook wb = null;
+		private readonly IDialogService? dialogService;
 
 		private static readonly Dictionary<string, uint> vipCurrencies = new()
 		{
@@ -42,10 +38,12 @@ namespace NavfertyExcelAddIn.Web.CurrencyExchangeRates
 			{ GRID_COLUMNS_RATE, UIStrings.CurrencyExchangeRates_GridColumn_Rate }
 		});
 
-		private Providers.ExchangeRatesDataProviderBaase ratesProvider = null;
-		private CurrencyExchangeRatesDataset.ExchangeRatesDataTable dtResult = null;
-		private static int ratesDecimalDigitsCount = 2;
+		private Providers.ExchangeRatesDataProviderBaase? ratesProvider;
+		private CurrencyExchangeRatesDataset.ExchangeRatesDataTable? dtResult;
+		private static int ratesDecimalDigitsCount = 4;
 
+
+		private WebResultRow? SelectedExchangeRate;
 
 		/// <summary>Just for designer</summary>
 		[EditorBrowsable(EditorBrowsableState.Never)]
@@ -57,7 +55,6 @@ namespace NavfertyExcelAddIn.Web.CurrencyExchangeRates
 		private frmExchangeRates(IDialogService ds) : this()
 		{
 			dialogService = ds;
-			//this.wb = wb;
 		}
 
 		private void Form_Load(object sender, EventArgs e)
@@ -126,7 +123,6 @@ namespace NavfertyExcelAddIn.Web.CurrencyExchangeRates
 
 					//Some rows (in Ukrainian NBU) has rates like 0.00000000698  and than all rows in grid looks weird.
 					//To avoid this, we use standart 4 digits float part
-					ratesDecimalDigitsCount = 4;
 				};
 
 				gridResult.DataSource = dtResult;
@@ -255,25 +251,22 @@ namespace NavfertyExcelAddIn.Web.CurrencyExchangeRates
 				var selRows = gridResult.SelectedRowsAsEnumerable();
 				if (selRows.Count() != 1)
 				{
-					dialogService.ShowError(UIStrings.CurrencyExchangeRates_Error_CanSelectOnlyOneRow);
+					dialogService?.ShowError(UIStrings.CurrencyExchangeRates_Error_CanSelectOnlyOneRow);
 					return;
 				}
 
 				var selRow = selRows.First();
-				var err = ((selRow.DataBoundItem as DataRowView).Row as CurrencyExchangeRatesDataset.ExchangeRatesRow);
-				this.SelectedExchangeRate = err.Raw as WebResultRow;
-				//var exchangeRate = wrr.CursFor1Unit;
+				var err = ((selRow.DataBoundItem as DataRowView)!.Row as CurrencyExchangeRatesDataset.ExchangeRatesRow);
+				this.SelectedExchangeRate = err!.Raw as WebResultRow;
 				DialogResult = DialogResult.OK;
 			}
 			catch (Exception ex)
 			{
-				dialogService.ShowError(ex.Message);
+				dialogService?.ShowError(ex.Message);
 			}
 		}
 
-		private WebResultRow? SelectedExchangeRate = null;
-
-		public static WebResultRow? SelectExchageRates(IDialogService dialogService)
+		public static WebResultRow? SelectExchageRate(IDialogService dialogService)
 		{
 			using (var f = new frmExchangeRates(dialogService))
 			{
