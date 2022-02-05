@@ -54,7 +54,7 @@ namespace Navferty.ExcelAddIn.Web.CurrencyExchangeRates.Providers
 					Title,
 					dt.ToLongDateString());
 
-				Logger.Debug($"1st web request for '{dt}' failed, but 2-nd web request for '{dtPrevDay}' finished good! Looks like web source does not yet provide data for '{dt}'!");
+				Logger.Debug($"1st web request for '{dt:yyyy-MM-dd}' failed, but 2-nd web request for '{dtPrevDay:yyyy-MM-dd}' finished good! Looks like web source does not yet provide data for '{dt:yyyy-MM-dd}'!");
 				throw new Exception(sErr);
 			}
 
@@ -90,8 +90,7 @@ namespace Navferty.ExcelAddIn.Web.CurrencyExchangeRates.Providers
 
 		private async Task<WebResult> TryGetExchangeRatesForDate(DateTime dt, int nTry)
 		{
-			string sDate = dt.ToString("yyyy-MM-dd");
-			Logger.Debug($"Starting Web query attempt #{nTry}, Date: '{sDate}'...");
+			Logger.Debug($"Starting Web query attempt #{nTry}, Date: '{dt:yyyy-MM-dd}'...");
 			var sw = new Stopwatch();
 			try
 			{

@@ -32,9 +32,6 @@ namespace NavfertyExcelAddIn.Web
 
 			var exchangeRate = rslt.CursFor1Unit;
 			sel.Value = exchangeRate;
-
-
-			//			var weeee = Navferty.ExcelAddIn.Web.CurrencyExchangeRates.Providers.NBU.JsonExchangeRatesForDateRecord();
 		}
 	}
 }

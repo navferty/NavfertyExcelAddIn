@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Globalization;
@@ -123,12 +124,12 @@ namespace Navferty.ExcelAddIn.Web.CurrencyExchangeRates
 			*/
 		}
 
-		internal static CurrencyExchangeRatesDataset.ExchangeRatesDataTable ToDataTable(ExchangeRateRecord[] webRows)
+		internal static CurrencyExchangeRatesDataset.ExchangeRatesDataTable ToDataTable(IEnumerable<ExchangeRateRecord> webRows)
 		{
 			//Sort rows
 			webRows = (from r in webRows
 					   orderby r.PriorityInGrid ascending, r.Name ascending
-					   select r).ToArray();
+					   select r);
 
 			CurrencyExchangeRatesDataset.ExchangeRatesDataTable dtResult = new();
 			webRows.ToList().ForEach(wrr =>
