@@ -120,9 +120,6 @@
   <data name="Address" xml:space="preserve">
     <value>Range Address</value>
   </data>
-  <data name="CannotUnlockPleaseSaveAsXml" xml:space="preserve">
-    <value>Cannot unlock workbook contents because of wrong workbook format. Please save workbook as xlsx or xlsm and try again</value>
-  </data>
   <data name="CurrencyExchangeRates_Error_CanSelectOnlyOneRow" xml:space="preserve">
     <value>You can select only one row to insert!</value>
   </data>
@@ -182,85 +179,13 @@ Please try again later, or specify a different date.</value>
   <data name="ErrorMessage" xml:space="preserve">
     <value>Error occured: {0}</value>
   </data>
-  <data name="Formula" xml:space="preserve">
-    <value>Formula</value>
-  </data>
   <data name="Info" xml:space="preserve">
     <value>Info</value>
-  </data>
-  <data name="NoErrors" xml:space="preserve">
-    <value>Found no errors in range {0}</value>
-  </data>
-  <data name="NoMatchingWorkSheets" xml:space="preserve">
-    <value>No matching sheets in the workbook</value>
-  </data>
-  <data name="SearchResults" xml:space="preserve">
-    <value>Search Results</value>
-  </data>
-  <data name="SheetProtectionFlag_Contents" xml:space="preserve">
-    <value>contents</value>
-  </data>
-  <data name="SheetProtectionFlag_DrawingObjects" xml:space="preserve">
-    <value>shapes</value>
-  </data>
-  <data name="SheetProtectionFlag_Scenarios" xml:space="preserve">
-    <value>scenarios</value>
-  </data>
-  <data name="SheetProtectionFlag_UI" xml:space="preserve">
-    <value>user interface</value>
-  </data>
-  <data name="SheetProtection_Clear" xml:space="preserve">
-    <value>Clear</value>
-  </data>
-  <data name="SheetProtection_Execute" xml:space="preserve">
-    <value>Execute</value>
-  </data>
-  <data name="SheetProtection_Password" xml:space="preserve">
-    <value>Password:</value>
-  </data>
-  <data name="SheetProtection_PasswordBanner" xml:space="preserve">
-    <value>Enter password for worksheets (not required)...</value>
-  </data>
-  <data name="SheetProtection_Protected" xml:space="preserve">
-    <value>Protected</value>
-  </data>
-  <data name="SheetProtection_ProtectionForSheets" xml:space="preserve">
-    <value>protection for sheets:</value>
-  </data>
-  <data name="SheetProtection_Set" xml:space="preserve">
-    <value>Set</value>
-  </data>
-  <data name="ShowVersionMessage" xml:space="preserve">
-    <value>Navferty Excle add-in. Published under MIT licence. Version </value>
-  </data>
-  <data name="SuccessfullyValidatedMessage" xml:space="preserve">
-    <value>Successfully validated, no errors or warnings detected</value>
-  </data>
-  <data name="UnsavedChangesWillBeLostPrompt" xml:space="preserve">
-    <value>Any unsaved changes will be lost. Active workbook may become corrupted. It is strongly recommended to create backup. Continue?</value>
-  </data>
-  <data name="VbaUnprotected" xml:space="preserve">
-    <value>VBA project unprotected. To enable viewing source code go to VBA project properties in VBE editor, tab Protection, set any password and press OK. Then you can disable password by unchecking the option Lock project for viewing.</value>
   </data>
   <data name="Warning" xml:space="preserve">
     <value>Warning!</value>
   </data>
-  <data name="WorkSheetsNotFound" xml:space="preserve">
-    <value>Workbook '{0}' have no worksheets!</value>
-  </data>
   <data name="WsName" xml:space="preserve">
     <value>Worksheet Name</value>
-  </data>
-  <data name="XmlValidationReport_ElementName" xml:space="preserve">
-    <value>Element</value>
-  </data>
-  <data name="XmlValidationReport_Message" xml:space="preserve">
-    <value>Message</value>
-  </data>
-  <data name="XmlValidationReport_Severity" xml:space="preserve">
-    <value>Severity</value>
-  </data>
-  <data name="XmlValidationReport_Value" xml:space="preserve">
-    <value>Value</value>
   </data>
 </root>
