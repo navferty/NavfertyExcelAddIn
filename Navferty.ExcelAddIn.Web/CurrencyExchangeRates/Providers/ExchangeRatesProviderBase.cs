@@ -72,7 +72,7 @@ namespace Navferty.ExcelAddIn.Web.CurrencyExchangeRates.Providers
 			return ExchangeRateRecord.ToDataTable(webRows);
 		}
 
-		private struct WebResult
+		private class WebResult
 		{
 			public readonly ExchangeRateRecord[]? Rows = null;
 			public readonly Exception? Err = null;
