@@ -415,7 +415,7 @@ namespace Navferty.ExcelAddIn.Web.CurrencyExchangeRates
 
 			[global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
 			[global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-			public global::System.Data.DataColumn RawColumn
+			public global::System.Data.DataColumn ExchangeRateRecordColumn
 			{
 				get
 				{
@@ -768,13 +768,13 @@ namespace Navferty.ExcelAddIn.Web.CurrencyExchangeRates
 
 			[global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
 			[global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-			public object Raw
+			public ExchangeRateRecord Raw
 			{
 				get
 				{
 					try
 					{
-						return ((object)(this[this.tableExchangeRates.RawColumn]));
+						return ((ExchangeRateRecord)(this[this.tableExchangeRates.ExchangeRateRecordColumn]));
 					}
 					catch (global::System.InvalidCastException e)
 					{
@@ -783,7 +783,7 @@ namespace Navferty.ExcelAddIn.Web.CurrencyExchangeRates
 				}
 				set
 				{
-					this[this.tableExchangeRates.RawColumn] = value;
+					this[this.tableExchangeRates.ExchangeRateRecordColumn] = value;
 				}
 			}
 
@@ -833,14 +833,14 @@ namespace Navferty.ExcelAddIn.Web.CurrencyExchangeRates
 			[global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
 			public bool IsRawNull()
 			{
-				return this.IsNull(this.tableExchangeRates.RawColumn);
+				return this.IsNull(this.tableExchangeRates.ExchangeRateRecordColumn);
 			}
 
 			[global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
 			[global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
 			public void SetRawNull()
 			{
-				this[this.tableExchangeRates.RawColumn] = global::System.Convert.DBNull;
+				this[this.tableExchangeRates.ExchangeRateRecordColumn] = global::System.Convert.DBNull;
 			}
 		}
 
