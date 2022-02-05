@@ -11,7 +11,7 @@ namespace Navferty.ExcelAddIn.Web.CurrencyExchangeRates
 {
 
 	[TypeConverter(typeof(ExpandableObjectConverter))]
-	public class WebResultRow
+	public class ExchangeRateRecord
 	{
 		public readonly string Name = string.Empty;
 		public readonly string ISOCode = string.Empty;
@@ -25,14 +25,14 @@ namespace Navferty.ExcelAddIn.Web.CurrencyExchangeRates
 		internal uint PriorityInGrid = uint.MaxValue;
 		internal readonly DateTime ValidFrom;
 
-		private WebResultRow() : base()
+		private ExchangeRateRecord() : base()
 		{
 			ValidFrom = DateTime.Now;
 			PriorityInGrid = uint.MaxValue;
 			Units = 1;
 		}
 		/// <summary>Contructor for CBRF record</summary>
-		internal WebResultRow(DataRow row, DateTime dt)
+		internal ExchangeRateRecord(DataRow row, DateTime dt)
 		{
 			//Vname — Название валюты
 			//Vnom — Номинал
@@ -52,7 +52,7 @@ namespace Navferty.ExcelAddIn.Web.CurrencyExchangeRates
 		}
 
 		/// <summary>Constructor for NBU record</summary>
-		internal WebResultRow(Providers.NBU.JsonExchangeRatesForDateRecord nbu) : this()
+		internal ExchangeRateRecord(Providers.NBU.JsonExchangeRatesForDateRecord nbu) : this()
 		{
 			Name = nbu.Name;
 
@@ -69,7 +69,7 @@ namespace Navferty.ExcelAddIn.Web.CurrencyExchangeRates
 		}
 
 		/// <summary>Constructor for NBU record</summary>
-		internal WebResultRow(Providers.ECB.ECBExchangeRatesRecord ecb) : this()
+		internal ExchangeRateRecord(Providers.ECB.ECBExchangeRatesRecord ecb) : this()
 		{
 			Name = ecb.Title;
 
@@ -100,7 +100,7 @@ namespace Navferty.ExcelAddIn.Web.CurrencyExchangeRates
 			? Curs
 			: (Curs / Units);
 
-		public static int GetMaxDecimalDigitsCount(WebResultRow[] wrr)
+		public static int GetMaxDecimalDigitsCount(ExchangeRateRecord[] wrr)
 		{
 			return 4;// some UA NBU records has 8 decimal numbers, and number formatted with this value looks bad!
 			/*			 

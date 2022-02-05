@@ -28,7 +28,7 @@ namespace Navferty.ExcelAddIn.Web.CurrencyExchangeRates.Providers
 		private NBU.JsonExchangeRatesForDateRecord[] rawJsonRows = Array.Empty<NBU.JsonExchangeRatesForDateRecord>();
 		private HttpClient web = new();
 
-		protected override async Task<WebResultRow[]> DownloadWebResultRowsForDate(DateTime dt)
+		protected override async Task<ExchangeRateRecord[]> DownloadWebResultRowsForDate(DateTime dt)
 		{
 			rawJson = String.Empty;
 			rawJsonRows = Array.Empty<NBU.JsonExchangeRatesForDateRecord>();
@@ -57,7 +57,7 @@ namespace Navferty.ExcelAddIn.Web.CurrencyExchangeRates.Providers
 
 			try
 			{
-				var rows = rawJsonRows.Select(row => new WebResultRow(row)).ToArray();
+				var rows = rawJsonRows.Select(row => new ExchangeRateRecord(row)).ToArray();
 				return rows;
 			}
 			catch (Exception ex)

@@ -32,10 +32,10 @@ namespace Navferty.ExcelAddIn.Web.CurrencyExchangeRates.Providers
 
 		public async Task<CurrencyExchangeRatesDataset.ExchangeRatesDataTable> GetExchangeRatesForDate(
 			DateTime dt,
-			Func<WebResultRow, uint?> cbGetCurrencyPriority)
+			Func<ExchangeRateRecord, uint?> cbGetCurrencyPriority)
 		{
-			WebResultRow[] webRowsForDay = { };
-			WebResultRow[] webRowsForPrevDay = { };
+			ExchangeRateRecord[] webRowsForDay = { };
+			ExchangeRateRecord[] webRowsForPrevDay = { };
 			Exception? ex1 = null;
 			Exception? ex2 = null;
 
@@ -122,7 +122,7 @@ namespace Navferty.ExcelAddIn.Web.CurrencyExchangeRates.Providers
 			return dtResult;
 		}
 
-		protected abstract Task<WebResultRow[]> DownloadWebResultRowsForDate(DateTime dt);
+		protected abstract Task<ExchangeRateRecord[]> DownloadWebResultRowsForDate(DateTime dt);
 
 		public override string ToString() => Title;
 	}

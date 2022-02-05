@@ -57,7 +57,7 @@
     <Compile Include="CurrencyExchangeRates\frmExchangeRates.Designer.cs">
       <DependentUpon>frmExchangeRates.cs</DependentUpon>
     </Compile>
-    <Compile Include="CurrencyExchangeRates\WebResultRow.cs" />
+    <Compile Include="CurrencyExchangeRates\ExchangeRateRecord.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

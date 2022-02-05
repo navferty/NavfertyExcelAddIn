@@ -42,7 +42,7 @@ namespace Navferty.ExcelAddIn.Web.CurrencyExchangeRates
 		private static int ratesDecimalDigitsCount = 4;
 
 
-		public WebResultRow? SelectedExchangeRate;
+		public ExchangeRateRecord? SelectedExchangeRate;
 
 		/// <summary>Just for designer</summary>
 		[EditorBrowsable(EditorBrowsableState.Never)]
@@ -256,7 +256,7 @@ namespace Navferty.ExcelAddIn.Web.CurrencyExchangeRates
 
 				var selRow = selRows.First();
 				var err = ((selRow.DataBoundItem as DataRowView)!.Row as CurrencyExchangeRatesDataset.ExchangeRatesRow);
-				this.SelectedExchangeRate = err!.Raw as WebResultRow;
+				this.SelectedExchangeRate = err!.Raw as ExchangeRateRecord;
 				DialogResult = DialogResult.OK;
 			}
 			catch (Exception ex)
