@@ -16,6 +16,13 @@ namespace Navferty.ExcelAddIn.Web.CurrencyExchangeRates.Providers
 {
 	internal class NBUProvider : ExchangeRatesProviderBase
 	{
+
+		//https://bank.gov.ua/ua/open-data/api-dev
+		//https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange
+		//https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange?date=20200302&json
+		private const string WEB_URL = @"https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange?date={0}&json";
+		private const string WEB_DATE_FORMAT = @"yyyyMMdd";
+
 		private static readonly CultureInfo ci = CultureInfo.GetCultureInfo("uk-UA");
 
 		public override string Title => UIStrings.CurrencyExchangeRates_Sources_NBU;
@@ -33,15 +40,10 @@ namespace Navferty.ExcelAddIn.Web.CurrencyExchangeRates.Providers
 			rawJson = String.Empty;
 			rawJsonRows = Array.Empty<NBU.JsonExchangeRatesForDateRecord>();
 
-			//https://bank.gov.ua/ua/open-data/api-dev
-			//https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange
-			//https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange?date=20200302&json
+			string url = string.Format(WEB_URL, dt.ToString(WEB_DATE_FORMAT));
+			logger.Debug($"Query url: {url}");
 
-			string sDateForNBU = dt.ToString("yyyyMMdd");
-			var urlNBUExchangeForDate = @$"https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange?date={sDateForNBU}&json";
-			logger.Debug($"Query url: {urlNBUExchangeForDate}");
-
-			var webResponce = (await web.GetAsync(urlNBUExchangeForDate));
+			var webResponce = (await web.GetAsync(url));
 			logger.Debug($"webResponce.StatusCode: {webResponce.StatusCode}, IsSuccessStatusCode = {webResponce.IsSuccessStatusCode}");
 			rawJson = await webResponce.EnsureSuccessStatusCode().Content.ReadAsStringAsync();
 

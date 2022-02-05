@@ -15,10 +15,12 @@ namespace Navferty.ExcelAddIn.Web.CurrencyExchangeRates.Providers
 {
 	internal class ECBProvider : ExchangeRatesProviderBase
 	{
+		//https://sdw-wsrest.ecb.europa.eu/service/data/EXR?startPeriod=2022-02-01&endPeriod=2022-02-01
+		private const string WEB_URL = @"https://sdw-wsrest.ecb.europa.eu/service/data/EXR?startPeriod={0}&endPeriod={0}";
+		private const string WEB_DATE_FORMAT = @"yyyy-MM-dd";
+
 		private const string C_EURO_ISO = "EUR";
 		private const char C_EURO = '€';
-
-
 
 		private static readonly Lazy<CultureInfo> ci = new Lazy<CultureInfo>(() =>
 		{
@@ -41,12 +43,10 @@ namespace Navferty.ExcelAddIn.Web.CurrencyExchangeRates.Providers
 			rawXML = String.Empty;
 			rawRows = Array.Empty<ECB.ECBExchangeRatesRecord>();
 
-			//https://sdw-wsrest.ecb.europa.eu/service/data/EXR?startPeriod=2022-02-01&endPeriod=2022-02-01
-			string sDate = dt.ToString("yyyy-MM-dd");
-			var urlECBExchangeForDate = @$"https://sdw-wsrest.ecb.europa.eu/service/data/EXR?startPeriod={sDate}&endPeriod={sDate}";
-			logger.Debug($"Query url: {urlECBExchangeForDate}");
+			string url = string.Format(WEB_URL, dt.ToString(WEB_DATE_FORMAT));
+			logger.Debug($"Query url: {url}");
 
-			var webResponce = (await web.GetAsync(urlECBExchangeForDate));
+			var webResponce = (await web.GetAsync(url));
 			logger.Debug($"webResponce.StatusCode: {webResponce.StatusCode}, IsSuccessStatusCode = {webResponce.IsSuccessStatusCode}");
 			rawXML = await webResponce.EnsureSuccessStatusCode().Content.ReadAsStringAsync();
 
