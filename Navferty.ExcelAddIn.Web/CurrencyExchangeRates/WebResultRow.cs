@@ -30,7 +30,7 @@ namespace Navferty.ExcelAddIn.Web.CurrencyExchangeRates
 			Units = 1;
 		}
 		/// <summary>Contructor for CBRF record</summary>
-		public WebResultRow(DataRow row, DateTime dt)
+		internal WebResultRow(DataRow row, DateTime dt)
 		{
 			//Vname — Название валюты
 			//Vnom — Номинал
@@ -50,7 +50,7 @@ namespace Navferty.ExcelAddIn.Web.CurrencyExchangeRates
 		}
 
 		/// <summary>Constructor for NBU record</summary>
-		public WebResultRow(Providers.NBU.JsonExchangeRatesForDateRecord nbu) : this()
+		internal WebResultRow(Providers.NBU.JsonExchangeRatesForDateRecord nbu) : this()
 		{
 			Name = nbu.Name;
 
@@ -67,7 +67,7 @@ namespace Navferty.ExcelAddIn.Web.CurrencyExchangeRates
 		}
 
 		/// <summary>Constructor for NBU record</summary>
-		public WebResultRow(Providers.ECB.ECBExchangeRatesRecord ecb) : this()
+		internal WebResultRow(Providers.ECB.ECBExchangeRatesRecord ecb) : this()
 		{
 			Name = ecb.Title;
 

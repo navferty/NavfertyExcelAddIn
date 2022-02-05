@@ -7,18 +7,18 @@ using NavfertyExcelAddIn.Localization;
 
 #nullable enable
 
-namespace NavfertyExcelAddIn.Web.CurrencyExchangeRates
+namespace NavfertyExcelAddIn.Web
 {
-	public class CurrencyExchangeRatesBuilder : ICurrencyExchangeRates
+	public class WebToolsBuilder : IWebTools
 	{
 		internal readonly IDialogService dialogService;
 		private Microsoft.Office.Interop.Excel.Application App => Globals.ThisAddIn.Application;
 
-		public CurrencyExchangeRatesBuilder(IDialogService dialogService)
+		public WebToolsBuilder(IDialogService dialogService)
 			=> this.dialogService = dialogService;
 
 
-		public void ShowCurrencyExchangeRates(Workbook wb)
+		public void CurrencyExchangeRates_Show(Workbook wb)
 		{
 			Range? sel = App.Selection;
 			if (null == sel || sel.Cells == null || sel.Cells.Count < 1)
@@ -32,6 +32,9 @@ namespace NavfertyExcelAddIn.Web.CurrencyExchangeRates
 
 			var exchangeRate = rslt.CursFor1Unit;
 			sel.Value = exchangeRate;
+
+
+			//			var weeee = Navferty.ExcelAddIn.Web.CurrencyExchangeRates.Providers.NBU.JsonExchangeRatesForDateRecord();
 		}
 	}
 }

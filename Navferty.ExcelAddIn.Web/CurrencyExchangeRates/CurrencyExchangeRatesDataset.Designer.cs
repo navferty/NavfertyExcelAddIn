@@ -23,7 +23,7 @@ namespace Navferty.ExcelAddIn.Web.CurrencyExchangeRates
 	[global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedDataSetSchema")]
 	[global::System.Xml.Serialization.XmlRootAttribute("CurrencyExchangeRatesDataset")]
 	[global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.DataSet")]
-	public partial class CurrencyExchangeRatesDataset : global::System.Data.DataSet
+	internal partial class CurrencyExchangeRatesDataset : global::System.Data.DataSet
 	{
 
 		private ExchangeRatesDataTable tableExchangeRates;

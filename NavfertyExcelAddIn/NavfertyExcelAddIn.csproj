@@ -266,8 +266,8 @@
     <Compile Include="Transliterate\CyrillicToLatinFallback.cs" />
     <Compile Include="Transliterate\Transliterator.cs" />
     <Compile Include="Undo\UndoManager.cs" />
-    <Compile Include="Web\CurrencyExchangeRates\CurrencyExchangeRatesBuilder.cs" />
-    <Compile Include="Web\CurrencyExchangeRates\ICurrencyExchangeRates.cs" />
+    <Compile Include="Web\WebToolsBuilder.cs" />
+    <Compile Include="Web\IWebTools.cs" />
     <Compile Include="WorksheetCellsEditing\ConditionalFormatFixer.cs" />
     <Compile Include="WorksheetCellsEditing\IConditionalFormatFixer.cs" />
     <Compile Include="WorksheetProtectUnprotect\frmWorksheetsProtection.cs">
@@ -442,6 +442,9 @@
       <Project>{443907ef-f460-4726-94f0-fe35a1ac8fa2}</Project>
       <Name>Navferty.ExcelAddIn.Web</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Web\CurrencyExchangeRates\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
