@@ -39,7 +39,7 @@ namespace Navferty.ExcelAddIn.Web.CurrencyExchangeRates.Providers
 
 			string sDateForNBU = dt.ToString("yyyyMMdd");
 			var urlNBUExchangeForDate = @$"https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange?date={sDateForNBU}&json";
-			logger.Debug($"NBU: ExchangeRates query url: {urlNBUExchangeForDate}");
+			logger.Debug($"Query url: {urlNBUExchangeForDate}");
 
 			rawJson = await (await web.GetAsync(urlNBUExchangeForDate)).
 				EnsureSuccessStatusCode().
@@ -51,7 +51,7 @@ namespace Navferty.ExcelAddIn.Web.CurrencyExchangeRates.Providers
 			}
 			catch (Exception ex)
 			{
-				logger.Error(ex, $"NBU: Failed to deserialize Json via JsonConvert.DeserializeObject<NBU.JsonExchangeRatesForDateRecord[]>(rawJson):\n\n{rawJson}");
+				logger.Error(ex, $"Failed to deserialize NBU Json via 'JsonConvert.DeserializeObject<NBU.JsonExchangeRatesForDateRecord[]>(rawJson)':\nrawJson:\n{rawJson}");
 				throw new Exception(UIStrings.CurrencyExchangeRates_Error_ParseError);
 			}
 
@@ -62,7 +62,7 @@ namespace Navferty.ExcelAddIn.Web.CurrencyExchangeRates.Providers
 			}
 			catch (Exception ex)
 			{
-				logger.Error(ex, $"NBU: Failed to convert 'JsonExchangeRatesForDateRecord' to 'WebResultRow'!");
+				logger.Error(ex, $"Failed to convert '{rawJsonRows.GetType()}' to '{typeof(ExchangeRateRecord)}'!");
 				throw new Exception(UIStrings.CurrencyExchangeRates_Error_ParseError);
 			}
 		}

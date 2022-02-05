@@ -39,18 +39,21 @@ namespace Navferty.ExcelAddIn.Web.CurrencyExchangeRates.Providers
 			Exception? ex1 = null;
 			Exception? ex2 = null;
 
+			dt = dt.Date;//Cut off time
+			var dtPrevDay = dt.AddDays(-1);
+
 			var sw = new Stopwatch();
 			try
 			{
-				Logger.Debug($"{GetType()}: 1st web query attempt for '{dt}' starting...");
+				Logger.Debug($"1st web query attempt for '{dt}' starting...");
 				sw.Start();
 				webRowsForDay = await DownloadExchangeRatesForDayAsync(dt);
 				sw.Stop();
-				Logger.Debug($"\t1st web query finished OK. Elapsed: {sw.Elapsed.TotalMilliseconds}ms.");
+				Logger.Debug($"1st web query finished OK. Elapsed: {sw.Elapsed.TotalMilliseconds}ms.");
 
 				if (null == webRowsForDay || !webRowsForDay.Any())
 				{
-					Logger.Error($"{GetType()}: 1st webRowsForDay = NULL!");
+					Logger.Error("1st webRowsForDay = NULL!");
 					throw new Exception(UIStrings.CurrencyExchangeRates_Error_Network);
 				}
 			}
@@ -58,24 +61,23 @@ namespace Navferty.ExcelAddIn.Web.CurrencyExchangeRates.Providers
 			{
 				sw.Stop();
 				ex1 = e1;
-				Logger.Error(ex1, $"1st web query (for date '{dt}') Failed! Elapsed: {sw.Elapsed.TotalMilliseconds}ms.");
+				Logger.Error(ex1, $"1st web query '{dt}' Failed! Elapsed: {sw.Elapsed.TotalMilliseconds}ms.");
 			}
 
 			if (null != ex1)
 			{
-				var dtPrevDay = dt.AddDays(-1);
-				Logger.Debug($"{this.GetType()}: 2nd web query attempt for '{dtPrevDay}' starting...");
+				Logger.Debug($"2nd web query attempt for '{dtPrevDay}' starting...");
 				sw = new Stopwatch();
 				try
 				{
 					sw.Start();
 					webRowsForPrevDay = await DownloadExchangeRatesForDayAsync(dtPrevDay);
 					sw.Stop();
-					Logger.Debug($"\t2nd web query finished OK. Elapsed: {sw.Elapsed.TotalMilliseconds}ms.");
+					Logger.Debug($"2nd web query finished OK. Elapsed: {sw.Elapsed.TotalMilliseconds}ms.");
 
 					if (null == webRowsForPrevDay || !webRowsForPrevDay.Any())
 					{
-						Logger.Error($"{GetType()}: 2nd webRowsForPrevDay = NULL!");
+						Logger.Error("2nd webRowsForPrevDay = NULL!");
 						throw new Exception(UIStrings.CurrencyExchangeRates_Error_Network);
 					}
 				}
@@ -83,7 +85,7 @@ namespace Navferty.ExcelAddIn.Web.CurrencyExchangeRates.Providers
 				{
 					sw.Stop();
 					ex2 = e2;
-					Logger.Error(ex2, $"2nd web query (for date '{dtPrevDay}') Failed! Elapsed: {sw.Elapsed.TotalMilliseconds}ms.");
+					Logger.Error(ex2, $"2nd web query '{dtPrevDay}' Failed! Elapsed: {sw.Elapsed.TotalMilliseconds}ms.");
 				}
 			}
 
@@ -103,7 +105,8 @@ namespace Navferty.ExcelAddIn.Web.CurrencyExchangeRates.Providers
 					Title,
 					dt.ToLongDateString());
 
-				Logger.Debug(sErr);
+				Logger.Debug($"1st web request for '{dt}' failed, but 2-nd web request for '{dtPrevDay}' finished good!\nLooks like web source does not yet provide data for '{dt}'!");
+				//Logger.Debug(sErr);
 				throw new Exception(sErr);
 			}
 

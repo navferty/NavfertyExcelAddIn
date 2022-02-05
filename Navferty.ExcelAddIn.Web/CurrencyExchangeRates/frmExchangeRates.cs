@@ -60,6 +60,8 @@ namespace Navferty.ExcelAddIn.Web.CurrencyExchangeRates
 		{
 			Text = UIStrings.CurrencyExchangeRates_FormTitle;
 			lblInfoTip.Text = UIStrings.CurrencyExchangeRates_FormInfoTip;
+			lblInfoTip.Visible = false;
+
 
 			lblSource.Text = UIStrings.CurrencyExchangeRates_Source;
 			btnPasteResult.Text = UIStrings.CurrencyExchangeRates_PasteToCell;
@@ -150,7 +152,7 @@ namespace Navferty.ExcelAddIn.Web.CurrencyExchangeRates
 				gridResult.EmptyText = ex.Message;
 				gridResult.DataSource = null;
 
-				ratesProvider?.Logger.Error(ex, $"{ratesProvider.GetType()} ({ratesProvider.Title}) ERROR!");
+				ratesProvider?.Logger.Error(ex);
 			}
 			finally
 			{
@@ -228,6 +230,7 @@ namespace Navferty.ExcelAddIn.Web.CurrencyExchangeRates
 		private void UpdatePasteButtonState()
 		{
 			btnPasteResult.Enabled = gridResult.RowsAsEnumerable().Any();
+			lblInfoTip.Visible = gridResult.RowsAsEnumerable().Any();
 		}
 
 		private void gridResult_CellDoubleClick(object sender, DataGridViewCellEventArgs e)

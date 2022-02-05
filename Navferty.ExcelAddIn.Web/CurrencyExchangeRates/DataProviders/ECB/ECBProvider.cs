@@ -44,7 +44,7 @@ namespace Navferty.ExcelAddIn.Web.CurrencyExchangeRates.Providers
 			//https://sdw-wsrest.ecb.europa.eu/service/data/EXR?startPeriod=2022-02-01&endPeriod=2022-02-01
 			string sDate = dt.ToString("yyyy-MM-dd");
 			var urlECBExchangeForDate = @$"https://sdw-wsrest.ecb.europa.eu/service/data/EXR?startPeriod={sDate}&endPeriod={sDate}";
-			logger.Debug($"ECB: ExchangeRates query url: {urlECBExchangeForDate}");
+			logger.Debug($"Query url: {urlECBExchangeForDate}");
 
 			rawXML = await (await web.GetAsync(urlECBExchangeForDate)).
 				EnsureSuccessStatusCode().
@@ -52,7 +52,7 @@ namespace Navferty.ExcelAddIn.Web.CurrencyExchangeRates.Providers
 
 			if (string.IsNullOrWhiteSpace(rawXML))
 			{
-				logger.Error("ECB: web service answer xml = null!");
+				logger.Error("Web service answer xml = NULL!");
 				throw new Exception(UIStrings.CurrencyExchangeRates_Error_Network);
 			}
 
@@ -62,7 +62,7 @@ namespace Navferty.ExcelAddIn.Web.CurrencyExchangeRates.Providers
 			}
 			catch (Exception ex)
 			{
-				logger.Error(ex, $"ECB: Failed to parse xml:\n{rawXML}");
+				logger.Error(ex, $"Failed to parse xml:\nrawXML:\n{rawXML}");
 				throw new Exception(UIStrings.CurrencyExchangeRates_Error_ParseError);
 			}
 
@@ -72,7 +72,7 @@ namespace Navferty.ExcelAddIn.Web.CurrencyExchangeRates.Providers
 			}
 			catch (Exception ex)
 			{
-				logger.Error(ex, "ECB: Failed to convert 'ECBExchangeRatesRecord' to 'WebResultRow'!");
+				logger.Error(ex, $"Failed to convert '{rawRows.GetType()}' to '{typeof(ExchangeRateRecord)}'!");
 
 				throw new Exception(UIStrings.CurrencyExchangeRates_Error_ParseError);
 

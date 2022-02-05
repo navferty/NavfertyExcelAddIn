@@ -34,25 +34,28 @@ namespace Navferty.ExcelAddIn.Web.CurrencyExchangeRates.Providers
 				var dtsResult = await cbr.GetCursOnDateAsync(dt);
 				if (dtsResult == null)
 				{
-					logger.Error("CBR: await cbr.GetCursOnDateAsync(dt) return NULL with no errors!");
+					logger.Error("async await cbr.GetCursOnDateAsync(dt) return NULL with no errors!");
 					throw new Exception(UIStrings.CurrencyExchangeRates_Error_Network);
 				}
 
 				rawDataTable = dtsResult.Tables.Cast<DataTable>().FirstOrDefault();
 				if (rawDataTable == default)
 				{
-					logger.Error("CBR: dstaset does not containt any Tables!");
+					logger.Error($"Failed to get frist DataTable from web dstaset ('{dtsResult.GetType()}'). Dataset does not containt any Tables!");
 					throw new Exception(UIStrings.CurrencyExchangeRates_Error_Network);
 				}
 
+				var dataTableRows = rawDataTable.RowsAsEnumerable().ToArray();
+				logger.Debug($"dataTableRows.Count = {dataTableRows.Count()}");
 				try
 				{
-					var rows = rawDataTable.RowsAsEnumerable().Select(row => new ExchangeRateRecord(row, dt)).ToArray();
+					var rows = dataTableRows.Select(row => new ExchangeRateRecord(row, dt)).ToArray();
 					return rows;
 				}
 				catch (Exception ex)
 				{
-					logger.Error(ex, "CBR: Failed to convert 'CBR.Datatable[0].DataRow' to 'WebResultRow'!");
+
+					logger.Error(ex, $"Failed to convert '{dataTableRows.GetType()}' to '{typeof(ExchangeRateRecord)}'!");
 					throw new Exception(UIStrings.CurrencyExchangeRates_Error_ParseError);
 				}
 			};
