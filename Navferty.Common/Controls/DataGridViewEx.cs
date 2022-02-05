@@ -5,7 +5,7 @@ using System.Windows.Forms;
 
 #nullable enable
 
-namespace NavfertyCommon.Controls
+namespace Navferty.Common.Controls
 {
 	/// <summary>DataGridView that do not blick return key</summary>
 	public class DataGridViewEx : System.Windows.Forms.DataGridView

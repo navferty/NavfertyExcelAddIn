@@ -10,11 +10,11 @@
     <NoStandardLibraries>false</NoStandardLibraries>
     <ProjectGuid>{F14665A1-A035-4C8E-845E-F00029C8181A}</ProjectGuid>
     <OutputType>Library</OutputType>
-    <RootNamespace>NavfertyCommon</RootNamespace>
-    <AssemblyName>NavfertyCommon</AssemblyName>
+    <RootNamespace>Navferty.Common</RootNamespace>
+    <AssemblyName>Navferty.Common</AssemblyName>
     <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <AutoGenerateBindingRedirects>false</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -37,9 +37,6 @@
   <PropertyGroup>
     <StartupObject />
   </PropertyGroup>
-  <ItemGroup>
-    <None Include="App.config" />
-  </ItemGroup>
   <ItemGroup>
     <Compile Include="Controls\CheckedListBoxEx.cs">
       <SubType>Component</SubType>

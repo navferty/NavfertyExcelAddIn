@@ -8,7 +8,7 @@ using Microsoft.Win32.SafeHandles;
 
 #nullable enable
 
-namespace NavfertyCommon
+namespace Navferty.Common
 {
 	internal static class WinAPI
 	{

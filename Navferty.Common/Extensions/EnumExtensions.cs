@@ -6,7 +6,7 @@ using System.Runtime.CompilerServices;
 
 #nullable enable
 
-namespace NavfertyCommon
+namespace Navferty.Common
 {
 	[DebuggerStepThrough]
 	public static class EnumExtensions

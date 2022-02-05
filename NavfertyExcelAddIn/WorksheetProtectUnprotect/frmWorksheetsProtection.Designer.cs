@@ -35,7 +35,7 @@ namespace NavfertyExcelAddIn.WorksheetProtectUnprotect
 			this.radioModeProtect = new System.Windows.Forms.RadioButton();
 			this.lblModeDesription = new System.Windows.Forms.Label();
 			this.radioModeUnProtect = new System.Windows.Forms.RadioButton();
-			this.lstWorksheets = new NavfertyCommon.Controls.CheckedListBoxEx();
+			this.lstWorksheets = new Navferty.Common.Controls.CheckedListBoxEx();
 			this.lblPWD = new System.Windows.Forms.Label();
 			this.txtPWD = new System.Windows.Forms.TextBox();
 			this.panel1 = new System.Windows.Forms.Panel();
@@ -191,7 +191,7 @@ namespace NavfertyExcelAddIn.WorksheetProtectUnprotect
 		internal System.Windows.Forms.RadioButton radioModeProtect;
 		internal System.Windows.Forms.RadioButton radioModeUnProtect;
 		internal System.Windows.Forms.Label lblModeDesription;
-		internal NavfertyCommon.Controls.CheckedListBoxEx lstWorksheets;
+		internal Navferty.Common.Controls.CheckedListBoxEx lstWorksheets;
 		internal System.Windows.Forms.Label lblPWD;
 		internal System.Windows.Forms.TextBox txtPWD;
 		private System.Windows.Forms.Panel panel1;

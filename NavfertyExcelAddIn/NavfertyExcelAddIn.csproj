@@ -478,12 +478,11 @@
     <WCFMetadataStorage Include="Connected Services\Web.CBR\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\CommonToolsLib\CommonToolsLib.csproj">
+    <ProjectReference Include="..\Navferty.Common\Navferty.Common.csproj">
       <Project>{f14665a1-a035-4c8e-845e-f00029c8181a}</Project>
-      <Name>CommonToolsLib</Name>
+      <Name>Navferty.Common</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

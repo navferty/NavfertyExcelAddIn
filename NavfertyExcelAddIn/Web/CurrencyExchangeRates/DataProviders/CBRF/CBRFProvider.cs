@@ -4,7 +4,7 @@ using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
 
-using NavfertyCommon;
+using Navferty.Common;
 
 using NavfertyExcelAddIn.Localization;
 

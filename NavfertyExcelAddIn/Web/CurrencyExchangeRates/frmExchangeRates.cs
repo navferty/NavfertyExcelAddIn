@@ -7,7 +7,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-using NavfertyCommon;
+using Navferty.Common;
 
 using NavfertyExcelAddIn.Localization;
 
@@ -15,7 +15,7 @@ using NavfertyExcelAddIn.Localization;
 
 namespace NavfertyExcelAddIn.Web.CurrencyExchangeRates
 {
-	internal partial class frmExchangeRates : NavfertyCommon.Controls.FormEx
+	internal partial class frmExchangeRates : Navferty.Common.Controls.FormEx
 	{
 		private readonly IDialogService? dialogService;
 
@@ -222,7 +222,7 @@ namespace NavfertyExcelAddIn.Web.CurrencyExchangeRates
 			if (e.ColumnIndex != iColRate) return;
 			if (e.Value is not double dRate) return;
 
-			e.Value = dRate.ToString($"C{ratesDecimalDigitsCount}", ratesProvider.Culture);
+			e.Value = dRate.ToString($"C{ratesDecimalDigitsCount}", ratesProvider!.Culture);
 		}
 
 		private void UpdatePasteButtonState()

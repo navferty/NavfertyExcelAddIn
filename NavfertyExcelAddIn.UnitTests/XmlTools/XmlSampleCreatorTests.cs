@@ -5,7 +5,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 using Moq;
 
-using NavfertyCommon;
+using Navferty.Common;
 
 using NavfertyExcelAddIn.XmlTools;
 

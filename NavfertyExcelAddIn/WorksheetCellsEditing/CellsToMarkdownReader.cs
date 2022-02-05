@@ -3,45 +3,45 @@ using System.Text;
 
 using Microsoft.Office.Interop.Excel;
 
-using NavfertyCommon;
+using Navferty.Common;
 
 using NavfertyExcelAddIn.Commons;
 
 namespace NavfertyExcelAddIn.WorksheetCellsEditing
 {
-	public class CellsToMarkdownReader : ICellsToMarkdownReader
-	{
-		public string ReadToMarkdown(Range range)
-		{
-			var markdown = new StringBuilder();
+    public class CellsToMarkdownReader : ICellsToMarkdownReader
+    {
+        public string ReadToMarkdown(Range range)
+        {
+            var markdown = new StringBuilder();
 
-			var isHeaderRow = true;
-			int columnsCount = range.Columns.Count;
+            var isHeaderRow = true;
+            int columnsCount = range.Columns.Count;
 
-			foreach (Range row in range.Rows)
-			{
-				foreach (Range cell in row.Cells)
-				{
-					markdown.Append('|');
-					var value = (string)cell.Value?.ToString();
-					markdown.Append(value.TrimSpaces() ?? " ");
-				}
-				markdown.Append('|');
-				markdown.Append("\r\n");
+            foreach (Range row in range.Rows)
+            {
+                foreach (Range cell in row.Cells)
+                {
+                    markdown.Append('|');
+                    var value = (string)cell.Value?.ToString();
+                    markdown.Append(value.TrimSpaces() ?? " ");
+                }
+                markdown.Append('|');
+                markdown.Append("\r\n");
 
-				if (isHeaderRow)
-				{
-					Enumerable
-						.Repeat("|---", columnsCount)
-						.ForEach(x => markdown.Append(x));
+                if (isHeaderRow)
+                {
+                    Enumerable
+                        .Repeat("|---", columnsCount)
+                        .ForEach(x => markdown.Append(x));
 
-					markdown.Append("|\r\n");
+                    markdown.Append("|\r\n");
 
-					isHeaderRow = false;
-				}
-			}
+                    isHeaderRow = false;
+                }
+            }
 
-			return markdown.ToString();
-		}
-	}
+            return markdown.ToString();
+        }
+    }
 }

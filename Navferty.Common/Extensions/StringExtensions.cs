@@ -4,7 +4,7 @@ using System.Text.RegularExpressions;
 
 #nullable enable
 
-namespace NavfertyCommon
+namespace Navferty.Common
 {
 	public static class StringExtensions
 	{

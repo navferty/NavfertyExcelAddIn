@@ -1,11 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Globalization;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 using NavfertyExcelAddIn.Localization;
 
@@ -16,20 +12,16 @@ namespace NavfertyExcelAddIn.Web.CurrencyExchangeRates
 	internal class WebResultRow
 	{
 		public readonly string Name = string.Empty;
-		public readonly DateTime ValidFrom;
-
-		/// <summary>Number of units</summary>
-		public readonly double Units = 1.0;
-
-		public readonly double Curs = 0.0;
-		public readonly string CursAsString = "";
-
-		/// <summary>Internal bank code</summary>
-		public readonly int Code = 0;
-
 		public readonly string ISOCode = string.Empty;
+		public readonly double Units = 1.0;
+		public readonly double Curs = 0.0;
 
-		public uint PriorityInGrid = uint.MaxValue;
+		internal readonly string CursAsString = "";
+		/// <summary>Internal bank code</summary>
+		internal readonly int Code = 0;
+
+		internal uint PriorityInGrid = uint.MaxValue;
+		internal readonly DateTime ValidFrom;
 
 		private WebResultRow() : base()
 		{

@@ -14,7 +14,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		.editorconfig = .editorconfig
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CommonToolsLib", "CommonToolsLib\CommonToolsLib.csproj", "{F14665A1-A035-4C8E-845E-F00029C8181A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Navferty.Common", "Navferty.Common\Navferty.Common.csproj", "{F14665A1-A035-4C8E-845E-F00029C8181A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

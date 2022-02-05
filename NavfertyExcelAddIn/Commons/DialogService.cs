@@ -6,7 +6,7 @@ using System.Windows.Forms;
 
 using Microsoft.Office.Core;
 
-using NavfertyCommon;
+using Navferty.Common;
 
 using NavfertyExcelAddIn.Localization;
 

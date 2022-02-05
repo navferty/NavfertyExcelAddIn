@@ -3,7 +3,7 @@ using System.Windows.Forms;
 
 #nullable enable
 
-namespace NavfertyCommon.Controls
+namespace Navferty.Common.Controls
 {
 	/// <summary>Form than closes by ESC key</summary>
 	public class FormEx : System.Windows.Forms.Form
