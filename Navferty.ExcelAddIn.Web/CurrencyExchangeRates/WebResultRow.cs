@@ -5,6 +5,8 @@ using System.Globalization;
 
 using Navferty.ExcelAddIn.Web.Localization;
 
+#nullable enable
+
 namespace Navferty.ExcelAddIn.Web.CurrencyExchangeRates
 {
 
@@ -55,7 +57,7 @@ namespace Navferty.ExcelAddIn.Web.CurrencyExchangeRates
 			Name = nbu.Name;
 
 			ISOCode = nbu.ISOCode;
-			Code = nbu.r030;
+			Code = nbu.R030;
 
 			CursAsString = nbu.RateString;
 			var fi = (NumberFormatInfo)NumberFormatInfo.InvariantInfo.Clone();

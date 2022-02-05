@@ -99,15 +99,6 @@
     <None Include="CurrencyExchangeRates\CurrencyExchangeRatesDataset.xss">
       <DependentUpon>CurrencyExchangeRatesDataset.xsd</DependentUpon>
     </None>
-    <None Include="CurrencyExchangeRates\DataProviders\ECB\Series.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="CurrencyExchangeRates\DataProviders\ECB\Structure.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="CurrencyExchangeRates\DataProviders\ECB\URN.xsd">
-      <SubType>Designer</SubType>
-    </None>
     <None Include="Connected Services\cbrwebservice\configuration91.svcinfo" />
     <None Include="Connected Services\cbrwebservice\configuration.svcinfo" />
     <None Include="Connected Services\cbrwebservice\Reference.svcmap">

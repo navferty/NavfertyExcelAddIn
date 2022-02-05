@@ -10,6 +10,8 @@ using Newtonsoft.Json;
 
 using NLog;
 
+#nullable enable
+
 namespace Navferty.ExcelAddIn.Web.CurrencyExchangeRates.Providers
 {
 	internal class NBUProvider : ExchangeRatesDataProviderBaase
@@ -45,7 +47,7 @@ namespace Navferty.ExcelAddIn.Web.CurrencyExchangeRates.Providers
 
 			try
 			{
-				rawJsonRows = JsonConvert.DeserializeObject<NBU.JsonExchangeRatesForDateRecord[]>(rawJson);
+				rawJsonRows = JsonConvert.DeserializeObject<NBU.JsonExchangeRatesForDateRecord[]>(rawJson)!;
 			}
 			catch (Exception ex)
 			{

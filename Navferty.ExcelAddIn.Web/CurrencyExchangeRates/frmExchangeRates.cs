@@ -149,7 +149,7 @@ namespace Navferty.ExcelAddIn.Web.CurrencyExchangeRates
 				gridResult.EmptyText = ex.Message;
 				gridResult.DataSource = null;
 
-				ratesProvider.Logger.Error(ex, $"{ratesProvider.GetType()} ({ratesProvider.Title}) ERROR!");
+				ratesProvider?.Logger.Error(ex, $"{ratesProvider.GetType()} ({ratesProvider.Title}) ERROR!");
 			}
 			finally
 			{

@@ -1,29 +1,25 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿
 using Newtonsoft.Json;
+
+#nullable enable
 
 namespace Navferty.ExcelAddIn.Web.CurrencyExchangeRates.Providers.NBU
 {
 	public class JsonExchangeRatesForDateRecord
 	{
 		[JsonProperty("r030")]
-		public int r030 { get; set; }
+		public int R030 { get; set; } = 0;
 
 		[JsonProperty("txt")]
-		public string Name { get; set; }
+		public string Name { get; set; } = string.Empty;
 
 		[JsonProperty("rate")]
-		public string RateString { get; set; }
+		public string RateString { get; set; } = string.Empty;
 
 		[JsonProperty("cc")]
-		public string ISOCode { get; set; }
+		public string ISOCode { get; set; } = string.Empty;
 
 		[JsonProperty("exchangedate")]
-		public string ValidFrom { get; set; }
+		public string ValidFrom { get; set; } = string.Empty;
 	}
 }

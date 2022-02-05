@@ -10,6 +10,8 @@ using Navferty.ExcelAddIn.Web.Localization;
 
 using NLog;
 
+#nullable enable
+
 namespace Navferty.ExcelAddIn.Web.CurrencyExchangeRates.Providers
 {
 	internal class CBRFProvider : ExchangeRatesDataProviderBaase
@@ -23,7 +25,7 @@ namespace Navferty.ExcelAddIn.Web.CurrencyExchangeRates.Providers
 		private readonly ILogger logger = LogManager.GetCurrentClassLogger();
 		public override ILogger Logger => logger;
 
-		private DataTable rawDataTable = null;
+		private DataTable? rawDataTable = null;
 		protected override async Task<WebResultRow[]> DownloadWebResultRowsForDate(DateTime dt)
 		{
 
