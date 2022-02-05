@@ -13,7 +13,7 @@ using NLog;
 
 namespace Navferty.ExcelAddIn.Web.CurrencyExchangeRates.Providers
 {
-	internal abstract class ExchangeRatesDataProviderBase
+	internal abstract class ExchangeRatesProviderBase
 	{
 		public abstract string Title { get; }
 		public abstract ILogger Logger { get; }

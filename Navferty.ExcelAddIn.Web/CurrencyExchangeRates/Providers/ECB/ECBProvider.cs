@@ -13,7 +13,7 @@ using NLog;
 
 namespace Navferty.ExcelAddIn.Web.CurrencyExchangeRates.Providers
 {
-	internal class ECBProvider : ExchangeRatesDataProviderBase
+	internal class ECBProvider : ExchangeRatesProviderBase
 	{
 		private const string C_EURO_ISO = "EUR";
 		private const char C_EURO = '€';

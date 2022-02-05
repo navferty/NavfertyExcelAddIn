@@ -45,12 +45,12 @@
     </Compile>
     <Compile Include="CurrencyExchangeRates\Manager.cs" />
     <Compile Include="CurrencyExchangeRates\CurrencyExchangeRatesDataset.Designer.cs" />
-    <Compile Include="CurrencyExchangeRates\DataProviders\CBRF\CBRFProvider.cs" />
-    <Compile Include="CurrencyExchangeRates\DataProviders\ECB\ECBExchangeRatesRecord.cs" />
-    <Compile Include="CurrencyExchangeRates\DataProviders\ECB\ECBProvider.cs" />
-    <Compile Include="CurrencyExchangeRates\DataProviders\ExchangeRatesDataProviderBase.cs" />
-    <Compile Include="CurrencyExchangeRates\DataProviders\NBU\JsonExchangeRatesForDateRecord.cs" />
-    <Compile Include="CurrencyExchangeRates\DataProviders\NBU\NBUProvider.cs" />
+    <Compile Include="CurrencyExchangeRates\Providers\CBRF\CBRFProvider.cs" />
+    <Compile Include="CurrencyExchangeRates\Providers\ECB\ECBExchangeRatesRecord.cs" />
+    <Compile Include="CurrencyExchangeRates\Providers\ECB\ECBProvider.cs" />
+    <Compile Include="CurrencyExchangeRates\Providers\ExchangeRatesProviderBase.cs" />
+    <Compile Include="CurrencyExchangeRates\Providers\NBU\JsonExchangeRatesForDateRecord.cs" />
+    <Compile Include="CurrencyExchangeRates\Providers\NBU\NBUProvider.cs" />
     <Compile Include="CurrencyExchangeRates\frmExchangeRates.cs">
       <SubType>Form</SubType>
     </Compile>

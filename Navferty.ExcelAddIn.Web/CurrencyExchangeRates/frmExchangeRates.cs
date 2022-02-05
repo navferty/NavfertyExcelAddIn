@@ -37,7 +37,7 @@ namespace Navferty.ExcelAddIn.Web.CurrencyExchangeRates
 			{ GRID_COLUMNS_RATE, UIStrings.CurrencyExchangeRates_GridColumn_Rate }
 		});
 
-		private Providers.ExchangeRatesDataProviderBase? ratesProvider;
+		private Providers.ExchangeRatesProviderBase? ratesProvider;
 		private CurrencyExchangeRatesDataset.ExchangeRatesDataTable? dtResult;
 		private static int ratesDecimalDigitsCount = 4;
 
@@ -67,7 +67,7 @@ namespace Navferty.ExcelAddIn.Web.CurrencyExchangeRates
 			btnPasteResult.Text = UIStrings.CurrencyExchangeRates_PasteToCell;
 			lblFilterTitle.Text = UIStrings.CurrencyExchangeRates_FilterTitle;
 
-			var availProviders = new Providers.ExchangeRatesDataProviderBase[] {
+			var availProviders = new Providers.ExchangeRatesProviderBase[] {
 				new Providers.CBRFProvider(),
 				new Providers.NBUProvider(),
 				new Providers.ECBProvider()};
@@ -105,7 +105,7 @@ namespace Navferty.ExcelAddIn.Web.CurrencyExchangeRates
 			this.UseWaitCursor = true;
 			try
 			{
-				ratesProvider = cbProvider.SelectedItem as Providers.ExchangeRatesDataProviderBase;
+				ratesProvider = cbProvider.SelectedItem as Providers.ExchangeRatesProviderBase;
 				if (ratesProvider == null) return;
 
 				dtResult = null;
