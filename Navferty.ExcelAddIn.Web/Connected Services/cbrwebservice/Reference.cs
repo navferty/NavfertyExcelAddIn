@@ -8,13 +8,13 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace NavfertyExcelAddIn.Web.CBR {
+namespace Navferty.ExcelAddIn.Web.cbrwebservice {
     using System.Data;
     
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ServiceModel.ServiceContractAttribute(Namespace="http://web.cbr.ru/", ConfigurationName="Web.CBR.DailyInfoSoap")]
-    internal interface DailyInfoSoap {
+    [System.ServiceModel.ServiceContractAttribute(Namespace="http://web.cbr.ru/", ConfigurationName="cbrwebservice.DailyInfoSoap")]
+    public interface DailyInfoSoap {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://web.cbr.ru/SaldoXML", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
@@ -578,12 +578,12 @@ namespace NavfertyExcelAddIn.Web.CBR {
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    internal interface DailyInfoSoapChannel : NavfertyExcelAddIn.Web.CBR.DailyInfoSoap, System.ServiceModel.IClientChannel {
+    public interface DailyInfoSoapChannel : Navferty.ExcelAddIn.Web.cbrwebservice.DailyInfoSoap, System.ServiceModel.IClientChannel {
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    internal partial class DailyInfoSoapClient : System.ServiceModel.ClientBase<NavfertyExcelAddIn.Web.CBR.DailyInfoSoap>, NavfertyExcelAddIn.Web.CBR.DailyInfoSoap {
+    public partial class DailyInfoSoapClient : System.ServiceModel.ClientBase<Navferty.ExcelAddIn.Web.cbrwebservice.DailyInfoSoap>, Navferty.ExcelAddIn.Web.cbrwebservice.DailyInfoSoap {
         
         public DailyInfoSoapClient() {
         }

@@ -3,13 +3,13 @@ using System.ComponentModel;
 using System.Data;
 using System.Globalization;
 
-using NavfertyExcelAddIn.Localization;
+using Navferty.ExcelAddIn.Web.Localization;
 
-namespace NavfertyExcelAddIn.Web.CurrencyExchangeRates
+namespace Navferty.ExcelAddIn.Web.CurrencyExchangeRates
 {
 
 	[TypeConverter(typeof(ExpandableObjectConverter))]
-	internal class WebResultRow
+	public class WebResultRow
 	{
 		public readonly string Name = string.Empty;
 		public readonly string ISOCode = string.Empty;

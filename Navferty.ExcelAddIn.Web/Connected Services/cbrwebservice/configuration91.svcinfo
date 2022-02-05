@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<SavedWcfConfigurationInformation xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" Version="9.1" CheckSum="xstRNl1ENHs6M7mr+DAZ3iUYNeJ45zjnp7clNUkSOU4=">
+<SavedWcfConfigurationInformation xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" Version="9.1" CheckSum="tF/W26y0ocN7ZGCn8VO/WwTpu+uUPTr3BjQDfrccFkw=">
   <bindingConfigurations>
     <bindingConfiguration bindingType="basicHttpBinding" name="DailyInfoSoap">
       <properties>
@@ -112,7 +112,7 @@
     </bindingConfiguration>
   </bindingConfigurations>
   <endpoints>
-    <endpoint name="DailyInfoSoap" contract="Web.CBR.DailyInfoSoap" bindingType="basicHttpBinding" address="http://www.cbr.ru/DailyInfoWebServ/DailyInfo.asmx" bindingConfiguration="DailyInfoSoap">
+    <endpoint name="DailyInfoSoap" contract="cbrwebservice.DailyInfoSoap" bindingType="basicHttpBinding" address="http://www.cbr.ru/DailyInfoWebServ/DailyInfo.asmx" bindingConfiguration="DailyInfoSoap">
       <properties>
         <property path="/address" isComplexType="false" isExplicitlyDefined="true" clrType="System.Uri, System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <serializedValue>http://www.cbr.ru/DailyInfoWebServ/DailyInfo.asmx</serializedValue>
@@ -127,7 +127,7 @@
           <serializedValue>DailyInfoSoap</serializedValue>
         </property>
         <property path="/contract" isComplexType="false" isExplicitlyDefined="true" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-          <serializedValue>Web.CBR.DailyInfoSoap</serializedValue>
+          <serializedValue>cbrwebservice.DailyInfoSoap</serializedValue>
         </property>
         <property path="/headers" isComplexType="true" isExplicitlyDefined="false" clrType="System.ServiceModel.Configuration.AddressHeaderCollectionElement, System.ServiceModel, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <serializedValue>System.ServiceModel.Configuration.AddressHeaderCollectionElement</serializedValue>

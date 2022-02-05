@@ -4,13 +4,13 @@ using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
 
-using NavfertyExcelAddIn.Localization;
+using Navferty.ExcelAddIn.Web.Localization;
 
 using Newtonsoft.Json;
 
 using NLog;
 
-namespace NavfertyExcelAddIn.Web.CurrencyExchangeRates.Providers
+namespace Navferty.ExcelAddIn.Web.CurrencyExchangeRates.Providers
 {
 	internal class NBUProvider : ExchangeRatesDataProviderBaase
 	{

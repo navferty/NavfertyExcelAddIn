@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 using Navferty.Common;
 
-using NavfertyExcelAddIn.Localization;
+using Navferty.ExcelAddIn.Web.Localization;
 
 using NLog;
 
-namespace NavfertyExcelAddIn.Web.CurrencyExchangeRates.Providers
+namespace Navferty.ExcelAddIn.Web.CurrencyExchangeRates.Providers
 {
 	internal class CBRFProvider : ExchangeRatesDataProviderBaase
 	{
@@ -27,7 +27,7 @@ namespace NavfertyExcelAddIn.Web.CurrencyExchangeRates.Providers
 		protected override async Task<WebResultRow[]> DownloadWebResultRowsForDate(DateTime dt)
 		{
 
-			using (var cbr = new Web.CBR.DailyInfoSoapClient())
+			using (var cbr = new cbrwebservice.DailyInfoSoapClient())
 			{
 				var dtsResult = await cbr.GetCursOnDateAsync(dt);
 				if (dtsResult == null)

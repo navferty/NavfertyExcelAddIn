@@ -237,7 +237,6 @@
   <ItemGroup>
     <Compile Include="Commons\FileExtensionFilter.cs" />
     <Compile Include="Commons\RangeExtensions.cs" />
-    <Compile Include="Connected Services\Web.CBR\Reference.cs" />
     <Compile Include="FindFormulaErrors\CVErrEnum.cs" />
     <Compile Include="DataValidation\CellsValueValidator.cs" />
     <Compile Include="DataValidation\IValidator.cs" />
@@ -267,26 +266,7 @@
     <Compile Include="Transliterate\CyrillicToLatinFallback.cs" />
     <Compile Include="Transliterate\Transliterator.cs" />
     <Compile Include="Undo\UndoManager.cs" />
-    <Compile Include="Web\CurrencyExchangeRates\DataProviders\ECB\ECBProvider.cs" />
-    <Compile Include="Web\CurrencyExchangeRates\DataProviders\ECB\ECBExchangeRatesRecord.cs" />
-    <Compile Include="Web\CurrencyExchangeRates\DataProviders\ECB\XmlDeserializerToObject.cs" />
-    <Compile Include="Web\CurrencyExchangeRates\DataProviders\NBU\NBUProvider.cs" />
-    <Compile Include="Web\CurrencyExchangeRates\DataProviders\ExchangeRatesDataProviderBaase.cs" />
-    <Compile Include="Web\CurrencyExchangeRates\DataProviders\CBRF\CBRFProvider.cs" />
-    <Compile Include="Web\CurrencyExchangeRates\DataProviders\NBU\JsonExchangeRatesForDateRecord.cs" />
-    <Compile Include="Web\CurrencyExchangeRates\CurrencyExchangeRatesDataset.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>CurrencyExchangeRatesDataset.xsd</DependentUpon>
-    </Compile>
-    <Compile Include="Web\CurrencyExchangeRates\WebResultRow.cs" />
     <Compile Include="Web\CurrencyExchangeRates\CurrencyExchangeRatesBuilder.cs" />
-    <Compile Include="Web\CurrencyExchangeRates\frmExchangeRates.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Web\CurrencyExchangeRates\frmExchangeRates.Designer.cs">
-      <DependentUpon>frmExchangeRates.cs</DependentUpon>
-    </Compile>
     <Compile Include="Web\CurrencyExchangeRates\ICurrencyExchangeRates.cs" />
     <Compile Include="WorksheetCellsEditing\ConditionalFormatFixer.cs" />
     <Compile Include="WorksheetCellsEditing\IConditionalFormatFixer.cs" />
@@ -347,7 +327,6 @@
     <Compile Include="XmlTools\XmlValidationError.cs" />
     <Compile Include="XmlTools\XmlValidator.cs" />
     <Compile Include="XmlTools\XsdSchemaValidator.cs" />
-    <None Include="Connected Services\Web.CBR\DailyInfo.wsdl" />
     <None Include="Properties\DataSources\System.Data.DataSet.datasource" />
     <None Include="Properties\DataSources\System.Xml.XmlNode.datasource" />
     <None Include="Resources\replaceChars.png" />
@@ -371,12 +350,6 @@
     <None Include="Resources\findErrors.png" />
     <None Include="app.config" />
     <None Include="NavfertyExcelAddIn_TemporaryKey.pfx" />
-    <None Include="Connected Services\Web.CBR\configuration91.svcinfo" />
-    <None Include="Connected Services\Web.CBR\configuration.svcinfo" />
-    <None Include="Connected Services\Web.CBR\Reference.svcmap">
-      <Generator>WCF Proxy Generator</Generator>
-      <LastGenOutput>Reference.cs</LastGenOutput>
-    </None>
     <Content Include="NLog.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -414,22 +387,8 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>RibbonLabels.resx</DependentUpon>
     </Compile>
-    <None Include="Web\CurrencyExchangeRates\CurrencyExchangeRatesDataset.xsc">
-      <DependentUpon>CurrencyExchangeRatesDataset.xsd</DependentUpon>
-    </None>
-    <None Include="Web\CurrencyExchangeRates\CurrencyExchangeRatesDataset.xsd">
-      <SubType>Designer</SubType>
-      <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>CurrencyExchangeRatesDataset.Designer.cs</LastGenOutput>
-    </None>
-    <None Include="Web\CurrencyExchangeRates\CurrencyExchangeRatesDataset.xss">
-      <DependentUpon>CurrencyExchangeRatesDataset.xsd</DependentUpon>
-    </None>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Web\CurrencyExchangeRates\frmExchangeRates.resx">
-      <DependentUpon>frmExchangeRates.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="InteractiveRangeReport\InteractiveRangeReportForm.resx">
       <DependentUpon>InteractiveRangeReportForm.cs</DependentUpon>
       <SubType>Designer</SubType>
@@ -475,12 +434,13 @@
     <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <ItemGroup>
-    <WCFMetadataStorage Include="Connected Services\Web.CBR\" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\Navferty.Common\Navferty.Common.csproj">
       <Project>{f14665a1-a035-4c8e-845e-f00029c8181a}</Project>
       <Name>Navferty.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Navferty.ExcelAddIn.Web\Navferty.ExcelAddIn.Web.csproj">
+      <Project>{443907ef-f460-4726-94f0-fe35a1ac8fa2}</Project>
+      <Name>Navferty.ExcelAddIn.Web</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

@@ -1,0 +1,266 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Address" xml:space="preserve">
+    <value>Адрес ячейки</value>
+  </data>
+  <data name="CannotUnlockPleaseSaveAsXml" xml:space="preserve">
+    <value>Для разброкировки содержимого сохраните книгу в формате .xlsx или .xlsm</value>
+  </data>
+  <data name="CurrencyExchangeRates_Error_CanSelectOnlyOneRow" xml:space="preserve">
+    <value>Можно выбрать только одну строку для вставки!</value>
+  </data>
+  <data name="CurrencyExchangeRates_Error_NedAnyCellSelection" xml:space="preserve">
+    <value>Необходимо выбрать ячейку в таблице!</value>
+  </data>
+  <data name="CurrencyExchangeRates_Error_Network" xml:space="preserve">
+    <value>Не удалось получить данные с онлайн источника из-за сетевой ошибки!</value>
+  </data>
+  <data name="CurrencyExchangeRates_Error_NotAvailYet" xml:space="preserve">
+    <value>{0}, на данный момент, не предоставляет данных за {1}!
+
+Попробуйте повторить запрос позже, или укажите другую дату.</value>
+  </data>
+  <data name="CurrencyExchangeRates_Error_ParseError" xml:space="preserve">
+    <value>Не удалось разобрать данные с онлайн источника из-за ошибки в формате данных!</value>
+  </data>
+  <data name="CurrencyExchangeRates_FilterDescription" xml:space="preserve">
+    <value>Фильтр по наименованию и коду валюты</value>
+  </data>
+  <data name="CurrencyExchangeRates_FilterTitle" xml:space="preserve">
+    <value>Отбор строк:</value>
+  </data>
+  <data name="CurrencyExchangeRates_FormTitle" xml:space="preserve">
+    <value>Курсы валют</value>
+  </data>
+  <data name="CurrencyExchangeRates_GridColumn_ISO" xml:space="preserve">
+    <value>Код</value>
+  </data>
+  <data name="CurrencyExchangeRates_GridColumn_Name" xml:space="preserve">
+    <value>Валюта</value>
+  </data>
+  <data name="CurrencyExchangeRates_GridColumn_Rate" xml:space="preserve">
+    <value>Курс</value>
+  </data>
+  <data name="CurrencyExchangeRates_PasteToCell" xml:space="preserve">
+    <value>Вставить в ячейку листа</value>
+  </data>
+  <data name="CurrencyExchangeRates_Source" xml:space="preserve">
+    <value>Источник данных:</value>
+  </data>
+  <data name="CurrencyExchangeRates_Sources_CBRF" xml:space="preserve">
+    <value>Центральный банк Российской Федерации (Банк России)</value>
+  </data>
+  <data name="CurrencyExchangeRates_Sources_ECB" xml:space="preserve">
+    <value>Европейский центральный банк</value>
+  </data>
+  <data name="CurrencyExchangeRates_Sources_NBU" xml:space="preserve">
+    <value>Національний банк України</value>
+  </data>
+  <data name="CurrencyExchangeRates_UnitsFormat" xml:space="preserve">
+    <value>за {0} единиц</value>
+  </data>
+  <data name="Error" xml:space="preserve">
+    <value>Ошибка</value>
+  </data>
+  <data name="ErrorMessage" xml:space="preserve">
+    <value>Произошла ошибка: {0}</value>
+  </data>
+  <data name="Formula" xml:space="preserve">
+    <value>Формула</value>
+  </data>
+  <data name="Info" xml:space="preserve">
+    <value>Внимание</value>
+  </data>
+  <data name="NoErrors" xml:space="preserve">
+    <value>В диапазоне {0} ошибок не найдено</value>
+  </data>
+  <data name="NoMatchingWorkSheets" xml:space="preserve">
+    <value>Нет подходящих листов в книге</value>
+  </data>
+  <data name="SearchResults" xml:space="preserve">
+    <value>Результаты поиска</value>
+  </data>
+  <data name="SheetProtectionFlag_Contents" xml:space="preserve">
+    <value>содержимое</value>
+  </data>
+  <data name="SheetProtectionFlag_DrawingObjects" xml:space="preserve">
+    <value>фигуры</value>
+  </data>
+  <data name="SheetProtectionFlag_Scenarios" xml:space="preserve">
+    <value>сценарии</value>
+  </data>
+  <data name="SheetProtectionFlag_UI" xml:space="preserve">
+    <value>пользовательский интерфейс</value>
+  </data>
+  <data name="SheetProtection_Clear" xml:space="preserve">
+    <value>Снять</value>
+  </data>
+  <data name="SheetProtection_Execute" xml:space="preserve">
+    <value>Выполнить</value>
+  </data>
+  <data name="SheetProtection_Password" xml:space="preserve">
+    <value>Пароль:</value>
+  </data>
+  <data name="SheetProtection_PasswordBanner" xml:space="preserve">
+    <value>Укажите пароль для листов (необязательно)...</value>
+  </data>
+  <data name="SheetProtection_Protected" xml:space="preserve">
+    <value>Защищено</value>
+  </data>
+  <data name="SheetProtection_ProtectionForSheets" xml:space="preserve">
+    <value>защиту следующих листов книги:</value>
+  </data>
+  <data name="SheetProtection_Set" xml:space="preserve">
+    <value>Установить</value>
+  </data>
+  <data name="ShowVersionMessage" xml:space="preserve">
+    <value>Надстройка Navferty, публикуется под лицензией MIT. Версия </value>
+  </data>
+  <data name="SuccessfullyValidatedMessage" xml:space="preserve">
+    <value>Валидация успешна, ошибок не обнаружено</value>
+  </data>
+  <data name="UnsavedChangesWillBeLostPrompt" xml:space="preserve">
+    <value>Несохранённые изменения будут утеряны. Книга может оказаться повреждённой: настоятельно рекомендуется предварительно создать копию. Продолжить?</value>
+  </data>
+  <data name="VbaUnprotected" xml:space="preserve">
+    <value>Проект VBA разблокирован. Чтобы получить доступ к содержимому VBA-проекта, откройте свойста проекта в редакторе VBE, и на вкладке Protection установите любой пароль и нажмите OK. После этого Вы можете удалить пароль путем снятия опции Lock project for viewing.</value>
+  </data>
+  <data name="Warning" xml:space="preserve">
+    <value>Внимание</value>
+  </data>
+  <data name="WorkSheetsNotFound" xml:space="preserve">
+    <value>Книга '{0}' не содержит листов!</value>
+  </data>
+  <data name="WsName" xml:space="preserve">
+    <value>Имя листа</value>
+  </data>
+  <data name="XmlValidationReport_ElementName" xml:space="preserve">
+    <value>Элемент</value>
+  </data>
+  <data name="XmlValidationReport_Message" xml:space="preserve">
+    <value>Ошибка</value>
+  </data>
+  <data name="XmlValidationReport_Severity" xml:space="preserve">
+    <value>Уровень</value>
+  </data>
+  <data name="XmlValidationReport_Value" xml:space="preserve">
+    <value>Значение</value>
+  </data>
+</root>

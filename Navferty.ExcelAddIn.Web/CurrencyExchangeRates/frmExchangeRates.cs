@@ -8,12 +8,11 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 
 using Navferty.Common;
-
-using NavfertyExcelAddIn.Localization;
+using Navferty.ExcelAddIn.Web.Localization;
 
 #nullable enable
 
-namespace NavfertyExcelAddIn.Web.CurrencyExchangeRates
+namespace Navferty.ExcelAddIn.Web.CurrencyExchangeRates
 {
 	internal partial class frmExchangeRates : Navferty.Common.Controls.FormEx
 	{
@@ -43,7 +42,7 @@ namespace NavfertyExcelAddIn.Web.CurrencyExchangeRates
 		private static int ratesDecimalDigitsCount = 4;
 
 
-		private WebResultRow? SelectedExchangeRate;
+		public WebResultRow? SelectedExchangeRate;
 
 		/// <summary>Just for designer</summary>
 		[EditorBrowsable(EditorBrowsableState.Never)]
@@ -52,7 +51,7 @@ namespace NavfertyExcelAddIn.Web.CurrencyExchangeRates
 			InitializeComponent();
 		}
 
-		private frmExchangeRates(IDialogService ds) : this()
+		public frmExchangeRates(IDialogService ds) : this()
 		{
 			dialogService = ds;
 		}
@@ -266,13 +265,6 @@ namespace NavfertyExcelAddIn.Web.CurrencyExchangeRates
 			}
 		}
 
-		public static WebResultRow? SelectExchageRate(IDialogService dialogService)
-		{
-			using (var f = new frmExchangeRates(dialogService))
-			{
-				if (f.ShowDialog() != DialogResult.OK) return null;
-				return f.SelectedExchangeRate;
-			};
-		}
+
 	}
 }
