@@ -59,6 +59,7 @@ namespace Navferty.ExcelAddIn.Web.CurrencyExchangeRates
 		private void Form_Load(object sender, EventArgs e)
 		{
 			Text = UIStrings.CurrencyExchangeRates_FormTitle;
+			lblInfoTip.Text = UIStrings.CurrencyExchangeRates_FormInfoTip;
 
 			lblSource.Text = UIStrings.CurrencyExchangeRates_Source;
 			btnPasteResult.Text = UIStrings.CurrencyExchangeRates_PasteToCell;

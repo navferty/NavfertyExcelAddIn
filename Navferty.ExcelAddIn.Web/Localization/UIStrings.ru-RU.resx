@@ -140,6 +140,10 @@
   <data name="CurrencyExchangeRates_FilterTitle" xml:space="preserve">
     <value>Отбор строк:</value>
   </data>
+  <data name="CurrencyExchangeRates_FormInfoTip" xml:space="preserve">
+    <value>Для вставки значения курса на лист, выберите строку в таблице ↑ двойным кликом,
+или используйте кнопку →</value>
+  </data>
   <data name="CurrencyExchangeRates_FormTitle" xml:space="preserve">
     <value>Курсы валют</value>
   </data>
@@ -153,7 +157,7 @@
     <value>Курс</value>
   </data>
   <data name="CurrencyExchangeRates_PasteToCell" xml:space="preserve">
-    <value>Вставить в ячейку листа</value>
+    <value>Выбрать</value>
   </data>
   <data name="CurrencyExchangeRates_Source" xml:space="preserve">
     <value>Источник данных:</value>

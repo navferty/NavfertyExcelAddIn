@@ -140,6 +140,10 @@ Please try again later, or specify a different date.</value>
   <data name="CurrencyExchangeRates_FilterTitle" xml:space="preserve">
     <value>Rows Filter:</value>
   </data>
+  <data name="CurrencyExchangeRates_FormInfoTip" xml:space="preserve">
+    <value>To insert exchange rate value into worksheet, double click on the table ↑ row,
+or use the button →</value>
+  </data>
   <data name="CurrencyExchangeRates_FormTitle" xml:space="preserve">
     <value>Exchange Rates</value>
   </data>
@@ -153,7 +157,7 @@ Please try again later, or specify a different date.</value>
     <value>Exchange Rate</value>
   </data>
   <data name="CurrencyExchangeRates_PasteToCell" xml:space="preserve">
-    <value>Insert Into Worksheet Cell</value>
+    <value>Select</value>
   </data>
   <data name="CurrencyExchangeRates_Source" xml:space="preserve">
     <value>Data Source:</value>

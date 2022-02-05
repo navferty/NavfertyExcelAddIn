@@ -36,6 +36,7 @@
             this.cbProvider = new System.Windows.Forms.ComboBox();
             this.lblSource = new System.Windows.Forms.Label();
             this.lblFilterTitle = new System.Windows.Forms.Label();
+            this.lblInfoTip = new Navferty.Common.Controls.LabelEx();
             this.tlpMain.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridResult)).BeginInit();
             this.SuspendLayout();
@@ -72,6 +73,7 @@
             this.tlpMain.Controls.Add(this.cbProvider, 1, 0);
             this.tlpMain.Controls.Add(this.lblSource, 0, 0);
             this.tlpMain.Controls.Add(this.lblFilterTitle, 0, 1);
+            this.tlpMain.Controls.Add(this.lblInfoTip, 0, 3);
             this.tlpMain.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tlpMain.Location = new System.Drawing.Point(8, 8);
             this.tlpMain.Name = "tlpMain";
@@ -155,6 +157,21 @@
             this.lblFilterTitle.Text = "fltr";
             this.lblFilterTitle.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
+            // lblInfoTip
+            // 
+            this.tlpMain.SetColumnSpan(this.lblInfoTip, 2);
+            this.lblInfoTip.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblInfoTip.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.lblInfoTip.InfotipCornersRadius = 8;
+            this.lblInfoTip.InfotippBorderColor = System.Drawing.SystemColors.ButtonShadow;
+            this.lblInfoTip.Location = new System.Drawing.Point(3, 495);
+            this.lblInfoTip.Name = "lblInfoTip";
+            this.lblInfoTip.Padding = new System.Windows.Forms.Padding(4);
+            this.lblInfoTip.Size = new System.Drawing.Size(487, 40);
+            this.lblInfoTip.TabIndex = 7;
+            this.lblInfoTip.Text = "*";
+            this.lblInfoTip.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
             // frmExchangeRates
             // 
             this.AcceptButton = this.btnPasteResult;
@@ -189,5 +206,6 @@
         private Navferty.Common.Controls.DataGridViewEx gridResult;
         private System.Windows.Forms.Label lblSource;
         private System.Windows.Forms.Label lblFilterTitle;
-    }
+		private Common.Controls.LabelEx lblInfoTip;
+	}
 }

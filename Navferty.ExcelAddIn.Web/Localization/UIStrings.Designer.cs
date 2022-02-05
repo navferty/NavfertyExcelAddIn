@@ -126,6 +126,16 @@ namespace Navferty.ExcelAddIn.Web.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to To insert exchange rate value into worksheet, double click on the table ↑ row,
+        ///or use the button →.
+        /// </summary>
+        internal static string CurrencyExchangeRates_FormInfoTip {
+            get {
+                return ResourceManager.GetString("CurrencyExchangeRates_FormInfoTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Exchange Rates.
         /// </summary>
         internal static string CurrencyExchangeRates_FormTitle {
@@ -162,7 +172,7 @@ namespace Navferty.ExcelAddIn.Web.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Insert Into Worksheet Cell.
+        ///   Looks up a localized string similar to Select.
         /// </summary>
         internal static string CurrencyExchangeRates_PasteToCell {
             get {

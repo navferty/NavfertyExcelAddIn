@@ -41,6 +41,9 @@
     <Compile Include="Controls\CheckedListBoxEx.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Controls\LabelEx.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Controls\DataGridViewEx.cs">
       <SubType>Component</SubType>
     </Compile>

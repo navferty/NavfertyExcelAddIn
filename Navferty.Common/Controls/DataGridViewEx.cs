@@ -89,14 +89,12 @@ namespace Navferty.Common.Controls
 			if ((RowCount > 0) || (string.IsNullOrWhiteSpace(emptyText))) return;
 
 			Graphics g = e.Graphics;
-
+			g.PageUnit = GraphicsUnit.Pixel;
 
 			g.SetClip(ClientRectangle);
 			g.Clear(BackgroundColor);
 
-			using (var sf = emptyTextAlign.ToStringFormat())
-			using (Brush brText = new SolidBrush(ForeColor))
-				g.DrawString(emptyText, Font, brText, ClientRectangle, sf);
+			g.DrawTextEx(emptyText, Font, ForeColor, ClientRectangle, emptyTextAlign);
 		}
 	}
 }

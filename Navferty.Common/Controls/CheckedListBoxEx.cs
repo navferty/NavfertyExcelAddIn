@@ -58,15 +58,12 @@ namespace Navferty.Common.Controls
 			if (Items.Count > 0 || string.IsNullOrWhiteSpace(emptyText))
 				return;//We paint over only if ListBox noes not have any items and and EmptyText
 
-			var rcClient = WinAPI.GetClientRect(this);
+			//var rcClient = WinAPI.GetClientRect(this);
 			using (var dc = new WinAPI.DC(this))
 			using (var g = dc.CreateGraphics())
 			{
 				g.PageUnit = GraphicsUnit.Pixel;
-				using (var sf = emptyTextAlign.ToStringFormat())
-				using (var brText = new SolidBrush(SystemColors.ControlDarkDark))
-					g.DrawString(emptyText, Font, brText, rcClient, sf);
-
+				g.DrawTextEx(emptyText, Font, SystemColors.ControlDarkDark, ClientRectangle, emptyTextAlign);
 			}
 		}
 
