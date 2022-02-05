@@ -416,10 +416,10 @@ namespace NavfertyExcelAddIn
 			if (wb is null) return;
 
 			var path = wb.FullName;
-			logger.Debug($"CurrencyExchangeRates {path}");
+			logger.Debug($"Web.CurrencyExchangeRates {path}");
 
 			var webExchangeRates = GetService<Web.IWebTools>();
-			webExchangeRates.CurrencyExchangeRates_Show(wb);
+			webExchangeRates.CurrencyExchangeRates_Show();
 		}
 		#endregion
 

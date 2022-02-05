@@ -123,58 +123,8 @@
   <data name="CannotUnlockPleaseSaveAsXml" xml:space="preserve">
     <value>Для разброкировки содержимого сохраните книгу в формате .xlsx или .xlsm</value>
   </data>
-  <data name="CurrencyExchangeRates_Error_CanSelectOnlyOneRow" xml:space="preserve">
-    <value>Можно выбрать только одну строку для вставки!</value>
-  </data>
   <data name="CurrencyExchangeRates_Error_NedAnyCellSelection" xml:space="preserve">
     <value>Необходимо выбрать ячейку в таблице!</value>
-  </data>
-  <data name="CurrencyExchangeRates_Error_Network" xml:space="preserve">
-    <value>Не удалось получить данные с онлайн источника из-за сетевой ошибки!</value>
-  </data>
-  <data name="CurrencyExchangeRates_Error_NotAvailYet" xml:space="preserve">
-    <value>{0}, на данный момент, не предоставляет данных за {1}!
-
-Попробуйте повторить запрос позже, или укажите другую дату.</value>
-  </data>
-  <data name="CurrencyExchangeRates_Error_ParseError" xml:space="preserve">
-    <value>Не удалось разобрать данные с онлайн источника из-за ошибки в формате данных!</value>
-  </data>
-  <data name="CurrencyExchangeRates_FilterDescription" xml:space="preserve">
-    <value>Фильтр по наименованию и коду валюты</value>
-  </data>
-  <data name="CurrencyExchangeRates_FilterTitle" xml:space="preserve">
-    <value>Отбор строк:</value>
-  </data>
-  <data name="CurrencyExchangeRates_FormTitle" xml:space="preserve">
-    <value>Курсы валют</value>
-  </data>
-  <data name="CurrencyExchangeRates_GridColumn_ISO" xml:space="preserve">
-    <value>Код</value>
-  </data>
-  <data name="CurrencyExchangeRates_GridColumn_Name" xml:space="preserve">
-    <value>Валюта</value>
-  </data>
-  <data name="CurrencyExchangeRates_GridColumn_Rate" xml:space="preserve">
-    <value>Курс</value>
-  </data>
-  <data name="CurrencyExchangeRates_PasteToCell" xml:space="preserve">
-    <value>Вставить в ячейку листа</value>
-  </data>
-  <data name="CurrencyExchangeRates_Source" xml:space="preserve">
-    <value>Источник данных:</value>
-  </data>
-  <data name="CurrencyExchangeRates_Sources_CBRF" xml:space="preserve">
-    <value>Центральный банк Российской Федерации (Банк России)</value>
-  </data>
-  <data name="CurrencyExchangeRates_Sources_ECB" xml:space="preserve">
-    <value>Европейский центральный банк</value>
-  </data>
-  <data name="CurrencyExchangeRates_Sources_NBU" xml:space="preserve">
-    <value>Національний банк України</value>
-  </data>
-  <data name="CurrencyExchangeRates_UnitsFormat" xml:space="preserve">
-    <value>за {0} единиц</value>
   </data>
   <data name="Error" xml:space="preserve">
     <value>Ошибка</value>

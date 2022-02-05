@@ -18,7 +18,7 @@ namespace NavfertyExcelAddIn.Web
 			=> this.dialogService = dialogService;
 
 
-		public void CurrencyExchangeRates_Show(Workbook wb)
+		public void CurrencyExchangeRates_Show()
 		{
 			Range? sel = App.Selection;
 			if (null == sel || sel.Cells == null || sel.Cells.Count < 1)

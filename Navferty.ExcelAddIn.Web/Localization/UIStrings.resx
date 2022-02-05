@@ -117,9 +117,6 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Address" xml:space="preserve">
-    <value>Range Address</value>
-  </data>
   <data name="CurrencyExchangeRates_Error_CanSelectOnlyOneRow" xml:space="preserve">
     <value>You can select only one row to insert!</value>
   </data>
@@ -184,8 +181,5 @@ Please try again later, or specify a different date.</value>
   </data>
   <data name="Warning" xml:space="preserve">
     <value>Warning!</value>
-  </data>
-  <data name="WsName" xml:space="preserve">
-    <value>Worksheet Name</value>
   </data>
 </root>

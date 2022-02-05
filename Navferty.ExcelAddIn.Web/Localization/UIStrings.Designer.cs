@@ -61,15 +61,6 @@ namespace Navferty.ExcelAddIn.Web.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Range Address.
-        /// </summary>
-        internal static string Address {
-            get {
-                return ResourceManager.GetString("Address", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to You can select only one row to insert!.
         /// </summary>
         internal static string CurrencyExchangeRates_Error_CanSelectOnlyOneRow {
@@ -257,15 +248,6 @@ namespace Navferty.ExcelAddIn.Web.Localization {
         internal static string Warning {
             get {
                 return ResourceManager.GetString("Warning", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Worksheet Name.
-        /// </summary>
-        internal static string WsName {
-            get {
-                return ResourceManager.GetString("WsName", resourceCulture);
             }
         }
     }
