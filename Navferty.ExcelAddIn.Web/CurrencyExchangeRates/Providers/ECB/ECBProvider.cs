@@ -46,9 +46,9 @@ namespace Navferty.ExcelAddIn.Web.CurrencyExchangeRates.Providers
 			var urlECBExchangeForDate = @$"https://sdw-wsrest.ecb.europa.eu/service/data/EXR?startPeriod={sDate}&endPeriod={sDate}";
 			logger.Debug($"Query url: {urlECBExchangeForDate}");
 
-			rawXML = await (await web.GetAsync(urlECBExchangeForDate)).
-				EnsureSuccessStatusCode().
-				Content.ReadAsStringAsync();
+			var webResponce = (await web.GetAsync(urlECBExchangeForDate));
+			logger.Debug($"webResponce.StatusCode: {webResponce.StatusCode}, IsSuccessStatusCode = {webResponce.IsSuccessStatusCode}");
+			rawXML = await webResponce.EnsureSuccessStatusCode().Content.ReadAsStringAsync();
 
 			if (string.IsNullOrWhiteSpace(rawXML))
 			{

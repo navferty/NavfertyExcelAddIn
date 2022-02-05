@@ -41,9 +41,9 @@ namespace Navferty.ExcelAddIn.Web.CurrencyExchangeRates.Providers
 			var urlNBUExchangeForDate = @$"https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange?date={sDateForNBU}&json";
 			logger.Debug($"Query url: {urlNBUExchangeForDate}");
 
-			rawJson = await (await web.GetAsync(urlNBUExchangeForDate)).
-				EnsureSuccessStatusCode().
-				Content.ReadAsStringAsync();
+			var webResponce = (await web.GetAsync(urlNBUExchangeForDate));
+			logger.Debug($"webResponce.StatusCode: {webResponce.StatusCode}, IsSuccessStatusCode = {webResponce.IsSuccessStatusCode}");
+			rawJson = await webResponce.EnsureSuccessStatusCode().Content.ReadAsStringAsync();
 
 			try
 			{
