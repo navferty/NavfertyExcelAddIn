@@ -48,7 +48,7 @@
     <Compile Include="CurrencyExchangeRates\DataProviders\CBRF\CBRFProvider.cs" />
     <Compile Include="CurrencyExchangeRates\DataProviders\ECB\ECBExchangeRatesRecord.cs" />
     <Compile Include="CurrencyExchangeRates\DataProviders\ECB\ECBProvider.cs" />
-    <Compile Include="CurrencyExchangeRates\DataProviders\ExchangeRatesDataProviderBaase.cs" />
+    <Compile Include="CurrencyExchangeRates\DataProviders\ExchangeRatesDataProviderBase.cs" />
     <Compile Include="CurrencyExchangeRates\DataProviders\NBU\JsonExchangeRatesForDateRecord.cs" />
     <Compile Include="CurrencyExchangeRates\DataProviders\NBU\NBUProvider.cs" />
     <Compile Include="CurrencyExchangeRates\frmExchangeRates.cs">

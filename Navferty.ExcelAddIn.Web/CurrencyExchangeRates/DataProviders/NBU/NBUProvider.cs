@@ -14,7 +14,7 @@ using NLog;
 
 namespace Navferty.ExcelAddIn.Web.CurrencyExchangeRates.Providers
 {
-	internal class NBUProvider : ExchangeRatesDataProviderBaase
+	internal class NBUProvider : ExchangeRatesDataProviderBase
 	{
 		private static readonly CultureInfo ci = CultureInfo.GetCultureInfo("uk-UA");
 
