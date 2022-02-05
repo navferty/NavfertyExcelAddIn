@@ -36,7 +36,7 @@ namespace Navferty.ExcelAddIn.Web.CurrencyExchangeRates.Providers
 		private ECB.ECBExchangeRatesRecord[] rawRows = Array.Empty<ECB.ECBExchangeRatesRecord>();
 		private HttpClient web = new();
 
-		protected override async Task<ExchangeRateRecord[]> DownloadWebResultRowsForDate(DateTime dt)
+		protected override async Task<ExchangeRateRecord[]> DownloadExchangeRatesForDayAsync(DateTime dt)
 		{
 			rawXML = String.Empty;
 			rawRows = Array.Empty<ECB.ECBExchangeRatesRecord>();

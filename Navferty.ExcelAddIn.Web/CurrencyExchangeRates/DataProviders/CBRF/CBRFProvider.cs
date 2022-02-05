@@ -26,7 +26,7 @@ namespace Navferty.ExcelAddIn.Web.CurrencyExchangeRates.Providers
 		public override ILogger Logger => logger;
 
 		private DataTable? rawDataTable = null;
-		protected override async Task<ExchangeRateRecord[]> DownloadWebResultRowsForDate(DateTime dt)
+		protected override async Task<ExchangeRateRecord[]> DownloadExchangeRatesForDayAsync(DateTime dt)
 		{
 
 			using (var cbr = new cbrwebservice.DailyInfoSoapClient())
