@@ -2,6 +2,7 @@
 using System.ComponentModel;
 using System.Data;
 using System.Globalization;
+using System.Linq;
 
 using Navferty.ExcelAddIn.Web.Localization;
 
@@ -120,6 +121,29 @@ namespace Navferty.ExcelAddIn.Web.CurrencyExchangeRates
 
 			return exchangeRatesDecimalDigitsCount;
 			*/
+		}
+
+		internal static CurrencyExchangeRatesDataset.ExchangeRatesDataTable ToDataTable(ExchangeRateRecord[] webRows)
+		{
+			//Sort rows
+			webRows = (from r in webRows
+					   orderby r.PriorityInGrid ascending, r.Name ascending
+					   select r).ToArray();
+
+			CurrencyExchangeRatesDataset.ExchangeRatesDataTable dtResult = new();
+			webRows.ToList().ForEach(wrr =>
+			{
+				var newRow = dtResult.NewExchangeRatesRow();
+				{
+					newRow.Raw = wrr;
+					newRow.Name = wrr.DisplayName;
+					newRow.ISO = wrr.ISOCode;
+					newRow.Rate = wrr.Curs;
+				}
+				dtResult.Rows.Add(newRow);
+			});
+
+			return dtResult;
 		}
 	}
 }

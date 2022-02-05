@@ -34,110 +34,81 @@ namespace Navferty.ExcelAddIn.Web.CurrencyExchangeRates.Providers
 			DateTime dt,
 			Func<ExchangeRateRecord, uint?> cbGetCurrencyPriority)
 		{
-			ExchangeRateRecord[]? webRowsForDay = null;
-			ExchangeRateRecord[]? webRowsForPrevDay = null;
-			Exception? ex1 = null;
-			Exception? ex2 = null;
+			dt = dt.Date;//Cut off time			
 
-			dt = dt.Date;//Cut off time
-			var dtPrevDay = dt.AddDays(-1);
-
-			var sw = new Stopwatch();
-			try
+			var result = await TryGetExchangeRatesForDate(dt, 1);
+			if (!result.HasData)
 			{
-				Logger.Debug($"1st web query attempt for '{dt}' starting...");
-				sw.Start();
-				webRowsForDay = await DownloadExchangeRatesForDayAsync(dt);
-				sw.Stop();
-				Logger.Debug($"1st web query finished OK. Elapsed: {sw.Elapsed.TotalMilliseconds}ms.");
+				var dtPrevDay = dt.AddDays(-3); //We're going back a few days.
+												//For some sources, the data may not be available at the end of the banking day in their local time,
+												//so a request for -1 day ago, according to the user's calendar,
+												//may also not work and lead to errors.
+												//So we go straight to 3 days ago, to avoid "false" errors!
 
-				if (null == webRowsForDay || !webRowsForDay.Any())
-				{
-					Logger.Error("1st webRowsForDay = NULL!");
-					throw new Exception(UIStrings.CurrencyExchangeRates_Error_Network);
-				}
-			}
-			catch (Exception e1)
-			{
-				sw.Stop();
-				ex1 = e1;
-				Logger.Error(ex1, $"1st web query '{dt}' Failed! Elapsed: {sw.Elapsed.TotalMilliseconds}ms.");
-			}
 
-			if (null != ex1)
-			{
-				Logger.Debug($"2nd web query attempt for '{dtPrevDay}' starting...");
-				sw = new Stopwatch();
-				try
-				{
-					sw.Start();
-					webRowsForPrevDay = await DownloadExchangeRatesForDayAsync(dtPrevDay);
-					sw.Stop();
-					Logger.Debug($"2nd web query finished OK. Elapsed: {sw.Elapsed.TotalMilliseconds}ms.");
+				var result2 = await TryGetExchangeRatesForDate(dtPrevDay, 2);
+				if (!result2.HasData) throw result.Err!;  // both web requests failed! Looks like we have some network problems...
 
-					if (null == webRowsForPrevDay || !webRowsForPrevDay.Any())
-					{
-						Logger.Error("2nd webRowsForPrevDay = NULL!");
-						throw new Exception(UIStrings.CurrencyExchangeRates_Error_Network);
-					}
-				}
-				catch (Exception e2)
-				{
-					sw.Stop();
-					ex2 = e2;
-					Logger.Error(ex2, $"2nd web query '{dtPrevDay}' Failed! Elapsed: {sw.Elapsed.TotalMilliseconds}ms.");
-				}
-			}
-
-			if (ex1 != null && ex2 != null)
-			{
-				// both web requests failed!
-				// Looks like we have some network problems...
-				throw ex1;
-			}
-
-			if (ex1 != null && ex2 == null)
-			{
-				// 2-nd web request finished good!
-				// The source does not yet contain data for the specified date!
-
+				// 2-nd web request finished good! The source does not yet contain data for the specified date!
 				string sErr = string.Format(UIStrings.CurrencyExchangeRates_Error_NotAvailYet,
 					Title,
 					dt.ToLongDateString());
 
-				Logger.Debug($"1st web request for '{dt}' failed, but 2-nd web request for '{dtPrevDay}' finished good!\nLooks like web source does not yet provide data for '{dt}'!");
-				//Logger.Debug(sErr);
+				Logger.Debug($"1st web request for '{dt}' failed, but 2-nd web request for '{dtPrevDay}' finished good! Looks like web source does not yet provide data for '{dt}'!");
 				throw new Exception(sErr);
 			}
 
-			CurrencyExchangeRatesDataset.ExchangeRatesDataTable dtResult = new();
+			var webRows = result.Rows!;
 			if (null != cbGetCurrencyPriority)
 			{
 				//Get priority for each row
-				webRowsForDay.ToList().ForEach(wrr =>
+				webRows.ToList().ForEach(wrr =>
 			   {
 				   var priority = cbGetCurrencyPriority.Invoke(wrr);
 				   if (priority.HasValue) wrr.PriorityInGrid = priority.Value;
 			   });
 			}
 
-			(from r in webRowsForDay
-			 orderby r.PriorityInGrid ascending, r.Name ascending   //Sort by grid priority and title
-			 select r)
-			 .ToList().ForEach(wrr  //Populate our result datatable with rows...
-			 =>
-			 {
-				 var newRow = dtResult.NewExchangeRatesRow();
-				 {
-					 newRow.Raw = wrr;
-					 newRow.Name = wrr.DisplayName;
-					 newRow.ISO = wrr.ISOCode;
-					 newRow.Rate = wrr.Curs;
-				 }
-				 dtResult.Rows.Add(newRow);
-			 });
+			return ExchangeRateRecord.ToDataTable(webRows);
+		}
 
-			return dtResult;
+		private struct WebResult
+		{
+			public readonly ExchangeRateRecord[]? Rows = null;
+			public readonly Exception? Err = null;
+
+			public WebResult(ExchangeRateRecord[] rows)
+			{
+				this.Rows = rows;
+				if (!HasData) Err = new Exception("Web query finished without error (Unknown error)!");
+			}
+
+			public WebResult(Exception e) { Err = e; }
+
+			public bool HasData => (null != Rows && Rows.Any());
+		}
+
+		private async Task<WebResult> TryGetExchangeRatesForDate(DateTime dt, int nTry)
+		{
+			string sDate = dt.ToString("yyyy-MM-dd");
+			Logger.Debug($"Starting Web query attempt #{nTry}, Date: '{sDate}'...");
+			var sw = new Stopwatch();
+			try
+			{
+				sw.Start();
+				var webRows = await DownloadExchangeRatesForDayAsync(dt);
+				sw.Stop();
+				Logger.Debug($"Web query finished OK. Elapsed: {sw.Elapsed.TotalMilliseconds}ms.");
+				var wr = new WebResult(webRows);
+				if (!wr.HasData) Logger.Error("Web query result: webRows is NULL or Empty rows!");
+				return wr;
+			}
+			catch (Exception ex)
+			{
+				sw.Stop();
+				Logger.Error(ex, $"Web query Failed! Elapsed: {sw.Elapsed.TotalMilliseconds}ms.");
+				return new WebResult(ex);
+			}
 		}
 
 		protected abstract Task<ExchangeRateRecord[]> DownloadExchangeRatesForDayAsync(DateTime dt);
