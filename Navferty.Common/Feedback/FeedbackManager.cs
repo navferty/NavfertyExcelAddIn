@@ -28,8 +28,7 @@ namespace Navferty.Common.Feedback
 					using (Graphics g = Graphics.FromImage(bmCapt))
 						g.CopyFromScreen(rcCapt.Left, rcCapt.Top, 0, 0, rcCapt.Size);
 
-					var sBitmapFile = System.IO.Path.Combine(
-						  System.IO.Path.GetTempPath(), (Guid.NewGuid().ToString() + '.'.ToString() + fileExt));
+					var sBitmapFile = Path.Combine(Path.GetTempPath(), (Guid.NewGuid().ToString() + '.'.ToString() + fileExt));
 					bmCapt.Save(sBitmapFile, fmt);
 					return new System.IO.FileInfo(sBitmapFile);
 				}
@@ -45,7 +44,19 @@ namespace Navferty.Common.Feedback
 			bool sendScreenshots = true
 			)
 		{
+			List<FileInfo> lFilesToAttach = new();
+
 			logger.Value.Debug("Start SendFeedEMail");
+			var logFileName = LogManagement.GetTargetFilename(null);
+			var fiLogOld = new FileInfo(logFileName);
+			if (fiLogOld.Exists)
+			{
+				logger.Value.Debug($"Attaching Log File: '{fiLogOld.FullName}'");
+				var sNewLogFile = Path.Combine(Path.GetTempPath(), (Guid.NewGuid().ToString() + "_" + fiLogOld.Name));
+				var fiLogNew = new FileInfo(sNewLogFile);
+				fiLogOld.CopyTo(fiLogNew.FullName);
+				if (fiLogNew.Exists) lFilesToAttach.Add(fiLogNew);
+			}
 
 			//TODO: !!! Insert developer email instead of this !!!
 			string developerMail = (new Func<string>(() =>
@@ -65,9 +76,9 @@ namespace Navferty.Common.Feedback
 			if (messageBody.Length > MAX_MESSAGE_BODY_LENGH) messageBody = new string(messageBody.Take(MAX_MESSAGE_BODY_LENGH).ToArray());
 			logger.Value.Debug($"messageBody:\n'{messageBody}'");
 
-			List<FileInfo> lScreenshotFiles = new();
-			if (sendScreenshots) lScreenshotFiles = GetScreenshotsAsFiles(ImageFormat.Jpeg).ToList();//Create screenshots to temp dir
-			logger.Value.Debug($"screensots: '{lScreenshotFiles.Count}'");
+			if (sendScreenshots) lFilesToAttach = GetScreenshotsAsFiles(ImageFormat.Jpeg).ToList();//Create screenshots to temp dir
+			logger.Value.Debug($"FilesToAttach: '{lFilesToAttach.Count}'");
+
 
 			try
 			{
@@ -77,7 +88,7 @@ namespace Navferty.Common.Feedback
 					MAIL_SUBJECT,
 					messageBody,
 					WinAPI.MAPI.UIFlags.SendMailDirectNoUI,
-					lScreenshotFiles.Select(fi => fi.FullName).ToArray()
+					lFilesToAttach.Select(fi => fi.FullName).ToArray()
 					);
 
 				logger.Value.Debug($"Send result: {bSend}");
@@ -86,7 +97,7 @@ namespace Navferty.Common.Feedback
 			finally
 			{
 				//Cleanup Temp files
-				lScreenshotFiles.ForEach(fi =>
+				lFilesToAttach.ForEach(fi =>
 				{
 					try { fi.Delete(); }
 					catch { }

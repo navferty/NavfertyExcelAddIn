@@ -268,6 +268,7 @@ namespace Navferty.Common
 					{
 						case MAPI_ERRORS.OK: return true;
 						case MAPI_ERRORS.UserAbort: return false;
+						case MAPI_ERRORS.NotSupported: return false;//If send with no UI, and user denied send, this occurs.
 						default: throw new MAPIException(Err);
 					}
 				}
