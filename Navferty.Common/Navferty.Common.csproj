@@ -50,6 +50,7 @@
     <Compile Include="Controls\FormEx.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Extensions\DrawingExtensions.cs" />
     <Compile Include="Extensions\ControlsExtensions.cs" />
     <Compile Include="Extensions\DataExtensions.cs" />
     <Compile Include="Extensions\EnumExtensions.cs" />

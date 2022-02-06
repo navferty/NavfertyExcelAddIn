@@ -27,7 +27,6 @@ namespace Navferty.Common.Controls
 				, true);
 		}
 
-
 		protected override void OnPaintBackground(PaintEventArgs e)
 		{
 			base.OnPaintBackground(e);
@@ -92,7 +91,14 @@ namespace Navferty.Common.Controls
 				rcInfo.DeflateByPadding(Padding);
 
 				using (var pnFrame = new Pen(infotipBorderColor, 1))
-					g.DrawRoundRect(rcInfo, infotipCornersRadius, pnFrame, SystemBrushes.Info);
+				{
+					using (var pathInfo = rcInfo.CreateRoundRect(infotipCornersRadius))
+					{
+						g.DrawPathShadow(pathInfo, 8, 50);
+						g.DrawPath(pathInfo, pnFrame, SystemBrushes.Info);
+					}
+					//g.DrawRoundRect(rcInfo, infotipCornersRadius, pnFrame, SystemBrushes.Info);
+				}
 
 				clrText = SystemColors.InfoText;
 			}
