@@ -19,7 +19,7 @@ namespace NavfertyExcelAddIn.Localization {
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     internal class RibbonLabels {
@@ -88,7 +88,7 @@ namespace NavfertyExcelAddIn.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Copy as Markdown.
+        ///   Looks up a localized string similar to Markdown.
         /// </summary>
         internal static string CopyAsMarkdown {
             get {
@@ -97,11 +97,20 @@ namespace NavfertyExcelAddIn.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Create Sample XML based on XSD.
+        ///   Looks up a localized string similar to XML from XSD.
         /// </summary>
         internal static string CreateSampleXml {
             get {
                 return ResourceManager.GetString("CreateSampleXml", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Exchange rates.
+        /// </summary>
+        internal static string CurrencyExchangeRatesSelect {
+            get {
+                return ResourceManager.GetString("CurrencyExchangeRatesSelect", resourceCulture);
             }
         }
         
@@ -115,7 +124,7 @@ namespace NavfertyExcelAddIn.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Find Formula Errors in the selected range.
+        ///   Looks up a localized string similar to Find Errors.
         /// </summary>
         internal static string FindErrors {
             get {
@@ -133,7 +142,7 @@ namespace NavfertyExcelAddIn.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Highlight Duplicates.
+        ///   Looks up a localized string similar to Colorize Duplicates.
         /// </summary>
         internal static string HighlightDuplicates {
             get {
@@ -142,11 +151,20 @@ namespace NavfertyExcelAddIn.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Parse Numerics.
+        ///   Looks up a localized string similar to To Numeric.
         /// </summary>
         internal static string ParseNumerics {
             get {
                 return ResourceManager.GetString("ParseNumerics", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Worksheets Protection.
+        /// </summary>
+        internal static string ProtectUnprotectWorksheets {
+            get {
+                return ResourceManager.GetString("ProtectUnprotectWorksheets", resourceCulture);
             }
         }
         
@@ -160,7 +178,7 @@ namespace NavfertyExcelAddIn.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Repair Conditional Formatting.
+        ///   Looks up a localized string similar to Conditional Formatting.
         /// </summary>
         internal static string RepairConditionalFormat {
             get {
@@ -174,6 +192,15 @@ namespace NavfertyExcelAddIn.Localization {
         internal static string ReplaceChars {
             get {
                 return ResourceManager.GetString("ReplaceChars", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Data protection.
+        /// </summary>
+        internal static string SecurityGroup {
+            get {
+                return ResourceManager.GetString("SecurityGroup", resourceCulture);
             }
         }
         
@@ -214,7 +241,7 @@ namespace NavfertyExcelAddIn.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Switch Reference Style (A1/R1C1).
+        ///   Looks up a localized string similar to Reference Style (A1/R1C1).
         /// </summary>
         internal static string SwitchReferenceStyle {
             get {
@@ -223,7 +250,7 @@ namespace NavfertyExcelAddIn.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Toggle Case.
+        ///   Looks up a localized string similar to Text Case.
         /// </summary>
         internal static string ToggleCase {
             get {
@@ -232,7 +259,7 @@ namespace NavfertyExcelAddIn.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Toggle Sheet Labels Display.
+        ///   Looks up a localized string similar to Sheet Tabs.
         /// </summary>
         internal static string ToggleSheetLabels {
             get {
@@ -286,7 +313,7 @@ namespace NavfertyExcelAddIn.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Unmerge Cells.
+        ///   Looks up a localized string similar to Unmerge.
         /// </summary>
         internal static string UnmergeCells {
             get {
@@ -295,7 +322,7 @@ namespace NavfertyExcelAddIn.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Unprotect Workbook.
+        ///   Looks up a localized string similar to Remove File Protection.
         /// </summary>
         internal static string UnprotectWorkbook {
             get {
@@ -304,7 +331,7 @@ namespace NavfertyExcelAddIn.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Validate Values.
+        ///   Looks up a localized string similar to Validate.
         /// </summary>
         internal static string ValidateValuesButton {
             get {
@@ -349,7 +376,7 @@ namespace NavfertyExcelAddIn.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to XML contents text.
+        ///   Looks up a localized string similar to XML Contents Text.
         /// </summary>
         internal static string ValidateValuesXml {
             get {
@@ -372,6 +399,15 @@ namespace NavfertyExcelAddIn.Localization {
         internal static string ViewGroup {
             get {
                 return ResourceManager.GetString("ViewGroup", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Web tools.
+        /// </summary>
+        internal static string WebToolsGroup {
+            get {
+                return ResourceManager.GetString("WebToolsGroup", resourceCulture);
             }
         }
         

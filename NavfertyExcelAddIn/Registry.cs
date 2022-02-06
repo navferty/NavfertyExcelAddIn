@@ -1,6 +1,8 @@
 ﻿using Autofac;
 using Autofac.Extras.DynamicProxy;
 
+using Navferty.Common;
+
 using NavfertyExcelAddIn.Commons;
 using NavfertyExcelAddIn.DataValidation;
 using NavfertyExcelAddIn.FindFormulaErrors;
@@ -10,6 +12,7 @@ using NavfertyExcelAddIn.Transliterate;
 using NavfertyExcelAddIn.Undo;
 using NavfertyExcelAddIn.UnprotectWorkbook;
 using NavfertyExcelAddIn.WorksheetCellsEditing;
+using NavfertyExcelAddIn.WorksheetProtectUnprotect;
 using NavfertyExcelAddIn.XmlTools;
 
 namespace NavfertyExcelAddIn
@@ -68,6 +71,11 @@ namespace NavfertyExcelAddIn
 				.EnableInterfaceInterceptors()
 				.InterceptedBy(typeof(ExceptionLogger));
 
+			builder.RegisterType<WsProtectorUnprotector>()
+				.As<IWsProtectorUnprotector>()
+				.EnableInterfaceInterceptors()
+				.InterceptedBy(typeof(ExceptionLogger));
+
 			builder.RegisterType<ErrorFinder>()
 				.As<IErrorFinder>()
 				.EnableInterfaceInterceptors()
@@ -115,6 +123,11 @@ namespace NavfertyExcelAddIn
 
 			builder.RegisterType<XmlSampleCreator>()
 				.As<IXmlSampleCreator>()
+				.EnableInterfaceInterceptors()
+				.InterceptedBy(typeof(ExceptionLogger));
+
+			builder.RegisterType<Web.WebToolsBuilder>()
+				.As<Web.IWebTools>()
 				.EnableInterfaceInterceptors()
 				.InterceptedBy(typeof(ExceptionLogger));
 

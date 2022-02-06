@@ -118,31 +118,28 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="ParseNumerics" xml:space="preserve">
-    <value>Parse Numerics</value>
+    <value>To Numeric</value>
   </data>
   <data name="UnprotectWorkbook" xml:space="preserve">
-    <value>Unprotect Workbook</value>
+    <value>Remove File Protection</value>
   </data>
   <data name="CutNames" xml:space="preserve">
     <value>Cut Names</value>
   </data>
-  <data name="HighlightDuplicates" xml:space="preserve">
-    <value>Highlight Duplicates</value>
-  </data>
   <data name="ToggleCase" xml:space="preserve">
-    <value>Toggle Case</value>
+    <value>Text Case</value>
   </data>
   <data name="TrimSpaces" xml:space="preserve">
     <value>Trim Spaces</value>
   </data>
   <data name="UnmergeCells" xml:space="preserve">
-    <value>Unmerge Cells</value>
+    <value>Unmerge</value>
   </data>
   <data name="ValidateXml" xml:space="preserve">
     <value>Validate XML with XSD</value>
   </data>
   <data name="CreateSampleXml" xml:space="preserve">
-    <value>Create Sample XML based on XSD</value>
+    <value>XML from XSD</value>
   </data>
   <data name="CommonGroup" xml:space="preserve">
     <value>Commons</value>
@@ -151,13 +148,13 @@
     <value>XML Tools</value>
   </data>
   <data name="FindErrors" xml:space="preserve">
-    <value>Find Formula Errors in the selected range</value>
+    <value>Find Errors</value>
   </data>
   <data name="CopyAsMarkdown" xml:space="preserve">
-    <value>Copy as Markdown</value>
+    <value>Markdown</value>
   </data>
   <data name="ValidateValuesButton" xml:space="preserve">
-    <value>Validate Values</value>
+    <value>Validate</value>
   </data>
   <data name="ValidateValuesDate" xml:space="preserve">
     <value>Date</value>
@@ -172,7 +169,7 @@
     <value>Russian TIN (Personal)</value>
   </data>
   <data name="ValidateValuesXml" xml:space="preserve">
-    <value>XML contents text</value>
+    <value>XML Contents Text</value>
   </data>
   <data name="Transliterate" xml:space="preserve">
     <value>With Transliteration 'У' -&gt; 'U'</value>
@@ -208,10 +205,10 @@
     <value>Undo Last Action</value>
   </data>
   <data name="SwitchReferenceStyle" xml:space="preserve">
-    <value>Switch Reference Style (A1/R1C1)</value>
+    <value>Reference Style (A1/R1C1)</value>
   </data>
   <data name="ToggleSheetLabels" xml:space="preserve">
-    <value>Toggle Sheet Labels Display</value>
+    <value>Sheet Tabs</value>
   </data>
   <data name="ViewGroup" xml:space="preserve">
     <value>View</value>
@@ -223,6 +220,21 @@
     <value>Trim Extra Spaces</value>
   </data>
   <data name="RepairConditionalFormat" xml:space="preserve">
-    <value>Repair Conditional Formatting</value>
+    <value>Conditional Formatting</value>
+  </data>
+  <data name="ProtectUnprotectWorksheets" xml:space="preserve">
+    <value>Worksheets Protection</value>
+  </data>
+  <data name="HighlightDuplicates" xml:space="preserve">
+    <value>Colorize Duplicates</value>
+  </data>
+  <data name="SecurityGroup" xml:space="preserve">
+    <value>Data protection</value>
+  </data>
+  <data name="CurrencyExchangeRatesSelect" xml:space="preserve">
+    <value>Exchange rates</value>
+  </data>
+  <data name="WebToolsGroup" xml:space="preserve">
+    <value>Web tools</value>
   </data>
 </root>

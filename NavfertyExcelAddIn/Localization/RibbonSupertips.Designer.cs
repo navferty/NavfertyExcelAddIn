@@ -19,7 +19,7 @@ namespace NavfertyExcelAddIn.Localization {
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     internal class RibbonSupertips {
@@ -70,6 +70,24 @@ namespace NavfertyExcelAddIn.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Create Sample XML based on XSD-file.
+        /// </summary>
+        internal static string CreateSampleXml {
+            get {
+                return ResourceManager.GetString("CreateSampleXml", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Select A Currency Exchange Rate From An Online Source And Paste Into The Current Cell.
+        /// </summary>
+        internal static string CurrencyExchangeRatesSelect {
+            get {
+                return ResourceManager.GetString("CurrencyExchangeRatesSelect", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to In the development....
         /// </summary>
         internal static string CutNames {
@@ -102,6 +120,15 @@ namespace NavfertyExcelAddIn.Localization {
         internal static string ParseNumerics {
             get {
                 return ResourceManager.GetString("ParseNumerics", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Set or remove Worksheets protection for current Workbook.
+        /// </summary>
+        internal static string ProtectUnprotectWorksheets {
+            get {
+                return ResourceManager.GetString("ProtectUnprotectWorksheets", resourceCulture);
             }
         }
         
@@ -170,11 +197,29 @@ namespace NavfertyExcelAddIn.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Switch Formula Reference Style (A1/R1C1).
+        /// </summary>
+        internal static string SwitchReferenceStyle {
+            get {
+                return ResourceManager.GetString("SwitchReferenceStyle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Change the case of all words in the cell. Replacement order: lowercase, uppercase, first capital, lowercase....
         /// </summary>
         internal static string ToggleCase {
             get {
                 return ResourceManager.GetString("ToggleCase", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Show or hide worksheet tabs.
+        /// </summary>
+        internal static string ToggleSheetLabels {
+            get {
+                return ResourceManager.GetString("ToggleSheetLabels", resourceCulture);
             }
         }
         
@@ -229,6 +274,15 @@ namespace NavfertyExcelAddIn.Localization {
         internal static string UnmergeCells {
             get {
                 return ResourceManager.GetString("UnmergeCells", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Unprotect Workbook file.
+        /// </summary>
+        internal static string UnprotectWorkbook {
+            get {
+                return ResourceManager.GetString("UnprotectWorkbook", resourceCulture);
             }
         }
         

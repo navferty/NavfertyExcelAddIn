@@ -13,6 +13,8 @@ using Autofac;
 using Microsoft.Office.Core;
 using Microsoft.Office.Interop.Excel;
 
+using Navferty.Common;
+
 using NavfertyExcelAddIn.Commons;
 using NavfertyExcelAddIn.DataValidation;
 using NavfertyExcelAddIn.FindFormulaErrors;
@@ -24,6 +26,7 @@ using NavfertyExcelAddIn.Transliterate;
 using NavfertyExcelAddIn.Undo;
 using NavfertyExcelAddIn.UnprotectWorkbook;
 using NavfertyExcelAddIn.WorksheetCellsEditing;
+using NavfertyExcelAddIn.WorksheetProtectUnprotect;
 using NavfertyExcelAddIn.XmlTools;
 
 using NLog;
@@ -199,6 +202,18 @@ namespace NavfertyExcelAddIn
 			App.Workbooks.Open(path);
 		}
 
+		public void ProtectUnprotectWorksheets(IRibbonControl ribbonControl)
+		{
+			var wb = App.ActiveWorkbook;
+			if (wb is null) return;
+
+			var path = wb.FullName;
+			logger.Debug($"ProtectUnprotectWorksheets {path}");
+
+			var wsProtectorUnprotector = GetService<IWsProtectorUnprotector>();
+			wsProtectorUnprotector.ProtectUnprotectSelectedWorksheets(wb);
+		}
+
 		public void CutNames(IRibbonControl ribbonControl)
 		{
 			var range = GetSelectionOrUsedRange(App.ActiveSheet);
@@ -347,7 +362,7 @@ namespace NavfertyExcelAddIn
 
 			if (allErrors.Count == 0)
 			{
-				dialogService.ShowInfo(UIStrings.NoErrors);
+				dialogService.ShowInfo(string.Format(UIStrings.NoErrors, range.Address));
 				return;
 			}
 			form = new InteractiveRangeReportForm(allErrors, activeSheet);
@@ -393,6 +408,21 @@ namespace NavfertyExcelAddIn
 			validator.Validate(App);
 		}
 		#endregion
+
+		#region Web
+		public void CurrencyExchangeRatesSelect(IRibbonControl ribbonControl)
+		{
+			var wb = App.ActiveWorkbook;
+			if (wb is null) return;
+
+			var path = wb.FullName;
+			logger.Debug($"Web.CurrencyExchangeRates {path}");
+
+			var webExchangeRates = GetService<Web.IWebTools>();
+			webExchangeRates.CurrencyExchangeRates_Show();
+		}
+		#endregion
+
 		#endregion
 
 		#region Utils
