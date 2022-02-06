@@ -2,12 +2,16 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Imaging;
+using System.Globalization;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Windows.Forms;
 
 using Microsoft.Win32;
+
+using NLog;
 
 #nullable enable
 
@@ -32,13 +36,17 @@ namespace Navferty.Common.Feedback
 			}).ToArray();
 
 		private const string MAIL_SUBJECT = @"NavfertyExcelAddin Bug report from user!";
-		private const int MAX_MESSAGE_BODY_LENGH = 500;
+		private const int MAX_MESSAGE_BODY_LENGH = 1024 * 3;
 
-		private static bool SendFeedEMail(
-			string messageBody,
+		private static readonly Lazy<ILogger> logger = new(() => LogManager.GetCurrentClassLogger());
+
+		internal static bool SendFeedEMail(
+			string userText,
 			bool sendScreenshots = true
 			)
 		{
+			logger.Value.Debug("Start SendFeedEMail");
+
 			//TODO: !!! Insert developer email instead of this !!!
 			string developerMail = (new Func<string>(() =>
 			{
@@ -46,29 +54,20 @@ namespace Navferty.Common.Feedback
 					return hKey.GetValue("Email").ToString();
 			})).Invoke();
 
+			logger.Value.Debug($"developerMail: '{developerMail}'");
+
+			StringBuilder sbMessageBody = new();
+			sbMessageBody.AppendLine(GetSystemInfo().Trim());
+			sbMessageBody.AppendLine("*** User message:");
+			sbMessageBody.AppendLine((string.IsNullOrWhiteSpace(userText) ? "[NONE]" : ('"' + userText + '"')));
+
+			string messageBody = sbMessageBody.ToString();
+			if (messageBody.Length > MAX_MESSAGE_BODY_LENGH) messageBody = new string(messageBody.Take(MAX_MESSAGE_BODY_LENGH).ToArray());
+			logger.Value.Debug($"messageBody:\n'{messageBody}'");
 
 			List<FileInfo> lScreenshotFiles = new();
-
-			if (string.IsNullOrWhiteSpace(messageBody))
-				messageBody = string.Empty;
-
-
-
-			if (messageBody.Length > MAX_MESSAGE_BODY_LENGH)
-				messageBody = new string(messageBody.Take(MAX_MESSAGE_BODY_LENGH).ToArray());
-
-
-			StringBuilder sbTechInfo = new();
-			sbTechInfo.AppendLine($"Message created {DateTime.Now}");
-			sbTechInfo.AppendLine(Application.ProductVersion.ToString());
-			sbTechInfo.AppendLine(Application.ExecutablePath);
-			sbTechInfo.AppendLine();
-			sbTechInfo.AppendLine(messageBody);
-
-			messageBody = sbTechInfo.ToString();
-
-			if (sendScreenshots)    //Create screenshots to temp dir
-				lScreenshotFiles = GetScreenshotsAsFiles(ImageFormat.Jpeg).ToList();
+			if (sendScreenshots) lScreenshotFiles = GetScreenshotsAsFiles(ImageFormat.Jpeg).ToList();//Create screenshots to temp dir
+			logger.Value.Debug($"screensots: '{lScreenshotFiles.Count}'");
 
 			try
 			{
@@ -81,6 +80,7 @@ namespace Navferty.Common.Feedback
 					lScreenshotFiles.Select(fi => fi.FullName).ToArray()
 					);
 
+				logger.Value.Debug($"Send result: {bSend}");
 				return bSend;
 			}
 			finally
@@ -93,11 +93,41 @@ namespace Navferty.Common.Feedback
 				});
 			}
 		}
+		private static string GetSystemInfo()
+		{
+			var dtNow = DateTime.Now;
+			var asm = Assembly.GetExecutingAssembly();
+			StringBuilder sbSysInfo = new();
+			sbSysInfo.AppendLine("*** Product:");
+			sbSysInfo.AppendLine($"Name: '{Application.ProductName}' v'{Application.ProductVersion}'");
+			sbSysInfo.AppendLine($"Path: '{Application.ExecutablePath}'");
+			sbSysInfo.AppendLine();
+			sbSysInfo.AppendLine("*** Assembly:");
+			sbSysInfo.AppendLine($"FullName: '{asm.FullName}'");
+			sbSysInfo.AppendLine($"Location: '{asm.Location}'");
+			sbSysInfo.AppendLine($"ImageRuntimeVersion: '{asm.ImageRuntimeVersion}'");
+			sbSysInfo.AppendLine($"IsFullyTrusted: '{asm.IsFullyTrusted}'");
+			sbSysInfo.AppendLine($"EntryPoint: '{asm.EntryPoint}'");
+			sbSysInfo.AppendLine();
+			sbSysInfo.AppendLine("*** TimeZone:");
+			sbSysInfo.AppendLine(dtNow.Kind.ToString() + $": {dtNow}");
+			sbSysInfo.AppendLine($"Utc: {dtNow.ToUniversalTime()}");
+			sbSysInfo.AppendLine($"UtcOffset: {TimeZone.CurrentTimeZone.GetUtcOffset(dtNow)}");
+			sbSysInfo.AppendLine();
+			sbSysInfo.AppendLine("*** Culture:");
+			sbSysInfo.AppendLine($"CultureInfo.CurrentCulture: {CultureInfo.CurrentCulture}");
+			sbSysInfo.AppendLine($"CultureInfo.CurrentUICulture: {CultureInfo.CurrentUICulture}");
+			sbSysInfo.AppendLine($"Application.CurrentCulture: {Application.CurrentCulture}");
+			sbSysInfo.AppendLine($"InputLanguage: {Application.CurrentInputLanguage.Culture} (Layout: {Application.CurrentInputLanguage.LayoutName})");
+			sbSysInfo.AppendLine();
+			sbSysInfo.AppendLine($"VisualStyleState: {Application.VisualStyleState}");
+			return sbSysInfo.ToString();
+		}
 
 		public static void ShowFeedbackUI()
 		{
-			SendFeedEMail("sd", true);
-
+			using var fui = new frmFeedbackUI();
+			fui.ShowDialog();
 		}
 	}
 }
