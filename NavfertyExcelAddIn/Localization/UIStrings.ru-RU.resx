@@ -123,6 +123,9 @@
   <data name="CannotUnlockPleaseSaveAsXml" xml:space="preserve">
     <value>Для разброкировки содержимого сохраните книгу в формате .xlsx или .xlsm</value>
   </data>
+  <data name="CurrencyExchangeRates_Error_NedAnyCellSelection" xml:space="preserve">
+    <value>Необходимо выбрать ячейку в таблице!</value>
+  </data>
   <data name="Error" xml:space="preserve">
     <value>Ошибка</value>
   </data>

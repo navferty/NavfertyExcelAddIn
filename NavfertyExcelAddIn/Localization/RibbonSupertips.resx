@@ -184,6 +184,9 @@ Allows rewriting values in range -999 billion to 999 billion, with precision up 
   <data name="UnprotectWorkbook" xml:space="preserve">
     <value>Unprotect Workbook file</value>
   </data>
+  <data name="CurrencyExchangeRatesSelect" xml:space="preserve">
+    <value>Select A Currency Exchange Rate From An Online Source And Paste Into The Current Cell</value>
+  </data>
   <data name="CreateSampleXml" xml:space="preserve">
     <value>Create Sample XML based on XSD-file</value>
   </data>

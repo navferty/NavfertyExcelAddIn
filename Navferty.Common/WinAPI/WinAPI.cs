@@ -1,17 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Diagnostics;
 using System.Drawing;
-using System.Linq;
 using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 using Microsoft.Win32.SafeHandles;
 
-namespace NavfertyExcelAddIn.Commons
+#nullable enable
+
+namespace Navferty.Common
 {
 	internal static class WinAPI
 	{
@@ -28,7 +25,7 @@ namespace NavfertyExcelAddIn.Commons
 			[In] IntPtr hwnd,
 			[In, MarshalAs(UnmanagedType.I4)] WinAPI.WindowMessages wMsg,
 			[In] int wParam,
-			[In, MarshalAs(UnmanagedType.LPTStr)] string lParam);
+			[In, MarshalAs(UnmanagedType.LPTStr)] string? lParam);
 
 		[DllImport(WINDLL_USER)]
 		private static extern int GetClientRect(

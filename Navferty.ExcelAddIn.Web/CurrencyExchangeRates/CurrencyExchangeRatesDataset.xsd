@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="CurrencyExchangeRatesDataset" targetNamespace="http://tempuri.org/DataSet1.xsd" xmlns:mstns="http://tempuri.org/DataSet1.xsd" xmlns="http://tempuri.org/DataSet1.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections />
+        <Tables />
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="CurrencyExchangeRatesDataset" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:Generator_UserDSName="CurrencyExchangeRatesDataset" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="CurrencyExchangeRatesDataset">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="ExchangeRates" msprop:Generator_RowEvHandlerName="ExchangeRatesRowChangeEventHandler" msprop:Generator_RowDeletedName="ExchangeRatesRowDeleted" msprop:Generator_RowDeletingName="ExchangeRatesRowDeleting" msprop:Generator_RowEvArgName="ExchangeRatesRowChangeEvent" msprop:Generator_TablePropName="ExchangeRates" msprop:Generator_RowChangedName="ExchangeRatesRowChanged" msprop:Generator_UserTableName="ExchangeRates" msprop:Generator_RowChangingName="ExchangeRatesRowChanging" msprop:Generator_RowClassName="ExchangeRatesRow" msprop:Generator_TableClassName="ExchangeRatesDataTable" msprop:Generator_TableVarName="tableExchangeRates">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="ID" msdata:AutoIncrement="true" msprop:Generator_UserColumnName="ID" msprop:Generator_ColumnPropNameInTable="IDColumn" msprop:Generator_ColumnPropNameInRow="ID" msprop:Generator_ColumnVarNameInTable="columnID" type="xs:int" />
+              <xs:element name="Name" msprop:Generator_ColumnPropNameInTable="NameColumn" msprop:Generator_ColumnPropNameInRow="Name" msprop:Generator_UserColumnName="Name" msprop:Generator_ColumnVarNameInTable="columnName" type="xs:string" minOccurs="0" />
+              <xs:element name="ISO" msprop:Generator_ColumnPropNameInTable="ISOColumn" msprop:Generator_ColumnPropNameInRow="ISO" msprop:Generator_UserColumnName="ISO" msprop:Generator_ColumnVarNameInTable="columnISO" type="xs:string" minOccurs="0" />
+              <xs:element name="Rate" msprop:Generator_ColumnPropNameInTable="RateColumn" msprop:Generator_ColumnPropNameInRow="Rate" msprop:Generator_UserColumnName="Rate" msprop:Generator_ColumnVarNameInTable="columnRate" type="xs:double" minOccurs="0" />
+              <xs:element name="Raw" msprop:Generator_UserColumnName="Raw" msprop:Generator_ColumnPropNameInTable="RawColumn" msprop:Generator_ColumnPropNameInRow="Raw" msprop:Generator_ColumnVarNameInTable="columnRaw" type="xs:anyType" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+    <xs:unique name="Constraint11">
+      <xs:selector xpath=".//mstns:ExchangeRates" />
+      <xs:field xpath="mstns:ID" />
+    </xs:unique>
+  </xs:element>
+</xs:schema>

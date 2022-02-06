@@ -120,6 +120,11 @@
             keytip="VX" getScreentip="GetLabel" getSupertip="GetSupertip"/>
         </group>
 
+        <group id="WebToolsGroup" getLabel="GetLabel" autoScale="1">
+          <button id="CurrencyExchangeRatesSelect" getLabel="GetLabel" onAction="CurrencyExchangeRatesSelect"
+                          imageMso="InternationalCurrency" size="large" getScreentip="GetLabel" getSupertip="GetSupertip"/>
+        </group>
+
       </tab>
     </tabs>
   </ribbon>

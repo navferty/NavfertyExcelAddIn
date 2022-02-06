@@ -2,7 +2,8 @@
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-using NavfertyExcelAddIn.Commons;
+using Navferty.Common;
+
 using NavfertyExcelAddIn.FindFormulaErrors;
 using NavfertyExcelAddIn.UnitTests.Builders;
 

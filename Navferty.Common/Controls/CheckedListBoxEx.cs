@@ -1,12 +1,13 @@
-﻿using System.Windows.Forms;
-using System.ComponentModel;
+﻿using System.ComponentModel;
 using System.Drawing;
-using NavfertyExcelAddIn.Commons;
+using System.Windows.Forms;
 
-namespace NavfertyExcelAddIn.Commons.Controls
+#nullable enable
+
+namespace Navferty.Common.Controls
 {
 	/// <summary>Used for draw custom 'EmptyText' when list does not contains items</summary>
-	internal class CheckedListBoxEx : System.Windows.Forms.CheckedListBox
+	public class CheckedListBoxEx : System.Windows.Forms.CheckedListBox
 	{
 		protected string emptyText = string.Empty;
 		protected ContentAlignment emptyTextAlign = ContentAlignment.MiddleCenter;
@@ -57,25 +58,17 @@ namespace NavfertyExcelAddIn.Commons.Controls
 			if (Items.Count > 0 || string.IsNullOrWhiteSpace(emptyText))
 				return;//We paint over only if ListBox noes not have any items and and EmptyText
 
-			var rcClient = WinAPI.GetClientRect(this);
+			//var rcClient = WinAPI.GetClientRect(this);
 			using (var dc = new WinAPI.DC(this))
+			using (var g = dc.CreateGraphics())
 			{
-				using (var g = dc.CreateGraphics())
-				{
-					g.PageUnit = GraphicsUnit.Pixel;
-					var fmt = new StringFormat()
-					{
-						Alignment = emptyTextAlign.GetAlignment(),
-						LineAlignment = emptyTextAlign.GetLineAlignment()
-					};
-					using (var brText = new SolidBrush(SystemColors.ControlDarkDark))
-					{
-						g.DrawString(emptyText, Font, brText, rcClient, fmt);
-					};
-				}
+				g.PageUnit = GraphicsUnit.Pixel;
+				g.DrawTextEx(emptyText, Font, SystemColors.ControlDarkDark, ClientRectangle, emptyTextAlign);
 			}
 		}
 
 		#endregion
 	}
 }
+
+

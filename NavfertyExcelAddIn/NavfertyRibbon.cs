@@ -13,6 +13,8 @@ using Autofac;
 using Microsoft.Office.Core;
 using Microsoft.Office.Interop.Excel;
 
+using Navferty.Common;
+
 using NavfertyExcelAddIn.Commons;
 using NavfertyExcelAddIn.DataValidation;
 using NavfertyExcelAddIn.FindFormulaErrors;
@@ -406,6 +408,21 @@ namespace NavfertyExcelAddIn
 			validator.Validate(App);
 		}
 		#endregion
+
+		#region Web
+		public void CurrencyExchangeRatesSelect(IRibbonControl ribbonControl)
+		{
+			var wb = App.ActiveWorkbook;
+			if (wb is null) return;
+
+			var path = wb.FullName;
+			logger.Debug($"Web.CurrencyExchangeRates {path}");
+
+			var webExchangeRates = GetService<Web.IWebTools>();
+			webExchangeRates.CurrencyExchangeRates_Show();
+		}
+		#endregion
+
 		#endregion
 
 		#region Utils

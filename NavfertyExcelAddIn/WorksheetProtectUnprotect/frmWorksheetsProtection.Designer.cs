@@ -2,7 +2,7 @@
 
 namespace NavfertyExcelAddIn.WorksheetProtectUnprotect
 {
-	partial class frmAskWorksheetProtectionPassword
+	partial class frmWorksheetsProtection
 	{
 		/// <summary>
 		/// Required designer variable.
@@ -35,7 +35,7 @@ namespace NavfertyExcelAddIn.WorksheetProtectUnprotect
 			this.radioModeProtect = new System.Windows.Forms.RadioButton();
 			this.lblModeDesription = new System.Windows.Forms.Label();
 			this.radioModeUnProtect = new System.Windows.Forms.RadioButton();
-			this.lstWorksheets = new Commons.Controls.CheckedListBoxEx();
+			this.lstWorksheets = new Navferty.Common.Controls.CheckedListBoxEx();
 			this.lblPWD = new System.Windows.Forms.Label();
 			this.txtPWD = new System.Windows.Forms.TextBox();
 			this.panel1 = new System.Windows.Forms.Panel();
@@ -170,7 +170,6 @@ namespace NavfertyExcelAddIn.WorksheetProtectUnprotect
 			this.ClientSize = new System.Drawing.Size(553, 280);
 			this.Controls.Add(this.tlpMain);
 			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
-			this.KeyPreview = true;
 			this.MaximizeBox = false;
 			this.MinimizeBox = false;
 			this.Name = "frmAskWorksheetProtectionPassword";
@@ -192,7 +191,7 @@ namespace NavfertyExcelAddIn.WorksheetProtectUnprotect
 		internal System.Windows.Forms.RadioButton radioModeProtect;
 		internal System.Windows.Forms.RadioButton radioModeUnProtect;
 		internal System.Windows.Forms.Label lblModeDesription;
-		internal Commons.Controls.CheckedListBoxEx lstWorksheets;
+		internal Navferty.Common.Controls.CheckedListBoxEx lstWorksheets;
 		internal System.Windows.Forms.Label lblPWD;
 		internal System.Windows.Forms.TextBox txtPWD;
 		private System.Windows.Forms.Panel panel1;

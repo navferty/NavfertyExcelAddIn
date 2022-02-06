@@ -79,6 +79,15 @@ namespace NavfertyExcelAddIn.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to You must select a cell in the table!.
+        /// </summary>
+        internal static string CurrencyExchangeRates_Error_NedAnyCellSelection {
+            get {
+                return ResourceManager.GetString("CurrencyExchangeRates_Error_NedAnyCellSelection", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Error.
         /// </summary>
         internal static string Error {

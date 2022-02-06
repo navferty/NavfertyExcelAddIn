@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
 
-namespace NavfertyExcelAddIn.Commons
+#nullable enable
+
+namespace Navferty.Common
 {
 	public interface IDialogService
 	{

@@ -184,6 +184,9 @@
   <data name="UnprotectWorkbook" xml:space="preserve">
     <value>Снять защиту книги и листов (для файла)</value>
   </data>
+  <data name="CurrencyExchangeRatesSelect" xml:space="preserve">
+    <value>Выбрать курс валюты из интернет-источника и вставить в текущую ячейку</value>
+  </data>
   <data name="CreateSampleXml" xml:space="preserve">
     <value>Создать образец XML на основе XSD-файла</value>
   </data>

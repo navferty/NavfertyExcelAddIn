@@ -4,6 +4,8 @@ using System.Linq;
 
 using Microsoft.Office.Interop.Excel;
 
+using Navferty.Common;
+
 using NavfertyExcelAddIn.Commons;
 using NavfertyExcelAddIn.InteractiveRangeReport;
 

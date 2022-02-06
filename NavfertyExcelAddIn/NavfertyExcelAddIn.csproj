@@ -139,6 +139,9 @@
     <Reference Include="Microsoft.Bcl.AsyncInterfaces, Version=1.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Bcl.AsyncInterfaces.1.1.0\lib\net461\Microsoft.Bcl.AsyncInterfaces.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.13.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
       <HintPath>..\packages\NLog.4.6.7\lib\net45\NLog.dll</HintPath>
     </Reference>
@@ -162,6 +165,7 @@
     <Reference Include="System.Memory, Version=4.0.1.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Memory.4.5.4\lib\net461\System.Memory.dll</HintPath>
     </Reference>
+    <Reference Include="System.Net.Http" />
     <Reference Include="System.Numerics" />
     <Reference Include="System.Numerics.Vectors, Version=4.1.4.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Numerics.Vectors.4.5.0\lib\net46\System.Numerics.Vectors.dll</HintPath>
@@ -231,11 +235,8 @@
     can be found.
   -->
   <ItemGroup>
-    <Compile Include="Commons\WinAPI\WinAPI.cs" />
     <Compile Include="Commons\FileExtensionFilter.cs" />
     <Compile Include="Commons\RangeExtensions.cs" />
-    <Compile Include="Commons\StringExtensions.cs" />
-    <Compile Include="Commons\ControlsExtensions.cs" />
     <Compile Include="FindFormulaErrors\CVErrEnum.cs" />
     <Compile Include="DataValidation\CellsValueValidator.cs" />
     <Compile Include="DataValidation\IValidator.cs" />
@@ -265,16 +266,15 @@
     <Compile Include="Transliterate\CyrillicToLatinFallback.cs" />
     <Compile Include="Transliterate\Transliterator.cs" />
     <Compile Include="Undo\UndoManager.cs" />
+    <Compile Include="Web\WebToolsBuilder.cs" />
+    <Compile Include="Web\IWebTools.cs" />
     <Compile Include="WorksheetCellsEditing\ConditionalFormatFixer.cs" />
     <Compile Include="WorksheetCellsEditing\IConditionalFormatFixer.cs" />
-    <Compile Include="Commons\Controls\CheckedListBoxEx.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="WorksheetProtectUnprotect\frmAskWorksheetProtectionPassword.cs">
+    <Compile Include="WorksheetProtectUnprotect\frmWorksheetsProtection.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="WorksheetProtectUnprotect\frmAskWorksheetProtectionPassword.Designer.cs">
-      <DependentUpon>frmAskWorksheetProtectionPassword.cs</DependentUpon>
+    <Compile Include="WorksheetProtectUnprotect\frmWorksheetsProtection.Designer.cs">
+      <DependentUpon>frmWorksheetsProtection.cs</DependentUpon>
     </Compile>
     <Compile Include="WorksheetProtectUnprotect\IWsProtectorUnprotector.cs" />
     <Compile Include="WorksheetProtectUnprotect\WorksheetRow.cs" />
@@ -299,14 +299,12 @@
     <Compile Include="WorksheetCellsEditing\CellsUnmerger.cs" />
     <Compile Include="Commons\DialogService.cs" />
     <Compile Include="Commons\EnumerableExtensions.cs" />
-    <Compile Include="Commons\IDialogService.cs" />
     <Compile Include="InteractiveRangeReport\InteractiveRangeReportForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="InteractiveRangeReport\InteractiveRangeReportForm.Designer.cs">
       <DependentUpon>InteractiveRangeReportForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Commons\EnumExtensions.cs" />
     <Compile Include="FindFormulaErrors\ErrorFinder.cs" />
     <Compile Include="FindFormulaErrors\IErrorFinder.cs" />
     <Compile Include="Commons\ExceptionLogger.cs" />
@@ -329,6 +327,8 @@
     <Compile Include="XmlTools\XmlValidationError.cs" />
     <Compile Include="XmlTools\XmlValidator.cs" />
     <Compile Include="XmlTools\XsdSchemaValidator.cs" />
+    <None Include="Properties\DataSources\System.Data.DataSet.datasource" />
+    <None Include="Properties\DataSources\System.Xml.XmlNode.datasource" />
     <None Include="Resources\replaceChars.png" />
     <None Include="Resources\replace.png" />
     <None Include="Resources\undo.png" />
@@ -426,9 +426,22 @@
       <LastGenOutput>RibbonIcons.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="WorksheetProtectUnprotect\frmAskWorksheetProtectionPassword.resx">
-      <DependentUpon>frmAskWorksheetProtectionPassword.cs</DependentUpon>
+    <EmbeddedResource Include="WorksheetProtectUnprotect\frmWorksheetsProtection.resx">
+      <DependentUpon>frmWorksheetsProtection.cs</DependentUpon>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Navferty.Common\Navferty.Common.csproj">
+      <Project>{f14665a1-a035-4c8e-845e-f00029c8181a}</Project>
+      <Name>Navferty.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Navferty.ExcelAddIn.Web\Navferty.ExcelAddIn.Web.csproj">
+      <Project>{443907ef-f460-4726-94f0-fe35a1ac8fa2}</Project>
+      <Name>Navferty.ExcelAddIn.Web</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup />
   <PropertyGroup>

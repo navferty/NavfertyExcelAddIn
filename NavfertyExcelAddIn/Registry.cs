@@ -1,6 +1,8 @@
 ﻿using Autofac;
 using Autofac.Extras.DynamicProxy;
 
+using Navferty.Common;
+
 using NavfertyExcelAddIn.Commons;
 using NavfertyExcelAddIn.DataValidation;
 using NavfertyExcelAddIn.FindFormulaErrors;
@@ -121,6 +123,11 @@ namespace NavfertyExcelAddIn
 
 			builder.RegisterType<XmlSampleCreator>()
 				.As<IXmlSampleCreator>()
+				.EnableInterfaceInterceptors()
+				.InterceptedBy(typeof(ExceptionLogger));
+
+			builder.RegisterType<Web.WebToolsBuilder>()
+				.As<Web.IWebTools>()
 				.EnableInterfaceInterceptors()
 				.InterceptedBy(typeof(ExceptionLogger));
 
