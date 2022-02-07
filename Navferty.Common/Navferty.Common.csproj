@@ -50,6 +50,7 @@
     <Compile Include="Controls\FormEx.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Extensions\DelegatesExtensions.cs" />
     <Compile Include="Localization\UIStrings.Designer.cs">
       <DependentUpon>UIStrings.resx</DependentUpon>
       <AutoGen>True</AutoGen>

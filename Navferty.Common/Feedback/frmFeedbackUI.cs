@@ -1,14 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 using Navferty.Common.Controls;
+//using Navferty.Common.DelegatesExtensions;
 
 using NLog;
 
@@ -25,51 +19,54 @@ namespace Navferty.Common.Feedback
 			Text = Localization.UIStrings.Feedback_Title;
 			lblMessage.Text = String.Format(Localization.UIStrings.Feedback_Message, FeedbackManager.MAX_USER_TEXT_LENGH);
 			txtUserMessage.MaxLength = FeedbackManager.MAX_USER_TEXT_LENGH;
-			lblSummary.Text = Localization.UIStrings.Feedback_Summary;
 
 			chkIncludeScreenshots.Text = Localization.UIStrings.Feedback_IncludeScreenshots;
 			chkIncludeScreenshots.Checked = true;
 
 			llGotoGithub.Text = Localization.UIStrings.Feedback_GotoGithub;
 			btnSend.Text = Localization.UIStrings.Feedback_Send;
+
+			//Create ink to show NLog Log file
+			{
+				string fullSummaryText = string.Format(Localization.UIStrings.Feedback_Summary_Template, Localization.UIStrings.Feedback_Summary_Loglink);
+				lblSummary.Text = fullSummaryText;
+				var la = new LinkArea(fullSummaryText.IndexOf(Localization.UIStrings.Feedback_Summary_Loglink), Localization.UIStrings.Feedback_Summary_Loglink.Length);
+				lblSummary.LinkArea = la;
+				lblSummary.LinkClicked += (s, e) => OnShowLog();
+			}
 		}
 
 		private void OnSend(object sender, EventArgs e)
 		{
-			try
-			{
-				if (FeedbackManager.SendFeedEMail(
-					txtUserMessage.Text.Trim(),
-					chkIncludeScreenshots.Checked,
-					this))
+			new Action(() =>
+			  {
+				  if (FeedbackManager.SendFeedEMail(
+					  txtUserMessage.Text.Trim(),
+					  chkIncludeScreenshots.Checked,
+					  this))
 
-					DialogResult = DialogResult.OK;
-			}
-			catch (Exception ex)
-			{
-				logger.Error(ex, "Failed to send feedback email!");
-				MessageBox.Show(ex.Message,
-					Localization.UIStrings.Feedback_ErrorTitle,
-					MessageBoxButtons.OK,
-					MessageBoxIcon.Error);
-			}
+					  DialogResult = DialogResult.OK;
+
+			  }).TryCatch(true,
+				Localization.UIStrings.Feedback_ErrorTitle,
+				logger, "Failed to send feedback mail!");
 		}
 
 
-		private void llGotoGithub_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+		private void OnGotoGithub(object sender, LinkLabelLinkClickedEventArgs e)
 		{
-			try
-			{
-				FeedbackManager.JumpGithub();
-			}
-			catch (Exception ex)
-			{
-				logger.Error(ex, "Failed to open Github bugtracker!");
-				MessageBox.Show(ex.Message,
-					Localization.UIStrings.Feedback_Error,
-					MessageBoxButtons.OK,
-					MessageBoxIcon.Error);
-			}
+			new Action(() => { FeedbackManager.ShowGithub(); })
+				.TryCatch(true,
+				Localization.UIStrings.Feedback_ErrorTitle,
+				logger, "Failed to open Github bugtracker!");
+		}
+		private void OnShowLog()
+		{
+			new Action(() => { FeedbackManager.ShowLogFile(); })
+				.TryCatch(true,
+				Localization.UIStrings.Feedback_ErrorTitle,
+				logger, "Failed to show NLog log file!");
+
 		}
 	}
 }

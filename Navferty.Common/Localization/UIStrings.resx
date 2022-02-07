@@ -135,8 +135,11 @@
   <data name="Feedback_Send" xml:space="preserve">
     <value>Send</value>
   </data>
-  <data name="Feedback_Summary" xml:space="preserve">
-    <value>The error log will be included in the report.</value>
+  <data name="Feedback_Summary_Loglink" xml:space="preserve">
+    <value>an error log</value>
+  </data>
+  <data name="Feedback_Summary_Template" xml:space="preserve">
+    <value>The report will include {0}.</value>
   </data>
   <data name="Feedback_Title" xml:space="preserve">
     <value>Feedback</value>

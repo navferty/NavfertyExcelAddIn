@@ -115,11 +115,20 @@ namespace Navferty.Common.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The error log will be included in the report..
+        ///   Looks up a localized string similar to an error log.
         /// </summary>
-        internal static string Feedback_Summary {
+        internal static string Feedback_Summary_Loglink {
             get {
-                return ResourceManager.GetString("Feedback_Summary", resourceCulture);
+                return ResourceManager.GetString("Feedback_Summary_Loglink", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The report will include {0}..
+        /// </summary>
+        internal static string Feedback_Summary_Template {
+            get {
+                return ResourceManager.GetString("Feedback_Summary_Template", resourceCulture);
             }
         }
         

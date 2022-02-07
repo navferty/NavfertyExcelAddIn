@@ -108,32 +108,26 @@ namespace Navferty.Common.Feedback
 				}
 			}
 
-			LogManager.Flush(); //Write NLog cache to disk
-			var logFileName = LogManagement.GetTargetFilename(null);
-			if (logFileName != null)
+			var fiNLogFile = GetNLogFile();
+			if (null != fiNLogFile && fiNLogFile.Exists)
 			{
-				FileInfo fiLogFromNLogEngine = new(logFileName);
-				logger.Debug($"Log File Found: '{fiLogFromNLogEngine.FullName}', Exist: {fiLogFromNLogEngine.Exists}");
-				if (fiLogFromNLogEngine.Exists)
+				logger.Debug($"Log File Found: '{fiNLogFile.FullName}', Exist: {fiNLogFile.Exists}");
+				FileInfo fiLogFileInTempDir = new(Path.Combine(
+					Path.GetTempPath(),
+					(Guid.NewGuid().ToString() + "_" + fiNLogFile.Name)));
+
+				//Drop last NLog cache data to disk
 				{
-					FileInfo fiLogFileInTempDir = new(Path.Combine(
-						Path.GetTempPath(),
-						(Guid.NewGuid().ToString() + "_" + fiLogFromNLogEngine.Name)));
-					{
-						//Write NLog cache to disk
-						{
-							//logger.Factory.Flush();
-							LogManager.Flush();
-							Thread.Sleep(1000); //Waiting NLog flush task to finish
-						}
-
-						//Copy NLog file to temp file
-						fiLogFromNLogEngine.CopyTo(fiLogFileInTempDir.FullName);
-
-						//Attach temp NLog file to email
-						if (fiLogFileInTempDir.Exists) lFilesToAttach.Add(fiLogFileInTempDir);
-					}
+					//logger.Factory.Flush();
+					LogManager.Flush();
+					Thread.Sleep(1000); //Waiting NLog flush task to finish
 				}
+
+				//Copy NLog file to temp file
+				fiNLogFile.CopyTo(fiLogFileInTempDir.FullName);
+
+				//Attach temp NLog file to email
+				if (fiLogFileInTempDir.Exists) lFilesToAttach.Add(fiLogFileInTempDir);
 			}
 
 			logger.Debug($"Total Files To Attach: '{lFilesToAttach.Count}'");
@@ -193,15 +187,25 @@ namespace Navferty.Common.Feedback
 			return sbSysInfo.ToString();
 		}
 
+		private static FileInfo? GetNLogFile()
+		{
+			LogManager.Flush(); //Write NLog cache to disk if this still in RAM
+			var logFileName = LogManagement.GetTargetFilename(null);
+			if (logFileName != null) return new(logFileName);
+			return null;
+		}
+
 		public static void ShowFeedbackUI()
 		{
 			using var fui = new frmFeedbackUI();
 			fui.ShowDialog();
 		}
 
-		public static void JumpGithub()
-		{
-			System.Diagnostics.Process.Start(GITHUB_BUGTRACKER_URL);
-		}
+		public static void ShowGithub()
+			=> System.Diagnostics.Process.Start(GITHUB_BUGTRACKER_URL);
+
+		public static void ShowLogFile()
+			=> System.Diagnostics.Process.Start(GetNLogFile()!.FullName);
+
 	}
 }
