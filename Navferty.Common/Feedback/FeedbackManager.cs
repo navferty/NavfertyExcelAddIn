@@ -158,6 +158,28 @@ namespace Navferty.Common.Feedback
 		}
 		private static string GetSystemInfo()
 		{
+			Func<Assembly, string?, string> DumpAssemmbly = new((asm, title) =>
+			{
+				StringBuilder sbAsm = new();
+				sbAsm.AppendLine($"*** {title ?? string.Empty} Assembly '{asm.FullName}'");
+				sbAsm.AppendLine($"Location: '{asm.Location}'");
+				sbAsm.AppendLine($"ImageRuntimeVersion: '{asm.ImageRuntimeVersion}'");
+				sbAsm.AppendLine($"Trusted: '{asm.IsFullyTrusted}'");
+				sbAsm.AppendLine($"EntryPoint: '{asm.EntryPoint}'");
+				return sbAsm.ToString();
+			});
+
+			Func<AssemblyName, string?, string> DumpAssemmblyName = new((asmn, title) =>
+			{
+				StringBuilder sbAsm = new();
+				sbAsm.AppendLine($"*** {title ?? string.Empty} Assembly '{asmn.FullName}'");
+				sbAsm.AppendLine($"CodeBase: '{asmn.CodeBase}'");
+				sbAsm.AppendLine($"ContentType: '{asmn.ContentType}'");
+				sbAsm.AppendLine($"Culture: '{asmn.CultureInfo.DisplayName}'");
+				sbAsm.AppendLine($"ProcessorArchitecture: '{asmn.ProcessorArchitecture}'");
+				return sbAsm.ToString();
+			});
+
 			var dtNow = DateTime.Now;
 			var asm = Assembly.GetExecutingAssembly();
 			StringBuilder sbSysInfo = new();
@@ -165,13 +187,15 @@ namespace Navferty.Common.Feedback
 			sbSysInfo.AppendLine($"Name: '{Application.ProductName}' v'{Application.ProductVersion}'");
 			sbSysInfo.AppendLine($"Path: '{Application.ExecutablePath}'");
 			sbSysInfo.AppendLine();
-			sbSysInfo.AppendLine("*** Assembly:");
-			sbSysInfo.AppendLine($"FullName: '{asm.FullName}'");
-			sbSysInfo.AppendLine($"Location: '{asm.Location}'");
-			sbSysInfo.AppendLine($"ImageRuntimeVersion: '{asm.ImageRuntimeVersion}'");
-			sbSysInfo.AppendLine($"IsFullyTrusted: '{asm.IsFullyTrusted}'");
-			sbSysInfo.AppendLine($"EntryPoint: '{asm.EntryPoint}'");
-			sbSysInfo.AppendLine();
+			sbSysInfo.AppendLine(DumpAssemmbly(Assembly.GetExecutingAssembly(), "Executing"));
+			sbSysInfo.AppendLine(DumpAssemmbly(Assembly.GetCallingAssembly(), "Calling"));
+
+			Assembly.GetExecutingAssembly()
+				.GetReferencedAssemblies()
+				.OrderBy(asmn => asmn.FullName)
+				.ToList()
+				.ForEach(asmn => { sbSysInfo.AppendLine(DumpAssemmblyName(asmn, "Referenced")); });
+
 			sbSysInfo.AppendLine("*** TimeZone:");
 			sbSysInfo.AppendLine(dtNow.Kind.ToString() + $": {dtNow}");
 			sbSysInfo.AppendLine($"Utc: {dtNow.ToUniversalTime()}");
