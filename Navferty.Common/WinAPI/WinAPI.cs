@@ -242,6 +242,7 @@ namespace Navferty.Common
 				string strSubject,
 				string strBody,
 				UIFlags UIflags = UIFlags.PopupUI,
+				IWin32Window? parentWindow = null,
 				params string[] attachFiles
 				)
 			{
@@ -257,9 +258,11 @@ namespace Navferty.Common
 					MAPI_FLAGS how = (UIflags == UIFlags.PopupUI) ? (MAPI_FLAGS.MAPI_LOGON_UI | MAPI_FLAGS.MAPI_DIALOG) : (MAPI_FLAGS.MAPI_LOGON_UI);
 					how |= MAPI_FLAGS.MAPI_NEW_SESSION;
 
+					IntPtr hWnd = (parentWindow == null) ? IntPtr.Zero : parentWindow.Handle;
+
 					var Err = MAPISendMail(
 						new IntPtr(0),
-						new IntPtr(0),
+						hWnd,
 						msg,
 						how,
 						0);
@@ -279,10 +282,11 @@ namespace Navferty.Common
 				string strSubject,
 				string strBody,
 				UIFlags uiFlags = UIFlags.PopupUI,
+				IWin32Window? parentWindow = null,
 				params string[] attachFiles)
 				=> SendMail(
 					new MapiRecipDesc[] { CreateRecipient(sendTo, SendToFlags.MAPI_TO) },
-					strSubject, strBody, uiFlags, attachFiles);
+					strSubject, strBody, uiFlags, parentWindow, attachFiles);
 
 
 			public static MapiRecipDesc CreateRecipient(string email, SendToFlags howTo = SendToFlags.MAPI_TO)

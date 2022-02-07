@@ -50,6 +50,11 @@
     <Compile Include="Controls\FormEx.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Localization\UIStrings.Designer.cs">
+      <DependentUpon>UIStrings.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Include="LogManagement.cs" />
     <Compile Include="Extensions\DrawingExtensions.cs" />
     <Compile Include="Extensions\ControlsExtensions.cs" />
@@ -92,6 +97,12 @@
     <EmbeddedResource Include="Feedback\frmFeedbackUI.resx">
       <DependentUpon>frmFeedbackUI.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Localization\UIStrings.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>UIStrings.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Localization\UIStrings.ru-RU.resx" />
   </ItemGroup>
   <Choose>
     <When Condition="Exists('NavfertyExcelAddIn_uom_TemporaryKey.pfx')">

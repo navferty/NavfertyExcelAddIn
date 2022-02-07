@@ -138,9 +138,7 @@
   <ItemGroup>
     <WCFMetadataStorage Include="Connected Services\cbrwebservice\" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Feedback\" />
-  </ItemGroup>
+  <ItemGroup />
   <Choose>
     <When Condition="Exists('NavfertyExcelAddIn_uom_TemporaryKey.pfx')">
       <PropertyGroup>

@@ -21,19 +21,37 @@ namespace Navferty.Common.Feedback
 		public frmFeedbackUI()
 		{
 			InitializeComponent();
+
+			Text = Localization.UIStrings.Feedback_Title;
+			lblMessage.Text = String.Format(Localization.UIStrings.Feedback_Message, FeedbackManager.MAX_USER_TEXT_LENGH);
+			txtUserMessage.MaxLength = FeedbackManager.MAX_USER_TEXT_LENGH;
+			lblSummary.Text = Localization.UIStrings.Feedback_Summary;
+
+			chkIncludeScreenshots.Text = Localization.UIStrings.Feedback_IncludeScreenshots;
+			chkIncludeScreenshots.Checked = true;
+
+			llGotoGithub.Text = Localization.UIStrings.Feedback_GotoGithub;
+			btnSend.Text = Localization.UIStrings.Feedback_Send;
 		}
 
-		private void button1_Click(object sender, EventArgs e)
+		private void OnSend(object sender, EventArgs e)
 		{
 			try
 			{
-				if (FeedbackManager.SendFeedEMail("Test message", true))
-					this.DialogResult = DialogResult.OK;
+				if (FeedbackManager.SendFeedEMail(
+					txtUserMessage.Text.Trim(),
+					chkIncludeScreenshots.Checked,
+					this))
+
+					DialogResult = DialogResult.OK;
 			}
 			catch (Exception ex)
 			{
 				logger.Error(ex, "Failed to send feedback email!");
-				MessageBox.Show(ex.Message, "Failed to send feedback email!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+				MessageBox.Show(ex.Message,
+					Localization.UIStrings.Feedback_ErrorTitle,
+					MessageBoxButtons.OK,
+					MessageBoxIcon.Error);
 			}
 		}
 	}

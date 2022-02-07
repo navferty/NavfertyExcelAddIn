@@ -7,6 +7,7 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Text;
+using System.Threading;
 using System.Windows.Forms;
 
 using Microsoft.Win32;
@@ -19,6 +20,9 @@ namespace Navferty.Common.Feedback
 {
 	public static class FeedbackManager
 	{
+		private const string MAIL_SUBJECT = @"NavfertyExcelAddin Bug report from user!";
+		internal const int MAX_USER_TEXT_LENGH = 1_000;
+
 		private static FileInfo[] GetScreenshotsAsFiles(ImageFormat fmt, string fileExt = "jpg")
 			=> System.Windows.Forms.Screen.AllScreens.ToList().Select(scr =>
 			{
@@ -34,52 +38,95 @@ namespace Navferty.Common.Feedback
 				}
 			}).ToArray();
 
-		private const string MAIL_SUBJECT = @"NavfertyExcelAddin Bug report from user!";
-		private const int MAX_MESSAGE_BODY_LENGH = 1024 * 3;
 
-		private static readonly Lazy<ILogger> logger = new(() => LogManager.GetCurrentClassLogger());
 
 		internal static bool SendFeedEMail(
 			string userText,
-			bool sendScreenshots = true
+			bool sendScreenshots = true,
+			Form? parentWindow = null
 			)
 		{
+
+			var logger = LogManager.GetCurrentClassLogger();
+			logger.Debug("Start SendFeedEMail Task...");
+
 			List<FileInfo> lFilesToAttach = new();
 
-			logger.Value.Debug("Start SendFeedEMail");
-			var logFileName = LogManagement.GetTargetFilename(null);
-			var fiLogOld = new FileInfo(logFileName);
-			if (fiLogOld.Exists)
-			{
-				logger.Value.Debug($"Attaching Log File: '{fiLogOld.FullName}'");
-				var sNewLogFile = Path.Combine(Path.GetTempPath(), (Guid.NewGuid().ToString() + "_" + fiLogOld.Name));
-				var fiLogNew = new FileInfo(sNewLogFile);
-				fiLogOld.CopyTo(fiLogNew.FullName);
-				if (fiLogNew.Exists) lFilesToAttach.Add(fiLogNew);
-			}
+			if (userText.Length > MAX_USER_TEXT_LENGH) userText = new string(userText.Take(MAX_USER_TEXT_LENGH).ToArray());
 
 			//TODO: !!! Insert developer email instead of this !!!
 			string developerMail = (new Func<string>(() =>
 			{
 				using (var hKey = Registry.CurrentUser.OpenSubKey(@"Software\Microsoft\Office\16.0\Outlook\Profiles\Outlook\9375CFF0413111d3B88A00104B2A6676\00000005"))
 					return hKey.GetValue("Email").ToString();
-			})).Invoke();
+			})).Invoke(); logger.Debug($"developerMail: '{developerMail}'");
 
-			logger.Value.Debug($"developerMail: '{developerMail}'");
+			string sysInfo = GetSystemInfo().Trim();
+			logger.Debug($"System Info Dump:\n{sysInfo}\n\n********\nUser message: '{userText}'\n");
 
 			StringBuilder sbMessageBody = new();
-			sbMessageBody.AppendLine(GetSystemInfo().Trim());
-			sbMessageBody.AppendLine("*** User message:");
+			sbMessageBody.Append("User message: ");
 			sbMessageBody.AppendLine((string.IsNullOrWhiteSpace(userText) ? "[NONE]" : ('"' + userText + '"')));
-
 			string messageBody = sbMessageBody.ToString();
-			if (messageBody.Length > MAX_MESSAGE_BODY_LENGH) messageBody = new string(messageBody.Take(MAX_MESSAGE_BODY_LENGH).ToArray());
-			logger.Value.Debug($"messageBody:\n'{messageBody}'");
 
-			if (sendScreenshots) lFilesToAttach = GetScreenshotsAsFiles(ImageFormat.Jpeg).ToList();//Create screenshots to temp dir
-			logger.Value.Debug($"FilesToAttach: '{lFilesToAttach.Count}'");
+			if (sendScreenshots)
+			{
+				if (parentWindow != null)
+				{
+					//Temporary hide feedback UI to make clear screenshots
+					parentWindow.Opacity = 0;
+					parentWindow.Refresh();
+					Application.DoEvents();
+				}
+				try
+				{
+					//Create screenshots to temp dir
+					var screenshotFiles = GetScreenshotsAsFiles(ImageFormat.Jpeg);
+					lFilesToAttach.AddRange(screenshotFiles);
+					string screenshotFileNames = string.Join(", ", screenshotFiles.Select(fi => fi.FullName));
+					logger.Debug($"Screenshot Files ({lFilesToAttach.Count}): '{screenshotFileNames}'");
+				}
+				finally
+				{
+					if (parentWindow != null)
+					{
+						//Restore feedback UI
+						parentWindow.Opacity = 1;
+						parentWindow.Refresh();
+						Application.DoEvents();
+					}
+				}
+			}
 
+			LogManager.Flush(); //Write NLog cache to disk
+			var logFileName = LogManagement.GetTargetFilename(null);
+			if (logFileName != null)
+			{
+				FileInfo fiLogFromNLogEngine = new(logFileName);
+				logger.Debug($"Log File Found: '{fiLogFromNLogEngine.FullName}', Exist: {fiLogFromNLogEngine.Exists}");
+				if (fiLogFromNLogEngine.Exists)
+				{
+					FileInfo fiLogFileInTempDir = new(Path.Combine(
+						Path.GetTempPath(),
+						(Guid.NewGuid().ToString() + "_" + fiLogFromNLogEngine.Name)));
+					{
+						//Write NLog cache to disk
+						{
+							//logger.Factory.Flush();
+							LogManager.Flush();
+							Thread.Sleep(1000); //Waiting NLog flush task to finish
+						}
 
+						//Copy NLog file to temp file
+						fiLogFromNLogEngine.CopyTo(fiLogFileInTempDir.FullName);
+
+						//Attach temp NLog file to email
+						if (fiLogFileInTempDir.Exists) lFilesToAttach.Add(fiLogFileInTempDir);
+					}
+				}
+			}
+
+			logger.Debug($"Total Files To Attach: '{lFilesToAttach.Count}'");
 			try
 			{
 				//Send Screenshots 
@@ -88,10 +135,11 @@ namespace Navferty.Common.Feedback
 					MAIL_SUBJECT,
 					messageBody,
 					WinAPI.MAPI.UIFlags.SendMailDirectNoUI,
+					parentWindow,
 					lFilesToAttach.Select(fi => fi.FullName).ToArray()
 					);
 
-				logger.Value.Debug($"Send result: {bSend}");
+				logger.Debug($"Send result: {bSend}");
 				return bSend;
 			}
 			finally

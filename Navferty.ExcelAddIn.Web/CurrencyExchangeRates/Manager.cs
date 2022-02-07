@@ -11,10 +11,6 @@ namespace Navferty.ExcelAddIn.Web.CurrencyExchangeRates
 	{
 		public static ExchangeRateRecord? SelectExchageRate(IDialogService dialogService)
 		{
-
-			Navferty.Common.Feedback.FeedbackManager.ShowFeedbackUI();
-
-
 			using (var f = new frmExchangeRates(dialogService))
 			{
 				if (f.ShowDialog() != DialogResult.OK) return null;
