@@ -61,6 +61,15 @@ namespace Navferty.Common.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Error!.
+        /// </summary>
+        internal static string Feedback_Error {
+            get {
+                return ResourceManager.GetString("Feedback_Error", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Failed to send feedback email!.
         /// </summary>
         internal static string Feedback_ErrorTitle {
@@ -79,7 +88,7 @@ namespace Navferty.Common.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Include screenshots.
+        ///   Looks up a localized string similar to Include screenshot.
         /// </summary>
         internal static string Feedback_IncludeScreenshots {
             get {

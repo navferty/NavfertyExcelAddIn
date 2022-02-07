@@ -41,10 +41,10 @@
             // btnSend
             // 
             this.btnSend.Dock = System.Windows.Forms.DockStyle.Right;
-            this.btnSend.Location = new System.Drawing.Point(357, 225);
+            this.btnSend.Location = new System.Drawing.Point(432, 235);
             this.btnSend.Name = "btnSend";
             this.btnSend.Size = new System.Drawing.Size(113, 34);
-            this.btnSend.TabIndex = 0;
+            this.btnSend.TabIndex = 1;
             this.btnSend.Text = "Send";
             this.btnSend.UseVisualStyleBackColor = true;
             this.btnSend.Click += new System.EventHandler(this.OnSend);
@@ -56,18 +56,18 @@
             this.lblMessage.Dock = System.Windows.Forms.DockStyle.Top;
             this.lblMessage.Location = new System.Drawing.Point(3, 0);
             this.lblMessage.Name = "lblMessage";
-            this.lblMessage.Size = new System.Drawing.Size(467, 13);
+            this.lblMessage.Size = new System.Drawing.Size(542, 13);
             this.lblMessage.TabIndex = 1;
             this.lblMessage.Text = "message";
             // 
             // chkIncludeScreenshots
             // 
             this.chkIncludeScreenshots.AutoSize = true;
-            this.chkIncludeScreenshots.Location = new System.Drawing.Point(3, 189);
+            this.chkIncludeScreenshots.Location = new System.Drawing.Point(3, 199);
             this.chkIncludeScreenshots.Name = "chkIncludeScreenshots";
-            this.chkIncludeScreenshots.Size = new System.Drawing.Size(78, 17);
+            this.chkIncludeScreenshots.Size = new System.Drawing.Size(115, 17);
             this.chkIncludeScreenshots.TabIndex = 2;
-            this.chkIncludeScreenshots.Text = "includeLog";
+            this.chkIncludeScreenshots.Text = "include screenshot";
             this.chkIncludeScreenshots.UseVisualStyleBackColor = true;
             // 
             // tableLayoutPanel1
@@ -90,8 +90,8 @@
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(473, 262);
-            this.tableLayoutPanel1.TabIndex = 3;
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(548, 272);
+            this.tableLayoutPanel1.TabIndex = 0;
             // 
             // txtUserMessage
             // 
@@ -103,15 +103,17 @@
             this.txtUserMessage.Multiline = true;
             this.txtUserMessage.Name = "txtUserMessage";
             this.txtUserMessage.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.txtUserMessage.Size = new System.Drawing.Size(467, 167);
-            this.txtUserMessage.TabIndex = 3;
+            this.txtUserMessage.Size = new System.Drawing.Size(542, 177);
+            this.txtUserMessage.TabIndex = 0;
             // 
             // lblSummary
             // 
             this.lblSummary.AutoSize = true;
-            this.lblSummary.Location = new System.Drawing.Point(3, 209);
+            this.tableLayoutPanel1.SetColumnSpan(this.lblSummary, 2);
+            this.lblSummary.Dock = System.Windows.Forms.DockStyle.Top;
+            this.lblSummary.Location = new System.Drawing.Point(3, 219);
             this.lblSummary.Name = "lblSummary";
-            this.lblSummary.Size = new System.Drawing.Size(48, 13);
+            this.lblSummary.Size = new System.Drawing.Size(542, 13);
             this.lblSummary.TabIndex = 4;
             this.lblSummary.Text = "summary";
             // 
@@ -119,19 +121,21 @@
             // 
             this.llGotoGithub.AutoSize = true;
             this.llGotoGithub.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.llGotoGithub.Location = new System.Drawing.Point(3, 249);
+            this.llGotoGithub.Location = new System.Drawing.Point(3, 259);
             this.llGotoGithub.Name = "llGotoGithub";
-            this.llGotoGithub.Size = new System.Drawing.Size(348, 13);
-            this.llGotoGithub.TabIndex = 5;
+            this.llGotoGithub.Size = new System.Drawing.Size(423, 13);
+            this.llGotoGithub.TabIndex = 2;
             this.llGotoGithub.TabStop = true;
             this.llGotoGithub.Text = "goto github";
+            this.llGotoGithub.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.llGotoGithub_LinkClicked);
             // 
             // frmFeedbackUI
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(489, 278);
+            this.ClientSize = new System.Drawing.Size(564, 288);
             this.Controls.Add(this.tableLayoutPanel1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "frmFeedbackUI";

@@ -117,6 +117,9 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="Feedback_Error" xml:space="preserve">
+    <value>Ошибка!</value>
+  </data>
   <data name="Feedback_ErrorTitle" xml:space="preserve">
     <value>Не удалось отправить отчёт разработчику!</value>
   </data>
@@ -124,7 +127,7 @@
     <value>Трекер ошибок и запроса новых функций</value>
   </data>
   <data name="Feedback_IncludeScreenshots" xml:space="preserve">
-    <value>Включить в отчёт скриншоты</value>
+    <value>Приложить скриншот</value>
   </data>
   <data name="Feedback_Message" xml:space="preserve">
     <value>Кратко опишите возникающую ошибку (не более {0} символов):</value>

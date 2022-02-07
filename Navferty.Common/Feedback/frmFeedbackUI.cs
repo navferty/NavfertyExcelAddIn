@@ -54,5 +54,22 @@ namespace Navferty.Common.Feedback
 					MessageBoxIcon.Error);
 			}
 		}
+
+
+		private void llGotoGithub_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+		{
+			try
+			{
+				FeedbackManager.JumpGithub();
+			}
+			catch (Exception ex)
+			{
+				logger.Error(ex, "Failed to open Github bugtracker!");
+				MessageBox.Show(ex.Message,
+					Localization.UIStrings.Feedback_Error,
+					MessageBoxButtons.OK,
+					MessageBoxIcon.Error);
+			}
+		}
 	}
 }

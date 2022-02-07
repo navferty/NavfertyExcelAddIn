@@ -196,4 +196,7 @@
   <data name="ToggleSheetLabels" xml:space="preserve">
     <value>Отобразить или скрыть ярлычки листов</value>
   </data>
+  <data name="Feedback" xml:space="preserve">
+    <value>Отправить отчёт об ошибке или пожелание новой функциональности разработчику</value>
+  </data>
 </root>

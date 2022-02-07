@@ -20,6 +20,8 @@ namespace Navferty.Common.Feedback
 {
 	public static class FeedbackManager
 	{
+		private const string GITHUB_BUGTRACKER_URL = @"https://github.com/navferty/NavfertyExcelAddIn/issues";
+		private const string DEVELOPER_MAIL = @"navferty@ymail.com";
 		private const string MAIL_SUBJECT = @"NavfertyExcelAddin Bug report from user!";
 		internal const int MAX_USER_TEXT_LENGH = 1_000;
 
@@ -38,7 +40,20 @@ namespace Navferty.Common.Feedback
 				}
 			}).ToArray();
 
-
+		/// <summary>This used for debug!
+		//If you want to send error reports to custom email,
+		//create new string value 'Navferty_ExcelAddIn_Feedback_Email' in root of 'HKEY_CURRENT_USER' and set you mail
+		/// </summary>
+		internal static string GetDeveloperMail()
+		{
+			try
+			{
+				string mail = Registry.CurrentUser.GetValue("Navferty_ExcelAddIn_Feedback_Email").ToString().Trim();
+				if (string.IsNullOrWhiteSpace(mail)) mail = DEVELOPER_MAIL;
+				return mail;
+			}
+			catch { return DEVELOPER_MAIL; }
+		}
 
 		internal static bool SendFeedEMail(
 			string userText,
@@ -50,16 +65,11 @@ namespace Navferty.Common.Feedback
 			var logger = LogManager.GetCurrentClassLogger();
 			logger.Debug("Start SendFeedEMail Task...");
 
+			string developerMail = GetDeveloperMail();
+			logger.Debug($"developerMail: '{developerMail}'");
+
 			List<FileInfo> lFilesToAttach = new();
-
 			if (userText.Length > MAX_USER_TEXT_LENGH) userText = new string(userText.Take(MAX_USER_TEXT_LENGH).ToArray());
-
-			//TODO: !!! Insert developer email instead of this !!!
-			string developerMail = (new Func<string>(() =>
-			{
-				using (var hKey = Registry.CurrentUser.OpenSubKey(@"Software\Microsoft\Office\16.0\Outlook\Profiles\Outlook\9375CFF0413111d3B88A00104B2A6676\00000005"))
-					return hKey.GetValue("Email").ToString();
-			})).Invoke(); logger.Debug($"developerMail: '{developerMail}'");
 
 			string sysInfo = GetSystemInfo().Trim();
 			logger.Debug($"System Info Dump:\n{sysInfo}\n\n********\nUser message: '{userText}'\n");
@@ -187,6 +197,11 @@ namespace Navferty.Common.Feedback
 		{
 			using var fui = new frmFeedbackUI();
 			fui.ShowDialog();
+		}
+
+		public static void JumpGithub()
+		{
+			System.Diagnostics.Process.Start(GITHUB_BUGTRACKER_URL);
 		}
 	}
 }

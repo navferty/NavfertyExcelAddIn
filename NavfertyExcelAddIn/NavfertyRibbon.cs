@@ -423,6 +423,13 @@ namespace NavfertyExcelAddIn
 		}
 		#endregion
 
+		#region Feedback
+		public void FeedbackStart(IRibbonControl ribbonControl)
+		{
+			GetService<Feedback.IFeedback>().DisplayFeedbackUI();
+		}
+		#endregion
+
 		#endregion
 
 		#region Utils
