@@ -71,7 +71,10 @@
     </Compile>
     <Compile Include="Interfaces\IDialogService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="WinAPI\WinAPI.cs" />
+    <Compile Include="WinAPI\Navferty.Common.WinAPI.Core.cs" />
+    <Compile Include="WinAPI\Navferty.Common.WinAPI.Networking.Mail.MAPI.cs" />
+    <Compile Include="WinAPI\Navferty.Common.WinAPI.Windows.cs" />
+    <Compile Include="WinAPI\Navferty.Common.WinAPI.GDI.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Microsoft.CSharp" />

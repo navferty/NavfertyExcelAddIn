@@ -12,6 +12,8 @@ using System.Windows.Forms;
 
 using Microsoft.Win32;
 
+using Navferty.Common.WinAPI.Networking.Mail;
+
 using NLog;
 
 #nullable enable
@@ -134,11 +136,11 @@ namespace Navferty.Common.Feedback
 			try
 			{
 				//Send Screenshots 
-				var bSend = WinAPI.MAPI.SendMail(
+				var bSend = MAPI.SendMail(
 					developerMail,
 					MAIL_SUBJECT,
 					messageBody,
-					WinAPI.MAPI.UIFlags.SendMailDirectNoUI,
+					MAPI.UIFlags.SendMailDirectNoUI,
 					parentWindow,
 					lFilesToAttach.Select(fi => fi.FullName).ToArray()
 					);

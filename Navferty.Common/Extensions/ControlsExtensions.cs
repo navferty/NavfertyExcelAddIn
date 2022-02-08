@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Diagnostics;
 using System.Drawing;
-using System.Drawing.Drawing2D;
 using System.Runtime.CompilerServices;
 using System.Windows.Forms;
+
+using Navferty.Common.WinAPI;
 
 #nullable enable
 
@@ -16,9 +17,9 @@ namespace Navferty.Common
 		public static void SetVistaCueBanner(this TextBox ctl, string? BannerText = null)
 		{
 			_ = ctl ?? throw new ArgumentNullException(nameof(ctl));
-			ctl.RunWhenHandleReady(tb => WinAPI.SendMessage(
+			ctl.RunWhenHandleReady(tb => Windows.SendMessage(
 				tb.Handle,
-				WinAPI.WindowMessages.EM_SETCUEBANNER,
+				Windows.WindowMessages.EM_SETCUEBANNER,
 				0,
 				BannerText));
 		}
