@@ -57,7 +57,16 @@ namespace Navferty.Common.Feedback
 			catch { return DEVELOPER_MAIL; }
 		}
 
-		internal static bool SendFeedEMail(
+		/// <summary>Create and Send feedback mail using MAPI.
+		/// 
+		/// In fact, the email is not sent immediately, but is cached in the mail client, 
+		/// and will be sent when the user launches the mail client. 
+		/// If the mail client is already running, the email will be sent at the next synchronization.
+		/// </summary>
+		/// <param name="userText">Some mail body text</param>
+		/// <param name="sendScreenshots">Takes and sends Screenshots of each monitor</param>
+		/// <param name="parentWindow">This window will be hidden to take screenshots</param>
+		internal static bool SendFeedbackMail(
 			string userText,
 			bool sendScreenshots = true,
 			Form? parentWindow = null
@@ -135,7 +144,7 @@ namespace Navferty.Common.Feedback
 			logger.Debug($"Total Files To Attach: '{lFilesToAttach.Count}'");
 			try
 			{
-				//Send Screenshots 
+				//Send mail
 				var bSend = MAPI.SendMail(
 					developerMail,
 					MAIL_SUBJECT,
@@ -158,6 +167,8 @@ namespace Navferty.Common.Feedback
 				});
 			}
 		}
+
+		/// <summary>Collect some debug information about system to help resolve errors</summary>
 		private static string GetSystemInfo()
 		{
 			Func<Assembly, string?, string> DumpAssemmbly = new((asm, title) =>
@@ -213,6 +224,7 @@ namespace Navferty.Common.Feedback
 			return sbSysInfo.ToString();
 		}
 
+		/// <summary>Return NLog engine Log file path on the disk</summary>
 		private static FileInfo? GetNLogFile()
 		{
 			LogManager.Flush(); //Write NLog cache to disk if this still in RAM
@@ -221,15 +233,19 @@ namespace Navferty.Common.Feedback
 			return null;
 		}
 
+		/// <summary>Displays user Feedback UI dialog</summary>
+		/// <param name="message">some text to prefill user comment textbox</param>
 		public static void ShowFeedbackUI(string? message = null)
 		{
 			using var fui = new frmFeedbackUI(message);
 			fui.ShowDialog();
 		}
 
+		/// <summary>Opens Github issues page in Web browser</summary>
 		public static void ShowGithub()
 			=> System.Diagnostics.Process.Start(GITHUB_BUGTRACKER_URL);
 
+		/// <summary>Opens NLog engine file in text editor</summary>
 		public static void ShowLogFile()
 			=> System.Diagnostics.Process.Start(GetNLogFile()!.FullName);
 

@@ -172,6 +172,12 @@ namespace Navferty.Common.WinAPI.Networking.Mail
 		#endregion
 
 
+		/// <summary>Create and Send mail message.
+		/// 
+		/// In fact, the email is not sent immediately, but is cached in the mail client, 
+		/// and will be sent when the user launches the mail client. 
+		/// If the mail client is already running, the email will be sent at the next synchronization.
+		/// </summary>
 		public static bool SendMail(
 			IEnumerable<MapiRecipDesc> recipients,
 			string strSubject,
@@ -212,6 +218,7 @@ namespace Navferty.Common.WinAPI.Networking.Mail
 			}
 		}
 
+		/// <inheritdoc cref="SendMail" />
 		public static bool SendMail(
 			string sendTo,
 			string strSubject,

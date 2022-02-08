@@ -55,7 +55,7 @@ namespace Navferty.Common.Feedback
 		{
 			new Action(() =>
 			  {
-				  if (FeedbackManager.SendFeedEMail(
+				  if (FeedbackManager.SendFeedbackMail(
 					  txtUserMessage.Text.Trim(),
 					  chkIncludeScreenshots.Checked,
 					  this))

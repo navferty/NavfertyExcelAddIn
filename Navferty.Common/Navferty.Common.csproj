@@ -41,7 +41,7 @@
     <Compile Include="Controls\CheckedListBoxEx.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Controls\ErrorForm.cs">
+    <Compile Include="Controls\ErrorDialog.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Controls\LabelEx.cs">
@@ -80,10 +80,10 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="WinAPI\Navferty.Common.WinAPI.Core.cs" />
-    <Compile Include="WinAPI\Navferty.Common.WinAPI.Networking.Mail.MAPI.cs" />
-    <Compile Include="WinAPI\Navferty.Common.WinAPI.Windows.cs" />
-    <Compile Include="WinAPI\Navferty.Common.WinAPI.GDI.cs" />
+    <Compile Include="WinAPI\WinAPI.Core.cs" />
+    <Compile Include="WinAPI\WinAPI.Networking.Mail.MAPI.cs" />
+    <Compile Include="WinAPI\WinAPI.Windows.cs" />
+    <Compile Include="WinAPI\WinAPI.GDI.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Microsoft.CSharp" />
@@ -107,8 +107,8 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Controls\ErrorForm.resx">
-      <DependentUpon>ErrorForm.cs</DependentUpon>
+    <EmbeddedResource Include="Controls\ErrorDialog.resx">
+      <DependentUpon>ErrorDialog.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Feedback\frmFeedbackUI.resx">
       <DependentUpon>frmFeedbackUI.cs</DependentUpon>
