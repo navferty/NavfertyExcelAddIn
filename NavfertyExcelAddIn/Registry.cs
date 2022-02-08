@@ -133,6 +133,11 @@ namespace NavfertyExcelAddIn
 
 			builder.RegisterType<ExceptionLogger>();
 
+			builder.RegisterType<Feedback.FeedbackBuilder>()
+				.As<Feedback.IFeedback>()
+				.EnableInterfaceInterceptors()
+				.InterceptedBy(typeof(ExceptionLogger));
+
 			builder.RegisterType<UndoManager>()
 				.SingleInstance();
 

@@ -266,8 +266,10 @@
     <Compile Include="Transliterate\CyrillicToLatinFallback.cs" />
     <Compile Include="Transliterate\Transliterator.cs" />
     <Compile Include="Undo\UndoManager.cs" />
-    <Compile Include="Web\WebToolsBuilder.cs" />
+    <Compile Include="Feedback\FeedbackBuilder.cs" />
+    <Compile Include="Feedback\IFeedback.cs" />
     <Compile Include="Web\IWebTools.cs" />
+    <Compile Include="Web\WebToolsBuilder.cs" />
     <Compile Include="WorksheetCellsEditing\ConditionalFormatFixer.cs" />
     <Compile Include="WorksheetCellsEditing\IConditionalFormatFixer.cs" />
     <Compile Include="WorksheetProtectUnprotect\frmWorksheetsProtection.cs">

@@ -2,6 +2,9 @@
 using System.Drawing;
 using System.Windows.Forms;
 
+using Navferty.Common.WinAPI;
+using Navferty.Common.WinAPI.GDI;
+
 #nullable enable
 
 namespace Navferty.Common.Controls
@@ -47,19 +50,18 @@ namespace Navferty.Common.Controls
 			base.WndProc(ref m);
 
 			//Now do our job.
-			switch ((WinAPI.WindowMessages)m.Msg)
+			switch ((Windows.WindowMessages)m.Msg)
 			{
-				case WinAPI.WindowMessages.WM_PAINT: RePaint(); break;
+				case Windows.WindowMessages.WM_PAINT: RePaint(); break;
 			}
 		}
 
 		private void RePaint()
 		{
 			if (Items.Count > 0 || string.IsNullOrWhiteSpace(emptyText))
-				return;//We paint over only if ListBox noes not have any items and and EmptyText
+				return; //We paint over only if ListBox noes not have any items and and EmptyText
 
-			//var rcClient = WinAPI.GetClientRect(this);
-			using (var dc = new WinAPI.DC(this))
+			using (var dc = this.GetDC())
 			using (var g = dc.CreateGraphics())
 			{
 				g.PageUnit = GraphicsUnit.Pixel;

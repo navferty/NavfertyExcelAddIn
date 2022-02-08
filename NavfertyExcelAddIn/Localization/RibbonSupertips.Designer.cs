@@ -97,6 +97,15 @@ namespace NavfertyExcelAddIn.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Send a bug report or feature request to the developer.
+        /// </summary>
+        internal static string Feedback {
+            get {
+                return ResourceManager.GetString("Feedback", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Find all cells in the specified range that have any errors (#)..
         /// </summary>
         internal static string FindErrors {
