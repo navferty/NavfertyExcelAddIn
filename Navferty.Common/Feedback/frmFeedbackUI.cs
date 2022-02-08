@@ -6,19 +6,34 @@ using Navferty.Common.Controls;
 
 using NLog;
 
+#nullable enable
+
 namespace Navferty.Common.Feedback
 {
 	internal partial class frmFeedbackUI : FormEx
 	{
 		private readonly ILogger logger = LogManager.GetCurrentClassLogger();
 
-		public frmFeedbackUI()
+		[Obsolete("Just for Designer!", true)]
+		public frmFeedbackUI() : base()
+		{
+			InitializeComponent();
+		}
+
+		public frmFeedbackUI(string? message = null) : base()
 		{
 			InitializeComponent();
 
 			Text = Localization.UIStrings.Feedback_Title;
 			lblMessage.Text = String.Format(Localization.UIStrings.Feedback_Message, FeedbackManager.MAX_USER_TEXT_LENGH);
 			txtUserMessage.MaxLength = FeedbackManager.MAX_USER_TEXT_LENGH;
+
+			if (!string.IsNullOrWhiteSpace(message))
+			{
+				message = message!.LimitLength(FeedbackManager.MAX_USER_TEXT_LENGH);
+				txtUserMessage.Text = message;
+			}
+
 
 			chkIncludeScreenshots.Text = Localization.UIStrings.Feedback_IncludeScreenshots;
 			chkIncludeScreenshots.Checked = true;
@@ -62,7 +77,15 @@ namespace Navferty.Common.Feedback
 		}
 		private void OnShowLog()
 		{
-			new Action(() => { FeedbackManager.ShowLogFile(); })
+
+			new Action(() =>
+			{
+				/*
+				var EEE = new Exception("Test");
+				throw EEE;
+				 */
+				FeedbackManager.ShowLogFile();
+			})
 				.TryCatch(true,
 				Localization.UIStrings.Feedback_ErrorTitle,
 				logger, "Failed to show NLog log file!");

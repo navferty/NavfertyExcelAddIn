@@ -175,31 +175,31 @@ namespace NavfertyExcelAddIn
 
 		public void UnprotectWorkbook(IRibbonControl ribbonControl)
 		{
-			var wb = App.ActiveWorkbook;
-			var path = wb.FullName;
-
-			logger.Debug($"UnprotectWorkbook {path}");
-
-			var extension = path.Split('.').LastOrDefault();
-
-			if (extension != "xlsx" && extension != "xlsm")
+			try
 			{
-				dialogService.ShowError(UIStrings.CannotUnlockPleaseSaveAsXml);
-				return;
+				var wb = App.ActiveWorkbook;
+				var path = wb.FullName;
+
+				logger.Debug($"UnprotectWorkbook {path}");
+
+				var extension = path.Split('.').LastOrDefault();
+
+				if (extension != "xlsx" && extension != "xlsm")
+					throw new Exception(UIStrings.CannotUnlockPleaseSaveAsXml);
+
+				if (!dialogService.Ask(UIStrings.UnsavedChangesWillBeLostPrompt, UIStrings.Warning))
+				{
+					return;
+				}
+
+				wb.Close(false);
+
+				var wbUnprotector = GetService<IWbUnprotector>();
+				wbUnprotector.UnprotectWorkbookWithAllWorksheets(path);
+
+				App.Workbooks.Open(path);
 			}
-
-			if (!dialogService.Ask(UIStrings.UnsavedChangesWillBeLostPrompt, UIStrings.Warning))
-			{
-				return;
-			}
-
-			wb.Close(false);
-
-
-			var wbUnprotector = GetService<IWbUnprotector>();
-			wbUnprotector.UnprotectWorkbookWithAllWorksheets(path);
-
-			App.Workbooks.Open(path);
+			catch (Exception ex) { dialogService.ShowError(ex); }
 		}
 
 		public void ProtectUnprotectWorksheets(IRibbonControl ribbonControl)
@@ -317,29 +317,30 @@ namespace NavfertyExcelAddIn
 
 		public void ValidateValues(IRibbonControl ribbonControl)
 		{
-			var activeSheet = (Worksheet)App.ActiveSheet;
-			var range = GetSelectionOrUsedRange(activeSheet);
-
-			if (range == null)
-				return;
-
-			logger.Debug($"ValidateValues. Range selected is {range.Address}");
-
-			if (!validationTypeByButtonId.TryGetValue(ribbonControl.Id, out var validationType))
+			try
 			{
-				dialogService.ShowError($"Invalid control id '{ribbonControl.Id}'");
-				throw new ArgumentOutOfRangeException($"Invalid control id '{ribbonControl.Id}'");
+				var activeSheet = (Worksheet)App.ActiveSheet;
+				var range = GetSelectionOrUsedRange(activeSheet);
+
+				if (range == null)
+					return;
+
+				logger.Debug($"ValidateValues. Range selected is {range.Address}");
+
+				if (!validationTypeByButtonId.TryGetValue(ribbonControl.Id, out var validationType))
+					throw new ArgumentOutOfRangeException($"Invalid control id '{ribbonControl.Id}'");
+
+				logger.Debug($"ValidateValues. Range selected is {range.Address}, validation type {validationType}");
+
+				IReadOnlyCollection<InteractiveErrorItem> results;
+
+				var validator = GetService<ICellsValueValidator>();
+				results = validator.Validate(range, validationType);
+
+				form = new InteractiveRangeReportForm(results, activeSheet);
+				form.Show();
 			}
-
-			logger.Debug($"ValidateValues. Range selected is {range.Address}, validation type {validationType}");
-
-			IReadOnlyCollection<InteractiveErrorItem> results;
-
-			var validator = GetService<ICellsValueValidator>();
-			results = validator.Validate(range, validationType);
-
-			form = new InteractiveRangeReportForm(results, activeSheet);
-			form.Show();
+			catch (Exception ex) { dialogService.ShowError(ex, logger); }
 		}
 
 		public void FindErrors(IRibbonControl ribbonControl)

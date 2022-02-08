@@ -61,6 +61,24 @@ namespace Navferty.Common.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Close.
+        /// </summary>
+        internal static string ErrorWindow_OkButton {
+            get {
+                return ResourceManager.GetString("ErrorWindow_OkButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to An error has occurred!.
+        /// </summary>
+        internal static string ErrorWindow_Title {
+            get {
+                return ResourceManager.GetString("ErrorWindow_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Error!.
         /// </summary>
         internal static string Feedback_Error {
@@ -111,6 +129,15 @@ namespace Navferty.Common.Localization {
         internal static string Feedback_Send {
             get {
                 return ResourceManager.GetString("Feedback_Send", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Send Feedback.
+        /// </summary>
+        internal static string Feedback_SendFeedback {
+            get {
+                return ResourceManager.GetString("Feedback_SendFeedback", resourceCulture);
             }
         }
         

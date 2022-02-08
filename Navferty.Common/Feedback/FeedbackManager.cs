@@ -71,7 +71,7 @@ namespace Navferty.Common.Feedback
 			logger.Debug($"developerMail: '{developerMail}'");
 
 			List<FileInfo> lFilesToAttach = new();
-			if (userText.Length > MAX_USER_TEXT_LENGH) userText = new string(userText.Take(MAX_USER_TEXT_LENGH).ToArray());
+			userText = userText.LimitLength(MAX_USER_TEXT_LENGH);
 
 			string sysInfo = GetSystemInfo().Trim();
 			logger.Debug($"System Info Dump:\n{sysInfo}\n\n********\nUser message: '{userText}'\n");
@@ -221,9 +221,9 @@ namespace Navferty.Common.Feedback
 			return null;
 		}
 
-		public static void ShowFeedbackUI()
+		public static void ShowFeedbackUI(string? message = null)
 		{
-			using var fui = new frmFeedbackUI();
+			using var fui = new frmFeedbackUI(message);
 			fui.ShowDialog();
 		}
 

@@ -10,6 +10,8 @@ using Navferty.Common;
 
 using NavfertyExcelAddIn.Localization;
 
+using NLog;
+
 using Application = Microsoft.Office.Interop.Excel.Application;
 
 namespace NavfertyExcelAddIn.Commons
@@ -29,10 +31,14 @@ namespace NavfertyExcelAddIn.Commons
 				{FileType.Pdf, new FileExtensionFilter("PDF files", "*.pdf")}
 			};
 
+		[Obsolete("Use ShowError(Exception, ILogger) instead", true)]
 		public void ShowError(string message)
 		{
-			MessageBox.Show(message, UIStrings.Error, MessageBoxButtons.OK, MessageBoxIcon.Error);
+			//MessageBox.Show(message, UIStrings.Error, MessageBoxButtons.OK, MessageBoxIcon.Error);
+			ShowError(new Exception(message));
 		}
+		public void ShowError(Exception e, ILogger? logger = null)
+			=> e.ShowErrorUI(null, logger);
 
 		public void ShowInfo(string message)
 		{

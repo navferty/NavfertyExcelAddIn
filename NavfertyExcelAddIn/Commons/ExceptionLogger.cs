@@ -30,8 +30,7 @@ namespace NavfertyExcelAddIn.Commons
 			}
 			catch (Exception ex)
 			{
-				logger.Error(ex);
-				dialogService.ShowError(string.Format(UIStrings.ErrorMessage, ex.Message));
+				dialogService.ShowError(ex, logger);
 				throw;
 			}
 		}

@@ -15,13 +15,13 @@ namespace Navferty.Common
 	[DebuggerStepThrough]
 	public static class DelegatesExtensions
 	{
-
 		public static bool TryCatch(
 			this Action a,
 			bool displayErrorMessage = true,
 			string? errorTitle = null,
 			ILogger? logger = null,
-			string? loggerTitle = null
+			string? loggerTitle = null,
+			bool allowErrorReporting = true
 			)
 		{
 			try
@@ -34,13 +34,14 @@ namespace Navferty.Common
 				errorTitle ??= Application.ProductName;
 				loggerTitle ??= errorTitle;
 
-				logger?.Error(ex, loggerTitle);
 				if (displayErrorMessage)
 				{
-					MessageBox.Show(ex.Message,
-						errorTitle!,
-						MessageBoxButtons.OK,
-						MessageBoxIcon.Error);
+					ex.ShowErrorUI(errorTitle, logger, loggerTitle, allowErrorReporting);
+					//MessageBox.Show(ex.Message,						errorTitle!,						MessageBoxButtons.OK,						MessageBoxIcon.Error);
+				}
+				else
+				{
+					logger?.Error(ex, loggerTitle);
 				}
 			}
 			return false;

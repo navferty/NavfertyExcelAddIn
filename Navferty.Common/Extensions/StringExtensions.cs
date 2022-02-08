@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices;
 using System.Text.RegularExpressions;
 
 #nullable enable
@@ -31,6 +32,15 @@ namespace Navferty.Common
 		public static int CountChars(this string value, char c)
 		{
 			return value.Count(x => x == c);
+		}
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static string LimitLength(
+			this string text,
+			int MaxLength)
+		{
+			if (text.Length > MaxLength) text = new string(text.Take(MaxLength).ToArray());
+			return text;
 		}
 	}
 }

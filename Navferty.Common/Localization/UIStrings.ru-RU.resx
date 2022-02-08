@@ -117,6 +117,12 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="ErrorWindow_OkButton" xml:space="preserve">
+    <value>Закрыть</value>
+  </data>
+  <data name="ErrorWindow_Title" xml:space="preserve">
+    <value>Произошла ошибка!</value>
+  </data>
   <data name="Feedback_Error" xml:space="preserve">
     <value>Ошибка!</value>
   </data>
@@ -134,6 +140,9 @@
   </data>
   <data name="Feedback_Send" xml:space="preserve">
     <value>Отправить</value>
+  </data>
+  <data name="Feedback_SendFeedback" xml:space="preserve">
+    <value>Сообщить разработчикам</value>
   </data>
   <data name="Feedback_Summary_Loglink" xml:space="preserve">
     <value>журнал ошибок</value>
