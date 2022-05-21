@@ -186,6 +186,18 @@
   <data name="SuccessfullyValidatedMessage" xml:space="preserve">
     <value>Successfully validated, no errors or warnings detected</value>
   </data>
+  <data name="TrimTextByLength_TextLen" xml:space="preserve">
+    <value>Specify the allowed maximum text length, or 0 for no truncation.</value>
+  </data>
+  <data name="TrimTextByLength_Title" xml:space="preserve">
+    <value>Text clipping</value>
+  </data>
+  <data name="TrimTextByLength_TrimFullSpaced" xml:space="preserve">
+    <value>Delete lines consisting of only spaces</value>
+  </data>
+  <data name="TrimTextByLength_TrimStartEnd" xml:space="preserve">
+    <value>Trim spaces at the beginning and end of a string</value>
+  </data>
   <data name="UnsavedChangesWillBeLostPrompt" xml:space="preserve">
     <value>Any unsaved changes will be lost. Active workbook may become corrupted. It is strongly recommended to create backup. Continue?</value>
   </data>

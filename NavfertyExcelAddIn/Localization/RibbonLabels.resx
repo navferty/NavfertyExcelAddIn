@@ -240,4 +240,7 @@
   <data name="Feedback" xml:space="preserve">
     <value>Feedback</value>
   </data>
+  <data name="TrimTextByLength" xml:space="preserve">
+    <value>Trim Text</value>
+  </data>
 </root>

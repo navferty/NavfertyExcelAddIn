@@ -268,6 +268,42 @@ namespace NavfertyExcelAddIn.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Specify the allowed maximum text length, or 0 for no truncation..
+        /// </summary>
+        internal static string TrimTextByLength_TextLen {
+            get {
+                return ResourceManager.GetString("TrimTextByLength_TextLen", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Text clipping.
+        /// </summary>
+        internal static string TrimTextByLength_Title {
+            get {
+                return ResourceManager.GetString("TrimTextByLength_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Delete lines consisting of only spaces.
+        /// </summary>
+        internal static string TrimTextByLength_TrimFullSpaced {
+            get {
+                return ResourceManager.GetString("TrimTextByLength_TrimFullSpaced", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Trim spaces at the beginning and end of a string.
+        /// </summary>
+        internal static string TrimTextByLength_TrimStartEnd {
+            get {
+                return ResourceManager.GetString("TrimTextByLength_TrimStartEnd", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Any unsaved changes will be lost. Active workbook may become corrupted. It is strongly recommended to create backup. Continue?.
         /// </summary>
         internal static string UnsavedChangesWillBeLostPrompt {

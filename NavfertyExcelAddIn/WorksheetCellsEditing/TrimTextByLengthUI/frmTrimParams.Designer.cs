@@ -1,4 +1,4 @@
-﻿namespace NavfertyExcelAddIn.LimitTextLength
+﻿namespace NavfertyExcelAddIn.WorksheetCellsEditing.TrimTextByLengthUI
 {
 	partial class frmTrimParams
 	{
@@ -57,14 +57,14 @@
 			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
 			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
 			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 32F));
-			this.tableLayoutPanel1.Size = new System.Drawing.Size(288, 136);
+			this.tableLayoutPanel1.Size = new System.Drawing.Size(409, 153);
 			this.tableLayoutPanel1.TabIndex = 0;
 			// 
 			// btnOk
 			// 
 			this.btnOk.DialogResult = System.Windows.Forms.DialogResult.OK;
 			this.btnOk.Dock = System.Windows.Forms.DockStyle.Right;
-			this.btnOk.Location = new System.Drawing.Point(179, 107);
+			this.btnOk.Location = new System.Drawing.Point(300, 124);
 			this.btnOk.Name = "btnOk";
 			this.btnOk.Size = new System.Drawing.Size(106, 26);
 			this.btnOk.TabIndex = 0;
@@ -77,7 +77,7 @@
 			this.lblTextLength.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.lblTextLength.Location = new System.Drawing.Point(3, 0);
 			this.lblTextLength.Name = "lblTextLength";
-			this.lblTextLength.Size = new System.Drawing.Size(170, 26);
+			this.lblTextLength.Size = new System.Drawing.Size(291, 26);
 			this.lblTextLength.TabIndex = 1;
 			this.lblTextLength.Text = "Maximum Text Length:";
 			this.lblTextLength.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -85,7 +85,7 @@
 			// numMaxLength
 			// 
 			this.numMaxLength.Dock = System.Windows.Forms.DockStyle.Top;
-			this.numMaxLength.Location = new System.Drawing.Point(179, 3);
+			this.numMaxLength.Location = new System.Drawing.Point(300, 3);
 			this.numMaxLength.Name = "numMaxLength";
 			this.numMaxLength.Size = new System.Drawing.Size(106, 20);
 			this.numMaxLength.TabIndex = 2;
@@ -98,7 +98,7 @@
 			this.chkTrimStartEnd.Dock = System.Windows.Forms.DockStyle.Top;
 			this.chkTrimStartEnd.Location = new System.Drawing.Point(3, 29);
 			this.chkTrimStartEnd.Name = "chkTrimStartEnd";
-			this.chkTrimStartEnd.Size = new System.Drawing.Size(282, 14);
+			this.chkTrimStartEnd.Size = new System.Drawing.Size(403, 14);
 			this.chkTrimStartEnd.TabIndex = 3;
 			this.chkTrimStartEnd.Text = "trimStartEndSpaces";
 			this.chkTrimStartEnd.UseVisualStyleBackColor = true;
@@ -110,7 +110,7 @@
 			this.chkTrimFullSpaces.Dock = System.Windows.Forms.DockStyle.Top;
 			this.chkTrimFullSpaces.Location = new System.Drawing.Point(3, 49);
 			this.chkTrimFullSpaces.Name = "chkTrimFullSpaces";
-			this.chkTrimFullSpaces.Size = new System.Drawing.Size(282, 14);
+			this.chkTrimFullSpaces.Size = new System.Drawing.Size(403, 14);
 			this.chkTrimFullSpaces.TabIndex = 4;
 			this.chkTrimFullSpaces.Text = "trimFullSpacedStrings";
 			this.chkTrimFullSpaces.UseVisualStyleBackColor = true;
@@ -120,7 +120,7 @@
 			this.AcceptButton = this.btnOk;
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(304, 152);
+			this.ClientSize = new System.Drawing.Size(425, 169);
 			this.Controls.Add(this.tableLayoutPanel1);
 			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
 			this.MaximizeBox = false;
@@ -142,7 +142,7 @@
 
 		private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
 		private System.Windows.Forms.Button btnOk;
-		private System.Windows.Forms.Label lblTextLength;
+		internal System.Windows.Forms.Label lblTextLength;
 		internal System.Windows.Forms.NumericUpDown numMaxLength;
 		internal System.Windows.Forms.CheckBox chkTrimStartEnd;
 		internal System.Windows.Forms.CheckBox chkTrimFullSpaces;

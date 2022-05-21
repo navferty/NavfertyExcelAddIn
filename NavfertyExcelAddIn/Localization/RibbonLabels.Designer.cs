@@ -313,6 +313,15 @@ namespace NavfertyExcelAddIn.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Trim Text.
+        /// </summary>
+        internal static string TrimTextByLength {
+            get {
+                return ResourceManager.GetString("TrimTextByLength", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Undo Last Action.
         /// </summary>
         internal static string UndoLastAction {

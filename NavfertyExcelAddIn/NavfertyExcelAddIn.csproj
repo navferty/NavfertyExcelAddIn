@@ -240,14 +240,12 @@
     <Compile Include="FindFormulaErrors\CVErrEnum.cs" />
     <Compile Include="DataValidation\CellsValueValidator.cs" />
     <Compile Include="DataValidation\IValidator.cs" />
-    <Compile Include="LimitTextLength\frmTrimParams.cs">
+    <Compile Include="WorksheetCellsEditing\TrimTextByLengthUI\frmTrimParams.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="LimitTextLength\frmTrimParams.Designer.cs">
+    <Compile Include="WorksheetCellsEditing\TrimTextByLengthUI\frmTrimParams.Designer.cs">
       <DependentUpon>frmTrimParams.cs</DependentUpon>
     </Compile>
-    <Compile Include="LimitTextLength\ITextTrimmer.cs" />
-    <Compile Include="LimitTextLength\TextTrimmer.cs" />
     <Compile Include="Transliterate\ICyrillicLettersReplacer.cs" />
     <Compile Include="InteractiveRangeReport\InteractiveErrorItem.cs" />
     <Compile Include="DataValidation\ICellsValueValidator.cs" />
@@ -301,9 +299,9 @@
     <Compile Include="WorksheetCellsEditing\ICellsToMarkdownReader.cs" />
     <Compile Include="WorksheetCellsEditing\CellsToMarkdownReader.cs" />
     <Compile Include="WorksheetCellsEditing\IDuplicatesHighlighter.cs" />
-    <Compile Include="WorksheetCellsEditing\IEmptySpaceTrimmer.cs" />
+    <Compile Include="WorksheetCellsEditing\ITextTrimmer.cs" />
     <Compile Include="WorksheetCellsEditing\DuplicatesHighlighter.cs" />
-    <Compile Include="WorksheetCellsEditing\EmptySpaceTrimmer.cs" />
+    <Compile Include="WorksheetCellsEditing\TextTrimmer.cs" />
     <Compile Include="WorksheetCellsEditing\ICaseToggler.cs" />
     <Compile Include="WorksheetCellsEditing\CaseToggler.cs" />
     <Compile Include="WorksheetCellsEditing\CellsUnmerger.cs" />
@@ -403,7 +401,7 @@
       <DependentUpon>InteractiveRangeReportForm.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="LimitTextLength\frmTrimParams.resx">
+    <EmbeddedResource Include="WorksheetCellsEditing\TrimTextByLengthUI\frmTrimParams.resx">
       <DependentUpon>frmTrimParams.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Localization\RibbonSupertips.resx">

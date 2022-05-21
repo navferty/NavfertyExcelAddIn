@@ -199,4 +199,7 @@
   <data name="Feedback" xml:space="preserve">
     <value>Отправить отчёт об ошибке или пожелание новой функциональности разработчику</value>
   </data>
+  <data name="TrimTextByLength" xml:space="preserve">
+    <value>Обрезать текст по заданной длинне</value>
+  </data>
 </root>

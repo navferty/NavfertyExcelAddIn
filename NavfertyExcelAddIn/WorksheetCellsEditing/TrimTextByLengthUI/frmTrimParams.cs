@@ -8,9 +8,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace NavfertyExcelAddIn.LimitTextLength
+namespace NavfertyExcelAddIn.WorksheetCellsEditing.TrimTextByLengthUI
 {
-	public partial class frmTrimParams : Form
+	public partial class frmTrimParams : Navferty.Common.Controls.FormEx
 	{
 		public frmTrimParams()
 		{

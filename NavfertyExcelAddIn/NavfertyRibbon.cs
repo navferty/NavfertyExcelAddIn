@@ -19,7 +19,6 @@ using NavfertyExcelAddIn.Commons;
 using NavfertyExcelAddIn.DataValidation;
 using NavfertyExcelAddIn.FindFormulaErrors;
 using NavfertyExcelAddIn.InteractiveRangeReport;
-using NavfertyExcelAddIn.LimitTextLength;
 using NavfertyExcelAddIn.Localization;
 using NavfertyExcelAddIn.ParseNumerics;
 using NavfertyExcelAddIn.StringifyNumerics;
@@ -263,15 +262,9 @@ namespace NavfertyExcelAddIn
 		public void TrimExtraSpaces(IRibbonControl ribbonControl)
 		{
 			var range = GetSelectionOrUsedRange(App.ActiveSheet);
-
-			if (range == null)
-				return;
-
+			if (range == null) return;
 			logger.Debug($"{nameof(TrimExtraSpaces)}. Range selected is {range.Address}");
-
-
-			var trimmer = GetService<IEmptySpaceTrimmer>();
-			trimmer.TrimExtraSpaces(range);
+			GetService<WorksheetCellsEditing.ITextTrimmer>().TrimExtraSpaces(range);
 		}
 
 		public void RemoveAllSpaces(IRibbonControl ribbonControl)
@@ -284,7 +277,7 @@ namespace NavfertyExcelAddIn
 			logger.Debug($"{nameof(RemoveAllSpaces)}. Range selected is {range.Address}");
 
 
-			var trimmer = GetService<IEmptySpaceTrimmer>();
+			var trimmer = GetService<WorksheetCellsEditing.ITextTrimmer>();
 			trimmer.RemoveAllSpaces(range);
 		}
 
@@ -293,7 +286,7 @@ namespace NavfertyExcelAddIn
 			Range range = GetSelectionOrUsedRange(App.ActiveSheet);
 			if (range == null) return;
 			logger.Debug($"{nameof(TrimTextByLength)}. Range selected is {range.Address}");
-			GetService<ITextTrimmer>().DisplayTrimTextUI(range);
+			GetService<WorksheetCellsEditing.ITextTrimmer>().TrimTextByLengthUIDisplay(range);
 		}
 
 

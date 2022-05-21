@@ -199,4 +199,7 @@ Allows rewriting values in range -999 billion to 999 billion, with precision up 
   <data name="Feedback" xml:space="preserve">
     <value>Send a bug report or feature request to the developer</value>
   </data>
+  <data name="TrimTextByLength" xml:space="preserve">
+    <value>Trim cell text by specifed length</value>
+  </data>
 </root>

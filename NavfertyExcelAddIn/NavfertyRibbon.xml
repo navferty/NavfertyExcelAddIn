@@ -38,6 +38,10 @@
                       onAction="NumberToWordsFrench" keytip="SF" getScreentip="GetLabel" getSupertip="GetSupertip"/>
             </menu>
           </splitButton>
+
+          <button id="TrimTextByLength" getLabel="GetLabel" onAction="TrimTextByLength"
+                  image="parseNumerics" size="large"
+                  getScreentip="GetLabel" getSupertip="GetSupertip"/>
         </group>
 
         <group id="FormattingValues" getLabel="GetLabel" autoScale="1">
