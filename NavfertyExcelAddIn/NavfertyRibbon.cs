@@ -19,6 +19,7 @@ using NavfertyExcelAddIn.Commons;
 using NavfertyExcelAddIn.DataValidation;
 using NavfertyExcelAddIn.FindFormulaErrors;
 using NavfertyExcelAddIn.InteractiveRangeReport;
+using NavfertyExcelAddIn.LimitTextLength;
 using NavfertyExcelAddIn.Localization;
 using NavfertyExcelAddIn.ParseNumerics;
 using NavfertyExcelAddIn.StringifyNumerics;
@@ -287,6 +288,15 @@ namespace NavfertyExcelAddIn
 			trimmer.RemoveAllSpaces(range);
 		}
 
+		public void TrimTextByLength(IRibbonControl ribbonControl)
+		{
+			Range range = GetSelectionOrUsedRange(App.ActiveSheet);
+			if (range == null) return;
+			logger.Debug($"{nameof(TrimTextByLength)}. Range selected is {range.Address}");
+			GetService<ITextTrimmer>().DisplayTrimTextUI(range);
+		}
+
+
 		public void RepairConditionalFormat(IRibbonControl ribbonControl)
 		{
 			var range = GetSelectionOrUsedRange(App.ActiveSheet);
@@ -298,7 +308,6 @@ namespace NavfertyExcelAddIn
 			var formatFixer = GetService<IConditionalFormatFixer>();
 			formatFixer.FillRange(range);
 		}
-
 
 		public void UnmergeCells(IRibbonControl ribbonControl)
 		{

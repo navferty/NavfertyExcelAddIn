@@ -6,6 +6,7 @@ using Navferty.Common;
 using NavfertyExcelAddIn.Commons;
 using NavfertyExcelAddIn.DataValidation;
 using NavfertyExcelAddIn.FindFormulaErrors;
+using NavfertyExcelAddIn.LimitTextLength;
 using NavfertyExcelAddIn.ParseNumerics;
 using NavfertyExcelAddIn.StringifyNumerics;
 using NavfertyExcelAddIn.Transliterate;
@@ -48,6 +49,11 @@ namespace NavfertyExcelAddIn
 
 			builder.RegisterType<EmptySpaceTrimmer>()
 				.As<IEmptySpaceTrimmer>()
+				.EnableInterfaceInterceptors()
+				.InterceptedBy(typeof(ExceptionLogger));
+
+			builder.RegisterType<EmptySpaceTrimmer>()
+				.As<ITextTrimmer>()
 				.EnableInterfaceInterceptors()
 				.InterceptedBy(typeof(ExceptionLogger));
 

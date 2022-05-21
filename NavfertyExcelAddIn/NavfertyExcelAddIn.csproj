@@ -240,6 +240,13 @@
     <Compile Include="FindFormulaErrors\CVErrEnum.cs" />
     <Compile Include="DataValidation\CellsValueValidator.cs" />
     <Compile Include="DataValidation\IValidator.cs" />
+    <Compile Include="LimitTextLength\frmTrimParams.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="LimitTextLength\frmTrimParams.Designer.cs">
+      <DependentUpon>frmTrimParams.cs</DependentUpon>
+    </Compile>
+    <Compile Include="LimitTextLength\ITextTrimmer.cs" />
     <Compile Include="LimitTextLength\TextTrimmer.cs" />
     <Compile Include="Transliterate\ICyrillicLettersReplacer.cs" />
     <Compile Include="InteractiveRangeReport\InteractiveErrorItem.cs" />
@@ -395,6 +402,9 @@
     <EmbeddedResource Include="InteractiveRangeReport\InteractiveRangeReportForm.resx">
       <DependentUpon>InteractiveRangeReportForm.cs</DependentUpon>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="LimitTextLength\frmTrimParams.resx">
+      <DependentUpon>frmTrimParams.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Localization\RibbonSupertips.resx">
       <Generator>ResXFileCodeGenerator</Generator>
