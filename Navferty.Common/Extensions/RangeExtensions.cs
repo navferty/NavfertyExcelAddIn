@@ -9,7 +9,7 @@ namespace Navferty.Common
 	[DebuggerStepThrough]
 	public static class RangeExtensions
 	{
-		public const Int64 DEFAULT_MAX_ALLOWED_CELLS = 2;// 1_000_000L;
+		public const Int64 DEFAULT_MAX_ALLOWED_CELLS = 1_000_000L;
 
 		public class TooManyCellsException : Exception
 		{
