@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 
 using Microsoft.Office.Interop.Excel;
 
@@ -37,6 +38,9 @@ namespace NavfertyExcelAddIn.WorksheetCellsEditing
 
 		public void TrimTextByLengthUIDisplay(Range range)
 		{
+
+			range.ThrowIfTooManyCellsSelected();
+
 			int maxLen = range
 				.Cells?
 				.Cast<Range>()?

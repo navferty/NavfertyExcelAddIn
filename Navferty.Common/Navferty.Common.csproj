@@ -55,6 +55,7 @@
     </Compile>
     <Compile Include="Extensions\DelegatesExtensions.cs" />
     <Compile Include="Extensions\ErrorsExtensions.cs" />
+    <Compile Include="Extensions\RangeExtensions.cs" />
     <Compile Include="Localization\UIStrings.Designer.cs">
       <DependentUpon>UIStrings.resx</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -87,6 +88,9 @@
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.Office.Interop.Excel, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
     <Reference Include="NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
       <HintPath>..\packages\NLog.4.6.7\lib\net45\NLog.dll</HintPath>
     </Reference>

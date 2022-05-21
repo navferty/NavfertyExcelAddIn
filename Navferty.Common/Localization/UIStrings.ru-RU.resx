@@ -123,6 +123,9 @@
   <data name="ErrorWindow_Title" xml:space="preserve">
     <value>Произошла ошибка!</value>
   </data>
+  <data name="Error_TooManyCellsSelected" xml:space="preserve">
+    <value>Выбрано слишком много ячеек!</value>
+  </data>
   <data name="Feedback_Error" xml:space="preserve">
     <value>Ошибка!</value>
   </data>

@@ -61,6 +61,15 @@ namespace Navferty.Common.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Too many cells selected!.
+        /// </summary>
+        internal static string Error_TooManyCellsSelected {
+            get {
+                return ResourceManager.GetString("Error_TooManyCellsSelected", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Close.
         /// </summary>
         internal static string ErrorWindow_OkButton {
