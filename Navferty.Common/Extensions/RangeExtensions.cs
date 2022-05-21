@@ -21,6 +21,7 @@ namespace Navferty.Common
 		/// <param name="maxAllowedCellsInRange"></param>
 		/// <exception cref="TooManyCellsException"></exception>
 
+		[DebuggerStepThrough]
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static Int64 ThrowIfTooManyCellsSelected(
 			this Range? sel,
