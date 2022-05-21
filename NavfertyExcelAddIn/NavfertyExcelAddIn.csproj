@@ -240,6 +240,7 @@
     <Compile Include="FindFormulaErrors\CVErrEnum.cs" />
     <Compile Include="DataValidation\CellsValueValidator.cs" />
     <Compile Include="DataValidation\IValidator.cs" />
+    <Compile Include="LimitTextLength\TextTrimmer.cs" />
     <Compile Include="Transliterate\ICyrillicLettersReplacer.cs" />
     <Compile Include="InteractiveRangeReport\InteractiveErrorItem.cs" />
     <Compile Include="DataValidation\ICellsValueValidator.cs" />
