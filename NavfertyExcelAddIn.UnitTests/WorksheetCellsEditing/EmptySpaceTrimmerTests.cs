@@ -11,14 +11,14 @@ namespace NavfertyExcelAddIn.UnitTests.WorksheetCellsEditing
 	[TestClass]
 	public class EmptySpaceTrimmerTests : TestsBase
 	{
-		private EmptySpaceTrimmer emptySpaceTrimmer;
+		private TextTrimmer emptySpaceTrimmer;
 
 		[TestInitialize]
 		public void BeforeEachTest()
 		{
 			SetRangeExtentionsStub();
 
-			emptySpaceTrimmer = new EmptySpaceTrimmer();
+			emptySpaceTrimmer = new TextTrimmer();
 		}
 
 		[TestMethod]

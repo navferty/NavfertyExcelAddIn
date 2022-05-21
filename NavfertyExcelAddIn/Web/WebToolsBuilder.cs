@@ -1,4 +1,6 @@
 ﻿
+using System;
+
 using Microsoft.Office.Interop.Excel;
 
 using Navferty.Common;
@@ -20,18 +22,20 @@ namespace NavfertyExcelAddIn.Web
 
 		public void CurrencyExchangeRates_Show()
 		{
-			Range? sel = App.Selection;
-			if (null == sel || sel.Cells == null || sel.Cells.Count < 1)
+			try
 			{
-				dialogService.ShowError(UIStrings.CurrencyExchangeRates_Error_NedAnyCellSelection);
-				return;
+				Range? sel = App.Selection;
+				if (null == sel || sel.Cells == null || sel.Cells.Count < 1)
+					throw new Exception(UIStrings.CurrencyExchangeRates_Error_NedAnyCellSelection);
+
+
+				var rslt = Navferty.ExcelAddIn.Web.CurrencyExchangeRates.Manager.SelectExchageRate(dialogService);
+				if (rslt == null) return;//User cancel
+
+				var exchangeRate = rslt.CursFor1Unit;
+				sel.Value = exchangeRate;
 			}
-
-			var rslt = Navferty.ExcelAddIn.Web.CurrencyExchangeRates.Manager.SelectExchageRate(dialogService);
-			if (rslt == null) return;//User cancel
-
-			var exchangeRate = rslt.CursFor1Unit;
-			sel.Value = exchangeRate;
+			catch (Exception ex) { dialogService.ShowError(ex); }
 		}
 	}
 }

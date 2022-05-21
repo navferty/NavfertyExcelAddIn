@@ -175,31 +175,31 @@ namespace NavfertyExcelAddIn
 
 		public void UnprotectWorkbook(IRibbonControl ribbonControl)
 		{
-			var wb = App.ActiveWorkbook;
-			var path = wb.FullName;
-
-			logger.Debug($"UnprotectWorkbook {path}");
-
-			var extension = path.Split('.').LastOrDefault();
-
-			if (extension != "xlsx" && extension != "xlsm")
+			try
 			{
-				dialogService.ShowError(UIStrings.CannotUnlockPleaseSaveAsXml);
-				return;
+				var wb = App.ActiveWorkbook;
+				var path = wb.FullName;
+
+				logger.Debug($"UnprotectWorkbook {path}");
+
+				var extension = path.Split('.').LastOrDefault();
+
+				if (extension != "xlsx" && extension != "xlsm")
+					throw new Exception(UIStrings.CannotUnlockPleaseSaveAsXml);
+
+				if (!dialogService.Ask(UIStrings.UnsavedChangesWillBeLostPrompt, UIStrings.Warning))
+				{
+					return;
+				}
+
+				wb.Close(false);
+
+				var wbUnprotector = GetService<IWbUnprotector>();
+				wbUnprotector.UnprotectWorkbookWithAllWorksheets(path);
+
+				App.Workbooks.Open(path);
 			}
-
-			if (!dialogService.Ask(UIStrings.UnsavedChangesWillBeLostPrompt, UIStrings.Warning))
-			{
-				return;
-			}
-
-			wb.Close(false);
-
-
-			var wbUnprotector = GetService<IWbUnprotector>();
-			wbUnprotector.UnprotectWorkbookWithAllWorksheets(path);
-
-			App.Workbooks.Open(path);
+			catch (Exception ex) { dialogService.ShowError(ex); }
 		}
 
 		public void ProtectUnprotectWorksheets(IRibbonControl ribbonControl)
@@ -262,15 +262,9 @@ namespace NavfertyExcelAddIn
 		public void TrimExtraSpaces(IRibbonControl ribbonControl)
 		{
 			var range = GetSelectionOrUsedRange(App.ActiveSheet);
-
-			if (range == null)
-				return;
-
+			if (range == null) return;
 			logger.Debug($"{nameof(TrimExtraSpaces)}. Range selected is {range.Address}");
-
-
-			var trimmer = GetService<IEmptySpaceTrimmer>();
-			trimmer.TrimExtraSpaces(range);
+			GetService<WorksheetCellsEditing.ITextTrimmer>().TrimExtraSpaces(range);
 		}
 
 		public void RemoveAllSpaces(IRibbonControl ribbonControl)
@@ -283,9 +277,18 @@ namespace NavfertyExcelAddIn
 			logger.Debug($"{nameof(RemoveAllSpaces)}. Range selected is {range.Address}");
 
 
-			var trimmer = GetService<IEmptySpaceTrimmer>();
+			var trimmer = GetService<WorksheetCellsEditing.ITextTrimmer>();
 			trimmer.RemoveAllSpaces(range);
 		}
+
+		public void TrimTextByLength(IRibbonControl ribbonControl)
+		{
+			Range range = GetSelectionOrUsedRange(App.ActiveSheet);
+			if (range == null) return;
+			logger.Debug($"{nameof(TrimTextByLength)}. Range selected is {range.Address}");
+			GetService<WorksheetCellsEditing.ITextTrimmer>().TrimTextByLengthUIDisplay(range);
+		}
+
 
 		public void RepairConditionalFormat(IRibbonControl ribbonControl)
 		{
@@ -298,7 +301,6 @@ namespace NavfertyExcelAddIn
 			var formatFixer = GetService<IConditionalFormatFixer>();
 			formatFixer.FillRange(range);
 		}
-
 
 		public void UnmergeCells(IRibbonControl ribbonControl)
 		{
@@ -317,29 +319,30 @@ namespace NavfertyExcelAddIn
 
 		public void ValidateValues(IRibbonControl ribbonControl)
 		{
-			var activeSheet = (Worksheet)App.ActiveSheet;
-			var range = GetSelectionOrUsedRange(activeSheet);
-
-			if (range == null)
-				return;
-
-			logger.Debug($"ValidateValues. Range selected is {range.Address}");
-
-			if (!validationTypeByButtonId.TryGetValue(ribbonControl.Id, out var validationType))
+			try
 			{
-				dialogService.ShowError($"Invalid control id '{ribbonControl.Id}'");
-				throw new ArgumentOutOfRangeException($"Invalid control id '{ribbonControl.Id}'");
+				var activeSheet = (Worksheet)App.ActiveSheet;
+				var range = GetSelectionOrUsedRange(activeSheet);
+
+				if (range == null)
+					return;
+
+				logger.Debug($"ValidateValues. Range selected is {range.Address}");
+
+				if (!validationTypeByButtonId.TryGetValue(ribbonControl.Id, out var validationType))
+					throw new ArgumentOutOfRangeException($"Invalid control id '{ribbonControl.Id}'");
+
+				logger.Debug($"ValidateValues. Range selected is {range.Address}, validation type {validationType}");
+
+				IReadOnlyCollection<InteractiveErrorItem> results;
+
+				var validator = GetService<ICellsValueValidator>();
+				results = validator.Validate(range, validationType);
+
+				form = new InteractiveRangeReportForm(results, activeSheet);
+				form.Show();
 			}
-
-			logger.Debug($"ValidateValues. Range selected is {range.Address}, validation type {validationType}");
-
-			IReadOnlyCollection<InteractiveErrorItem> results;
-
-			var validator = GetService<ICellsValueValidator>();
-			results = validator.Validate(range, validationType);
-
-			form = new InteractiveRangeReportForm(results, activeSheet);
-			form.Show();
+			catch (Exception ex) { dialogService.ShowError(ex, logger); }
 		}
 
 		public void FindErrors(IRibbonControl ribbonControl)
@@ -420,6 +423,13 @@ namespace NavfertyExcelAddIn
 
 			var webExchangeRates = GetService<Web.IWebTools>();
 			webExchangeRates.CurrencyExchangeRates_Show();
+		}
+		#endregion
+
+		#region Feedback
+		public void FeedbackStart(IRibbonControl ribbonControl)
+		{
+			GetService<Feedback.IFeedback>().DisplayFeedbackUI();
 		}
 		#endregion
 

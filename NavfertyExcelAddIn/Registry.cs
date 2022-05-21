@@ -46,8 +46,8 @@ namespace NavfertyExcelAddIn
 				.EnableInterfaceInterceptors()
 				.InterceptedBy(typeof(ExceptionLogger));
 
-			builder.RegisterType<EmptySpaceTrimmer>()
-				.As<IEmptySpaceTrimmer>()
+			builder.RegisterType<TextTrimmer>()
+				.As<ITextTrimmer>()
 				.EnableInterfaceInterceptors()
 				.InterceptedBy(typeof(ExceptionLogger));
 
@@ -132,6 +132,11 @@ namespace NavfertyExcelAddIn
 				.InterceptedBy(typeof(ExceptionLogger));
 
 			builder.RegisterType<ExceptionLogger>();
+
+			builder.RegisterType<Feedback.FeedbackBuilder>()
+				.As<Feedback.IFeedback>()
+				.EnableInterfaceInterceptors()
+				.InterceptedBy(typeof(ExceptionLogger));
 
 			builder.RegisterType<UndoManager>()
 				.SingleInstance();

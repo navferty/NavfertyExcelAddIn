@@ -117,89 +117,49 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="ParseNumerics" xml:space="preserve">
-    <value>Convert the cell data type to a numeric one.</value>
-  </data>
-  <data name="CutNames" xml:space="preserve">
-    <value>In the development...</value>
-  </data>
-  <data name="HighlightDuplicates" xml:space="preserve">
-    <value>Paint groups of duplicates with different colors.</value>
-  </data>
-  <data name="ToggleCase" xml:space="preserve">
-    <value>Change the case of all words in the cell. Replacement order: lowercase, uppercase, first capital, lowercase...</value>
-  </data>
-  <data name="TrimSpaces" xml:space="preserve">
-    <value>Trim or remove spaces, tabs and 'new line' symbols.</value>
-  </data>
-  <data name="UnmergeCells" xml:space="preserve">
-    <value>Split merged cells and fill each cell with original content.</value>
-  </data>
-  <data name="FindErrors" xml:space="preserve">
-    <value>Find all cells in the specified range that have any errors (#).</value>
-  </data>
-  <data name="CopyAsMarkdown" xml:space="preserve">
-    <value>Save the selected range of values to the clipboard using Markdown markup.</value>
-  </data>
-  <data name="Transliterate" xml:space="preserve">
-    <value>Change the Russian alphabet to English using transliteration, for example: 'У' - &gt; 'U'.</value>
-  </data>
-  <data name="TransliterateButton" xml:space="preserve">
-    <value>Full using transliteration (by default) or partial replacement of the Russian alphabet (by analogy) with English. Example of transliteration: 'У' - &gt; 'U', example of substitution by analogy:' У ' - &gt; 'Y'.</value>
-  </data>
-  <data name="ReplaceChars" xml:space="preserve">
-    <value>Change similar letters of the Russian and English alphabets, for example: 'У' - &gt; 'Y'.</value>
-  </data>
-  <data name="StringifyNumericsButton" xml:space="preserve">
-    <value>Rewrite the numeric value of the cell with words. The default is the Russian language.
-Allows rewriting values in range -999 billion to 999 billion, with precision up to thousandths.</value>
-  </data>
-  <data name="StringifyNumericsEn" xml:space="preserve">
-    <value>Rewrite the numeric value of a cell in English with words.</value>
-  </data>
-  <data name="StringifyNumericsRu" xml:space="preserve">
-    <value>Rewrite the numeric value of a cell in Russian with words.</value>
-  </data>
-  <data name="ValidateValuesButton" xml:space="preserve">
-    <value>Checking values against standards selected with drop down.</value>
-  </data>
-  <data name="StringifyNumericsFr" xml:space="preserve">
-    <value>Rewrite the numeric value of a cell in French with words.</value>
-  </data>
-  <data name="UndoLastAction" xml:space="preserve">
-    <value>Undo the latest action done with this add-in. The undo is possible for certain functions in the sections 'Converting Values' and 'Formatting Values' and only in case the cells' values have not been changed after that action.</value>
-  </data>
-  <data name="RemoveAllSpaces" xml:space="preserve">
-    <value>Remove all spaces in selected cells or entire sheet</value>
-  </data>
-  <data name="TrimExtraSpaces" xml:space="preserve">
-    <value>Trim extra spaces in cell values. Remove all trailing spaces, replace duplicated spaces in the middle of cell values.</value>
-  </data>
-  <data name="RepairConditionalFormat" xml:space="preserve">
-    <value>Fill conditional formatting in entire table, with rules based on first table row</value>
-  </data>
-  <data name="ProtectUnprotectWorksheets" xml:space="preserve">
-    <value>Set or remove Worksheets protection for current Workbook</value>
-  </data>
-  <data name="UnprotectWorkbook" xml:space="preserve">
-    <value>Unprotect Workbook file</value>
-  </data>
-  <data name="CurrencyExchangeRatesSelect" xml:space="preserve">
-    <value>Select A Currency Exchange Rate From An Online Source And Paste Into The Current Cell</value>
-  </data>
-  <data name="CreateSampleXml" xml:space="preserve">
-    <value>Create Sample XML based on XSD-file</value>
-  </data>
-  <data name="SwitchReferenceStyle" xml:space="preserve">
-    <value>Switch Formula Reference Style (A1/R1C1)</value>
-  </data>
-  <data name="ToggleSheetLabels" xml:space="preserve">
-    <value>Show or hide worksheet tabs</value>
-  </data>
-  <data name="Feedback" xml:space="preserve">
-    <value>Send a bug report or feature request to the developer</value>
-  </data>
-  <data name="TrimTextByLength" xml:space="preserve">
-    <value>Trim cell text by specifed length</value>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="picIcon.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        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
+        fwDWYGmBKz70PQAAAABJRU5ErkJggg==
+</value>
   </data>
 </root>

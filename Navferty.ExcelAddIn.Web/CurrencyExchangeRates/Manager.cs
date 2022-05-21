@@ -9,7 +9,6 @@ namespace Navferty.ExcelAddIn.Web.CurrencyExchangeRates
 {
 	public static class Manager
 	{
-
 		public static ExchangeRateRecord? SelectExchageRate(IDialogService dialogService)
 		{
 			using (var f = new frmExchangeRates(dialogService))

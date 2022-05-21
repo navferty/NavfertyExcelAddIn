@@ -186,6 +186,18 @@
   <data name="SuccessfullyValidatedMessage" xml:space="preserve">
     <value>Валидация успешна, ошибок не обнаружено</value>
   </data>
+  <data name="TrimTextByLength_TextLen" xml:space="preserve">
+    <value>Укажите допустимую максимальную длинну текста, или 0 чтобы не обрезать.</value>
+  </data>
+  <data name="TrimTextByLength_Title" xml:space="preserve">
+    <value>Обрезка текста</value>
+  </data>
+  <data name="TrimTextByLength_TrimFullSpaced" xml:space="preserve">
+    <value>Удалять строки состоящие из одних пробелов</value>
+  </data>
+  <data name="TrimTextByLength_TrimStartEnd" xml:space="preserve">
+    <value>Обрезать пробелы в начале и в конце строки</value>
+  </data>
   <data name="UnsavedChangesWillBeLostPrompt" xml:space="preserve">
     <value>Несохранённые изменения будут утеряны. Книга может оказаться повреждённой: настоятельно рекомендуется предварительно создать копию. Продолжить?</value>
   </data>
