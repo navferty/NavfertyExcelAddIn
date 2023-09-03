@@ -61,8 +61,8 @@ steps:
     targetType: 'inline'
     script: |
       "install tools:"
-      &dotnet tool install dotnet-reportgenerator-globaltool --tool-path . --version 4.0.12
-      &dotnet tool install coverlet.console --tool-path . --version 1.4.1
+      &dotnet tool install dotnet-reportgenerator-globaltool --tool-path .
+      &dotnet tool install coverlet.console --tool-path .
 
       "`nmake reports dir:"
       mkdir .\reports

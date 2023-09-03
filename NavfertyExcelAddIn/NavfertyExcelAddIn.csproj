@@ -460,7 +460,7 @@
       <PropertyGroup>
         <SignManifests>true</SignManifests>
         <ManifestKeyFile>NavfertyExcelAddIn_TemporaryKey.pfx</ManifestKeyFile>
-        <ManifestCertificateThumbprint>8A194674EFEB140748CD131659BF16EE09C2361A</ManifestCertificateThumbprint>
+        <ManifestCertificateThumbprint>6EDA2DD8FEB3E8F5B0CCC0343C15A1F1C23DC736</ManifestCertificateThumbprint>
       </PropertyGroup>
     </When>
   </Choose>
