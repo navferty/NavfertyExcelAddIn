@@ -41,6 +41,9 @@
     <Compile Include="Controls\CheckedListBoxEx.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Controls\ErrorDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Controls\LabelEx.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -50,24 +53,81 @@
     <Compile Include="Controls\FormEx.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Extensions\DelegatesExtensions.cs" />
+    <Compile Include="Extensions\ErrorsExtensions.cs" />
+    <Compile Include="Extensions\RangeExtensions.cs" />
+    <Compile Include="Localization\UIStrings.Designer.cs">
+      <DependentUpon>UIStrings.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="LogManagement.cs" />
     <Compile Include="Extensions\DrawingExtensions.cs" />
     <Compile Include="Extensions\ControlsExtensions.cs" />
     <Compile Include="Extensions\DataExtensions.cs" />
     <Compile Include="Extensions\EnumExtensions.cs" />
     <Compile Include="Extensions\StringExtensions.cs" />
+    <Compile Include="Feedback\FeedbackManager.cs" />
+    <Compile Include="Feedback\frmFeedbackUI.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Feedback\frmFeedbackUI.Designer.cs">
+      <DependentUpon>frmFeedbackUI.cs</DependentUpon>
+    </Compile>
     <Compile Include="Interfaces\IDialogService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="WinAPI\WinAPI.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="WinAPI\WinAPI.Core.cs" />
+    <Compile Include="WinAPI\WinAPI.Networking.Mail.MAPI.cs" />
+    <Compile Include="WinAPI\WinAPI.Windows.cs" />
+    <Compile Include="WinAPI\WinAPI.GDI.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.Office.Interop.Excel, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
+      <HintPath>..\packages\NLog.4.6.7\lib\net45\NLog.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Data" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Data.Linq" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.IO.Compression" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Transactions" />
     <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Controls\ErrorDialog.resx">
+      <DependentUpon>ErrorDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Feedback\frmFeedbackUI.resx">
+      <DependentUpon>frmFeedbackUI.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Localization\UIStrings.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>UIStrings.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Localization\UIStrings.ru-RU.resx" />
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
   <Choose>
     <When Condition="Exists('NavfertyExcelAddIn_uom_TemporaryKey.pfx')">
       <PropertyGroup>

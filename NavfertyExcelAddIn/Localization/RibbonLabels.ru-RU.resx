@@ -237,4 +237,10 @@
   <data name="SecurityGroup" xml:space="preserve">
     <value>Защита данных</value>
   </data>
+  <data name="Feedback" xml:space="preserve">
+    <value>Обратная связь</value>
+  </data>
+  <data name="TrimTextByLength" xml:space="preserve">
+    <value>Обрезать текст</value>
+  </data>
 </root>

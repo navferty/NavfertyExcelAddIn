@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Diagnostics;
 using System.Drawing;
-using System.Drawing.Drawing2D;
 using System.Runtime.CompilerServices;
 using System.Windows.Forms;
+
+using Navferty.Common.WinAPI;
 
 #nullable enable
 
@@ -16,9 +17,9 @@ namespace Navferty.Common
 		public static void SetVistaCueBanner(this TextBox ctl, string? BannerText = null)
 		{
 			_ = ctl ?? throw new ArgumentNullException(nameof(ctl));
-			ctl.RunWhenHandleReady(tb => WinAPI.SendMessage(
+			ctl.RunWhenHandleReady(tb => Windows.SendMessage(
 				tb.Handle,
-				WinAPI.WindowMessages.EM_SETCUEBANNER,
+				Windows.WindowMessages.EM_SETCUEBANNER,
 				0,
 				BannerText));
 		}
@@ -75,6 +76,15 @@ namespace Navferty.Common
 		private const int DEFAULT_TEXT_EDIT_DELAY = 1000;
 		private const string DEFAULT_FILTER_CUEBANNER = "Filter";
 
+		/// <summary>
+		/// Attaches a deferred text change event handler that makes it possible to react to text changes with some delay, 
+		/// allowing the user to correct erroneous input, 
+		/// or complete input, rather than reacting immediately to each letter.
+		/// </summary>
+		/// <param name="OnTextChangedCallBack">TextChanged Handler</param>
+		/// <param name="TextEditiDelay">Delay (ms.) during which repeated input will not call the handler</param>
+		/// <param name="VistaCueBanner">Vista cueabanner text</param>
+		/// <param name="SetBackColorAsSystemTipColor">Sets the background color for textbox to Systemcolors.Info</param>
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void AttachDelayedFilter(
 			this TextBox txtCtl,
@@ -97,13 +107,13 @@ namespace Navferty.Common
 			};
 			txtCtl.TextChanged += (s, e) =>
 			{
-				//Перезапускаем таймер
+				//Restart timer...
 				TMR.Stop();
 				TMR.Start();
 			};
 		}
 
-
+		/// <inheritdoc cref="AttachDelayedFilter" />
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void AttachDelayedFilter(
 			this TextBox txtCtl,
@@ -119,28 +129,6 @@ namespace Navferty.Common
 				VistaCueBanner,
 				SetBackColorAsSystemTipColor);
 		}
-
-
-		/*
-		 
-	<MethodImpl(MethodImplOptions.AggressiveInlining), System.Runtime.CompilerServices.Extension() >
-	Friend Sub AttachDelayedFilter(TB As System.Windows.Forms.ToolStripTextBox,
-								   TextChangedCallBack As Action,
-								   Optional iDelay_ms As Integer = 1000,
-								   Optional VistaCueBanner As String = C_DEFAULT_FILTER_TEXTBOX_CUE_BANNER,
-								   Optional SetBackColorAsSystemTipColor As Boolean = True)
-
-
-		With TB
-
-			Call.TextBox.AttachDelayedFilter(TextChangedCallBack, iDelay_ms, VistaCueBanner, SetBackColorAsSystemTipColor)
-
-		   If(SetBackColorAsSystemTipColor) Then.BackColor = SystemColors.Info
-	 End With
- End Sub
-		*/
-
-
 
 		#endregion
 

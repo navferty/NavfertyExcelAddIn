@@ -254,7 +254,7 @@ namespace Navferty.ExcelAddIn.Web.CurrencyExchangeRates
 				var selRows = gridResult.SelectedRowsAsEnumerable();
 				if (selRows.Count() != 1)
 				{
-					dialogService?.ShowError(UIStrings.CurrencyExchangeRates_Error_CanSelectOnlyOneRow);
+					dialogService?.ShowError(new Exception(UIStrings.CurrencyExchangeRates_Error_CanSelectOnlyOneRow));
 					return;
 				}
 
@@ -265,7 +265,7 @@ namespace Navferty.ExcelAddIn.Web.CurrencyExchangeRates
 			}
 			catch (Exception ex)
 			{
-				dialogService?.ShowError(ex.Message);
+				dialogService?.ShowError(ex);
 			}
 		}
 

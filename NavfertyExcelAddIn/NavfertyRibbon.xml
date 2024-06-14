@@ -38,6 +38,10 @@
                       onAction="NumberToWordsFrench" keytip="SF" getScreentip="GetLabel" getSupertip="GetSupertip"/>
             </menu>
           </splitButton>
+
+          <button id="TrimTextByLength" getLabel="GetLabel" onAction="TrimTextByLength"
+                  image="parseNumerics" size="large"
+                  getScreentip="GetLabel" getSupertip="GetSupertip"/>
         </group>
 
         <group id="FormattingValues" getLabel="GetLabel" autoScale="1">
@@ -121,8 +125,15 @@
         </group>
 
         <group id="WebToolsGroup" getLabel="GetLabel" autoScale="1">
+
           <button id="CurrencyExchangeRatesSelect" getLabel="GetLabel" onAction="CurrencyExchangeRatesSelect"
-            keytip="EX" imageMso="InternationalCurrency" size="large" getScreentip="GetLabel" getSupertip="GetSupertip"/>
+                  size="large" imageMso="InternationalCurrency"
+                  keytip="EX" getScreentip="GetLabel" getSupertip="GetSupertip"/>
+
+          <button id="Feedback" getLabel="GetLabel" onAction="FeedbackStart"
+                  size="normal" imageMso="SendUpdate"
+                  keytip="FB" getScreentip="GetLabel" getSupertip="GetSupertip"/>
+
         </group>
 
       </tab>
