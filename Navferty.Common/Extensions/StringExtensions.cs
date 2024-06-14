@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Diagnostics;
+using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text.RegularExpressions;
 
@@ -6,6 +7,7 @@ using System.Text.RegularExpressions;
 
 namespace Navferty.Common
 {
+	[DebuggerStepThrough]
 	public static class StringExtensions
 	{
 		//private static readonly ILogger logger = LogManager.GetCurrentClassLogger();
@@ -29,8 +31,16 @@ namespace Navferty.Common
 
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static int CountChars(this string value, char c)
-		{
-			return value.Count(x => x == c);
-		}
+			=> value.Count(x => x == c);
+
+		/// <summary>Removes only ASCII Space char (0x32)</summary>
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static string RemoveSpacesFast(this string source)
+			=> source.Replace(" ", string.Empty);
+
+		/// <summary>Removes all Unicode character which is categorized as white space.</summary>
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static string RemoveSpacesEx(this string source)
+			=> string.Concat(source.Where(c => !char.IsWhiteSpace(c)));
 	}
 }
