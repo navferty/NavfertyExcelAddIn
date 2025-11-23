@@ -151,6 +151,9 @@
     </Reference>
     <Reference Include="System.Configuration" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Data.SQLite, Version=1.0.118.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Data.SQLite.Core.1.0.118.0\lib\net46\System.Data.SQLite.dll</HintPath>
+    </Reference>
     <Reference Include="System.Diagnostics.DiagnosticSource, Version=4.0.5.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Diagnostics.DiagnosticSource.4.7.1\lib\net46\System.Diagnostics.DiagnosticSource.dll</HintPath>
     </Reference>
@@ -323,6 +326,8 @@
     </Compile>
     <Compile Include="UnprotectWorkbook\IWbUnprotector.cs" />
     <Compile Include="UnprotectWorkbook\WbUnprotector.cs" />
+    <Compile Include="SqliteExport\ISqliteExporter.cs" />
+    <Compile Include="SqliteExport\SqliteExporter.cs" />
     <Compile Include="XmlTools\XmlSampleCreator.cs" />
     <Compile Include="XmlTools\XmlValidationError.cs" />
     <Compile Include="XmlTools\XmlValidator.cs" />
