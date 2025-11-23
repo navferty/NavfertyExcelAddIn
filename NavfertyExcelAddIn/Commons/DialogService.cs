@@ -26,7 +26,8 @@ namespace NavfertyExcelAddIn.Commons
 				{FileType.Excel, new FileExtensionFilter("Excel files", "*.xls; *.xlsx; *.xlsm; *.xlsb")},
 				{FileType.Xml, new FileExtensionFilter("XML Files", "*.xml")},
 				{FileType.Xsd, new FileExtensionFilter("XSD Files", "*.xsd")},
-				{FileType.Pdf, new FileExtensionFilter("PDF files", "*.pdf")}
+				{FileType.Pdf, new FileExtensionFilter("PDF files", "*.pdf")},
+				{FileType.Db, new FileExtensionFilter("SQLite Database", "*.db; *.sqlite; *.sqlite3")}
 			};
 
 		public void ShowError(string message)
@@ -77,6 +78,21 @@ namespace NavfertyExcelAddIn.Commons
 			{
 				dialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
 				dialog.FileName = initialFileName;
+
+				var fileExtension = ExtensionFilters[fileType];
+				dialog.Filter = $@"{fileExtension.Description} | {fileExtension.Extentions}";
+
+				return dialog.ShowDialog() == DialogResult.OK
+					? dialog.FileName
+					: string.Empty;
+			}
+		}
+
+		public string AskForSaveFile(FileType fileType)
+		{
+			using (var dialog = new SaveFileDialog())
+			{
+				dialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
 
 				var fileExtension = ExtensionFilters[fileType];
 				dialog.Filter = $@"{fileExtension.Description} | {fileExtension.Extentions}";

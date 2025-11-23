@@ -237,4 +237,7 @@
   <data name="SecurityGroup" xml:space="preserve">
     <value>Защита данных</value>
   </data>
+  <data name="ExportToSqlite" xml:space="preserve">
+    <value>Экспорт в SQLite</value>
+  </data>
 </root>

@@ -13,6 +13,7 @@ namespace Navferty.Common
 
 		IReadOnlyCollection<string> AskForFiles(bool allowMultiselect, FileType fileType);
 		string AskFileNameSaveAs(string initialFileName, FileType fileType);
+		string AskForSaveFile(FileType fileType);
 	}
 
 	public enum FileType
@@ -21,6 +22,7 @@ namespace Navferty.Common
 		Excel = 1,
 		Xml = 2,
 		Xsd = 3,
-		Pdf = 4
+		Pdf = 4,
+		Db = 5
 	}
 }

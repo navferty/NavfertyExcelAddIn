@@ -196,4 +196,7 @@
   <data name="ToggleSheetLabels" xml:space="preserve">
     <value>Отобразить или скрыть ярлычки листов</value>
   </data>
+  <data name="ExportToSqlite" xml:space="preserve">
+    <value>Экспортировать все листы текущей книги в файл базы данных SQLite</value>
+  </data>
 </root>

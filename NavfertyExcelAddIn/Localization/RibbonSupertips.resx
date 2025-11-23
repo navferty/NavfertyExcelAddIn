@@ -196,4 +196,7 @@ Allows rewriting values in range -999 billion to 999 billion, with precision up 
   <data name="ToggleSheetLabels" xml:space="preserve">
     <value>Show or hide worksheet tabs</value>
   </data>
+  <data name="ExportToSqlite" xml:space="preserve">
+    <value>Export all worksheets from the current workbook to a SQLite database file</value>
+  </data>
 </root>

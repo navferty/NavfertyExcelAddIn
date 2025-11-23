@@ -11,7 +11,7 @@
     <OutputType>Library</OutputType>
     <RootNamespace>Navferty.ExcelAddIn.Web</RootNamespace>
     <AssemblyName>Navferty.ExcelAddIn.Web</AssemblyName>
-    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.8.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
@@ -138,21 +138,5 @@
   <ItemGroup>
     <WCFMetadataStorage Include="Connected Services\cbrwebservice\" />
   </ItemGroup>
-  <Choose>
-    <When Condition="Exists('NavfertyExcelAddIn_uom_TemporaryKey.pfx')">
-      <PropertyGroup>
-        <SignManifests>true</SignManifests>
-        <ManifestKeyFile>NavfertyExcelAddIn_uom_TemporaryKey.pfx</ManifestKeyFile>
-        <ManifestCertificateThumbprint>2A9C33F460B4D532AD2F603B76CA85F096C65728</ManifestCertificateThumbprint>
-      </PropertyGroup>
-    </When>
-    <When Condition="!Exists('NavfertyExcelAddIn_uom_TemporaryKey.pfx')">
-      <PropertyGroup>
-        <SignManifests>true</SignManifests>
-        <ManifestKeyFile>NavfertyExcelAddIn_TemporaryKey.pfx</ManifestKeyFile>
-        <ManifestCertificateThumbprint>6EDA2DD8FEB3E8F5B0CCC0343C15A1F1C23DC736</ManifestCertificateThumbprint>
-      </PropertyGroup>
-    </When>
-  </Choose>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

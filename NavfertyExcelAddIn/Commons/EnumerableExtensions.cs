@@ -67,7 +67,7 @@ namespace NavfertyExcelAddIn.Commons
 			}
 
 			// minimize number of COM calls to excel
-			if (!(rangeValue is object[,] values))
+			if (!(rangeValue is object?[,] values))
 				return;
 
 			int upperI = values.GetUpperBound(0); // Rows
@@ -87,7 +87,7 @@ namespace NavfertyExcelAddIn.Commons
 					if (value is TIn s)
 					{
 						var newValue = transform(s);
-						if ((object)newValue != value) // TODO check boxing time on million values
+						if ((object?)newValue != value) // TODO check boxing time on million values
 						{
 							isChanged = true;
 							values[i, j] = newValue;

@@ -29,7 +29,7 @@
     <NoStandardLibraries>false</NoStandardLibraries>
     <RootNamespace>NavfertyExcelAddIn</RootNamespace>
     <AssemblyName>NavfertyExcelAddIn</AssemblyName>
-    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.8.1</TargetFrameworkVersion>
     <DefineConstants>VSTO40</DefineConstants>
     <BootstrapperEnabled>true</BootstrapperEnabled>
     <PublishUrl>опубликовать\</PublishUrl>
@@ -48,6 +48,8 @@
     <OfficeApplicationDescription />
     <LoadBehavior>3</LoadBehavior>
     <TargetFrameworkProfile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
   </PropertyGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.7.2">
@@ -151,6 +153,12 @@
     </Reference>
     <Reference Include="System.Configuration" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Data.SQLite.Core, Version=1.0.118.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Data.SQLite.Core.1.0.118.0\lib\net46\System.Data.SQLite.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Data.SQLite, Version=1.0.118.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=MSIL">
+      <HintPath>..\packages\Stub.System.Data.SQLite.Core.NetFramework.1.0.118.0\lib\net46\System.Data.SQLite.dll</HintPath>
+    </Reference>
     <Reference Include="System.Diagnostics.DiagnosticSource, Version=4.0.5.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Diagnostics.DiagnosticSource.4.7.1\lib\net46\System.Diagnostics.DiagnosticSource.dll</HintPath>
     </Reference>
@@ -323,6 +331,8 @@
     </Compile>
     <Compile Include="UnprotectWorkbook\IWbUnprotector.cs" />
     <Compile Include="UnprotectWorkbook\WbUnprotector.cs" />
+    <Compile Include="SqliteExport\ISqliteExporter.cs" />
+    <Compile Include="SqliteExport\SqliteExporter.cs" />
     <Compile Include="XmlTools\XmlSampleCreator.cs" />
     <Compile Include="XmlTools\XmlValidationError.cs" />
     <Compile Include="XmlTools\XmlValidator.cs" />
@@ -448,23 +458,16 @@
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
   </PropertyGroup>
-  <Choose>
-    <When Condition="Exists('NavfertyExcelAddIn_uom_TemporaryKey.pfx')">
-      <PropertyGroup>
-        <SignManifests>true</SignManifests>
-        <ManifestKeyFile>NavfertyExcelAddIn_uom_TemporaryKey.pfx</ManifestKeyFile>
-        <ManifestCertificateThumbprint>2A9C33F460B4D532AD2F603B76CA85F096C65728</ManifestCertificateThumbprint>
-      </PropertyGroup>
-    </When>
-    <When Condition="!Exists('NavfertyExcelAddIn_uom_TemporaryKey.pfx')">
-      <PropertyGroup>
-        <SignManifests>true</SignManifests>
-        <ManifestKeyFile>NavfertyExcelAddIn_TemporaryKey.pfx</ManifestKeyFile>
-        <ManifestCertificateThumbprint>6EDA2DD8FEB3E8F5B0CCC0343C15A1F1C23DC736</ManifestCertificateThumbprint>
-      </PropertyGroup>
-    </When>
-  </Choose>
+  <PropertyGroup>
+    <ManifestCertificateThumbprint>F9B1B0FCADE6088F34E7F3F9A1A52F84E066B634</ManifestCertificateThumbprint>
+  </PropertyGroup>
   <!-- Include the build rules for a C# project. -->
+  <PropertyGroup>
+    <SignManifests>true</SignManifests>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestKeyFile>NavfertyExcelAddIn_TemporaryKey.pfx</ManifestKeyFile>
+  </PropertyGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- Include additional build rules for an Office application add-in. -->
   <Import Project="$(VSToolsPath)\OfficeTools\Microsoft.VisualStudio.Tools.Office.targets" Condition="'$(VSToolsPath)' != ''" />
@@ -479,4 +482,11 @@
       </FlavorProperties>
     </VisualStudio>
   </ProjectExtensions>
+  <Import Project="..\packages\Stub.System.Data.SQLite.Core.NetFramework.1.0.118.0\build\net46\Stub.System.Data.SQLite.Core.NetFramework.targets" Condition="Exists('..\packages\Stub.System.Data.SQLite.Core.NetFramework.1.0.118.0\build\net46\Stub.System.Data.SQLite.Core.NetFramework.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Stub.System.Data.SQLite.Core.NetFramework.1.0.118.0\build\net46\Stub.System.Data.SQLite.Core.NetFramework.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Stub.System.Data.SQLite.Core.NetFramework.1.0.118.0\build\net46\Stub.System.Data.SQLite.Core.NetFramework.targets'))" />
+  </Target>
 </Project>

@@ -7,6 +7,6 @@
 		/// </summary>
 		/// <param name="number"></param>
 		/// <returns></returns>
-		string StringifyNumber(double number);
+		string? StringifyNumber(double number);
 	}
 }

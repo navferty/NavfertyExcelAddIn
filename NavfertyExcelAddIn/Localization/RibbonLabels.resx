@@ -237,4 +237,7 @@
   <data name="WebToolsGroup" xml:space="preserve">
     <value>Web tools</value>
   </data>
+  <data name="ExportToSqlite" xml:space="preserve">
+    <value>Export to SQLite</value>
+  </data>
 </root>

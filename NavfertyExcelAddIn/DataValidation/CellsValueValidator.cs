@@ -30,9 +30,9 @@ namespace NavfertyExcelAddIn.DataValidation
 		private void CheckCell(Range cell, IValidator validator, ICollection<InteractiveErrorItem> errors, string wsName)
 		{
 			// Value instead of Value2 can return datetime
-			var value = (object)cell.Value;
+			var value = (object?)cell.Value;
 
-			if (string.IsNullOrEmpty(value?.ToString()))
+			if (value is null || string.IsNullOrEmpty(value.ToString()))
 			{
 				return;
 			}

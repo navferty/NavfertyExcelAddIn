@@ -101,7 +101,7 @@ namespace NavfertyExcelAddIn.Transliterate
 
 		private int bufferIndex = -1;
 		private int leftToReturn = -1;
-		private string buffer;
+		private string buffer = string.Empty;
 
 		internal CyrillicToLatinFallbackBuffer(Dictionary<char, string> table)
 		{

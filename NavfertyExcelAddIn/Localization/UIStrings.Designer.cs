@@ -19,7 +19,7 @@ namespace NavfertyExcelAddIn.Localization {
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "18.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     internal class UIStrings {
@@ -120,6 +120,15 @@ namespace NavfertyExcelAddIn.Localization {
         internal static string Info {
             get {
                 return ResourceManager.GetString("Info", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No active workbook.
+        /// </summary>
+        internal static string NoActiveWorkbook {
+            get {
+                return ResourceManager.GetString("NoActiveWorkbook", resourceCulture);
             }
         }
         
@@ -255,6 +264,24 @@ namespace NavfertyExcelAddIn.Localization {
         internal static string ShowVersionMessage {
             get {
                 return ResourceManager.GetString("ShowVersionMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Error exporting to SQLite.
+        /// </summary>
+        internal static string SqliteExportError {
+            get {
+                return ResourceManager.GetString("SqliteExportError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Workbook successfully exported to SQLite database.
+        /// </summary>
+        internal static string SqliteExportSuccess {
+            get {
+                return ResourceManager.GetString("SqliteExportSuccess", resourceCulture);
             }
         }
         

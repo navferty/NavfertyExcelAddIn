@@ -20,8 +20,8 @@ namespace NavfertyExcelAddIn.WorksheetCellsEditing
 			var cells = range.Cast<Range>();
 
 			var firstValue = cells
-				.FirstOrDefault(CheckForLetters)?
-				.Value
+				.FirstOrDefault(CheckForLetters)
+				?.Value
 				.ToString();
 
 			if (string.IsNullOrEmpty(firstValue))
@@ -29,9 +29,9 @@ namespace NavfertyExcelAddIn.WorksheetCellsEditing
 				return;
 			}
 
-			var targertCase = DetectTargetCase((string)firstValue);
+			var targertCase = DetectTargetCase((string)firstValue!);
 
-			range.ApplyForEachCellOfType<string, string>(value => ConvertTextCase(value, targertCase));
+			range.ApplyForEachCellOfType<string, string?>(value => ConvertTextCase(value, targertCase));
 		}
 
 		private static bool CheckForLetters(Range cell)

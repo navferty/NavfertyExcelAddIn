@@ -6,7 +6,7 @@ namespace NavfertyExcelAddIn.StringifyNumerics
 {
 	public class RussianNumericStringifier : INumericStringifier
 	{
-		private Dictionary<int, string> allNumbers;
+		private Dictionary<int, string> allNumbers = new Dictionary<int, string>();
 
 		public RussianNumericStringifier()
 		{
@@ -14,7 +14,7 @@ namespace NavfertyExcelAddIn.StringifyNumerics
 		}
 
 		// thanks to pikabu.ru/@iakki for idea of algorythm
-		public string StringifyNumber(double number)
+		public string? StringifyNumber(double number)
 		{
 			if (number >= 1_000_000_000_000)
 				return null;

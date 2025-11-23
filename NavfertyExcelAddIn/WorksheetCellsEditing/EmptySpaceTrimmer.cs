@@ -18,14 +18,14 @@ namespace NavfertyExcelAddIn.WorksheetCellsEditing
         {
             logger.Info($"Trim spaces for range {range.GetRelativeAddress()}");
 
-            range.ApplyForEachCellOfType<string, string>(value => value.TrimSpaces());
+            range.ApplyForEachCellOfType<string, string?>(value => value.TrimSpaces());
         }
 
         public void RemoveAllSpaces(Range range)
         {
             logger.Info($"Trim spaces for range {range.GetRelativeAddress()}");
 
-            range.ApplyForEachCellOfType<string, string>(value =>
+            range.ApplyForEachCellOfType<string, string?>(value =>
             {
                 if (string.IsNullOrWhiteSpace(value))
                     return null;
