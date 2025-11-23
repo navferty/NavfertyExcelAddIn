@@ -23,8 +23,8 @@ namespace NavfertyExcelAddIn.WorksheetCellsEditing
                 foreach (Range cell in row.Cells)
                 {
                     markdown.Append('|');
-                    var value = (string)cell.Value?.ToString();
-                    markdown.Append(value.TrimSpaces() ?? " ");
+                    var value = (string?)cell.Value?.ToString();
+                    markdown.Append(value?.TrimSpaces() ?? " ");
                 }
                 markdown.Append('|');
                 markdown.Append("\r\n");
