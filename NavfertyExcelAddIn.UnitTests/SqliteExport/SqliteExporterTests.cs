@@ -1,6 +1,7 @@
-using System;
+﻿using System;
 using System.Data.SQLite;
 using System.IO;
+using System.Reflection;
 
 using Microsoft.Office.Interop.Excel;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -10,6 +11,8 @@ using Moq;
 using Navferty.Common;
 
 using NavfertyExcelAddIn.SqliteExport;
+
+using Range = Microsoft.Office.Interop.Excel.Range;
 
 namespace NavfertyExcelAddIn.UnitTests.SqliteExport
 {
@@ -65,7 +68,7 @@ namespace NavfertyExcelAddIn.UnitTests.SqliteExport
 			var worksheet = new Mock<Worksheet>(MockBehavior.Loose);
 			var usedRange = new Mock<Range>(MockBehavior.Loose);
 
-			var testData = new object[3, 2];
+			var testData = new object[3, 3];
 			testData[1, 1] = "A1";
 			testData[1, 2] = "B1";
 			testData[2, 1] = "A2";
@@ -75,7 +78,7 @@ namespace NavfertyExcelAddIn.UnitTests.SqliteExport
 			worksheet.Setup(x => x.UsedRange).Returns(usedRange.Object);
 			usedRange.Setup(x => x.Rows.Count).Returns(2);
 			usedRange.Setup(x => x.Columns.Count).Returns(2);
-			usedRange.Setup(x => x.Value).Returns(testData);
+			usedRange.Setup(x => x.get_Value(Missing.Value)).Returns(testData);
 
 			worksheets.Setup(x => x.Count).Returns(1);
 			worksheets.Setup(x => x.GetEnumerator()).Returns(new[] { worksheet.Object }.GetEnumerator());
@@ -121,14 +124,14 @@ namespace NavfertyExcelAddIn.UnitTests.SqliteExport
 			var worksheet = new Mock<Worksheet>(MockBehavior.Loose);
 			var usedRange = new Mock<Range>(MockBehavior.Loose);
 
-			var testData = new object[2, 1];
+			var testData = new object[2, 2];
 			testData[1, 1] = "Value";
 
 			worksheet.Setup(x => x.Name).Returns("Test-Sheet!@#");
 			worksheet.Setup(x => x.UsedRange).Returns(usedRange.Object);
 			usedRange.Setup(x => x.Rows.Count).Returns(1);
 			usedRange.Setup(x => x.Columns.Count).Returns(1);
-			usedRange.Setup(x => x.Value).Returns(testData);
+			usedRange.Setup(x => x.get_Value(Missing.Value)).Returns(testData);
 
 			worksheets.Setup(x => x.Count).Returns(1);
 			worksheets.Setup(x => x.GetEnumerator()).Returns(new[] { worksheet.Object }.GetEnumerator());
