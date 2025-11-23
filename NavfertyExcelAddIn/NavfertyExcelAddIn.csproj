@@ -29,7 +29,7 @@
     <NoStandardLibraries>false</NoStandardLibraries>
     <RootNamespace>NavfertyExcelAddIn</RootNamespace>
     <AssemblyName>NavfertyExcelAddIn</AssemblyName>
-    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.8.1</TargetFrameworkVersion>
     <DefineConstants>VSTO40</DefineConstants>
     <BootstrapperEnabled>true</BootstrapperEnabled>
     <PublishUrl>опубликовать\</PublishUrl>
