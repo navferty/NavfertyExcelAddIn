@@ -213,4 +213,13 @@
   <data name="XmlValidationReport_Value" xml:space="preserve">
     <value>Value</value>
   </data>
+  <data name="SqliteExportSuccess" xml:space="preserve">
+    <value>Workbook successfully exported to SQLite database</value>
+  </data>
+  <data name="SqliteExportError" xml:space="preserve">
+    <value>Error exporting to SQLite</value>
+  </data>
+  <data name="NoActiveWorkbook" xml:space="preserve">
+    <value>No active workbook</value>
+  </data>
 </root>

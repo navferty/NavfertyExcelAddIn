@@ -118,6 +118,8 @@
             size="large" keytip="SX" getScreentip="GetLabel" getSupertip="GetSupertip"/>
           <button id="ValidateXml" getLabel="GetLabel" onAction="ValidateXml" image="validateXml" size="large"
             keytip="VX" getScreentip="GetLabel" getSupertip="GetSupertip"/>
+          <button id="ExportToSqlite" getLabel="GetLabel" onAction="ExportToSqlite" imageMso="ExportExcel" size="large"
+            keytip="ES" getScreentip="GetLabel" getSupertip="GetSupertip"/>
         </group>
 
         <group id="WebToolsGroup" getLabel="GetLabel" autoScale="1">

@@ -7,6 +7,7 @@ using NavfertyExcelAddIn.Commons;
 using NavfertyExcelAddIn.DataValidation;
 using NavfertyExcelAddIn.FindFormulaErrors;
 using NavfertyExcelAddIn.ParseNumerics;
+using NavfertyExcelAddIn.SqliteExport;
 using NavfertyExcelAddIn.StringifyNumerics;
 using NavfertyExcelAddIn.Transliterate;
 using NavfertyExcelAddIn.Undo;
@@ -123,6 +124,11 @@ namespace NavfertyExcelAddIn
 
 			builder.RegisterType<XmlSampleCreator>()
 				.As<IXmlSampleCreator>()
+				.EnableInterfaceInterceptors()
+				.InterceptedBy(typeof(ExceptionLogger));
+
+			builder.RegisterType<SqliteExporter>()
+				.As<ISqliteExporter>()
 				.EnableInterfaceInterceptors()
 				.InterceptedBy(typeof(ExceptionLogger));
 

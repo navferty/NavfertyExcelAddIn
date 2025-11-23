@@ -21,6 +21,7 @@ using NavfertyExcelAddIn.FindFormulaErrors;
 using NavfertyExcelAddIn.InteractiveRangeReport;
 using NavfertyExcelAddIn.Localization;
 using NavfertyExcelAddIn.ParseNumerics;
+using NavfertyExcelAddIn.SqliteExport;
 using NavfertyExcelAddIn.StringifyNumerics;
 using NavfertyExcelAddIn.Transliterate;
 using NavfertyExcelAddIn.Undo;
@@ -406,6 +407,21 @@ namespace NavfertyExcelAddIn
 
 			var validator = GetService<IXmlValidator>();
 			validator.Validate(App);
+		}
+
+		public void ExportToSqlite(IRibbonControl ribbonControl)
+		{
+			logger.Debug("ExportToSqlite pressed");
+
+			var wb = App.ActiveWorkbook;
+			if (wb is null)
+			{
+				dialogService.ShowError(UIStrings.NoActiveWorkbook);
+				return;
+			}
+
+			var exporter = GetService<ISqliteExporter>();
+			exporter.ExportToSqlite(wb);
 		}
 		#endregion
 
