@@ -459,7 +459,7 @@
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestCertificateThumbprint>5C18E63BDBEE1C8BD1F5490DF2C179C71B2574D3</ManifestCertificateThumbprint>
+    <ManifestCertificateThumbprint>F9B1B0FCADE6088F34E7F3F9A1A52F84E066B634</ManifestCertificateThumbprint>
   </PropertyGroup>
   <!-- Include the build rules for a C# project. -->
   <PropertyGroup>
