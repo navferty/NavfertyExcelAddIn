@@ -17,8 +17,8 @@ namespace NavfertyExcelAddIn.Undo
 		private readonly IList<UndoItem> undoItems = new List<UndoItem>();
 		private readonly IList<AreaUndoItems> areaUndoItems = new List<AreaUndoItems>();
 
-		private string wsName;
-		private string wbName;
+		private string? wsName;
+		private string? wbName;
 
 		public void StartNewAction(Range range)
 		{
@@ -79,12 +79,15 @@ namespace NavfertyExcelAddIn.Undo
 
 		private static bool CheckChanges(Worksheet worksheet, UndoItem x)
 		{
-			object currentValue = ((Range)worksheet.Cells[x.RowIndex, x.ColumnIndex]).Value;
+			object? currentValue = ((Range)worksheet.Cells[x.RowIndex, x.ColumnIndex]).Value;
 
-			if (currentValue.GetType() != x.NewValue.GetType())
+			if (currentValue?.GetType() != x.NewValue?.GetType())
 				return true;
 
-			return !x.NewValue.Equals(currentValue);
+			if (x.NewValue is null)
+				return currentValue is null;
+
+			return x.NewValue.Equals(currentValue);
 		}
 
 		private static bool CheckChanges(Worksheet worksheet, AreaUndoItems areaUndoItems)
@@ -132,14 +135,14 @@ namespace NavfertyExcelAddIn.Undo
 		public int Width { get; set; }
 		public int Height { get; set; }
 
-		public object[,] OldValues { get; set; }
-		public object[,] NewValues { get; set; }
+		public object?[,] OldValues { get; set; } = null!;
+		public object?[,] NewValues { get; set; } = null!;
 	}
 
 	public class UndoItem
 	{
-		public object OldValue { get; set; }
-		public object NewValue { get; set; }
+		public object? OldValue { get; set; }
+		public object? NewValue { get; set; }
 
 		public int RowIndex { get; set; }
 		public int ColumnIndex { get; set; }

@@ -5,7 +5,7 @@ namespace NavfertyExcelAddIn.StringifyNumerics
 {
 	public class EnglishNumericStringifier : INumericStringifier
 	{
-		public string StringifyNumber(double number)
+		public string? StringifyNumber(double number)
 		{
 			if (number >= 1_000_000_000_000)
 				return null;

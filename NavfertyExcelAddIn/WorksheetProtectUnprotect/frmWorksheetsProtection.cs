@@ -17,8 +17,8 @@ namespace NavfertyExcelAddIn.WorksheetProtectUnprotect
 
         private Microsoft.Office.Interop.Excel.Application App => Globals.ThisAddIn.Application;
 
-        private readonly WsProtectorUnprotector creator = null;
-        private readonly Workbook wb = null;
+        private readonly WsProtectorUnprotector creator = null!;
+        private readonly Workbook wb = null!;
 
         private Sheets GetSheets() => wb.Worksheets;
 

@@ -48,13 +48,14 @@ namespace NavfertyExcelAddIn.InteractiveRangeReport
 				return;
 
 			if (selectedRows.Length == 1)
-				errorItems[selectedRows[0].RowIndex].Range.Select();
+				errorItems[selectedRows[0].RowIndex].Range?.Select();
 
 			var range = selectedRows
 				.Select(x => errorItems[x.RowIndex].Range)
+				.Where(x => x != null)
 				.Aggregate((r1, r2) => App.Union(r1, r2));
 
-			range.Select();
+			range?.Select();
 		}
 	}
 }

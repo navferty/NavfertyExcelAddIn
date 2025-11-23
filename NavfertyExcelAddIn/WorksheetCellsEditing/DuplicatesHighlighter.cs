@@ -37,7 +37,7 @@ namespace NavfertyExcelAddIn.WorksheetCellsEditing
 				.Where(x => x != null)
 				.GroupBy(x => ((object)x.Value)?.ToString().ToLowerInvariant(), new ValueEqualityComparer())
 				.Where(x => x.Count() > 1 && !string.IsNullOrEmpty(x.Key))
-				.ToDictionary(x => x.Key, x => x.ToArray());
+				.ToDictionary(x => x.Key!, x => x.ToArray());
 		}
 
 		private Dictionary<int, Range> GetUnionRanges(Dictionary<string, Range[]> valueGroups)
@@ -70,20 +70,20 @@ namespace NavfertyExcelAddIn.WorksheetCellsEditing
 			return rangesByColors;
 		}
 
-		private class ValueEqualityComparer : IEqualityComparer<string>
+		private class ValueEqualityComparer : IEqualityComparer<string?>
 		{
-			public bool Equals(string x, string y)
+			public bool Equals(string? x, string? y)
 			{
 				if (string.IsNullOrWhiteSpace(x) || string.IsNullOrWhiteSpace(y))
 				{
 					return false;
 				}
 
-				return x.Equals(y, StringComparison.InvariantCultureIgnoreCase);
+				return x!.Equals(y!, StringComparison.InvariantCultureIgnoreCase);
 			}
-			public int GetHashCode(string obj)
+			public int GetHashCode(string? obj)
 			{
-				return obj.GetHashCode();
+				return obj?.GetHashCode() ?? 0;
 			}
 		}
 	}

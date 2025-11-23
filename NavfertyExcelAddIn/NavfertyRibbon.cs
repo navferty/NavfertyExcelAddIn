@@ -61,7 +61,7 @@ namespace NavfertyExcelAddIn
 		private Application App => Globals.ThisAddIn.Application;
 
 		#region Forms
-		private InteractiveRangeReportForm form;
+		private InteractiveRangeReportForm? form;
 		#endregion
 		#endregion
 
@@ -143,7 +143,7 @@ namespace NavfertyExcelAddIn
 				value =>
 				{
 					var newValue = stringifier.StringifyNumber(value);
-					return (object)newValue ?? value;
+					return (object?)newValue ?? value;
 				});
 		}
 
@@ -429,21 +429,21 @@ namespace NavfertyExcelAddIn
 		public string GetLabel(IRibbonControl ribbonControl)
 		{
 			var sw = Stopwatch.StartNew();
-			logger.Debug($"{nameof(GetLabel)} - {ribbonControl?.Id}");
+			logger.Debug($"{nameof(GetLabel)} - {ribbonControl.Id}");
 			try
 			{
 				var label = RibbonLabels.ResourceManager.GetString(ribbonControl.Id);
-				logger.Debug($"{nameof(GetLabel)} - {ribbonControl?.Id}: '{label}'. Elapsed {sw.Elapsed}");
+				logger.Debug($"{nameof(GetLabel)} - {ribbonControl.Id}: '{label}'. Elapsed {sw.Elapsed}");
 				return label;
 			}
 			catch (Exception ex)
 			{
-				logger.Error($"{nameof(GetLabel)} - {ribbonControl?.Id} error after {sw.Elapsed}:");
+				logger.Error($"{nameof(GetLabel)} - {ribbonControl.Id} error after {sw.Elapsed}:");
 				logger.Error(ex);
-				return ribbonControl?.Id;
+				return ribbonControl.Id;
 			}
 		}
-		public Bitmap GetImage(string imageName)
+		public Bitmap? GetImage(string imageName)
 		{
 			var sw = Stopwatch.StartNew();
 			logger.Debug($"{nameof(GetImage)} - {imageName}");
@@ -463,22 +463,23 @@ namespace NavfertyExcelAddIn
 		public string GetSupertip(IRibbonControl ribbonControl)
 		{
 			var sw = Stopwatch.StartNew();
-			logger.Debug($"{nameof(GetSupertip)} - {ribbonControl?.Id}");
+			logger.Debug($"{nameof(GetSupertip)} - {ribbonControl.Id}");
 			try
 			{
 				var superTip = RibbonSupertips.ResourceManager.GetString(ribbonControl.Id);
-				logger.Debug($"{nameof(GetSupertip)} - {ribbonControl?.Id}: '{superTip}'. Elapsed {sw.Elapsed}");
+				logger.Debug($"{nameof(GetSupertip)} - {ribbonControl.Id}: '{superTip}'. Elapsed {sw.Elapsed}");
 				return superTip;
 			}
 			catch (Exception ex)
 			{
-				logger.Error($"{nameof(GetSupertip)} - {ribbonControl?.Id} error after {sw.Elapsed}:");
+				logger.Error($"{nameof(GetSupertip)} - {ribbonControl.Id} error after {sw.Elapsed}:");
 				logger.Error(ex);
-				return ribbonControl?.Id;
+				return ribbonControl.Id;
 			}
 		}
 
 		private T GetService<T>()
+			where T : notnull
 		{
 			return Container.Resolve<T>();
 		}
@@ -494,7 +495,7 @@ namespace NavfertyExcelAddIn
 			}
 		}
 
-		private Range GetSelectionOrUsedRange(Worksheet activeSheet)
+		private Range? GetSelectionOrUsedRange(Worksheet activeSheet)
 		{
 			var selection = (Range)App.Selection;
 
