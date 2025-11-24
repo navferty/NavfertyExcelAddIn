@@ -13,7 +13,7 @@ namespace NavfertyExcelAddIn.SqliteExport
 			BLOB
 		}
 
-		private const double FloatingPointTolerance = 1e-10;
+		internal const double FloatingPointTolerance = 1e-10;
 
 		public static SqliteColumnType DetectColumnType(object[,] values, int colIndex, int startRow, int endRow)
 		{
@@ -71,7 +71,7 @@ namespace NavfertyExcelAddIn.SqliteExport
 					}
 					else if (value is decimal dec)
 					{
-						if (dec != Math.Round(dec))
+						if (Math.Abs((double)(dec - Math.Round(dec))) > FloatingPointTolerance)
 						{
 							allIntegers = false;
 						}

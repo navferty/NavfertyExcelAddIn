@@ -130,6 +130,14 @@ namespace NavfertyExcelAddIn.SqliteExport
 
 			// Calculate header row index (1-based indexing)
 			int headerRowIndex = 1 + options.RowsToSkip;
+			
+			// Validate header row is within bounds
+			if (headerRowIndex > rowCount)
+			{
+				logger.Debug($"Worksheet {worksheet.Name} has no rows after skipping {options.RowsToSkip} rows, skipping");
+				return;
+			}
+			
 			// Calculate actual data start row (after skipped rows and optional header)
 			int dataStartRow = headerRowIndex;
 			string[] columnNames = null;
@@ -235,7 +243,7 @@ namespace NavfertyExcelAddIn.SqliteExport
 								else if (value is double dbl)
 								{
 									// Validate that it's actually an integer value before casting
-									if (Math.Abs(dbl - Math.Round(dbl)) < 1e-10)
+									if (Math.Abs(dbl - Math.Round(dbl)) < ColumnTypeDetector.FloatingPointTolerance)
 									{
 										command.Parameters.AddWithValue($"@col{col}", (long)Math.Round(dbl));
 									}
@@ -248,7 +256,7 @@ namespace NavfertyExcelAddIn.SqliteExport
 								}
 								else if (value is float flt)
 								{
-									if (Math.Abs(flt - Math.Round(flt)) < 1e-10)
+									if (Math.Abs(flt - Math.Round(flt)) < ColumnTypeDetector.FloatingPointTolerance)
 									{
 										command.Parameters.AddWithValue($"@col{col}", (long)Math.Round(flt));
 									}
@@ -260,7 +268,7 @@ namespace NavfertyExcelAddIn.SqliteExport
 								}
 								else if (value is decimal dec)
 								{
-									if (dec == Math.Round(dec))
+									if (Math.Abs((double)(dec - Math.Round(dec))) < ColumnTypeDetector.FloatingPointTolerance)
 									{
 										command.Parameters.AddWithValue($"@col{col}", (long)dec);
 									}
@@ -396,7 +404,7 @@ namespace NavfertyExcelAddIn.SqliteExport
 			}
 
 			// Ensure the name doesn't start with a digit
-			if (result.Length > 0 && char.IsDigit(result[0]))
+			if (char.IsDigit(result[0]))
 			{
 				result = "_" + result;
 			}
