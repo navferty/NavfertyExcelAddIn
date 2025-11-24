@@ -166,6 +166,13 @@ public class CommonsAutomationTests : AutomationTestsBase
 		SendKeys.SendWait("ZXER");
 		Thread.Sleep(defaultSleep);
 
+		SendKeys.SendWait("{DOWN}{DOWN}"); // Move to third error in A5 cell
+
+		var selectedCell = app.ActiveCell;
+		Assert.IsNotNull(selectedCell);
+		TestContext.WriteLine($"Active cell after FindErrors: {selectedCell.Address}");
+		Assert.AreEqual("$A$5", selectedCell.Address, "Active cell should be A3 (first error)");
+
 		// The FindErrors feature should identify and highlight error cells
 		// We can verify it completed without errors
 		var cell3Value = ((Range)sheet.Cells[3, 1]).Value;
