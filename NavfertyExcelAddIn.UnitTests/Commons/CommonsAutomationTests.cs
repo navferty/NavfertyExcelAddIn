@@ -43,11 +43,45 @@ public class CommonsAutomationTests : AutomationTestsBase
 		SendKeys.SendWait("ZXD");
 		Thread.Sleep(defaultSleep);
 
-		// Verify conditional formatting was applied
-		var usedRange = sheet.UsedRange;
-		Assert.IsTrue(usedRange.FormatConditions.Count > 0, "Conditional formatting should be applied");
+		// Verify that cells with same values have same color
+		// apple appears in: A1, C1, A3
+		var appleColor1 = ((Range)sheet.Cells[1, 1]).Interior.ColorIndex;
+		var appleColor2 = ((Range)sheet.Cells[1, 3]).Interior.ColorIndex;
+		var appleColor3 = ((Range)sheet.Cells[3, 1]).Interior.ColorIndex;
+		
+		TestContext.WriteLine($"Apple cells - A1 color: {appleColor1}, C1 color: {appleColor2}, A3 color: {appleColor3}");
+		Assert.AreEqual(appleColor1, appleColor2, "All 'apple' cells should have the same color");
+		Assert.AreEqual(appleColor1, appleColor3, "All 'apple' cells should have the same color");
+		Assert.AreNotEqual(XlColorIndex.xlColorIndexNone, appleColor1, "'apple' cells should be colored");
 
-		TestContext.WriteLine($"Conditional formats applied: {usedRange.FormatConditions.Count}");
+		// banana appears in: B1, B2
+		var bananaColor1 = ((Range)sheet.Cells[1, 2]).Interior.ColorIndex;
+		var bananaColor2 = ((Range)sheet.Cells[2, 2]).Interior.ColorIndex;
+		
+		TestContext.WriteLine($"Banana cells - B1 color: {bananaColor1}, B2 color: {bananaColor2}");
+		Assert.AreEqual(bananaColor1, bananaColor2, "All 'banana' cells should have the same color");
+		Assert.AreNotEqual(XlColorIndex.xlColorIndexNone, bananaColor1, "'banana' cells should be colored");
+
+		// orange appears in: A2, C3
+		var orangeColor1 = ((Range)sheet.Cells[2, 1]).Interior.ColorIndex;
+		var orangeColor2 = ((Range)sheet.Cells[3, 3]).Interior.ColorIndex;
+		
+		TestContext.WriteLine($"Orange cells - A2 color: {orangeColor1}, C3 color: {orangeColor2}");
+		Assert.AreEqual(orangeColor1, orangeColor2, "All 'orange' cells should have the same color");
+		Assert.AreNotEqual(XlColorIndex.xlColorIndexNone, orangeColor1, "'orange' cells should be colored");
+
+		// Different duplicate groups should have different colors
+		Assert.AreNotEqual(appleColor1, bananaColor1, "Different duplicate groups should have different colors");
+		Assert.AreNotEqual(appleColor1, orangeColor1, "Different duplicate groups should have different colors");
+		Assert.AreNotEqual(bananaColor1, orangeColor1, "Different duplicate groups should have different colors");
+
+		// grape and kiwi appear only once, should not be colored
+		var grapeColor = ((Range)sheet.Cells[2, 3]).Interior.ColorIndex;
+		var kiwiColor = ((Range)sheet.Cells[3, 2]).Interior.ColorIndex;
+		
+		TestContext.WriteLine($"Unique cells - grape color: {grapeColor}, kiwi color: {kiwiColor}");
+		Assert.AreEqual(XlColorIndex.xlColorIndexNone, grapeColor, "'grape' should not be colored (not a duplicate)");
+		Assert.AreEqual(XlColorIndex.xlColorIndexNone, kiwiColor, "'kiwi' should not be colored (not a duplicate)");
 	}
 
 	[TestMethod]
@@ -215,10 +249,44 @@ public class CommonsAutomationTests : AutomationTestsBase
 		SendKeys.SendWait("ZXD");
 		Thread.Sleep(defaultSleep);
 
-		// Verify conditional formatting was applied
-		var usedRange = sheet.UsedRange;
-		Assert.IsTrue(usedRange.FormatConditions.Count > 0, "Conditional formatting should be applied");
+		// Verify that cells with same values have same color
+		// 100 appears in: A1, C1, A3
+		var value100Color1 = ((Range)sheet.Cells[1, 1]).Interior.ColorIndex;
+		var value100Color2 = ((Range)sheet.Cells[1, 3]).Interior.ColorIndex;
+		var value100Color3 = ((Range)sheet.Cells[3, 1]).Interior.ColorIndex;
+		
+		TestContext.WriteLine($"100 cells - A1 color: {value100Color1}, C1 color: {value100Color2}, A3 color: {value100Color3}");
+		Assert.AreEqual(value100Color1, value100Color2, "All '100' cells should have the same color");
+		Assert.AreEqual(value100Color1, value100Color3, "All '100' cells should have the same color");
+		Assert.AreNotEqual(XlColorIndex.xlColorIndexNone, value100Color1, "'100' cells should be colored");
 
-		TestContext.WriteLine($"Conditional formats applied: {usedRange.FormatConditions.Count}");
+		// 200 appears in: B1, B2
+		var value200Color1 = ((Range)sheet.Cells[1, 2]).Interior.ColorIndex;
+		var value200Color2 = ((Range)sheet.Cells[2, 2]).Interior.ColorIndex;
+		
+		TestContext.WriteLine($"200 cells - B1 color: {value200Color1}, B2 color: {value200Color2}");
+		Assert.AreEqual(value200Color1, value200Color2, "All '200' cells should have the same color");
+		Assert.AreNotEqual(XlColorIndex.xlColorIndexNone, value200Color1, "'200' cells should be colored");
+
+		// 300 appears in: A2, C3
+		var value300Color1 = ((Range)sheet.Cells[2, 1]).Interior.ColorIndex;
+		var value300Color2 = ((Range)sheet.Cells[3, 3]).Interior.ColorIndex;
+		
+		TestContext.WriteLine($"300 cells - A2 color: {value300Color1}, C3 color: {value300Color2}");
+		Assert.AreEqual(value300Color1, value300Color2, "All '300' cells should have the same color");
+		Assert.AreNotEqual(XlColorIndex.xlColorIndexNone, value300Color1, "'300' cells should be colored");
+
+		// Different duplicate groups should have different colors
+		Assert.AreNotEqual(value100Color1, value200Color1, "Different duplicate groups should have different colors");
+		Assert.AreNotEqual(value100Color1, value300Color1, "Different duplicate groups should have different colors");
+		Assert.AreNotEqual(value200Color1, value300Color1, "Different duplicate groups should have different colors");
+
+		// 400 and 500 appear only once, should not be colored
+		var value400Color = ((Range)sheet.Cells[2, 3]).Interior.ColorIndex;
+		var value500Color = ((Range)sheet.Cells[3, 2]).Interior.ColorIndex;
+		
+		TestContext.WriteLine($"Unique cells - 400 color: {value400Color}, 500 color: {value500Color}");
+		Assert.AreEqual(XlColorIndex.xlColorIndexNone, value400Color, "'400' should not be colored (not a duplicate)");
+		Assert.AreEqual(XlColorIndex.xlColorIndexNone, value500Color, "'500' should not be colored (not a duplicate)");
 	}
 }
