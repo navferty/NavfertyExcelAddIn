@@ -1,4 +1,4 @@
-using System.Threading;
+﻿using System.Threading;
 using System.Windows.Forms;
 
 using Microsoft.Office.Interop.Excel;
@@ -76,8 +76,8 @@ public class CommonsAutomationTests : AutomationTestsBase
 		Assert.AreNotEqual(bananaColor1, orangeColor1, "Different duplicate groups should have different colors");
 
 		// grape and kiwi appear only once, should not be colored
-		var grapeColor = ((Range)sheet.Cells[2, 3]).Interior.ColorIndex;
-		var kiwiColor = ((Range)sheet.Cells[3, 2]).Interior.ColorIndex;
+		var grapeColor = (XlColorIndex)((Range)sheet.Cells[2, 3]).Interior.ColorIndex;
+		var kiwiColor = (XlColorIndex)((Range)sheet.Cells[3, 2]).Interior.ColorIndex;
 		
 		TestContext.WriteLine($"Unique cells - grape color: {grapeColor}, kiwi color: {kiwiColor}");
 		Assert.AreEqual(XlColorIndex.xlColorIndexNone, grapeColor, "'grape' should not be colored (not a duplicate)");
@@ -282,8 +282,8 @@ public class CommonsAutomationTests : AutomationTestsBase
 		Assert.AreNotEqual(value200Color1, value300Color1, "Different duplicate groups should have different colors");
 
 		// 400 and 500 appear only once, should not be colored
-		var value400Color = ((Range)sheet.Cells[2, 3]).Interior.ColorIndex;
-		var value500Color = ((Range)sheet.Cells[3, 2]).Interior.ColorIndex;
+		var value400Color = (XlColorIndex)((Range)sheet.Cells[2, 3]).Interior.ColorIndex;
+		var value500Color = (XlColorIndex)((Range)sheet.Cells[3, 2]).Interior.ColorIndex;
 		
 		TestContext.WriteLine($"Unique cells - 400 color: {value400Color}, 500 color: {value500Color}");
 		Assert.AreEqual(XlColorIndex.xlColorIndexNone, value400Color, "'400' should not be colored (not a duplicate)");
