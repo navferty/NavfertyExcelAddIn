@@ -2,6 +2,7 @@ using System;
 using System.Data.SQLite;
 using System.IO;
 using System.Text;
+using System.Windows.Forms;
 
 using Microsoft.Office.Interop.Excel;
 
@@ -30,6 +31,32 @@ namespace NavfertyExcelAddIn.SqliteExport
 				throw new ArgumentNullException(nameof(workbook));
 			}
 
+			// Show options dialog
+			SqliteExportOptions options;
+			using (var optionsForm = new SqliteExportOptionsForm())
+			{
+				if (optionsForm.ShowDialog() != DialogResult.OK)
+				{
+					return;
+				}
+				options = optionsForm.Options;
+			}
+
+			ExportToSqlite(workbook, options);
+		}
+
+		public void ExportToSqlite(Workbook workbook, SqliteExportOptions options)
+		{
+			if (workbook == null)
+			{
+				throw new ArgumentNullException(nameof(workbook));
+			}
+
+			if (options == null)
+			{
+				throw new ArgumentNullException(nameof(options));
+			}
+
 			var dbPath = dialogService.AskForSaveFile(FileType.Db);
 			if (string.IsNullOrEmpty(dbPath))
 			{
@@ -40,7 +67,7 @@ namespace NavfertyExcelAddIn.SqliteExport
 
 			try
 			{
-				ExportWorkbookToDatabase(workbook, dbPath);
+				ExportWorkbookToDatabase(workbook, dbPath, options);
 				dialogService.ShowInfo(UIStrings.SqliteExportSuccess);
 			}
 			catch (Exception ex)
@@ -50,7 +77,7 @@ namespace NavfertyExcelAddIn.SqliteExport
 			}
 		}
 
-		private void ExportWorkbookToDatabase(Workbook workbook, string dbPath)
+		private void ExportWorkbookToDatabase(Workbook workbook, string dbPath, SqliteExportOptions options)
 		{
 			if (File.Exists(dbPath))
 			{
@@ -68,7 +95,7 @@ namespace NavfertyExcelAddIn.SqliteExport
 					try
 					{
 						logger.Debug($"Exporting worksheet: {worksheet.Name}");
-						ExportWorksheetToTable(worksheet, connection);
+						ExportWorksheetToTable(worksheet, connection, options);
 					}
 					catch (Exception ex)
 					{
@@ -81,7 +108,7 @@ namespace NavfertyExcelAddIn.SqliteExport
 			logger.Debug($"Successfully exported {workbook.Worksheets.Count} worksheets to {dbPath}");
 		}
 
-		private void ExportWorksheetToTable(Worksheet worksheet, SQLiteConnection connection)
+		private void ExportWorksheetToTable(Worksheet worksheet, SQLiteConnection connection, SqliteExportOptions options)
 		{
 			var usedRange = worksheet.UsedRange;
 			if (usedRange == null || usedRange.Rows.Count == 0)
@@ -101,21 +128,54 @@ namespace NavfertyExcelAddIn.SqliteExport
 				return;
 			}
 
-			CreateTable(connection, tableName, colCount);
+			// Calculate actual data start row (1-based indexing)
+			int dataStartRow = 1 + options.RowsToSkip;
+			string[] columnNames = null;
 
-			InsertData(connection, tableName, values, rowCount, colCount);
+			if (options.UseFirstRowAsHeaders)
+			{
+				// Extract column names from the first non-skipped row
+				columnNames = new string[colCount];
+				for (int col = 1; col <= colCount; col++)
+				{
+					var headerValue = values[dataStartRow, col];
+					var headerText = headerValue != null ? headerValue.ToString().Trim() : string.Empty;
+					columnNames[col - 1] = string.IsNullOrWhiteSpace(headerText) ? $"Column{col}" : SanitizeColumnName(headerText);
+				}
+				dataStartRow++; // Move past the header row
+			}
 
-			logger.Debug($"Exported {rowCount} rows to table {tableName}");
+			// Check if there's any data to export
+			if (dataStartRow > rowCount)
+			{
+				logger.Debug($"Worksheet {worksheet.Name} has no data rows after skipping, skipping");
+				return;
+			}
+
+			// Detect column types
+			var columnTypes = new ColumnTypeDetector.SqliteColumnType[colCount];
+			for (int col = 1; col <= colCount; col++)
+			{
+				columnTypes[col - 1] = ColumnTypeDetector.DetectColumnType(values, col, dataStartRow, rowCount);
+			}
+
+			CreateTable(connection, tableName, colCount, columnNames, columnTypes);
+
+			InsertData(connection, tableName, values, dataStartRow, rowCount, colCount, columnTypes);
+
+			logger.Debug($"Exported {rowCount - dataStartRow + 1} rows to table {tableName}");
 		}
 
-		private void CreateTable(SQLiteConnection connection, string tableName, int columnCount)
+		private void CreateTable(SQLiteConnection connection, string tableName, int columnCount, string[] columnNames, ColumnTypeDetector.SqliteColumnType[] columnTypes)
 		{
 			var createTableSql = new StringBuilder();
 			createTableSql.Append($"CREATE TABLE [{tableName}] (");
 
 			for (var i = 1; i <= columnCount; i++)
 			{
-				createTableSql.Append($"[Column{i}] TEXT");
+				var columnName = columnNames != null ? columnNames[i - 1] : $"Column{i}";
+				var columnType = columnTypes[i - 1].ToString();
+				createTableSql.Append($"[{columnName}] {columnType}");
 				if (i < columnCount)
 				{
 					createTableSql.Append(", ");
@@ -130,7 +190,7 @@ namespace NavfertyExcelAddIn.SqliteExport
 			}
 		}
 
-		private void InsertData(SQLiteConnection connection, string tableName, object[,] values, int rowCount, int colCount)
+		private void InsertData(SQLiteConnection connection, string tableName, object[,] values, int startRow, int endRow, int colCount, ColumnTypeDetector.SqliteColumnType[] columnTypes)
 		{
 			using (var transaction = connection.BeginTransaction())
 			{
@@ -150,15 +210,92 @@ namespace NavfertyExcelAddIn.SqliteExport
 
 				using (var command = new SQLiteCommand(insertSql.ToString(), connection))
 				{
-					for (var row = 1; row <= rowCount; row++)
+					for (var row = startRow; row <= endRow; row++)
 					{
 						command.Parameters.Clear();
 
 						for (var col = 1; col <= colCount; col++)
 						{
 							var value = values[row, col];
-							var stringValue = value != null ? value.ToString() : string.Empty;
-							command.Parameters.AddWithValue($"@col{col}", stringValue);
+							var columnType = columnTypes[col - 1];
+
+							if (value == null || (value is string str && string.IsNullOrWhiteSpace(str)))
+							{
+								command.Parameters.AddWithValue($"@col{col}", DBNull.Value);
+							}
+							else if (columnType == ColumnTypeDetector.SqliteColumnType.INTEGER)
+							{
+								if (value is bool boolVal)
+								{
+									command.Parameters.AddWithValue($"@col{col}", boolVal ? 1 : 0);
+								}
+								else if (value is double dbl)
+								{
+									command.Parameters.AddWithValue($"@col{col}", (long)dbl);
+								}
+								else if (value is float flt)
+								{
+									command.Parameters.AddWithValue($"@col{col}", (long)flt);
+								}
+								else if (value is decimal dec)
+								{
+									command.Parameters.AddWithValue($"@col{col}", (long)dec);
+								}
+								else if (value is int || value is long || value is short || value is byte)
+								{
+									command.Parameters.AddWithValue($"@col{col}", Convert.ToInt64(value));
+								}
+								else if (long.TryParse(value.ToString(), out long parsed))
+								{
+									command.Parameters.AddWithValue($"@col{col}", parsed);
+								}
+								else
+								{
+									command.Parameters.AddWithValue($"@col{col}", value.ToString());
+								}
+							}
+							else if (columnType == ColumnTypeDetector.SqliteColumnType.REAL)
+							{
+								if (value is double || value is float || value is decimal)
+								{
+									command.Parameters.AddWithValue($"@col{col}", Convert.ToDouble(value));
+								}
+								else if (double.TryParse(value.ToString(), out double parsed))
+								{
+									command.Parameters.AddWithValue($"@col{col}", parsed);
+								}
+								else
+								{
+									command.Parameters.AddWithValue($"@col{col}", value.ToString());
+								}
+							}
+							else if (columnType == ColumnTypeDetector.SqliteColumnType.NUMERIC)
+							{
+								if (value is DateTime dateTime)
+								{
+									// Store DateTime as ISO 8601 string format which SQLite can parse
+									command.Parameters.AddWithValue($"@col{col}", dateTime.ToString("yyyy-MM-dd HH:mm:ss"));
+								}
+								else
+								{
+									command.Parameters.AddWithValue($"@col{col}", value.ToString());
+								}
+							}
+							else if (columnType == ColumnTypeDetector.SqliteColumnType.BLOB)
+							{
+								if (value is byte[] bytes)
+								{
+									command.Parameters.AddWithValue($"@col{col}", bytes);
+								}
+								else
+								{
+									command.Parameters.AddWithValue($"@col{col}", DBNull.Value);
+								}
+							}
+							else
+							{
+								command.Parameters.AddWithValue($"@col{col}", value.ToString());
+							}
 						}
 
 						command.ExecuteNonQuery();
@@ -193,6 +330,40 @@ namespace NavfertyExcelAddIn.SqliteExport
 			if (string.IsNullOrWhiteSpace(result))
 			{
 				return "Sheet";
+			}
+
+			if (char.IsDigit(result[0]))
+			{
+				result = "_" + result;
+			}
+
+			return result;
+		}
+
+		private string SanitizeColumnName(string name)
+		{
+			if (string.IsNullOrWhiteSpace(name))
+			{
+				return "Column";
+			}
+
+			var sanitized = new StringBuilder();
+			foreach (var c in name)
+			{
+				if (char.IsLetterOrDigit(c) || c == '_')
+				{
+					sanitized.Append(c);
+				}
+				else
+				{
+					sanitized.Append('_');
+				}
+			}
+
+			var result = sanitized.ToString();
+			if (string.IsNullOrWhiteSpace(result))
+			{
+				return "Column";
 			}
 
 			if (char.IsDigit(result[0]))

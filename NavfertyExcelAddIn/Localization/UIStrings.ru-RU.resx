@@ -219,6 +219,15 @@
   <data name="SqliteExportError" xml:space="preserve">
     <value>Ошибка экспорта в SQLite</value>
   </data>
+  <data name="SqliteExport_OptionsTitle" xml:space="preserve">
+    <value>Параметры экспорта SQLite</value>
+  </data>
+  <data name="SqliteExport_UseFirstRowAsHeaders" xml:space="preserve">
+    <value>Использовать первую строку как названия столбцов</value>
+  </data>
+  <data name="SqliteExport_RowsToSkip" xml:space="preserve">
+    <value>Пропустить строк:</value>
+  </data>
   <data name="NoActiveWorkbook" xml:space="preserve">
     <value>Нет активной книги</value>
   </data>
