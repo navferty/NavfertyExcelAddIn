@@ -95,7 +95,8 @@ namespace NavfertyExcelAddIn.SqliteExport
 				else
 				{
 					// Try to parse as a number
-					if (double.TryParse(value.ToString(), out double parsed))
+					var stringValue = value?.ToString();
+					if (!string.IsNullOrWhiteSpace(stringValue) && double.TryParse(stringValue, out double parsed))
 					{
 						if (Math.Abs(parsed - Math.Round(parsed)) > FloatingPointTolerance)
 						{

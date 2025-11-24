@@ -345,43 +345,19 @@ namespace NavfertyExcelAddIn.SqliteExport
 
 		private string SanitizeTableName(string name)
 		{
-			if (string.IsNullOrWhiteSpace(name))
-			{
-				return "Sheet";
-			}
-
-			var sanitized = new StringBuilder();
-			foreach (var c in name)
-			{
-				if (char.IsLetterOrDigit(c) || c == '_')
-				{
-					sanitized.Append(c);
-				}
-				else
-				{
-					sanitized.Append('_');
-				}
-			}
-
-			var result = sanitized.ToString();
-			if (string.IsNullOrWhiteSpace(result))
-			{
-				return "Sheet";
-			}
-
-			if (char.IsDigit(result[0]))
-			{
-				result = "_" + result;
-			}
-
-			return result;
+			return SanitizeName(name, "Sheet");
 		}
 
 		private string SanitizeColumnName(string name)
 		{
+			return SanitizeName(name, "Column");
+		}
+
+		private string SanitizeName(string name, string defaultName)
+		{
 			if (string.IsNullOrWhiteSpace(name))
 			{
-				return "Column";
+				return defaultName;
 			}
 
 			var sanitized = new StringBuilder();
@@ -400,7 +376,7 @@ namespace NavfertyExcelAddIn.SqliteExport
 			var result = sanitized.ToString();
 			if (string.IsNullOrWhiteSpace(result))
 			{
-				return "Column";
+				return defaultName;
 			}
 
 			// Ensure the name doesn't start with a digit
