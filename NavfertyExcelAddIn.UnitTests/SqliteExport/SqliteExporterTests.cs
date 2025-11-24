@@ -75,12 +75,8 @@ namespace NavfertyExcelAddIn.UnitTests.SqliteExport
 			};
 
 			optionsProvider
-				.Setup(x => x.TryGetOptions(out It.Ref<SqliteExportOptions>.IsAny))
-				.Returns((out SqliteExportOptions opt) =>
-				{
-					opt = testOptions;
-					return true;
-				});
+				.Setup(x => x.TryGetOptions(out testOptions))
+				.Returns(true);
 
 			dialogService
 				.Setup(x => x.AskForSaveFile(FileType.Db))
@@ -123,12 +119,8 @@ namespace NavfertyExcelAddIn.UnitTests.SqliteExport
 			};
 
 			optionsProvider
-				.Setup(x => x.TryGetOptions(out It.Ref<SqliteExportOptions>.IsAny))
-				.Returns((out SqliteExportOptions opt) =>
-				{
-					opt = testOptions;
-					return true;
-				});
+				.Setup(x => x.TryGetOptions(out testOptions))
+				.Returns(true);
 
 			dialogService
 				.Setup(x => x.AskForSaveFile(FileType.Db))
@@ -190,12 +182,8 @@ namespace NavfertyExcelAddIn.UnitTests.SqliteExport
 			};
 
 			optionsProvider
-				.Setup(x => x.TryGetOptions(out It.Ref<SqliteExportOptions>.IsAny))
-				.Returns((out SqliteExportOptions opt) =>
-				{
-					opt = testOptions;
-					return true;
-				});
+				.Setup(x => x.TryGetOptions(out testOptions))
+				.Returns(true);
 
 			dialogService
 				.Setup(x => x.AskForSaveFile(FileType.Db))
@@ -245,12 +233,8 @@ namespace NavfertyExcelAddIn.UnitTests.SqliteExport
 			};
 
 			optionsProvider
-				.Setup(x => x.TryGetOptions(out It.Ref<SqliteExportOptions>.IsAny))
-				.Returns((out SqliteExportOptions opt) =>
-				{
-					opt = testOptions;
-					return true;
-				});
+				.Setup(x => x.TryGetOptions(out testOptions))
+				.Returns(true);
 
 			dialogService
 				.Setup(x => x.AskForSaveFile(FileType.Db))

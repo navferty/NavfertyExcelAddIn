@@ -1,22 +1,22 @@
-using System.Windows.Forms;
+﻿using System.Windows.Forms;
 
-namespace NavfertyExcelAddIn.SqliteExport
+namespace NavfertyExcelAddIn.SqliteExport;
+
+#nullable enable
+public class SqliteExportOptionsFormProvider : ISqliteExportOptionsProvider
 {
-	public class SqliteExportOptionsFormProvider : ISqliteExportOptionsProvider
+	public bool TryGetOptions(out SqliteExportOptions? options)
 	{
-		public bool TryGetOptions(out SqliteExportOptions options)
+		using (var optionsForm = new SqliteExportOptionsForm())
 		{
-			using (var optionsForm = new SqliteExportOptionsForm())
+			if (optionsForm.ShowDialog() == DialogResult.OK)
 			{
-				if (optionsForm.ShowDialog() == DialogResult.OK)
-				{
-					options = optionsForm.Options;
-					return true;
-				}
+				options = optionsForm.Options;
+				return true;
 			}
-
-			options = null;
-			return false;
 		}
+
+		options = null;
+		return false;
 	}
 }
