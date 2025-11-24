@@ -53,10 +53,8 @@ namespace NavfertyExcelAddIn.UnitTests.SqliteExport
 		{
 			var workbook = new Mock<Workbook>(MockBehavior.Strict);
 
-			SqliteExportOptions options = null;
-
 			optionsProvider
-				.Setup(x => x.TryGetOptions(out options))
+				.Setup(x => x.TryGetOptions(out It.Ref<SqliteExportOptions>.IsAny))
 				.Returns(false);
 
 			exporter.ExportToSqlite(workbook.Object);
@@ -70,15 +68,19 @@ namespace NavfertyExcelAddIn.UnitTests.SqliteExport
 		{
 			var workbook = new Mock<Workbook>(MockBehavior.Strict);
 
-			var options = new SqliteExportOptions
+			var testOptions = new SqliteExportOptions
 			{
 				UseFirstRowAsHeaders = true,
 				RowsToSkip = 0
 			};
 
 			optionsProvider
-				.Setup(x => x.TryGetOptions(out options))
-				.Returns(true);
+				.Setup(x => x.TryGetOptions(out It.Ref<SqliteExportOptions>.IsAny))
+				.Returns((out SqliteExportOptions opt) =>
+				{
+					opt = testOptions;
+					return true;
+				});
 
 			dialogService
 				.Setup(x => x.AskForSaveFile(FileType.Db))
@@ -114,15 +116,19 @@ namespace NavfertyExcelAddIn.UnitTests.SqliteExport
 
 			workbook.Setup(x => x.Worksheets).Returns(worksheets.Object);
 
-			var options = new SqliteExportOptions
+			var testOptions = new SqliteExportOptions
 			{
 				UseFirstRowAsHeaders = false,
 				RowsToSkip = 0
 			};
 
 			optionsProvider
-				.Setup(x => x.TryGetOptions(out options))
-				.Returns(true);
+				.Setup(x => x.TryGetOptions(out It.Ref<SqliteExportOptions>.IsAny))
+				.Returns((out SqliteExportOptions opt) =>
+				{
+					opt = testOptions;
+					return true;
+				});
 
 			dialogService
 				.Setup(x => x.AskForSaveFile(FileType.Db))
@@ -177,15 +183,19 @@ namespace NavfertyExcelAddIn.UnitTests.SqliteExport
 
 			workbook.Setup(x => x.Worksheets).Returns(worksheets.Object);
 
-			var options = new SqliteExportOptions
+			var testOptions = new SqliteExportOptions
 			{
 				UseFirstRowAsHeaders = false,
 				RowsToSkip = 0
 			};
 
 			optionsProvider
-				.Setup(x => x.TryGetOptions(out options))
-				.Returns(true);
+				.Setup(x => x.TryGetOptions(out It.Ref<SqliteExportOptions>.IsAny))
+				.Returns((out SqliteExportOptions opt) =>
+				{
+					opt = testOptions;
+					return true;
+				});
 
 			dialogService
 				.Setup(x => x.AskForSaveFile(FileType.Db))
@@ -228,15 +238,19 @@ namespace NavfertyExcelAddIn.UnitTests.SqliteExport
 
 			workbook.Setup(x => x.Worksheets).Returns(worksheets.Object);
 
-			var options = new SqliteExportOptions
+			var testOptions = new SqliteExportOptions
 			{
 				UseFirstRowAsHeaders = false,
 				RowsToSkip = 0
 			};
 
 			optionsProvider
-				.Setup(x => x.TryGetOptions(out options))
-				.Returns(true);
+				.Setup(x => x.TryGetOptions(out It.Ref<SqliteExportOptions>.IsAny))
+				.Returns((out SqliteExportOptions opt) =>
+				{
+					opt = testOptions;
+					return true;
+				});
 
 			dialogService
 				.Setup(x => x.AskForSaveFile(FileType.Db))
