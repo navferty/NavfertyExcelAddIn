@@ -231,4 +231,10 @@
   <data name="NoActiveWorkbook" xml:space="preserve">
     <value>No active workbook</value>
   </data>
+  <data name="OK" xml:space="preserve">
+    <value>OK</value>
+  </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
 </root>
