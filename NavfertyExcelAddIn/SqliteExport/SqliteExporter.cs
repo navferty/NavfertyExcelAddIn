@@ -128,8 +128,10 @@ namespace NavfertyExcelAddIn.SqliteExport
 				return;
 			}
 
-			// Calculate actual data start row (1-based indexing)
-			int dataStartRow = 1 + options.RowsToSkip;
+			// Calculate header row index (1-based indexing)
+			int headerRowIndex = 1 + options.RowsToSkip;
+			// Calculate actual data start row (after skipped rows and optional header)
+			int dataStartRow = headerRowIndex;
 			string[] columnNames = null;
 
 			if (options.UseFirstRowAsHeaders)
@@ -138,11 +140,12 @@ namespace NavfertyExcelAddIn.SqliteExport
 				columnNames = new string[colCount];
 				for (int col = 1; col <= colCount; col++)
 				{
-					var headerValue = values[dataStartRow, col];
+					var headerValue = values[headerRowIndex, col];
 					var headerText = headerValue != null ? headerValue.ToString().Trim() : string.Empty;
 					columnNames[col - 1] = string.IsNullOrWhiteSpace(headerText) ? $"Column{col}" : SanitizeColumnName(headerText);
 				}
-				dataStartRow++; // Move past the header row
+				// Data starts from the row after the header
+				dataStartRow = headerRowIndex + 1;
 			}
 
 			// Check if there's any data to export
@@ -231,15 +234,41 @@ namespace NavfertyExcelAddIn.SqliteExport
 								}
 								else if (value is double dbl)
 								{
-									command.Parameters.AddWithValue($"@col{col}", (long)dbl);
+									// Validate that it's actually an integer value before casting
+									if (Math.Abs(dbl - Math.Round(dbl)) < 1e-10)
+									{
+										command.Parameters.AddWithValue($"@col{col}", (long)Math.Round(dbl));
+									}
+									else
+									{
+										// This shouldn't happen if type detection is correct, but handle it gracefully
+										logger.Warn($"Non-integer value {dbl} in INTEGER column, converting to REAL");
+										command.Parameters.AddWithValue($"@col{col}", dbl);
+									}
 								}
 								else if (value is float flt)
 								{
-									command.Parameters.AddWithValue($"@col{col}", (long)flt);
+									if (Math.Abs(flt - Math.Round(flt)) < 1e-10)
+									{
+										command.Parameters.AddWithValue($"@col{col}", (long)Math.Round(flt));
+									}
+									else
+									{
+										logger.Warn($"Non-integer value {flt} in INTEGER column, converting to REAL");
+										command.Parameters.AddWithValue($"@col{col}", flt);
+									}
 								}
 								else if (value is decimal dec)
 								{
-									command.Parameters.AddWithValue($"@col{col}", (long)dec);
+									if (dec == Math.Round(dec))
+									{
+										command.Parameters.AddWithValue($"@col{col}", (long)dec);
+									}
+									else
+									{
+										logger.Warn($"Non-integer value {dec} in INTEGER column, converting to REAL");
+										command.Parameters.AddWithValue($"@col{col}", (double)dec);
+									}
 								}
 								else if (value is int || value is long || value is short || value is byte)
 								{
@@ -274,7 +303,7 @@ namespace NavfertyExcelAddIn.SqliteExport
 								if (value is DateTime dateTime)
 								{
 									// Store DateTime as ISO 8601 string format which SQLite can parse
-									command.Parameters.AddWithValue($"@col{col}", dateTime.ToString("yyyy-MM-dd HH:mm:ss"));
+									command.Parameters.AddWithValue($"@col{col}", dateTime.ToString("yyyy-MM-dd HH:mm:ss", System.Globalization.CultureInfo.InvariantCulture));
 								}
 								else
 								{
@@ -366,7 +395,8 @@ namespace NavfertyExcelAddIn.SqliteExport
 				return "Column";
 			}
 
-			if (char.IsDigit(result[0]))
+			// Ensure the name doesn't start with a digit
+			if (result.Length > 0 && char.IsDigit(result[0]))
 			{
 				result = "_" + result;
 			}

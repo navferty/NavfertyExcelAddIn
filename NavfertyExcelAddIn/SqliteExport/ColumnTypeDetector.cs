@@ -13,6 +13,8 @@ namespace NavfertyExcelAddIn.SqliteExport
 			BLOB
 		}
 
+		private const double FloatingPointTolerance = 1e-10;
+
 		public static SqliteColumnType DetectColumnType(object[,] values, int colIndex, int startRow, int endRow)
 		{
 			if (values == null)
@@ -55,21 +57,21 @@ namespace NavfertyExcelAddIn.SqliteExport
 					// Check if it's an integer value
 					if (value is double dbl)
 					{
-						if (Math.Abs(dbl - Math.Floor(dbl)) > double.Epsilon)
+						if (Math.Abs(dbl - Math.Round(dbl)) > FloatingPointTolerance)
 						{
 							allIntegers = false;
 						}
 					}
 					else if (value is float flt)
 					{
-						if (Math.Abs(flt - Math.Floor(flt)) > float.Epsilon)
+						if (Math.Abs(flt - Math.Round(flt)) > FloatingPointTolerance)
 						{
 							allIntegers = false;
 						}
 					}
 					else if (value is decimal dec)
 					{
-						if (dec != Math.Floor(dec))
+						if (dec != Math.Round(dec))
 						{
 							allIntegers = false;
 						}
@@ -95,7 +97,7 @@ namespace NavfertyExcelAddIn.SqliteExport
 					// Try to parse as a number
 					if (double.TryParse(value.ToString(), out double parsed))
 					{
-						if (Math.Abs(parsed - Math.Floor(parsed)) > double.Epsilon)
+						if (Math.Abs(parsed - Math.Round(parsed)) > FloatingPointTolerance)
 						{
 							allIntegers = false;
 						}
