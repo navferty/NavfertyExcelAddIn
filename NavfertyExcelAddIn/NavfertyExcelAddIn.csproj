@@ -36,6 +36,7 @@
     <InstallUrl>https://www.navferty.ru/deploy/</InstallUrl>
     <TargetCulture>ru</TargetCulture>
     <ApplicationVersion>$(Version)</ApplicationVersion>
+    <Nullable>enable</Nullable>
     <AutoIncrementApplicationRevision>true</AutoIncrementApplicationRevision>
     <UpdateEnabled>true</UpdateEnabled>
     <UpdateInterval>7</UpdateInterval>
@@ -103,7 +104,8 @@
     <OutputPath>bin\Debug\</OutputPath>
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
     <DefineConstants>$(DefineConstants);DEBUG;TRACE</DefineConstants>
-    <WarningLevel>4</WarningLevel>
+    <WarningLevel>5</WarningLevel>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
   </PropertyGroup>
   <!--
     This section defines properties that are set when the "Release" configuration is selected.
@@ -337,7 +339,14 @@
     <Compile Include="UnprotectWorkbook\IWbUnprotector.cs" />
     <Compile Include="UnprotectWorkbook\WbUnprotector.cs" />
     <Compile Include="SqliteExport\ISqliteExporter.cs" />
+    <Compile Include="SqliteExport\ISqliteExportOptionsProvider.cs" />
     <Compile Include="SqliteExport\SqliteExporter.cs" />
+    <Compile Include="SqliteExport\SqliteExportOptionsFormProvider.cs" />
+    <Compile Include="SqliteExport\ColumnTypeDetector.cs" />
+    <Compile Include="SqliteExport\SqliteExportOptions.cs" />
+    <Compile Include="SqliteExport\SqliteExportOptionsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="XmlTools\XmlSampleCreator.cs" />
     <Compile Include="XmlTools\XmlValidationError.cs" />
     <Compile Include="XmlTools\XmlValidator.cs" />

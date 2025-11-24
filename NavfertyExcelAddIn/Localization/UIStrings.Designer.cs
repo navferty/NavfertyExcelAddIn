@@ -70,6 +70,15 @@ namespace NavfertyExcelAddIn.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Cancel.
+        /// </summary>
+        internal static string Cancel {
+            get {
+                return ResourceManager.GetString("Cancel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Cannot unlock workbook contents because of wrong workbook format. Please save workbook as xlsx or xlsm and try again.
         /// </summary>
         internal static string CannotUnlockPleaseSaveAsXml {
@@ -147,6 +156,15 @@ namespace NavfertyExcelAddIn.Localization {
         internal static string NoMatchingWorkSheets {
             get {
                 return ResourceManager.GetString("NoMatchingWorkSheets", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to OK.
+        /// </summary>
+        internal static string OK {
+            get {
+                return ResourceManager.GetString("OK", resourceCulture);
             }
         }
         
@@ -264,6 +282,33 @@ namespace NavfertyExcelAddIn.Localization {
         internal static string ShowVersionMessage {
             get {
                 return ResourceManager.GetString("ShowVersionMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to SQLite Export Options.
+        /// </summary>
+        internal static string SqliteExport_OptionsTitle {
+            get {
+                return ResourceManager.GetString("SqliteExport_OptionsTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Rows to skip:.
+        /// </summary>
+        internal static string SqliteExport_RowsToSkip {
+            get {
+                return ResourceManager.GetString("SqliteExport_RowsToSkip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Use first row as column names.
+        /// </summary>
+        internal static string SqliteExport_UseFirstRowAsHeaders {
+            get {
+                return ResourceManager.GetString("SqliteExport_UseFirstRowAsHeaders", resourceCulture);
             }
         }
         

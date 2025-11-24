@@ -219,7 +219,22 @@
   <data name="SqliteExportError" xml:space="preserve">
     <value>Error exporting to SQLite</value>
   </data>
+  <data name="SqliteExport_OptionsTitle" xml:space="preserve">
+    <value>SQLite Export Options</value>
+  </data>
+  <data name="SqliteExport_UseFirstRowAsHeaders" xml:space="preserve">
+    <value>Use first row as column names</value>
+  </data>
+  <data name="SqliteExport_RowsToSkip" xml:space="preserve">
+    <value>Rows to skip:</value>
+  </data>
   <data name="NoActiveWorkbook" xml:space="preserve">
     <value>No active workbook</value>
+  </data>
+  <data name="OK" xml:space="preserve">
+    <value>OK</value>
+  </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>Cancel</value>
   </data>
 </root>
