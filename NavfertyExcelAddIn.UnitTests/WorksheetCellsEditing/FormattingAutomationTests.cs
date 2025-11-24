@@ -1,4 +1,4 @@
-using System.Threading;
+﻿using System.Threading;
 using System.Windows.Forms;
 
 using Microsoft.Office.Interop.Excel;
@@ -86,7 +86,7 @@ public class FormattingAutomationTests : AutomationTestsBase
 
 		// Alt + ZX + TS + X (TrimExtraSpaces keytip)
 		SendKeys.SendWait("%"); // Alt
-		SendKeys.SendWait("ZXTSX");
+		SendKeys.SendWait("ZXTS{DOWN}{ENTER}");
 		Thread.Sleep(defaultSleep);
 
 		var currentValues = (object?[,])sheet.UsedRange.Cells.Value;
@@ -133,7 +133,7 @@ public class FormattingAutomationTests : AutomationTestsBase
 
 		// Alt + ZX + TS + A (RemoveAllSpaces keytip)
 		SendKeys.SendWait("%"); // Alt
-		SendKeys.SendWait("ZXTSA");
+		SendKeys.SendWait("ZXTS{ENTER}");
 		Thread.Sleep(defaultSleep);
 
 		var currentValues = (object?[,])sheet.UsedRange.Cells.Value;
@@ -179,7 +179,7 @@ public class FormattingAutomationTests : AutomationTestsBase
 
 		// Alt + ZX + TS (TrimSpaces keytip - default action)
 		SendKeys.SendWait("%"); // Alt
-		SendKeys.SendWait("ZXTS");
+		SendKeys.SendWait("ZXTS{DOWN}{ENTER}");
 		Thread.Sleep(defaultSleep);
 
 		var currentValues = (object?[,])sheet.UsedRange.Cells.Value;
