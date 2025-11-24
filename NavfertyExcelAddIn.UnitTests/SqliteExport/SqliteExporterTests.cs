@@ -20,6 +20,7 @@ namespace NavfertyExcelAddIn.UnitTests.SqliteExport
 	public class SqliteExporterTests : TestsBase
 	{
 		private Mock<IDialogService> dialogService;
+		private Mock<ISqliteExportOptionsProvider> optionsProvider;
 		private SqliteExporter exporter;
 		private string testDbPath;
 
@@ -27,7 +28,8 @@ namespace NavfertyExcelAddIn.UnitTests.SqliteExport
 		public void BeforeEachTest()
 		{
 			dialogService = new Mock<IDialogService>(MockBehavior.Strict);
-			exporter = new SqliteExporter(dialogService.Object);
+			optionsProvider = new Mock<ISqliteExportOptionsProvider>(MockBehavior.Strict);
+			exporter = new SqliteExporter(dialogService.Object, optionsProvider.Object);
 			testDbPath = Path.Combine(Path.GetTempPath(), $"test_{Guid.NewGuid()}.db");
 		}
 
@@ -47,9 +49,36 @@ namespace NavfertyExcelAddIn.UnitTests.SqliteExport
 		}
 
 		[TestMethod]
+		public void ExportToSqlite_UserCancelsOptionsDialog_DoesNothing()
+		{
+			var workbook = new Mock<Workbook>(MockBehavior.Strict);
+
+			SqliteExportOptions options = null;
+
+			optionsProvider
+				.Setup(x => x.TryGetOptions(out options))
+				.Returns(false);
+
+			exporter.ExportToSqlite(workbook.Object);
+
+			// Verify that no dialog service methods were called since user cancelled
+			dialogService.VerifyAll();
+		}
+
+		[TestMethod]
 		public void ExportToSqlite_NoDbPathSelected_DoesNothing()
 		{
 			var workbook = new Mock<Workbook>(MockBehavior.Strict);
+
+			var options = new SqliteExportOptions
+			{
+				UseFirstRowAsHeaders = true,
+				RowsToSkip = 0
+			};
+
+			optionsProvider
+				.Setup(x => x.TryGetOptions(out options))
+				.Returns(true);
 
 			dialogService
 				.Setup(x => x.AskForSaveFile(FileType.Db))
@@ -84,6 +113,16 @@ namespace NavfertyExcelAddIn.UnitTests.SqliteExport
 			worksheets.Setup(x => x.GetEnumerator()).Returns(new[] { worksheet.Object }.GetEnumerator());
 
 			workbook.Setup(x => x.Worksheets).Returns(worksheets.Object);
+
+			var options = new SqliteExportOptions
+			{
+				UseFirstRowAsHeaders = false,
+				RowsToSkip = 0
+			};
+
+			optionsProvider
+				.Setup(x => x.TryGetOptions(out options))
+				.Returns(true);
 
 			dialogService
 				.Setup(x => x.AskForSaveFile(FileType.Db))
@@ -138,6 +177,16 @@ namespace NavfertyExcelAddIn.UnitTests.SqliteExport
 
 			workbook.Setup(x => x.Worksheets).Returns(worksheets.Object);
 
+			var options = new SqliteExportOptions
+			{
+				UseFirstRowAsHeaders = false,
+				RowsToSkip = 0
+			};
+
+			optionsProvider
+				.Setup(x => x.TryGetOptions(out options))
+				.Returns(true);
+
 			dialogService
 				.Setup(x => x.AskForSaveFile(FileType.Db))
 				.Returns(testDbPath);
@@ -178,6 +227,16 @@ namespace NavfertyExcelAddIn.UnitTests.SqliteExport
 			worksheets.Setup(x => x.GetEnumerator()).Returns(new[] { worksheet.Object }.GetEnumerator());
 
 			workbook.Setup(x => x.Worksheets).Returns(worksheets.Object);
+
+			var options = new SqliteExportOptions
+			{
+				UseFirstRowAsHeaders = false,
+				RowsToSkip = 0
+			};
+
+			optionsProvider
+				.Setup(x => x.TryGetOptions(out options))
+				.Returns(true);
 
 			dialogService
 				.Setup(x => x.AskForSaveFile(FileType.Db))

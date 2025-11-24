@@ -2,7 +2,6 @@ using System;
 using System.Data.SQLite;
 using System.IO;
 using System.Text;
-using System.Windows.Forms;
 
 using Microsoft.Office.Interop.Excel;
 
@@ -17,11 +16,13 @@ namespace NavfertyExcelAddIn.SqliteExport
 	public class SqliteExporter : ISqliteExporter
 	{
 		private readonly IDialogService dialogService;
+		private readonly ISqliteExportOptionsProvider optionsProvider;
 		private readonly Logger logger = LogManager.GetCurrentClassLogger();
 
-		public SqliteExporter(IDialogService dialogService)
+		public SqliteExporter(IDialogService dialogService, ISqliteExportOptionsProvider optionsProvider)
 		{
 			this.dialogService = dialogService;
+			this.optionsProvider = optionsProvider;
 		}
 
 		public void ExportToSqlite(Workbook workbook)
@@ -31,15 +32,10 @@ namespace NavfertyExcelAddIn.SqliteExport
 				throw new ArgumentNullException(nameof(workbook));
 			}
 
-			// Show options dialog
-			SqliteExportOptions options;
-			using (var optionsForm = new SqliteExportOptionsForm())
+			// Get options from provider
+			if (!optionsProvider.TryGetOptions(out var options))
 			{
-				if (optionsForm.ShowDialog() != DialogResult.OK)
-				{
-					return;
-				}
-				options = optionsForm.Options;
+				return;
 			}
 
 			ExportToSqlite(workbook, options);

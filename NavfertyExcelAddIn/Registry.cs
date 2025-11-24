@@ -127,6 +127,9 @@ namespace NavfertyExcelAddIn
 				.EnableInterfaceInterceptors()
 				.InterceptedBy(typeof(ExceptionLogger));
 
+			builder.RegisterType<SqliteExportOptionsFormProvider>()
+				.As<ISqliteExportOptionsProvider>();
+
 			builder.RegisterType<SqliteExporter>()
 				.As<ISqliteExporter>()
 				.EnableInterfaceInterceptors()

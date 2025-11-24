@@ -337,7 +337,9 @@
     <Compile Include="UnprotectWorkbook\IWbUnprotector.cs" />
     <Compile Include="UnprotectWorkbook\WbUnprotector.cs" />
     <Compile Include="SqliteExport\ISqliteExporter.cs" />
+    <Compile Include="SqliteExport\ISqliteExportOptionsProvider.cs" />
     <Compile Include="SqliteExport\SqliteExporter.cs" />
+    <Compile Include="SqliteExport\SqliteExportOptionsFormProvider.cs" />
     <Compile Include="SqliteExport\ColumnTypeDetector.cs" />
     <Compile Include="SqliteExport\SqliteExportOptions.cs" />
     <Compile Include="SqliteExport\SqliteExportOptionsForm.cs">
