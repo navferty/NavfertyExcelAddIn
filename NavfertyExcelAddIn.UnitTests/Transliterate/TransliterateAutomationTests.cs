@@ -1,4 +1,4 @@
-using System.Threading;
+﻿using System.Threading;
 using System.Windows.Forms;
 
 using Microsoft.Office.Interop.Excel;
@@ -37,9 +37,9 @@ public class TransliterateAutomationTests : AutomationTestsBase
 		sheet.UsedRange.Select();
 		Thread.Sleep(defaultSleep);
 
-		// Alt + ZX + TL + T (Transliterate keytip)
+		// Alt + ZX + TL + first entry (Transliterate keytip)
 		SendKeys.SendWait("%"); // Alt
-		SendKeys.SendWait("ZXTLT");
+		SendKeys.SendWait("ZXTL{ENTER}");
 		Thread.Sleep(defaultSleep);
 
 		var currentValues = (object?[,])sheet.UsedRange.Cells.Value;
@@ -83,9 +83,9 @@ public class TransliterateAutomationTests : AutomationTestsBase
 		sheet.UsedRange.Select();
 		Thread.Sleep(defaultSleep);
 
-		// Alt + ZX + TL + R (ReplaceChars keytip)
+		// Alt + ZX + TL + second entry (ReplaceChars keytip)
 		SendKeys.SendWait("%"); // Alt
-		SendKeys.SendWait("ZXTLR");
+		SendKeys.SendWait("ZXTL{DOWN}{ENTER}");
 		Thread.Sleep(defaultSleep);
 
 		var currentValues = (object?[,])sheet.UsedRange.Cells.Value;
@@ -126,9 +126,9 @@ public class TransliterateAutomationTests : AutomationTestsBase
 		sheet.UsedRange.Select();
 		Thread.Sleep(defaultSleep);
 
-		// Alt + ZX + TL + T (Transliterate keytip)
+		// Alt + ZX + TL + first entry (Transliterate keytip)
 		SendKeys.SendWait("%"); // Alt
-		SendKeys.SendWait("ZXTLT");
+		SendKeys.SendWait("ZXTL{ENTER}");
 		Thread.Sleep(defaultSleep);
 
 		var currentValues = (object?[,])sheet.UsedRange.Cells.Value;
