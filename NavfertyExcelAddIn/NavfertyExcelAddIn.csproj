@@ -36,6 +36,7 @@
     <InstallUrl>https://www.navferty.ru/deploy/</InstallUrl>
     <TargetCulture>ru</TargetCulture>
     <ApplicationVersion>$(Version)</ApplicationVersion>
+    <Nullable>enable</Nullable>
     <AutoIncrementApplicationRevision>true</AutoIncrementApplicationRevision>
     <UpdateEnabled>true</UpdateEnabled>
     <UpdateInterval>7</UpdateInterval>
@@ -103,7 +104,8 @@
     <OutputPath>bin\Debug\</OutputPath>
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
     <DefineConstants>$(DefineConstants);DEBUG;TRACE</DefineConstants>
-    <WarningLevel>4</WarningLevel>
+    <WarningLevel>5</WarningLevel>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
   </PropertyGroup>
   <!--
     This section defines properties that are set when the "Release" configuration is selected.
