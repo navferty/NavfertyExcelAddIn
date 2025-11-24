@@ -338,6 +338,11 @@
     <Compile Include="UnprotectWorkbook\WbUnprotector.cs" />
     <Compile Include="SqliteExport\ISqliteExporter.cs" />
     <Compile Include="SqliteExport\SqliteExporter.cs" />
+    <Compile Include="SqliteExport\ColumnTypeDetector.cs" />
+    <Compile Include="SqliteExport\SqliteExportOptions.cs" />
+    <Compile Include="SqliteExport\SqliteExportOptionsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="XmlTools\XmlSampleCreator.cs" />
     <Compile Include="XmlTools\XmlValidationError.cs" />
     <Compile Include="XmlTools\XmlValidator.cs" />

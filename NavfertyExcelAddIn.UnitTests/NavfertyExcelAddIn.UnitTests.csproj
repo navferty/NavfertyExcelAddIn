@@ -107,6 +107,7 @@
     <Compile Include="WorksheetCellsEditing\DuplicatesHighlighterTests.cs" />
     <Compile Include="WorksheetCellsEditing\EmptySpaceTrimmerTests.cs" />
     <Compile Include="SqliteExport\SqliteExporterTests.cs" />
+    <Compile Include="SqliteExport\ColumnTypeDetectorTests.cs" />
     <Compile Include="XmlTools\XmlSampleCreatorTests.cs" />
     <Compile Include="XmlTools\XmlValidatorTests.cs" />
     <Compile Include="XmlTools\XsdSchemaValidatorTests.cs" />
