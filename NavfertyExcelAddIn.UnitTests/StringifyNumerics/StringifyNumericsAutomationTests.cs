@@ -14,8 +14,8 @@ namespace NavfertyExcelAddIn.UnitTests.StringifyNumerics;
 [TestClass]
 public class StringifyNumericsAutomationTests : AutomationTestsBase
 {
-	[DataTestMethod]
-	[DynamicData(nameof(GetStringifyTestCases), DynamicDataSourceType.Method)]
+	[TestMethod]
+	[DynamicData(nameof(GetStringifyTestCases))]
 	[TestCategory("Automation")]
 	[Description("Create blank workbook, fill it with numbers and stringify numerics to each of 3 language options")]
 	public void StringifyNumerics(string language, string keySequence, object[,] expectedValues)

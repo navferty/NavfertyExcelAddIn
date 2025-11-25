@@ -77,7 +77,7 @@ namespace NavfertyExcelAddIn.UnitTests.XmlTools
                 .Returns(new[] { "file.xml" });
 
 
-            var ex = Assert.ThrowsException<ArgumentException>(() => validator.Validate(app.Object));
+            var ex = Assert.Throws<ArgumentException>(() => validator.Validate(app.Object));
 
             Assert.AreEqual("One or more files not found", ex.Message);
             dialogService.VerifyAll();

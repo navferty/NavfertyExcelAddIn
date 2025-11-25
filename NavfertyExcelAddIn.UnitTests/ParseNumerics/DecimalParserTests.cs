@@ -38,7 +38,7 @@ namespace NavfertyExcelAddIn.UnitTests.ParseNumerics
 		{
 			var input = "no value";
 
-			Assert.AreEqual(null, input.ParseDecimal());
+			Assert.IsNull(input.ParseDecimal());
 		}
 
 	}

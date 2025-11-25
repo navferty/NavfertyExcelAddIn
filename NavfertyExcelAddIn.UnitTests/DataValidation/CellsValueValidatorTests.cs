@@ -39,7 +39,7 @@ namespace NavfertyExcelAddIn.UnitTests.DataValidation
 
 			var result = cellsValidator.Validate(selection, ValidationType.Xml);
 
-			Assert.AreEqual(0, result.Count);
+			Assert.IsEmpty(result);
 		}
 
 		[TestMethod]
@@ -50,7 +50,7 @@ namespace NavfertyExcelAddIn.UnitTests.DataValidation
 
 			var result = cellsValidator.Validate(selection, ValidationType.Xml);
 
-			Assert.AreEqual(10, result.Count);
+			Assert.HasCount(10, result);
 		}
 
 		[TestMethod]
@@ -71,7 +71,7 @@ namespace NavfertyExcelAddIn.UnitTests.DataValidation
 
 			var result = cellsValidator.Validate(selection, ValidationType.Xml);
 
-			Assert.AreEqual(1, result.Count);
+			Assert.HasCount(1, result);
 			validator.Verify(x => x.CheckValue(It.IsAny<object>()), Times.Exactly(3));
 		}
 
@@ -82,7 +82,7 @@ namespace NavfertyExcelAddIn.UnitTests.DataValidation
 
 			var result = cellsValidator.Validate(selection, ValidationType.Xml);
 
-			Assert.AreEqual(0, result.Count);
+			Assert.IsEmpty(result);
 		}
 	}
 }

@@ -45,7 +45,7 @@ namespace NavfertyExcelAddIn.UnitTests.SqliteExport
 		[TestMethod]
 		public void ExportToSqlite_NullWorkbook_ThrowsArgumentNullException()
 		{
-			Assert.ThrowsException<ArgumentNullException>(() => exporter.ExportToSqlite(null));
+			Assert.Throws<ArgumentNullException>(() => exporter.ExportToSqlite(null));
 		}
 
 		[TestMethod]
@@ -199,13 +199,11 @@ namespace NavfertyExcelAddIn.UnitTests.SqliteExport
 			using (var connection = new SQLiteConnection($"Data Source={testDbPath};Version=3;"))
 			{
 				connection.Open();
-				using (var command = new SQLiteCommand("SELECT name FROM sqlite_master WHERE type='table'", connection))
-				using (var reader = command.ExecuteReader())
-				{
-					Assert.IsTrue(reader.Read());
-					var tableName = reader.GetString(0);
-					Assert.AreEqual("Test_Sheet___", tableName);
-				}
+				using var command = new SQLiteCommand("SELECT name FROM sqlite_master WHERE type='table'", connection);
+				using var reader = command.ExecuteReader();
+				Assert.IsTrue(reader.Read());
+				var tableName = reader.GetString(0);
+				Assert.AreEqual("Test_Sheet___", tableName);
 			}
 
 			dialogService.VerifyAll();
@@ -250,11 +248,9 @@ namespace NavfertyExcelAddIn.UnitTests.SqliteExport
 			using (var connection = new SQLiteConnection($"Data Source={testDbPath};Version=3;"))
 			{
 				connection.Open();
-				using (var command = new SQLiteCommand("SELECT COUNT(*) FROM sqlite_master WHERE type='table'", connection))
-				{
-					var tableCount = (long)command.ExecuteScalar();
-					Assert.AreEqual(0, tableCount);
-				}
+				using var command = new SQLiteCommand("SELECT COUNT(*) FROM sqlite_master WHERE type='table'", connection);
+				var tableCount = (long)command.ExecuteScalar();
+				Assert.AreEqual(0, tableCount);
 			}
 
 			dialogService.VerifyAll();
@@ -305,14 +301,12 @@ namespace NavfertyExcelAddIn.UnitTests.SqliteExport
 			using (var connection = new SQLiteConnection($"Data Source={testDbPath};Version=3;"))
 			{
 				connection.Open();
-				using (var command = new SQLiteCommand("PRAGMA table_info(TestSheet)", connection))
-				using (var reader = command.ExecuteReader())
-				{
-					Assert.IsTrue(reader.Read());
-					Assert.AreEqual("Name", reader.GetString(1));
-					Assert.IsTrue(reader.Read());
-					Assert.AreEqual("Age", reader.GetString(1));
-				}
+				using var command = new SQLiteCommand("PRAGMA table_info(TestSheet)", connection);
+				using var reader = command.ExecuteReader();
+				Assert.IsTrue(reader.Read());
+				Assert.AreEqual("Name", reader.GetString(1));
+				Assert.IsTrue(reader.Read());
+				Assert.AreEqual("Age", reader.GetString(1));
 			}
 
 			dialogService.VerifyAll();
@@ -363,11 +357,9 @@ namespace NavfertyExcelAddIn.UnitTests.SqliteExport
 			using (var connection = new SQLiteConnection($"Data Source={testDbPath};Version=3;"))
 			{
 				connection.Open();
-				using (var command = new SQLiteCommand("SELECT COUNT(*) FROM TestSheet", connection))
-				{
-					var count = (long)command.ExecuteScalar();
-					Assert.AreEqual(1, count); // Only one data row after skipping 2 and using 1 as header
-				}
+				using var command = new SQLiteCommand("SELECT COUNT(*) FROM TestSheet", connection);
+				var count = (long)command.ExecuteScalar();
+				Assert.AreEqual(1, count); // Only one data row after skipping 2 and using 1 as header
 			}
 
 			dialogService.VerifyAll();
@@ -417,13 +409,11 @@ namespace NavfertyExcelAddIn.UnitTests.SqliteExport
 			using (var connection = new SQLiteConnection($"Data Source={testDbPath};Version=3;"))
 			{
 				connection.Open();
-				using (var command = new SQLiteCommand("PRAGMA table_info(TestSheet)", connection))
-				using (var reader = command.ExecuteReader())
-				{
-					Assert.IsTrue(reader.Read());
-					Assert.AreEqual("ID", reader.GetString(1));
-					Assert.AreEqual("INTEGER", reader.GetString(2));
-				}
+				using var command = new SQLiteCommand("PRAGMA table_info(TestSheet)", connection);
+				using var reader = command.ExecuteReader();
+				Assert.IsTrue(reader.Read());
+				Assert.AreEqual("ID", reader.GetString(1));
+				Assert.AreEqual("INTEGER", reader.GetString(2));
 			}
 
 			dialogService.VerifyAll();
@@ -473,13 +463,11 @@ namespace NavfertyExcelAddIn.UnitTests.SqliteExport
 			using (var connection = new SQLiteConnection($"Data Source={testDbPath};Version=3;"))
 			{
 				connection.Open();
-				using (var command = new SQLiteCommand("PRAGMA table_info(TestSheet)", connection))
-				using (var reader = command.ExecuteReader())
-				{
-					Assert.IsTrue(reader.Read());
-					Assert.AreEqual("Price", reader.GetString(1));
-					Assert.AreEqual("REAL", reader.GetString(2));
-				}
+				using var command = new SQLiteCommand("PRAGMA table_info(TestSheet)", connection);
+				using var reader = command.ExecuteReader();
+				Assert.IsTrue(reader.Read());
+				Assert.AreEqual("Price", reader.GetString(1));
+				Assert.AreEqual("REAL", reader.GetString(2));
 			}
 
 			dialogService.VerifyAll();
