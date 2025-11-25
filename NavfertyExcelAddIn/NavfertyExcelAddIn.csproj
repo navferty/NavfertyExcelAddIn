@@ -118,9 +118,6 @@
     <Reference Include="Microsoft.Office.Tools.Excel">
       <Private>False</Private>
     </Reference>
-    <!--<Reference Include="Microsoft.Office.Tools.Ribbon">
-      <Private>False</Private>
-    </Reference>-->
   </ItemGroup>
 
   <!-- Use COMReference for local development (where Office is installed) -->
@@ -193,21 +190,13 @@
     <PackageReference Include="Autofac" />
     <PackageReference Include="Autofac.Extras.DynamicProxy" />
     <PackageReference Include="Castle.Core" />
-    <PackageReference Include="Microsoft.Bcl.AsyncInterfaces" />
     <PackageReference Include="Microsoft.Xml.XMLGen" />
     <PackageReference Include="Newtonsoft.Json" />
     <PackageReference Include="NLog" />
     <PackageReference Include="NLog.Config" />
     <PackageReference Include="NumericParser" />
-    <PackageReference Include="Stub.System.Data.SQLite.Core.NetFramework" />
-    <PackageReference Include="System.Buffers" />
     <PackageReference Include="System.Data.SQLite.Core" />
-    <PackageReference Include="System.Diagnostics.DiagnosticSource" />
     <PackageReference Include="System.IO.Compression.ZipFile" />
-    <PackageReference Include="System.Memory" />
-    <PackageReference Include="System.Numerics.Vectors" />
-    <PackageReference Include="System.Runtime.CompilerServices.Unsafe" />
-    <PackageReference Include="System.Threading.Tasks.Extensions" />
   </ItemGroup>
 
   <PropertyGroup>

@@ -8,7 +8,6 @@
     <PackageVersion Include="Autofac" Version="9.0.0" />
     <PackageVersion Include="Autofac.Extras.DynamicProxy" Version="7.1.0" />
     <PackageVersion Include="Castle.Core" Version="5.2.1" />
-    <PackageVersion Include="Microsoft.Bcl.AsyncInterfaces" Version="10.0.0" />
     <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="18.0.1" />
     <PackageVersion Include="Microsoft.Xml.XMLGen" Version="1.0.0" />
     <PackageVersion Include="Moq" Version="4.20.72" />
@@ -18,15 +17,8 @@
     <PackageVersion Include="NLog" Version="4.6.7" />
     <PackageVersion Include="NLog.Config" Version="4.6.7" />
     <PackageVersion Include="NumericParser" Version="0.9.6" />
-    <PackageVersion Include="Stub.System.Data.SQLite.Core.NetFramework" Version="1.0.119" />
-    <PackageVersion Include="System.Buffers" Version="4.6.1" />
     <PackageVersion Include="System.Data.SQLite.Core" Version="1.0.119" />
-    <PackageVersion Include="System.Diagnostics.DiagnosticSource" Version="10.0.0" />
     <PackageVersion Include="System.IO.Compression.ZipFile" Version="4.3.0" />
-    <PackageVersion Include="System.Memory" Version="4.6.3" />
     <PackageVersion Include="System.Net.Http" Version="4.3.4" />
-    <PackageVersion Include="System.Numerics.Vectors" Version="4.6.1" />
-    <PackageVersion Include="System.Runtime.CompilerServices.Unsafe" Version="6.1.2" />
-    <PackageVersion Include="System.Threading.Tasks.Extensions" Version="4.6.3" />
   </ItemGroup>
 </Project>
