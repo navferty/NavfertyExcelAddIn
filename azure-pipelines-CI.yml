@@ -11,7 +11,7 @@ pool:
 
 variables:
   solutionFolder: '$(Build.SourcesDirectory)/NavfertyExcelAddIn'
-  solution: '$(Build.SourcesDirectory)/NavfertyExcelAddIn.sln'
+  solution: '$(Build.SourcesDirectory)/NavfertyExcelAddIn.slnx'
   buildPlatform: 'Any CPU'
   buildConfiguration: 'Release'
 

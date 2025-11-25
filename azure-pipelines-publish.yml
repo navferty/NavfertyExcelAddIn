@@ -8,7 +8,7 @@ pool:
 
 variables:
   solutionFolder: '$(Build.SourcesDirectory)/NavfertyExcelAddIn'
-  solution: '$(Build.SourcesDirectory)/NavfertyExcelAddIn.sln'
+  solution: '$(Build.SourcesDirectory)/NavfertyExcelAddIn.slnx'
   buildPlatform: 'Any CPU'
   buildConfiguration: 'Release'
   # patchVersion: counter with the prefix as minorVersion, and seed as 0.
