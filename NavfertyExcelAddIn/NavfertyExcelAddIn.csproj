@@ -174,9 +174,6 @@
     <Content Include="NLog.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <None Update="NLog.xsd">
-      <SubType>Designer</SubType>
-    </None>
     <None Update="ThisAddIn.Designer.xml">
       <DependentUpon>ThisAddIn.cs</DependentUpon>
     </None>
@@ -201,7 +198,6 @@
     <PackageReference Include="Newtonsoft.Json" />
     <PackageReference Include="NLog" />
     <PackageReference Include="NLog.Config" />
-    <PackageReference Include="NLog.Schema" />
     <PackageReference Include="NumericParser" />
     <PackageReference Include="Stub.System.Data.SQLite.Core.NetFramework" />
     <PackageReference Include="System.Buffers" />

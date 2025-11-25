@@ -39,7 +39,6 @@
     <PackageReference Include="Moq" />
     <PackageReference Include="MSTest.TestAdapter" />
     <PackageReference Include="MSTest.TestFramework" />
-    <PackageReference Include="NLog" />
     <PackageReference Include="Stub.System.Data.SQLite.Core.NetFramework" />
     <PackageReference Include="System.Data.SQLite.Core" />
     <PackageReference Include="System.Runtime.CompilerServices.Unsafe" />
