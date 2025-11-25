@@ -31,22 +31,29 @@ internal class NBUProvider : ExchangeRatesProviderBase
 	private readonly ILogger logger = LogManager.GetCurrentClassLogger();
 	public override ILogger Logger => logger;
 
-	private string rawJson = String.Empty;
-	private NBU.JsonExchangeRatesForDateRecord[] rawJsonRows = Array.Empty<NBU.JsonExchangeRatesForDateRecord>();
-	private HttpClient web = new();
+	private readonly HttpClient web = new();
 
 	protected override async Task<ExchangeRateRecord[]> DownloadExchangeRatesForDayAsync(DateTime dt)
 	{
-		rawJson = String.Empty;
-		rawJsonRows = Array.Empty<NBU.JsonExchangeRatesForDateRecord>();
 
 		string url = string.Format(WEB_URL, dt.ToString(WEB_DATE_FORMAT));
 		logger.Debug($"Query url: {url}");
 
-		var webResponce = (await web.GetAsync(url));
-		logger.Debug($"webResponce.StatusCode: {webResponce.StatusCode}, IsSuccessStatusCode = {webResponce.IsSuccessStatusCode}");
-		rawJson = await webResponce.EnsureSuccessStatusCode().Content.ReadAsStringAsync();
+		string rawJson;
+		try
+		{
+			var webResponce = (await web.GetAsync(url));
+			logger.Debug($"webResponce.StatusCode: {webResponce.StatusCode}, IsSuccessStatusCode = {webResponce.IsSuccessStatusCode}");
+			webResponce.EnsureSuccessStatusCode();
+			rawJson = await webResponce.Content.ReadAsStringAsync();
+		}
+		catch (Exception ex)
+		{
+			logger.Error(ex, "Network error when downloading NBU exchange rates!");
+			throw;
+		}
 
+		JsonExchangeRatesForDateRecord[] rawJsonRows;
 		try
 		{
 			rawJsonRows = JsonConvert.DeserializeObject<NBU.JsonExchangeRatesForDateRecord[]>(rawJson)!;
