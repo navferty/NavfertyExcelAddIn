@@ -68,9 +68,9 @@ namespace Navferty.ExcelAddIn.Web.CurrencyExchangeRates
 			lblFilterTitle.Text = UIStrings.CurrencyExchangeRates_FilterTitle;
 
 			var availProviders = new Providers.ExchangeRatesProviderBase[] {
-				new Providers.CBRFProvider(),
-				new Providers.NBUProvider(),
-				new Providers.ECBProvider()};
+				new Providers.CBRF.CBRFProvider(),
+				new Providers.NBU.NBUProvider(),
+				new Providers.ECB.ECBProvider()};
 
 			availProviders = (from p in availProviders
 							  orderby p.Priority, p.Title
