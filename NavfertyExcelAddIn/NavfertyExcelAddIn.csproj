@@ -72,19 +72,20 @@
   </ItemGroup>
 
   <PropertyGroup>
-    <VSToolsPath Condition="'$(VSToolsPath)' == ''">C:\Program Files\Microsoft Visual Studio\18\Insiders\MSBuild\Microsoft\VisualStudio\v18.0</VSToolsPath>
+    <VSInstallRoot Condition="'$(VSInstallRoot)' == ''">$(ProgramFiles)\Microsoft Visual Studio\18\Insiders</VSInstallRoot>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(VSInstallRoot)\MSBuild\Microsoft\VisualStudio\v18.0</VSToolsPath>
     <AssemblySearchPaths>$(AssemblySearchPaths);{GAC}</AssemblySearchPaths>
   </PropertyGroup>
 
   <ItemGroup>
     <!-- VSTO Utilities assemblies MUST come first - they contain the base types -->
     <Reference Include="Microsoft.Office.Tools.Common.v4.0.Utilities">
-      <HintPath>C:\Program Files\Microsoft Visual Studio\18\Insiders\Common7\IDE\ReferenceAssemblies\v4.0\Microsoft.Office.Tools.Common.v4.0.Utilities.dll</HintPath>
+      <HintPath>$(VSInstallRoot)\Common7\IDE\ReferenceAssemblies\v4.0\Microsoft.Office.Tools.Common.v4.0.Utilities.dll</HintPath>
       <Private>True</Private>
       <EmbedInteropTypes>False</EmbedInteropTypes>
     </Reference>
     <Reference Include="Microsoft.Office.Tools.Excel.v4.0.Utilities">
-      <HintPath>C:\Program Files\Microsoft Visual Studio\18\Insiders\Common7\IDE\ReferenceAssemblies\v4.0\Microsoft.Office.Tools.Excel.v4.0.Utilities.dll</HintPath>
+      <HintPath>$(VSInstallRoot)\Common7\IDE\ReferenceAssemblies\v4.0\Microsoft.Office.Tools.Excel.v4.0.Utilities.dll</HintPath>
       <Private>True</Private>
       <EmbedInteropTypes>False</EmbedInteropTypes>
     </Reference>
