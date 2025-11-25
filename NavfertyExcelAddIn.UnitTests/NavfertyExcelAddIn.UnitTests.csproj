@@ -75,4 +75,23 @@
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </COMReference>
   </ItemGroup>
+
+  <!-- Use checked-in Interop assemblies for CI (where Office is NOT installed) -->
+  <ItemGroup Condition="!Exists('C:\Program Files\Microsoft Office')">
+    <Reference Include="Microsoft.Office.Core">
+      <HintPath>..\lib\Microsoft.Office.Core.dll</HintPath>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="Microsoft.Office.Interop.Excel">
+      <HintPath>..\lib\Microsoft.Office.Interop.Excel.dll</HintPath>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="VBIDE">
+      <HintPath>..\lib\VBIDE.dll</HintPath>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
+    <!--<Reference Include="Microsoft.Office.Tools.Ribbon">
+      <HintPath>..\lib\Microsoft.Office.Tools.Ribbon.dll</HintPath>
+    </Reference>-->
+  </ItemGroup>
 </Project>
