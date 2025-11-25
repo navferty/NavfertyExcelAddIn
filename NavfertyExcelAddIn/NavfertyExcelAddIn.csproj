@@ -184,6 +184,7 @@
     <PackageReference Include="NLog" />
     <PackageReference Include="NLog.Config" />
     <PackageReference Include="NLog.Schema" />
+    <PackageReference Include="NumericParser" />
     <PackageReference Include="Stub.System.Data.SQLite.Core.NetFramework" />
     <PackageReference Include="System.Buffers" />
     <PackageReference Include="System.Data.SQLite.Core" />

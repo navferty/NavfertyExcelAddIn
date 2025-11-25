@@ -18,6 +18,7 @@
     <PackageVersion Include="NLog" Version="4.6.7" />
     <PackageVersion Include="NLog.Config" Version="4.6.7" />
     <PackageVersion Include="NLog.Schema" Version="4.6.7" />
+    <PackageVersion Include="NumericParser" Version="0.9.6" />
     <PackageVersion Include="Stub.System.Data.SQLite.Core.NetFramework" Version="1.0.119" />
     <PackageVersion Include="System.Buffers" Version="4.6.1" />
     <PackageVersion Include="System.Data.SQLite.Core" Version="1.0.119" />

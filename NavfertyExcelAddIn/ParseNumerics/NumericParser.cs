@@ -4,21 +4,24 @@ using Microsoft.Office.Interop.Excel;
 
 using NavfertyExcelAddIn.Commons;
 
-namespace NavfertyExcelAddIn.ParseNumerics
+using NumericParser;
+
+namespace NavfertyExcelAddIn.ParseNumerics;
+
+public class NumericParser : INumericParser
 {
-	public class NumericParser : INumericParser
+	public void Parse(Range selection)
 	{
-		public void Parse(Range selection)
-		{
-			selection.ApplyForEachCellOfType<string, object>(
-				value =>
+		selection.ApplyForEachCellOfType<string, object>(
+			value =>
+			{
+				if (value.TryParseDecimal(out var newValue))
 				{
-					var newValue = value.ParseDecimal();
-					if (newValue.HasValue)
-						// Excel stores numerics as Double
-						return (object)Convert.ToDouble(newValue);
-					return (object)value;
-				});
-		}
+					// Excel stores numerics as Double
+					return Convert.ToDouble(newValue);
+				}
+
+				return value;
+			});
 	}
 }
