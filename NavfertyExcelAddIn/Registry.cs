@@ -82,7 +82,7 @@ namespace NavfertyExcelAddIn
 				.EnableInterfaceInterceptors()
 				.InterceptedBy(typeof(ExceptionLogger));
 
-			builder.RegisterType<ParseNumerics.NumericParser>()
+			builder.RegisterType<ParseNumerics.NumericParserService>()
 				.As<INumericParser>()
 				.EnableInterfaceInterceptors()
 				.InterceptedBy(typeof(ExceptionLogger));

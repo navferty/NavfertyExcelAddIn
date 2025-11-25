@@ -14,7 +14,7 @@ namespace NavfertyExcelAddIn.UnitTests.ParseNumerics;
 [TestClass]
 public class NumericParserTests
 {
-	private NavfertyExcelAddIn.ParseNumerics.NumericParser NumericParser;
+	private NavfertyExcelAddIn.ParseNumerics.NumericParserService NumericParser;
 
 	[TestInitialize]
 	public void BeforeEachTest()

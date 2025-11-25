@@ -8,7 +8,7 @@ using NumericParser;
 
 namespace NavfertyExcelAddIn.ParseNumerics;
 
-public class NumericParser : INumericParser
+public class NumericParserService : INumericParser
 {
 	public void Parse(Range selection)
 	{
