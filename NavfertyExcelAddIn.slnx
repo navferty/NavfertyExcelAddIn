@@ -6,6 +6,7 @@
     <File Path=".editorconfig" />
     <File Path="azure-pipelines-CI.yml" />
     <File Path="azure-pipelines-publish.yml" />
+    <File Path="Directory.Packages.props" />
   </Folder>
   <Project Path="Navferty.Common/Navferty.Common.csproj" Id="f14665a1-a035-4c8e-845e-f00029c8181a" />
   <Project Path="Navferty.ExcelAddIn.Web/Navferty.ExcelAddIn.Web.csproj" Id="443907ef-f460-4726-94f0-fe35a1ac8fa2" />
