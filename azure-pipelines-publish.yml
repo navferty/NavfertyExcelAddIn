@@ -44,12 +44,8 @@ steps:
     msbuildArchitecture: 'x64'
     platform: '$(buildPlatform)'
     configuration: '$(buildConfiguration)'
-    msbuildArgs: '$(msbuildArgs) /p:Version="$(majorVersion).$(minorVersion).$(patchVersion).$(buildId)"'
+    msbuildArgs: '$(msbuildArgs) /p:Version="$(majorVersion).$(minorVersion).$(patchVersion).$(buildId)" /target:Publish /p:PublishDir="$(Build.ArtifactStagingDirectory)\"'
 
-- task: CopyFiles@2
-  inputs:
-    SourceFolder: '$(solutionFolder)/bin/Release/app.publish/'
-    TargetFolder: $(Build.ArtifactStagingDirectory)
 - task: PublishBuildArtifacts@1
   inputs:
     PathtoPublish: '$(Build.ArtifactStagingDirectory)'
