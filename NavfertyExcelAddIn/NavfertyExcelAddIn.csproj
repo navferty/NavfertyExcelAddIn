@@ -30,6 +30,9 @@
     <ImportWindowsDesktopTargets>true</ImportWindowsDesktopTargets>
     <ResolveAssemblyWarnOrErrorOnTargetArchitectureMismatch>None</ResolveAssemblyWarnOrErrorOnTargetArchitectureMismatch>
     <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
+    <!-- ClickOnce deployment settings -->
+    <MapFileExtensions>true</MapFileExtensions>
+    <Install>true</Install>
   </PropertyGroup>
 
   <PropertyGroup>
