@@ -53,7 +53,7 @@ steps:
   inputs:
     solution: '$(project)'
     msbuildArchitecture: 'x64'
-    msbuildArguments: '/t:Publish /p:Version="$(majorVersion).$(minorVersion).$(patchVersion).$(buildId)" /p:PublishDir="$(Build.ArtifactStagingDirectory)\" /p:VisualStudioVersion="17.0" /p:Platform="AnyCPU" /p:Configuration="$(buildConfiguration)"'
+    msbuildArguments: '/t:Publish /p:Version="$(majorVersion).$(minorVersion).$(patchVersion).$(buildId)" /p:PublishDir="$(Build.ArtifactStagingDirectory)/" /p:VisualStudioVersion="17.0" /p:Platform="AnyCPU" /p:Configuration="$(buildConfiguration)"'
 
 - task: PublishBuildArtifacts@1
   inputs:
