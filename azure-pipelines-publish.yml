@@ -63,19 +63,7 @@ steps:
   inputs:
     solution: '$(project)'
     msbuildArchitecture: 'x64'
-    msbuildArguments: '/t:PublishOnly /p:Version="$(majorVersion).$(minorVersion).$(patchVersion).$(buildId)" /p:PublishDir="$(Build.ArtifactStagingDirectory)/" /p:VisualStudioVersion="17.0" /p:Platform="AnyCPU" /p:Configuration="$(buildConfiguration)" /p:BootstrapperEnabled=true /p:CreateWebPageOnPublish=true /p:InstallUrl="https://navferty.ru/deploy/" /p:ApplicationVersion="$(majorVersion).$(minorVersion).$(patchVersion).$(buildId)" /p:SignToolCommand="signtool.exe sign /f $(solutionFolder)/$(certfile) /p $(password) /t http://timestamp.digicert.com"'
-
-# Diagnose what was published
-- task: PowerShell@2
-  name: 'DiagnosePublishOutput'
-  inputs:
-    targetType: 'inline'
-    script: |
-      Write-Host "Contents of Artifact Staging Directory:"
-      Get-ChildItem -Path "$(Build.ArtifactStagingDirectory)" -Recurse | Format-Table FullName, Length
-
-      Write-Host "`nSearching for publish output in bin folder:"
-      Get-ChildItem -Path "$(solutionFolder)/bin" -Recurse -ErrorAction SilentlyContinue | Format-Table FullName, Length
+    msbuildArguments: '/t:PublishOnly /p:Version="$(majorVersion).$(minorVersion).$(patchVersion).$(buildId)" /p:PublishDir="$(Build.ArtifactStagingDirectory)/" /p:VisualStudioVersion="17.0" /p:Platform="AnyCPU" /p:Configuration="$(buildConfiguration)" /p:BootstrapperEnabled=true /p:CreateWebPageOnPublish=true /p:InstallUrl="https://navferty.ru/deploy/" /p:ApplicationVersion="$(majorVersion).$(minorVersion).$(patchVersion).$(buildId)" /p:SignToolCommand="signtool.exe sign /f \"$(solutionFolder)/$(certfile)\" /p \"$(password)\""'
 
 # Verify deployment structure
 - task: PowerShell@2
@@ -86,27 +74,18 @@ steps:
       Write-Host "Deployment structure:"
       Get-ChildItem -Path "$(Build.ArtifactStagingDirectory)" -Recurse | Format-Table FullName, Length
       
-      Write-Host "`nChecking for setup.exe:"
-      $setupExe = Get-ChildItem -Path "$(Build.ArtifactStagingDirectory)" -Filter "setup.exe" -Recurse
-      if ($setupExe) {
-        Write-Host "✓ setup.exe found: $($setupExe.FullName) ($($setupExe.Length) bytes)"
-      } else {
-        Write-Warning "✗ setup.exe NOT found"
-      }
-
-# Verify deployment structure
-- task: PowerShell@2
-  name: 'VerifyDeployment1'
-  inputs:
-    targetType: 'inline'
-    script: |
-      Write-Host "Deployment structure:"
-      Get-ChildItem -Path "$(Build.ArtifactStagingDirectory)" -Recurse | Format-Table FullName, Length
+      Write-Host "`nSearching for publish output in bin folder:"
+      Get-ChildItem -Path "$(solutionFolder)/bin" -Recurse -ErrorAction SilentlyContinue | Format-Table FullName, Length
       
       Write-Host "`nChecking for setup.exe:"
       $setupExe = Get-ChildItem -Path "$(Build.ArtifactStagingDirectory)" -Filter "setup.exe" -Recurse
       if ($setupExe) {
         Write-Host "✓ setup.exe found: $($setupExe.FullName) ($($setupExe.Length) bytes)"
+
+        # Verify signature
+        $signature = Get-AuthenticodeSignature $setupExe.FullName
+        Write-Host "Signature Status: $($signature.Status)"
+        Write-Host "Signer: $($signature.SignerCertificate.Subject)"
       } else {
         Write-Warning "✗ setup.exe NOT found"
       }
