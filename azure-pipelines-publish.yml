@@ -56,7 +56,35 @@ steps:
   inputs:
     solution: '$(project)'
     msbuildArchitecture: 'x64'
-    msbuildArguments: '/t:Publish /p:Version="$(majorVersion).$(minorVersion).$(patchVersion).$(buildId)" /p:PublishDir="$(Build.ArtifactStagingDirectory)/" /p:VisualStudioVersion="17.0" /p:Platform="AnyCPU" /p:Configuration="$(buildConfiguration)" /p:MapFileExtensions=true /p:Install=true /p:InstallUrl="https://www.navferty.ru/deploy/"'
+    msbuildArguments: '/t:Publish /p:Version="$(majorVersion).$(minorVersion).$(patchVersion).$(buildId)" /p:PublishDir="$(Build.ArtifactStagingDirectory)/" /p:VisualStudioVersion="17.0" /p:Platform="AnyCPU" /p:Configuration="$(buildConfiguration)"'
+
+# Manually add .deploy extensions since MapFileExtensions doesn't work with SDK-style VSTO projects
+- task: PowerShell@2
+  name: 'PrepareClickOnceDeployment'
+  inputs:
+    targetType: 'inline'
+    script: |
+      $stagingPath = "$(Build.ArtifactStagingDirectory)"
+      $binPath = "$(solutionFolder)/bin/$(buildConfiguration)/net481"
+      
+      Write-Host "Adding .deploy extensions to deployment files..."
+      
+      # Rename all files except those that shouldn't have .deploy extension
+      Get-ChildItem -Path $stagingPath -Recurse -File | Where-Object { 
+        $_.Extension -notin @('.deploy') 
+      } | ForEach-Object {
+        $newName = $_.Name + ".deploy"
+        Write-Host "Renaming: $($_.Name) -> $newName"
+        Rename-Item -Path $_.FullName -NewName $newName -Force
+      }
+      
+      # Copy .vosto and .manifest files (these should NOT have .deploy extension)
+      Write-Host "`nCopying manifest files..."
+      Copy-Item "$binPath\*.vsto" $stagingPath -Verbose
+      Copy-Item "$binPath\*.manifest" $stagingPath -Verbose
+      
+      Write-Host "`nFinal deployment structure:"
+      Get-ChildItem -Path $stagingPath -Recurse | Format-Table Name, Length -AutoSize
 
 # Diagnose what was published
 - task: PowerShell@2
