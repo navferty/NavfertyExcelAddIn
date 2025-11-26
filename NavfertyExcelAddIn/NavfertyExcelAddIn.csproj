@@ -200,7 +200,7 @@
   </ItemGroup>
 
   <PropertyGroup>
-    <ManifestCertificateThumbprint>F9B1B0FCADE6088F34E7F3F9A1A52F84E066B634</ManifestCertificateThumbprint>
+    <ManifestCertificateThumbprint>6D82638C4FCAC9D5C2BD46B9BE500E8922B195EC</ManifestCertificateThumbprint>
   </PropertyGroup>
 
   <PropertyGroup>
@@ -208,7 +208,7 @@
   </PropertyGroup>
 
   <PropertyGroup>
-    <ManifestKeyFile>NavfertyExcelAddIn_TemporaryKey.pfx</ManifestKeyFile>
+    <ManifestKeyFile>Navferty.pfx</ManifestKeyFile>
   </PropertyGroup>
 
   <Import Project="Sdk.targets" Sdk="Microsoft.NET.Sdk" />
