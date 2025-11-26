@@ -67,18 +67,7 @@ steps:
       $stagingPath = "$(Build.ArtifactStagingDirectory)"
       $binPath = "$(solutionFolder)/bin/$(buildConfiguration)/net481"
       
-      Write-Host "Adding .deploy extensions to deployment files..."
-      
-      # Rename all files except those that shouldn't have .deploy extension
-      Get-ChildItem -Path $stagingPath -Recurse -File | Where-Object { 
-        $_.Extension -notin @('.deploy') 
-      } | ForEach-Object {
-        $newName = $_.Name + ".deploy"
-        Write-Host "Renaming: $($_.Name) -> $newName"
-        Rename-Item -Path $_.FullName -NewName $newName -Force
-      }
-      
-      # Copy .vosto and .manifest files (these should NOT have .deploy extension)
+      # Copy .vsto and .manifest files
       Write-Host "`nCopying manifest files..."
       Copy-Item "$binPath\*.vsto" $stagingPath -Verbose
       Copy-Item "$binPath\*.manifest" $stagingPath -Verbose
@@ -130,6 +119,9 @@ steps:
     password: '$(ftpPassword)'
     rootDirectory: '$(Build.ArtifactStagingDirectory)'
     filePatterns: |
+      **/*.dll
+      **/*.pdb
+      **/*.config
       **/*.deploy
       **/*.manifest
       **/*.vsto
