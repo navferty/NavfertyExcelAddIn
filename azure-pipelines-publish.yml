@@ -48,16 +48,14 @@ steps:
     configuration: '$(buildConfiguration)'
     msbuildArgs: '$(msbuildArgs) /p:Version="$(majorVersion).$(minorVersion).$(patchVersion).$(buildId)"'
 
-# Publish the specific VSTO project
-- task: VSBuild@1
+# Publish the specific VSTO project using MSBuild task
+- task: MSBuild@1
   inputs:
     solution: '$(project)'
-    vsVersion: 'latest'
     msbuildArchitecture: 'x64'
     platform: '$(buildPlatform)'
     configuration: '$(buildConfiguration)'
-    msbuildArgs: '/p:Version="$(majorVersion).$(minorVersion).$(patchVersion).$(buildId)" /p:PublishDir="$(Build.ArtifactStagingDirectory)\"'
-    msbuildTarget: 'Publish'
+    msbuildArguments: '/t:Publish /p:Version="$(majorVersion).$(minorVersion).$(patchVersion).$(buildId)" /p:PublishDir="$(Build.ArtifactStagingDirectory)\" /p:VisualStudioVersion="17.0"'
 
 - task: PublishBuildArtifacts@1
   inputs:
