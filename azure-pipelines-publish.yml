@@ -95,3 +95,15 @@ steps:
     cleanContents: true
     preservePaths: true
     trustSSL: true
+
+# Create and push git tag after successful publishing
+- task: PowerShell@2
+  name: 'CreateGitTag'
+  inputs:
+    targetType: 'inline'
+    script: |
+      Write-Host "Creating git tag v$(majorVersion).$(minorVersion).$(patchVersion).$(buildId)"
+      git config user.email "azuredevops@navferty.ru"
+      git config user.name "Azure DevOps"
+      git tag -a "v$(majorVersion).$(minorVersion).$(patchVersion).$(buildId)" -m "Release version $(majorVersion).$(minorVersion).$(patchVersion).$(buildId)"
+      git push origin "v$(majorVersion).$(minorVersion).$(patchVersion).$(buildId)"
