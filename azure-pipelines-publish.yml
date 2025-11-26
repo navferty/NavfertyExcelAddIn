@@ -58,14 +58,14 @@ steps:
     configuration: '$(buildConfiguration)'
     msbuildArgs: '$(msbuildArgs) /p:Version="$(majorVersion).$(minorVersion).$(patchVersion).$(buildId)"'
 
-# Publish VSTO with ClickOnce deployment structure (including setup.exe)
+# Publish VSTO with ClickOnce deployment structure (skip setup.exe signing)
 - task: MSBuild@1
   inputs:
     solution: '$(project)'
     msbuildArchitecture: 'x64'
-    msbuildArguments: '/t:PublishOnly /p:Version="$(majorVersion).$(minorVersion).$(patchVersion).$(buildId)" /p:PublishDir="$(Build.ArtifactStagingDirectory)/" /p:VisualStudioVersion="17.0" /p:Platform="AnyCPU" /p:Configuration="$(buildConfiguration)" /p:BootstrapperEnabled=true /p:CreateWebPageOnPublish=true /p:InstallUrl="https://navferty.ru/deploy/" /p:ApplicationVersion="$(majorVersion).$(minorVersion).$(patchVersion).$(buildId)" /p:SignToolCommand="signtool.exe sign /f \"$(solutionFolder)/$(certfile)\" /p \"$(password)\""'
+    msbuildArguments: '/t:PublishOnly /p:Version="$(majorVersion).$(minorVersion).$(patchVersion).$(buildId)" /p:PublishDir="$(Build.ArtifactStagingDirectory)/" /p:VisualStudioVersion="17.0" /p:Platform="AnyCPU" /p:Configuration="$(buildConfiguration)" /p:BootstrapperEnabled=true /p:CreateWebPageOnPublish=true /p:InstallUrl="https://navferty.ru/deploy/" /p:ApplicationVersion="$(majorVersion).$(minorVersion).$(patchVersion).$(buildId)" /p:SignToolCommand=echo'
 
-# Verify deployment structure
+# Verify deployment structure and manifest signatures
 - task: PowerShell@2
   name: 'VerifyDeployment'
   inputs:
@@ -81,11 +81,6 @@ steps:
       $setupExe = Get-ChildItem -Path "$(Build.ArtifactStagingDirectory)" -Filter "setup.exe" -Recurse
       if ($setupExe) {
         Write-Host "✓ setup.exe found: $($setupExe.FullName) ($($setupExe.Length) bytes)"
-
-        # Verify signature
-        $signature = Get-AuthenticodeSignature $setupExe.FullName
-        Write-Host "Signature Status: $($signature.Status)"
-        Write-Host "Signer: $($signature.SignerCertificate.Subject)"
       } else {
         Write-Warning "✗ setup.exe NOT found"
       }
@@ -98,6 +93,26 @@ steps:
       } else {
         Write-Warning "✗ Application Files folder NOT found"
       }
+      
+      Write-Host "`nVerifying manifest signatures in staging directory:"
+      $vstoFile = Get-ChildItem -Path "$(Build.ArtifactStagingDirectory)" -Filter "*.vsto" -Recurse | Select-Object -First 1
+      if ($vstoFile) {
+        Write-Host "Checking VSTO manifest signature: $($vstoFile.Name)"
+        $vstoSig = Get-AuthenticodeSignature $vstoFile.FullName
+        Write-Host "  Status: $($vstoSig.Status)"
+        Write-Host "  Signer: $($vstoSig.SignerCertificate.Subject)"
+      }
+      
+      $manifestFile = Get-ChildItem -Path "$(Build.ArtifactStagingDirectory)" -Filter "*.manifest" -Recurse | Select-Object -First 1
+      if ($manifestFile) {
+        Write-Host "Checking application manifest signature: $($manifestFile.Name)"
+        $manifestSig = Get-AuthenticodeSignature $manifestFile.FullName
+        Write-Host "  Status: $($manifestSig.Status)"
+        Write-Host "  Signer: $($manifestSig.SignerCertificate.Subject)"
+      }
+      
+      Write-Host "`nDeployment structure:"
+      Get-ChildItem -Path "$(Build.ArtifactStagingDirectory)" -Recurse | Format-Table FullName, Length
 
 # Export certificate for users to install manually
 - task: PowerShell@2
