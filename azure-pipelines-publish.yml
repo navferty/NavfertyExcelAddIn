@@ -147,15 +147,8 @@ steps:
     targetType: 'inline'
     script: |
       $stagingPath = "$(Build.ArtifactStagingDirectory)"
-      $binPath = "$(solutionFolder)/bin/$(buildConfiguration)/net481"
       
-      # Copy .vsto and .manifest files
-      Write-Host "`nCopying manifest files..."
-      Copy-Item "$binPath\*.vsto" $stagingPath -Verbose -ErrorAction SilentlyContinue
-      Copy-Item "$binPath\*.manifest" $stagingPath -Verbose -ErrorAction SilentlyContinue
-      
-      Write-Host "`nFinal deployment structure:"
-      Get-ChildItem -Path $stagingPath -Recurse | Format-Table Name, Length -AutoSize
+      # TODO move .vsto file to root of staging directory
 
 - task: PublishBuildArtifacts@1
   inputs:
