@@ -10,6 +10,7 @@
     <File Path="Directory.Packages.props" />
     <File Path="LICENSE" />
     <File Path="README.md" />
+    <File Path="README_Cert.md" />
     <File Path="README_RU.md" />
   </Folder>
   <Project Path="Navferty.Common/Navferty.Common.csproj" Id="f14665a1-a035-4c8e-845e-f00029c8181a" />
