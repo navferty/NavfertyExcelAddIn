@@ -23,6 +23,7 @@ steps:
     restoreSolution: '$(solution)'
 
 - task: PowerShell@2
+  name: 'ImportCertificate'
   inputs:
     targetType: 'inline'
     script: |
@@ -39,6 +40,8 @@ steps:
 - task: VSBuild@1
   inputs:
     solution: '$(solution)'
+    vsVersion: 'latest'
+    msbuildArchitecture: 'x64'
     platform: '$(buildPlatform)'
     configuration: '$(buildConfiguration)'
     msbuildArgs: '$(msbuildArgs) /p:Version="$(majorVersion).$(minorVersion).$(patchVersion).$(buildId)"'
