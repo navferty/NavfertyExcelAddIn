@@ -58,7 +58,34 @@ steps:
     msbuildArchitecture: 'x64'
     msbuildArguments: '/t:Publish /p:Version="$(majorVersion).$(minorVersion).$(patchVersion).$(buildId)" /p:PublishDir="$(Build.ArtifactStagingDirectory)/" /p:VisualStudioVersion="17.0" /p:Platform="AnyCPU" /p:Configuration="$(buildConfiguration)" /p:BootstrapperEnabled=true /p:CreateWebPageOnPublish=true /p:InstallUrl="https://www.navferty.ru/deploy/" /p:ApplicationVersion="$(majorVersion).$(minorVersion).$(patchVersion).$(buildId)"'
 
-# Manually add .deploy extensions since MapFileExtensions doesn't work with SDK-style VSTO projects
+# Generate bootstrapper (setup.exe) manually since SDK-style projects don't do this automatically
+- task: PowerShell@2
+  name: 'GenerateBootstrapper'
+  inputs:
+    targetType: 'inline'
+    script: |
+      Write-Host "Generating bootstrapper (setup.exe)..."
+      
+      $msbuildPath = "C:\Program Files\Microsoft Visual Studio\2022\Enterprise\MSBuild\Current\Bin\amd64\msbuild.exe"
+      $projectPath = "$(project)"
+      $publishDir = "$(Build.ArtifactStagingDirectory)"
+      
+      # Call GenerateBootstrapper target explicitly
+      & $msbuildPath $projectPath `
+        /t:GenerateBootstrapper `
+        /p:Configuration="$(buildConfiguration)" `
+        /p:Platform="AnyCPU" `
+        /p:OutputPath="$publishDir\" `
+        /p:PublishUrl="https://www.navferty.ru/deploy/" `
+        /p:BootstrapperEnabled=true `
+        /p:ApplicationVersion="$(majorVersion).$(minorVersion).$(patchVersion).$(buildId)" `
+        /p:VisualStudioVersion="17.0" `
+        /verbosity:detailed
+      
+      Write-Host "Checking for setup.exe..."
+      Get-ChildItem -Path $publishDir -Filter "setup.exe" -Recurse -ErrorAction SilentlyContinue | Format-Table FullName, Length
+
+# Copy manifest files
 - task: PowerShell@2
   name: 'PrepareClickOnceDeployment'
   inputs:
@@ -69,8 +96,8 @@ steps:
       
       # Copy .vsto and .manifest files
       Write-Host "`nCopying manifest files..."
-      Copy-Item "$binPath\*.vsto" $stagingPath -Verbose
-      Copy-Item "$binPath\*.manifest" $stagingPath -Verbose
+      Copy-Item "$binPath\*.vsto" $stagingPath -Verbose -ErrorAction SilentlyContinue
+      Copy-Item "$binPath\*.manifest" $stagingPath -Verbose -ErrorAction SilentlyContinue
       
       Write-Host "`nFinal deployment structure:"
       Get-ChildItem -Path $stagingPath -Recurse | Format-Table Name, Length -AutoSize
@@ -85,7 +112,7 @@ steps:
       Get-ChildItem -Path "$(Build.ArtifactStagingDirectory)" -Recurse | Format-Table FullName, Length
       
       Write-Host "`nSearching for publish output in bin folder:"
-      Get-ChildItem -Path "$(solutionFolder)/bin" -Recurse -Include "*.vsto","*.manifest","*.deploy" -ErrorAction SilentlyContinue | Format-Table FullName, Length
+      Get-ChildItem -Path "$(solutionFolder)/bin" -Recurse -Include "*.vsto","*.manifest","*.deploy","*.exe" -ErrorAction SilentlyContinue | Format-Table FullName, Length
 
 - task: PublishBuildArtifacts@1
   inputs:
