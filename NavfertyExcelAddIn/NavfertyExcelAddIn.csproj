@@ -33,6 +33,11 @@
     <!-- ClickOnce deployment settings -->
     <MapFileExtensions>true</MapFileExtensions>
     <Install>true</Install>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+    <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
+    <WebPage>publish.htm</WebPage>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <PublishWizardCompleted>true</PublishWizardCompleted>
   </PropertyGroup>
 
   <PropertyGroup>

@@ -56,7 +56,7 @@ steps:
   inputs:
     solution: '$(project)'
     msbuildArchitecture: 'x64'
-    msbuildArguments: '/t:Publish /p:Version="$(majorVersion).$(minorVersion).$(patchVersion).$(buildId)" /p:PublishDir="$(Build.ArtifactStagingDirectory)/" /p:VisualStudioVersion="17.0" /p:Platform="AnyCPU" /p:Configuration="$(buildConfiguration)"'
+    msbuildArguments: '/t:Publish /p:Version="$(majorVersion).$(minorVersion).$(patchVersion).$(buildId)" /p:PublishDir="$(Build.ArtifactStagingDirectory)/" /p:VisualStudioVersion="17.0" /p:Platform="AnyCPU" /p:Configuration="$(buildConfiguration)" /p:BootstrapperEnabled=true /p:CreateWebPageOnPublish=true /p:InstallUrl="https://www.navferty.ru/deploy/" /p:ApplicationVersion="$(majorVersion).$(minorVersion).$(patchVersion).$(buildId)"'
 
 # Manually add .deploy extensions since MapFileExtensions doesn't work with SDK-style VSTO projects
 - task: PowerShell@2
@@ -125,6 +125,7 @@ steps:
       **/*.deploy
       **/*.manifest
       **/*.vsto
+      **/*.htm
     remoteDirectory: '/deploy/' # navferty.ru/deploy
     clean: false
     cleanContents: true
