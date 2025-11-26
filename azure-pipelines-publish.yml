@@ -1,4 +1,4 @@
-# .NET Desktop
+﻿# .NET Desktop
 # Build and run tests for .NET Desktop or Windows classic desktop solutions.
 # Add steps that publish symbols, save build artifacts, and more:
 # https://docs.microsoft.com/azure/devops/pipelines/apps/windows/dot-net
@@ -51,12 +51,12 @@ steps:
     configuration: '$(buildConfiguration)'
     msbuildArgs: '$(msbuildArgs) /p:Version="$(majorVersion).$(minorVersion).$(patchVersion).$(buildId)"'
 
-# Publish the specific VSTO project using MSBuild task
+# Publish VSTO with ClickOnce deployment structure (including setup.exe)
 - task: MSBuild@1
   inputs:
     solution: '$(project)'
     msbuildArchitecture: 'x64'
-    msbuildArguments: '/t:Publish /p:Version="$(majorVersion).$(minorVersion).$(patchVersion).$(buildId)" /p:PublishDir="$(Build.ArtifactStagingDirectory)/" /p:VisualStudioVersion="17.0" /p:Platform="AnyCPU" /p:Configuration="$(buildConfiguration)" /p:BootstrapperEnabled=true /p:CreateWebPageOnPublish=true /p:InstallUrl="https://navferty.ru/deploy/" /p:ApplicationVersion="$(majorVersion).$(minorVersion).$(patchVersion).$(buildId)"'
+    msbuildArguments: '/t:PublishOnly /p:Version="$(majorVersion).$(minorVersion).$(patchVersion).$(buildId)" /p:PublishDir="$(Build.ArtifactStagingDirectory)/" /p:VisualStudioVersion="17.0" /p:Platform="AnyCPU" /p:Configuration="$(buildConfiguration)" /p:BootstrapperEnabled=true /p:CreateWebPageOnPublish=true /p:InstallUrl="https://navferty.ru/deploy/" /p:ApplicationVersion="$(majorVersion).$(minorVersion).$(patchVersion).$(buildId)"'
 
 # Diagnose what was published
 - task: PowerShell@2
@@ -66,9 +66,47 @@ steps:
     script: |
       Write-Host "Contents of Artifact Staging Directory:"
       Get-ChildItem -Path "$(Build.ArtifactStagingDirectory)" -Recurse | Format-Table FullName, Length
-      
+
       Write-Host "`nSearching for publish output in bin folder:"
       Get-ChildItem -Path "$(solutionFolder)/bin" -Recurse -ErrorAction SilentlyContinue | Format-Table FullName, Length
+
+# Verify deployment structure
+- task: PowerShell@2
+  name: 'VerifyDeployment'
+  inputs:
+    targetType: 'inline'
+    script: |
+      Write-Host "Deployment structure:"
+      Get-ChildItem -Path "$(Build.ArtifactStagingDirectory)" -Recurse | Format-Table FullName, Length
+      
+      Write-Host "`nChecking for setup.exe:"
+      $setupExe = Get-ChildItem -Path "$(Build.ArtifactStagingDirectory)" -Filter "setup.exe" -Recurse
+      if ($setupExe) {
+        Write-Host "✓ setup.exe found: $($setupExe.FullName) ($($setupExe.Length) bytes)"
+      } else {
+        Write-Warning "✗ setup.exe NOT found"
+      }
+
+# Export certificate for users to install manually
+- task: PowerShell@2
+  name: 'ExportCertificate'
+  inputs:
+    targetType: 'inline'
+    script: |
+      $pfxPath = "$(solutionFolder)/$(certfile)"
+      $cerPath = "$(Build.ArtifactStagingDirectory)/NavfertyCert.cer"
+      
+      # Load the PFX
+      $cert = New-Object System.Security.Cryptography.X509Certificates.X509Certificate2
+      $cert.Import($pfxPath, '$(password)', [System.Security.Cryptography.X509Certificates.X509KeyStorageFlags]::Exportable)
+      
+      # Export as .cer (public key only)
+      $certBytes = $cert.Export([System.Security.Cryptography.X509Certificates.X509ContentType]::Cert)
+      [System.IO.File]::WriteAllBytes($cerPath, $certBytes)
+      
+      Write-Host "Certificate exported successfully"
+      Write-Host "Subject: $($cert.Subject)"
+      Write-Host "Thumbprint: $($cert.Thumbprint)"
 
 # Generate bootstrapper (setup.exe) manually since SDK-style projects don't do this automatically
 - task: PowerShell@2
