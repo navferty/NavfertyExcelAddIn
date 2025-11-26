@@ -13,7 +13,7 @@
  - [Trim Spaces](#trim-spaces)
  - [Remove File Protection](#remove-file-protection)
  - [Worksheets Protection](#worksheets-protection)
- - [Highlight Duplicates](#highlight-duplications)
+ - [Highlight Duplicates](#highlight-duplicates)
  - [Unmerge Cells](#unmerge-cells)
  - [Find Formula Errors in the selected range](#find-all-cells-containing-errors)
  - [Copy as Markdown](#copy-as-markdown)
@@ -71,7 +71,7 @@
 
     |||
     |:-:|---|
-    |![](images/icons/replaceChars.png)|Only uppercase letters of the alphabets will be replaced, such as: Аа, Вв, Ее, Кк, Мм, Нн, Оо, Рр, Сс, Тт, Уу, Хх.|
+    |![](images/icons/replaceChars.png)|Only matching letters of the alphabets will be replaced, such as: Аа, Вв, Ее, Кк, Мм, Нн, Оо, Рр, Сс, Тт, Уу, Хх.|
 
     <details>
       <summary>View screenshots</summary>
@@ -84,7 +84,7 @@
 
 |||
 |:-:|---|
-|![](images/icons/stringifyNumerics.png)|Rewrites numeric values in the text with the decryption<br>- In Russian<br>- In English<br>- In French|
+|![](images/icons/stringifyNumerics.png)|Converts numeric values to text representation<br>- In Russian<br>- In English<br>- In French|
 
 <details>
   <summary>View screenshots</summary>
@@ -116,7 +116,7 @@
 
 |||
 |:-:|---|
-|![](images/icons/trimSpaces.png)|Clear the text content of the selected cells from unnecessary spaces. Removes repeated spaces and line breaks, as well as beginning and ending spaces in cells that have a text format.|
+|![](images/icons/trimSpaces.png)|Clears the text content of the selected cells from unnecessary spaces. Removes repeated spaces and line breaks, as well as beginning and ending spaces in cells that have a text format.|
 
 <details>
   <summary>View screenshots</summary>
@@ -133,7 +133,7 @@
 
 |||
 |:-:|---|
-|![](images/icons/unprotectWorkbook.png)|Allows you to unprotect all the pages of an open book as the entire book, no password, and also unlock VBA project (if any) to which the password is set. This feature does not apply to encrypted books.|
+|![](images/icons/unprotectWorkbook.png)|Allows you to unprotect all sheets of an open workbook as well as the entire workbook, without requiring a password, and also unlock the VBA project (if any) for which a password is set. This feature does not apply to encrypted workbooks.|
 
 ## Worksheets Protection
 
@@ -141,7 +141,7 @@
 |:-:|---|
 |![](images/icons/unprotectWorkbook.png)|Allows you to set protection on multiple worksheets at once.|
 
-## Highlight duplications
+## Highlight Duplicates
 
 |||
 |:-:|---|
@@ -170,7 +170,7 @@
 
 |||
 |:-:|---|
-|![](images/icons/findErrors.png)|Search for all cells in the selected cells that contain calculation errors:<br><br>Excel formula errors types:<br>`#N/A`<br>`#NAME?`<br>`#DIV/0!`<br>`#REF!`<br>`#VALUE!`<br>`#NUM!`<br>`#NULL!`|
+|![](images/icons/findErrors.png)|Search for all cells in the selection that contain calculation errors:<br><br>Excel formula error types:<br>`#N/A`<br>`#NAME?`<br>`#DIV/0!`<br>`#REF!`<br>`#VALUE!`<br>`#NUM!`<br>`#NULL!`|
 
 <details>
   <summary>View a screenshot</summary>
@@ -194,7 +194,7 @@
 
 |||
 |:-:|---|
-|![](images/icons/validation.png)|<p>Check the cell values in the selected range for a specific format.<br><br>Supported format: <br>- Number<br>- Date<br>- TIN of an individual\* (12 digits, with two verification digits)<br>- TIN of the legal entity\* (10 digits, with one verification digit)<br>- Text for XML (no `<` and `>` characters or other invalid characters for XML content)<br><br>\* _- The correct TIN does not guarantee the existence of an organization or individual who would own this INN_</p>
+|![](images/icons/validation.png)|<p>Check the cell values in the selected range for a specific format.<br><br>Supported formats: <br>- Number<br>- Date<br>- TIN of an individual\* (12 digits, with two verification digits)<br>- TIN of a legal entity\* (10 digits, with one verification digit)<br>- Text for XML (no `<` and `>` characters or other invalid characters for XML content)<br><br>\* _- The correct TIN does not guarantee the existence of an organization or individual who would own this INN_</p>
 
 <details>
   <summary>View a screenshot</summary>
@@ -210,9 +210,9 @@
 
 |||
 |:-:|---|
-|![](images/icons/createSampleXml.png)|Select file with an XSD schema and create a sampe XML based on that schema.|
+|![](images/icons/createSampleXml.png)|Select file with an XSD schema and create a sample XML based on that schema.|
 
-For example, for the diagram below
+For example, for the schema below
 <details>
   <summary>XML schema sample - `sample.xsd`</summary>
 
@@ -305,7 +305,7 @@ The following xml-file will be generated:
 
 |||
 |:-:|---|
-|![](images/icons/validateXml.png)|Check XML file with XSD schema. Select xml and xsd files, and report with all validation errors and warnings will be created in new workbook.|
+|![](images/icons/validateXml.png)|Check XML file with XSD schema. Select XML and XSD files, and a report with all validation errors and warnings will be created in a new workbook.|
 
 Sample error report
 
@@ -323,8 +323,8 @@ Sample error report
 
 ### Online Install
 
-You can install the add-in from official website of the project:
-[navferty.ru](https://www.navferty.ru). Just download and run the setup.exe file.
+You can install the add-in from the official website of the project:
+[navferty.ru](https://www.navferty.ru). Just download and run the setup.exe.
 
 You may need to manually import the self-signed certificate before the installation process can be finished.
 
@@ -332,7 +332,7 @@ The installation process also requires internet connection to load latest versio
 
 ### Offline Install
 
-The solution is build in Azure, you can download full archive with installation files from there:
+The solution is built in Azure, you can download the full archive with installation files from there:
 
 * Visit https://navferty.visualstudio.com/NavfertyExcelAddIn/_build?definitionId=3
 
@@ -352,7 +352,7 @@ The solution is build in Azure, you can download full archive with installation 
 
 ![Navferty's Tools Ribbon Tab in MS Excel](images/Install3.png)
 
-After installation process is completed, run (or restart) Excel application, and you will see new tab:
+After the installation process is completed, run (or restart) Excel application, and you will see new tab:
 
 ![Navferty's Tools Ribbon Tab in MS Excel](images/Install4.png)
 
