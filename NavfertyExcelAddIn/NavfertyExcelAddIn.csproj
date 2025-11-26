@@ -193,7 +193,6 @@
     <PackageReference Include="Microsoft.Xml.XMLGen" />
     <PackageReference Include="Newtonsoft.Json" />
     <PackageReference Include="NLog" />
-    <PackageReference Include="NLog.Config" />
     <PackageReference Include="NumericParser" />
     <PackageReference Include="System.Data.SQLite.Core" />
     <PackageReference Include="System.IO.Compression.ZipFile" />
