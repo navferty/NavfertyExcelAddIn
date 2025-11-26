@@ -31,15 +31,22 @@ steps:
   inputs:
     targetType: 'inline'
     script: |
-      Write-Host "Import Certificate"
+      Write-Host "Importing Certificate for Manifest Signing"
       $pfxpath = '$(solutionFolder)/$(certfile)'
+      $password = '$(password)'
+      
       Add-Type -AssemblyName System.Security
       $cert = New-Object System.Security.Cryptography.X509Certificates.X509Certificate2
-      $cert.Import($pfxpath, '$(password)', [System.Security.Cryptography.X509Certificates.X509KeyStorageFlags]"PersistKeySet")
-      $store = new-object system.security.cryptography.X509Certificates.X509Store -argumentlist "MY", CurrentUser
-      $store.Open([System.Security.Cryptography.X509Certificates.OpenFlags]"ReadWrite")
+      $cert.Import($pfxpath, $password, [System.Security.Cryptography.X509Certificates.X509KeyStorageFlags]"PersistKeySet")
+      
+      # Import to CurrentUser\My for manifest signing
+      $store = New-Object System.Security.Cryptography.X509Certificates.X509Store -ArgumentList "MY", CurrentUser
+      $store.Open([System.Security.Cryptography.X509Certificates.OpenFlags]::ReadWrite)
       $store.Add($cert)
       $store.Close()
+      
+      Write-Host "Certificate imported successfully"
+      Write-Host "Thumbprint: $($cert.Thumbprint)"
 
 # Build the entire solution
 - task: VSBuild@1
@@ -56,7 +63,7 @@ steps:
   inputs:
     solution: '$(project)'
     msbuildArchitecture: 'x64'
-    msbuildArguments: '/t:PublishOnly /p:Version="$(majorVersion).$(minorVersion).$(patchVersion).$(buildId)" /p:PublishDir="$(Build.ArtifactStagingDirectory)/" /p:VisualStudioVersion="17.0" /p:Platform="AnyCPU" /p:Configuration="$(buildConfiguration)" /p:BootstrapperEnabled=true /p:CreateWebPageOnPublish=true /p:InstallUrl="https://navferty.ru/deploy/" /p:ApplicationVersion="$(majorVersion).$(minorVersion).$(patchVersion).$(buildId)"'
+    msbuildArguments: '/t:PublishOnly /p:Version="$(majorVersion).$(minorVersion).$(patchVersion).$(buildId)" /p:PublishDir="$(Build.ArtifactStagingDirectory)/" /p:VisualStudioVersion="17.0" /p:Platform="AnyCPU" /p:Configuration="$(buildConfiguration)" /p:BootstrapperEnabled=true /p:CreateWebPageOnPublish=true /p:InstallUrl="https://navferty.ru/deploy/" /p:ApplicationVersion="$(majorVersion).$(minorVersion).$(patchVersion).$(buildId)" /p:SignToolCommand="signtool.exe sign /f $(solutionFolder)/$(certfile) /p $(password) /t http://timestamp.digicert.com"'
 
 # Diagnose what was published
 - task: PowerShell@2
@@ -87,6 +94,32 @@ steps:
         Write-Warning "✗ setup.exe NOT found"
       }
 
+# Verify deployment structure
+- task: PowerShell@2
+  name: 'VerifyDeployment1'
+  inputs:
+    targetType: 'inline'
+    script: |
+      Write-Host "Deployment structure:"
+      Get-ChildItem -Path "$(Build.ArtifactStagingDirectory)" -Recurse | Format-Table FullName, Length
+      
+      Write-Host "`nChecking for setup.exe:"
+      $setupExe = Get-ChildItem -Path "$(Build.ArtifactStagingDirectory)" -Filter "setup.exe" -Recurse
+      if ($setupExe) {
+        Write-Host "✓ setup.exe found: $($setupExe.FullName) ($($setupExe.Length) bytes)"
+      } else {
+        Write-Warning "✗ setup.exe NOT found"
+      }
+      
+      Write-Host "`nChecking for Application Files folder:"
+      $appFiles = Get-ChildItem -Path "$(Build.ArtifactStagingDirectory)" -Filter "Application Files" -Directory
+      if ($appFiles) {
+        Write-Host "✓ Application Files folder found"
+        Get-ChildItem -Path $appFiles.FullName -Recurse | Format-Table Name, Length -AutoSize
+      } else {
+        Write-Warning "✗ Application Files folder NOT found"
+      }
+
 # Export certificate for users to install manually
 - task: PowerShell@2
   name: 'ExportCertificate'
@@ -107,34 +140,6 @@ steps:
       Write-Host "Certificate exported successfully"
       Write-Host "Subject: $($cert.Subject)"
       Write-Host "Thumbprint: $($cert.Thumbprint)"
-
-# Generate bootstrapper (setup.exe) manually since SDK-style projects don't do this automatically
-- task: PowerShell@2
-  name: 'GenerateBootstrapper'
-  inputs:
-    targetType: 'inline'
-    script: |
-      Write-Host "Generating bootstrapper (setup.exe)..."
-      
-      $msbuildPath = "C:\Program Files\Microsoft Visual Studio\2022\Enterprise\MSBuild\Current\Bin\amd64\msbuild.exe"
-      $projectPath = "$(project)"
-      $publishDir = "$(Build.ArtifactStagingDirectory)"
-      
-      # Call GenerateBootstrapper target explicitly
-      # Call PublishOnly (which includes CreateBootstrapper)
-      & $msbuildPath $projectPath `
-        /t:PublishOnly `
-        /p:Configuration="$(buildConfiguration)" `
-        /p:Platform="AnyCPU" `
-        /p:PublishDir="$publishDir\" `
-        /p:InstallUrl="https://navferty.ru/deploy/" `
-        /p:BootstrapperEnabled=true `
-        /p:ApplicationVersion="$(majorVersion).$(minorVersion).$(patchVersion).$(buildId)" `
-        /p:VisualStudioVersion="17.0" `
-        /verbosity:normal
-      
-      Write-Host "Checking for setup.exe..."
-      Get-ChildItem -Path $publishDir -Filter "setup.exe" -Recurse -ErrorAction SilentlyContinue | Format-Table FullName, Length
 
 # Copy manifest files
 - task: PowerShell@2
