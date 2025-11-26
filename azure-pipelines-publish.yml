@@ -58,6 +58,18 @@ steps:
     msbuildArchitecture: 'x64'
     msbuildArguments: '/t:Publish /p:Version="$(majorVersion).$(minorVersion).$(patchVersion).$(buildId)" /p:PublishDir="$(Build.ArtifactStagingDirectory)/" /p:VisualStudioVersion="17.0" /p:Platform="AnyCPU" /p:Configuration="$(buildConfiguration)"'
 
+# Diagnose what was published
+- task: PowerShell@2
+  name: 'DiagnosePublishOutput'
+  inputs:
+    targetType: 'inline'
+    script: |
+      Write-Host "Contents of Artifact Staging Directory:"
+      Get-ChildItem -Path "$(Build.ArtifactStagingDirectory)" -Recurse | Format-Table FullName, Length
+      
+      Write-Host "`nSearching for publish output in bin folder:"
+      Get-ChildItem -Path "$(solutionFolder)/bin" -Recurse -Include "*.vsto","*.manifest","*.deploy" -ErrorAction SilentlyContinue | Format-Table FullName, Length
+
 - task: PublishBuildArtifacts@1
   inputs:
     PathtoPublish: '$(Build.ArtifactStagingDirectory)'
