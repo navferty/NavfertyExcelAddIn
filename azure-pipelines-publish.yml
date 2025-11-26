@@ -17,6 +17,9 @@ variables:
   buildId: '$(Build.BuildId)'
 
 steps:
+- checkout: self
+  persistCredentials: true
+
 - task: NuGetToolInstaller@1
 
 - task: NuGetCommand@2
@@ -102,8 +105,25 @@ steps:
   inputs:
     targetType: 'inline'
     script: |
-      Write-Host "Creating git tag v$(majorVersion).$(minorVersion).$(patchVersion).$(buildId)"
+      $tagName = "v$(majorVersion).$(minorVersion).$(patchVersion).$(buildId)"
+      Write-Host "Creating git tag $tagName"
+      
       git config user.email "azuredevops@navferty.ru"
       git config user.name "Azure DevOps"
-      git tag -a "v$(majorVersion).$(minorVersion).$(patchVersion).$(buildId)" -m "Release version $(majorVersion).$(minorVersion).$(patchVersion).$(buildId)"
-      git push origin "v$(majorVersion).$(minorVersion).$(patchVersion).$(buildId)"
+      
+      # Check if tag already exists
+      $existingTag = git tag -l $tagName
+      if ($existingTag) {
+        Write-Host "Tag $tagName already exists, skipping creation"
+        exit 0
+      }
+      
+      git tag -a $tagName -m "Release version $(majorVersion).$(minorVersion).$(patchVersion).$(buildId)"
+      git push origin $tagName
+      
+      if ($LASTEXITCODE -eq 0) {
+        Write-Host "Successfully created and pushed tag $tagName"
+      } else {
+        Write-Error "Failed to push tag $tagName"
+        exit 1
+      }
