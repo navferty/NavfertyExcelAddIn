@@ -51,7 +51,7 @@ public class SqliteExportAutomationTest : AutomationTestsBase
 		// check text in message box to be success
 		var messageText = GetMessageBoxText();
 		TestContext.WriteLine($"Message box text: {messageText}");
-		Assert.IsTrue(messageText.Contains("Workbook successfully exported to SQLite database"), "Export did not complete successfully");
+		Assert.Contains("Workbook successfully exported to SQLite database", messageText, "Export did not complete successfully");
 
 		// send esc to confirm success message box
 		SendKeys.SendWait("{ESC}");
@@ -104,7 +104,7 @@ public class SqliteExportAutomationTest : AutomationTestsBase
 					$"Invalid column type: {columnType}");
 			}
 			
-			Assert.IsTrue(columnCount > 0, $"Table {tableName} has no columns");
+			Assert.IsGreaterThan(0, columnCount, $"Table {tableName} has no columns");
 		}
 
 		// Verify table has data
@@ -112,7 +112,7 @@ public class SqliteExportAutomationTest : AutomationTestsBase
 		{
 			var rowCount = (long)command.ExecuteScalar();
 			TestContext.WriteLine($"  Row count: {rowCount}");
-			Assert.IsTrue(rowCount > 0, $"Table {tableName} has no data rows");
+			Assert.IsGreaterThan(0, rowCount, $"Table {tableName} has no data rows");
 		}
 
 		// Verify we can read data from the table

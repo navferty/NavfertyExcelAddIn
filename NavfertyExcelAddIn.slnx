@@ -1,0 +1,14 @@
+<Solution>
+  <Folder Name="/NavfertyExcelAddIn.Tests/">
+    <Project Path="NavfertyExcelAddIn.UnitTests/NavfertyExcelAddIn.UnitTests.csproj" Id="6a7d8a8f-6338-43e3-b5ac-92483188ec91" />
+  </Folder>
+  <Folder Name="/Solution Items/">
+    <File Path=".editorconfig" />
+    <File Path="azure-pipelines-CI.yml" />
+    <File Path="azure-pipelines-publish.yml" />
+    <File Path="Directory.Packages.props" />
+  </Folder>
+  <Project Path="Navferty.Common/Navferty.Common.csproj" Id="f14665a1-a035-4c8e-845e-f00029c8181a" />
+  <Project Path="Navferty.ExcelAddIn.Web/Navferty.ExcelAddIn.Web.csproj" Id="443907ef-f460-4726-94f0-fe35a1ac8fa2" />
+  <Project Path="NavfertyExcelAddIn/NavfertyExcelAddIn.csproj" Id="def56c38-95b1-4cfc-8b27-70fea7a35d78" />
+</Solution>

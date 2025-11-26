@@ -1,57 +1,53 @@
-﻿<Project ToolsVersion="16.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
-  <!--
-    This section defines project-level properties.
+﻿<Project>
+  <!--see https://stackoverflow.com/questions/65143051/is-it-possible-to-use-a-new-sdk-style-csproj-file-for-a-vsto-addin-project-->
+  <Import Project="Sdk.props" Sdk="Microsoft.NET.Sdk" />
 
-    AssemblyName
-      Name of the output assembly.
-    Configuration
-      Specifies a default value for debug.
-    OutputType
-      Must be "Library" for VSTO.
-    Platform
-      Specifies what CPU the output of this project can run on.
-    NoStandardLibraries
-      Set to "false" for VSTO.
-    RootNamespace
-      In C#, this specifies the namespace given to new files. In VB, all objects are
-      wrapped in this namespace at runtime.
-  -->
   <PropertyGroup>
+    <TargetFramework>net481</TargetFramework>
     <LangVersion>Latest</LangVersion>
     <Nullable>enable</Nullable>
     <NullableContextOptions>enable</NullableContextOptions>
-    <ProjectTypeGuids>{BAA0C2D2-18E2-41B9-852F-F413020CAA33};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{DEF56C38-95B1-4CFC-8B27-70FEA7A35D78}</ProjectGuid>
     <OutputType>Library</OutputType>
-    <NoStandardLibraries>false</NoStandardLibraries>
-    <RootNamespace>NavfertyExcelAddIn</RootNamespace>
-    <AssemblyName>NavfertyExcelAddIn</AssemblyName>
-    <TargetFrameworkVersion>v4.8.1</TargetFrameworkVersion>
     <DefineConstants>VSTO40</DefineConstants>
     <BootstrapperEnabled>true</BootstrapperEnabled>
     <PublishUrl>publish\</PublishUrl>
     <InstallUrl>https://www.navferty.ru/deploy/</InstallUrl>
     <TargetCulture>ru</TargetCulture>
     <ApplicationVersion>$(Version)</ApplicationVersion>
-    <Nullable>enable</Nullable>
     <AutoIncrementApplicationRevision>true</AutoIncrementApplicationRevision>
     <UpdateEnabled>true</UpdateEnabled>
     <UpdateInterval>7</UpdateInterval>
     <UpdateIntervalUnits>days</UpdateIntervalUnits>
     <IsWebBootstrapper>True</IsWebBootstrapper>
     <ProductName>NavfertyExcelAddIn</ProductName>
-    <PublisherName />
-    <SupportUrl />
+    <PublisherName>Navferty</PublisherName>
+    <SupportUrl>https://navferty.ru/</SupportUrl>
     <FriendlyName>NavfertyExcelAddIn</FriendlyName>
-    <OfficeApplicationDescription />
+    <OfficeApplicationDescription>An Excel add-in for common use.</OfficeApplicationDescription>
     <LoadBehavior>3</LoadBehavior>
-    <TargetFrameworkProfile />
-    <NuGetPackageImportStamp>
-    </NuGetPackageImportStamp>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <UseWindowsForms>true</UseWindowsForms>
+    <ImportWindowsDesktopTargets>true</ImportWindowsDesktopTargets>
+    <ResolveAssemblyWarnOrErrorOnTargetArchitectureMismatch>None</ResolveAssemblyWarnOrErrorOnTargetArchitectureMismatch>
+    <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
   </PropertyGroup>
+
+  <PropertyGroup>
+    <OfficeApplication>Excel</OfficeApplication>
+  </PropertyGroup>
+
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DefineConstants>$(DefineConstants);DEBUG;TRACE</DefineConstants>
+    <WarningLevel>5</WarningLevel>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <StartAction>Program</StartAction>
+    <StartProgram>C:\Program Files\Microsoft Office\root\Office16\EXCEL.EXE</StartProgram>
+  </PropertyGroup>
+
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DefineConstants>$(DefineConstants);TRACE</DefineConstants>
+  </PropertyGroup>
+
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.7.2">
       <Visible>False</Visible>
@@ -74,418 +70,151 @@
       <Install>true</Install>
     </BootstrapperPackage>
   </ItemGroup>
+
+  <!-- VS Installation paths - try multiple locations -->
   <PropertyGroup>
-    <!--
-      OfficeApplication
-        Add-in host application
-    -->
-    <OfficeApplication>Excel</OfficeApplication>
+    <!-- Try VS Insiders first (local dev) -->
+    <VSInstallRoot Condition="'$(VSInstallRoot)' == '' AND Exists('$(ProgramFiles)\Microsoft Visual Studio\18\Insiders')">$(ProgramFiles)\Microsoft Visual Studio\18\Insiders</VSInstallRoot>
+    <!-- Then try VS 2022 Enterprise (Azure) -->
+    <VSInstallRoot Condition="'$(VSInstallRoot)' == '' AND Exists('$(ProgramFiles)\Microsoft Visual Studio\2022\Enterprise')">$(ProgramFiles)\Microsoft Visual Studio\2022\Enterprise</VSInstallRoot>
+    <!-- Then try VS 2022 Professional -->
+    <VSInstallRoot Condition="'$(VSInstallRoot)' == '' AND Exists('$(ProgramFiles)\Microsoft Visual Studio\2022\Professional')">$(ProgramFiles)\Microsoft Visual Studio\2022\Professional</VSInstallRoot>
+    <!-- Finally try VS 2022 Community -->
+    <VSInstallRoot Condition="'$(VSInstallRoot)' == '' AND Exists('$(ProgramFiles)\Microsoft Visual Studio\2022\Community')">$(ProgramFiles)\Microsoft Visual Studio\2022\Community</VSInstallRoot>
+    
+    <!-- Set VSToolsPath based on VS version - v17.0 for VS 2022, v18.0 for VS Next -->
+    <VSToolsPath Condition="'$(VSToolsPath)' == '' AND $(VSInstallRoot.Contains('\2022\'))">$(VSInstallRoot)\MSBuild\Microsoft\VisualStudio\v17.0</VSToolsPath>
+    <VSToolsPath Condition="'$(VSToolsPath)' == '' AND '$(VSInstallRoot)' != ''">$(VSInstallRoot)\MSBuild\Microsoft\VisualStudio\v18.0</VSToolsPath>
+    
+    <AssemblySearchPaths>$(AssemblySearchPaths);{GAC}</AssemblySearchPaths>
   </PropertyGroup>
-  <!--
-    This section defines properties that are set when the "Debug" configuration is selected.
 
-    DebugSymbols
-      If "true", create symbols (.pdb). If "false", do not create symbols.
-    DefineConstants
-      Constants defined for the preprocessor.
-    EnableUnmanagedDebugging
-      If "true", starting the debugger will attach both managed and unmanaged debuggers.
-    Optimize
-      If "true", optimize the build output. If "false", do not optimize.
-    OutputPath
-      Output path of project relative to the project file.
-    WarningLevel
-      Warning level for the compiler.
-  -->
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
-    <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
-    <DefineConstants>$(DefineConstants);DEBUG;TRACE</DefineConstants>
-    <WarningLevel>5</WarningLevel>
-    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
-  </PropertyGroup>
-  <!--
-    This section defines properties that are set when the "Release" configuration is selected.
+  <ItemGroup>
+    <!-- VSTO Utilities assemblies - from VS installation -->
+    <Reference Include="Microsoft.Office.Tools.Common.v4.0.Utilities" Condition="Exists('$(VSInstallRoot)\Common7\IDE\ReferenceAssemblies\v4.0\Microsoft.Office.Tools.Common.v4.0.Utilities.dll')">
+      <HintPath>$(VSInstallRoot)\Common7\IDE\ReferenceAssemblies\v4.0\Microsoft.Office.Tools.Common.v4.0.Utilities.dll</HintPath>
+      <Private>True</Private>
+      <EmbedInteropTypes>False</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="Microsoft.Office.Tools.Excel.v4.0.Utilities" Condition="Exists('$(VSInstallRoot)\Common7\IDE\ReferenceAssemblies\v4.0\Microsoft.Office.Tools.Excel.v4.0.Utilities.dll')">
+      <HintPath>$(VSInstallRoot)\Common7\IDE\ReferenceAssemblies\v4.0\Microsoft.Office.Tools.Excel.v4.0.Utilities.dll</HintPath>
+      <Private>True</Private>
+      <EmbedInteropTypes>False</EmbedInteropTypes>
+    </Reference>
+    
+    <!-- VSTO Runtime and Tools assemblies - resolved from GAC -->
+    <Reference Include="Microsoft.Office.Tools.v4.0.Framework">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Microsoft.VisualStudio.Tools.Applications.Runtime">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Microsoft.Office.Tools">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Microsoft.Office.Tools.Common">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Microsoft.Office.Tools.Excel">
+      <Private>False</Private>
+    </Reference>
+  </ItemGroup>
 
-    DebugSymbols
-      If "true", create symbols (.pdb). If "false", do not create symbols.
-    DefineConstants
-      Constants defined for the preprocessor.
-    EnableUnmanagedDebugging
-      If "true", starting the debugger will attach both managed and unmanaged debuggers.
-    Optimize
-      If "true", optimize the build output. If "false", do not optimize.
-    OutputPath
-      Output path of project relative to the project file.
-    WarningLevel
-      Warning level for the compiler.
-  -->
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
-    <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
-    <DefineConstants>$(DefineConstants);TRACE</DefineConstants>
-    <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
-  <!--
-    This section specifies references for the project.
-  -->
-  <ItemGroup>
-    <Reference Include="Accessibility" />
-    <Reference Include="Autofac, Version=6.2.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
-      <HintPath>..\packages\Autofac.6.2.0\lib\netstandard2.0\Autofac.dll</HintPath>
-    </Reference>
-    <Reference Include="Autofac.Extras.DynamicProxy, Version=6.0.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
-      <HintPath>..\packages\Autofac.Extras.DynamicProxy.6.0.0\lib\netstandard2.0\Autofac.Extras.DynamicProxy.dll</HintPath>
-    </Reference>
-    <Reference Include="Castle.Core, Version=4.0.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
-      <HintPath>..\packages\Castle.Core.4.4.1\lib\net45\Castle.Core.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Bcl.AsyncInterfaces, Version=1.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.Bcl.AsyncInterfaces.1.1.0\lib\net461\Microsoft.Bcl.AsyncInterfaces.dll</HintPath>
-    </Reference>
-    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.13.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
-    </Reference>
-    <Reference Include="NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
-      <HintPath>..\packages\NLog.4.6.7\lib\net45\NLog.dll</HintPath>
-    </Reference>
-    <Reference Include="System" />
-    <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Buffers.4.5.1\lib\net461\System.Buffers.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Configuration" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Data.SQLite.Core, Version=1.0.118.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Data.SQLite.Core.1.0.118.0\lib\net46\System.Data.SQLite.Core.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Data.SQLite, Version=1.0.118.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=MSIL">
-      <HintPath>..\packages\Stub.System.Data.SQLite.Core.NetFramework.1.0.118.0\lib\net46\System.Data.SQLite.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Diagnostics.DiagnosticSource, Version=4.0.5.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Diagnostics.DiagnosticSource.4.7.1\lib\net46\System.Diagnostics.DiagnosticSource.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Drawing" />
-    <Reference Include="System.IO.Compression" />
-    <Reference Include="System.IO.Compression.FileSystem" />
-    <Reference Include="System.IO.Compression.ZipFile, Version=4.0.2.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.IO.Compression.ZipFile.4.3.0\lib\net46\System.IO.Compression.ZipFile.dll</HintPath>
-      <Private>True</Private>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="System.Memory, Version=4.0.1.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Memory.4.5.4\lib\net461\System.Memory.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Net.Http" />
-    <Reference Include="System.Numerics" />
-    <Reference Include="System.Numerics.Vectors, Version=4.1.4.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Numerics.Vectors.4.5.0\lib\net46\System.Numerics.Vectors.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=4.0.4.1, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.4.5.3\lib\net461\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Runtime.Serialization" />
-    <Reference Include="System.ServiceModel" />
-    <Reference Include="System.Threading.Tasks.Extensions, Version=4.2.0.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Threading.Tasks.Extensions.4.5.4\lib\net461\System.Threading.Tasks.Extensions.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Transactions" />
-    <Reference Include="System.Windows.Forms" />
-    <Reference Include="System.Xml" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="XmlSampleGenerator, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.Xml.XMLGen.1.0.0\lib\XmlSampleGenerator.dll</HintPath>
-    </Reference>
+  <!-- Use COMReference for local development (where Office is installed) -->
+  <ItemGroup Condition="Exists('C:\Program Files\Microsoft Office')">
+    <COMReference Include="Microsoft.Office.Core">
+      <Guid>{2df8d04c-5bfa-101b-bde5-00aa0044de52}</Guid>
+      <VersionMajor>2</VersionMajor>
+      <VersionMinor>8</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>primary</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+    <COMReference Include="Microsoft.Office.Interop.Excel">
+      <Guid>{00020813-0000-0000-c000-000000000046}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>9</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>primary</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+    <COMReference Include="VBIDE">
+      <Guid>{0002e157-0000-0000-c000-000000000046}</Guid>
+      <VersionMajor>5</VersionMajor>
+      <VersionMinor>3</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>primary</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
   </ItemGroup>
-  <ItemGroup>
-    <Reference Include="Microsoft.Office.Tools.v4.0.Framework, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Microsoft.VisualStudio.Tools.Applications.Runtime, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Microsoft.Office.Tools, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Microsoft.Office.Tools.Common, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Microsoft.Office.Tools.Excel, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <Private>False</Private>
-    </Reference>
-  </ItemGroup>
-  <ItemGroup>
-    <Reference Include="Microsoft.Office.Tools.Common.v4.0.Utilities, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <Private>True</Private>
-    </Reference>
-  </ItemGroup>
-  <ItemGroup>
-    <Reference Include="Office, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c">
-      <Private>False</Private>
+
+  <!-- Use checked-in Interop assemblies for CI (where Office is NOT installed) -->
+  <ItemGroup Condition="!Exists('C:\Program Files\Microsoft Office')">
+    <Reference Include="Microsoft.Office.Core">
+      <HintPath>..\lib\Microsoft.Office.Core.dll</HintPath>
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </Reference>
-    <Reference Include="Microsoft.Office.Interop.Excel, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c">
-      <Private>False</Private>
+    <Reference Include="Microsoft.Office.Interop.Excel">
+      <HintPath>..\lib\Microsoft.Office.Interop.Excel.dll</HintPath>
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </Reference>
-    <Reference Include="stdole, Version=7.0.3300.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-      <Private>False</Private>
+    <Reference Include="VBIDE">
+      <HintPath>..\lib\VBIDE.dll</HintPath>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
     </Reference>
   </ItemGroup>
-  <!--
-    This section defines the user source files that are part of the project.
-     
-    A "Compile" element specifies a source file to compile.
-    An "EmbeddedResource" element specifies an .resx file for embedded resources.
-    A "None" element specifies a file that is not to be passed to the compiler (for instance, 
-    a text file or XML file).
-    The "AppDesigner" element specifies the directory where the application properties files
-    can be found.
-  -->
+
   <ItemGroup>
-    <Compile Include="Commons\FileExtensionFilter.cs" />
-    <Compile Include="Commons\RangeExtensions.cs" />
-    <Compile Include="FindFormulaErrors\CVErrEnum.cs" />
-    <Compile Include="DataValidation\CellsValueValidator.cs" />
-    <Compile Include="DataValidation\IValidator.cs" />
-    <Compile Include="Transliterate\ICyrillicLettersReplacer.cs" />
-    <Compile Include="InteractiveRangeReport\InteractiveErrorItem.cs" />
-    <Compile Include="DataValidation\ICellsValueValidator.cs" />
-    <Compile Include="DataValidation\ValidationResult.cs" />
-    <Compile Include="DataValidation\ValidatorFactory.cs" />
-    <Compile Include="DataValidation\Validators\DateValidator.cs" />
-    <Compile Include="DataValidation\Validators\NumericValidator.cs" />
-    <Compile Include="DataValidation\Validators\XmlTextValidator.cs" />
-    <Compile Include="DataValidation\Validators\TinOrganizationValidator.cs" />
-    <Compile Include="DataValidation\Validators\TinPersonalValidator.cs" />
-    <Compile Include="DataValidation\IValidatorFactory.cs" />
-    <Compile Include="Localization\RibbonSupertips.Designer.cs">
-      <DependentUpon>RibbonSupertips.resx</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-    </Compile>
-    <Compile Include="StringifyNumerics\EnglishNumericStringifier.cs" />
-    <Compile Include="StringifyNumerics\INumericStringifier.cs" />
-    <Compile Include="StringifyNumerics\FrenchNumericStringifier.cs" />
-    <Compile Include="StringifyNumerics\RussianNumericStringifier.cs" />
-    <Compile Include="SupportedCulture.cs" />
-    <Compile Include="Transliterate\CyrillicLettersReplacer.cs" />
-    <Compile Include="Transliterate\ITransliterator.cs" />
-    <Compile Include="Transliterate\CyrillicToLatinFallback.cs" />
-    <Compile Include="Transliterate\Transliterator.cs" />
-    <Compile Include="Undo\UndoManager.cs" />
-    <Compile Include="Web\WebToolsBuilder.cs" />
-    <Compile Include="Web\IWebTools.cs" />
-    <Compile Include="WorksheetCellsEditing\ConditionalFormatFixer.cs" />
-    <Compile Include="WorksheetCellsEditing\IConditionalFormatFixer.cs" />
-    <Compile Include="WorksheetProtectUnprotect\frmWorksheetsProtection.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="WorksheetProtectUnprotect\frmWorksheetsProtection.Designer.cs">
-      <DependentUpon>frmWorksheetsProtection.cs</DependentUpon>
-    </Compile>
-    <Compile Include="WorksheetProtectUnprotect\IWsProtectorUnprotector.cs" />
-    <Compile Include="WorksheetProtectUnprotect\WorksheetRow.cs" />
-    <Compile Include="WorksheetProtectUnprotect\WsProtectorUnprotector.cs" />
-    <Compile Include="XmlTools\IXmlValidator.cs" />
-    <Compile Include="XmlTools\IXsdSchemaValidator.cs" />
-    <Compile Include="XmlTools\IXmlSampleCreator.cs" />
-    <Compile Include="Localization\ValidationMessages.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>ValidationMessages.resx</DependentUpon>
-    </Compile>
-    <Compile Include="DataValidation\ValidationType.cs" />
-    <Compile Include="WorksheetCellsEditing\ICellsToMarkdownReader.cs" />
-    <Compile Include="WorksheetCellsEditing\CellsToMarkdownReader.cs" />
-    <Compile Include="WorksheetCellsEditing\IDuplicatesHighlighter.cs" />
-    <Compile Include="WorksheetCellsEditing\IEmptySpaceTrimmer.cs" />
-    <Compile Include="WorksheetCellsEditing\DuplicatesHighlighter.cs" />
-    <Compile Include="WorksheetCellsEditing\EmptySpaceTrimmer.cs" />
-    <Compile Include="WorksheetCellsEditing\ICaseToggler.cs" />
-    <Compile Include="WorksheetCellsEditing\CaseToggler.cs" />
-    <Compile Include="WorksheetCellsEditing\CellsUnmerger.cs" />
-    <Compile Include="Commons\DialogService.cs" />
-    <Compile Include="Commons\EnumerableExtensions.cs" />
-    <Compile Include="InteractiveRangeReport\InteractiveRangeReportForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="InteractiveRangeReport\InteractiveRangeReportForm.Designer.cs">
-      <DependentUpon>InteractiveRangeReportForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="FindFormulaErrors\ErrorFinder.cs" />
-    <Compile Include="FindFormulaErrors\IErrorFinder.cs" />
-    <Compile Include="Commons\ExceptionLogger.cs" />
-    <Compile Include="WorksheetCellsEditing\ICellsUnmerger.cs" />
-    <Compile Include="NavfertyRibbon.cs" />
-    <Compile Include="ParseNumerics\DecimalParser.cs" />
-    <Compile Include="ParseNumerics\INumericParser.cs" />
-    <Compile Include="ParseNumerics\NumericParser.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="RibbonIcons.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>RibbonIcons.resx</DependentUpon>
-    </Compile>
-    <Compile Include="UnprotectWorkbook\IWbUnprotector.cs" />
-    <Compile Include="UnprotectWorkbook\WbUnprotector.cs" />
-    <Compile Include="SqliteExport\ISqliteExporter.cs" />
-    <Compile Include="SqliteExport\ISqliteExportOptionsProvider.cs" />
-    <Compile Include="SqliteExport\SqliteExporter.cs" />
-    <Compile Include="SqliteExport\SqliteExportOptionsFormProvider.cs" />
-    <Compile Include="SqliteExport\ColumnTypeDetector.cs" />
-    <Compile Include="SqliteExport\SqliteExportOptions.cs" />
-    <Compile Include="SqliteExport\SqliteExportOptionsForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="XmlTools\XmlSampleCreator.cs" />
-    <Compile Include="XmlTools\XmlValidationError.cs" />
-    <Compile Include="XmlTools\XmlValidator.cs" />
-    <Compile Include="XmlTools\XsdSchemaValidator.cs" />
-    <None Include="Properties\DataSources\System.Data.DataSet.datasource" />
-    <None Include="Properties\DataSources\System.Xml.XmlNode.datasource" />
-    <None Include="Resources\replaceChars.png" />
-    <None Include="Resources\replace.png" />
-    <None Include="Resources\undo.png" />
-    <None Include="Resources\stringifyNumericsFr.png" />
-    <None Include="Resources\stringifyNumerics.png" />
-    <None Include="Resources\stringifyNumericsRu.png" />
-    <None Include="Resources\stringifyNumericsEn.png" />
-    <None Include="Resources\transliterate.png" />
-    <None Include="Resources\markdown.png" />
-    <None Include="Resources\validateXml.png" />
-    <None Include="Resources\unprotectWorkbook.png" />
-    <None Include="Resources\unmergeCells.png" />
-    <None Include="Resources\trimSpaces.png" />
-    <None Include="Resources\toggleCase.png" />
-    <None Include="Resources\parseNumerics.png" />
-    <None Include="Resources\highlightDuplicates.png" />
-    <None Include="Resources\cutNames.png" />
-    <None Include="Resources\createSampleXml.png" />
-    <None Include="Resources\findErrors.png" />
-    <None Include="app.config" />
-    <None Include="NavfertyExcelAddIn_TemporaryKey.pfx" />
     <Content Include="NLog.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <None Include="NLog.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="packages.config" />
-    <None Include="Properties\Settings.settings">
-      <Generator>SettingsSingleFileGenerator</Generator>
-      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
-    </None>
-    <Compile Include="Properties\Settings.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Settings.settings</DependentUpon>
-      <DesignTimeSharedInput>True</DesignTimeSharedInput>
-    </Compile>
-    <Compile Include="Registry.cs" />
-    <Compile Include="ThisAddIn.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <None Include="ThisAddIn.Designer.xml">
+    <None Update="ThisAddIn.Designer.xml">
       <DependentUpon>ThisAddIn.cs</DependentUpon>
     </None>
-    <Compile Include="ThisAddIn.Designer.cs">
-      <DependentUpon>ThisAddIn.Designer.xml</DependentUpon>
-    </Compile>
     <AppDesigner Include="Properties\" />
-    <Compile Include="Localization\UIStrings.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>UIStrings.resx</DependentUpon>
-    </Compile>
-    <Compile Include="Localization\RibbonLabels.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>RibbonLabels.resx</DependentUpon>
-    </Compile>
   </ItemGroup>
+
   <ItemGroup>
-    <EmbeddedResource Include="InteractiveRangeReport\InteractiveRangeReportForm.resx">
-      <DependentUpon>InteractiveRangeReportForm.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Localization\RibbonSupertips.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>RibbonSupertips.Designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Localization\RibbonSupertips.ru-RU.resx">
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Localization\RibbonLabels.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>RibbonLabels.Designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Localization\RibbonLabels.ru-RU.resx">
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Localization\UIStrings.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>UIStrings.Designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Localization\UIStrings.ru-RU.resx" />
-    <EmbeddedResource Include="Localization\ValidationMessages.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>ValidationMessages.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Localization\ValidationMessages.ru-RU.resx" />
     <EmbeddedResource Include="NavfertyRibbon.xml" />
-    <EmbeddedResource Include="RibbonIcons.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>RibbonIcons.Designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="WorksheetProtectUnprotect\frmWorksheetsProtection.resx">
-      <DependentUpon>frmWorksheetsProtection.cs</DependentUpon>
-    </EmbeddedResource>
   </ItemGroup>
+
   <ItemGroup>
-    <WCFMetadata Include="Connected Services\" />
+    <ProjectReference Include="..\Navferty.Common\Navferty.Common.csproj" />
+    <ProjectReference Include="..\Navferty.ExcelAddIn.Web\Navferty.ExcelAddIn.Web.csproj" />
   </ItemGroup>
+
   <ItemGroup>
-    <ProjectReference Include="..\Navferty.Common\Navferty.Common.csproj">
-      <Project>{f14665a1-a035-4c8e-845e-f00029c8181a}</Project>
-      <Name>Navferty.Common</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Navferty.ExcelAddIn.Web\Navferty.ExcelAddIn.Web.csproj">
-      <Project>{443907ef-f460-4726-94f0-fe35a1ac8fa2}</Project>
-      <Name>Navferty.ExcelAddIn.Web</Name>
-    </ProjectReference>
+    <PackageReference Include="Autofac" />
+    <PackageReference Include="Autofac.Extras.DynamicProxy" />
+    <PackageReference Include="Castle.Core" />
+    <PackageReference Include="Microsoft.Xml.XMLGen" />
+    <PackageReference Include="Newtonsoft.Json" />
+    <PackageReference Include="NLog" />
+    <PackageReference Include="NLog.Config" />
+    <PackageReference Include="NumericParser" />
+    <PackageReference Include="System.Data.SQLite.Core" />
+    <PackageReference Include="System.IO.Compression.ZipFile" />
   </ItemGroup>
-  <ItemGroup />
-  <PropertyGroup>
-    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
-    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
-  </PropertyGroup>
+
   <PropertyGroup>
     <ManifestCertificateThumbprint>F9B1B0FCADE6088F34E7F3F9A1A52F84E066B634</ManifestCertificateThumbprint>
   </PropertyGroup>
-  <!-- Include the build rules for a C# project. -->
+
   <PropertyGroup>
     <SignManifests>true</SignManifests>
   </PropertyGroup>
+
   <PropertyGroup>
     <ManifestKeyFile>NavfertyExcelAddIn_TemporaryKey.pfx</ManifestKeyFile>
   </PropertyGroup>
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <!-- Include additional build rules for an Office application add-in. -->
-  <Import Project="$(VSToolsPath)\OfficeTools\Microsoft.VisualStudio.Tools.Office.targets" Condition="'$(VSToolsPath)' != ''" />
-  <!-- This section defines VSTO properties that describe the host-changeable project properties. -->
+
+  <Import Project="Sdk.targets" Sdk="Microsoft.NET.Sdk" />
+
+  <Import Project="$(VSToolsPath)\OfficeTools\Microsoft.VisualStudio.Tools.Office.targets" Condition="Exists('$(VSToolsPath)\OfficeTools\Microsoft.VisualStudio.Tools.Office.targets')" />
+
   <ProjectExtensions>
     <VisualStudio>
       <FlavorProperties GUID="{BAA0C2D2-18E2-41B9-852F-F413020CAA33}">
@@ -496,11 +225,4 @@
       </FlavorProperties>
     </VisualStudio>
   </ProjectExtensions>
-  <Import Project="..\packages\Stub.System.Data.SQLite.Core.NetFramework.1.0.118.0\build\net46\Stub.System.Data.SQLite.Core.NetFramework.targets" Condition="Exists('..\packages\Stub.System.Data.SQLite.Core.NetFramework.1.0.118.0\build\net46\Stub.System.Data.SQLite.Core.NetFramework.targets')" />
-  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
-    <PropertyGroup>
-      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
-    </PropertyGroup>
-    <Error Condition="!Exists('..\packages\Stub.System.Data.SQLite.Core.NetFramework.1.0.118.0\build\net46\Stub.System.Data.SQLite.Core.NetFramework.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Stub.System.Data.SQLite.Core.NetFramework.1.0.118.0\build\net46\Stub.System.Data.SQLite.Core.NetFramework.targets'))" />
-  </Target>
 </Project>

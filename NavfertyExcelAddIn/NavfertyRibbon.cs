@@ -5,6 +5,7 @@ using System.Diagnostics.CodeAnalysis;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
 
@@ -83,6 +84,9 @@ namespace NavfertyExcelAddIn
 		public void RibbonLoad(IRibbonUI ribbonUI)
 		{
 			logger.Debug($"Ribbon loaded");
+
+			// .NET Framework 4.8.1 by default doesn't use TLS 1.2 or higher protocols
+			ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12 | SecurityProtocolType.Tls13 | SecurityProtocolType.Tls11;
 		}
 
 		#region View Group

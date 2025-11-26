@@ -1,136 +1,43 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
+    <TargetFramework>net481</TargetFramework>
     <LangVersion>Latest</LangVersion>
     <Nullable>enable</Nullable>
     <NullableContextOptions>enable</NullableContextOptions>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <NoStandardLibraries>false</NoStandardLibraries>
-    <OutputType>Library</OutputType>
-    <RootNamespace>Navferty.ExcelAddIn.Web</RootNamespace>
-    <AssemblyName>Navferty.ExcelAddIn.Web</AssemblyName>
-    <TargetFrameworkVersion>v4.8.1</TargetFrameworkVersion>
-    <FileAlignment>512</FileAlignment>
-    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
-    <Deterministic>true</Deterministic>
-    <ProjectGuid>{443907EF-F460-4726-94F0-FE35A1AC8FA2}</ProjectGuid>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <UseWindowsForms>true</UseWindowsForms>
+    <ImportWindowsDesktopTargets>true</ImportWindowsDesktopTargets>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
-    <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
     <DefineConstants>$(DefineConstants);DEBUG;TRACE</DefineConstants>
-    <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
-    <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
     <DefineConstants>$(DefineConstants);TRACE</DefineConstants>
-    <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
-  <PropertyGroup>
-    <StartupObject />
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Connected Services\cbrwebservice\Reference.cs">
+    <Compile Update="Connected Services\cbrwebservice\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
-    <Compile Include="CurrencyExchangeRates\Manager.cs" />
-    <Compile Include="CurrencyExchangeRates\CurrencyExchangeRatesDataset.Designer.cs" />
-    <Compile Include="CurrencyExchangeRates\Providers\CBRF\CBRFProvider.cs" />
-    <Compile Include="CurrencyExchangeRates\Providers\ECB\ECBExchangeRatesRecord.cs" />
-    <Compile Include="CurrencyExchangeRates\Providers\ECB\ECBProvider.cs" />
-    <Compile Include="CurrencyExchangeRates\Providers\ExchangeRatesProviderBase.cs" />
-    <Compile Include="CurrencyExchangeRates\Providers\NBU\JsonExchangeRatesForDateRecord.cs" />
-    <Compile Include="CurrencyExchangeRates\Providers\NBU\NBUProvider.cs" />
-    <Compile Include="CurrencyExchangeRates\frmExchangeRates.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="CurrencyExchangeRates\frmExchangeRates.Designer.cs">
-      <DependentUpon>frmExchangeRates.cs</DependentUpon>
-    </Compile>
-    <Compile Include="CurrencyExchangeRates\ExchangeRateRecord.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.13.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
-    </Reference>
-    <Reference Include="NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
-      <HintPath>..\packages\NLog.4.6.7\lib\net45\NLog.dll</HintPath>
-    </Reference>
-    <Reference Include="System" />
-    <Reference Include="System.Configuration" />
-    <Reference Include="System.Data" />
     <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="System.Data.Linq" />
-    <Reference Include="System.Drawing" />
-    <Reference Include="System.IO.Compression" />
-    <Reference Include="System.Net.Http" />
-    <Reference Include="System.Runtime.Serialization" />
-    <Reference Include="System.ServiceModel" />
-    <Reference Include="System.Transactions" />
-    <Reference Include="System.Windows.Forms" />
-    <Reference Include="System.Xml" />
-    <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
-    <AppDesigner Include="Properties\" />
-    <Compile Include="Localization\UIStrings.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>UIStrings.resx</DependentUpon>
-    </Compile>
-    <None Include="app.config" />
-    <None Include="Connected Services\cbrwebservice\DailyInfo.wsdl" />
-    <None Include="CurrencyExchangeRates\CurrencyExchangeRatesDataset.xsc">
+    <None Update="CurrencyExchangeRates\CurrencyExchangeRatesDataset.xsc">
       <DependentUpon>CurrencyExchangeRatesDataset.xsd</DependentUpon>
     </None>
-    <None Include="CurrencyExchangeRates\CurrencyExchangeRatesDataset.xsd" />
-    <None Include="CurrencyExchangeRates\CurrencyExchangeRatesDataset.xss">
+    <None Update="CurrencyExchangeRates\CurrencyExchangeRatesDataset.xss">
       <DependentUpon>CurrencyExchangeRatesDataset.xsd</DependentUpon>
     </None>
-    <None Include="Connected Services\cbrwebservice\configuration91.svcinfo" />
-    <None Include="Connected Services\cbrwebservice\configuration.svcinfo" />
-    <None Include="Connected Services\cbrwebservice\Reference.svcmap">
+    <None Update="Connected Services\cbrwebservice\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
-    <Content Include="NLog.config">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <None Include="NLog.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="packages.config" />
-    <None Include="Properties\DataSources\System.Data.DataSet.datasource" />
-    <None Include="Properties\DataSources\System.Xml.XmlNode.datasource" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="CurrencyExchangeRates\frmExchangeRates.resx">
-      <DependentUpon>frmExchangeRates.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Localization\UIStrings.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>UIStrings.Designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Localization\UIStrings.ru-RU.resx" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Navferty.Common\Navferty.Common.csproj">
-      <Project>{f14665a1-a035-4c8e-845e-f00029c8181a}</Project>
-      <Name>Navferty.Common</Name>
-    </ProjectReference>
+    <ProjectReference Include="..\Navferty.Common\Navferty.Common.csproj" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Connected Services\" />
@@ -138,5 +45,9 @@
   <ItemGroup>
     <WCFMetadataStorage Include="Connected Services\cbrwebservice\" />
   </ItemGroup>
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <ItemGroup>
+    <PackageReference Include="System.Net.Http" />
+    <PackageReference Include="Newtonsoft.Json" />
+    <PackageReference Include="NLog" />
+  </ItemGroup>
 </Project>

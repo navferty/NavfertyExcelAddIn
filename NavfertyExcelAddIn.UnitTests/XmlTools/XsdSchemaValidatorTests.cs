@@ -35,7 +35,7 @@ namespace NavfertyExcelAddIn.UnitTests.XmlTools
 
 			var result = validator.Validate(xmlFilename, new[] { xsdFilename });
 
-			Assert.AreEqual(0, result.Count);
+			Assert.IsEmpty(result);
 		}
 
 		[TestMethod]
@@ -47,7 +47,7 @@ namespace NavfertyExcelAddIn.UnitTests.XmlTools
 
 			var result = validator.Validate(xmlFilename, new[] { xsdFilename });
 
-			Assert.AreEqual(3, result.Count);
+			Assert.HasCount(3, result);
 			Assert.IsTrue(result.All(x => x.Severity == ValidationErrorSeverity.Error));
 
 			var errors = result.ToArray();
@@ -71,7 +71,7 @@ namespace NavfertyExcelAddIn.UnitTests.XmlTools
 			string xsdFilename = GetFilePath(XsdFile);
 
 
-			var ex = Assert.ThrowsException<XmlException>(() => validator.Validate(xmlFilename, new[] { xsdFilename }));
+			var ex = Assert.Throws<XmlException>(() => validator.Validate(xmlFilename, new[] { xsdFilename }));
 
 			StringAssert.Contains(ex.Message, "Документ");
 		}

@@ -45,9 +45,9 @@ public class CommonsAutomationTests : AutomationTestsBase
 
 		// Verify that cells with same values have same color
 		// apple appears in: A1, C1, A3
-		var appleColor1 = ((Range)sheet.Cells[1, 1]).Interior.ColorIndex;
-		var appleColor2 = ((Range)sheet.Cells[1, 3]).Interior.ColorIndex;
-		var appleColor3 = ((Range)sheet.Cells[3, 1]).Interior.ColorIndex;
+		var appleColor1 = (XlColorIndex)((Range)sheet.Cells[1, 1]).Interior.ColorIndex;
+		var appleColor2 = (XlColorIndex)((Range)sheet.Cells[1, 3]).Interior.ColorIndex;
+		var appleColor3 = (XlColorIndex)((Range)sheet.Cells[3, 1]).Interior.ColorIndex;
 		
 		TestContext.WriteLine($"Apple cells - A1 color: {appleColor1}, C1 color: {appleColor2}, A3 color: {appleColor3}");
 		Assert.AreEqual(appleColor1, appleColor2, "All 'apple' cells should have the same color");
@@ -55,16 +55,16 @@ public class CommonsAutomationTests : AutomationTestsBase
 		Assert.AreNotEqual(XlColorIndex.xlColorIndexNone, appleColor1, "'apple' cells should be colored");
 
 		// banana appears in: B1, B2
-		var bananaColor1 = ((Range)sheet.Cells[1, 2]).Interior.ColorIndex;
-		var bananaColor2 = ((Range)sheet.Cells[2, 2]).Interior.ColorIndex;
+		var bananaColor1 = (XlColorIndex)((Range)sheet.Cells[1, 2]).Interior.ColorIndex;
+		var bananaColor2 = (XlColorIndex)((Range)sheet.Cells[2, 2]).Interior.ColorIndex;
 		
 		TestContext.WriteLine($"Banana cells - B1 color: {bananaColor1}, B2 color: {bananaColor2}");
 		Assert.AreEqual(bananaColor1, bananaColor2, "All 'banana' cells should have the same color");
 		Assert.AreNotEqual(XlColorIndex.xlColorIndexNone, bananaColor1, "'banana' cells should be colored");
 
 		// orange appears in: A2, C3
-		var orangeColor1 = ((Range)sheet.Cells[2, 1]).Interior.ColorIndex;
-		var orangeColor2 = ((Range)sheet.Cells[3, 3]).Interior.ColorIndex;
+		var orangeColor1 = (XlColorIndex)((Range)sheet.Cells[2, 1]).Interior.ColorIndex;
+		var orangeColor2 = (XlColorIndex)((Range)sheet.Cells[3, 3]).Interior.ColorIndex;
 		
 		TestContext.WriteLine($"Orange cells - A2 color: {orangeColor1}, C3 color: {orangeColor2}");
 		Assert.AreEqual(orangeColor1, orangeColor2, "All 'orange' cells should have the same color");
@@ -220,9 +220,9 @@ public class CommonsAutomationTests : AutomationTestsBase
 			TestContext.WriteLine(clipboardText);
 
 			// Verify markdown format (should contain pipe characters for table)
-			Assert.IsTrue(clipboardText.Contains("|"), "Markdown table should contain pipe characters");
-			Assert.IsTrue(clipboardText.Contains("Name"), "Markdown should contain header 'Name'");
-			Assert.IsTrue(clipboardText.Contains("Alice"), "Markdown should contain 'Alice'");
+			Assert.Contains("|", clipboardText, "Markdown table should contain pipe characters");
+			Assert.Contains("Name", clipboardText, "Markdown should contain header 'Name'");
+			Assert.Contains("Alice", clipboardText, "Markdown should contain 'Alice'");
 		}
 	}
 
@@ -258,9 +258,9 @@ public class CommonsAutomationTests : AutomationTestsBase
 
 		// Verify that cells with same values have same color
 		// 100 appears in: A1, C1, A3
-		var value100Color1 = ((Range)sheet.Cells[1, 1]).Interior.ColorIndex;
-		var value100Color2 = ((Range)sheet.Cells[1, 3]).Interior.ColorIndex;
-		var value100Color3 = ((Range)sheet.Cells[3, 1]).Interior.ColorIndex;
+		var value100Color1 = (XlColorIndex)((Range)sheet.Cells[1, 1]).Interior.ColorIndex;
+		var value100Color2 = (XlColorIndex)((Range)sheet.Cells[1, 3]).Interior.ColorIndex;
+		var value100Color3 = (XlColorIndex)((Range)sheet.Cells[3, 1]).Interior.ColorIndex;
 		
 		TestContext.WriteLine($"100 cells - A1 color: {value100Color1}, C1 color: {value100Color2}, A3 color: {value100Color3}");
 		Assert.AreEqual(value100Color1, value100Color2, "All '100' cells should have the same color");
@@ -268,16 +268,16 @@ public class CommonsAutomationTests : AutomationTestsBase
 		Assert.AreNotEqual(XlColorIndex.xlColorIndexNone, value100Color1, "'100' cells should be colored");
 
 		// 200 appears in: B1, B2
-		var value200Color1 = ((Range)sheet.Cells[1, 2]).Interior.ColorIndex;
-		var value200Color2 = ((Range)sheet.Cells[2, 2]).Interior.ColorIndex;
+		var value200Color1 = (XlColorIndex)((Range)sheet.Cells[1, 2]).Interior.ColorIndex;
+		var value200Color2 = (XlColorIndex)((Range)sheet.Cells[2, 2]).Interior.ColorIndex;
 		
 		TestContext.WriteLine($"200 cells - B1 color: {value200Color1}, B2 color: {value200Color2}");
 		Assert.AreEqual(value200Color1, value200Color2, "All '200' cells should have the same color");
 		Assert.AreNotEqual(XlColorIndex.xlColorIndexNone, value200Color1, "'200' cells should be colored");
 
 		// 300 appears in: A2, C3
-		var value300Color1 = ((Range)sheet.Cells[2, 1]).Interior.ColorIndex;
-		var value300Color2 = ((Range)sheet.Cells[3, 3]).Interior.ColorIndex;
+		var value300Color1 = (XlColorIndex)((Range)sheet.Cells[2, 1]).Interior.ColorIndex;
+		var value300Color2 = (XlColorIndex)((Range)sheet.Cells[3, 3]).Interior.ColorIndex;
 		
 		TestContext.WriteLine($"300 cells - A2 color: {value300Color1}, C3 color: {value300Color2}");
 		Assert.AreEqual(value300Color1, value300Color2, "All '300' cells should have the same color");

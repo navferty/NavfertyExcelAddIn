@@ -11,7 +11,7 @@ pool:
 
 variables:
   solutionFolder: '$(Build.SourcesDirectory)/NavfertyExcelAddIn'
-  solution: '$(Build.SourcesDirectory)/NavfertyExcelAddIn.sln'
+  solution: '$(Build.SourcesDirectory)/NavfertyExcelAddIn.slnx'
   buildPlatform: 'Any CPU'
   buildConfiguration: 'Release'
 
@@ -74,7 +74,7 @@ steps:
       $coverlet = "$pwd\coverlet.exe"
 
       "calling $coverlet for $($unitTestFile.FullName)"
-      &$coverlet $unitTestFile.FullName --target "dotnet" --targetargs "vstest $($unitTestFile.FullName) --logger:trx" --format "cobertura"
+      &$coverlet $unitTestFile.FullName --target "dotnet" --targetargs "vstest $($unitTestFile.FullName) --filter:`"TestCategory!=Automation`" --logger:trx" --format "cobertura"
 
       "`ngenerate report(s)"
       gci -Recurse | 
@@ -82,7 +82,7 @@ steps:
           %{ &"$pwd\reportgenerator.exe" "-reports:$($_.FullName)" "-targetdir:reports" "-reporttypes:HTMLInline;HTMLChart" }
 
 
-- task: PublishCodeCoverageResults@1
+- task: PublishCodeCoverageResults@2
   inputs:
     codeCoverageTool: 'Cobertura'
     summaryFileLocation: '$(Build.SourcesDirectory)/coverage.cobertura.xml'

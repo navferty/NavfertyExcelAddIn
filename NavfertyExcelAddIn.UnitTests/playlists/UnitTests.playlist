@@ -1,0 +1,11 @@
+<Playlist Version="2.0">
+  <Rule Name="Includes" Match="Any">
+    <Rule Match="All">
+      <Property Name="Solution" />
+      <Property Name="Project" Value="NavfertyExcelAddIn.UnitTests" />
+    </Rule>
+  </Rule>
+  <Rule Name="Excludes" Match="Not">
+    <Property Name="Trait" Value="Automation" />
+  </Rule>
+</Playlist>
