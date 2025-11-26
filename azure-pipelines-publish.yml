@@ -63,7 +63,7 @@ steps:
   inputs:
     solution: '$(project)'
     msbuildArchitecture: 'x64'
-    msbuildArguments: '/t:PublishOnly /p:Version="$(majorVersion).$(minorVersion).$(patchVersion).$(buildId)" /p:PublishDir="$(Build.ArtifactStagingDirectory)/" /p:VisualStudioVersion="17.0" /p:Platform="AnyCPU" /p:Configuration="$(buildConfiguration)" /p:BootstrapperEnabled=true /p:CreateWebPageOnPublish=true /p:InstallUrl="https://navferty.ru/deploy/" /p:ApplicationVersion="$(majorVersion).$(minorVersion).$(patchVersion).$(buildId)" /p:SignToolCommand=echo'
+    msbuildArguments: '/t:PublishOnly /p:Version="$(majorVersion).$(minorVersion).$(patchVersion).$(buildId)" /p:PublishDir="$(Build.ArtifactStagingDirectory)/" /p:VisualStudioVersion="17.0" /p:Platform="AnyCPU" /p:Configuration="$(buildConfiguration)" /p:BootstrapperEnabled=true /p:CreateWebPageOnPublish=true /p:InstallUrl="https://navferty.ru/deploy/" /p:ApplicationVersion="$(majorVersion).$(minorVersion).$(patchVersion).$(buildId)" /p:SignToolCommand=exit'
 
 # Verify deployment structure and manifest signatures
 - task: PowerShell@2
