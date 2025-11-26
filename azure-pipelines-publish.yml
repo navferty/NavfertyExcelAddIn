@@ -58,6 +58,18 @@ steps:
     msbuildArchitecture: 'x64'
     msbuildArguments: '/t:Publish /p:Version="$(majorVersion).$(minorVersion).$(patchVersion).$(buildId)" /p:PublishDir="$(Build.ArtifactStagingDirectory)/" /p:VisualStudioVersion="17.0" /p:Platform="AnyCPU" /p:Configuration="$(buildConfiguration)" /p:BootstrapperEnabled=true /p:CreateWebPageOnPublish=true /p:InstallUrl="https://navferty.ru/deploy/" /p:ApplicationVersion="$(majorVersion).$(minorVersion).$(patchVersion).$(buildId)"'
 
+# Diagnose what was published
+- task: PowerShell@2
+  name: 'DiagnosePublishOutput'
+  inputs:
+    targetType: 'inline'
+    script: |
+      Write-Host "Contents of Artifact Staging Directory:"
+      Get-ChildItem -Path "$(Build.ArtifactStagingDirectory)" -Recurse | Format-Table FullName, Length
+      
+      Write-Host "`nSearching for publish output in bin folder:"
+      Get-ChildItem -Path "$(solutionFolder)/bin" -Recurse -ErrorAction SilentlyContinue | Format-Table FullName, Length
+
 # Generate bootstrapper (setup.exe) manually since SDK-style projects don't do this automatically
 - task: PowerShell@2
   name: 'GenerateBootstrapper'
@@ -102,18 +114,6 @@ steps:
       
       Write-Host "`nFinal deployment structure:"
       Get-ChildItem -Path $stagingPath -Recurse | Format-Table Name, Length -AutoSize
-
-# Diagnose what was published
-- task: PowerShell@2
-  name: 'DiagnosePublishOutput'
-  inputs:
-    targetType: 'inline'
-    script: |
-      Write-Host "Contents of Artifact Staging Directory:"
-      Get-ChildItem -Path "$(Build.ArtifactStagingDirectory)" -Recurse | Format-Table FullName, Length
-      
-      Write-Host "`nSearching for publish output in bin folder:"
-      Get-ChildItem -Path "$(solutionFolder)/bin" -Recurse -Include "*.vsto","*.manifest","*.deploy","*.exe" -ErrorAction SilentlyContinue | Format-Table FullName, Length
 
 - task: PublishBuildArtifacts@1
   inputs:
