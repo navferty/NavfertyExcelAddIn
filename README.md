@@ -18,6 +18,7 @@
  - [Find Formula Errors in the selected range](#find-all-cells-containing-errors)
  - [Copy as Markdown](#copy-as-markdown)
  - [Validate Values](#validate-values)
+ - [Export to SQLite](#export-to-sqlite)
  - [Create Sample XML based on XSD](#create-sample-xml-based-on-xsd)
  - [Validate XML with XSD](#validate-xml-with-xsd)
 
@@ -200,6 +201,23 @@
   <summary>View a screenshot</summary>
 
 ![Navferty's Tools Ribbon Tab in MS Excel](images/Validate.png)
+</details>
+
+[Up](#navfertys-excel-add-in)
+
+---
+
+## Export to SQLite
+
+|||
+|:-:|---|
+||Export the entire workbook to a SQLite database file. Each worksheet is converted to a separate table with automatic column type detection. Options include using the first row as column headers and skipping initial rows.|
+
+<details>
+  <summary>View screenshots</summary>
+
+![Export to SQLite in MS Excel](images/ExportToSqlite1.png)
+![SQLite Database Result](images/ExportToSqlite2.png)
 </details>
 
 [Up](#navfertys-excel-add-in)
