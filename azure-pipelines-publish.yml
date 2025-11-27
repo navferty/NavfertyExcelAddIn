@@ -95,6 +95,22 @@ steps:
         Write-Warning "✗ Application Files folder NOT found"
       }
       
+      Write-Host "`nChecking for SQLite.Interop.dll files:"
+      $sqliteX86 = Get-ChildItem -Path "$(Build.ArtifactStagingDirectory)" -Filter "SQLite.Interop.dll" -Recurse | Where-Object { $_.FullName -like "*\x86\*" }
+      $sqliteX64 = Get-ChildItem -Path "$(Build.ArtifactStagingDirectory)" -Filter "SQLite.Interop.dll" -Recurse | Where-Object { $_.FullName -like "*\x64\*" }
+      
+      if ($sqliteX86) {
+        Write-Host "✓ SQLite.Interop.dll (x86) found: $($sqliteX86.FullName) ($($sqliteX86.Length) bytes)"
+      } else {
+        Write-Warning "✗ SQLite.Interop.dll (x86) NOT found - SQLite export feature will fail!"
+      }
+      
+      if ($sqliteX64) {
+        Write-Host "✓ SQLite.Interop.dll (x64) found: $($sqliteX64.FullName) ($($sqliteX64.Length) bytes)"
+      } else {
+        Write-Warning "✗ SQLite.Interop.dll (x64) NOT found - SQLite export feature will fail!"
+      }
+      
       Write-Host "`nVerifying manifest signatures in staging directory:"
       $vstoFile = Get-ChildItem -Path "$(Build.ArtifactStagingDirectory)" -Filter "*.vsto" -Recurse | Select-Object -First 1
       if ($vstoFile) {

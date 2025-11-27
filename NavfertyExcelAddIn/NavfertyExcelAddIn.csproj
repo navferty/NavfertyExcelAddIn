@@ -218,6 +218,39 @@
     <ManifestKeyFile>Navferty.pfx</ManifestKeyFile>
   </PropertyGroup>
 
+  <!-- Custom target to ensure SQLite native DLLs are copied to output directory -->
+  <Target Name="CopySQLiteNativeDlls" AfterTargets="Build;Publish">
+    <PropertyGroup>
+      <SQLitePackageDir>$(NuGetPackageRoot)system.data.sqlite.core\1.0.119\</SQLitePackageDir>
+    </PropertyGroup>
+    
+    <ItemGroup>
+      <SQLiteNativeFiles Include="$(SQLitePackageDir)build\net46\x86\SQLite.Interop.dll">
+        <DestinationFolder>$(OutDir)x86\</DestinationFolder>
+        <PublishDestinationFolder>$(PublishDir)x86\</PublishDestinationFolder>
+      </SQLiteNativeFiles>
+      <SQLiteNativeFiles Include="$(SQLitePackageDir)build\net46\x64\SQLite.Interop.dll">
+        <DestinationFolder>$(OutDir)x64\</DestinationFolder>
+        <PublishDestinationFolder>$(PublishDir)x64\</PublishDestinationFolder>
+      </SQLiteNativeFiles>
+    </ItemGroup>
+    
+    <!-- Copy to build output directory -->
+    <Copy SourceFiles="@(SQLiteNativeFiles)" 
+          DestinationFolder="%(SQLiteNativeFiles.DestinationFolder)"
+          SkipUnchangedFiles="true"
+          Condition="Exists('%(SQLiteNativeFiles.FullPath)')" />
+    
+    <!-- Copy to publish directory if publishing -->
+    <Copy SourceFiles="@(SQLiteNativeFiles)" 
+          DestinationFolder="%(SQLiteNativeFiles.PublishDestinationFolder)"
+          SkipUnchangedFiles="true"
+          Condition="'$(PublishDir)' != '' AND Exists('%(SQLiteNativeFiles.FullPath)')" />
+    
+    <Message Text="Copied SQLite native DLLs to output directory: $(OutDir)" Importance="high" />
+    <Message Text="Copied SQLite native DLLs to publish directory: $(PublishDir)" Importance="high" Condition="'$(PublishDir)' != ''" />
+  </Target>
+
   <Import Project="Sdk.targets" Sdk="Microsoft.NET.Sdk" />
 
   <Import Project="$(VSToolsPath)\OfficeTools\Microsoft.VisualStudio.Tools.Office.targets" Condition="Exists('$(VSToolsPath)\OfficeTools\Microsoft.VisualStudio.Tools.Office.targets')" />
