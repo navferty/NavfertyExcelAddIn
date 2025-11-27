@@ -5,9 +5,13 @@
   <Folder Name="/Solution Items/">
     <File Path=".editorconfig" />
     <File Path=".gitignore" />
+    <File Path="Directory.Packages.props" />
+  </Folder>
+  <Folder Name="/Pipelines/">
     <File Path="azure-pipelines-CI.yml" />
     <File Path="azure-pipelines-publish.yml" />
-    <File Path="Directory.Packages.props" />
+  </Folder>
+  <Folder Name="/Readme/">
     <File Path="LICENSE" />
     <File Path="README.md" />
     <File Path="README_Cert.md" />
