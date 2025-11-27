@@ -20,4 +20,25 @@
   <Project Path="Navferty.Common/Navferty.Common.csproj" Id="f14665a1-a035-4c8e-845e-f00029c8181a" />
   <Project Path="Navferty.ExcelAddIn.Web/Navferty.ExcelAddIn.Web.csproj" Id="443907ef-f460-4726-94f0-fe35a1ac8fa2" />
   <Project Path="NavfertyExcelAddIn/NavfertyExcelAddIn.csproj" Id="def56c38-95b1-4cfc-8b27-70fea7a35d78" />
+  <Project Path="Website/" Type="Website" DisplayName="Website">
+    <BuildType Project="Debug" />
+    <Properties Name="WebsiteProperties">
+      <Property Name="Debug.AspNetCompiler.Debug" Value="false" />
+      <Property Name="Debug.AspNetCompiler.FixedNames" Value="false" />
+      <Property Name="Debug.AspNetCompiler.ForceOverwrite" Value="true" />
+      <Property Name="Debug.AspNetCompiler.PhysicalPath" Value="Website\" />
+      <Property Name="Debug.AspNetCompiler.TargetPath" Value="PrecompiledWeb\localhost_62313\" />
+      <Property Name="Debug.AspNetCompiler.Updateable" Value="true" />
+      <Property Name="Debug.AspNetCompiler.VirtualPath" Value="/localhost_62313" />
+      <Property Name="Release.AspNetCompiler.Debug" Value="false" />
+      <Property Name="Release.AspNetCompiler.FixedNames" Value="false" />
+      <Property Name="Release.AspNetCompiler.ForceOverwrite" Value="true" />
+      <Property Name="Release.AspNetCompiler.PhysicalPath" Value="Website\" />
+      <Property Name="Release.AspNetCompiler.TargetPath" Value="PrecompiledWeb\localhost_62313\" />
+      <Property Name="Release.AspNetCompiler.Updateable" Value="true" />
+      <Property Name="Release.AspNetCompiler.VirtualPath" Value="/localhost_62313" />
+      <Property Name="TargetFrameworkMoniker" Value=".NETFramework,Version%3Dv4.0" />
+      <Property Name="VWDPort" Value="62313" />
+    </Properties>
+  </Project>
 </Solution>
