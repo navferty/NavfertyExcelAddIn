@@ -185,6 +185,32 @@
     <AppDesigner Include="Properties\" />
   </ItemGroup>
 
+  <!-- SQLite native DLL package location (needed early for Content items) -->
+  <PropertyGroup>
+    <SQLiteStubPackageDir Condition="'$(SQLiteStubPackageDir)' == '' AND '$(NuGetPackageRoot)' != ''">$(NuGetPackageRoot)stub.system.data.sqlite.core.netframework\1.0.119\</SQLiteStubPackageDir>
+    <SQLiteStubPackageDir Condition="'$(SQLiteStubPackageDir)' == ''">$(UserProfile)\.nuget\packages\stub.system.data.sqlite.core.netframework\1.0.119\</SQLiteStubPackageDir>
+  </PropertyGroup>
+
+  <!-- Include SQLite native DLLs in ClickOnce deployment -->
+  <ItemGroup>
+    <Content Include="$(SQLiteStubPackageDir)build\net46\x86\SQLite.Interop.dll" Condition="Exists('$(SQLiteStubPackageDir)build\net46\x86\SQLite.Interop.dll')">
+      <Link>x86\SQLite.Interop.dll</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <PublishState>Include</PublishState>
+      <IncludeHash>true</IncludeHash>
+      <FileType>File</FileType>
+      <Visible>false</Visible>
+    </Content>
+    <Content Include="$(SQLiteStubPackageDir)build\net46\x64\SQLite.Interop.dll" Condition="Exists('$(SQLiteStubPackageDir)build\net46\x64\SQLite.Interop.dll')">
+      <Link>x64\SQLite.Interop.dll</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <PublishState>Include</PublishState>
+      <IncludeHash>true</IncludeHash>
+      <FileType>File</FileType>
+      <Visible>false</Visible>
+    </Content>
+  </ItemGroup>
+
   <ItemGroup>
     <EmbeddedResource Include="NavfertyRibbon.xml" />
   </ItemGroup>
@@ -217,6 +243,62 @@
   <PropertyGroup>
     <ManifestKeyFile>Navferty.pfx</ManifestKeyFile>
   </PropertyGroup>
+
+  <!-- Custom target to ensure SQLite native DLLs are copied to output directory -->
+  <Target Name="CopySQLiteNativeDlls" AfterTargets="Build;_CopyFilesToPublishFolder;ComputeFilesToPublish">
+    <PropertyGroup>
+      <!-- SQLite native DLLs are in the stub package, not the main package -->
+      <SQLiteStubPackageDir>$(NuGetPackageRoot)stub.system.data.sqlite.core.netframework\1.0.119\</SQLiteStubPackageDir>
+      <!-- Fallback if NuGetPackageRoot is not set -->
+      <SQLiteStubPackageDir Condition="'$(NuGetPackageRoot)' == ''">$(UserProfile)\.nuget\packages\stub.system.data.sqlite.core.netframework\1.0.119\</SQLiteStubPackageDir>
+    </PropertyGroup>
+    
+    <!-- Log diagnostic information -->
+    <Message Text="=== SQLite Native DLL Copy Target ===" Importance="high" />
+    <Message Text="SQLite Stub Package Directory: $(SQLiteStubPackageDir)" Importance="high" />
+    <Message Text="Output Directory: $(OutDir)" Importance="high" />
+    <Message Text="Publish Directory: $(PublishDir)" Importance="high" />
+    
+    <ItemGroup>
+      <!-- Get SQLite native DLLs from the stub package -->
+      <SQLiteNativeFiles Include="$(SQLiteStubPackageDir)build\net46\x86\SQLite.Interop.dll" Condition="Exists('$(SQLiteStubPackageDir)build\net46\x86\SQLite.Interop.dll')">
+        <DestinationFolder>$(OutDir)x86\</DestinationFolder>
+        <PublishDestinationFolder>$(PublishDir)Application Files\$(AssemblyName)_$(ApplicationVersion)\x86\</PublishDestinationFolder>
+        <Arch>x86</Arch>
+      </SQLiteNativeFiles>
+      <SQLiteNativeFiles Include="$(SQLiteStubPackageDir)build\net46\x64\SQLite.Interop.dll" Condition="Exists('$(SQLiteStubPackageDir)build\net46\x64\SQLite.Interop.dll')">
+        <DestinationFolder>$(OutDir)x64\</DestinationFolder>
+        <PublishDestinationFolder>$(PublishDir)Application Files\$(AssemblyName)_$(ApplicationVersion)\x64\</PublishDestinationFolder>
+        <Arch>x64</Arch>
+      </SQLiteNativeFiles>
+    </ItemGroup>
+    
+    <!-- Log what we found -->
+    <Message Text="Found @(SQLiteNativeFiles->Count()) SQLite native DLL(s)" Importance="high" />
+    <Message Text="  - %(SQLiteNativeFiles.Identity) [%(SQLiteNativeFiles.Arch)]" Importance="high" Condition="'@(SQLiteNativeFiles)' != ''" />
+    <Warning Text="No SQLite native DLLs found in $(SQLiteStubPackageDir)" Condition="'@(SQLiteNativeFiles)' == ''" />
+    
+    <!-- Copy to build output directory -->
+    <Copy SourceFiles="@(SQLiteNativeFiles)" 
+          DestinationFolder="%(SQLiteNativeFiles.DestinationFolder)"
+          SkipUnchangedFiles="true"
+          Condition="'@(SQLiteNativeFiles)' != ''" />
+    
+    <!-- Copy to publish directory if publishing (for ClickOnce) -->
+    <Copy SourceFiles="@(SQLiteNativeFiles)" 
+          DestinationFolder="%(SQLiteNativeFiles.PublishDestinationFolder)"
+          SkipUnchangedFiles="true"
+          Condition="'$(PublishDir)' != '' AND '@(SQLiteNativeFiles)' != ''" />
+    
+    <!-- Also copy to root publish directory as fallback -->
+    <Copy SourceFiles="@(SQLiteNativeFiles)" 
+          DestinationFolder="$(PublishDir)%(SQLiteNativeFiles.Arch)\"
+          SkipUnchangedFiles="true"
+          Condition="'$(PublishDir)' != '' AND '@(SQLiteNativeFiles)' != ''" />
+    
+    <Message Text="✓ Copied SQLite native DLLs to: $(OutDir)" Importance="high" Condition="'@(SQLiteNativeFiles)' != ''" />
+    <Message Text="✓ Copied SQLite native DLLs to: $(PublishDir)" Importance="high" Condition="'$(PublishDir)' != '' AND '@(SQLiteNativeFiles)' != ''" />
+  </Target>
 
   <Import Project="Sdk.targets" Sdk="Microsoft.NET.Sdk" />
 
