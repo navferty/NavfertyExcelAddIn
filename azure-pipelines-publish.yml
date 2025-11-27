@@ -63,8 +63,57 @@ steps:
   inputs:
     solution: '$(project)'
     msbuildArchitecture: 'x64'
-    msbuildArguments: '/t:PublishOnly /p:Version="$(majorVersion).$(minorVersion).$(patchVersion).$(buildId)" /p:PublishDir="$(Build.ArtifactStagingDirectory)/" /p:VisualStudioVersion="17.0" /p:Platform="AnyCPU" /p:Configuration="$(buildConfiguration)" /p:BootstrapperEnabled=true /p:CreateWebPageOnPublish=true /p:InstallUrl="https://navferty.ru/deploy/" /p:ApplicationVersion="$(majorVersion).$(minorVersion).$(patchVersion).$(buildId)"'
+    msbuildArguments: '/t:PublishOnly /p:Version="$(majorVersion).$(minorVersion).$(patchVersion).$(buildId)" /p:PublishDir="$(Build.ArtifactStagingDirectory)/" /p:VisualStudioVersion="17.0" /p:Platform="AnyCPU" /p:Configuration="$(buildConfiguration)" /p:BootstrapperEnabled=true /p:CreateWebPageOnPublish=true /p:InstallUrl="https://navferty.ru/deploy/" /p:ApplicationVersion="$(majorVersion).$(minorVersion).$(patchVersion).$(buildId)" /verbosity:normal'
   continueOnError: true # task fails if setup.exe cannot be signed
+
+# Copy SQLite native DLLs to the ClickOnce deployment folder
+- task: PowerShell@2
+  name: 'CopySQLiteNativeDlls'
+  inputs:
+    targetType: 'inline'
+    script: |
+      Write-Host "Copying SQLite native DLLs to ClickOnce deployment structure"
+      
+      $binPublishPath = "$(solutionFolder)/bin/Release/net481/publish"
+      $stagingPath = "$(Build.ArtifactStagingDirectory)"
+      $appVersion = "$(majorVersion).$(minorVersion).$(patchVersion).$(buildId)"
+      $appVersionUnderscore = $appVersion.Replace('.', '_')
+      
+      Write-Host "Source (bin publish): $binPublishPath"
+      Write-Host "Destination (staging): $stagingPath"
+      Write-Host "Application version: $appVersionUnderscore"
+      
+      # Find SQLite.Interop.dll files in bin publish folder
+      $sqliteFiles = Get-ChildItem -Path $binPublishPath -Filter "SQLite.Interop.dll" -Recurse -ErrorAction SilentlyContinue
+      
+      Write-Host "Found $($sqliteFiles.Count) SQLite.Interop.dll file(s) in bin publish folder"
+      
+      foreach ($file in $sqliteFiles) {
+        Write-Host "  - $($file.FullName)"
+        
+        # Determine architecture from path
+        $relativePath = $file.FullName.Substring($binPublishPath.Length + 1)
+        $destPath = Join-Path $stagingPath $relativePath
+        
+        Write-Host "    Copying to: $destPath"
+        
+        # Create destination directory if it doesn't exist
+        $destDir = Split-Path $destPath -Parent
+        if (-not (Test-Path $destDir)) {
+          New-Item -ItemType Directory -Path $destDir -Force | Out-Null
+        }
+        
+        # Copy the file
+        Copy-Item -Path $file.FullName -Destination $destPath -Force
+        Write-Host "    ✓ Copied successfully"
+      }
+      
+      Write-Host "`nVerifying copied files in staging directory:"
+      $copiedFiles = Get-ChildItem -Path $stagingPath -Filter "SQLite.Interop.dll" -Recurse -ErrorAction SilentlyContinue
+      Write-Host "Found $($copiedFiles.Count) SQLite.Interop.dll file(s) in staging directory"
+      foreach ($file in $copiedFiles) {
+        Write-Host "  ✓ $($file.FullName) ($($file.Length) bytes)"
+      }
 
 # Verify deployment structure and manifest signatures
 - task: PowerShell@2
@@ -93,6 +142,22 @@ steps:
         Get-ChildItem -Path $appFiles.FullName -Recurse | Format-Table Name, Length -AutoSize
       } else {
         Write-Warning "✗ Application Files folder NOT found"
+      }
+      
+      Write-Host "`nChecking for SQLite.Interop.dll files:"
+      $sqliteX86 = Get-ChildItem -Path "$(Build.ArtifactStagingDirectory)" -Filter "SQLite.Interop.dll" -Recurse | Where-Object { $_.FullName -like "*\x86\*" }
+      $sqliteX64 = Get-ChildItem -Path "$(Build.ArtifactStagingDirectory)" -Filter "SQLite.Interop.dll" -Recurse | Where-Object { $_.FullName -like "*\x64\*" }
+      
+      if ($sqliteX86) {
+        Write-Host "✓ SQLite.Interop.dll (x86) found: $($sqliteX86.FullName) ($($sqliteX86.Length) bytes)"
+      } else {
+        Write-Warning "✗ SQLite.Interop.dll (x86) NOT found - SQLite export feature will fail!"
+      }
+      
+      if ($sqliteX64) {
+        Write-Host "✓ SQLite.Interop.dll (x64) found: $($sqliteX64.FullName) ($($sqliteX64.Length) bytes)"
+      } else {
+        Write-Warning "✗ SQLite.Interop.dll (x64) NOT found - SQLite export feature will fail!"
       }
       
       Write-Host "`nVerifying manifest signatures in staging directory:"
