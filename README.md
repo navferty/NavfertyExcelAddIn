@@ -182,7 +182,7 @@
 
 |||
 |:-:|---|
-|![](images/icons/parseNumerics.png)|Contents of selected cells will be copied to clipboard in markdown format.|
+|![](images/icons/markdown.png)|Contents of selected cells will be copied to clipboard in markdown format.|
 
 <details>
   <summary>View a screenshot</summary>
@@ -324,19 +324,19 @@ Sample error report
 ### Online Install
 
 You can install the add-in from the official website of the project:
-[navferty.ru](https://www.navferty.ru). Just download and run the setup.exe.
+[navferty.ru](https://www.navferty.ru). Just download and run setup.exe.
 
 You may need to manually import the self-signed certificate before the installation process can be finished.
 
-The installation process also requires internet connection to load latest version.
+The installation process also requires an internet connection to load the latest version.
 
 ### Offline Install
 
-The solution is built in Azure, you can download the full archive with installation files from there:
+The solution is built in Azure. You can download the full archive with installation files from there:
 
 * Visit https://navferty.visualstudio.com/NavfertyExcelAddIn/_build?definitionId=3
 
-* Select latest build of 'NavfertyExcelAddIn - Publish' pipeline:
+* Select the latest build of 'NavfertyExcelAddIn - Publish' pipeline:
 
 ![Navferty's Tools Ribbon Tab in MS Excel](images/Install1.png)
 
@@ -346,13 +346,13 @@ The solution is built in Azure, you can download the full archive with installat
 
 * Extract files to a folder and run '.vsto' file:
 
-> Using desktop folder is highly recommended - installing updates
+> Using the desktop folder is highly recommended - installing updates
 > is permitted only from the same folder where it was installed
 > for the first time!
 
 ![Navferty's Tools Ribbon Tab in MS Excel](images/Install3.png)
 
-After the installation process is completed, run (or restart) Excel application, and you will see new tab:
+After the installation process is completed, run (or restart) the Excel application, and you will see a new tab:
 
 ![Navferty's Tools Ribbon Tab in MS Excel](images/Install4.png)
 
