@@ -22,6 +22,19 @@ steps:
   inputs:
     restoreSolution: '$(solution)'
 
+# Remove Website project from solution to avoid .NET Framework 4.0 targeting pack error
+- task: PowerShell@2
+  displayName: 'Remove Website project from solution'
+  inputs:
+    targetType: 'inline'
+    script: |
+      $solutionFile = '$(solution)'
+      $content = Get-Content $solutionFile -Raw
+      $pattern = '(?s)\s*<Project Path="Website/".*?</Project>'
+      $content = $content -replace $pattern, ''
+      Set-Content $solutionFile $content -NoNewline
+      Write-Host "Website project removed from solution"
+
 - task: PowerShell@2
   name: 'ImportCertificate'
   inputs:
