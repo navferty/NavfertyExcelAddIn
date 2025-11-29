@@ -302,11 +302,13 @@ Validate an XML file against an XSD schema. A detailed error report will be crea
 <details>
   <summary>View sample error report</summary>
 
-**Sample error report:**
+Sample error report:
 
-- **Severity:** Error | **Element:** city | **Message:** The element 'shipto' has invalid child element 'city'. List of possible elements expected: 'address'.
-- **Severity:** Error | **Element:** quantity | **Message:** The 'quantity' element is invalid - The value '-5' is invalid according to its datatype 'positiveInteger'
-- **Severity:** Error | **Element:** price | **Message:** The 'price' element is invalid - The value 'asdasd' is invalid according to its datatype 'decimal'
+|Severity|Element|Message|
+|---|---|---|
+|Error|city|The element 'shipto' has invalid child element 'city'. List of possible elements expected: 'address'.|
+|Error|quantity|The 'quantity' element is invalid - The value '-5' is invalid according to its datatype 'http://www.w3.org/2001/XMLSchema:positiveInteger' - Value '-5' was either too large or too small for PositiveInteger.|
+|Error|price|The 'price' element is invalid - The value 'asdasd' is invalid according to its datatype 'http://www.w3.org/2001/XMLSchema:decimal' - The string 'не число' is not a valid Decimal value.|
 
 </details>
 
