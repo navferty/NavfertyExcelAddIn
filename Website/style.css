@@ -265,8 +265,10 @@ a.btn svg {
     color: var(--text-dark);
     font-size: 1.25rem;
     font-weight: 600;
-    margin-top: 1.5rem;
-    margin-bottom: 0.75rem;
+    display: flex;
+    align-items: center;
+    margin: 0.75rem 0.5em;
+    gap: 1rem;
 }
 
 #content p {
@@ -332,13 +334,6 @@ a.btn svg {
     border: none;
     border-top: 2px solid var(--border-color);
     margin: 3rem 0;
-}
-
-.zag:before {
-    display: block;
-    content: "";
-    height: 5rem;
-    margin-top: -5rem;
 }
 
 /* Feature Cards */
