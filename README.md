@@ -2,37 +2,35 @@
 
 # Navferty's Excel Add-In
 
+A free Excel add-in that enhances productivity with tools for data manipulation, formatting, and validation.
+
 ![Navferty's Tools Ribbon Tab in MS Excel](images/NavfertyToolsRibbonEn.png)
 
-## Available features
- - [Undo Last Action](#undo-last-action)
+## Features
  - [Parse Numerics](#parse-numerics)
- - [Replace Chars (Transliteration or analogues)](#replace)
- - [Stringify Numerics to Words](#stringify-numerics-into-words)
+ - [Replace (Transliteration or Analogues)](#replace)
+ - [Stringify Numerics](#stringify-numerics)
  - [Toggle Case](#toggle-case)
  - [Trim Spaces](#trim-spaces)
- - [Remove File Protection](#remove-file-protection)
+ - [Unprotect Workbook](#unprotect-workbook)
  - [Worksheets Protection](#worksheets-protection)
- - [Highlight Duplicates](#highlight-duplicates)
+ - [Highlight Duplications](#highlight-duplications)
  - [Unmerge Cells](#unmerge-cells)
- - [Find Formula Errors in the selected range](#find-all-cells-containing-errors)
+ - [Find All Cells Containing Errors](#find-all-cells-containing-errors)
  - [Copy as Markdown](#copy-as-markdown)
  - [Validate Values](#validate-values)
  - [Export to SQLite](#export-to-sqlite)
  - [Create Sample XML based on XSD](#create-sample-xml-based-on-xsd)
  - [Validate XML with XSD](#validate-xml-with-xsd)
+ - [Undo Last Action](#undo-last-action)
 
-## [How to install](#how-to-install-the-add-in)
+## Installation
 
----
+Download and run [the installation file](https://deploy.navferty.ru/setup.exe) to install the add-in for Excel.
 
-## Undo Last Action
+After installation, restart Excel if it was open. You should see the new **Navferty's Tools** tab in the ribbon.
 
-|||
-|:-:|---|
-|![](images/icons/undo.png)|Undo the last action performed with this add-in. Canceling is possible for some functions in the 'Converting values' and 'Formatting values' sections, and only if the range of cells was not edited after the action was performed.|
-
-[Up](#navfertys-excel-add-in)
+**Note:** If you encounter a security warning about the certificate, see [detailed installation instructions](#how-to-install-the-add-in) below.
 
 ---
 
@@ -40,7 +38,7 @@
 
 |||
 |:-:|---|
-|![](images/icons/parseNumerics.png)|Convert numbers stored as text to numeric format.|
+|![](images/icons/parseNumerics.png)|Convert numbers stored as text to proper numeric format, making them usable in calculations.|
 
 <details>
   <summary>View screenshots</summary>
@@ -53,45 +51,45 @@
 
 |||
 |:-:|---|
-|![](images/icons/replace.png)|Replace Russian characters in the match table.|
+|![](images/icons/replace.png)|Replace Russian characters using different transformation methods.|
 
-*   ### Transliteration
-
-    |||
-    |:-:|---|
-    |![](images/icons/transliterate.png)|The entire Russian alphabet is completely changed to English. For example, the letter "Ж" will be replaced with "Zh", and the letter "Щ" with "Shch". Based on ICAO Doc [9303](https://www.icao.int/publications/Documents/9303_p3_cons_en.pdf).|
-
-    <details>
-      <summary>View screenshots</summary>
-
-    ![Navferty's Tools Ribbon Tab in MS Excel](images/Transliterate1.png)
-    ![Navferty's Tools Ribbon Tab in MS Excel](images/Transliterate2.png)
-    </details>
-
-* ### Replace Chars
-
-    |||
-    |:-:|---|
-    |![](images/icons/replaceChars.png)|Only matching letters of the alphabets will be replaced, such as: Аа, Вв, Ее, Кк, Мм, Нн, Оо, Рр, Сс, Тт, Уу, Хх.|
-
-    <details>
-      <summary>View screenshots</summary>
-
-    ![Navferty's Tools Ribbon Tab in MS Excel](images/ReplaceChars1.png)
-    ![Navferty's Tools Ribbon Tab in MS Excel](images/ReplaceChars2.png)
-    </details>
-
-## Stringify Numerics into Words
+### With Transliteration
 
 |||
 |:-:|---|
-|![](images/icons/stringifyNumerics.png)|Converts numeric values to text representation<br>- In Russian<br>- In English<br>- In French|
+|![](images/icons/transliterate.png)|Complete transliteration of Russian alphabet to English. For example: "Ж" → "Zh", "Щ" → "Shch". Based on ICAO Doc [9303](https://www.icao.int/publications/Documents/9303_p3_cons_en.pdf).|
 
 <details>
   <summary>View screenshots</summary>
 
-![Navferty's Tools Ribbon Tab in MS Excel](images/Stringify1.png)
-![Navferty's Tools Ribbon Tab in MS Excel](images/Stringify2.png)
+![Transliteration - Before](images/Transliterate1.png)
+![Transliteration - After](images/Transliterate2.png)
+</details>
+
+### Replace Chars
+
+|||
+|:-:|---|
+|![](images/icons/replaceChars.png)|Replace only visually similar letters: А↔A, В↔B, Е↔E, К↔K, М↔M, Н↔H, О↔O, Р↔P, С↔C, Т↔T, У↔Y, Х↔X.|
+
+<details>
+  <summary>View screenshots</summary>
+
+![Replace Chars - Before](images/ReplaceChars1.png)
+![Replace Chars - After](images/ReplaceChars2.png)
+</details>
+
+## Stringify Numerics
+
+|||
+|:-:|---|
+|![](images/icons/stringifyNumerics.png)|Convert numbers to their word representation in multiple languages:<br>• Russian<br>• English<br>• French|
+
+<details>
+  <summary>View screenshots</summary>
+
+![Stringify Numerics - Input](images/Stringify1.png)
+![Stringify Numerics - Output](images/Stringify2.png)
 </details>
 
 [Up](#navfertys-excel-add-in)
@@ -102,105 +100,105 @@
 
 |||
 |:-:|---|
-|![](images/icons/toggleCase.png)|Case switching for text values in selected cells according to the scheme:<br>`Abcde` -> `abcde` -> `ABCDE`|
+|![](images/icons/toggleCase.png)|Cycle through text case transformations: `Abcde` → `abcde` → `ABCDE`|
 
 <details>
   <summary>View screenshots</summary>
 
-![Navferty's Tools Ribbon Tab in MS Excel](images/ToggleCase1.png)
-![Navferty's Tools Ribbon Tab in MS Excel](images/ToggleCase2.png)
-![Navferty's Tools Ribbon Tab in MS Excel](images/ToggleCase3.png)
-![Navferty's Tools Ribbon Tab in MS Excel](images/ToggleCase4.png)
+![Toggle Case - Example 1](images/ToggleCase1.png)
+![Toggle Case - Example 2](images/ToggleCase2.png)
+![Toggle Case - Example 3](images/ToggleCase3.png)
+![Toggle Case - Example 4](images/ToggleCase4.png)
 </details>
 
 ## Trim Spaces
 
 |||
 |:-:|---|
-|![](images/icons/trimSpaces.png)|Clears the text content of the selected cells from unnecessary spaces. Removes repeated spaces and line breaks, as well as beginning and ending spaces in cells that have a text format.|
+|![](images/icons/trimSpaces.png)|Remove extra spaces, line breaks, and leading/trailing whitespace from text cells.|
 
 <details>
   <summary>View screenshots</summary>
 
-![Navferty's Tools Ribbon Tab in MS Excel](images/TrimSpaces1.png)
-![Navferty's Tools Ribbon Tab in MS Excel](images/TrimSpaces2.png)
+![Trim Spaces - Before](images/TrimSpaces1.png)
+![Trim Spaces - After](images/TrimSpaces2.png)
 </details>
 
 [Up](#navfertys-excel-add-in)
 
 ---
 
-## Remove File Protection
+## Unprotect Workbook
 
 |||
 |:-:|---|
-|![](images/icons/unprotectWorkbook.png)|Allows you to unprotect all sheets of an open workbook as well as the entire workbook, without requiring a password, and also unlock the VBA project (if any) for which a password is set. This feature does not apply to encrypted workbooks.|
+|![](images/icons/unprotectWorkbook.png)|Remove protection from all worksheets, workbook structure, and VBA projects without needing passwords. *Note: Does not work with encrypted workbooks.*|
 
 ## Worksheets Protection
 
 |||
 |:-:|---|
-|![](images/icons/unprotectWorkbook.png)|Allows you to set protection on multiple worksheets at once.|
+|![](images/icons/unprotectWorkbook.png)|Set or remove protection on multiple worksheets at once.|
 
-## Highlight Duplicates
+## Highlight Duplications
 
 |||
 |:-:|---|
-|![](images/icons/highlightDuplicates.png)|Sets the color of cells that contain duplicate values in the selected range. Different colors correspond to different groups of duplicates.|
+|![](images/icons/highlightDuplicates.png)|Automatically color-code duplicate values in the selected range. Different colors indicate different duplicate groups.|
 
 <details>
-  <summary>View a screenshot</summary>
+  <summary>View screenshot</summary>
 
-![Navferty's Tools Ribbon Tab in MS Excel](images/Duplicates.png)
+![Highlighted duplicates with different colors](images/Duplicates.png)
 </details>
 
 ## Unmerge Cells
 
 |||
 |:-:|---|
-|![](images/icons/unmergeCells.png)|Unmerge cells and fill each cell of merge area with initial value.|
+|![](images/icons/unmergeCells.png)|Unmerge cells while filling each cell with the original merged value.|
 
 <details>
   <summary>View screenshots</summary>
 
-![Navferty's Tools Ribbon Tab in MS Excel](images/Unmerge1.png)
-![Navferty's Tools Ribbon Tab in MS Excel](images/Unmerge2.png)
+![Unmerge Cells - Before](images/Unmerge1.png)
+![Unmerge Cells - After](images/Unmerge2.png)
 </details>
 
-## Find all cells containing errors
+## Find All Cells Containing Errors
 
 |||
 |:-:|---|
-|![](images/icons/findErrors.png)|Search for all cells in the selection that contain calculation errors:<br><br>Excel formula error types:<br>`#N/A`<br>`#NAME?`<br>`#DIV/0!`<br>`#REF!`<br>`#VALUE!`<br>`#NUM!`<br>`#NULL!`|
+|![](images/icons/findErrors.png)|Locate all formula errors in the selected range: `#N/A`, `#NAME?`, `#DIV/0!`, `#REF!`, `#VALUE!`, `#NUM!`, `#NULL!`|
 
 <details>
-  <summary>View a screenshot</summary>
+  <summary>View screenshot</summary>
 
-![Navferty's Tools Ribbon Tab in MS Excel](images/FindErrorValues.png)
+![Error cells highlighted](images/FindErrorValues.png)
 </details>
 
 ## Copy as Markdown
 
 |||
 |:-:|---|
-|![](images/icons/markdown.png)|Contents of selected cells will be copied to clipboard in markdown format.|
+|![](images/icons/markdown.png)|Copy selected cells to clipboard as a markdown-formatted table.|
 
 <details>
-  <summary>View a screenshot</summary>
+  <summary>View screenshot</summary>
 
-![Navferty's Tools Ribbon Tab in MS Excel](images/ExportToMarkdown.png)
+![Markdown export example](images/ExportToMarkdown.png)
 </details>
 
-## Validate values
+## Validate Values
 
 |||
 |:-:|---|
-|![](images/icons/validation.png)|<p>Check the cell values in the selected range for a specific format.<br><br>Supported formats: <br>- Number<br>- Date<br>- TIN of an individual\* (12 digits, with two verification digits)<br>- TIN of a legal entity\* (10 digits, with one verification digit)<br>- Text for XML (no `<` and `>` characters or other invalid characters for XML content)<br><br>\* _- The correct TIN does not guarantee the existence of an organization or individual who would own this INN_</p>
+|![](images/icons/validation.png)|Check cell values against specific formats: Number, Date, TIN of an individual (12 digits), TIN of a legal entity (10 digits), Text for XML (no invalid characters).<br><br>*Note: Valid TIN format doesn't guarantee the organization or individual exists.*|
 
 <details>
-  <summary>View a screenshot</summary>
+  <summary>View screenshot</summary>
 
-![Navferty's Tools Ribbon Tab in MS Excel](images/Validate.png)
+![Validation results](images/Validate.png)
 </details>
 
 [Up](#navfertys-excel-add-in)
@@ -211,13 +209,13 @@
 
 |||
 |:-:|---|
-||Export the entire workbook to a SQLite database file. Each worksheet is converted to a separate table with automatic column type detection. Options include using the first row as column headers and skipping initial rows.|
+|![](images/icons/validation.png)|Export the entire workbook to a SQLite database file. Each worksheet becomes a separate table with automatic column type detection.|
 
 <details>
   <summary>View screenshots</summary>
 
-![Export to SQLite in MS Excel](images/ExportToSqlite1.png)
-![SQLite Database Result](images/ExportToSqlite2.png)
+![Export dialog](images/ExportToSqlite1.png)
+![SQLite database result](images/ExportToSqlite2.png)
 </details>
 
 [Up](#navfertys-excel-add-in)
@@ -228,11 +226,12 @@
 
 |||
 |:-:|---|
-|![](images/icons/createSampleXml.png)|Select file with an XSD schema and create a sample XML based on that schema.|
+|![](images/icons/createSampleXml.png)|Generate a sample XML file from an XSD schema to visualize the structure.|
 
-For example, for the schema below
 <details>
-  <summary>XML schema sample - `sample.xsd`</summary>
+  <summary>View example</summary>
+
+**Input XSD Schema:**
 
 ```XML
 <?xml version="1.0" encoding="UTF-8" ?>
@@ -269,12 +268,8 @@ For example, for the schema below
 
 </xs:schema>
 ```
-</details>
 
-The following xml-file will be generated:
-
-<details>
-  <summary>XML output - `sample.xml`</summary>
+**Generated XML Output:**
 
 ```XML
 <shiporder xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" orderid="orderid1">
@@ -315,6 +310,7 @@ The following xml-file will be generated:
     <quantity>3</quantity>
     <price>1.1</price>
   </item>
+  ...
 </shiporder>
 ```
 </details>
@@ -323,15 +319,27 @@ The following xml-file will be generated:
 
 |||
 |:-:|---|
-|![](images/icons/validateXml.png)|Check XML file with XSD schema. Select XML and XSD files, and a report with all validation errors and warnings will be created in a new workbook.|
+|![](images/icons/validateXml.png)|Validate an XML file against an XSD schema. A detailed error report will be created in a new workbook.|
 
-Sample error report
+<details>
+  <summary>View sample error report</summary>
 
 |Severity|Element|Message|
 |---|---|---|
 |Error|city|The element 'shipto' has invalid child element 'city'. List of possible elements expected: 'address'.|
-|Error|quantity|The 'quantity' element is invalid - The value '-5' is invalid according to its datatype 'http://www.w3.org/2001/XMLSchema:positiveInteger' - Value '-5' was either too large or too small for PositiveInteger.|
-|Error|price|The 'price' element is invalid - The value 'asdasd' is invalid according to its datatype 'http://www.w3.org/2001/XMLSchema:decimal' - The string 'не число' is not a valid Decimal value.|
+|Error|quantity|The 'quantity' element is invalid - The value '-5' is invalid according to its datatype 'positiveInteger'|
+|Error|price|The 'price' element is invalid - The value 'asdasd' is invalid according to its datatype 'decimal'|
+</details>
+
+[Up](#navfertys-excel-add-in)
+
+---
+
+## Undo Last Action
+
+|||
+|:-:|---|
+|![](images/icons/undo.png)|Undo the last action performed with this add-in. Available for some functions in the 'Converting values' and 'Formatting values' sections, only if cells haven't been edited since.|
 
 [Up](#navfertys-excel-add-in)
 
@@ -339,39 +347,37 @@ Sample error report
 
 ## How to Install the Add-In
 
-### Online Install
+### Quick Install (Recommended)
 
-You can install the add-in from the official website of the project:
-[navferty.ru](https://www.navferty.ru). Just download and run setup.exe.
+1. Download [setup.exe](https://deploy.navferty.ru/setup.exe)
+2. Run the installer and follow the wizard
+3. Restart Excel if it was open during installation
+4. You'll see the new **Navferty's Tools** tab in the ribbon
 
-You may need to manually import the self-signed certificate before the installation process can be finished.
+### Certificate Installation (if needed)
 
-The installation process also requires an internet connection to load the latest version.
+If you encounter a security warning about the certificate:
 
-### Offline Install
 
-The solution is built in Azure. You can download the full archive with installation files from there:
+1. Right-click on `setup.exe` and select **Properties**
+2. Go to the **Digital Signatures** tab
+3. Select the signature and click **Details**
+4. Click **View Certificate** → **Install Certificate**
+5. Choose **Local Machine** and place it in **Trusted Root Certification Authorities**
 
-* Visit https://navferty.visualstudio.com/NavfertyExcelAddIn/_build?definitionId=3
+*Note: You can remove the certificate after installation, but it will be required for future updates.*
 
-* Select the latest build of 'NavfertyExcelAddIn - Publish' pipeline:
+### Advanced: Offline Install
 
-![Navferty's Tools Ribbon Tab in MS Excel](images/Install1.png)
+The solution is built in Azure. You can download the full archive with installation files:
 
-* Download published installation files:
+1. Visit https://navferty.visualstudio.com/NavfertyExcelAddIn/_build?definitionId=3
+2. Select the latest build of 'NavfertyExcelAddIn - Publish' pipeline
+3. Download published installation files
+4. Extract files to a folder and run the '.vsto' file
 
-![Navferty's Tools Ribbon Tab in MS Excel](images/Install2.png)
+> **Important:** Using the desktop folder is recommended - updates are only permitted from the same folder where the add-in was first installed.
 
-* Extract files to a folder and run '.vsto' file:
-
-> Using the desktop folder is highly recommended - installing updates
-> is permitted only from the same folder where it was installed
-> for the first time!
-
-![Navferty's Tools Ribbon Tab in MS Excel](images/Install3.png)
-
-After the installation process is completed, run (or restart) the Excel application, and you will see a new tab:
-
-![Navferty's Tools Ribbon Tab in MS Excel](images/Install4.png)
+After installation, restart Excel and you'll see the new **Navferty's Tools** tab.
 
 [Up](#navfertys-excel-add-in)
