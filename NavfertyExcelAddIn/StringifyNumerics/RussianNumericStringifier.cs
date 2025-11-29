@@ -63,6 +63,7 @@ public class RussianNumericStringifier : INumericStringifier
 		var fractional = fractionalPart == 0
 			? string.Empty
 			: " и " + allNumbers[fractionalPart] + " " + fractionalName;
+		fractional = FixFractionalGender(fractional);
 
 		var numbers = (int)(number % 1000);
 		// TODO what about currency... can user select currency in addition?
@@ -89,8 +90,17 @@ public class RussianNumericStringifier : INumericStringifier
 	{
 		var result = number.Replace("один целая", "одна целая");
 		result = result.Replace("два целых", "две целых");
-		result = result.Replace("два тысячных", "две тысячных");
+		return result;
+	}
+
+	private string FixFractionalGender(string fractional)
+	{
+		var result = fractional.Replace("один десятая", "одна десятая");
+		result = result.Replace("два десятых", "две десятых");
+		result = result.Replace("один сотая", "одна сотая");
+		result = result.Replace("два сотых", "две сотых");
 		result = result.Replace("один тысячная", "одна тысячная");
+		result = result.Replace("два тысячных", "две тысячных");
 		return result;
 	}
 
