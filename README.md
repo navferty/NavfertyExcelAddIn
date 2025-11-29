@@ -36,8 +36,6 @@ After installation, restart Excel if it was open. You should see the new **Navfe
 
 ## Parse Numerics
 
-![Parse Numerics Icon](images/icons/parseNumerics.png)
-
 Convert numbers stored as text to proper numeric format, making them usable in calculations.
 
 <details>
@@ -49,13 +47,9 @@ Convert numbers stored as text to proper numeric format, making them usable in c
 
 ## Replace
 
-![Replace Icon](images/icons/replace.png)
-
 Replace Russian characters using different transformation methods.
 
 ### With Transliteration
-
-![Transliterate Icon](images/icons/transliterate.png)
 
 Complete transliteration of Russian alphabet to English. For example: "Ж" → "Zh", "Щ" → "Shch". Based on ICAO Doc [9303](https://www.icao.int/publications/Documents/9303_p3_cons_en.pdf).
 
@@ -68,8 +62,6 @@ Complete transliteration of Russian alphabet to English. For example: "Ж" → "
 
 ### Replace Chars
 
-![Replace Chars Icon](images/icons/replaceChars.png)
-
 Replace only visually similar letters: А↔A, В↔B, Е↔E, К↔K, М↔M, Н↔H, О↔O, Р↔P, С↔C, Т↔T, У↔Y, Х↔X.
 
 <details>
@@ -80,8 +72,6 @@ Replace only visually similar letters: А↔A, В↔B, Е↔E, К↔K, М↔M, �
 </details>
 
 ## Stringify Numerics
-
-![Stringify Numerics Icon](images/icons/stringifyNumerics.png)
 
 Convert numbers to their word representation in multiple languages:
 - Russian
@@ -101,8 +91,6 @@ Convert numbers to their word representation in multiple languages:
 
 ## Toggle Case
 
-![Toggle Case Icon](images/icons/toggleCase.png)
-
 Cycle through text case transformations: `Abcde` → `abcde` → `ABCDE`
 
 <details>
@@ -115,8 +103,6 @@ Cycle through text case transformations: `Abcde` → `abcde` → `ABCDE`
 </details>
 
 ## Trim Spaces
-
-![Trim Spaces Icon](images/icons/trimSpaces.png)
 
 Remove extra spaces, line breaks, and leading/trailing whitespace from text cells.
 
@@ -133,21 +119,15 @@ Remove extra spaces, line breaks, and leading/trailing whitespace from text cell
 
 ## Unprotect Workbook
 
-![Unprotect Workbook Icon](images/icons/unprotectWorkbook.png)
-
 Remove protection from all worksheets, workbook structure, and VBA projects without needing passwords. 
 
 *Note: Does not work with encrypted workbooks.*
 
 ## Worksheets Protection
 
-![Worksheets Protection Icon](images/icons/unprotectWorkbook.png)
-
 Set or remove protection on multiple worksheets at once.
 
 ## Highlight Duplications
-
-![Highlight Duplications Icon](images/icons/highlightDuplicates.png)
 
 Automatically color-code duplicate values in the selected range. Different colors indicate different duplicate groups.
 
@@ -158,8 +138,6 @@ Automatically color-code duplicate values in the selected range. Different color
 </details>
 
 ## Unmerge Cells
-
-![Unmerge Cells Icon](images/icons/unmergeCells.png)
 
 Unmerge cells while filling each cell with the original merged value.
 
@@ -172,8 +150,6 @@ Unmerge cells while filling each cell with the original merged value.
 
 ## Find All Cells Containing Errors
 
-![Find Errors Icon](images/icons/findErrors.png)
-
 Locate all formula errors in the selected range: `#N/A`, `#NAME?`, `#DIV/0!`, `#REF!`, `#VALUE!`, `#NUM!`, `#NULL!`
 
 <details>
@@ -184,8 +160,6 @@ Locate all formula errors in the selected range: `#N/A`, `#NAME?`, `#DIV/0!`, `#
 
 ## Copy as Markdown
 
-![Copy as Markdown Icon](images/icons/markdown.png)
-
 Copy selected cells to clipboard as a markdown-formatted table.
 
 <details>
@@ -195,8 +169,6 @@ Copy selected cells to clipboard as a markdown-formatted table.
 </details>
 
 ## Validate Values
-
-![Validate Values Icon](images/icons/validation.png)
 
 Check cell values against specific formats:
 - Number
@@ -219,8 +191,6 @@ Check cell values against specific formats:
 
 ## Export to SQLite
 
-![Export to SQLite Icon](images/icons/validation.png)
-
 Export the entire workbook to a SQLite database file. Each worksheet becomes a separate table with automatic column type detection.
 
 <details>
@@ -235,8 +205,6 @@ Export the entire workbook to a SQLite database file. Each worksheet becomes a s
 ---
 
 ## Create Sample XML based on XSD
-
-![Create Sample XML Icon](images/icons/createSampleXml.png)
 
 Generate a sample XML file from an XSD schema to visualize the structure.
 
@@ -329,8 +297,6 @@ Generate a sample XML file from an XSD schema to visualize the structure.
 
 ## Validate XML with XSD
 
-![Validate XML Icon](images/icons/validateXml.png)
-
 Validate an XML file against an XSD schema. A detailed error report will be created in a new workbook.
 
 <details>
@@ -349,8 +315,6 @@ Validate an XML file against an XSD schema. A detailed error report will be crea
 ---
 
 ## Undo Last Action
-
-![Undo Icon](images/icons/undo.png)
 
 Undo the last action performed with this add-in. Available for some functions in the 'Converting values' and 'Formatting values' sections, only if cells haven't been edited since.
 
