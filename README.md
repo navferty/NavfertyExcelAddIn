@@ -26,7 +26,7 @@ A free Excel add-in that enhances productivity with tools for data manipulation,
 
 ## Installation
 
-Download and run [the installation file](https://deploy.navferty.ru/setup.exe) to install the add-in for Excel.
+Download, unpack and run [the installation file](https://deploy.navferty.ru/setup.zip) to install the add-in for Excel.
 
 After installation, restart Excel if it was open. You should see the new **Navferty's Tools** tab in the ribbon.
 
@@ -328,7 +328,7 @@ Undo the last action performed with this add-in. Available for some functions in
 
 ### Quick Install (Recommended)
 
-1. Download [setup.exe](https://deploy.navferty.ru/setup.exe)
+1. Download and unpack [setup.exe](https://deploy.navferty.ru/setup.zip)
 2. Run the installer and follow the wizard
 3. Restart Excel if it was open during installation
 4. You'll see the new **Navferty's Tools** tab in the ribbon
