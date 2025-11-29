@@ -1,319 +1,376 @@
-<h1 id="top" class="zag">Navferty's Excel Add-In</h1>
+﻿<h1 id="top" class="zag">Navferty's Excel Add-In</h1>
 
-<img class="illustration" id="imnav" src="images/NavfertyToolsRibbonEn.png" alt="Description of the function">
-
-<p>
-    Welcome to the official website of the project. Here you can download installation file. Most activity is on the <a
-        href="https://github.com/navferty/NavfertyExcelAddIn">project page on GitHub</a>: issues, source code and
-    pull-requests.
+<p class="subtitle">
+    A free Excel add-in that enhances your productivity with tools for data manipulation, formatting, and validation.
 </p>
 
-<p>
-    Navferty Excel Add-In is an add-in for Microsoft Excel that provides a set of useful
-    tools to enhance your productivity when working with spreadsheets.
-    The add-in includes various functions for data manipulation, formatting, and analysis,
-    making it easier to perform common tasks in Excel.
-</p>
+<img class="hero-image" src="images/NavfertyToolsRibbonEn.png" alt="Navferty's Tools Ribbon in Microsoft Excel">
 
-<h2 id='how-to-install' class="zag">How to install</h2>
+<div class="hero-actions">
+    <a href="https://deploy.navferty.ru/setup.exe" class="btn btn-primary">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M10 13L5 8h3V3h4v5h3l-5 5z" fill="currentColor"/>
+            <path d="M3 15h14v2H3v-2z" fill="currentColor"/>
+        </svg>
+        Download Installer
+    </a>
+    <a href="https://github.com/navferty/NavfertyExcelAddIn" class="btn btn-secondary" target="_blank" rel="noopener">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M10 0C4.477 0 0 4.477 0 10c0 4.42 2.865 8.17 6.839 9.49.5.092.682-.217.682-.482 0-.237-.008-.866-.013-1.7-2.782.603-3.369-1.34-3.369-1.34-.454-1.156-1.11-1.463-1.11-1.463-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.831.092-.646.35-1.086.636-1.336-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.578 9.578 0 0110 4.836c.85.004 1.705.114 2.504.336 1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.203 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.578.688.48C17.137 18.163 20 14.418 20 10c0-5.523-4.477-10-10-10z" fill="currentColor"/>
+        </svg>
+        View on GitHub
+    </a>
+</div>
 
-<p>Download and run <a href="https://deploy.navferty.ru/setup.exe">the installation file</a> to have the add-in installed for your Excel.</p>
+<div class="info-box">
+    <h3>What's Inside</h3>
+    <p>
+        Navferty Excel Add-In provides a comprehensive set of tools for data manipulation, formatting, and validation.
+        Convert text to numbers, transliterate text, validate XML files, and more.
+    </p>
+    <p>
+        <strong>100% Free</strong> • <strong>Open Source</strong> • <strong>Actively Maintained</strong>
+    </p>
+</div>
 
-<p>After installation, restart Excel if it was open during installation. You should see the new <strong>Navferty's Tools</strong> tab in the Excel ribbon.</p>
+<h2 id='how-to-install' class="zag">Installation</h2>
 
-<p>
-    If you face a certificate problem, you will need to import the provided certificate on your computer:
-    <br />
-    open setup.exe's properties, go to Digital signatures tab and import the certificate to trusted root with Wizard:
-</p>
+<div class="installation-steps">
+    <div class="step">
+        <div class="step-number">1</div>
+        <div class="step-content">
+            <h4>Download the Installer</h4>
+            <p>Get the latest version from our server:</p>
+            <a href="https://deploy.navferty.ru/setup.exe" class="btn btn-primary btn-small">Download setup.exe</a>
+        </div>
+    </div>
+
+    <div class="step">
+        <div class="step-number">2</div>
+        <div class="step-content">
+            <h4>Run the Installation</h4>
+            <p>Double-click the downloaded <code>setup.exe</code> file and follow the installation wizard.</p>
+        </div>
+    </div>
+
+    <div class="step">
+        <div class="step-number">3</div>
+        <div class="step-content">
+            <h4>Restart Excel</h4>
+            <p>If Excel was open during installation, restart it. You'll see the new <strong>Navferty's Tools</strong> tab in the ribbon.</p>
+        </div>
+    </div>
+</div>
+
 <details>
-    <summary>Import certificate wizard</summary>
-    <img src="./digital-certificate.jpg" alt="Import certificate wizard" />
+    <summary>Certificate Installation (if needed)</summary>
+    <div class="warning-box">
+        <p>If you encounter a security warning about the certificate:</p>
+        <ol>
+            <li>Right-click on <code>setup.exe</code> and select <strong>Properties</strong></li>
+            <li>Go to the <strong>Digital Signatures</strong> tab</li>
+            <li>Select the signature and click <strong>Details</strong></li>
+            <li>Click <strong>View Certificate</strong> → <strong>Install Certificate</strong></li>
+            <li>Choose <strong>Local Machine</strong> and place it in <strong>Trusted Root Certification Authorities</strong></li>
+        </ol>
+        <img src="./digital-certificate.jpg" alt="Certificate installation wizard">
+        <p><em>Note: You can remove the certificate after installation, but it will be required for future updates.</em></p>
+    </div>
 </details>
-<p>
-    When add-in is installed, you can remove the certificate from trusted root if you want (but it would be required for future updates).
-</p>
 
-<h2 id='how-to-uninstall' class="zag">How to uninstall</h2>
+<h2 id='how-to-uninstall' class="zag">Uninstallation</h2>
 
-<p>To remove the add-in from your computer:</p>
+<p><strong>Method 1: Windows Settings (Recommended)</strong></p>
 <ol>
-    <li>Open Windows Settings (press <kbd>Win</kbd> + <kbd>I</kbd>)</li>
-    <li>Go to <strong>Apps</strong> → <strong>Apps & features</strong> (or <strong>Installed apps</strong> on Windows 11)</li>
-    <li>Search for "Navferty Excel Add-In" in the list</li>
-    <li>Click on the add-in and select <strong>Uninstall</strong></li>
-    <li>Follow the prompts to complete the uninstallation</li>
+    <li>Open Windows Settings (<kbd>Win</kbd> + <kbd>I</kbd>)</li>
+    <li>Navigate to <strong>Apps</strong> → <strong>Apps & features</strong> (or <strong>Installed apps</strong> on Windows 11)</li>
+    <li>Find <strong>Navferty Excel Add-In</strong> in the list</li>
+    <li>Click <strong>Uninstall</strong> and follow the prompts</li>
 </ol>
-<p>Alternatively, you can use the classic Control Panel:</p>
+
+<p><strong>Method 2: Control Panel</strong></p>
 <ol>
-    <li>Open Control Panel</li>
+    <li>Open <strong>Control Panel</strong></li>
     <li>Go to <strong>Programs</strong> → <strong>Programs and Features</strong></li>
-    <li>Find "Navferty Excel Add-In" in the list</li>
-    <li>Right-click and select <strong>Uninstall</strong>, or click the <strong>Uninstall</strong> button</li>
+    <li>Right-click <strong>Navferty Excel Add-In</strong> and select <strong>Uninstall</strong></li>
 </ol>
+
 <hr>
 
-<h2>Main functions</h2>
+<h2 id="features">Features Overview</h2>
 
-<h3 id="parsenumerics" class="zag">Parse Numerics</h3>
-<img class="icons" alt="Parse Numerics icon" src="images/icons/parseNumerics.png">
-<p class="dscrptn">Convert numbers stored as text to numeric format.</p>
+<h3 id="parsenumerics" class="zag">
+    <img class="icons" alt="Parse Numerics icon" src="images/icons/parseNumerics.png">
+    Parse Numerics
+</h3>
+<p class="dscrptn">Convert numbers stored as text to proper numeric format, making them usable in calculations.</p>
 <details class="more">
     <summary>View screenshots</summary>
-    <img src="images/ParseNumerics1.png" alt="Description of the function">
-    <img src="images/ParseNumerics2.png" alt="Description of the function">
+    <img src="images/ParseNumerics1.png" alt="Parse Numerics - Before">
+    <img src="images/ParseNumerics2.png" alt="Parse Numerics - After">
 </details>
 
-<h3 id="replace" class="zag">Replace</h3>
-<img class="icons" alt="Replace icon" src="images/icons/replace.png">
-<p class="dscrptn">Replace Russian characters in the match table.</p>
+<h3 id="replace" class="zag">
+    <img class="icons" alt="Replace icon" src="images/icons/replace.png">
+    Replace
+</h3>
+<p class="dscrptn">Replace Cyrillic characters using different transformation methods.</p>
 
 <ul class="more">
     <li>
-        <h4>With Transliteration</h4>
-        <img class="icons" alt="Transliteration icon" src="images/icons/transliterate.png">
-        <p class="dscrptn">The entire Russian alphabet is completely changed to English. For example, the letter "Ж"
-            will be replaced with "Zh", and the letter "Щ" with "Shch". Based on ICAO Doc <a
-                href="https://www.icao.int/publications/Documents/9303_p3_cons_en.pdf">9303</a>.</p>
+        <h4 id="withtransliteration">
+            <img class="icons" alt="Transliteration icon" src="images/icons/transliterate.png">
+            With Transliteration
+        </h4>
+        <p class="dscrptn">
+            Complete transliteration of Cyrillic alphabet to English. For example: "Ж" → "Zh", "Щ" → "Shch".
+            Based on ICAO Doc <a href="https://www.icao.int/publications/Documents/9303_p3_cons_en.pdf" target="_blank" rel="noopener">9303</a>.
+        </p>
         <details class="more">
             <summary>View screenshots</summary>
-            <img src="images/Transliterate1.png" alt="Description of the function">
-            <img src="images/Transliterate2.png" alt="Description of the function">
+            <img src="images/Transliterate1.png" alt="Transliteration - Before">
+            <img src="images/Transliterate2.png" alt="Transliteration - After">
         </details>
     </li>
     <li>
-        <h4>Replace Chars</h4>
-        <img class="icons" alt="Replace Chars icon" src="images/icons/replaceChars.png">
-        <p class="dscrptn">Only matching letters of the alphabets will be replaced, such as: Аа, Вв, Ее, Кк, Мм, Нн,
-            Оо, Рр, Сс, Тт, Уу, Хх.</p>
+        <h4 id="replacechars">
+            <img class="icons" alt="Replace Chars icon" src="images/icons/replaceChars.png">
+            Replace Chars
+        </h4>
+        <p class="dscrptn">
+            Replace only visually similar letters: А↔A, В↔B, Е↔E, К↔K, М↔M, Н↔H, О↔O, Р↔P, С↔C, Т↔T, У↔Y, Х↔X.
+        </p>
         <details class="more">
             <summary>View screenshots</summary>
-            <img src="images/ReplaceChars1.png" alt="Description of the function">
-            <img src="images/ReplaceChars2.png" alt="Description of the function">
+            <img src="images/ReplaceChars1.png" alt="Replace Chars - Before">
+            <img src="images/ReplaceChars2.png" alt="Replace Chars - After">
         </details>
     </li>
 </ul>
 
-<h3 id="stringifynumerics" class="zag">Stringify Numerics</h3>
-<img class="icons" alt="Stringify Numerics icon" src="images/icons/stringifyNumerics.png">
-<p class="dscrptn">
-  Converts numeric values to text representation in languages:
-  <br>- Russian
-  <br>- English
-  <br>- French
-</p>
+<h3 id="stringifynumerics" class="zag">
+    <img class="icons" alt="Stringify Numerics icon" src="images/icons/stringifyNumerics.png">
+    Stringify Numerics
+</h3>
+<p class="dscrptn">Convert numbers to their word representation in multiple languages:</p>
+<ul>
+    <li>Russian</li>
+    <li>English</li>
+    <li>French</li>
+</ul>
 <details class="more">
     <summary>View screenshots</summary>
-    <img src="images/Stringify1.png" alt="Description of the function">
-    <img src="images/Stringify2.png" alt="Description of the function">
+    <img src="images/Stringify1.png" alt="Stringify Numerics - Input">
+    <img src="images/Stringify2.png" alt="Stringify Numerics - Output">
 </details>
 
-<p><a href="#top">Up</a></p>
+<p class="back-to-top"><a href="#top">↑ Back to top</a></p>
+
 <hr>
 
-<h3 id="togglecase" class="zag">Toggle Case</h3>
-<img class="icons" alt="Toggle Case icon" src="images/icons/toggleCase.png">
-<p class="dscrptn">Case switching for text values in selected cells according to the scheme:<br><code>Abcde -&gt; abcde -&gt;
-    ABCDE</code></p>
+<h3 id="togglecase" class="zag">
+    <img class="icons" alt="Toggle Case icon" src="images/icons/toggleCase.png">
+    Toggle Case
+</h3>
+<p class="dscrptn">Cycle through text case transformations: <code>Abcde</code> → <code>abcde</code> → <code>ABCDE</code></p>
 <details class="more">
     <summary>View screenshots</summary>
-    <img src="images/ToggleCase1.png" alt="Description of the function">
-    <img src="images/ToggleCase2.png" alt="Description of the function">
-    <img src="images/ToggleCase3.png" alt="Description of the function">
-    <img src="images/ToggleCase4.png" alt="Description of the function">
+    <img src="images/ToggleCase1.png" alt="Toggle Case - Example 1">
+    <img src="images/ToggleCase2.png" alt="Toggle Case - Example 2">
+    <img src="images/ToggleCase3.png" alt="Toggle Case - Example 3">
+    <img src="images/ToggleCase4.png" alt="Toggle Case - Example 4">
 </details>
 
-<h3 id="trimspaces" class="zag">Trim Spaces</h3>
-<img class="icons" alt="Trim Spaces icon" src="images/icons/trimSpaces.png">
-<p class="dscrptn">Clear the text content of the selected cells from unnecessary spaces. Removes repeated spaces and
-    line breaks, as well as beginning and ending spaces in cells that have a text format.</p>
+<h3 id="trimspaces" class="zag">
+    <img class="icons" alt="Trim Spaces icon" src="images/icons/trimSpaces.png">
+    Trim Spaces
+</h3>
+<p class="dscrptn">Remove extra spaces, line breaks, and leading/trailing whitespace from text cells.</p>
 <details class="more">
     <summary>View screenshots</summary>
-    <img src="images/TrimSpaces1.png" alt="Description of the function">
-    <img src="images/TrimSpaces2.png" alt="Description of the function">
+    <img src="images/TrimSpaces1.png" alt="Trim Spaces - Before">
+    <img src="images/TrimSpaces2.png" alt="Trim Spaces - After">
 </details>
 
-<p><a href="#top">Up</a></p>
+<p class="back-to-top"><a href="#top">↑ Back to top</a></p>
+
 <hr>
 
-<h3 id="unprotectworkbook" class="zag">Unprotect Workbook</h3>
-<img class="icons" alt="Unprotect Workbook icon" src="images/icons/unprotectWorkbook.png">
-<p class="dscrptn">Allows you to unprotect all sheets of an open workbook as well as the entire workbook, remove password, and also
-    unlock the VBA project (if any) for which a password is set. This feature does not apply to encrypted workbooks.</p>
+<h3 id="unprotectworkbook" class="zag">
+    <img class="icons" alt="Unprotect Workbook icon" src="images/icons/unprotectWorkbook.png">
+    Unprotect Workbook
+</h3>
+<p class="dscrptn">Remove protection from all worksheets, workbook structure, and VBA projects without needing passwords. <em>Note: Does not work with encrypted workbooks.</em></p>
 
-<h3 id="highlightduplications" class="zag">Highlight Duplications</h3>
-<img class="icons" alt="Highlight Duplications icon" src="images/icons/highlightDuplicates.png">
-<p class="dscrptn">Sets the color of cells that contain duplicate values in the selected range. Different colors
-    correspond to different groups of duplicates.</p>
+<h3 id="highlightduplications" class="zag">
+    <img class="icons" alt="Highlight Duplications icon" src="images/icons/highlightDuplicates.png">
+    Highlight Duplications
+</h3>
+<p class="dscrptn">Automatically color-code duplicate values in the selected range. Different colors indicate different duplicate groups.</p>
 <details class="more">
-    <summary>View a screenshot</summary>
-    <img src="images/Duplicates.png" alt="Description of the function">
+    <summary>View screenshot</summary>
+    <img src="images/Duplicates.png" alt="Highlighted duplicates with different colors">
 </details>
 
-<h3 id="unmergecells" class="zag">Unmerge Cells</h3>
-<img class="icons" alt="Unmerge Cells icon" src="images/icons/unmergeCells.png">
-<p class="dscrptn">Unmerge cells and fill each cell of merge area with initial value.
-</p>
+<h3 id="unmergecells" class="zag">
+    <img class="icons" alt="Unmerge Cells icon" src="images/icons/unmergeCells.png">
+    Unmerge Cells
+</h3>
+<p class="dscrptn">Unmerge cells while filling each cell with the original merged value.</p>
 <details class="more">
     <summary>View screenshots</summary>
-    <img src="images/Unmerge1.png" alt="Description of the function">
-    <img src="images/Unmerge2.png" alt="Description of the function">
+    <img src="images/Unmerge1.png" alt="Unmerge Cells - Before">
+    <img src="images/Unmerge2.png" alt="Unmerge Cells - After">
 </details>
 
-<h3 id="findallcellscontainingerrors" class="zag">Find all cells containing errors</h3>
-<img class="icons" alt="Find all cells containing errors icon" src="images/icons/findErrors.png">
-<p class="dscrptn">Search for all cells in the selected cells that contain calculation errors:<br><br>
-    Excel formula errors types:<br>
-    <code>#N/A</code><br>
-    <code>#NAME?</code><br>
-    <code>#DIV/0!</code><br>
-    <code>#REF!</code><br>
-    <code>#VALUE!</code><br>
-    <code>#NUM!</code><br>
+<h3 id="findallcellscontainingerrors" class="zag">
+    <img class="icons" alt="Find all cells containing errors icon" src="images/icons/findErrors.png">
+    Find All Cells Containing Errors
+</h3>
+<p class="dscrptn">Locate all formula errors in the selected range:</p>
+<div class="error-types">
+    <code>#N/A</code>
+    <code>#NAME?</code>
+    <code>#DIV/0!</code>
+    <code>#REF!</code>
+    <code>#VALUE!</code>
+    <code>#NUM!</code>
     <code>#NULL!</code>
+</div>
+<p>
+    Clicking the entry in the search results will navigate to the corresponding cell in the worksheet.
 </p>
 <details class="more">
-    <summary>View a screenshot</summary>
-    <img src="images/FindErrorValues.png" alt="Description of the function">
+    <summary>View screenshot</summary>
+    <img src="images/FindErrorValues.png" alt="Error cells highlighted">
 </details>
 
-<h3 id="copyasmarkdown" class="zag">Copy as Markdown</h3>
-<img class="icons" alt="Copy as Markdown icon" src="images/icons/markdown.png">
-<p class="dscrptn">Contents of selected cells will be copied to clipboard in markdown format.</p>
+<h3 id="copyasmarkdown" class="zag">
+    <img class="icons" alt="Copy as Markdown icon" src="images/icons/markdown.png">
+    Copy as Markdown
+</h3>
+<p class="dscrptn">Copy selected cells to clipboard as a markdown-formatted table.</p>
 <details class="more">
-    <summary>View a screenshot</summary>
-    <img src="images/ExportToMarkdown.png" alt="Description of the function">
+    <summary>View screenshot</summary>
+    <img src="images/ExportToMarkdown.png" alt="Markdown export example">
 </details>
 
-<h3 id="validatevalues" class="zag">Validate Values</h3>
-<img class="icons" alt="Validate Values icon" src="images/icons/validation.png">
-<p class="dscrptn">
-    Check the cell values in the selected range for a specific format.<br><br>Supported formats: <br>
-    - Number<br>
-    - Date<br>
-    - TIN of an individual* (12 digits, with two verification digits)<br>
-    - TIN of the legal entity* (10 digits, with one verification digit)<br>
-    - Text for XML (no &lt; and &gt; characters or other invalid characters for XML content)<br><br>
-    <em>* - The correct TIN does not guarantee the existence of an organization or individual who would own this
-        INN</em></p>
+<h3 id="validatevalues" class="zag">
+    <img class="icons" alt="Validate Values icon" src="images/icons/validation.png">
+    Validate Values
+</h3>
+<p class="dscrptn">Check cell values against specific formats:</p>
+<ul>
+    <li>✓ Number</li>
+    <li>✓ Date</li>
+    <li>✓ TIN of an individual (12 digits, with verification digits)</li>
+    <li>✓ TIN of a legal entity (10 digits, with verification digit)</li>
+    <li>✓ Text for XML (no invalid characters like <code>&lt;</code> or <code>&gt;</code>)</li>
+</ul>
+<p class="note"><em>Note: Valid TIN format doesn't guarantee the organization or individual exists.</em></p>
 <details class="more">
-    <summary>View a screenshot</summary>
-    <img src="images/Validate.png" alt="Description of the function">
+    <summary>View screenshot</summary>
+    <img src="images/Validate.png" alt="Validation results">
 </details>
 
-<p><a href="#top">Up</a></p>
+<p class="back-to-top"><a href="#top">↑ Back to top</a></p>
+
 <hr>
 
-<h3 id="exporttosqlite" class="zag">Export to SQLite</h3>
-<p class="dscrptn">Export the entire workbook to a SQLite database file. Each worksheet is converted to a separate table with automatic column type detection. Options include using the first row as column headers and skipping initial rows.</p>
+<h3 id="exporttosqlite" class="zag">
+    <img class="icons" alt="Export to SQLite icon" src="images/icons/validation.png">
+    Export to SQLite
+</h3>
+<p class="dscrptn">Export the entire workbook to a SQLite database file. Each worksheet becomes a separate table with automatic column type detection.</p>
+<ul>
+    <li>Use first row as column headers</li>
+    <li>Skip initial rows if needed</li>
+    <li>Automatic data type detection</li>
+</ul>
 <details class="more">
     <summary>View screenshots</summary>
-    <img src="images/ExportToSqlite1.png" alt="Exporting workboot to SQLite DB file">
-    <img src="images/ExportToSqlite2.png" alt="SQLite DB contents">
+    <img src="images/ExportToSqlite1.png" alt="Export dialog">
+    <img src="images/ExportToSqlite2.png" alt="SQLite database result">
 </details>
 
-<p><a href="#top">Up</a></p>
+<p class="back-to-top"><a href="#top">↑ Back to top</a></p>
+
 <hr>
 
-<h3 id="createsamplexmlbasedonxsd" class="zag">Create Sample XML based on XSD</h3>
-<img class="icons" alt="Create Sample XML icon" src="images/icons/createSampleXml.png">
-<p class="dscrptn">Select file with an XSD schema and create a sample XML based on that schema.</p>
+<h3 id="createsamplexmlbasedonxsd" class="zag">
+    <img class="icons" alt="Create Sample XML icon" src="images/icons/createSampleXml.png">
+    Create Sample XML based on XSD
+</h3>
+<p class="dscrptn">Generate a sample XML file from an XSD schema to visualize the structure.</p>
 
-<div class="more">
-    <p>For example, for the schema below</p>
-    <details>
-        <summary>XML schema sample - sample.xsd</summary>
-        <pre>
-            &lt;?xml version="1.0" encoding="UTF-8" ?&gt;
-            &lt;xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"&gt;
-            
-            &lt;xs:element name="shiporder"&gt;
-            &lt;xs:complexType&gt;
-                &lt;xs:sequence&gt;
-                &lt;xs:element name="orderperson" type="xs:string"/&gt;
-                &lt;xs:element name="shipto"&gt;
-                    &lt;xs:complexType&gt;
-                    &lt;xs:sequence&gt;
-                        &lt;xs:element name="name" type="xs:string"/&gt;
-                        &lt;xs:element name="address" type="xs:string"/&gt;
-                        &lt;xs:element name="city" type="xs:string"/&gt;
-                        &lt;xs:element name="country" type="xs:string"/&gt;
-                    &lt;/xs:sequence&gt;
-                    &lt;/xs:complexType&gt;
-                &lt;/xs:element&gt;
-                &lt;xs:element name="item" maxOccurs="unbounded"&gt;
-                    &lt;xs:complexType&gt;
-                    &lt;xs:sequence&gt;
-                        &lt;xs:element name="title" type="xs:string"/&gt;
-                        &lt;xs:element name="note" type="xs:string" minOccurs="0"/&gt;
-                        &lt;xs:element name="quantity" type="xs:positiveInteger"/&gt;
-                        &lt;xs:element name="price" type="xs:decimal"/&gt;
-                    &lt;/xs:sequence&gt;
-                    &lt;/xs:complexType&gt;
-                &lt;/xs:element&gt;
-                &lt;/xs:sequence&gt;
-                &lt;xs:attribute name="orderid" type="xs:string" use="required"/&gt;
-            &lt;/xs:complexType&gt;
-            &lt;/xs:element&gt;
-            
-            &lt;/xs:schema&gt;
-        </pre>
-    </details>
+<details class="more">
+    <summary>View example</summary>
+    <p><strong>Input XSD Schema:</strong></p>
+    <pre>&lt;?xml version="1.0" encoding="UTF-8" ?&gt;
+&lt;xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"&gt;
+&lt;xs:element name="shiporder"&gt;
+  &lt;xs:complexType&gt;
+    &lt;xs:sequence&gt;
+      &lt;xs:element name="orderperson" type="xs:string"/&gt;
+      &lt;xs:element name="shipto"&gt;
+        &lt;xs:complexType&gt;
+          &lt;xs:sequence&gt;
+            &lt;xs:element name="name" type="xs:string"/&gt;
+            &lt;xs:element name="address" type="xs:string"/&gt;
+            &lt;xs:element name="city" type="xs:string"/&gt;
+            &lt;xs:element name="country" type="xs:string"/&gt;
+          &lt;/xs:sequence&gt;
+        &lt;/xs:complexType&gt;
+      &lt;/xs:element&gt;
+      &lt;xs:element name="item" maxOccurs="unbounded"&gt;
+        &lt;xs:complexType&gt;
+          &lt;xs:sequence&gt;
+            &lt;xs:element name="title" type="xs:string"/&gt;
+            &lt;xs:element name="note" type="xs:string" minOccurs="0"/&gt;
+            &lt;xs:element name="quantity" type="xs:positiveInteger"/&gt;
+            &lt;xs:element name="price" type="xs:decimal"/&gt;
+          &lt;/xs:sequence&gt;
+        &lt;/xs:complexType&gt;
+      &lt;/xs:element&gt;
+    &lt;/xs:sequence&gt;
+    &lt;xs:attribute name="orderid" type="xs:string" use="required"/&gt;
+  &lt;/xs:complexType&gt;
+&lt;/xs:element&gt;
+&lt;/xs:schema&gt;</pre>
 
-    <p>The following xml-file will be generated:</p>
+    <p><strong>Generated XML Output:</strong></p>
+    <pre>&lt;shiporder xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" orderid="orderid1"&gt;
+  &lt;orderperson&gt;orderperson1&lt;/orderperson&gt;
+  &lt;shipto&gt;
+    &lt;name&gt;name1&lt;/name&gt;
+    &lt;address&gt;address1&lt;/address&gt;
+    &lt;city&gt;city1&lt;/city&gt;
+    &lt;country&gt;country1&lt;/country&gt;
+  &lt;/shipto&gt;
+  &lt;item&gt;
+    &lt;title&gt;title1&lt;/title&gt;
+    &lt;note&gt;note1&lt;/note&gt;
+    &lt;quantity&gt;1&lt;/quantity&gt;
+    &lt;price&gt;1&lt;/price&gt;
+  &lt;/item&gt;
+  &lt;item&gt;
+    &lt;title&gt;title2&lt;/title&gt;
+    &lt;note&gt;note2&lt;/note&gt;
+    &lt;quantity&gt;79228162514264337593543950335&lt;/quantity&gt;
+    &lt;price&gt;-79228162514264337593543950335&lt;/price&gt;
+  &lt;/item&gt;
+  ...
+&lt;/shiporder&gt;</pre>
+</details>
 
-    <details>
-        <summary>XML output - <code>sample.xml</code></summary>
-        <pre>
-            &lt;shiporder xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" orderid="orderid1"&gt;
-            &lt;orderperson&gt;orderperson1&lt;/orderperson&gt;
-            &lt;shipto&gt;
-                &lt;name&gt;name1&lt;/name&gt;
-                &lt;address&gt;address1&lt;/address&gt;
-                &lt;city&gt;city1&lt;/city&gt;
-                &lt;country&gt;country1&lt;/country&gt;
-            &lt;/shipto&gt;
-            &lt;item&gt;
-                &lt;title&gt;title1&lt;/title&gt;
-                &lt;note&gt;note1&lt;/note&gt;
-                &lt;quantity&gt;1&lt;/quantity&gt;
-                &lt;price&gt;1&lt;/price&gt;
-            &lt;/item&gt;
-            &lt;item&gt;
-                &lt;title&gt;title2&lt;/title&gt;
-                &lt;note&gt;note2&lt;/note&gt;
-                &lt;quantity&gt;79228162514264337593543950335&lt;/quantity&gt;
-                &lt;price&gt;-79228162514264337593543950335&lt;/price&gt;
-            &lt;/item&gt;
-            &lt;item&gt;
-                &lt;title&gt;title3&lt;/title&gt;
-                &lt;note&gt;note3&lt;/note&gt;
-                &lt;quantity&gt;2&lt;/quantity&gt;
-                &lt;price&gt;79228162514264337593543950335&lt;/price&gt;
-            &lt;/item&gt;
-            &lt;item&gt;
-                &lt;title&gt;title4&lt;/title&gt;
-                &lt;note&gt;note4&lt;/note&gt;
-                &lt;quantity&gt;79228162514264337593543950334&lt;/quantity&gt;
-                &lt;price&gt;0.9&lt;/price&gt;
-            &lt;/item&gt;
-            &lt;item&gt;
-                &lt;title&gt;title5&lt;/title&gt;
-                &lt;note&gt;note5&lt;/note&gt;
-                &lt;quantity&gt;3&lt;/quantity&gt;
-                &lt;price&gt;1.1&lt;/price&gt;
-            &lt;/item&gt;
-            &lt;/shiporder&gt;
-        </pre>
-    </details>
-</div>
+<h3 id="validatexmlwithxsd" class="zag">
+    <img class="icons" alt="Validate XML icon" src="images/icons/validateXml.png">
+    Validate XML with XSD
+</h3>
+<p class="dscrptn">Validate an XML file against an XSD schema. A detailed error report will be created in a new workbook.</p>
 
-<h3 id="validatexmlwithxsd" class="zag">Validate XML with XSD</h3>
-<img class="icons" alt="Validate XML icon" src="images/icons/validateXml.png">
-<p class="dscrptn">Check XML file with XSD schema. Select XML and XSD files, and a report with all validation errors and
-    warnings will be created in a new workbook.</p>
-<div class="more">
-    <p>Sample error report</p>
+<details class="more">
+    <summary>View sample error report</summary>
     <div class="tbl">
         <table>
             <thead>
@@ -327,39 +384,31 @@
                 <tr>
                     <td>Error</td>
                     <td>city</td>
-                    <td>The element 'shipto' has invalid child element 'city'. List of possible elements expected:
-                        'address'.</td>
+                    <td>The element 'shipto' has invalid child element 'city'. List of possible elements expected: 'address'.</td>
                 </tr>
                 <tr>
                     <td>Error</td>
                     <td>quantity</td>
-                    <td>
-                        The 'quantity' element is invalid - The value '-5' is invalid according to its datatype
-                        'http://www.w3.org/2001/XMLSchema:positiveInteger' - Value '-5' was either too large or too
-                        small for
-                        PositiveInteger.
-                    </td>
+                    <td>The 'quantity' element is invalid - The value '-5' is invalid according to its datatype 'http://www.w3.org/2001/XMLSchema:positiveInteger'</td>
                 </tr>
                 <tr>
                     <td>Error</td>
                     <td>price</td>
-                    <td>
-                        The 'price' element is invalid - The value 'asdasd' is invalid according to its datatype
-                        'http://www.w3.org/2001/XMLSchema:decimal' - The string 'не число' is not a valid Decimal value.
-                    </td>
+                    <td>The 'price' element is invalid - The value 'asdasd' is invalid according to its datatype 'http://www.w3.org/2001/XMLSchema:decimal'</td>
                 </tr>
             </tbody>
         </table>
     </div>
-</div>
+</details>
 
-<p><a href="#top">Up</a></p>
+<p class="back-to-top"><a href="#top">↑ Back to top</a></p>
+
 <hr>
 
-<h3 id="undolastaction" class="zag">Undo Last Action</h3>
-<img class="icons" alt="Undo Last Action icon" src="images/icons/undo.png">
-<p class="dscrptn">Undo the last action performed with this add-in. Canceling is possible for some functions in the
-    'Converting values' and 'Formatting values' sections, and only if the range of cells was not edited after the action
-    was performed.</p>
+<h3 id="undolastaction" class="zag">
+    <img class="icons" alt="Undo Last Action icon" src="images/icons/undo.png">
+    Undo Last Action
+</h3>
+<p class="dscrptn">Undo the last action performed with this add-in. Available for some functions in the 'Converting values' and 'Formatting values' sections, only if cells haven't been edited since.</p>
 
-<p><a href="#top">Up</a></p>
+<p class="back-to-top"><a href="#top">↑ Back to top</a></p>
