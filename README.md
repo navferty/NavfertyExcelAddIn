@@ -36,28 +36,28 @@ After installation, restart Excel if it was open. You should see the new **Navfe
 
 ## Parse Numerics
 
-|||
-|:-:|---|
-|![](images/icons/parseNumerics.png)|Convert numbers stored as text to proper numeric format, making them usable in calculations.|
+![Parse Numerics Icon](images/icons/parseNumerics.png)
+
+Convert numbers stored as text to proper numeric format, making them usable in calculations.
 
 <details>
   <summary>View screenshots</summary>
 
-![Navferty's Tools Ribbon Tab in MS Excel](images/ParseNumerics1.png)
-![Navferty's Tools Ribbon Tab in MS Excel](images/ParseNumerics2.png)
+![Parse Numerics - Before](images/ParseNumerics1.png)
+![Parse Numerics - After](images/ParseNumerics2.png)
 </details>
 
 ## Replace
 
-|||
-|:-:|---|
-|![](images/icons/replace.png)|Replace Russian characters using different transformation methods.|
+![Replace Icon](images/icons/replace.png)
+
+Replace Russian characters using different transformation methods.
 
 ### With Transliteration
 
-|||
-|:-:|---|
-|![](images/icons/transliterate.png)|Complete transliteration of Russian alphabet to English. For example: "Ж" → "Zh", "Щ" → "Shch". Based on ICAO Doc [9303](https://www.icao.int/publications/Documents/9303_p3_cons_en.pdf).|
+![Transliterate Icon](images/icons/transliterate.png)
+
+Complete transliteration of Russian alphabet to English. For example: "Ж" → "Zh", "Щ" → "Shch". Based on ICAO Doc [9303](https://www.icao.int/publications/Documents/9303_p3_cons_en.pdf).
 
 <details>
   <summary>View screenshots</summary>
@@ -68,9 +68,9 @@ After installation, restart Excel if it was open. You should see the new **Navfe
 
 ### Replace Chars
 
-|||
-|:-:|---|
-|![](images/icons/replaceChars.png)|Replace only visually similar letters: А↔A, В↔B, Е↔E, К↔K, М↔M, Н↔H, О↔O, Р↔P, С↔C, Т↔T, У↔Y, Х↔X.|
+![Replace Chars Icon](images/icons/replaceChars.png)
+
+Replace only visually similar letters: А↔A, В↔B, Е↔E, К↔K, М↔M, Н↔H, О↔O, Р↔P, С↔C, Т↔T, У↔Y, Х↔X.
 
 <details>
   <summary>View screenshots</summary>
@@ -81,9 +81,12 @@ After installation, restart Excel if it was open. You should see the new **Navfe
 
 ## Stringify Numerics
 
-|||
-|:-:|---|
-|![](images/icons/stringifyNumerics.png)|Convert numbers to their word representation in multiple languages:<br>• Russian<br>• English<br>• French|
+![Stringify Numerics Icon](images/icons/stringifyNumerics.png)
+
+Convert numbers to their word representation in multiple languages:
+- Russian
+- English
+- French
 
 <details>
   <summary>View screenshots</summary>
@@ -98,9 +101,9 @@ After installation, restart Excel if it was open. You should see the new **Navfe
 
 ## Toggle Case
 
-|||
-|:-:|---|
-|![](images/icons/toggleCase.png)|Cycle through text case transformations: `Abcde` → `abcde` → `ABCDE`|
+![Toggle Case Icon](images/icons/toggleCase.png)
+
+Cycle through text case transformations: `Abcde` → `abcde` → `ABCDE`
 
 <details>
   <summary>View screenshots</summary>
@@ -113,9 +116,9 @@ After installation, restart Excel if it was open. You should see the new **Navfe
 
 ## Trim Spaces
 
-|||
-|:-:|---|
-|![](images/icons/trimSpaces.png)|Remove extra spaces, line breaks, and leading/trailing whitespace from text cells.|
+![Trim Spaces Icon](images/icons/trimSpaces.png)
+
+Remove extra spaces, line breaks, and leading/trailing whitespace from text cells.
 
 <details>
   <summary>View screenshots</summary>
@@ -130,21 +133,23 @@ After installation, restart Excel if it was open. You should see the new **Navfe
 
 ## Unprotect Workbook
 
-|||
-|:-:|---|
-|![](images/icons/unprotectWorkbook.png)|Remove protection from all worksheets, workbook structure, and VBA projects without needing passwords. *Note: Does not work with encrypted workbooks.*|
+![Unprotect Workbook Icon](images/icons/unprotectWorkbook.png)
+
+Remove protection from all worksheets, workbook structure, and VBA projects without needing passwords. 
+
+*Note: Does not work with encrypted workbooks.*
 
 ## Worksheets Protection
 
-|||
-|:-:|---|
-|![](images/icons/unprotectWorkbook.png)|Set or remove protection on multiple worksheets at once.|
+![Worksheets Protection Icon](images/icons/unprotectWorkbook.png)
+
+Set or remove protection on multiple worksheets at once.
 
 ## Highlight Duplications
 
-|||
-|:-:|---|
-|![](images/icons/highlightDuplicates.png)|Automatically color-code duplicate values in the selected range. Different colors indicate different duplicate groups.|
+![Highlight Duplications Icon](images/icons/highlightDuplicates.png)
+
+Automatically color-code duplicate values in the selected range. Different colors indicate different duplicate groups.
 
 <details>
   <summary>View screenshot</summary>
@@ -154,9 +159,9 @@ After installation, restart Excel if it was open. You should see the new **Navfe
 
 ## Unmerge Cells
 
-|||
-|:-:|---|
-|![](images/icons/unmergeCells.png)|Unmerge cells while filling each cell with the original merged value.|
+![Unmerge Cells Icon](images/icons/unmergeCells.png)
+
+Unmerge cells while filling each cell with the original merged value.
 
 <details>
   <summary>View screenshots</summary>
@@ -167,9 +172,9 @@ After installation, restart Excel if it was open. You should see the new **Navfe
 
 ## Find All Cells Containing Errors
 
-|||
-|:-:|---|
-|![](images/icons/findErrors.png)|Locate all formula errors in the selected range: `#N/A`, `#NAME?`, `#DIV/0!`, `#REF!`, `#VALUE!`, `#NUM!`, `#NULL!`|
+![Find Errors Icon](images/icons/findErrors.png)
+
+Locate all formula errors in the selected range: `#N/A`, `#NAME?`, `#DIV/0!`, `#REF!`, `#VALUE!`, `#NUM!`, `#NULL!`
 
 <details>
   <summary>View screenshot</summary>
@@ -179,9 +184,9 @@ After installation, restart Excel if it was open. You should see the new **Navfe
 
 ## Copy as Markdown
 
-|||
-|:-:|---|
-|![](images/icons/markdown.png)|Copy selected cells to clipboard as a markdown-formatted table.|
+![Copy as Markdown Icon](images/icons/markdown.png)
+
+Copy selected cells to clipboard as a markdown-formatted table.
 
 <details>
   <summary>View screenshot</summary>
@@ -191,9 +196,16 @@ After installation, restart Excel if it was open. You should see the new **Navfe
 
 ## Validate Values
 
-|||
-|:-:|---|
-|![](images/icons/validation.png)|Check cell values against specific formats: Number, Date, TIN of an individual (12 digits), TIN of a legal entity (10 digits), Text for XML (no invalid characters).<br><br>*Note: Valid TIN format doesn't guarantee the organization or individual exists.*|
+![Validate Values Icon](images/icons/validation.png)
+
+Check cell values against specific formats:
+- Number
+- Date
+- TIN of an individual (12 digits with verification)
+- TIN of a legal entity (10 digits with verification)
+- Text for XML (no invalid characters)
+
+*Note: Valid TIN format doesn't guarantee the organization or individual exists.*
 
 <details>
   <summary>View screenshot</summary>
@@ -207,9 +219,9 @@ After installation, restart Excel if it was open. You should see the new **Navfe
 
 ## Export to SQLite
 
-|||
-|:-:|---|
-|![](images/icons/validation.png)|Export the entire workbook to a SQLite database file. Each worksheet becomes a separate table with automatic column type detection.|
+![Export to SQLite Icon](images/icons/validation.png)
+
+Export the entire workbook to a SQLite database file. Each worksheet becomes a separate table with automatic column type detection.
 
 <details>
   <summary>View screenshots</summary>
@@ -224,9 +236,9 @@ After installation, restart Excel if it was open. You should see the new **Navfe
 
 ## Create Sample XML based on XSD
 
-|||
-|:-:|---|
-|![](images/icons/createSampleXml.png)|Generate a sample XML file from an XSD schema to visualize the structure.|
+![Create Sample XML Icon](images/icons/createSampleXml.png)
+
+Generate a sample XML file from an XSD schema to visualize the structure.
 
 <details>
   <summary>View example</summary>
@@ -317,18 +329,19 @@ After installation, restart Excel if it was open. You should see the new **Navfe
 
 ## Validate XML with XSD
 
-|||
-|:-:|---|
-|![](images/icons/validateXml.png)|Validate an XML file against an XSD schema. A detailed error report will be created in a new workbook.|
+![Validate XML Icon](images/icons/validateXml.png)
+
+Validate an XML file against an XSD schema. A detailed error report will be created in a new workbook.
 
 <details>
   <summary>View sample error report</summary>
 
-|Severity|Element|Message|
-|---|---|---|
-|Error|city|The element 'shipto' has invalid child element 'city'. List of possible elements expected: 'address'.|
-|Error|quantity|The 'quantity' element is invalid - The value '-5' is invalid according to its datatype 'positiveInteger'|
-|Error|price|The 'price' element is invalid - The value 'asdasd' is invalid according to its datatype 'decimal'|
+**Sample error report:**
+
+- **Severity:** Error | **Element:** city | **Message:** The element 'shipto' has invalid child element 'city'. List of possible elements expected: 'address'.
+- **Severity:** Error | **Element:** quantity | **Message:** The 'quantity' element is invalid - The value '-5' is invalid according to its datatype 'positiveInteger'
+- **Severity:** Error | **Element:** price | **Message:** The 'price' element is invalid - The value 'asdasd' is invalid according to its datatype 'decimal'
+
 </details>
 
 [Up](#navfertys-excel-add-in)
@@ -337,9 +350,9 @@ After installation, restart Excel if it was open. You should see the new **Navfe
 
 ## Undo Last Action
 
-|||
-|:-:|---|
-|![](images/icons/undo.png)|Undo the last action performed with this add-in. Available for some functions in the 'Converting values' and 'Formatting values' sections, only if cells haven't been edited since.|
+![Undo Icon](images/icons/undo.png)
+
+Undo the last action performed with this add-in. Available for some functions in the 'Converting values' and 'Formatting values' sections, only if cells haven't been edited since.
 
 [Up](#navfertys-excel-add-in)
 
