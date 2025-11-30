@@ -1,30 +1,22 @@
-﻿using System.Threading;
-using System.Windows.Forms;
-
-using Microsoft.Office.Interop.Excel;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-
-using NavfertyExcelAddIn.UnitTests.SqliteExport;
+﻿using Microsoft.Office.Interop.Excel;
 
 namespace NavfertyExcelAddIn.UnitTests.Transliterate;
 
-#nullable enable
-
-[TestClass]
+[Category("Automation")]
+[NotInParallel("Automation")]
 public class TransliterateAutomationTests : AutomationTestsBase
 {
-	[TestMethod]
-	[TestCategory("Automation")]
-	[Description("Test Transliterate feature - convert Cyrillic to Latin")]
-	public void Transliterate_CyrillicText_ConvertedToLatin()
+	[Test]
+	//[Description("Test Transliterate feature - convert Cyrillic to Latin")]
+	public async Task Transliterate_CyrillicText_ConvertedToLatin()
 	{
-		TestContext.WriteLine("Testing Transliterate feature");
+		TestContext.Output.WriteLine("Testing Transliterate feature");
 
 		var workbook = app.Workbooks.Add();
 		Thread.Sleep(defaultSleep);
 
 		var sheet = (Worksheet)workbook.Sheets[1];
-		Assert.IsNotNull(sheet);
+		await Assert.That(sheet).IsNotNull();
 
 		// Fill with Cyrillic text
 		var values = new object[,]
@@ -43,11 +35,11 @@ public class TransliterateAutomationTests : AutomationTestsBase
 		Thread.Sleep(defaultSleep);
 
 		var currentValues = (object?[,])sheet.UsedRange.Cells.Value;
-		Assert.IsNotNull(currentValues);
+		await Assert.That(currentValues).IsNotNull();
 
 		foreach (var cell in currentValues)
 		{
-			TestContext.WriteLine(cell?.ToString() ?? "<null>");
+			TestContext.Output.WriteLine(cell?.ToString() ?? "<null>");
 		}
 
 		// Expected transliteration results
@@ -57,21 +49,20 @@ public class TransliterateAutomationTests : AutomationTestsBase
 			{ "Karl", "Klara", "korally" },
 		};
 
-		CollectionAssert.AreEqual(expectedValues, currentValues);
+		await Assert.That(currentValues).IsEquivalentTo(expectedValues);
 	}
 
-	[TestMethod]
-	[TestCategory("Automation")]
-	[Description("Test ReplaceChars feature - replace specific characters")]
-	public void ReplaceChars_CustomReplacements_Applied()
+	[Test]
+	//[Description("Test ReplaceChars feature - replace specific characters")]
+	public async Task ReplaceChars_CustomReplacements_Applied()
 	{
-		TestContext.WriteLine("Testing ReplaceChars feature");
+		TestContext.Output.WriteLine("Testing ReplaceChars feature");
 
 		var workbook = app.Workbooks.Add();
 		Thread.Sleep(defaultSleep);
 
 		var sheet = (Worksheet)workbook.Sheets[1];
-		Assert.IsNotNull(sheet);
+		await Assert.That(sheet).IsNotNull();
 
 		// Fill with text containing characters to replace
 		var values = new object[,]
@@ -89,32 +80,31 @@ public class TransliterateAutomationTests : AutomationTestsBase
 		Thread.Sleep(defaultSleep);
 
 		var currentValues = (object?[,])sheet.UsedRange.Cells.Value;
-		Assert.IsNotNull(currentValues);
+		await Assert.That(currentValues).IsNotNull();
 
 		foreach (var cell in currentValues)
 		{
-			TestContext.WriteLine(cell?.ToString() ?? "<null>");
+			TestContext.Output.WriteLine(cell?.ToString() ?? "<null>");
 		}
 
 		// Verify that characters were replaced (specific replacements depend on implementation)
 		// At minimum, verify that the operation completed without error
-		Assert.IsNotNull(currentValues[1, 1]);
-		Assert.IsNotNull(currentValues[1, 2]);
-		Assert.IsNotNull(currentValues[1, 3]);
+		await Assert.That(currentValues[1, 1]).IsNotNull();
+		await Assert.That(currentValues[1, 2]).IsNotNull();
+		await Assert.That(currentValues[1, 3]).IsNotNull();
 	}
 
-	[TestMethod]
-	[TestCategory("Automation")]
-	[Description("Test Transliterate with mixed Cyrillic and Latin text")]
-	public void Transliterate_MixedText_OnlyCyrillicTransliterated()
+	[Test]
+	//[Description("Test Transliterate with mixed Cyrillic and Latin text")]
+	public async Task Transliterate_MixedText_OnlyCyrillicTransliterated()
 	{
-		TestContext.WriteLine("Testing Transliterate with mixed content");
+		TestContext.Output.WriteLine("Testing Transliterate with mixed content");
 
 		var workbook = app.Workbooks.Add();
 		Thread.Sleep(defaultSleep);
 
 		var sheet = (Worksheet)workbook.Sheets[1];
-		Assert.IsNotNull(sheet);
+		await Assert.That(sheet).IsNotNull();
 
 		// Fill with mixed content
 		var values = new object[,]
@@ -132,11 +122,11 @@ public class TransliterateAutomationTests : AutomationTestsBase
 		Thread.Sleep(defaultSleep);
 
 		var currentValues = (object?[,])sheet.UsedRange.Cells.Value;
-		Assert.IsNotNull(currentValues);
+		await Assert.That(currentValues).IsNotNull();
 
 		foreach (var cell in currentValues)
 		{
-			TestContext.WriteLine(cell?.ToString() ?? "<null>");
+			TestContext.Output.WriteLine(cell?.ToString() ?? "<null>");
 		}
 
 		// Expected: only Cyrillic parts transliterated
@@ -145,6 +135,6 @@ public class TransliterateAutomationTests : AutomationTestsBase
 			{ "Test Test", "English Russkii", "123 trista" },
 		};
 
-		CollectionAssert.AreEqual(expectedValues, currentValues);
+		await Assert.That(currentValues).IsEquivalentTo(expectedValues);
 	}
 }

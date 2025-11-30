@@ -1,31 +1,22 @@
-﻿using System.Drawing;
-using System.Threading;
-using System.Windows.Forms;
-
-using Microsoft.Office.Interop.Excel;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-
-using NavfertyExcelAddIn.UnitTests.SqliteExport;
+﻿using Microsoft.Office.Interop.Excel;
 
 namespace NavfertyExcelAddIn.UnitTests.WorksheetCellsEditing;
 
-#nullable enable
-
-[TestClass]
+[Category("Automation")]
+[NotInParallel("Automation")]
 public class ConditionalFormatAutomationTests : AutomationTestsBase
 {
-	[TestMethod]
-	[TestCategory("Automation")]
-	[Description("Test RepairConditionalFormat feature - copy conditional format from first row to entire range")]
-	public void RepairConditionalFormat_WithConditionalFormatInFirstRow_CopiedToAllRows()
+	[Test]
+	//[Description("Test RepairConditionalFormat feature - copy conditional format from first row to entire range")]
+	public async Task RepairConditionalFormat_WithConditionalFormatInFirstRow_CopiedToAllRows()
 	{
-		TestContext.WriteLine("Testing RepairConditionalFormat feature");
+		TestContext.Output.WriteLine("Testing RepairConditionalFormat feature");
 
 		var workbook = app.Workbooks.Add();
 		Thread.Sleep(defaultSleep);
 
 		var sheet = (Worksheet)workbook.Sheets[1];
-		Assert.IsNotNull(sheet);
+		Assert.NotNull(sheet);
 
 		// Fill with numeric data
 		var values = new object[,]
@@ -39,7 +30,7 @@ public class ConditionalFormatAutomationTests : AutomationTestsBase
 		sheet.Range[sheet.Cells[1, 1], sheet.Cells[4, 3]].Value = values;
 
 		// Add conditional formatting to the first row only
-		var firstRow = sheet.Range[sheet.Cells[1, 1], sheet.Cells[1, 3]];
+		Range firstRow = sheet.Range[sheet.Cells[1, 1], sheet.Cells[1, 3]];
 		var formatCondition = firstRow.FormatConditions.Add(
 			Type: XlFormatConditionType.xlCellValue,
 			Operator: XlFormatConditionOperator.xlGreater,
@@ -50,10 +41,11 @@ public class ConditionalFormatAutomationTests : AutomationTestsBase
 		Thread.Sleep(defaultSleep);
 
 		// Verify initial state - only first row has conditional formatting
-		Assert.IsTrue(firstRow.FormatConditions.Count > 0, "First row should have conditional formatting");
+		await Assert.That(GetFormatConditionsCount(firstRow)).IsGreaterThan(0); //, "First row should have conditional formatting");
 		
 		var secondRow = sheet.Range[sheet.Cells[2, 1], sheet.Cells[2, 3]];
-		Assert.AreEqual(0, secondRow.FormatConditions.Count, "Second row should not have conditional formatting initially");
+		var formatConditionsCount = (int)secondRow.FormatConditions.Count;
+		await Assert.That(formatConditionsCount).IsEqualTo(0); //, "Second row should not have conditional formatting initially");
 
 		// Select the entire range
 		sheet.Range[sheet.Cells[1, 1], sheet.Cells[4, 3]].Select();
@@ -67,25 +59,24 @@ public class ConditionalFormatAutomationTests : AutomationTestsBase
 		// Verify conditional formatting was copied to all rows
 		for (int row = 1; row <= 4; row++)
 		{
-			var currentRow = sheet.Range[sheet.Cells[row, 1], sheet.Cells[row, 3]];
-			Assert.IsTrue(currentRow.FormatConditions.Count > 0, $"Row {row} should have conditional formatting");
-			TestContext.WriteLine($"Row {row} has {currentRow.FormatConditions.Count} conditional format(s)");
+			Range currentRow = sheet.Range[sheet.Cells[row, 1], sheet.Cells[row, 3]];
+			await Assert.That(GetFormatConditionsCount(currentRow)).IsGreaterThan(0); //, $"Row {row} should have conditional formatting");
+			TestContext.Output.WriteLine($"Row {row} has {currentRow.FormatConditions.Count} conditional format(s)");
 		}
 	}
 
-	[TestMethod]
-	[Ignore("Only first row repair for conditional formattin is implemented")]
-	[TestCategory("Automation")]
-	[Description("Test RepairConditionalFormat with conditional format in second row (first row empty)")]
-	public void RepairConditionalFormat_WithConditionalFormatInSecondRow_CopiedToAllRows()
+	[Test]
+	[Skip("Only first row repair for conditional formattin is implemented")]
+	//[Description("Test RepairConditionalFormat with conditional format in second row (first row empty)")]
+	public async Task RepairConditionalFormat_WithConditionalFormatInSecondRow_CopiedToAllRows()
 	{
-		TestContext.WriteLine("Testing RepairConditionalFormat with format in second row");
+		TestContext.Output.WriteLine("Testing RepairConditionalFormat with format in second row");
 
 		var workbook = app.Workbooks.Add();
 		Thread.Sleep(defaultSleep);
 
 		var sheet = (Worksheet)workbook.Sheets[1];
-		Assert.IsNotNull(sheet);
+		Assert.NotNull(sheet);
 
 		// Fill with numeric data
 		var values = new object[,]
@@ -98,7 +89,7 @@ public class ConditionalFormatAutomationTests : AutomationTestsBase
 		sheet.Range[sheet.Cells[1, 1], sheet.Cells[3, 3]].Value = values;
 
 		// Add conditional formatting to the second row only (first row has none)
-		var secondRow = sheet.Range[sheet.Cells[2, 1], sheet.Cells[2, 3]];
+		Range secondRow = sheet.Range[sheet.Cells[2, 1], sheet.Cells[2, 3]];
 		var formatCondition = secondRow.FormatConditions.Add(
 			Type: XlFormatConditionType.xlCellValue,
 			Operator: XlFormatConditionOperator.xlLess,
@@ -109,9 +100,9 @@ public class ConditionalFormatAutomationTests : AutomationTestsBase
 		Thread.Sleep(defaultSleep);
 
 		// Verify initial state
-		var firstRow = sheet.Range[sheet.Cells[1, 1], sheet.Cells[1, 3]];
-		Assert.AreEqual(0, firstRow.FormatConditions.Count, "First row should not have conditional formatting initially");
-		Assert.IsTrue(secondRow.FormatConditions.Count > 0, "Second row should have conditional formatting");
+		Range firstRow = sheet.Range[sheet.Cells[1, 1], sheet.Cells[1, 3]];
+		await Assert.That(GetFormatConditionsCount(firstRow)).EqualTo(0); //, "First row should not have conditional formatting initially");
+		await Assert.That(GetFormatConditionsCount(secondRow)).IsGreaterThan(0); //, "Second row should have conditional formatting");
 
 		// Select the entire range
 		sheet.Range[sheet.Cells[1, 1], sheet.Cells[3, 3]].Select();
@@ -125,9 +116,14 @@ public class ConditionalFormatAutomationTests : AutomationTestsBase
 		// Verify conditional formatting was copied to all rows
 		for (int row = 1; row <= 3; row++)
 		{
-			var currentRow = sheet.Range[sheet.Cells[row, 1], sheet.Cells[row, 3]];
-			Assert.IsTrue(currentRow.FormatConditions.Count > 0, $"Row {row} should have conditional formatting");
-			TestContext.WriteLine($"Row {row} has {currentRow.FormatConditions.Count} conditional format(s)");
+			Range currentRow = sheet.Range[sheet.Cells[row, 1], sheet.Cells[row, 3]];
+			await Assert.That(GetFormatConditionsCount(currentRow)).IsGreaterThan(0); // > 0, $"Row {row} should have conditional formatting");
+			TestContext.Output.WriteLine($"Row {row} has {currentRow.FormatConditions.Count} conditional format(s)");
 		}
+	}
+
+	private static int GetFormatConditionsCount(Range range)
+	{
+		return (int)range.FormatConditions.Count;
 	}
 }

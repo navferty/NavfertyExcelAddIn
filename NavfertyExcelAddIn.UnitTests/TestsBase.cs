@@ -1,37 +1,32 @@
 ﻿using System.Globalization;
-using System.IO;
-using System.Threading;
-
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 using NavfertyExcelAddIn.Commons;
 
-namespace NavfertyExcelAddIn.UnitTests
+namespace NavfertyExcelAddIn.UnitTests;
+
+public abstract class TestsBase
 {
-	[TestClass]
-	public abstract class TestsBase
+	protected RangeExtensionsStub RangeExtensionsStub { get; set; } = new();
+
+	// TODO check when context may be null
+	public TestContext TestContext { get; } = TestContext.Current!;
+
+
+	protected void SetRangeExtentionsStub()
 	{
-		protected RangeExtensionsImplementationStub RangeExtensionsStub { get; set; }
+		RangeExtensionsStub = new RangeExtensionsStub();
+		RangeExtensions.ResetImplementation(RangeExtensionsStub);
+	}
 
-		public TestContext TestContext { get; set; }
+	protected void SetCulture(string culture = "en-US")
+	{
+		var cultureInfo = CultureInfo.GetCultureInfo(culture);
+		Thread.CurrentThread.CurrentCulture = cultureInfo;
+		Thread.CurrentThread.CurrentUICulture = cultureInfo;
+	}
 
-
-		protected void SetRangeExtentionsStub()
-		{
-			RangeExtensionsStub = new RangeExtensionsImplementationStub();
-			RangeExtensions.ResetImplementation(RangeExtensionsStub);
-		}
-
-		protected void SetCulture(string culture = "en-US")
-		{
-			var cultureInfo = CultureInfo.GetCultureInfo(culture);
-			Thread.CurrentThread.CurrentCulture = cultureInfo;
-			Thread.CurrentThread.CurrentUICulture = cultureInfo;
-		}
-
-		protected string GetFilePath(string fileName)
-		{
-			return Path.Combine(Directory.GetCurrentDirectory(), fileName);
-		}
+	protected string GetFilePath(string fileName)
+	{
+		return Path.Combine(Directory.GetCurrentDirectory(), fileName);
 	}
 }

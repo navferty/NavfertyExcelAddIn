@@ -15,7 +15,7 @@ public sealed class ColumnTypeDetector
 
 	internal const double FloatingPointTolerance = 1e-10;
 
-	public static SqliteColumnType DetectColumnType(object[,] values, int colIndex, int startRow, int endRow)
+	public static SqliteColumnType DetectColumnType(object?[,]? values, int colIndex, int startRow, int endRow)
 	{
 		if (values == null)
 		{

@@ -1,32 +1,23 @@
-﻿using System.Collections.Generic;
-using System.Threading;
-using System.Windows.Forms;
-
-using Microsoft.Office.Interop.Excel;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-
-using NavfertyExcelAddIn.UnitTests.SqliteExport;
+﻿using Microsoft.Office.Interop.Excel;
 
 namespace NavfertyExcelAddIn.UnitTests.StringifyNumerics;
 
-#nullable enable
-
-[TestClass]
+[Category("Automation")]
+[NotInParallel("Automation")]
 public class StringifyNumericsAutomationTests : AutomationTestsBase
 {
-	[TestMethod]
-	[DynamicData(nameof(GetStringifyTestCases))]
-	[TestCategory("Automation")]
-	[Description("Create blank workbook, fill it with numbers and stringify numerics to each of 3 language options")]
-	public void StringifyNumerics(string language, string keySequence, object[,] expectedValues)
+	[Test]
+	[MethodDataSource(nameof(GetStringifyTestCases))]
+	//[Description("Create blank workbook, fill it with numbers and stringify numerics to each of 3 language options")]
+	public async Task StringifyNumerics(string language, string keySequence, object[,] expectedValues)
 	{
-		TestContext.WriteLine($"Testing {language} stringification");
+		TestContext.Output.WriteLine($"Testing {language} stringification");
 
 		var workbook = app.Workbooks.Add();
 		Thread.Sleep(defaultSleep);
 
 		var sheet = (Worksheet)workbook.Sheets[1];
-		Assert.IsNotNull(sheet);
+		await Assert.That(sheet).IsNotNull();
 
 		var values = new[,]
 		{
@@ -52,11 +43,13 @@ public class StringifyNumericsAutomationTests : AutomationTestsBase
 		var currentValues = (object?[,])sheet.UsedRange.Cells.Value;
 		foreach (var cell in currentValues)
 		{
-			TestContext.WriteLine(cell?.ToString() ?? "<null>");
+			TestContext.Output.WriteLine(cell?.ToString() ?? "<null>");
 		}
 
-		Assert.IsNotNull(currentValues);
-		CollectionAssert.AreEqual(expectedValues, currentValues);
+		await Assert.That(currentValues).IsNotNull();
+
+		// TODO
+		await Assert.That(currentValues).IsEquivalentTo(expectedValues);
 	}
 
 	public static IEnumerable<object[]> GetStringifyTestCases()

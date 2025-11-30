@@ -1,21 +1,18 @@
-﻿using System;
-using System.Runtime.InteropServices;
-using System.Threading;
+﻿using System.Runtime.InteropServices;
 
 using Microsoft.Office.Core;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 using Application = Microsoft.Office.Interop.Excel.Application;
 
-namespace NavfertyExcelAddIn.UnitTests.SqliteExport;
+namespace NavfertyExcelAddIn.UnitTests;
 
 public class AutomationTestsBase : TestsBase
 {
 	protected readonly TimeSpan defaultSleep = TimeSpan.FromMilliseconds(750);
-	protected Application app;
+	protected Application app = null!;
 
-	[TestInitialize]
-	public virtual void Initialize()
+	[Before(HookType.Test)]
+	public virtual async Task Initialize()
 	{
 		app = OpenNewExcelApp();
 		app.WindowState = Microsoft.Office.Interop.Excel.XlWindowState.xlMaximized;
@@ -28,12 +25,12 @@ public class AutomationTestsBase : TestsBase
 		// check current active window to be excel app
 		var currentActiveWindowHandle = GetForegroundWindow();
 
-		TestContext.WriteLine($"Excel window handle: {excelWindowHandle}");
-		TestContext.WriteLine($"Current active window handle: {currentActiveWindowHandle}");
-		Assert.AreEqual(excelWindowHandle, currentActiveWindowHandle, "Excel is not the active window");
+		TestContext.Output.WriteLine($"Excel window handle: {excelWindowHandle}");
+		TestContext.Output.WriteLine($"Current active window handle: {currentActiveWindowHandle}");
+		await Assert.That(excelWindowHandle).IsEqualTo(currentActiveWindowHandle); //, "Excel is not the active window");
 	}
 
-	[TestCleanup]
+	[After(HookType.Test)]
 	public virtual void Cleanup()
 	{
 		app.Quit();
@@ -111,8 +108,8 @@ public class AutomationTestsBase : TestsBase
 				continue;
 
 			// Skip the first Static control (usually the icon) and get the second one (message text)
-			var staticHandle = FindWindowEx(msgBoxHandle, IntPtr.Zero, "Static", null);
-			staticHandle = FindWindowEx(msgBoxHandle, staticHandle, "Static", null);
+			var staticHandle = FindWindowEx(msgBoxHandle, IntPtr.Zero, "Static", null!);
+			staticHandle = FindWindowEx(msgBoxHandle, staticHandle, "Static", null!);
 
 			if (staticHandle == IntPtr.Zero)
 				continue;

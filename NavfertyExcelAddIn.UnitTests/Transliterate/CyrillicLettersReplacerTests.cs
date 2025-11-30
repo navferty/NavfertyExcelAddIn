@@ -1,31 +1,20 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using NavfertyExcelAddIn.Transliterate;
 
-using NavfertyExcelAddIn.Transliterate;
+namespace NavfertyExcelAddIn.UnitTests.Transliterate;
 
-namespace NavfertyExcelAddIn.UnitTests.Transliterate
+public class CyrillicLettersReplacerTests
 {
-	[TestClass]
-	public class CyrillicLettersReplacerTests
+	[Test]
+	[Arguments("\u0410123\u0412\u0415", "A123BE")]
+	[Arguments("ABCDEFG\u0410\u0411\u0412\u0413\u0414\u0415", "ABCDEFGAБBГДE")]
+	[Arguments("абвгдеёжзийклмнопрстуфхцчшщъыьэюя", "aбbгдeёжзийkлmhoпpctyфxцчшщъыьэюя")]
+	[Arguments("АБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯ", "AБBГДEЁЖЗИЙKЛMHOПPCTYФXЦЧШЩЪЫЬЭЮЯ")]
+	public async Task Transliterate(string input, string expected)
 	{
-		private CyrillicLettersReplacer replacer;
+		var replacer = new CyrillicLettersReplacer();
 
-		[TestInitialize]
-		public void Initialize()
-		{
-			replacer = new CyrillicLettersReplacer();
-		}
+		var output = replacer.ReplaceCyrillicCharsWithLatin(input);
 
-		[TestMethod]
-		[DataRow("\u0410123\u0412\u0415", "A123BE")]
-		[DataRow("ABCDEFG\u0410\u0411\u0412\u0413\u0414\u0415", "ABCDEFGAБBГДE")]
-		[DataRow("абвгдеёжзийклмнопрстуфхцчшщъыьэюя", "aбbгдeёжзийkлmhoпpctyфxцчшщъыьэюя")]
-		[DataRow("АБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯ", "AБBГДEЁЖЗИЙKЛMHOПPCTYФXЦЧШЩЪЫЬЭЮЯ")]
-		public void Transliterate(string input, string expected)
-		{
-			var output = replacer.ReplaceCyrillicCharsWithLatin(input);
-
-			Assert.AreEqual(expected, output);
-		}
-
+		await Assert.That(output).IsEqualTo(expected);
 	}
 }
