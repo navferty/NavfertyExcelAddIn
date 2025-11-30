@@ -215,38 +215,30 @@
 <p><strong>Входная XSD-схема:</strong></p>
 
 ```xml
-<?xml version="1.0" encoding="UTF-8" ?>
-<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
-<xs:element name="shiporder">
-  <xs:complexType>
-    <xs:sequence>
-      <xs:element name="Заголовок" type="xs:string"/>
-      <xs:element name="Адресат">
-        <xs:complexType>
-          <xs:sequence>
-            <xs:element name="Имя" type="xs:string"/>
-            <xs:element name="Адрес" type="xs:string"/>
-            <xs:element name="Город" type="xs:string"/>
-            <xs:element name="Страна" type="xs:string"/>
-          </xs:sequence>
-        </xs:complexType>
-      </xs:element>
-      <xs:element name="Элемент" maxOccurs="3">
-        <xs:complexType>
-          <xs:sequence>
-            <xs:element name="Название" type="xs:string"/>
-            <xs:element name="Описание" type="xs:string" minOccurs="0"/>
-            <xs:element name="Количество" type="xs:positiveInteger"/>
-            <xs:element name="Цена" type="xs:decimal"/>
-          </xs:sequence>
-        </xs:complexType>
-      </xs:element>
-    </xs:sequence>
-    <xs:attribute name="Идентификатор" type="xs:string" use="required"/>
-  </xs:complexType>
-</xs:element>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+           xmlns:tns="http://tempuri.org/PurchaseOrderSchema.xsd"
+           targetNamespace="http://tempuri.org/PurchaseOrderSchema.xsd"
+           elementFormDefault="qualified">
+ <xsd:element name="PurchaseOrder" type="tns:PurchaseOrderType"/>
+ <xsd:complexType name="PurchaseOrderType">
+  <xsd:sequence>
+   <xsd:element name="ShipTo" type="tns:USAddress" maxOccurs="2"/>
+   <xsd:element name="BillTo" type="tns:USAddress"/>
+  </xsd:sequence>
+  <xsd:attribute name="OrderDate" type="xsd:date"/>
+ </xsd:complexType>
 
-</xs:schema>
+ <xsd:complexType name="USAddress">
+  <xsd:sequence>
+   <xsd:element name="name"   type="xsd:string"/>
+   <xsd:element name="street" type="xsd:string"/>
+   <xsd:element name="city"   type="xsd:string"/>
+   <xsd:element name="state"  type="xsd:string"/>
+   <xsd:element name="zip"    type="xsd:integer"/>
+  </xsd:sequence>
+  <xsd:attribute name="country" type="xsd:NMTOKEN" fixed="US"/>
+ </xsd:complexType>
+</xsd:schema>
 ```
 </details>
 
@@ -256,33 +248,29 @@
   <summary>Результат генерации - sample.xml</summary>
 
 ```xml
-<КорневойЭлемент xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" Идентификатор="Идентификатор1">
-  <Заголовок>Заголовок1</Заголовок>
-  <Адресат>
-    <Имя>Имя1</Имя>
-    <Адрес>Адрес1</Адрес>
-    <Город>Город1</Город>
-    <Страна>Страна1</Страна>
-  </Адресат>
-  <Элемент>
-    <Название>Название1</Название>
-    <Описание>Описание1</Описание>
-    <Количество>1</Количество>
-    <Цена>1</Цена>
-  </Элемент>
-  <Элемент>
-    <Название>Название2</Название>
-    <Описание>Описание2</Описание>
-    <Количество>79228162514264337593543950335</Количество>
-    <Цена>-79228162514264337593543950335</Цена>
-  </Элемент>
-  <Элемент>
-    <Название>Название3</Название>
-    <Описание>Описание3</Описание>
-    <Количество>2</Количество>
-    <Цена>79228162514264337593543950335</Цена>
-  </Элемент>
-</КорневойЭлемент>
+<PurchaseOrder xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" OrderDate="1900-01-01" xmlns="http://tempuri.org/PurchaseOrderSchema.xsd">
+  <ShipTo country="US">
+    <name>name1</name>
+    <street>street1</street>
+    <city>city1</city>
+    <state>state1</state>
+    <zip>1</zip>
+  </ShipTo>
+  <ShipTo country="US">
+    <name>name2</name>
+    <street>street2</street>
+    <city>city2</city>
+    <state>state2</state>
+    <zip>-79228162514264337593543950335</zip>
+  </ShipTo>
+  <BillTo country="US">
+    <name>name1</name>
+    <street>street1</street>
+    <city>city1</city>
+    <state>state1</state>
+    <zip>1</zip>
+  </BillTo>
+</PurchaseOrder>
 ```
 </details>
 

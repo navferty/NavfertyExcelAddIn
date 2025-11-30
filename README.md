@@ -214,84 +214,58 @@ Generate a sample XML file from an XSD schema to visualize the structure.
 **Input XSD Schema:**
 
 ```XML
-<?xml version="1.0" encoding="UTF-8" ?>
-<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+           xmlns:tns="http://tempuri.org/PurchaseOrderSchema.xsd"
+           targetNamespace="http://tempuri.org/PurchaseOrderSchema.xsd"
+           elementFormDefault="qualified">
+ <xsd:element name="PurchaseOrder" type="tns:PurchaseOrderType"/>
+ <xsd:complexType name="PurchaseOrderType">
+  <xsd:sequence>
+   <xsd:element name="ShipTo" type="tns:USAddress" maxOccurs="2"/>
+   <xsd:element name="BillTo" type="tns:USAddress"/>
+  </xsd:sequence>
+  <xsd:attribute name="OrderDate" type="xsd:date"/>
+ </xsd:complexType>
 
-<xs:element name="shiporder">
-  <xs:complexType>
-    <xs:sequence>
-      <xs:element name="orderperson" type="xs:string"/>
-      <xs:element name="shipto">
-        <xs:complexType>
-          <xs:sequence>
-            <xs:element name="name" type="xs:string"/>
-            <xs:element name="address" type="xs:string"/>
-            <xs:element name="city" type="xs:string"/>
-            <xs:element name="country" type="xs:string"/>
-          </xs:sequence>
-        </xs:complexType>
-      </xs:element>
-      <xs:element name="item" maxOccurs="unbounded">
-        <xs:complexType>
-          <xs:sequence>
-            <xs:element name="title" type="xs:string"/>
-            <xs:element name="note" type="xs:string" minOccurs="0"/>
-            <xs:element name="quantity" type="xs:positiveInteger"/>
-            <xs:element name="price" type="xs:decimal"/>
-          </xs:sequence>
-        </xs:complexType>
-      </xs:element>
-    </xs:sequence>
-    <xs:attribute name="orderid" type="xs:string" use="required"/>
-  </xs:complexType>
-</xs:element>
-
-</xs:schema>
+ <xsd:complexType name="USAddress">
+  <xsd:sequence>
+   <xsd:element name="name"   type="xsd:string"/>
+   <xsd:element name="street" type="xsd:string"/>
+   <xsd:element name="city"   type="xsd:string"/>
+   <xsd:element name="state"  type="xsd:string"/>
+   <xsd:element name="zip"    type="xsd:integer"/>
+  </xsd:sequence>
+  <xsd:attribute name="country" type="xsd:NMTOKEN" fixed="US"/>
+ </xsd:complexType>
+</xsd:schema>
 ```
 
 **Generated XML Output:**
 
 ```XML
-<shiporder xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" orderid="orderid1">
-  <orderperson>orderperson1</orderperson>
-  <shipto>
+<PurchaseOrder xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" OrderDate="1900-01-01" xmlns="http://tempuri.org/PurchaseOrderSchema.xsd">
+  <ShipTo country="US">
     <name>name1</name>
-    <address>address1</address>
+    <street>street1</street>
     <city>city1</city>
-    <country>country1</country>
-  </shipto>
-  <item>
-    <title>title1</title>
-    <note>note1</note>
-    <quantity>1</quantity>
-    <price>1</price>
-  </item>
-  <item>
-    <title>title2</title>
-    <note>note2</note>
-    <quantity>79228162514264337593543950335</quantity>
-    <price>-79228162514264337593543950335</price>
-  </item>
-  <item>
-    <title>title3</title>
-    <note>note3</note>
-    <quantity>2</quantity>
-    <price>79228162514264337593543950335</price>
-  </item>
-  <item>
-    <title>title4</title>
-    <note>note4</note>
-    <quantity>79228162514264337593543950334</quantity>
-    <price>0.9</price>
-  </item>
-  <item>
-    <title>title5</title>
-    <note>note5</note>
-    <quantity>3</quantity>
-    <price>1.1</price>
-  </item>
-  ...
-</shiporder>
+    <state>state1</state>
+    <zip>1</zip>
+  </ShipTo>
+  <ShipTo country="US">
+    <name>name2</name>
+    <street>street2</street>
+    <city>city2</city>
+    <state>state2</state>
+    <zip>-79228162514264337593543950335</zip>
+  </ShipTo>
+  <BillTo country="US">
+    <name>name1</name>
+    <street>street1</street>
+    <city>city1</city>
+    <state>state1</state>
+    <zip>1</zip>
+  </BillTo>
+</PurchaseOrder>
 ```
 </details>
 

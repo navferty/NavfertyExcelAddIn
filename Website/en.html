@@ -306,61 +306,55 @@
 <details class="more">
     <summary>View example</summary>
     <p><strong>Input XSD Schema:</strong></p>
-    <pre>&lt;?xml version="1.0" encoding="UTF-8" ?&gt;
-&lt;xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"&gt;
-&lt;xs:element name="shiporder"&gt;
-  &lt;xs:complexType&gt;
-    &lt;xs:sequence&gt;
-      &lt;xs:element name="orderperson" type="xs:string"/&gt;
-      &lt;xs:element name="shipto"&gt;
-        &lt;xs:complexType&gt;
-          &lt;xs:sequence&gt;
-            &lt;xs:element name="name" type="xs:string"/&gt;
-            &lt;xs:element name="address" type="xs:string"/&gt;
-            &lt;xs:element name="city" type="xs:string"/&gt;
-            &lt;xs:element name="country" type="xs:string"/&gt;
-          &lt;/xs:sequence&gt;
-        &lt;/xs:complexType&gt;
-      &lt;/xs:element&gt;
-      &lt;xs:element name="item" maxOccurs="unbounded"&gt;
-        &lt;xs:complexType&gt;
-          &lt;xs:sequence&gt;
-            &lt;xs:element name="title" type="xs:string"/&gt;
-            &lt;xs:element name="note" type="xs:string" minOccurs="0"/&gt;
-            &lt;xs:element name="quantity" type="xs:positiveInteger"/&gt;
-            &lt;xs:element name="price" type="xs:decimal"/&gt;
-          &lt;/xs:sequence&gt;
-        &lt;/xs:complexType&gt;
-      &lt;/xs:element&gt;
-    &lt;/xs:sequence&gt;
-    &lt;xs:attribute name="orderid" type="xs:string" use="required"/&gt;
-  &lt;/xs:complexType&gt;
-&lt;/xs:element&gt;
-&lt;/xs:schema&gt;</pre>
+    <pre>&lt;xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+           xmlns:tns="http://tempuri.org/PurchaseOrderSchema.xsd"
+           targetNamespace="http://tempuri.org/PurchaseOrderSchema.xsd"
+           elementFormDefault="qualified"&gt;
+ &lt;xsd:element name="PurchaseOrder" type="tns:PurchaseOrderType"/&gt;
+ &lt;xsd:complexType name="PurchaseOrderType"&gt;
+  &lt;xsd:sequence&gt;
+   &lt;xsd:element name="ShipTo" type="tns:USAddress" maxOccurs="2"/&gt;
+   &lt;xsd:element name="BillTo" type="tns:USAddress"/&gt;
+  &lt;/xsd:sequence&gt;
+  &lt;xsd:attribute name="OrderDate" type="xsd:date"/&gt;
+ &lt;/xsd:complexType&gt;
+
+ &lt;xsd:complexType name="USAddress"&gt;
+  &lt;xsd:sequence&gt;
+   &lt;xsd:element name="name"   type="xsd:string"/&gt;
+   &lt;xsd:element name="street" type="xsd:string"/&gt;
+   &lt;xsd:element name="city"   type="xsd:string"/&gt;
+   &lt;xsd:element name="state"  type="xsd:string"/&gt;
+   &lt;xsd:element name="zip"    type="xsd:integer"/&gt;
+  &lt;/xsd:sequence&gt;
+  &lt;xsd:attribute name="country" type="xsd:NMTOKEN" fixed="US"/&gt;
+ &lt;/xsd:complexType&gt;
+&lt;/xsd:schema&gt;</pre>
 
     <p><strong>Generated XML Output:</strong></p>
-    <pre>&lt;shiporder xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" orderid="orderid1"&gt;
-  &lt;orderperson&gt;orderperson1&lt;/orderperson&gt;
-  &lt;shipto&gt;
+    <pre>&lt;PurchaseOrder xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" OrderDate="1900-01-01" xmlns="http://tempuri.org/PurchaseOrderSchema.xsd"&gt;
+  &lt;ShipTo country="US"&gt;
     &lt;name&gt;name1&lt;/name&gt;
-    &lt;address&gt;address1&lt;/address&gt;
+    &lt;street&gt;street1&lt;/street&gt;
     &lt;city&gt;city1&lt;/city&gt;
-    &lt;country&gt;country1&lt;/country&gt;
-  &lt;/shipto&gt;
-  &lt;item&gt;
-    &lt;title&gt;title1&lt;/title&gt;
-    &lt;note&gt;note1&lt;/note&gt;
-    &lt;quantity&gt;1&lt;/quantity&gt;
-    &lt;price&gt;1&lt;/price&gt;
-  &lt;/item&gt;
-  &lt;item&gt;
-    &lt;title&gt;title2&lt;/title&gt;
-    &lt;note&gt;note2&lt;/note&gt;
-    &lt;quantity&gt;79228162514264337593543950335&lt;/quantity&gt;
-    &lt;price&gt;-79228162514264337593543950335&lt;/price&gt;
-  &lt;/item&gt;
-  ...
-&lt;/shiporder&gt;</pre>
+    &lt;state&gt;state1&lt;/state&gt;
+    &lt;zip&gt;1&lt;/zip&gt;
+  &lt;/ShipTo&gt;
+  &lt;ShipTo country="US"&gt;
+    &lt;name&gt;name2&lt;/name&gt;
+    &lt;street&gt;street2&lt;/street&gt;
+    &lt;city&gt;city2&lt;/city&gt;
+    &lt;state&gt;state2&lt;/state&gt;
+    &lt;zip&gt;-79228162514264337593543950335&lt;/zip&gt;
+  &lt;/ShipTo&gt;
+  &lt;BillTo country="US"&gt;
+    &lt;name&gt;name1&lt;/name&gt;
+    &lt;street&gt;street1&lt;/street&gt;
+    &lt;city&gt;city1&lt;/city&gt;
+    &lt;state&gt;state1&lt;/state&gt;
+    &lt;zip&gt;1&lt;/zip&gt;
+  &lt;/BillTo&gt;
+&lt;/PurchaseOrder&gt;</pre>
 </details>
 
 <h3 id="validatexmlwithxsd" class="zag">
