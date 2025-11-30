@@ -51,7 +51,7 @@ Replace Russian characters using different transformation methods.
 
 ### With Transliteration
 
-Complete transliteration of Russian alphabet to English. For example: "Ж" → "Zh", "Щ" → "Shch". Based on ICAO Doc [9303](https://www.icao.int/publications/Documents/9303_p3_cons_en.pdf).
+Complete transliteration of Russian alphabet to English. For example: "Ж" → "Zh", "Щ" → "Shch". Based on ICAO Doc [9303](https://www.icao.int/sites/default/files/publications/DocSeries/9303_p3_cons_en.pdf).
 
 <details>
   <summary>View screenshots</summary>

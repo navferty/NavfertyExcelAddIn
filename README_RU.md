@@ -51,7 +51,7 @@
 
 ### Транслитерацией
 
-Полная транслитерация русского алфавита на английский. Например: "Ж" → "Zh", "Щ" → "Shch". Основано на документе ИКАО [9303](https://www.icao.int/publications/Documents/9303_p3_cons_ru.pdf).
+Полная транслитерация русского алфавита на английский. Например: "Ж" → "Zh", "Щ" → "Shch". Основано на документе ИКАО [9303](https://www.icao.int/sites/default/files/publications/DocSeries/9303_p3_cons_ru.pdf).
 
 <details>
   <summary>Посмотреть скриншоты</summary>

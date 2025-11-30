@@ -181,6 +181,7 @@ a.btn-primary:focus {
     border-color: var(--primary-dark);
     color: white;
     transform: translateY(-1px);
+    transition: background-color var(--transition-fast), border-color var(--transition-fast), transform var(--transition-fast), box-shadow var(--transition-fast);
     box-shadow: var(--shadow-md);
     border-bottom: 2px solid var(--primary-dark);
 }
@@ -388,6 +389,7 @@ summary {
     font-weight: 500;
     color: var(--primary-color);
     transition: background-color var(--transition-fast);
+    /* Prevent text selection on summary click when expanding */
     user-select: none;
 }
 
@@ -457,6 +459,10 @@ tbody tr:last-child td {
     border-top: 1px solid var(--border-color);
     font-size: 0.9rem;
     margin-top: 3rem;
+}
+
+.footer a {
+    color: inherit;
 }
 
 /* New Components for Enhanced UX */
