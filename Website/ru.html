@@ -1,358 +1,410 @@
-<h1 id="top" class="zag">Надстройка Navferty Excel Add-In</h1>
+﻿<h1 id="top" class="zag">Надстройка Navferty Excel Add-In</h1>
 
-<img class="illustration" id="imnav" src="images/NavfertyToolsRibbonRu.png">
-
-<p>
-    Добро пожаловать на официальную страницу проекта. Здесь Вы можете скачать установочный файл. Больше информации о
-    проекте, а также запросы на новые функции, сообщения о проблемах, исходный код - на
-    <a href="https://github.com/navferty/NavfertyExcelAddIn">странице проекта на GitHub</a>
+<p class="subtitle">
+    Бесплатная надстройка для Excel, которая повышает продуктивность инструментами для обработки данных, форматирования и валидации.
 </p>
 
-<p>
-    Navferty Excel Add-In - это надстройка для Microsoft Excel, которая добавляет ряд полезных функций для обработки
-    работы с электронными таблицами. Она полезна для различных задач, таких как парсинг числовых значений, замена символов,
-    преобразование чисел в слова и многое другое.
-</p>
+<img class="hero-image" src="images/NavfertyToolsRibbonRu.png" alt="Лента Navferty's Tools в Microsoft Excel">
 
-<h2 id="how-to-install" class="zag">Как установить</h2>
+<div class="hero-actions">
+    <a href="https://deploy.navferty.ru/setup.zip" class="btn btn-primary">
+        <svg role="img" aria-label="Иконка загрузки" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M10 13L5 8h3V3h4v5h3l-5 5z" fill="currentColor" />
+            <path d="M3 15h14v2H3v-2z" fill="currentColor" />
+        </svg>
+        Скачать установщик
+    </a>
+    <a href="https://github.com/navferty/NavfertyExcelAddIn" class="btn btn-secondary" target="_blank" rel="noopener">
+        <svg role="img" aria-label="Иконка GitHub" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M10 0C4.477 0 0 4.477 0 10c0 4.42 2.865 8.17 6.839 9.49.5.092.682-.217.682-.482 0-.237-.008-.866-.013-1.7-2.782.603-3.369-1.34-3.369-1.34-.454-1.156-1.11-1.463-1.11-1.463-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.831.092-.646.35-1.086.636-1.336-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.578 9.578 0 0110 4.836c.85.004 1.705.114 2.504.336 1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.203 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.578.688.48C17.137 18.163 20 14.418 20 10c0-5.523-4.477-10-10-10z" fill="currentColor" />
+        </svg>
+        Открыть на GitHub
+    </a>
+</div>
 
-<p>Для установки надстройки скачайте и запустите <a href="https://deploy.navferty.ru/setup.exe">установочный файл</a>.</p>
+<div class="info-box">
+    <h3>Что внутри</h3>
+    <p>
+        Navferty Excel Add-In предоставляет набор инструментов для обработки данных, форматирования и валидации.
+        Преобразование текста в числа, транслитерация текста, валидация XML-файлов и многое другое.
+    </p>
+    <p>
+        <strong>100% бесплатно</strong> • <strong>С открытым кодом</strong> • <strong>Активно развивается</strong>
+    </p>
+</div>
 
-<p>
-    После установки перезагрузите MS Excel (если он был открыт во время установки).
-    После этого надстройка добавит вкладку <strong>Navferty's Tools</strong> на ленту MS Excel.
-</p>
+<h2 id='how-to-install' class="zag">Установка</h2>
 
-<p>
-    Если возникнет проблема с установкой из-за сертификата, необходимо импортировать
-        сертификат следующим образом:
-    <br />
-    Откройте свойства файла setup.exe, откройте вкладку "Цифровые подписи" и импортируйте сертификат в trusted root:
-</p>
+<div class="installation-steps">
+    <div class="step">
+        <div class="step-number">1</div>
+        <div class="step-content">
+            <h4>Скачайте и разархивируйте архив с установщиком</h4>
+            <p>Получите последнюю версию с нашего сервера:</p>
+            <a href="https://deploy.navferty.ru/setup.zip" class="btn btn-primary btn-small">Скачать setup.exe</a>
+        </div>
+    </div>
+
+    <div class="step">
+        <div class="step-number">2</div>
+        <div class="step-content">
+            <h4>Запустите установку</h4>
+            <p>Дважды щёлкните по загруженному файлу <code>setup.exe</code> и следуйте инструкциям мастера установки.</p>
+        </div>
+    </div>
+
+    <div class="step">
+        <div class="step-number">3</div>
+        <div class="step-content">
+            <h4>Перезапустите Excel</h4>
+            <p>Если Excel был открыт во время установки, перезапустите его. Вы увидите новую вкладку <strong>Navferty's Tools</strong> на ленте.</p>
+        </div>
+    </div>
+</div>
+
 <details>
-    <summary>Мастер импорта сертификатов (нажмите, чтобы развернуть спойлер)</summary>
-    <img src="./cert-install.png" alt="Пример установки сертификата">
+    <summary>Установка сертификата (если требуется)</summary>
+    <div class="warning-box">
+        <p>Если возникает предупреждение о сертификате:</p>
+        <ol>
+            <li>Щёлкните правой кнопкой мыши по файлу <code>setup.exe</code> и выберите <strong>Свойства</strong></li>
+            <li>Перейдите на вкладку <strong>Цифровые подписи</strong></li>
+            <li>Выберите подпись и нажмите <strong>Сведения</strong></li>
+            <li>Нажмите <strong>Просмотреть сертификат</strong> → <strong>Установить сертификат</strong></li>
+            <li>Выберите <strong>Локальный компьютер</strong> и поместите его в <strong>Доверенные корневые центры сертификации</strong></li>
+        </ol>
+        <img src="./cert-install.png" alt="Мастер импорта сертификатов">
+        <p><em>Примечание: Вы можете удалить сертификат после установки, но он потребуется для будущих обновлений.</em></p>
+    </div>
 </details>
-<p>
-    После установки сертификат можно удалить из хранилища сертификатов (но он потребуется для установки обновлений в будущем).
-</p>
 
-<h2 id='how-to-uninstall' class="zag">Как удалить</h2>
+<h2 id='how-to-uninstall' class="zag">Удаление</h2>
 
-<p>Для удаления надстройки с компьютера:</p>
+<p><strong>Способ 1: Параметры Windows (рекомендуется)</strong></p>
 <ol>
-    <li>Откройте Параметры Windows (нажмите <kbd>Win</kbd> + <kbd>I</kbd>)</li>
+    <li>Откройте Параметры Windows (<kbd>Win</kbd> + <kbd>I</kbd>)</li>
     <li>Перейдите в <strong>Приложения</strong> → <strong>Приложения и возможности</strong> (или <strong>Установленные приложения</strong> в Windows 11)</li>
-    <li>Найдите "Navferty Excel Add-In" в списке</li>
-    <li>Нажмите на надстройку и выберите <strong>Удалить</strong></li>
-    <li>Следуйте инструкциям для завершения удаления</li>
+    <li>Найдите <strong>Navferty Excel Add-In</strong> в списке</li>
+    <li>Нажмите <strong>Удалить</strong> и следуйте инструкциям</li>
 </ol>
-<p>Альтернативно, можно использовать классическую Панель управления:</p>
+
+<p><strong>Способ 2: Панель управления</strong></p>
 <ol>
-    <li>Откройте Панель управления</li>
+    <li>Откройте <strong>Панель управления</strong></li>
     <li>Перейдите в <strong>Программы</strong> → <strong>Программы и компоненты</strong></li>
-    <li>Найдите "Navferty Excel Add-In" в списке</li>
-    <li>Щелкните правой кнопкой мыши и выберите <strong>Удалить</strong>, или нажмите кнопку <strong>Удалить</strong></li>
+    <li>Щёлкните правой кнопкой мыши по <strong>Navferty Excel Add-In</strong> и выберите <strong>Удалить</strong></li>
 </ol>
+
 <hr>
 
-<h2>Описание функций</h2>
+<h2 id="features">Обзор функций</h2>
 
-<h3 id="parsenumerics" class="zag">Парсинг числовых значений</h3>
-<img class="icons" alt="Иконка Парсинг числовых значений" src="images/icons/parseNumerics.png">
-<p class="dscrptn">Преобразовать числа, сохраненные в виде текста, в числовой формат.</p>
+<p class="section-intro">Инструменты для повышения продуктивности работы в Excel</p>
+
+<h3 id="parsenumerics" class="zag">
+    <img class="icons" alt="Иконка Парсинг чисел" src="images/icons/parseNumerics.png">
+    Парсинг чисел
+</h3>
+<p class="dscrptn">Преобразование чисел, сохранённых как текст, в правильный числовой формат для использования в вычислениях.</p>
 <details class="more">
     <summary>Посмотреть скриншоты</summary>
-    <img src="images/ParseNumerics1.png" alt="Описание работы функции">
-    <img src="images/ParseNumerics2.png" alt="Описание работы функции">
+    <img src="images/ParseNumerics1.png" alt="Парсинг чисел - До">
+    <img src="images/ParseNumerics2.png" alt="Парсинг чисел - После">
 </details>
 
-<h3 id="replace" class="zag">Заменить</h3>
-<img class="icons" alt="Иконка Заменить" src="images/icons/replace.png">
-<p class="dscrptn">Заменить русские символы по таблицам соответствия.</p>
+<h3 id="replace" class="zag">
+    <img class="icons" alt="Иконка Заменить" src="images/icons/replace.png">
+    Заменить
+</h3>
+<p class="dscrptn">Замена русских символов различными методами преобразования.</p>
 
 <ul class="more">
     <li>
-        <h4 id="withtransliteration" class="zag">Транслитерацией</h4>
-        <img class="icons" alt="Иконка Транслитерации" src="images/icons/transliterate.png">
-        <p class="dscrptn">Заменить весь русский алфавит на английский. Например, буква "Ж" заменится на "Zh",
-            а буква "Щ" - на "Shch". Основано на документе ИКАО <a
-                href="https://www.icao.int/publications/Documents/9303_p3_cons_ru.pdf">9303</a>.</p>
+        <h4 id="withtransliteration" class="zag">
+            <img class="icons" alt="Иконка Транслитерации" src="images/icons/transliterate.png">
+            Транслитерацией
+        </h4>
+        <p class="dscrptn">
+            Полная транслитерация русского алфавита на английский. Например: "Ж" → "Zh", "Щ" → "Shch".
+            Основано на документе ИКАО <a href="https://www.icao.int/sites/default/files/publications/DocSeries/9303_p3_cons_ru.pdf" target="_blank" rel="noopener">Doc 9303</a>.
+        </p>
         <details class="more">
             <summary>Посмотреть скриншоты</summary>
-            <img src="images/Transliterate1.png" alt="Описание работы функции">
-            <img src="images/Transliterate2.png" alt="Описание работы функции">
+            <img src="images/Transliterate1.png" alt="Транслитерация - До">
+            <img src="images/Transliterate2.png" alt="Транслитерация - После">
         </details>
     </li>
     <li>
-        <h4 id="replacechars" class="zag">На аналоги</h4>
-        <img class="icons" alt="Иконка Замены на аналоги" src="images/icons/replaceChars.png">
-        <p class="dscrptn">Заменить схожие по верхнему регистру буквы алфавитов: Аа, Вв, Ее, Кк, Мм,
-            Нн, Оо, Рр, Сс, Тт, Уу, Хх.</p>
+        <h4 id="replacechars" class="zag">
+            <img class="icons" alt="Иконка Замены на аналоги" src="images/icons/replaceChars.png">
+            На аналоги
+        </h4>
+        <p class="dscrptn">
+            Замена только визуально схожих букв: А↔A, В↔B, Е↔E, К↔K, М↔M, Н↔H, О↔O, Р↔P, С↔C, Т↔T, У↔Y, Х↔X.
+        </p>
         <details class="more">
             <summary>Посмотреть скриншоты</summary>
-            <img src="images/ReplaceChars1.png" alt="Описание работы функции">
-            <img src="images/ReplaceChars2.png" alt="Описание работы функции">
+            <img src="images/ReplaceChars1.png" alt="Замена на аналоги - До">
+            <img src="images/ReplaceChars2.png" alt="Замена на аналоги - После">
         </details>
     </li>
 </ul>
 
-<h3 id="stringifynumerics" class="zag">Преобразовать в слова</h3>
-<img class="icons" alt="Иконка Преобразовать в слова" src="images/icons/stringifyNumerics.png">
-<p class="dscrptn">Переписать числовые значения в текст с расшифровкой<br>- На русском<br>- На английском<br>- На
-    французском</p>
+<h3 id="stringifynumerics" class="zag">
+    <img class="icons" alt="Иконка Преобразовать числа в слова" src="images/icons/stringifyNumerics.png">
+    Преобразовать числа в слова
+</h3>
+<p class="dscrptn">Преобразование чисел в текстовое представление на разных языках:</p>
+<ul>
+    <li>Русский</li>
+    <li>Английский</li>
+    <li>Французский</li>
+</ul>
 <details class="more">
     <summary>Посмотреть скриншоты</summary>
-    <img src="images/Stringify1.png" alt="Описание работы функции">
-    <img src="images/Stringify2.png" alt="Описание работы функции">
+    <img src="images/Stringify1.png" alt="Преобразование чисел - Ввод">
+    <img src="images/Stringify2.png" alt="Преобразование чисел - Результат">
 </details>
 
-<p><a href="#top">Наверх</a></p>
+<p class="back-to-top"><a href="#top">↑ Наверх</a></p>
+
 <hr>
 
-<h3 id="togglecase" class="zag">Изменить регистр</h3>
-<img class="icons" alt="Иконка Изменить регистр" src="images/icons/toggleCase.png">
-<p class="dscrptn">Переключить регистр для текстовых значений в выделенных ячейках по схеме:<br><code>Абвгд -&gt; абвгд
-    -&gt; АБВГД</code></p>
+<h3 id="togglecase" class="zag">
+    <img class="icons" alt="Иконка Изменить регистр" src="images/icons/toggleCase.png">
+    Изменить регистр
+</h3>
+<p class="dscrptn">Циклическое переключение регистра текста: <code>Абвгд</code> → <code>абвгд</code> → <code>АБВГД</code></p>
 <details class="more">
     <summary>Посмотреть скриншоты</summary>
-    <img src="images/ToggleCase1.png" alt="Описание работы функции">
-    <img src="images/ToggleCase2.png" alt="Описание работы функции">
-    <img src="images/ToggleCase3.png" alt="Описание работы функции">
-    <img src="images/ToggleCase4.png" alt="Описание работы функции">
+    <img src="images/ToggleCase1.png" alt="Изменить регистр - Пример 1">
+    <img src="images/ToggleCase2.png" alt="Изменить регистр - Пример 2">
+    <img src="images/ToggleCase3.png" alt="Изменить регистр - Пример 3">
+    <img src="images/ToggleCase4.png" alt="Изменить регистр - Пример 4">
 </details>
 
-<h3 id="trimspaces" class="zag">Удалить пробелы</h3>
-<img class="icons" alt="Иконка Удалить пробелы" src="images/icons/trimSpaces.png">
-<p class="dscrptn">Очистить текстовое содержимое выделенных ячеек от лишних пробелов. Удаляет повторные пробелы и
-    переносы строк, а
-    также начальные и конечные пробелы в ячейках, имеющих текстовый формат.</p>
+<h3 id="trimspaces" class="zag">
+    <img class="icons" alt="Иконка Удалить пробелы" src="images/icons/trimSpaces.png">
+    Удалить пробелы
+</h3>
+<p class="dscrptn">Удаление лишних пробелов, переносов строк и начальных/конечных пробелов из текстовых ячеек.</p>
 <details class="more">
     <summary>Посмотреть скриншоты</summary>
-    <img src="images/TrimSpaces1.png" alt="Описание работы функции">
-    <img src="images/TrimSpaces2.png" alt="Описание работы функции">
+    <img src="images/TrimSpaces1.png" alt="Удалить пробелы - До">
+    <img src="images/TrimSpaces2.png" alt="Удалить пробелы - После">
 </details>
 
-<p><a href="#top">Наверх</a></p>
+<p class="back-to-top"><a href="#top">↑ Наверх</a></p>
+
 <hr>
 
-<h3 id="unprotectworkbook" class="zag">Снять защиту с книги и листов</h3>
-<img class="icons" alt="Иконка Снять защиту с книги и листов" src="images/icons/unprotectWorkbook.png">
-<p class="dscrptn">Снять защиту со всех листов открытой книги, как и защиту всей книги, в отсутствие пароля, а
-    также разблокировать VBA проект (при его наличии), на который установлен пароль. Функция не распространяется на
-    зашифрованные книги.</p>
+<h3 id="unprotectworkbook" class="zag">
+    <img class="icons" alt="Иконка Снять защиту" src="images/icons/unprotectWorkbook.png">
+    Снять защиту с книги
+</h3>
+<p class="dscrptn">Снятие защиты со всех листов, структуры книги и VBA-проектов без необходимости паролей. <em>Примечание: Не работает с зашифрованными книгами.</em></p>
 
-<h3 id="highlightduplications" class="zag">Множественная подсветка дублей</h3>
-<img class="icons" alt="Иконка Множественной подсветки дублей" src="images/icons/highlightDuplicates.png">
-<p class="dscrptn">Установить цвет ячеек, которые содержат повторяющиеся значения, в выделенном диапазоне. Различные
-    цвета
-    соответствуют разным группам дублей.</p>
+<h3 id="highlightduplications" class="zag">
+    <img class="icons" alt="Иконка Подсветить дубликаты" src="images/icons/highlightDuplicates.png">
+    Подсветить дубликаты
+</h3>
+<p class="dscrptn">Автоматическая цветовая кодировка повторяющихся значений в выбранном диапазоне. Разные цвета обозначают разные группы дубликатов.</p>
 <details class="more">
     <summary>Посмотреть скриншот</summary>
-    <img src="images/Duplicates.png" alt="Описание работы функции">
+    <img src="images/Duplicates.png" alt="Подсвеченные дубликаты разными цветами">
 </details>
 
-<h3 id="unmergecells" class="zag">Разъединение ячеек с заполнением</h3>
-<img class="icons" alt="Иконка Разъединения ячеек с заполнением" src="images/icons/unmergeCells.png">
-<p class="dscrptn">Отменить объединение ячеек и заполнить их исходным значением.</p>
+<h3 id="unmergecells" class="zag">
+    <img class="icons" alt="Иконка Разъединить ячейки" src="images/icons/unmergeCells.png">
+    Разъединить ячейки
+</h3>
+<p class="dscrptn">Разъединение ячеек с заполнением каждой ячейки исходным объединённым значением.</p>
 <details class="more">
     <summary>Посмотреть скриншоты</summary>
-    <img src="images/Unmerge1.png" alt="Описание работы функции">
-    <img src="images/Unmerge2.png" alt="Описание работы функции">
+    <img src="images/Unmerge1.png" alt="Разъединить ячейки - До">
+    <img src="images/Unmerge2.png" alt="Разъединить ячейки - После">
 </details>
 
-<h3 id="findallcellscontainingerrors" class="zag">Найти все ошибки в выделенном диапазоне</h3>
-<img class="icons" alt="Иконка Найти все ошибки в выделенном диапазоне" src="images/icons/findErrors.png">
-<p class="dscrptn">Найти все ячейки в выделенных ячейках, которые содержат ошибки вычислений:<br><br>
-    Виды ошибок в MS Excel:<br>
-    <code>#Н/Д</code><br>
-    <code>#ИМЯ?</code><br>
-    <code>#ДЕЛ/0!</code><br>
-    <code>#ССЫЛКА!</code><br>
-    <code>#ЗНАЧ!</code><br>
-    <code>#ЧИСЛО!</code><br>
+<h3 id="findallcellscontainingerrors" class="zag">
+    <img class="icons" alt="Иконка Найти все ошибки" src="images/icons/findErrors.png">
+    Найти все ошибки в выделенном диапазоне
+</h3>
+<p class="dscrptn">Поиск всех ошибок формул в выбранном диапазоне:</p>
+<div class="error-types">
+    <code>#Н/Д</code>
+    <code>#ИМЯ?</code>
+    <code>#ДЕЛ/0!</code>
+    <code>#ССЫЛКА!</code>
+    <code>#ЗНАЧ!</code>
+    <code>#ЧИСЛО!</code>
     <code>#ПУСТО!</code>
+</div>
+<p>
+    По клику на элемент в результатах поиска соответствующая ячейка будет выделена в рабочем листе.
 </p>
 <details class="more">
     <summary>Посмотреть скриншот</summary>
-    <img src="images/FindErrorValues.png" alt="Описание работы функции">
+    <img src="images/FindErrorValues.png" alt="Подсвеченные ячейки с ошибками">
 </details>
 
-<h3 id="copyasmarkdown" class="zag">Копировать в Markdown</h3>
-<img class="icons" alt="Иконка Копировать в Markdown" src="images/icons/markdown.png">
-<p class="dscrptn">Копировать в буфер обмена выделенный фрагмент как таблица Markdown.</p>
+<h3 id="copyasmarkdown" class="zag">
+    <img class="icons" alt="Иконка Копировать в Markdown" src="images/icons/markdown.png">
+    Копировать в Markdown
+</h3>
+<p class="dscrptn">Копирование выбранных ячеек в буфер обмена в формате markdown-таблицы.</p>
 <details class="more">
     <summary>Посмотреть скриншот</summary>
-    <img src="images/ExportToMarkdown.png" alt="Описание работы функции">
+    <img src="images/ExportToMarkdown.png" alt="Пример экспорта в Markdown">
 </details>
 
-<h3 id="validatevalues" class="zag">Валидация значений</h3>
-<img class="icons" alt="Иконка Валидации значений" src="images/icons/validation.png">
-<p class="dscrptn">Проверить значения ячеек в выделенном диапазоне на соответствие определённому
-    формату.<br><br>Поддерживаемые форматы:<br>
-    - Число<br>
-    - Дата<br>
-    - ИНН ФЛ* (12 цифр, с двумя проверочными цифрами)<br>
-    - ИНН ЮЛ* (10 цифр, с одной проверочной цифрой)<br>
-    - Текст для XML (отсутствие символов &lt; и &gt; и иных невалидных для содержимого XML)<br><br>
-    <em>* - Корректность ИНН не гарантирует существование организации или физического лица,
-        которому бы принадлежал этот ИНН</em></p>
+<h3 id="validatevalues" class="zag">
+    <img class="icons" alt="Иконка Валидация значений" src="images/icons/validation.png">
+    Валидация значений
+</h3>
+<p class="dscrptn">Проверка значений ячеек на соответствие определённым форматам:</p>
+<ul>
+    <li>✓ Число</li>
+    <li>✓ Дата</li>
+    <li>✓ ИНН физического лица (12 цифр с контрольными разрядами)</li>
+    <li>✓ ИНН юридического лица (10 цифр с контрольным разрядом)</li>
+    <li>✓ Текст для XML (без недопустимых символов вроде <code>&lt;</code> или <code>&gt;</code>)</li>
+</ul>
+<p class="note"><em>Примечание: Корректный формат ИНН не гарантирует существование организации или физического лица.</em></p>
 <details class="more">
     <summary>Посмотреть скриншот</summary>
-    <img src="images/Validate.png" alt="Описание работы функции">
+    <img src="images/Validate.png" alt="Результаты валидации">
 </details>
 
-<p><a href="#top">Наверх</a></p>
+<p class="back-to-top"><a href="#top">↑ Наверх</a></p>
+
 <hr>
 
-<h3 id="exporttosqlite" class="zag">Экспорт в SQLite</h3>
-<p class="dscrptn">Экспортировать всю книгу в файл базы данных SQLite. Каждый лист преобразуется в отдельную таблицу с автоматическим определением типов столбцов. Доступны опции использования первой строки в качестве заголовков столбцов и пропуска начальных строк.</p>
+<h3 id="exporttosqlite" class="zag">
+    <img class="icons" alt="Иконка Экспорт в SQLite" src="images/icons/validation.png">
+    Экспорт в SQLite
+</h3>
+<p class="dscrptn">Экспорт всей книги в файл базы данных SQLite. Каждый лист становится отдельной таблицей с автоматическим определением типов столбцов.</p>
+<ul>
+    <li>Использовать первую строку как заголовки столбцов</li>
+    <li>Пропускать начальные строки при необходимости</li>
+    <li>Автоматическое определение типов данных</li>
+</ul>
 <details class="more">
     <summary>Посмотреть скриншоты</summary>
-    <img src="images/ExportToSqlite1.png" alt="Экспорт книги в SQLite">
-    <img src="images/ExportToSqlite2.png" alt="Содержимое БД SQLite">
+    <img src="images/ExportToSqlite1.png" alt="Диалог экспорта">
+    <img src="images/ExportToSqlite2.png" alt="Результат в базе данных SQLite">
 </details>
 
-<p><a href="#top">Наверх</a></p>
+<p class="back-to-top"><a href="#top">↑ Наверх</a></p>
+
 <hr>
 
-<h3 id="createsamplexmlbasedonxsd" class="zag">Создать образец XML (по XSD)</h3>
-<img class="icons" alt="Иконка Создания образца XML" src="images/icons/createSampleXml.png">
-<p class="dscrptn">Сгенерировать пример XML-файла по xsd-схеме. Позволяет получить наглядное представление о структуре
-    xml-файла при
-    наличии XSD-файла со схемой. Например, для приведённой ниже схемы
-</p>
-<div class="more">
-    <details>
-        <summary>Образец схемы - sample.xsd</summary>
-        <pre>
-        &lt;?xml version="1.0" encoding="UTF-8" ?&gt;
-        &lt;xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"&gt;
+<h3 id="createsamplexmlbasedonxsd" class="zag">
+    <img class="icons" alt="Иконка Создать образец XML" src="images/icons/createSampleXml.png">
+    Создать образец XML по XSD
+</h3>
+<p class="dscrptn">Генерация образца XML-файла из XSD-схемы для визуализации структуры.</p>
 
-        &lt;xs:element name="КорневойЭлемент"&gt;
-        &lt;xs:complexType&gt;
-            &lt;xs:sequence&gt;
-            &lt;xs:element name="Заголовок" type="xs:string"/&gt;
-            &lt;xs:element name="Адресат"&gt;
-                &lt;xs:complexType&gt;
-                &lt;xs:sequence&gt;
-                    &lt;xs:element name="Имя" type="xs:string"/&gt;
-                    &lt;xs:element name="Адрес" type="xs:string"/&gt;
-                    &lt;xs:element name="Город" type="xs:string"/&gt;
-                    &lt;xs:element name="Страна" type="xs:string"/&gt;
-                &lt;/xs:sequence&gt;
-                &lt;/xs:complexType&gt;
-            &lt;/xs:element&gt;
-            &lt;xs:element name="Элемент" maxOccurs="3"&gt;
-                &lt;xs:complexType&gt;
-                &lt;xs:sequence&gt;
-                    &lt;xs:element name="Название" type="xs:string"/&gt;
-                    &lt;xs:element name="Описание" type="xs:string" minOccurs="0"/&gt;
-                    &lt;xs:element name="Количество" type="xs:positiveInteger"/&gt;
-                    &lt;xs:element name="Цена" type="xs:decimal"/&gt;
-                &lt;/xs:sequence&gt;
-                &lt;/xs:complexType&gt;
-            &lt;/xs:element&gt;
-            &lt;/xs:sequence&gt;
-            &lt;xs:attribute name="Идентификатор" type="xs:string" use="required"/&gt;
-        &lt;/xs:complexType&gt;
-        &lt;/xs:element&gt;
+<details class="more">
+    <summary>Посмотреть пример</summary>
+    <p><strong>Входная XSD-схема:</strong></p>
+    <pre>&lt;xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+           xmlns:tns="http://tempuri.org/PurchaseOrderSchema.xsd"
+           targetNamespace="http://tempuri.org/PurchaseOrderSchema.xsd"
+           elementFormDefault="qualified"&gt;
+ &lt;xsd:element name="PurchaseOrder" type="tns:PurchaseOrderType"/&gt;
+ &lt;xsd:complexType name="PurchaseOrderType"&gt;
+  &lt;xsd:sequence&gt;
+   &lt;xsd:element name="ShipTo" type="tns:USAddress" maxOccurs="2"/&gt;
+   &lt;xsd:element name="BillTo" type="tns:USAddress"/&gt;
+  &lt;/xsd:sequence&gt;
+  &lt;xsd:attribute name="OrderDate" type="xsd:date"/&gt;
+ &lt;/xsd:complexType&gt;
 
-        &lt;/xs:schema&gt;
-        </pre>
-    </details>
+ &lt;xsd:complexType name="USAddress"&gt;
+  &lt;xsd:sequence&gt;
+   &lt;xsd:element name="name"   type="xsd:string"/&gt;
+   &lt;xsd:element name="street" type="xsd:string"/&gt;
+   &lt;xsd:element name="city"   type="xsd:string"/&gt;
+   &lt;xsd:element name="state"  type="xsd:string"/&gt;
+   &lt;xsd:element name="zip"    type="xsd:integer"/&gt;
+  &lt;/xsd:sequence&gt;
+  &lt;xsd:attribute name="country" type="xsd:NMTOKEN" fixed="US"/&gt;
+ &lt;/xsd:complexType&gt;
+&lt;/xsd:schema&gt;</pre>
 
-    <p>Будет сформирован такой xml-файл:</p>
+    <p><strong>Сгенерированный XML:</strong></p>
+    <pre>&lt;PurchaseOrder xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" OrderDate="1900-01-01" xmlns="http://tempuri.org/PurchaseOrderSchema.xsd"&gt;
+  &lt;ShipTo country="US"&gt;
+    &lt;name&gt;name1&lt;/name&gt;
+    &lt;street&gt;street1&lt;/street&gt;
+    &lt;city&gt;city1&lt;/city&gt;
+    &lt;state&gt;state1&lt;/state&gt;
+    &lt;zip&gt;1&lt;/zip&gt;
+  &lt;/ShipTo&gt;
+  &lt;ShipTo country="US"&gt;
+    &lt;name&gt;name2&lt;/name&gt;
+    &lt;street&gt;street2&lt;/street&gt;
+    &lt;city&gt;city2&lt;/city&gt;
+    &lt;state&gt;state2&lt;/state&gt;
+    &lt;zip&gt;-79228162514264337593543950335&lt;/zip&gt;
+  &lt;/ShipTo&gt;
+  &lt;BillTo country="US"&gt;
+    &lt;name&gt;name1&lt;/name&gt;
+    &lt;street&gt;street1&lt;/street&gt;
+    &lt;city&gt;city1&lt;/city&gt;
+    &lt;state&gt;state1&lt;/state&gt;
+    &lt;zip&gt;1&lt;/zip&gt;
+  &lt;/BillTo&gt;
+&lt;/PurchaseOrder&gt;</pre>
+</details>
 
-    <details>
-        <summary>Результат генерации - sample.xml</summary>
-        <pre>
-        &lt;КорневойЭлемент xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" Идентификатор="Идентификатор1"&gt;
-        &lt;Заголовок&gt;Заголовок1&lt;/Заголовок&gt;
-        &lt;Адресат&gt;
-            &lt;Имя&gt;Имя1&lt;/Имя&gt;
-            &lt;Адрес&gt;Адрес1&lt;/Адрес&gt;
-            &lt;Город&gt;Город1&lt;/Город&gt;
-            &lt;Страна&gt;Страна1&lt;/Страна&gt;
-        &lt;/Адресат&gt;
-        &lt;Элемент&gt;
-            &lt;Название&gt;Название1&lt;/Название&gt;
-            &lt;Описание&gt;Описание1&lt;/Описание&gt;
-            &lt;Количество&gt;1&lt;/Количество&gt;
-            &lt;Цена&gt;1&lt;/Цена&gt;
-        &lt;/Элемент&gt;
-        &lt;Элемент&gt;
-            &lt;Название&gt;Название2&lt;/Название&gt;
-            &lt;Описание&gt;Описание2&lt;/Описание&gt;
-            &lt;Количество&gt;79228162514264337593543950335&lt;/Количество&gt;
-            &lt;Цена&gt;-79228162514264337593543950335&lt;/Цена&gt;
-        &lt;/Элемент&gt;
-        &lt;Элемент&gt;
-            &lt;Название&gt;Название3&lt;/Название&gt;
-            &lt;Описание&gt;Описание3&lt;/Описание&gt;
-            &lt;Количество&gt;2&lt;/Количество&gt;
-            &lt;Цена&gt;79228162514264337593543950335&lt;/Цена&gt;
-        &lt;/Элемент&gt;
-        &lt;/КорневойЭлемент&gt;
-        </pre>
-    </details>
-</div>
+<h3 id="validatexmlwithxsd" class="zag">
+    <img class="icons" alt="Иконка Валидация XML" src="images/icons/validateXml.png">
+    Валидация XML по XSD
+</h3>
+<p class="dscrptn">Валидация XML-файла по XSD-схеме. Подробный отчёт об ошибках будет создан в новой книге.</p>
 
-<h3 id="validatexmlwithxsd" class="zag">Валидация XML по XSD</h3>
-<img class="icons" alt="Иконка Валидации XML" src="images/icons/validateXml.png">
-<p class="dscrptn">Проверить соответствие xml-файла на основе XSD-схемы. Список ошибок будет выведен на лист в новой
-    книге MS Excel.</p>
-<div class="more">
-    <p>Пример отчёта о проверке:</p>
+<details class="more">
+    <summary>Посмотреть пример отчёта об ошибках</summary>
     <div class="tbl">
         <table>
             <thead>
                 <tr>
-                    <th>Уровень</th>
+                    <th>Серьёзность</th>
                     <th>Элемент</th>
-                    <th>Ошибка</th>
+                    <th>Сообщение</th>
                 </tr>
             </thead>
             <tbody>
                 <tr>
-                    <td>Error</td>
-                    <td>Город</td>
-                    <td>Элемент "Адресат" имеет недопустимый дочерний элемент "Город". Список ожидаемых элементов:
-                        "Адрес".
-                    </td>
+                    <td>Ошибка</td>
+                    <td>city</td>
+                    <td>Элемент 'shipto' содержит недопустимый дочерний элемент 'city'. Ожидаемый список элементов: 'address'.</td>
                 </tr>
                 <tr>
-                    <td>Error</td>
-                    <td>Количество</td>
-                    <td>Элемент "Количество" недействителен: значение "-5" недействительно с точки зрения его типа
-                        данных
-                        "http://www.w3.org/2001/XMLSchema:positiveInteger" — Значение "-5" недопустимо мало или
-                        недопустимо
-                        велико для PositiveInteger.
-                    </td>
+                    <td>Ошибка</td>
+                    <td>quantity</td>
+                    <td>Элемент 'quantity' недопустим - значение '-5' недопустимо согласно типу данных 'http://www.w3.org/2001/XMLSchema:positiveInteger'</td>
                 </tr>
                 <tr>
-                    <td>Error</td>
-                    <td>Цена</td>
-                    <td>Элемент "Цена" недействителен: значение "не число" недействительно с точки зрения его типа
-                        данных
-                        "http://www.w3.org/2001/XMLSchema:decimal" — Строка "не число" не является допустимым значением
-                        Decimal.
-                    </td>
+                    <td>Ошибка</td>
+                    <td>price</td>
+                    <td>Элемент 'price' недопустим - значение 'asdasd' недопустимо согласно типу данных 'http://www.w3.org/2001/XMLSchema:decimal'</td>
                 </tr>
             </tbody>
         </table>
     </div>
-</div>
+</details>
 
-<p><a href="#top">Наверх</a></p>
+<p class="back-to-top"><a href="#top">↑ Наверх</a></p>
+
 <hr>
 
-<h2 id="undolastaction" class="zag">Отменить последнее действие</h2>
-<img class="icons" alt="Иконка Отмены последнего действия" src="images/icons/undo.png">
-<p class="dscrptn">Отменить последнее действие, совершённое с помощью данной надстройки. Отмена возможна для некоторых
-    функций в
-    разделах 'Преобразование значений' и 'Форматирование значений' и только, если диапазон ячеек не редактировался после
-    совершения действия.</p>
+<h3 id="undolastaction" class="zag">
+    <img class="icons" alt="Иконка Отменить последнее действие" src="images/icons/undo.png">
+    Отменить последнее действие
+</h3>
+<p class="dscrptn">Отмена последнего действия, выполненного с помощью этой надстройки. Доступно для некоторых функций в разделах «Преобразование значений» и «Форматирование значений», только если ячейки не были отредактированы с момента выполнения действия.</p>
 
-<p><a href="#top">Наверх</a></p>
+<p class="back-to-top"><a href="#top">↑ Наверх</a></p>

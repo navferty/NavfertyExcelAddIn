@@ -9,7 +9,7 @@ namespace NavfertyExcelAddIn.Transliterate
 	public class CyrillicToLatinFallback : EncoderFallback
 	{
 		// transliteration standard: ICAO Doc 9303 (and Russian passport standard, Приказ МИД №4271)
-		// https://www.icao.int/publications/Documents/9303_p3_cons_en.pdf
+		// https://www.icao.int/sites/default/files/publications/DocSeries/9303_p3_cons_en.pdf
 		private readonly Dictionary<char, string> table = new Dictionary<char, string>
 			{
 				// Uppercase modern Cyrillic characters
