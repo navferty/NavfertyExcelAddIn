@@ -27,6 +27,14 @@ namespace NavfertyExcelAddIn.UnitTests.StringifyNumerics
 		[DataRow(1000, "одна тысяча")]
 		[DataRow(1_234_567, "один миллион двести тридцать четыре тысячи пятьсот шестьдесят семь")]
 		[DataRow(-1_234_567, "минус один миллион двести тридцать четыре тысячи пятьсот шестьдесят семь")]
+		[DataRow(351, "триста пятьдесят один")]
+		[DataRow(351.1, "триста пятьдесят одна целая и одна десятая")]
+		[DataRow(351.2, "триста пятьдесят одна целая и две десятых")]
+		[DataRow(352.1, "триста пятьдесят две целых и одна десятая")]
+		[DataRow(0.01, "ноль целых и одна сотая")]
+		[DataRow(0.02, "ноль целых и две сотых")]
+		[DataRow(0.001, "ноль целых и одна тысячная")]
+		[DataRow(0.002, "ноль целых и две тысячных")]
 		public void StringifyNumber(double input, string expected)
 		{
 			var output = numericStringifier.StringifyNumber(input);
