@@ -20,7 +20,9 @@ public class SqliteExportAutomationTest : AutomationTestsBase
 	{
 		var workbookPath = GetFilePath("SqliteExport/SqliteExportTestData.xlsx");
 
-		await Assert.That(File.Exists(workbookPath)).IsTrue(); // $"Test data file not found: {workbookPath}");
+		await Assert.That(File.Exists(workbookPath))
+			.IsTrue()
+			.Because($"Test data file not found: {workbookPath}");
 
 		var workbook = app.Workbooks.Open(workbookPath);
 		Thread.Sleep(defaultSleep.Add(defaultSleep));
@@ -52,7 +54,7 @@ public class SqliteExportAutomationTest : AutomationTestsBase
 
 		workbook.Close(false);
 
-		await Assert.That(File.Exists(testDbPath)).IsTrue(); // "Database file was not created");
+		await Assert.That(File.Exists(testDbPath)).IsTrue().Because("Database file was not created");
 
 		using var connection = new SQLiteConnection($"Data Source={testDbPath};Version=3;");
 		connection.Open();
@@ -60,7 +62,7 @@ public class SqliteExportAutomationTest : AutomationTestsBase
 		// Verify tables were created (one for each worksheet)
 		using var command = new SQLiteCommand("SELECT name FROM sqlite_master WHERE type='table' ORDER BY name", connection);
 		using var reader = command.ExecuteReader();
-		await Assert.That(reader.HasRows).IsTrue(); // "No tables were created");
+		await Assert.That(reader.HasRows).IsTrue().Because("No tables were created");
 
 		while (reader.Read())
 		{
@@ -78,7 +80,7 @@ public class SqliteExportAutomationTest : AutomationTestsBase
 		using (var command = new SQLiteCommand($"PRAGMA table_info([{tableName}])", connection))
 		using (var reader = command.ExecuteReader())
 		{
-			await Assert.That(reader.HasRows).IsTrue(); // $"Table {tableName} has no columns");
+			await Assert.That(reader.HasRows).IsTrue().Because($"Table {tableName} has no columns");
 			
 			int columnCount = 0;
 			while (reader.Read())
@@ -93,7 +95,9 @@ public class SqliteExportAutomationTest : AutomationTestsBase
 				await Assert.That(expectedTypes).Contains(columnType.ToUpper());
 			}
 			
-			await Assert.That(columnCount).IsGreaterThan(0); // $"Table {tableName} has no columns");
+			await Assert.That(columnCount)
+				.IsGreaterThan(0)
+				.Because($"Table {tableName} should have at least one column");
 		}
 
 		// Verify table has data
@@ -101,7 +105,7 @@ public class SqliteExportAutomationTest : AutomationTestsBase
 		{
 			var rowCount = (long)command.ExecuteScalar();
 			TestContext.Output.WriteLine($"  Row count: {rowCount}");
-			await Assert.That(rowCount).IsGreaterThan(0); // $"Table {tableName} has no data rows");
+			await Assert.That(rowCount).IsGreaterThan(0).Because($"Table {tableName} has no data rows");
 		}
 
 		// Verify we can read data from the table

@@ -56,16 +56,16 @@ public class XmlSampleCreatorTests : TestsBase
             .Setup(x => x.AskForFiles(false, FileType.Xsd))
             .Returns([GetFilePath(XsdFile)]);
 
-    var path = GetFilePath($"sample_{DateTime.Now:yyyy-MM-d_HH-mm-ss}.xml");
-    await Assert.That(File.Exists(path)).IsFalse();
+        var path = GetFilePath($"sample_{DateTime.Now:yyyy-MM-d_HH-mm-ss}.xml");
+        await Assert.That(File.Exists(path)).IsFalse();
 
         dialogService
             .Setup(x => x.AskFileNameSaveAs(It.IsAny<string>(), FileType.Xml))
             .Returns(path);
 
-    xmlSampleCreator.CreateSampleXml();
+        xmlSampleCreator.CreateSampleXml();
 
-    dialogService.VerifyAll();
-    await Assert.That(File.Exists(path)).IsTrue();
+        dialogService.VerifyAll();
+        await Assert.That(File.Exists(path)).IsTrue();
     }
 }

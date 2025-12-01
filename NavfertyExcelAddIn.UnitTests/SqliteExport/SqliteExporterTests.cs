@@ -362,7 +362,9 @@ public class SqliteExporterTests : TestsBase
 			connection.Open();
 			using var command = new SQLiteCommand("SELECT COUNT(*) FROM TestSheet", connection);
 			var count = (long)command.ExecuteScalar();
-			await Assert.That(count).IsEqualTo(1); // Only one data row after skipping 2 and using 1 as header
+			await Assert.That(count)
+				.IsEqualTo(1)
+				.Because("There should be only one data row after skipping 2 and using 1 as header");
 		}
 
 		dialogService.VerifyAll();

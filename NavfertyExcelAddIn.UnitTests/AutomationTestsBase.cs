@@ -27,7 +27,9 @@ public class AutomationTestsBase : TestsBase
 
 		TestContext.Output.WriteLine($"Excel window handle: {excelWindowHandle}");
 		TestContext.Output.WriteLine($"Current active window handle: {currentActiveWindowHandle}");
-		await Assert.That(excelWindowHandle).IsEqualTo(currentActiveWindowHandle); //, "Excel is not the active window");
+		await Assert.That(excelWindowHandle)
+			.IsEqualTo(currentActiveWindowHandle)
+			.Because("Excel is not the active window");
 	}
 
 	[After(HookType.Test)]
