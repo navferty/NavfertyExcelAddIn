@@ -58,42 +58,97 @@ steps:
     platform: '$(buildPlatform)'
     configuration: '$(buildConfiguration)'
 
-- task: VSTest@2
-  inputs:
-    platform: '$(buildPlatform)'
-    configuration: '$(buildConfiguration)'
-    # manually collecting coverage in next task
-    codeCoverageEnabled: false
-    # tests depending on Interop.Excel - run locally
-    # https://github.com/microsoft/vstest-docs/blob/master/docs/filter.md
-    testFiltercriteria: 'TestCategory!=Automation'
-
 - task: PowerShell@2
-  name: 'CollectCodeCoverage'
+  name: 'RunTests'
+  displayName: 'Run TUnit Tests'
   inputs:
     targetType: 'inline'
     script: |
-      "install tools:"
-      &dotnet tool install dotnet-reportgenerator-globaltool --tool-path .
-      &dotnet tool install coverlet.console --tool-path .
+      Write-Host "Finding TUnit test executable..."
+      $testExe = Get-ChildItem -Path "$(Build.SourcesDirectory)" -Recurse -Filter "*UnitTests.exe" | 
+                 Where-Object { $_.FullName -like "*bin\$(buildConfiguration)*" } |
+                 Select-Object -First 1
+      
+      if (-not $testExe) {
+        Write-Error "Test executable not found"
+        exit 1
+      }
+      
+      Write-Host "Found test executable: $($testExe.FullName)"
+      Write-Host "`nRunning tests (excluding Automation tests)..."
+      
+      $testResultsDir = "$(Build.SourcesDirectory)/TestResults"
+      New-Item -ItemType Directory -Force -Path $testResultsDir | Out-Null
+      
+      # Run TUnit tests with TRX output, excluding Automation category
+      & $testExe.FullName --report-trx --results-directory $testResultsDir --treenode-filter "/**[Category!=Automation]"
+      
+      $exitCode = $LASTEXITCODE
+      Write-Host "Test execution completed with exit code: $exitCode"
+      
+      if ($exitCode -ne 0) {
+        Write-Warning "Tests failed with exit code $exitCode"
+        exit $exitCode
+      }
+    workingDirectory: '$(Build.SourcesDirectory)'
 
-      "`nmake reports dir:"
-      mkdir .\reports
+- task: PowerShell@2
+  name: 'CollectCodeCoverage'
+  displayName: 'Collect Code Coverage'
+  inputs:
+    targetType: 'inline'
+    script: |
+      Write-Host "Installing tools..."
+      dotnet tool install dotnet-coverage --tool-path . --ignore-failed-sources
+      dotnet tool install dotnet-reportgenerator-globaltool --tool-path . --ignore-failed-sources
+      
+      Write-Host "`nCreating reports directory..."
+      New-Item -ItemType Directory -Force -Path .\reports | Out-Null
+      
+      Write-Host "`nFinding TUnit test executable..."
+      $testExe = Get-ChildItem -Path "$(Build.SourcesDirectory)" -Recurse -Filter "*UnitTests.exe" | 
+                 Where-Object { $_.FullName -like "*bin\$(buildConfiguration)*" } |
+                 Select-Object -First 1
+      
+      if (-not $testExe) {
+        Write-Error "Test executable not found"
+        exit 1
+      }
+      
+      Write-Host "Found test executable: $($testExe.FullName)"
+      Write-Host "`nRunning tests with code coverage (excluding Automation tests)..."
+      
+      $testResultsDir = "$(Build.SourcesDirectory)/TestResults"
+      New-Item -ItemType Directory -Force -Path $testResultsDir | Out-Null
+      
+      # Run tests with dotnet-coverage, excluding Automation category
+      & "$(Build.SourcesDirectory)\dotnet-coverage.exe" collect `
+        --output "$(Build.SourcesDirectory)\coverage.cobertura.xml" `
+        --output-format cobertura `
+        $testExe.FullName --report-trx --results-directory $testResultsDir --treenode-filter "/**[Category!=Automation]"
+      
+      Write-Host "`nGenerating coverage report..."
+      if (Test-Path "$(Build.SourcesDirectory)\coverage.cobertura.xml") {
+        & "$(Build.SourcesDirectory)\reportgenerator.exe" `
+          "-reports:$(Build.SourcesDirectory)\coverage.cobertura.xml" `
+          "-targetdir:$(Build.SourcesDirectory)\reports" `
+          "-reporttypes:HTMLInline;HTMLChart"
+        Write-Host "Coverage report generated successfully"
+      } else {
+        Write-Warning "No coverage file found"
+      }
+    workingDirectory: '$(Build.SourcesDirectory)'
 
-      "`nrun tests:"
-      $unitTestFile = gci -Recurse | ?{ $_.FullName -like "*bin\*Tests.dll" }
-      Write-Host "`$unitTestFile value: $unitTestFile"
-
-      $coverlet = "$pwd\coverlet.exe"
-
-      "calling $coverlet for $($unitTestFile.FullName)"
-      &$coverlet $unitTestFile.FullName --target "dotnet" --targetargs "vstest $($unitTestFile.FullName) --filter:`"TestCategory!=Automation`" --logger:trx" --format "cobertura"
-
-      "`ngenerate report(s)"
-      gci -Recurse | 
-          ?{ $_.Name -eq "coverage.cobertura.xml" } | 
-          %{ &"$pwd\reportgenerator.exe" "-reports:$($_.FullName)" "-targetdir:reports" "-reporttypes:HTMLInline;HTMLChart" }
-
+- task: PublishTestResults@2
+  displayName: 'Publish Test Results'
+  condition: always()
+  inputs:
+    testResultsFormat: 'VSTest'
+    testResultsFiles: '**/*.trx'
+    searchFolder: '$(Build.SourcesDirectory)/TestResults'
+    mergeTestResults: true
+    failTaskOnFailedTests: false
+    testRunTitle: 'Unit Tests'
 
 - task: PublishCodeCoverageResults@2
   inputs:
