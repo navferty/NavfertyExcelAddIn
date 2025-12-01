@@ -36,6 +36,7 @@ public class AutomationTestsBase : TestsBase
 	public virtual void Cleanup()
 	{
 		app.Quit();
+		Marshal.ReleaseComObject(app);
 	}
 
 	private static Application OpenNewExcelApp()
