@@ -121,8 +121,7 @@ public class XmlValidatorTests : TestsBase
         var error = new XmlValidationError(ValidationErrorSeverity.Error, "message", "value", "element name");
         xsdSchemaValidator
             .Setup(x => x.Validate(It.IsAny<string>(), It.IsAny<IReadOnlyCollection<string>>()))
-                .Returns(new[] { error });
-            //.Returns([error]);
+                .Returns([error]);
 
         SetCulture();
 

@@ -7,7 +7,7 @@ namespace NavfertyExcelAddIn.UnitTests.WorksheetCellsEditing;
 public class FormattingAutomationTests : AutomationTestsBase
 {
 	[Test]
-	//[Description("Test ToggleCase feature - cycle through lowercase, UPPERCASE, and Titlecase")]
+	[Property("Description", "Test ToggleCase feature - cycle through lowercase, UPPERCASE, and Titlecase")]
 	public async Task ToggleCase_TextValues_CaseToggled()
 	{
 		TestContext.Output.WriteLine("Testing ToggleCase feature");
@@ -53,7 +53,7 @@ public class FormattingAutomationTests : AutomationTestsBase
 	}
 
 	[Test]
-	//[Description("Test TrimExtraSpaces feature - remove extra spaces from text")]
+	[Property("Description", "Test TrimExtraSpaces feature - remove extra spaces from text")]
 	public async Task TrimExtraSpaces_TextWithSpaces_ExtraSpacesRemoved()
 	{
 		TestContext.Output.WriteLine("Testing TrimExtraSpaces feature");
@@ -99,7 +99,7 @@ public class FormattingAutomationTests : AutomationTestsBase
 	}
 
 	[Test]
-	//[Description("Test RemoveAllSpaces feature - remove all spaces from text")]
+	[Property("Description", "Test RemoveAllSpaces feature - remove all spaces from text")]
 	public async Task RemoveAllSpaces_TextWithSpaces_AllSpacesRemoved()
 	{
 		TestContext.Output.WriteLine("Testing RemoveAllSpaces feature");
@@ -145,7 +145,7 @@ public class FormattingAutomationTests : AutomationTestsBase
 	}
 
 	[Test]
-	//[Description("Test TrimSpaces (default) feature - remove extra spaces from text")]
+	[Property("Description", "Test TrimSpaces (default) feature - remove extra spaces from text")]
 	public async Task TrimSpaces_TextWithSpaces_ExtraSpacesRemoved()
 	{
 		TestContext.Output.WriteLine("Testing TrimSpaces (default) feature");

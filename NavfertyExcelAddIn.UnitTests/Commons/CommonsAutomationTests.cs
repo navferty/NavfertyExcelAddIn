@@ -76,7 +76,7 @@ public class CommonsAutomationTests : AutomationTestsBase
 	}
 
 	[Test]
-	//[Description("Test UnmergeCells feature - unmerge merged cells and fill with values")]
+	[Property("Description", "Test UnmergeCells feature - unmerge merged cells and fill with values")]
 	public async Task UnmergeCells_MergedCells_Unmerged()
 	{
 		TestContext.Output.WriteLine("Testing UnmergeCells feature");
@@ -126,7 +126,7 @@ public class CommonsAutomationTests : AutomationTestsBase
 	}
 
 	[Test]
-	//[Description("Test FindErrors feature - find cells with formula errors")]
+	[Property("Description", "Test FindErrors feature - find cells with formula errors")]
 	public async Task FindErrors_FormulasWithErrors_Found()
 	{
 		TestContext.Output.WriteLine("Testing FindErrors feature");
@@ -172,7 +172,7 @@ public class CommonsAutomationTests : AutomationTestsBase
 	}
 
 	[Test]
-	//[Description("Test CopyAsMarkdown feature - copy range as markdown table")]
+	[Property("Description", "Test CopyAsMarkdown feature - copy range as markdown table")]
 	public async Task CopyAsMarkdown_Range_CopiedToClipboard()
 	{
 		TestContext.Output.WriteLine("Testing CopyAsMarkdown feature");
@@ -215,7 +215,7 @@ public class CommonsAutomationTests : AutomationTestsBase
 	}
 
 	[Test]
-	//[Description("Test HighlightDuplicates with numeric values")]
+	[Property("Description", "Test HighlightDuplicates with numeric values")]
 	public async Task HighlightDuplicates_NumericValues_Highlighted()
 	{
 		TestContext.Output.WriteLine("Testing HighlightDuplicates with numbers");

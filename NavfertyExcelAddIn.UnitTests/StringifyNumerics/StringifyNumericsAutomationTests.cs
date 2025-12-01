@@ -8,7 +8,7 @@ public class StringifyNumericsAutomationTests : AutomationTestsBase
 {
 	[Test]
 	[MethodDataSource(nameof(GetStringifyTestCases))]
-	//[Description("Create blank workbook, fill it with numbers and stringify numerics to each of 3 language options")]
+	[Property("Description", "Create blank workbook, fill it with numbers and stringify numerics to each of 3 language options")]
 	public async Task StringifyNumerics(string language, string keySequence, object[,] expectedValues)
 	{
 		TestContext.Output.WriteLine($"Testing {language} stringification");

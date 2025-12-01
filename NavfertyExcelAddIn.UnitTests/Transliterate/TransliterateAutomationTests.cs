@@ -7,7 +7,7 @@ namespace NavfertyExcelAddIn.UnitTests.Transliterate;
 public class TransliterateAutomationTests : AutomationTestsBase
 {
 	[Test]
-	//[Description("Test Transliterate feature - convert Cyrillic to Latin")]
+	[Property("Description", "Test Transliterate feature - convert Cyrillic to Latin")]
 	public async Task Transliterate_CyrillicText_ConvertedToLatin()
 	{
 		TestContext.Output.WriteLine("Testing Transliterate feature");
@@ -53,7 +53,7 @@ public class TransliterateAutomationTests : AutomationTestsBase
 	}
 
 	[Test]
-	//[Description("Test ReplaceChars feature - replace specific characters")]
+	[Property("Description", "Test ReplaceChars feature - replace specific characters")]
 	public async Task ReplaceChars_CustomReplacements_Applied()
 	{
 		TestContext.Output.WriteLine("Testing ReplaceChars feature");
@@ -95,7 +95,7 @@ public class TransliterateAutomationTests : AutomationTestsBase
 	}
 
 	[Test]
-	//[Description("Test Transliterate with mixed Cyrillic and Latin text")]
+	[Property("Description", "Test Transliterate with mixed Cyrillic and Latin text")]
 	public async Task Transliterate_MixedText_OnlyCyrillicTransliterated()
 	{
 		TestContext.Output.WriteLine("Testing Transliterate with mixed content");

@@ -7,7 +7,7 @@ namespace NavfertyExcelAddIn.UnitTests.WorksheetCellsEditing;
 public class ConditionalFormatAutomationTests : AutomationTestsBase
 {
 	[Test]
-	//[Description("Test RepairConditionalFormat feature - copy conditional format from first row to entire range")]
+	[Property("Description", "Test RepairConditionalFormat feature - copy conditional format from first row to entire range")]
 	public async Task RepairConditionalFormat_WithConditionalFormatInFirstRow_CopiedToAllRows()
 	{
 		TestContext.Output.WriteLine("Testing RepairConditionalFormat feature");
@@ -16,7 +16,7 @@ public class ConditionalFormatAutomationTests : AutomationTestsBase
 		Thread.Sleep(defaultSleep);
 
 		var sheet = (Worksheet)workbook.Sheets[1];
-		Assert.NotNull(sheet);
+		await Assert.That(sheet).IsNotNull();
 
 		// Fill with numeric data
 		var values = new object[,]
@@ -67,7 +67,7 @@ public class ConditionalFormatAutomationTests : AutomationTestsBase
 
 	[Test]
 	[Skip("Only first row repair for conditional formattin is implemented")]
-	//[Description("Test RepairConditionalFormat with conditional format in second row (first row empty)")]
+	[Property("Description", "Test RepairConditionalFormat with conditional format in second row (first row empty)")]
 	public async Task RepairConditionalFormat_WithConditionalFormatInSecondRow_CopiedToAllRows()
 	{
 		TestContext.Output.WriteLine("Testing RepairConditionalFormat with format in second row");
@@ -76,7 +76,7 @@ public class ConditionalFormatAutomationTests : AutomationTestsBase
 		Thread.Sleep(defaultSleep);
 
 		var sheet = (Worksheet)workbook.Sheets[1];
-		Assert.NotNull(sheet);
+		await Assert.That(sheet).IsNotNull();
 
 		// Fill with numeric data
 		var values = new object[,]

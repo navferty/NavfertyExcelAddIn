@@ -7,7 +7,7 @@ namespace NavfertyExcelAddIn.UnitTests.ParseNumerics;
 public class ParseNumericsAutomationTests : AutomationTestsBase
 {
 	[Test]
-	//[Description("Create blank workbook, fill it with numeric strings and parse them to numbers")]
+	[Property("Description", "Create blank workbook, fill it with numeric strings and parse them to numbers")]
 	public async Task ParseNumerics_NumericStrings_ConvertedToNumbers()
 	{
 		TestContext.Output.WriteLine("Testing ParseNumerics feature");
@@ -57,7 +57,7 @@ public class ParseNumericsAutomationTests : AutomationTestsBase
 
 	[Test]
 	[Category("Automation")]
-	//[Description("Test ParseNumerics with mixed content - strings, numbers, and text")]
+	[Property("Description", "Test ParseNumerics with mixed content - strings, numbers, and text")]
 	public async Task ParseNumerics_MixedContent_OnlyNumericStringsParsed()
 	{
 		TestContext.Output.WriteLine("Testing ParseNumerics with mixed content");
