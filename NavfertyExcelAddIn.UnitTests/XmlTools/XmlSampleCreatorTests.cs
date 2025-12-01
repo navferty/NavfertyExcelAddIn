@@ -22,7 +22,7 @@ public class XmlSampleCreatorTests : TestsBase
     }
 
     [Test]
-    public async Task CreateSample_XsdNotSelected()
+    public void CreateSample_XsdNotSelected()
     {
         dialogService
             .Setup(x => x.AskForFiles(It.IsAny<bool>(), FileType.Xsd))
@@ -34,7 +34,7 @@ public class XmlSampleCreatorTests : TestsBase
     }
 
     [Test]
-    public async Task CreateSample_TargetXmlNotSelected()
+    public void CreateSample_TargetXmlNotSelected()
     {
         dialogService
             .Setup(x => x.AskForFiles(false, FileType.Xsd))

@@ -37,7 +37,7 @@ public class SqliteExporterTests : TestsBase
 	}
 
 	[Test]
-	public async Task ExportToSqlite_NullWorkbook_ThrowsArgumentNullException()
+	public void ExportToSqlite_NullWorkbook_ThrowsArgumentNullException()
 	{
 		var exporter = new SqliteExporter(dialogService.Object, optionsProvider.Object);
 
@@ -45,7 +45,7 @@ public class SqliteExporterTests : TestsBase
 	}
 
 	[Test]
-	public async Task ExportToSqlite_UserCancelsOptionsDialog_DoesNothing()
+	public void ExportToSqlite_UserCancelsOptionsDialog_DoesNothing()
 	{
 		var workbook = new Mock<Workbook>(MockBehavior.Strict);
 		var exporter = new SqliteExporter(dialogService.Object, optionsProvider.Object);
@@ -61,7 +61,7 @@ public class SqliteExporterTests : TestsBase
 	}
 
 	[Test]
-	public async Task ExportToSqlite_NoDbPathSelected_DoesNothing()
+	public void ExportToSqlite_NoDbPathSelected_DoesNothing()
 	{
 		var workbook = new Mock<Workbook>(MockBehavior.Strict);
 		var exporter = new SqliteExporter(dialogService.Object, optionsProvider.Object);

@@ -36,7 +36,7 @@ public class XmlValidatorTests : TestsBase
     }
 
     [Test]
-    public async Task Validate_XmlNotSelected()
+    public void Validate_XmlNotSelected()
     {
         dialogService
             .Setup(x => x.AskForFiles(It.IsAny<bool>(), FileType.Xml))
@@ -49,7 +49,7 @@ public class XmlValidatorTests : TestsBase
     }
 
     [Test]
-    public async Task Validate_XsdNotSelected()
+    public void Validate_XsdNotSelected()
     {
         dialogService
             .Setup(x => x.AskForFiles(It.IsAny<bool>(), FileType.Xml))
@@ -84,7 +84,7 @@ public class XmlValidatorTests : TestsBase
 
 
     [Test]
-    public async Task Validate_NoErrors_SuccessMessageShown()
+    public void Validate_NoErrors_SuccessMessageShown()
     {
         dialogService
             .SetupSequence(x => x.AskForFiles(It.IsAny<bool>(), FileType.Xsd))
@@ -109,7 +109,7 @@ public class XmlValidatorTests : TestsBase
     }
 
     [Test]
-    public async Task Validate_HasErrors_MessageShown()
+    public void Validate_HasErrors_MessageShown()
     {
         dialogService
             .SetupSequence(x => x.AskForFiles(It.IsAny<bool>(), FileType.Xsd))
