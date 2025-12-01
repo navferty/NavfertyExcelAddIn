@@ -59,42 +59,8 @@ steps:
     configuration: '$(buildConfiguration)'
 
 - task: PowerShell@2
-  name: 'RunTests'
-  displayName: 'Run TUnit Tests'
-  inputs:
-    targetType: 'inline'
-    script: |
-      Write-Host "Finding TUnit test executable..."
-      $testExe = Get-ChildItem -Path "$(Build.SourcesDirectory)" -Recurse -Filter "*UnitTests.exe" | 
-                 Where-Object { $_.FullName -like "*bin\$(buildConfiguration)*" } |
-                 Select-Object -First 1
-      
-      if (-not $testExe) {
-        Write-Error "Test executable not found"
-        exit 1
-      }
-      
-      Write-Host "Found test executable: $($testExe.FullName)"
-      Write-Host "`nRunning tests (excluding Automation tests)..."
-      
-      $testResultsDir = "$(Build.SourcesDirectory)/TestResults"
-      New-Item -ItemType Directory -Force -Path $testResultsDir | Out-Null
-      
-      # Run TUnit tests with TRX output, excluding Automation category
-      & $testExe.FullName --report-trx --results-directory $testResultsDir --treenode-filter "/**[Category!=Automation]"
-      
-      $exitCode = $LASTEXITCODE
-      Write-Host "Test execution completed with exit code: $exitCode"
-      
-      if ($exitCode -ne 0) {
-        Write-Warning "Tests failed with exit code $exitCode"
-        exit $exitCode
-      }
-    workingDirectory: '$(Build.SourcesDirectory)'
-
-- task: PowerShell@2
-  name: 'CollectCodeCoverage'
-  displayName: 'Collect Code Coverage'
+  name: 'RunTestsWithCoverage'
+  displayName: 'Run Tests with Code Coverage'
   inputs:
     targetType: 'inline'
     script: |
@@ -127,6 +93,9 @@ steps:
         --output-format cobertura `
         $testExe.FullName --report-trx --results-directory $testResultsDir --treenode-filter "/**[Category!=Automation]"
       
+      $exitCode = $LASTEXITCODE
+      Write-Host "`nTest execution completed with exit code: $exitCode"
+      
       Write-Host "`nGenerating coverage report..."
       if (Test-Path "$(Build.SourcesDirectory)\coverage.cobertura.xml") {
         & "$(Build.SourcesDirectory)\reportgenerator.exe" `
@@ -136,6 +105,11 @@ steps:
         Write-Host "Coverage report generated successfully"
       } else {
         Write-Warning "No coverage file found"
+      }
+      
+      if ($exitCode -ne 0) {
+        Write-Error "Tests failed with exit code $exitCode"
+        exit $exitCode
       }
     workingDirectory: '$(Build.SourcesDirectory)'
 
