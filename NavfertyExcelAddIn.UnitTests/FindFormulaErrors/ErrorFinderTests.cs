@@ -1,85 +1,77 @@
-﻿using System.Linq;
-
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-
-using Navferty.Common;
+﻿using Navferty.Common;
 
 using NavfertyExcelAddIn.FindFormulaErrors;
 using NavfertyExcelAddIn.UnitTests.Builders;
 
-namespace NavfertyExcelAddIn.UnitTests.FindFormulaErrors
+namespace NavfertyExcelAddIn.UnitTests.FindFormulaErrors;
+
+public class ErrorFinderTests : TestsBase
 {
-	[TestClass]
-	public class ErrorFinderTests : TestsBase
+	[Test]
+	public async Task Range_NoErrors()
 	{
-		private ErrorFinder errorFinder;
+		var errorFinder = new ErrorFinder();
 
-		[TestMethod]
-		public void Range_NoErrors()
-		{
-			errorFinder = new ErrorFinder();
+		var values = new object?[,] { { 1d, "1", "abc" }, { "123.123", "321 , 321", null } };
+		var range = new RangeBuilder().WithWorksheet().WithSingleValue(values).Build();
 
-			var values = new object[,] { { 1d, "1", "abc" }, { "123.123", "321 , 321", null } };
-			var range = new RangeBuilder().WithWorksheet().WithSingleValue(values).Build();
+		var result = errorFinder.GetAllErrorCells(range).ToArray();
 
-			var result = errorFinder.GetAllErrorCells(range).ToArray();
+		await Assert.That(result).IsEmpty();
+	}
 
-			Assert.IsEmpty(result);
-		}
+	[Test]
+	public async Task Range_WithErrors()
+	{
+		var errorFinder = new ErrorFinder();
 
-		[TestMethod]
-		public void Range_WithErrors()
-		{
-			errorFinder = new ErrorFinder();
+		var values = new object?[,] { { 1d, "1", "abc" }, { (int)CVErrEnum.ErrGettingData, "321 , 321", null } };
+		var range = new RangeBuilder().WithWorksheet().WithCells().WithSingleValue(values).Build();
+		SetRangeExtentionsStub();
 
-			var values = new object[,] { { 1d, "1", "abc" }, { (int)CVErrEnum.ErrGettingData, "321 , 321", null } };
-			var range = new RangeBuilder().WithWorksheet().WithCells().WithSingleValue(values).Build();
-			SetRangeExtentionsStub();
+		var result = errorFinder.GetAllErrorCells(range).ToArray();
 
-			var result = errorFinder.GetAllErrorCells(range).ToArray();
+		await Assert.That(result).Count().EqualTo(1);
+		await Assert.That(result.First().ErrorMessage).IsEqualTo(CVErrEnum.ErrGettingData.GetEnumDescription());
+	}
 
-			Assert.HasCount(1, result);
-			Assert.AreEqual(CVErrEnum.ErrGettingData.GetEnumDescription(), result.First().ErrorMessage);
-		}
+	[Test]
+	public async Task SingleValue_WithoutError()
+	{
+		var errorFinder = new ErrorFinder();
 
-		[TestMethod]
-		public void SingleValue_WithoutError()
-		{
-			errorFinder = new ErrorFinder();
+		var range = new RangeBuilder().WithWorksheet().WithSingleValue("1").Build();
 
-			var range = new RangeBuilder().WithWorksheet().WithSingleValue("1").Build();
+		var result = errorFinder.GetAllErrorCells(range).ToArray();
 
-			var result = errorFinder.GetAllErrorCells(range).ToArray();
+		await Assert.That(result).IsEmpty();
+	}
 
-			Assert.IsEmpty(result);
-		}
+	[Test]
+	public async Task SingleValue_WithError()
+	{
+		var errorFinder = new ErrorFinder();
 
-		[TestMethod]
-		public void SingleValue_WithError()
-		{
-			errorFinder = new ErrorFinder();
+		var range = new RangeBuilder().WithWorksheet().WithSingleValue((int)CVErrEnum.ErrNA).Build();
 
-			var range = new RangeBuilder().WithWorksheet().WithSingleValue((int)CVErrEnum.ErrNA).Build();
-
-			SetRangeExtentionsStub();
+		SetRangeExtentionsStub();
 
 
-			var result = errorFinder.GetAllErrorCells(range).ToArray();
+		var result = errorFinder.GetAllErrorCells(range).ToArray();
 
-			Assert.HasCount(1, result);
-			Assert.AreEqual(CVErrEnum.ErrNA.GetEnumDescription(), result.First().ErrorMessage);
-		}
+		await Assert.That(result).Count().EqualTo(1);
+		await Assert.That(result.First().ErrorMessage).IsEqualTo(CVErrEnum.ErrNA.GetEnumDescription());
+	}
 
-		[TestMethod]
-		public void NoValues()
-		{
-			errorFinder = new ErrorFinder();
+	[Test]
+	public async Task NoValues()
+	{
+		var errorFinder = new ErrorFinder();
 
-			var range = new RangeBuilder().WithWorksheet().WithSingleValue(null).Build();
+		var range = new RangeBuilder().WithWorksheet().WithSingleValue(null).Build();
 
-			var result = errorFinder.GetAllErrorCells(range).ToArray();
+		var result = errorFinder.GetAllErrorCells(range).ToArray();
 
-			Assert.IsEmpty(result);
-		}
+		await Assert.That(result).IsEmpty();
 	}
 }

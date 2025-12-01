@@ -1,13 +1,13 @@
-﻿using System.Collections.Generic;
-
-using NavfertyExcelAddIn.Commons;
+﻿using NavfertyExcelAddIn.Commons;
 
 using Range = Microsoft.Office.Interop.Excel.Range;
 
 namespace NavfertyExcelAddIn.UnitTests
 {
-	public class RangeExtensionsImplementationStub : IRangeExtensionsImplementation
+	public class RangeExtensionsStub : IRangeExtensionsImplementation
 	{
+		public const string ParallelizationContstraintKey = nameof(RangeExtensionsStub);
+
 		public IReadOnlyCollection<Range> GetFormulaInvocations => getFormulaInvocations;
 		public IReadOnlyCollection<Range> GetRelativeAddressInvocations => getRelativeAddressInvocations;
 		public IReadOnlyCollection<(Range, int)> SetColorInvocations => setColorInvocations;

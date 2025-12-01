@@ -1,35 +1,26 @@
-﻿using System;
-using System.Linq.Expressions;
+﻿using System.Linq.Expressions;
 using System.Reflection;
 
 using Microsoft.Office.Interop.Excel;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 using Moq;
+
+using NavfertyExcelAddIn.ParseNumerics;
 
 using Range = Microsoft.Office.Interop.Excel.Range;
 
 namespace NavfertyExcelAddIn.UnitTests.ParseNumerics;
 
-[TestClass]
 public class NumericParserTests
 {
-	private NavfertyExcelAddIn.ParseNumerics.NumericParserService NumericParser;
-
-	[TestInitialize]
-	public void BeforeEachTest()
-	{
-		NumericParser = new();
-	}
-
-	[TestMethod]
-	public void ParsedSuccessfully() // TODO naming
+	[Test]
+	public void VariousValuesInSelection_ParseNumerics_ValuesParsedSuccessfully()
 	{
 		var selection = new Mock<Range>(MockBehavior.Strict);
-		var values = new object[,] { { 1, "1", "abc" }, { "123.123", "321 , 321", null } };
+		var values = new object?[,] { { 1, "1", "abc" }, { "123.123", "321 , 321", null } };
 
 		selection.SetupGet(x => x.get_Value(Missing.Value)).Returns(values);
-		selection.SetupSet(x => x.Value = It.Is<object[,]>(z => VerifyParsed(z)));
+		selection.SetupSet(x => x.Value = It.Is<object[,]>(z => VerifyParsed(z).GetAwaiter().GetResult()));
 		Expression<Func<Range, string>> getAddress = x => x.get_Address(It.IsAny<object>(), It.IsAny<object>(),
 							It.IsAny<XlReferenceStyle>(), It.IsAny<object>(), It.IsAny<object>());
 		selection.SetupGet(getAddress).Returns("Address");
@@ -46,14 +37,15 @@ public class NumericParserTests
 		var areas = new Mock<Areas>(MockBehavior.Strict);
 		areas.Setup(x => x.GetEnumerator()).Returns(new[] { selection.Object }.GetEnumerator());
 		selection.Setup(x => x.Areas).Returns(areas.Object);
+		var numericParser = new NumericParserService();
 
-		NumericParser.Parse(selection.Object);
+		numericParser.Parse(selection.Object);
 	}
 
-	private bool VerifyParsed(object[,] parsedValues)
+	private async Task<bool> VerifyParsed(object?[,] parsedValues)
 	{
-		var expected = new object[,] { { 1, 1d, "abc" }, { 123.123d, 321.321d, null } };
-		CollectionAssert.AreEqual(expected, parsedValues);
+		var expected = new object?[,] { { 1, 1d, "abc" }, { 123.123d, 321.321d, null } };
+		await Assert.That(parsedValues).IsEquivalentTo(expected);
 		return true;
 	}
 }

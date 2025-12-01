@@ -1,30 +1,22 @@
-﻿using System.Threading;
-using System.Windows.Forms;
-
-using Microsoft.Office.Interop.Excel;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-
-using NavfertyExcelAddIn.UnitTests.SqliteExport;
+﻿using Microsoft.Office.Interop.Excel;
 
 namespace NavfertyExcelAddIn.UnitTests.WorksheetCellsEditing;
 
-#nullable enable
-
-[TestClass]
+[Category("Automation")]
+[NotInParallel("Automation")]
 public class FormattingAutomationTests : AutomationTestsBase
 {
-	[TestMethod]
-	[TestCategory("Automation")]
-	[Description("Test ToggleCase feature - cycle through lowercase, UPPERCASE, and Titlecase")]
-	public void ToggleCase_TextValues_CaseToggled()
+	[Test]
+	[Property("Description", "Test ToggleCase feature - cycle through lowercase, UPPERCASE, and Titlecase")]
+	public async Task ToggleCase_TextValues_CaseToggled()
 	{
-		TestContext.WriteLine("Testing ToggleCase feature");
+		TestContext.Output.WriteLine("Testing ToggleCase feature");
 
 		var workbook = app.Workbooks.Add();
 		Thread.Sleep(defaultSleep);
 
 		var sheet = (Worksheet)workbook.Sheets[1];
-		Assert.IsNotNull(sheet);
+		await Assert.That(sheet).IsNotNull();
 
 		// Fill with lowercase text
 		var values = new object[,]
@@ -43,11 +35,11 @@ public class FormattingAutomationTests : AutomationTestsBase
 		Thread.Sleep(defaultSleep);
 
 		var currentValues = (object?[,])sheet.UsedRange.Cells.Value;
-		Assert.IsNotNull(currentValues);
+		await Assert.That(currentValues).IsNotNull();
 
 		foreach (var cell in currentValues)
 		{
-			TestContext.WriteLine(cell?.ToString() ?? "<null>");
+			TestContext.Output.WriteLine(cell?.ToString() ?? "<null>");
 		}
 
 		// After first toggle: should be UPPERCASE
@@ -57,21 +49,20 @@ public class FormattingAutomationTests : AutomationTestsBase
 			{ "ONE", "TWO", "THREE" },
 		};
 
-		CollectionAssert.AreEqual(expectedValues, currentValues);
+		await Assert.That(currentValues).IsEquivalentTo(expectedValues);
 	}
 
-	[TestMethod]
-	[TestCategory("Automation")]
-	[Description("Test TrimExtraSpaces feature - remove extra spaces from text")]
-	public void TrimExtraSpaces_TextWithSpaces_ExtraSpacesRemoved()
+	[Test]
+	[Property("Description", "Test TrimExtraSpaces feature - remove extra spaces from text")]
+	public async Task TrimExtraSpaces_TextWithSpaces_ExtraSpacesRemoved()
 	{
-		TestContext.WriteLine("Testing TrimExtraSpaces feature");
+		TestContext.Output.WriteLine("Testing TrimExtraSpaces feature");
 
 		var workbook = app.Workbooks.Add();
 		Thread.Sleep(defaultSleep);
 
 		var sheet = (Worksheet)workbook.Sheets[1];
-		Assert.IsNotNull(sheet);
+		await Assert.That(sheet).IsNotNull();
 
 		// Fill with text containing extra spaces
 		var values = new object[,]
@@ -90,11 +81,11 @@ public class FormattingAutomationTests : AutomationTestsBase
 		Thread.Sleep(defaultSleep);
 
 		var currentValues = (object?[,])sheet.UsedRange.Cells.Value;
-		Assert.IsNotNull(currentValues);
+		await Assert.That(currentValues).IsNotNull();
 
 		foreach (var cell in currentValues)
 		{
-			TestContext.WriteLine($"'{cell?.ToString() ?? "<null>"}'");
+			TestContext.Output.WriteLine($"'{cell?.ToString() ?? "<null>"}'");
 		}
 
 		// Expected: extra spaces removed, single spaces preserved
@@ -104,21 +95,20 @@ public class FormattingAutomationTests : AutomationTestsBase
 			{ "one two", "three", "four" },
 		};
 
-		CollectionAssert.AreEqual(expectedValues, currentValues);
+		await Assert.That(currentValues).IsEquivalentTo(expectedValues);
 	}
 
-	[TestMethod]
-	[TestCategory("Automation")]
-	[Description("Test RemoveAllSpaces feature - remove all spaces from text")]
-	public void RemoveAllSpaces_TextWithSpaces_AllSpacesRemoved()
+	[Test]
+	[Property("Description", "Test RemoveAllSpaces feature - remove all spaces from text")]
+	public async Task RemoveAllSpaces_TextWithSpaces_AllSpacesRemoved()
 	{
-		TestContext.WriteLine("Testing RemoveAllSpaces feature");
+		TestContext.Output.WriteLine("Testing RemoveAllSpaces feature");
 
 		var workbook = app.Workbooks.Add();
 		Thread.Sleep(defaultSleep);
 
 		var sheet = (Worksheet)workbook.Sheets[1];
-		Assert.IsNotNull(sheet);
+		await Assert.That(sheet).IsNotNull();
 
 		// Fill with text containing spaces
 		var values = new object[,]
@@ -137,11 +127,11 @@ public class FormattingAutomationTests : AutomationTestsBase
 		Thread.Sleep(defaultSleep);
 
 		var currentValues = (object?[,])sheet.UsedRange.Cells.Value;
-		Assert.IsNotNull(currentValues);
+		await Assert.That(currentValues).IsNotNull();
 
 		foreach (var cell in currentValues)
 		{
-			TestContext.WriteLine(cell?.ToString() ?? "<null>");
+			TestContext.Output.WriteLine(cell?.ToString() ?? "<null>");
 		}
 
 		// Expected: all spaces removed
@@ -151,21 +141,20 @@ public class FormattingAutomationTests : AutomationTestsBase
 			{ "onetwothree", "abc", "xyz" },
 		};
 
-		CollectionAssert.AreEqual(expectedValues, currentValues);
+		await Assert.That(currentValues).IsEquivalentTo(expectedValues);
 	}
 
-	[TestMethod]
-	[TestCategory("Automation")]
-	[Description("Test TrimSpaces (default) feature - remove extra spaces from text")]
-	public void TrimSpaces_TextWithSpaces_ExtraSpacesRemoved()
+	[Test]
+	[Property("Description", "Test TrimSpaces (default) feature - remove extra spaces from text")]
+	public async Task TrimSpaces_TextWithSpaces_ExtraSpacesRemoved()
 	{
-		TestContext.WriteLine("Testing TrimSpaces (default) feature");
+		TestContext.Output.WriteLine("Testing TrimSpaces (default) feature");
 
 		var workbook = app.Workbooks.Add();
 		Thread.Sleep(defaultSleep);
 
 		var sheet = (Worksheet)workbook.Sheets[1];
-		Assert.IsNotNull(sheet);
+		await Assert.That(sheet).IsNotNull();
 
 		// Fill with text containing extra spaces
 		var values = new object[,]
@@ -183,11 +172,11 @@ public class FormattingAutomationTests : AutomationTestsBase
 		Thread.Sleep(defaultSleep);
 
 		var currentValues = (object?[,])sheet.UsedRange.Cells.Value;
-		Assert.IsNotNull(currentValues);
+		await Assert.That(currentValues).IsNotNull();
 
 		foreach (var cell in currentValues)
 		{
-			TestContext.WriteLine($"'{cell?.ToString() ?? "<null>"}'");
+			TestContext.Output.WriteLine($"'{cell?.ToString() ?? "<null>"}'");
 		}
 
 		// TrimSpaces calls TrimExtraSpaces
@@ -196,6 +185,6 @@ public class FormattingAutomationTests : AutomationTestsBase
 			{ "leading", "trailing", "both" },
 		};
 
-		CollectionAssert.AreEqual(expectedValues, currentValues);
+		await Assert.That(currentValues).IsEquivalentTo(expectedValues);
 	}
 }

@@ -1,8 +1,6 @@
 ﻿using System.Reflection;
 using System.Runtime.InteropServices;
 
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-
 [assembly: AssemblyTitle("NavfertyExcelAddIn.UnitTests")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
@@ -20,4 +18,4 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 [assembly: AssemblyVersion("1.0.0.0")]
 [assembly: AssemblyFileVersion("1.0.0.0")]
 
-[assembly: DoNotParallelize]
+//[assembly: DoNotParallelize]

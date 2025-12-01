@@ -1,79 +1,69 @@
-﻿using System.Linq;
-using System.Xml;
-
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using System.Xml;
 
 using NavfertyExcelAddIn.XmlTools;
 
-namespace NavfertyExcelAddIn.UnitTests.XmlTools
+namespace NavfertyExcelAddIn.UnitTests.XmlTools;
+
+public class XsdSchemaValidatorTests : TestsBase
 {
-	[TestClass]
-	public class XsdSchemaValidatorTests : TestsBase
+	private const string XsdFile = "XmlTools/Samples/NO_PRIB_1_002_00_05_07_05.xsd";
+	private const string CorrectXml = "XmlTools/Samples/Прибыль_Correct.xml";
+	private const string IncorrectXml = "XmlTools/Samples/Прибыль_Incorrect.xml";
+	private const string InvalidXml = "XmlTools/Samples/Прибыль_Invalid.xml";
+
+	[Before(HookType.Test)]
+	public void BeforeEachTest()
 	{
+		SetCulture();
+	}
 
-		private XsdSchemaValidator validator;
+	[Test]
+	public async Task ValidateXml_CorrectFile_NoErrors()
+	{
+		string xmlFilename = GetFilePath(CorrectXml);
+		string xsdFilename = GetFilePath(XsdFile);
+		var validator = new XsdSchemaValidator();
 
-		private const string XsdFile = "XmlTools/Samples/NO_PRIB_1_002_00_05_07_05.xsd";
-		private const string CorrectXml = "XmlTools/Samples/Прибыль_Correct.xml";
-		private const string IncorrectXml = "XmlTools/Samples/Прибыль_Incorrect.xml";
-		private const string InvalidXml = "XmlTools/Samples/Прибыль_Invalid.xml";
+		var result = validator.Validate(xmlFilename, [xsdFilename]);
 
-		[TestInitialize]
-		public void BeforeEachTest()
-		{
-			SetCulture();
+		await Assert.That(result).IsEmpty();
+	}
 
-			validator = new XsdSchemaValidator();
-		}
+	[Test]
+	public async Task ValidateXml_IncorrectFile_AllErrorsFound()
+	{
+		string xmlFilename = GetFilePath(IncorrectXml);
+		string xsdFilename = GetFilePath(XsdFile);
+		var validator = new XsdSchemaValidator();
 
-		[TestMethod]
-		public void ValidateXml_CorrectFile_NoErrors()
-		{
-			string xmlFilename = GetFilePath(CorrectXml);
-			string xsdFilename = GetFilePath(XsdFile);
+		var result = validator.Validate(xmlFilename, [xsdFilename]);
 
+		await Assert.That(result).Count().EqualTo(3);
+		await Assert.That(result.All(x => x.Severity == ValidationErrorSeverity.Error)).IsTrue();
 
-			var result = validator.Validate(xmlFilename, new[] { xsdFilename });
+		var errors = result.ToArray();
+		await Assert.That(errors[0].ElementName).IsEqualTo("ОКТМО");
+		await Assert.That(errors[0].Value).IsEqualTo("xxx");
+		await Assert.That(errors[0].Message).Contains("ОКТМОТип");
 
-			Assert.IsEmpty(result);
-		}
+		await Assert.That(errors[1].ElementName).IsEqualTo("КБК");
+		await Assert.That(errors[1].Value).IsEqualTo("123");
+		await Assert.That(errors[1].Message).Contains("КБКТип");
 
-		[TestMethod]
-		public void ValidateXml_IncorrectFile_AllErrorsFound()
-		{
-			string xmlFilename = GetFilePath(IncorrectXml);
-			string xsdFilename = GetFilePath(XsdFile);
+		await Assert.That(errors[2].ElementName).IsEqualTo("КБК");
+		await Assert.That(errors[2].Value).IsEqualTo("321");
+		await Assert.That(errors[2].Message).Contains("КБКТип");
+	}
 
+	[Test]
+	public async Task ValidateXml_InvalidXmlFile_NoErrors()
+	{
+		string xmlFilename = GetFilePath(InvalidXml);
+		string xsdFilename = GetFilePath(XsdFile);
+		var validator = new XsdSchemaValidator();
 
-			var result = validator.Validate(xmlFilename, new[] { xsdFilename });
+		var ex = Assert.Throws<XmlException>(() => validator.Validate(xmlFilename, [xsdFilename]));
 
-			Assert.HasCount(3, result);
-			Assert.IsTrue(result.All(x => x.Severity == ValidationErrorSeverity.Error));
-
-			var errors = result.ToArray();
-			Assert.AreEqual("ОКТМО", errors[0].ElementName);
-			Assert.AreEqual("xxx", errors[0].Value);
-			StringAssert.Contains(errors[0].Message, "ОКТМОТип");
-
-			Assert.AreEqual("КБК", errors[1].ElementName);
-			Assert.AreEqual("123", errors[1].Value);
-			StringAssert.Contains(errors[1].Message, "КБКТип");
-
-			Assert.AreEqual("КБК", errors[2].ElementName);
-			Assert.AreEqual("321", errors[2].Value);
-			StringAssert.Contains(errors[2].Message, "КБКТип");
-		}
-
-		[TestMethod]
-		public void ValidateXml_InvalidXmlFile_NoErrors()
-		{
-			string xmlFilename = GetFilePath(InvalidXml);
-			string xsdFilename = GetFilePath(XsdFile);
-
-
-			var ex = Assert.Throws<XmlException>(() => validator.Validate(xmlFilename, new[] { xsdFilename }));
-
-			StringAssert.Contains(ex.Message, "Документ");
-		}
+		await Assert.That(ex.Message).Contains("Документ");
 	}
 }

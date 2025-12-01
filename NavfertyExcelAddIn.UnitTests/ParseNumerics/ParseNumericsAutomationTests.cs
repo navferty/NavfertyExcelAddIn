@@ -1,30 +1,22 @@
-using System.Threading;
-using System.Windows.Forms;
-
-using Microsoft.Office.Interop.Excel;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-
-using NavfertyExcelAddIn.UnitTests.SqliteExport;
+﻿using Microsoft.Office.Interop.Excel;
 
 namespace NavfertyExcelAddIn.UnitTests.ParseNumerics;
 
-#nullable enable
-
-[TestClass]
+[Category("Automation")]
+[NotInParallel("Automation")]
 public class ParseNumericsAutomationTests : AutomationTestsBase
 {
-	[TestMethod]
-	[TestCategory("Automation")]
-	[Description("Create blank workbook, fill it with numeric strings and parse them to numbers")]
-	public void ParseNumerics_NumericStrings_ConvertedToNumbers()
+	[Test]
+	[Property("Description", "Create blank workbook, fill it with numeric strings and parse them to numbers")]
+	public async Task ParseNumerics_NumericStrings_ConvertedToNumbers()
 	{
-		TestContext.WriteLine("Testing ParseNumerics feature");
+		TestContext.Output.WriteLine("Testing ParseNumerics feature");
 
 		var workbook = app.Workbooks.Add();
 		Thread.Sleep(defaultSleep);
 
 		var sheet = (Worksheet)workbook.Sheets[1];
-		Assert.IsNotNull(sheet);
+		await Assert.That(sheet).IsNotNull();
 
 		// Fill with numeric strings
 		var values = new object[,]
@@ -44,7 +36,7 @@ public class ParseNumericsAutomationTests : AutomationTestsBase
 		Thread.Sleep(defaultSleep);
 
 		var currentValues = (object?[,])sheet.UsedRange.Cells.Value;
-		Assert.IsNotNull(currentValues);
+		await Assert.That(currentValues).IsNotNull();
 
 		// Verify all values are now doubles
 		for (int i = 0; i < 3; i++)
@@ -52,29 +44,29 @@ public class ParseNumericsAutomationTests : AutomationTestsBase
 			for (int j = 0; j < 3; j++)
 			{
 				var cellValue = currentValues[i + 1, j + 1];
-				TestContext.WriteLine($"Cell [{i + 1},{j + 1}]: {cellValue} (Type: {cellValue?.GetType().Name})");
-				Assert.IsInstanceOfType(cellValue, typeof(double), $"Cell [{i + 1},{j + 1}] should be double");
+				TestContext.Output.WriteLine($"Cell [{i + 1},{j + 1}]: {cellValue} (Type: {cellValue?.GetType().Name})");
+				await Assert.That(cellValue is double).IsTrue();
 			}
 		}
 
 		// Verify specific values
-		Assert.AreEqual(123.0, currentValues[1, 1]);
-		Assert.AreEqual(456.78, currentValues[1, 2]);
-		Assert.AreEqual(-50.0, currentValues[3, 1]);
+		await Assert.That(currentValues[1, 1]).IsEqualTo(123.0);
+		await Assert.That(currentValues[1, 2]).IsEqualTo(456.78);
+		await Assert.That(currentValues[3, 1]).IsEqualTo(-50.0);
 	}
 
-	[TestMethod]
-	[TestCategory("Automation")]
-	[Description("Test ParseNumerics with mixed content - strings, numbers, and text")]
-	public void ParseNumerics_MixedContent_OnlyNumericStringsParsed()
+	[Test]
+	[Category("Automation")]
+	[Property("Description", "Test ParseNumerics with mixed content - strings, numbers, and text")]
+	public async Task ParseNumerics_MixedContent_OnlyNumericStringsParsed()
 	{
-		TestContext.WriteLine("Testing ParseNumerics with mixed content");
+		TestContext.Output.WriteLine("Testing ParseNumerics with mixed content");
 
 		var workbook = app.Workbooks.Add();
 		Thread.Sleep(defaultSleep);
 
 		var sheet = (Worksheet)workbook.Sheets[1];
-		Assert.IsNotNull(sheet);
+		await Assert.That(sheet).IsNotNull();
 
 		// Fill with mixed content
 		var values = new object[,]
@@ -93,26 +85,26 @@ public class ParseNumericsAutomationTests : AutomationTestsBase
 		Thread.Sleep(defaultSleep);
 
 		var currentValues = (object?[,])sheet.UsedRange.Cells.Value;
-		Assert.IsNotNull(currentValues);
+		await Assert.That(currentValues).IsNotNull();
 
 		// "100" should be converted to double
-		Assert.AreEqual(100.0, currentValues[1, 1]);
-		Assert.IsInstanceOfType(currentValues[1, 1], typeof(double));
+		await Assert.That(currentValues[1, 1]).IsEqualTo(100.0);
+		await Assert.That(currentValues[1, 1] is double).IsTrue();
 
 		// "text" should remain as string
-		Assert.AreEqual("text", currentValues[1, 2]);
-		Assert.IsInstanceOfType(currentValues[1, 2], typeof(string));
+		await Assert.That(currentValues[1, 2]).IsEqualTo("text");
+		await Assert.That(currentValues[1, 2] is string).IsTrue();
 
 		// "200.5" should be converted to double
-		Assert.AreEqual(200.5, currentValues[1, 3]);
-		Assert.IsInstanceOfType(currentValues[1, 3], typeof(double));
+		await Assert.That(currentValues[1, 3]).IsEqualTo(200.5);
+		await Assert.That(currentValues[1, 3] is double).IsTrue();
 
 		// 50 was already a number, should remain double
-		Assert.AreEqual(50.0, currentValues[2, 1]);
-		Assert.IsInstanceOfType(currentValues[2, 1], typeof(double));
+		await Assert.That(currentValues[2, 1]).IsEqualTo(50.0);
+		await Assert.That(currentValues[2, 1] is double).IsTrue();
 
 		// "abc123" should remain as string
-		Assert.AreEqual("abc123", currentValues[2, 2]);
-		Assert.IsInstanceOfType(currentValues[2, 2], typeof(string));
+		await Assert.That(currentValues[2, 2]).IsEqualTo("abc123");
+		await Assert.That(currentValues[2, 2] is string).IsTrue();
 	}
 }

@@ -1,30 +1,22 @@
-﻿using System.Threading;
-using System.Windows.Forms;
-
-using Microsoft.Office.Interop.Excel;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-
-using NavfertyExcelAddIn.UnitTests.SqliteExport;
+﻿using Microsoft.Office.Interop.Excel;
 
 namespace NavfertyExcelAddIn.UnitTests.Commons;
 
-#nullable enable
-
-[TestClass]
+[Category("Automation")]
+[NotInParallel("Automation")]
 public class CommonsAutomationTests : AutomationTestsBase
 {
-	[TestMethod]
-	[TestCategory("Automation")]
-	[Description("Test HighlightDuplicates feature - highlight duplicate values in selection")]
-	public void HighlightDuplicates_DuplicateValues_Highlighted()
+	[Test]
+	[DisplayName("Test HighlightDuplicates feature - highlight duplicate values in selection")]
+	public async Task HighlightDuplicates_DuplicateValues_Highlighted()
 	{
-		TestContext.WriteLine("Testing HighlightDuplicates feature");
+		TestContext.Output.WriteLine("Testing HighlightDuplicates feature");
 
 		var workbook = app.Workbooks.Add();
 		Thread.Sleep(defaultSleep);
 
 		var sheet = (Worksheet)workbook.Sheets[1];
-		Assert.IsNotNull(sheet);
+		await Assert.That(sheet).IsNotNull();
 
 		// Fill with data containing duplicates
 		var values = new object[,]
@@ -49,53 +41,51 @@ public class CommonsAutomationTests : AutomationTestsBase
 		var appleColor2 = (XlColorIndex)((Range)sheet.Cells[1, 3]).Interior.ColorIndex;
 		var appleColor3 = (XlColorIndex)((Range)sheet.Cells[3, 1]).Interior.ColorIndex;
 		
-		TestContext.WriteLine($"Apple cells - A1 color: {appleColor1}, C1 color: {appleColor2}, A3 color: {appleColor3}");
-		Assert.AreEqual(appleColor1, appleColor2, "All 'apple' cells should have the same color");
-		Assert.AreEqual(appleColor1, appleColor3, "All 'apple' cells should have the same color");
-		Assert.AreNotEqual(XlColorIndex.xlColorIndexNone, appleColor1, "'apple' cells should be colored");
+		TestContext.Output.WriteLine($"Apple cells - A1 color: {appleColor1}, C1 color: {appleColor2}, A3 color: {appleColor3}");
+		await Assert.That(appleColor2).IsEqualTo(appleColor1).And.IsEqualTo(appleColor3);
+		await Assert.That(appleColor1).IsNotEqualTo(XlColorIndex.xlColorIndexNone);
 
 		// banana appears in: B1, B2
 		var bananaColor1 = (XlColorIndex)((Range)sheet.Cells[1, 2]).Interior.ColorIndex;
 		var bananaColor2 = (XlColorIndex)((Range)sheet.Cells[2, 2]).Interior.ColorIndex;
 		
-		TestContext.WriteLine($"Banana cells - B1 color: {bananaColor1}, B2 color: {bananaColor2}");
-		Assert.AreEqual(bananaColor1, bananaColor2, "All 'banana' cells should have the same color");
-		Assert.AreNotEqual(XlColorIndex.xlColorIndexNone, bananaColor1, "'banana' cells should be colored");
+		TestContext.Output.WriteLine($"Banana cells - B1 color: {bananaColor1}, B2 color: {bananaColor2}");
+		await Assert.That(bananaColor2).IsEqualTo(bananaColor1);
+		await Assert.That(bananaColor1).IsNotEqualTo(XlColorIndex.xlColorIndexNone);
 
 		// orange appears in: A2, C3
 		var orangeColor1 = (XlColorIndex)((Range)sheet.Cells[2, 1]).Interior.ColorIndex;
 		var orangeColor2 = (XlColorIndex)((Range)sheet.Cells[3, 3]).Interior.ColorIndex;
 		
-		TestContext.WriteLine($"Orange cells - A2 color: {orangeColor1}, C3 color: {orangeColor2}");
-		Assert.AreEqual(orangeColor1, orangeColor2, "All 'orange' cells should have the same color");
-		Assert.AreNotEqual(XlColorIndex.xlColorIndexNone, orangeColor1, "'orange' cells should be colored");
+		TestContext.Output.WriteLine($"Orange cells - A2 color: {orangeColor1}, C3 color: {orangeColor2}");
+		await Assert.That(orangeColor2).IsEqualTo(orangeColor1);
+		await Assert.That(orangeColor1).IsNotEqualTo(XlColorIndex.xlColorIndexNone);
 
 		// Different duplicate groups should have different colors
-		Assert.AreNotEqual(appleColor1, bananaColor1, "Different duplicate groups should have different colors");
-		Assert.AreNotEqual(appleColor1, orangeColor1, "Different duplicate groups should have different colors");
-		Assert.AreNotEqual(bananaColor1, orangeColor1, "Different duplicate groups should have different colors");
+		await Assert.That(appleColor1).IsNotEqualTo(bananaColor1);
+		await Assert.That(appleColor1).IsNotEqualTo(orangeColor1);
+		await Assert.That(bananaColor1).IsNotEqualTo(orangeColor1);
 
 		// grape and kiwi appear only once, should not be colored
 		var grapeColor = (XlColorIndex)((Range)sheet.Cells[2, 3]).Interior.ColorIndex;
 		var kiwiColor = (XlColorIndex)((Range)sheet.Cells[3, 2]).Interior.ColorIndex;
 		
-		TestContext.WriteLine($"Unique cells - grape color: {grapeColor}, kiwi color: {kiwiColor}");
-		Assert.AreEqual(XlColorIndex.xlColorIndexNone, grapeColor, "'grape' should not be colored (not a duplicate)");
-		Assert.AreEqual(XlColorIndex.xlColorIndexNone, kiwiColor, "'kiwi' should not be colored (not a duplicate)");
+		TestContext.Output.WriteLine($"Unique cells - grape color: {grapeColor}, kiwi color: {kiwiColor}");
+		await Assert.That(grapeColor).IsEqualTo(XlColorIndex.xlColorIndexNone); //, , "'grape' should not be colored (not a duplicate)");
+		await Assert.That(kiwiColor).IsEqualTo(XlColorIndex.xlColorIndexNone); //, , "'kiwi' should not be colored (not a duplicate)");
 	}
 
-	[TestMethod]
-	[TestCategory("Automation")]
-	[Description("Test UnmergeCells feature - unmerge merged cells and fill with values")]
-	public void UnmergeCells_MergedCells_Unmerged()
+	[Test]
+	[Property("Description", "Test UnmergeCells feature - unmerge merged cells and fill with values")]
+	public async Task UnmergeCells_MergedCells_Unmerged()
 	{
-		TestContext.WriteLine("Testing UnmergeCells feature");
+		TestContext.Output.WriteLine("Testing UnmergeCells feature");
 
 		var workbook = app.Workbooks.Add();
 		Thread.Sleep(defaultSleep);
 
 		var sheet = (Worksheet)workbook.Sheets[1];
-		Assert.IsNotNull(sheet);
+		await Assert.That(sheet).IsNotNull();
 
 		// Create merged cells
 		var range1 = sheet.Range[sheet.Cells[1, 1], sheet.Cells[1, 3]];
@@ -123,30 +113,29 @@ public class CommonsAutomationTests : AutomationTestsBase
 		var cell3 = (Range)sheet.Cells[2, 1];
 		var cell4 = (Range)sheet.Cells[3, 1];
 
-		Assert.IsFalse((bool)cell1.MergeCells, "Cell A1 should not be merged");
-		Assert.IsFalse((bool)cell2.MergeCells, "Cell B1 should not be merged");
-		Assert.IsFalse((bool)cell3.MergeCells, "Cell A2 should not be merged");
-		Assert.IsFalse((bool)cell4.MergeCells, "Cell A3 should not be merged");
+		await Assert.That((bool)cell1.MergeCells).IsFalse();
+		await Assert.That((bool)cell2.MergeCells).IsFalse();
+		await Assert.That((bool)cell3.MergeCells).IsFalse();
+		await Assert.That((bool)cell4.MergeCells).IsFalse();
 
 		// Verify values are filled
-		Assert.AreEqual("Merged", cell1.Value);
-		Assert.AreEqual("Merged", cell2.Value);
-		Assert.AreEqual("Vertical", cell3.Value);
-		Assert.AreEqual("Vertical", cell4.Value);
+		await Assert.That(cell1.Value as object).IsEqualTo("Merged");
+		await Assert.That(cell2.Value as object).IsEqualTo("Merged");
+		await Assert.That(cell3.Value as object).IsEqualTo("Vertical");
+		await Assert.That(cell4.Value as object).IsEqualTo("Vertical");
 	}
 
-	[TestMethod]
-	[TestCategory("Automation")]
-	[Description("Test FindErrors feature - find cells with formula errors")]
-	public void FindErrors_FormulasWithErrors_Found()
+	[Test]
+	[Property("Description", "Test FindErrors feature - find cells with formula errors")]
+	public async Task FindErrors_FormulasWithErrors_Found()
 	{
-		TestContext.WriteLine("Testing FindErrors feature");
+		TestContext.Output.WriteLine("Testing FindErrors feature");
 
 		var workbook = app.Workbooks.Add();
 		Thread.Sleep(defaultSleep);
 
 		var sheet = (Worksheet)workbook.Sheets[1];
-		Assert.IsNotNull(sheet);
+		await Assert.That(sheet).IsNotNull();
 
 		// Create some formulas with errors
 		sheet.Cells[1, 1] = 10;
@@ -169,31 +158,30 @@ public class CommonsAutomationTests : AutomationTestsBase
 		SendKeys.SendWait("{DOWN}{DOWN}"); // Move to third error in A5 cell
 
 		var selectedCell = app.ActiveCell;
-		Assert.IsNotNull(selectedCell);
-		TestContext.WriteLine($"Active cell after FindErrors: {selectedCell.Address}");
-		Assert.AreEqual("$A$5", selectedCell.Address, "Active cell should be A3 (first error)");
+		await Assert.That(selectedCell).IsNotNull();
+		TestContext.Output.WriteLine($"Active cell after FindErrors: {selectedCell.Address}");
+		await Assert.That(selectedCell.Address).IsEqualTo("$A$5");
 
 		// The FindErrors feature should identify and highlight error cells
 		// We can verify it completed without errors
 		var cell3Value = ((Range)sheet.Cells[3, 1]).Value;
-		TestContext.WriteLine($"Cell A3 value: {cell3Value}");
+		TestContext.Output.WriteLine($"Cell A3 value: {cell3Value}");
 		
 		// Verify the error value is present
-		Assert.IsNotNull(cell3Value, "Error cell should have a value");
+		await Assert.That(cell3Value as object).IsNotNull();
 	}
 
-	[TestMethod]
-	[TestCategory("Automation")]
-	[Description("Test CopyAsMarkdown feature - copy range as markdown table")]
-	public void CopyAsMarkdown_Range_CopiedToClipboard()
+	[Test]
+	[Property("Description", "Test CopyAsMarkdown feature - copy range as markdown table")]
+	public async Task CopyAsMarkdown_Range_CopiedToClipboard()
 	{
-		TestContext.WriteLine("Testing CopyAsMarkdown feature");
+		TestContext.Output.WriteLine("Testing CopyAsMarkdown feature");
 
 		var workbook = app.Workbooks.Add();
 		Thread.Sleep(defaultSleep);
 
 		var sheet = (Worksheet)workbook.Sheets[1];
-		Assert.IsNotNull(sheet);
+		await Assert.That(sheet).IsNotNull();
 
 		// Fill with data for markdown table
 		var values = new object[,]
@@ -216,28 +204,27 @@ public class CommonsAutomationTests : AutomationTestsBase
 		if (Clipboard.ContainsText())
 		{
 			var clipboardText = Clipboard.GetText();
-			TestContext.WriteLine("Clipboard content:");
-			TestContext.WriteLine(clipboardText);
+			TestContext.Output.WriteLine("Clipboard content:");
+			TestContext.Output.WriteLine(clipboardText);
 
 			// Verify markdown format (should contain pipe characters for table)
-			Assert.Contains("|", clipboardText, "Markdown table should contain pipe characters");
-			Assert.Contains("Name", clipboardText, "Markdown should contain header 'Name'");
-			Assert.Contains("Alice", clipboardText, "Markdown should contain 'Alice'");
+			await Assert.That(clipboardText).Contains("|");
+			await Assert.That(clipboardText).Contains("Name");
+			await Assert.That(clipboardText).Contains("Alice");
 		}
 	}
 
-	[TestMethod]
-	[TestCategory("Automation")]
-	[Description("Test HighlightDuplicates with numeric values")]
-	public void HighlightDuplicates_NumericValues_Highlighted()
+	[Test]
+	[Property("Description", "Test HighlightDuplicates with numeric values")]
+	public async Task HighlightDuplicates_NumericValues_Highlighted()
 	{
-		TestContext.WriteLine("Testing HighlightDuplicates with numbers");
+		TestContext.Output.WriteLine("Testing HighlightDuplicates with numbers");
 
 		var workbook = app.Workbooks.Add();
 		Thread.Sleep(defaultSleep);
 
 		var sheet = (Worksheet)workbook.Sheets[1];
-		Assert.IsNotNull(sheet);
+		await Assert.That(sheet).IsNotNull();
 
 		// Fill with numeric data containing duplicates
 		var values = new object[,]
@@ -262,38 +249,37 @@ public class CommonsAutomationTests : AutomationTestsBase
 		var value100Color2 = (XlColorIndex)((Range)sheet.Cells[1, 3]).Interior.ColorIndex;
 		var value100Color3 = (XlColorIndex)((Range)sheet.Cells[3, 1]).Interior.ColorIndex;
 		
-		TestContext.WriteLine($"100 cells - A1 color: {value100Color1}, C1 color: {value100Color2}, A3 color: {value100Color3}");
-		Assert.AreEqual(value100Color1, value100Color2, "All '100' cells should have the same color");
-		Assert.AreEqual(value100Color1, value100Color3, "All '100' cells should have the same color");
-		Assert.AreNotEqual(XlColorIndex.xlColorIndexNone, value100Color1, "'100' cells should be colored");
+		TestContext.Output.WriteLine($"100 cells - A1 color: {value100Color1}, C1 color: {value100Color2}, A3 color: {value100Color3}");
+		await Assert.That(value100Color2).IsEqualTo(value100Color1).And.IsEqualTo(value100Color3);
+		await Assert.That(value100Color1).IsNotEqualTo(XlColorIndex.xlColorIndexNone);
 
 		// 200 appears in: B1, B2
 		var value200Color1 = (XlColorIndex)((Range)sheet.Cells[1, 2]).Interior.ColorIndex;
 		var value200Color2 = (XlColorIndex)((Range)sheet.Cells[2, 2]).Interior.ColorIndex;
 		
-		TestContext.WriteLine($"200 cells - B1 color: {value200Color1}, B2 color: {value200Color2}");
-		Assert.AreEqual(value200Color1, value200Color2, "All '200' cells should have the same color");
-		Assert.AreNotEqual(XlColorIndex.xlColorIndexNone, value200Color1, "'200' cells should be colored");
+		TestContext.Output.WriteLine($"200 cells - B1 color: {value200Color1}, B2 color: {value200Color2}");
+		await Assert.That(value200Color2).IsEqualTo(value200Color1);
+		await Assert.That(value200Color1).IsNotEqualTo(XlColorIndex.xlColorIndexNone);
 
 		// 300 appears in: A2, C3
 		var value300Color1 = (XlColorIndex)((Range)sheet.Cells[2, 1]).Interior.ColorIndex;
 		var value300Color2 = (XlColorIndex)((Range)sheet.Cells[3, 3]).Interior.ColorIndex;
 		
-		TestContext.WriteLine($"300 cells - A2 color: {value300Color1}, C3 color: {value300Color2}");
-		Assert.AreEqual(value300Color1, value300Color2, "All '300' cells should have the same color");
-		Assert.AreNotEqual(XlColorIndex.xlColorIndexNone, value300Color1, "'300' cells should be colored");
+		TestContext.Output.WriteLine($"300 cells - A2 color: {value300Color1}, C3 color: {value300Color2}");
+		await Assert.That(value300Color2).IsEqualTo(value300Color1);
+		await Assert.That(value300Color1).IsNotEqualTo(XlColorIndex.xlColorIndexNone);
 
 		// Different duplicate groups should have different colors
-		Assert.AreNotEqual(value100Color1, value200Color1, "Different duplicate groups should have different colors");
-		Assert.AreNotEqual(value100Color1, value300Color1, "Different duplicate groups should have different colors");
-		Assert.AreNotEqual(value200Color1, value300Color1, "Different duplicate groups should have different colors");
+		await Assert.That(value100Color1).IsNotEqualTo(value200Color1);
+		await Assert.That(value100Color1).IsNotEqualTo(value300Color1);
+		await Assert.That(value200Color1).IsNotEqualTo(value300Color1);
 
 		// 400 and 500 appear only once, should not be colored
 		var value400Color = (XlColorIndex)((Range)sheet.Cells[2, 3]).Interior.ColorIndex;
 		var value500Color = (XlColorIndex)((Range)sheet.Cells[3, 2]).Interior.ColorIndex;
 		
-		TestContext.WriteLine($"Unique cells - 400 color: {value400Color}, 500 color: {value500Color}");
-		Assert.AreEqual(XlColorIndex.xlColorIndexNone, value400Color, "'400' should not be colored (not a duplicate)");
-		Assert.AreEqual(XlColorIndex.xlColorIndexNone, value500Color, "'500' should not be colored (not a duplicate)");
+		TestContext.Output.WriteLine($"Unique cells - 400 color: {value400Color}, 500 color: {value500Color}");
+		await Assert.That(value400Color).IsEqualTo(XlColorIndex.xlColorIndexNone);
+		await Assert.That(value500Color).IsEqualTo(XlColorIndex.xlColorIndexNone);
 	}
 }
