@@ -87,9 +87,10 @@ public class SqliteExportAutomationTest : AutomationTestsBase
 				var columnName = reader.GetString(1);
 				var columnType = reader.GetString(2);
 				TestContext.Output.WriteLine($"  Column {columnCount}: {columnName} ({columnType})");
-				
+
 				// Verify column type is one of the expected SQLite types
-				// Verify column type (skipped in migration) // Skipped assertion
+				var expectedTypes = new[] { "TEXT", "INTEGER", "REAL", "NUMERIC", "BLOB" };
+				await Assert.That(expectedTypes).Contains(columnType.ToUpper());
 			}
 			
 			await Assert.That(columnCount).IsGreaterThan(0); // $"Table {tableName} has no columns");
