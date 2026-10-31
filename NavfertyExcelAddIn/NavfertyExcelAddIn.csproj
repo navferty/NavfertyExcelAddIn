@@ -258,6 +258,8 @@
     </Exec>
     <PropertyGroup>
       <ManifestCertificateThumbprint>@(DevCertThumbprintLine)</ManifestCertificateThumbprint>
+      <!-- The VSTO targets copy the thumbprint into this property at evaluation time -->
+      <CertificateThumbprint>@(DevCertThumbprintLine)</CertificateThumbprint>
       <ManifestKeyFile>$(DevCertPfx)</ManifestKeyFile>
     </PropertyGroup>
     <Message Importance="high" Text="Navferty.pfx not found, signing with development certificate $(ManifestCertificateThumbprint)" />
