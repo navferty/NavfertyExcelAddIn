@@ -9,15 +9,16 @@
     <link rel="stylesheet" href="../style.css" />
 </head>
 
-<body>
+<body data-title-en="Automating routine Excel tasks without VBA - Navferty's Excel Add-In" data-title-ru="Автоматизация рутины в Excel без VBA - Надстройка Navferty Excel Add-In" data-desc-ru="Таблицы, Power Query, мгновенное заполнение, динамические массивы и другие встроенные инструменты, заменяющие большинство простых макросов.">
     <div id="container">
         <div class="top_nav">
-            <div id="head_name">Navferty's Excel Add-In</div>
-            <div onclick="location.href='../index.html';">Home</div>
-            <div onclick="location.href='index.html';">Articles</div>
+            <div id="head_name"><a href="../index.html">Navferty's Excel Add-In</a></div>
+            <div onclick="setUserLanguage('ru');">Russian</div>
+            <div onclick="setUserLanguage('en');">English</div>
         </div>
 
         <div id="content" class="article">
+<div class="lang-en">
 <p class="back-to-top"><a href="index.html">&larr; All articles</a></p>
 <h1 class="zag">Automating routine Excel tasks without VBA</h1>
 <p class="subtitle">Tables, Power Query, Flash Fill, dynamic arrays and other built-in tools that replace most simple macros.</p>
@@ -57,13 +58,54 @@
 
 <h2>When VBA still makes sense</h2>
 <p>When you need custom dialogs, interaction with other desktop applications, or logic that does not fit a formula or a query, VBA is still the straightforward way. The VBA articles linked from the <a href="index.html">article index</a> may help there.</p>
+</div>
+<div class="lang-ru" hidden>
+<p class="back-to-top"><a href="index.html">&larr; Все статьи</a></p>
+<h1 class="zag">Автоматизация рутины в Excel без VBA</h1>
+<p class="subtitle">Таблицы, Power Query, мгновенное заполнение, динамические массивы и другие встроенные инструменты, заменяющие большинство простых макросов.</p>
+<p>Макросы мощны, но их нужно поддерживать, их блокируют настройки безопасности, и они не работают в Excel для веба. Многую рутину можно сделать встроенными средствами, которые любой может изучить и изменить.</p>
 
+<h2>Таблицы</h2>
+<p>Таблица (<kbd>Ctrl</kbd>+<kbd>T</kbd>) автоматически расширяет формулы, форматирование, фильтры и диапазоны диаграмм при добавлении строк. Одно это избавляет от множества макросов «обновить диапазон».</p>
+
+<h2>Power Query</h2>
+<p><b>Данные → Получить данные</b> – правильный инструмент для регулярных загрузок и очистки: объединить все файлы из папки, удалить столбцы, сменить типы, разделить, развернуть (unpivot), слить две таблицы по ключу. Каждый шаг записывается. В следующем месяце вы кладёте новый файл и нажимаете <b>Обновить всё</b>.</p>
+<p>Типичные случаи: ежемесячная выгрузка из бухгалтерской системы с одинаковым макетом; папка с отчётами филиалов, которые надо собрать в одну таблицу; отчёт, который нужно развернуть из широкого формата в длинный.</p>
+
+<h2>Функции динамических массивов</h2>
+<p>В Microsoft 365 и Excel 2021 и новее одна формула может вернуть целый диапазон:</p>
+<ul>
+<li><code>=УНИК(A2:A1000)</code> – список уникальных значений.</li>
+<li><code>=СОРТ(A2:C1000; 2; -1)</code> – отсортированная копия данных.</li>
+<li><code>=ФИЛЬТР(A2:C1000; C2:C1000&gt;1000)</code> – только подходящие строки.</li>
+<li><code>=ПРОСМОТРX(E2; A:A; C:C; "не найдено")</code> – поиск со значением по умолчанию.</li>
+<li><code>=ТЕКСТРАЗД</code>, <code>=ОБЪЕДИНИТЬ</code>, <code>=LET</code> – разбить, склеить и дать имена промежуточным результатам.</li>
+</ul>
+
+<h2>Мгновенное заполнение</h2>
+<p>Введите результат для первой строки (например, инициалы из полного имени) и нажмите <kbd>Ctrl</kbd>+<kbd>E</kbd>. Excel угадает шаблон. Это не формула, поэтому при изменении источника результат не обновляется.</p>
+
+<h2>Сводные таблицы и срезы</h2>
+<p>Сводная таблица заменяет большинство самодельных итоговых формул и обновляется одним щелчком. Добавьте срезы для интерактивных фильтров.</p>
+
+<h2>Проверка данных и условное форматирование</h2>
+<p>Выпадающие списки и правила, подсвечивающие проблемы (пустое обязательное поле, дата в прошлом, дубликат), предотвращают ошибки при вводе, так что потом меньше надо чистить.</p>
+
+<h2>Office Scripts и Power Automate</h2>
+<p>Для Excel в вебе сценарии Office Scripts (TypeScript) автоматизируют правки, а Power Automate может запускать их по расписанию или при поступлении файла. Это более близкая замена VBA в облачном процессе.</p>
+
+<h2>Надстройки для повторяющихся мелочей</h2>
+<p>Небольшие операции, которые встречаются во многих файлах, – обрезка текста, преобразование текста в числа, подсветка дубликатов или экспорт в другой формат – удобно вынести в надстройку с кнопкой на ленте. См. <a href="best-free-excel-add-ins.html">бесплатные надстройки</a>.</p>
+
+<h2>Когда VBA всё ещё уместен</h2>
+<p>Если нужны собственные диалоги, взаимодействие с другими настольными приложениями или логика, которая не укладывается в формулу или запрос, VBA остаётся прямым путём. Статьи про VBA из <a href="index.html">списка статей</a> могут помочь.</p>
+</div>
         </div>
     </div>
     <div class="footer">
         <p>Navferty &copy; 2021-<span id="current-year"></span> &bull; <a href="https://github.com/navferty/NavfertyExcelAddIn" target="_blank" rel="noopener" class="footer-link">Open Source on GitHub</a></p>
     </div>
-    <script>document.getElementById('current-year').textContent = new Date().getFullYear();</script>
+    <script src="article.js"></script>
 </body>
 
 </html>

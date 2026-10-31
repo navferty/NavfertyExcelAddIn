@@ -9,15 +9,16 @@
     <link rel="stylesheet" href="../style.css" />
 </head>
 
-<body>
+<body data-title-en="VBA debugging techniques in Excel (Russian) - Navferty's Excel Add-In" data-title-ru="Приёмы отладки VBA-кода на примере MS Excel - Надстройка Navferty Excel Add-In" data-desc-ru="Практические способы найти ошибки в VBA-коде на примерах из Excel.">
     <div id="container">
         <div class="top_nav">
-            <div id="head_name">Navferty's Excel Add-In</div>
-            <div onclick="location.href='../index.html';">Home</div>
-            <div onclick="location.href='index.html';">Articles</div>
+            <div id="head_name"><a href="../index.html">Navferty's Excel Add-In</a></div>
+            <div onclick="setUserLanguage('ru');">Russian</div>
+            <div onclick="setUserLanguage('en');">English</div>
         </div>
 
         <div id="content" class="article">
+<div class="lang-en">
 <p class="back-to-top"><a href="index.html">&larr; All articles</a></p>
 <h1 class="zag">VBA debugging techniques in Excel (Russian)</h1>
 <p class="subtitle">Practical ways to find bugs in VBA code, with examples from Excel. Original article in Russian.</p>
@@ -35,13 +36,32 @@
 <li><b>Error handling</b> with <code>On Error GoTo</code>, and <code>Err.Number</code> and <code>Err.Description</code> in the handler, so that the macro reports the real reason.</li>
 <li>Turn off <code>Application.ScreenUpdating</code> and set calculation to manual in production code, and make sure they are restored on any exit path, including errors.</li>
 </ul>
+</div>
+<div class="lang-ru" hidden>
+<p class="back-to-top"><a href="index.html">&larr; Все статьи</a></p>
+<h1 class="zag">Приёмы отладки VBA-кода на примере MS Excel</h1>
+<p class="subtitle">Практические способы найти ошибки в VBA-коде на примерах из Excel.</p>
+<p>Макрос, который падает с «Run-time error 1004», сам по себе мало что объясняет. В редакторе VBA есть всё необходимое, чтобы выяснить причину.</p>
+<p>Статья автора на Pikabu собирает приёмы отладки с примерами из Excel:</p>
+<p><a href="https://pikabu.ru/story/priyomyi_otladki_vbakoda_na_primere_ms_excel_7151540" target="_blank" rel="noopener">Приёмы отладки VBA-кода на примере MS Excel</a> (Pikabu)</p>
 
+<h2>Краткий обзор</h2>
+<ul>
+<li><b>Option Explicit</b> в начале каждого модуля превращает опечатку в имени переменной в ошибку компиляции.</li>
+<li><b>Точки останова</b> (<kbd>F9</kbd>) и пошаговое выполнение (<kbd>F8</kbd> – с заходом, <kbd>Shift</kbd>+<kbd>F8</kbd> – с обходом) позволяют смотреть, как код выполняется построчно.</li>
+<li>Окна <b>Locals</b> и <b>Watch</b> показывают значения переменных. Наблюдение может остановить выполнение, когда условие станет истинным.</li>
+<li><b>Окно Immediate</b> (<kbd>Ctrl</kbd>+<kbd>G</kbd>) вычисляет выражения и запускает процедуры. <code>Debug.Print</code> пишет в него.</li>
+<li><b>Run to Cursor</b> и <b>Set Next Statement</b> позволяют пропустить или повторить код при отладке.</li>
+<li><b>Обработка ошибок</b> через <code>On Error GoTo</code> и <code>Err.Number</code> с <code>Err.Description</code> в обработчике, чтобы макрос сообщал реальную причину.</li>
+<li>В рабочем коде отключайте <code>Application.ScreenUpdating</code> и ставьте ручной расчёт, но следите, чтобы они восстанавливались при любом выходе, в том числе при ошибке.</li>
+</ul>
+</div>
         </div>
     </div>
     <div class="footer">
         <p>Navferty &copy; 2021-<span id="current-year"></span> &bull; <a href="https://github.com/navferty/NavfertyExcelAddIn" target="_blank" rel="noopener" class="footer-link">Open Source on GitHub</a></p>
     </div>
-    <script>document.getElementById('current-year').textContent = new Date().getFullYear();</script>
+    <script src="article.js"></script>
 </body>
 
 </html>

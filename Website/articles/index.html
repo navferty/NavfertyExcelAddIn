@@ -4,20 +4,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Articles about Excel tips, data cleaning and the Navferty Excel Add-In.">
+    <meta name="description" content="Tips for everyday Excel problems, data cleaning and the Navferty Excel Add-In.">
     <title>Articles - Navferty's Excel Add-In</title>
     <link rel="stylesheet" href="../style.css" />
 </head>
 
-<body>
+<body data-title-en="Articles - Navferty's Excel Add-In" data-title-ru="Статьи - Надстройка Navferty Excel Add-In" data-desc-ru="Советы по повседневным проблемам в Excel, очистке данных и надстройке Navferty.">
     <div id="container">
         <div class="top_nav">
-            <div id="head_name">Navferty's Excel Add-In</div>
-            <div onclick="location.href='../index.html';">Home</div>
-            <div onclick="location.href='index.html';">Articles</div>
+            <div id="head_name"><a href="../index.html">Navferty's Excel Add-In</a></div>
+            <div onclick="setUserLanguage('ru');">Russian</div>
+            <div onclick="setUserLanguage('en');">English</div>
         </div>
 
         <div id="content" class="article">
+<div class="lang-en">
 <h1 class="zag">Articles</h1>
 <p class="subtitle">Tips for everyday Excel problems: what goes wrong, how to fix it with built-in features, and where the add-in can save some clicks.</p>
 <h2>Using the add-in and Excel's built-in tools</h2>
@@ -43,19 +44,54 @@
 <li><a href="preparing-excel-reports-for-management.html">Preparing Excel reports for management</a><br><span>How to make a workbook that the reader understands in a minute.</span></li>
 <li><a href="best-free-excel-add-ins.html">Best free Excel add-ins</a><br><span>A short list of free add-ins that are worth installing, and what each is good at.</span></li>
 </ul>
-<h2>VBA (articles in Russian)</h2>
+<h2>VBA</h2>
 <ul class="article-list">
 <li><a href="vba-addin-with-custom-ribbon-tab.html">Creating a VBA add-in with its own ribbon tab (Russian)</a><br><span>A tutorial on packaging macros into an .xlam add-in with a custom Excel ribbon tab. Original article in Russian.</span></li>
 <li><a href="currency-rates-from-cbr-vba.html">Currency exchange rates from the Bank of Russia in VBA with auto-refresh (Russian)</a><br><span>A VBA example: loading currency rates from the CBR website into Excel and refreshing them automatically. Original article in Russian.</span></li>
 <li><a href="debugging-vba-code-in-excel.html">VBA debugging techniques in Excel (Russian)</a><br><span>Practical ways to find bugs in VBA code, with examples from Excel. Original article in Russian.</span></li>
 </ul>
 
+</div>
+<div class="lang-ru" hidden>
+<h1 class="zag">Статьи</h1>
+<p class="subtitle">Советы по повседневным проблемам в Excel: что идёт не так, как исправить это встроенными средствами и где надстройка сэкономит несколько кликов.</p>
+<h2>Надстройка и встроенные средства Excel</h2>
+<ul class="article-list">
+<li><a href="find-all-errors-in-excel.html">Как найти все ошибки в Excel (#ЗНАЧ!, #ССЫЛКА!, #ДЕЛ/0!)</a><br><span>Способы найти все ошибки в формулах на листе и что означает каждая из них.</span></li>
+<li><a href="text-numbers-to-numeric-values.html">Преобразование чисел-как-текст в числа</a><br><span>Почему числа в Excel становятся текстом и несколько способов вернуть им числовой тип.</span></li>
+<li><a href="remove-extra-spaces-in-excel.html">Как убрать лишние пробелы в Excel</a><br><span>СЖПРОБЕЛЫ, неразрывные пробелы и переносы строк: как правильно очистить текстовые ячейки.</span></li>
+<li><a href="highlight-duplicate-values-in-excel.html">Подсветка дубликатов в Excel без формул</a><br><span>Условное форматирование, удаление дубликатов и что делать, если нужно видеть, какие строки совпадают.</span></li>
+<li><a href="remove-protection-from-all-sheets.html">Снятие защиты со всех листов сразу</a><br><span>Что на самом деле защищают защита листа и книги и как быстро снять защиту со многих листов.</span></li>
+<li><a href="export-excel-data-to-sqlite.html">Экспорт данных из Excel в SQLite</a><br><span>Когда таблицы уже недостаточно, SQLite даёт полноценные запросы в одном файле.</span></li>
+<li><a href="validate-xml-against-xsd-in-excel.html">Проверка XML по XSD-схеме в Excel</a><br><span>Как проверить XML-файл на соответствие схеме и прочитать ошибки в виде таблицы.</span></li>
+</ul>
+<h2>Общие темы по Excel</h2>
+<ul class="article-list">
+<li><a href="common-excel-mistakes.html">Типичные ошибки в Excel и как их исправить</a><br><span>Проблемы, которые снова и снова встречаются в реальных книгах, и способ избежать каждой.</span></li>
+<li><a href="prepare-excel-files-for-import.html">Подготовка файлов Excel к импорту в 1С, Power BI и SQL</a><br><span>Что инструменты импорта ждут от таблицы и как привести файл в нужный вид.</span></li>
+<li><a href="speed-up-large-excel-workbooks.html">Как ускорить большие книги Excel</a><br><span>Почему книга тормозит и что менять в первую очередь.</span></li>
+<li><a href="best-practices-for-cleaning-data-in-excel.html">Лучшие практики очистки данных в Excel</a><br><span>Повторяемая последовательность шагов, чтобы превратить грязную выгрузку в таблицу, на которую можно положиться.</span></li>
+<li><a href="automating-excel-tasks-without-vba.html">Автоматизация рутины в Excel без VBA</a><br><span>Таблицы, Power Query, мгновенное заполнение, динамические массивы и другие встроенные инструменты, заменяющие большинство простых макросов.</span></li>
+<li><a href="csv-files-without-encoding-issues.html">Работа с CSV-файлами без проблем с кодировкой</a><br><span>Почему кириллица и символы с диакритикой превращаются в «кракозябры» и как правильно открывать и сохранять CSV.</span></li>
+<li><a href="checklist-validating-excel-files.html">Чек-лист проверки файла Excel перед отправкой</a><br><span>Короткий список проверок, которые стоит выполнить, прежде чем книга уйдёт с вашего компьютера.</span></li>
+<li><a href="beginners-guide-to-excel-formulas.html">Формулы Excel для начинающих</a><br><span>Основы написания формул и функции, которыми большинство людей пользуется каждую неделю.</span></li>
+<li><a href="preparing-excel-reports-for-management.html">Подготовка отчётов Excel для руководства</a><br><span>Как сделать книгу, которую читатель поймёт за минуту.</span></li>
+<li><a href="best-free-excel-add-ins.html">Лучшие бесплатные надстройки для Excel</a><br><span>Короткий список бесплатных надстроек, которые стоит установить, и для чего каждая хороша.</span></li>
+</ul>
+<h2>VBA</h2>
+<ul class="article-list">
+<li><a href="vba-addin-with-custom-ribbon-tab.html">Создание VBA-надстройки с отдельной вкладкой в Excel</a><br><span>Руководство по упаковке макросов в надстройку .xlam с собственной вкладкой на ленте Excel.</span></li>
+<li><a href="currency-rates-from-cbr-vba.html">Курсы валют с сайта ЦБ на VBA с автообновлением</a><br><span>Пример на VBA: загрузка курсов валют с сайта Банка России в Excel и их автоматическое обновление.</span></li>
+<li><a href="debugging-vba-code-in-excel.html">Приёмы отладки VBA-кода на примере MS Excel</a><br><span>Практические способы найти ошибки в VBA-коде на примерах из Excel.</span></li>
+</ul>
+
+</div>
         </div>
     </div>
     <div class="footer">
         <p>Navferty &copy; 2021-<span id="current-year"></span> &bull; <a href="https://github.com/navferty/NavfertyExcelAddIn" target="_blank" rel="noopener" class="footer-link">Open Source on GitHub</a></p>
     </div>
-    <script>document.getElementById('current-year').textContent = new Date().getFullYear();</script>
+    <script src="article.js"></script>
 </body>
 
 </html>

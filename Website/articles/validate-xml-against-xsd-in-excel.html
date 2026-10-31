@@ -9,15 +9,16 @@
     <link rel="stylesheet" href="../style.css" />
 </head>
 
-<body>
+<body data-title-en="Validating XML against XSD inside Excel - Navferty's Excel Add-In" data-title-ru="Проверка XML по XSD-схеме в Excel - Надстройка Navferty Excel Add-In" data-desc-ru="Как проверить XML-файл на соответствие схеме и прочитать ошибки в виде таблицы.">
     <div id="container">
         <div class="top_nav">
-            <div id="head_name">Navferty's Excel Add-In</div>
-            <div onclick="location.href='../index.html';">Home</div>
-            <div onclick="location.href='index.html';">Articles</div>
+            <div id="head_name"><a href="../index.html">Navferty's Excel Add-In</a></div>
+            <div onclick="setUserLanguage('ru');">Russian</div>
+            <div onclick="setUserLanguage('en');">English</div>
         </div>
 
         <div id="content" class="article">
+<div class="lang-en">
 <p class="back-to-top"><a href="index.html">&larr; All articles</a></p>
 <h1 class="zag">Validating XML against XSD inside Excel</h1>
 <p class="subtitle">How to check an XML file against its schema and read the errors as a table.</p>
@@ -48,13 +49,45 @@
 
 <h2>Reading the messages</h2>
 <p>Messages mention the element name and the expected alternatives. Fix the first error first: later messages are often consequences of the first one, for example a missing element makes everything after it look out of order.</p>
+</div>
+<div class="lang-ru" hidden>
+<p class="back-to-top"><a href="index.html">&larr; Все статьи</a></p>
+<h1 class="zag">Проверка XML по XSD-схеме в Excel</h1>
+<p class="subtitle">Как проверить XML-файл на соответствие схеме и прочитать ошибки в виде таблицы.</p>
+<p>Многие системы обмениваются данными в XML: налоговая и таможенная отчётность, банковские выписки, электронные счета, товарные фиды. Часто XML формируется из таблицы Excel скриптом или конвертером, а принимающая система отклоняет его с сообщением вроде «файл не соответствует схеме», не указывая, где ошибка.</p>
 
+<h2>Что такое XSD</h2>
+<p>XSD (XML Schema) описывает, какие элементы допустимы, в каком порядке, какие обязательны и какой тип у каждого значения. Валидация – проверка XML-файла по этим правилам. Файл может быть well-formed (теги записаны верно) и всё равно невалидным (пропущен обязательный элемент или в поле даты стоит текст).</p>
+
+<h2>Типичные проблемы</h2>
+<ul>
+<li>Обязательный элемент отсутствует или стоит не на своём месте. В <code>xs:sequence</code> порядок важен.</li>
+<li>Значение не соответствует типу: <code>-5</code> для <code>positiveInteger</code>, <code>12.03.2024</code> там, где <code>xs:date</code> ожидает <code>2024-03-12</code>.</li>
+<li>Десятичная запятая вместо точки.</li>
+<li>Строки длиннее <code>maxLength</code> или не подходящие под <code>pattern</code> (например, ИНН неверной длины).</li>
+<li>Символы <code>&lt;</code> и <code>&amp;</code>, не экранированные при записи XML.</li>
+</ul>
+
+<h2>Другие способы проверки</h2>
+<ul>
+<li><code>xmllint --noout --schema schema.xsd file.xml</code> на Linux и macOS, доступно и для Windows.</li>
+<li>Редакторы с поддержкой схем: Visual Studio Code с XML-расширением, Oxygen или Notepad++ с плагином XML Tools.</li>
+<li>Собственные карты XML в Excel (<b>Разработчик → Источник</b>) умеют импортировать XSD и сопоставлять его с ячейками. Для вложенных и повторяющихся структур возможности ограничены.</li>
+</ul>
+
+<h2>С надстройкой</h2>
+<p>Команда <b>Проверить XML по XSD</b> (Validate XML with XSD) принимает XML-файл и XSD-файл и создаёт новую книгу, где одна строка соответствует одной проблеме: серьёзность, элемент и сообщение. Это обычный лист, его можно отфильтровать, отсортировать и отправить тому, кто подготовил данные.</p>
+<p>Если у вас есть только схема и нужно понять, как выглядит корректный файл, команда <b>Создать пример XML по XSD</b> сформирует образец. А для проверок до создания XML есть <b>Проверка значений</b>: она проверяет, что в ячейках числа, даты, корректные ИНН или текст без символов, ломающих XML.</p>
+
+<h2>Как читать сообщения</h2>
+<p>В сообщениях указаны имя элемента и ожидаемые варианты. Исправляйте сначала первую ошибку: следующие часто являются её следствием, например пропущенный элемент делает всё после него «не в порядке».</p>
+</div>
         </div>
     </div>
     <div class="footer">
         <p>Navferty &copy; 2021-<span id="current-year"></span> &bull; <a href="https://github.com/navferty/NavfertyExcelAddIn" target="_blank" rel="noopener" class="footer-link">Open Source on GitHub</a></p>
     </div>
-    <script>document.getElementById('current-year').textContent = new Date().getFullYear();</script>
+    <script src="article.js"></script>
 </body>
 
 </html>

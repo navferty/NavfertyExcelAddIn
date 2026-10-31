@@ -9,15 +9,16 @@
     <link rel="stylesheet" href="../style.css" />
 </head>
 
-<body>
+<body data-title-en="Best practices for cleaning data in Excel - Navferty's Excel Add-In" data-title-ru="Лучшие практики очистки данных в Excel - Надстройка Navferty Excel Add-In" data-desc-ru="Повторяемая последовательность шагов, чтобы превратить грязную выгрузку в таблицу, на которую можно положиться.">
     <div id="container">
         <div class="top_nav">
-            <div id="head_name">Navferty's Excel Add-In</div>
-            <div onclick="location.href='../index.html';">Home</div>
-            <div onclick="location.href='index.html';">Articles</div>
+            <div id="head_name"><a href="../index.html">Navferty's Excel Add-In</a></div>
+            <div onclick="setUserLanguage('ru');">Russian</div>
+            <div onclick="setUserLanguage('en');">English</div>
         </div>
 
         <div id="content" class="article">
+<div class="lang-en">
 <p class="back-to-top"><a href="index.html">&larr; All articles</a></p>
 <h1 class="zag">Best practices for cleaning data in Excel</h1>
 <p class="subtitle">A repeatable order of steps for turning a messy export into a table you can rely on.</p>
@@ -70,13 +71,67 @@
 
 <h2>Write down what you did</h2>
 <p>A small “Notes” sheet with the steps will save you the next time the same file arrives, and lets a colleague trust the result.</p>
+</div>
+<div class="lang-ru" hidden>
+<p class="back-to-top"><a href="index.html">&larr; Все статьи</a></p>
+<h1 class="zag">Лучшие практики очистки данных в Excel</h1>
+<p class="subtitle">Повторяемая последовательность шагов, чтобы превратить грязную выгрузку в таблицу, на которую можно положиться.</p>
+<p>Очистка данных идёт быстрее и с меньшим числом ошибок, если выполнять её всегда в одном порядке и не трогать оригинал.</p>
 
+<h2>1. Сохраните оригинал</h2>
+<p>Скопируйте исходные данные на лист <code>raw</code> и никогда не редактируйте его. Работайте с копией или, лучше, используйте Power Query, чтобы шаги записывались и их можно было повторить на файле следующего месяца.</p>
+
+<h2>2. Посмотрите на данные, прежде чем менять их</h2>
+<ul>
+<li>Включите фильтры и просмотрите уникальные значения каждого столбца. Опечатки и варианты одной категории видны за секунды.</li>
+<li>Отсортируйте столбец по возрастанию и по убыванию: пустые ячейки, текст среди чисел и неожиданные экстремумы окажутся по краям.</li>
+<li>Запишите число строк и итоги, чтобы сравнить после очистки.</li>
+</ul>
+
+<h2>3. Исправьте структуру</h2>
+<ul>
+<li>Уберите строки заголовков, примечания и строки итогов внутри данных.</li>
+<li>Разъедините ячейки и заполните пустые. <b>Выделить группу ячеек → Пустые ячейки</b>, введите <code>=</code> и ссылку на ячейку выше, затем <kbd>Ctrl</kbd>+<kbd>Enter</kbd> заполнит вниз.</li>
+<li>Одна строка заголовков, уникальные имена столбцов.</li>
+</ul>
+
+<h2>4. Исправьте текст</h2>
+<ul>
+<li>Уберите лишние пробелы и непечатаемые символы (<a href="remove-extra-spaces-in-excel.html">подробнее</a>).</li>
+<li>Приведите регистр с помощью <code>ПРОПИСН</code>, <code>СТРОЧН</code>, <code>ПРОПНАЧ</code>. <code>ПРОПНАЧ</code> портит фамилии вроде <code>McDonald</code> и аббревиатуры, поэтому проверяйте результат.</li>
+<li>Ищите похожие буквы. Латинская <code>A</code> и кириллическая <code>А</code> – разные символы, и код, в котором они смешаны, ни с чем не совпадёт. Это обычное дело в русскоязычных данных с кодами и госномерами.</li>
+<li>Разделяйте составные поля через <b>Текст по столбцам</b> или <b>Мгновенное заполнение</b> (<kbd>Ctrl</kbd>+<kbd>E</kbd>). Проверяйте результат мгновенного заполнения: оно угадывает шаблон.</li>
+</ul>
+
+<h2>5. Исправьте типы</h2>
+<ul>
+<li>Преобразуйте числа и даты, записанные текстом, в настоящие (<a href="text-numbers-to-numeric-values.html">подробнее</a>).</li>
+<li>Идентификаторы с ведущими нулями оставляйте текстом.</li>
+<li>Используйте проверку данных со списками в столбцах, где значения вводят вручную.</li>
+</ul>
+
+<h2>6. Разберитесь с дубликатами и пропусками</h2>
+<ul>
+<li>Посмотрите на дубликаты, прежде чем удалять (<a href="highlight-duplicate-values-in-excel.html">подробнее</a>). Две строки с одним ключом могут быть разными записями.</li>
+<li>Решите для каждого столбца, что означает пустое значение: ноль, неизвестно или не применимо. Не заполняйте нулями вслепую, это меняет средние.</li>
+</ul>
+
+<h2>7. Проверьте результат</h2>
+<ul>
+<li>Сравните число строк и итоги с оригиналом.</li>
+<li>Проверьте ошибки в формулах (<a href="find-all-errors-in-excel.html">подробнее</a>).</li>
+<li>Сверьте несколько строк вручную с исходной системой.</li>
+</ul>
+
+<h2>Запишите, что вы сделали</h2>
+<p>Небольшой лист «Заметки» с шагами сэкономит время, когда придёт такой же файл, и позволит коллеге доверять результату.</p>
+</div>
         </div>
     </div>
     <div class="footer">
         <p>Navferty &copy; 2021-<span id="current-year"></span> &bull; <a href="https://github.com/navferty/NavfertyExcelAddIn" target="_blank" rel="noopener" class="footer-link">Open Source on GitHub</a></p>
     </div>
-    <script>document.getElementById('current-year').textContent = new Date().getFullYear();</script>
+    <script src="article.js"></script>
 </body>
 
 </html>

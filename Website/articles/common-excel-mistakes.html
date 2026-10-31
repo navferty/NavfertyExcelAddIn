@@ -9,15 +9,16 @@
     <link rel="stylesheet" href="../style.css" />
 </head>
 
-<body>
+<body data-title-en="Common Excel mistakes and how to fix them - Navferty's Excel Add-In" data-title-ru="Типичные ошибки в Excel и как их исправить - Надстройка Navferty Excel Add-In" data-desc-ru="Проблемы, которые снова и снова встречаются в реальных книгах, и способ избежать каждой.">
     <div id="container">
         <div class="top_nav">
-            <div id="head_name">Navferty's Excel Add-In</div>
-            <div onclick="location.href='../index.html';">Home</div>
-            <div onclick="location.href='index.html';">Articles</div>
+            <div id="head_name"><a href="../index.html">Navferty's Excel Add-In</a></div>
+            <div onclick="setUserLanguage('ru');">Russian</div>
+            <div onclick="setUserLanguage('en');">English</div>
         </div>
 
         <div id="content" class="article">
+<div class="lang-en">
 <p class="back-to-top"><a href="index.html">&larr; All articles</a></p>
 <h1 class="zag">Common Excel mistakes and how to fix them</h1>
 <p class="subtitle">Problems that show up again and again in real workbooks, with a way to avoid each one.</p>
@@ -52,13 +53,49 @@
 
 <h2>No second pair of eyes</h2>
 <p>A few cheap checks catch a surprising amount: totals compared with an independent calculation, a count of rows before and after, and <b>Formulas → Show Formulas</b> (<kbd>Ctrl</kbd>+<kbd>`</kbd>) to look for a cell where a formula was replaced by a number. See also the <a href="checklist-validating-excel-files.html">pre-send checklist</a>.</p>
+</div>
+<div class="lang-ru" hidden>
+<p class="back-to-top"><a href="index.html">&larr; Все статьи</a></p>
+<h1 class="zag">Типичные ошибки в Excel и как их исправить</h1>
+<p class="subtitle">Проблемы, которые снова и снова встречаются в реальных книгах, и способ избежать каждой.</p>
+<p>Большинство ошибок в таблицах несложные. Они возникают из нескольких привычек, которые легко поменять.</p>
 
+<h2>Числа, сохранённые как текст</h2>
+<p>Итоги, которые не сходятся, и поиск, который не находит, часто связаны с числами в текстовом формате. Способы исправления – в статье <a href="text-numbers-to-numeric-values.html">преобразование текста в числа</a>.</p>
+
+<h2>Числа, вбитые прямо в формулы</h2>
+<p><code>=B2*1,2</code> работает, пока не изменится ставка налога и вам не придётся искать все места, где набрано 1,2. Вынесите ставку в подписанную ячейку и ссылайтесь на неё: <code>=B2*$F$1</code>. Дайте ячейке имя (<b>Формулы → Присвоить имя</b>), и формула станет читаться как <code>=B2*НДС</code>.</p>
+
+<h2>Перепутанные относительные и абсолютные ссылки</h2>
+<p>Если формула, скопированная вниз, даёт странные результаты, проверьте знаки доллара. <code>$A$1</code> не двигается никогда, <code>A$1</code> фиксирует строку, <code>$A1</code> – столбец. При редактировании <kbd>F4</kbd> переключает эти варианты по кругу.</p>
+
+<h2>Диапазоны, не охватывающие новые строки</h2>
+<p><code>=СУММ(B2:B100)</code> молча пропустит строку 101. Преобразуйте данные в таблицу (<kbd>Ctrl</kbd>+<kbd>T</kbd>) и используйте структурированные ссылки вида <code>=СУММ(Продажи[Сумма])</code>, они растут вместе с данными.</p>
+
+<h2>Объединённые ячейки в области данных</h2>
+<p>Объединённые ячейки ломают сортировку, фильтры, сводные таблицы и копирование. Для визуального эффекта используйте <b>По центру выделения</b> (<b>Формат ячеек → Выравнивание → По горизонтали</b>). Если вам досталась таблица с объединениями, разъедините ячейки и заполните каждую исходным значением.</p>
+
+<h2>Даты, которые на самом деле текст</h2>
+<p>Если <code>01.02.2024</code> не сортируется и не участвует в расчётах, это текст или дата, прочитанная с другим порядком дня и месяца. Проверьте через <code>=ЕЧИСЛО(A1)</code>. Преобразуйте через <code>ДАТА</code>, <code>ДАТАЗНАЧ</code> или «Текст по столбцам» с явно заданным форматом даты.</p>
+
+<h2>Приблизительное совпадение в поиске</h2>
+<p><code>ВПР(x; диапазон; 2)</code> без последнего аргумента по умолчанию использует приблизительное совпадение и требует отсортированных данных. Вместо ошибки она может вернуть неправильное значение. Всегда пишите <code>ЛОЖЬ</code> (или используйте <code>ПРОСМОТРX</code>, где по умолчанию точное совпадение).</p>
+
+<h2>Скрытые строки, столбцы и листы</h2>
+<p><code>СУММ</code> учитывает скрытые строки, <code>ПРОМЕЖУТОЧНЫЕ.ИТОГИ(109; ...)</code> – нет. С отфильтрованными строками то же самое: выбирайте функцию под то, что имеете в виду. Перед отправкой файла проверьте <b>Файл → Сведения → Поиск проблем → Инспектор документов</b> или щёлкните правой кнопкой по ярлыку листа и посмотрите, активно ли <b>Показать</b>.</p>
+
+<h2>Формулы, замещённые значениями, и обратно</h2>
+<p>«Специальная вставка → Значения» разрывает связь с исходными ячейками. Иногда это нужно, но отчёт, где половина цифр «заморожена», – ловушка. Выделяйте входные данные другим цветом, чем формулы, и храните отдельный лист с исходными данными, которые вы не трогаете.</p>
+
+<h2>Нет второй пары глаз</h2>
+<p>Несколько дешёвых проверок ловят удивительно много: итоги, сверенные с независимым расчётом, число строк до и после, а также <b>Формулы → Показать формулы</b> (<kbd>Ctrl</kbd>+<kbd>`</kbd>), чтобы найти ячейку, где формулу заменили числом. См. также <a href="checklist-validating-excel-files.html">чек-лист перед отправкой</a>.</p>
+</div>
         </div>
     </div>
     <div class="footer">
         <p>Navferty &copy; 2021-<span id="current-year"></span> &bull; <a href="https://github.com/navferty/NavfertyExcelAddIn" target="_blank" rel="noopener" class="footer-link">Open Source on GitHub</a></p>
     </div>
-    <script>document.getElementById('current-year').textContent = new Date().getFullYear();</script>
+    <script src="article.js"></script>
 </body>
 
 </html>

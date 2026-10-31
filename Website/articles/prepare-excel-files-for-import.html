@@ -9,15 +9,16 @@
     <link rel="stylesheet" href="../style.css" />
 </head>
 
-<body>
+<body data-title-en="Preparing Excel files for import into 1C, Power BI and SQL - Navferty's Excel Add-In" data-title-ru="Подготовка файлов Excel к импорту в 1С, Power BI и SQL - Надстройка Navferty Excel Add-In" data-desc-ru="Что инструменты импорта ждут от таблицы и как привести файл в нужный вид.">
     <div id="container">
         <div class="top_nav">
-            <div id="head_name">Navferty's Excel Add-In</div>
-            <div onclick="location.href='../index.html';">Home</div>
-            <div onclick="location.href='index.html';">Articles</div>
+            <div id="head_name"><a href="../index.html">Navferty's Excel Add-In</a></div>
+            <div onclick="setUserLanguage('ru');">Russian</div>
+            <div onclick="setUserLanguage('en');">English</div>
         </div>
 
         <div id="content" class="article">
+<div class="lang-en">
 <p class="back-to-top"><a href="index.html">&larr; All articles</a></p>
 <h1 class="zag">Preparing Excel files for import into 1C, Power BI and SQL</h1>
 <p class="subtitle">What import tools expect from a spreadsheet and how to get the file into that shape.</p>
@@ -63,13 +64,60 @@
 
 <h2>A dry run</h2>
 <p>Import ten rows first. It is much faster to diagnose a problem on ten rows than on fifty thousand.</p>
+</div>
+<div class="lang-ru" hidden>
+<p class="back-to-top"><a href="index.html">&larr; Все статьи</a></p>
+<h1 class="zag">Подготовка файлов Excel к импорту в 1С, Power BI и SQL</h1>
+<p class="subtitle">Что инструменты импорта ждут от таблицы и как привести файл в нужный вид.</p>
+<p>Инструменты импорта строги там, где люди снисходительны. Человек видит заголовок, объединённую шапку и строку итогов и понимает таблицу. Загрузчик видит кашу. Большинство сбоев импорта сводится к нескольким одинаковым причинам.</p>
 
+<h2>Форма таблицы</h2>
+<ul>
+<li>Одна строка заголовков непосредственно над данными. Над ней нет блока заголовка, либо вы знаете, сколько строк пропустить.</li>
+<li>Без объединённых ячеек. Заполните повторяющиеся значения.</li>
+<li>Без строк промежуточных и общих итогов внутри данных.</li>
+<li>Без пустых строк и столбцов посередине.</li>
+<li>Одна таблица на лист.</li>
+</ul>
+
+<h2>Названия столбцов</h2>
+<ul>
+<li>Уникальные, непустые, короткие. Одинаковые названия получают суффиксы или вызывают ошибку.</li>
+<li>Для SQL избегайте пробелов, знаков препинания и цифры в начале. С <code>order_date</code> проще работать, чем с <code>Дата заказа (UTC)</code>.</li>
+<li>Не переименовывайте столбцы от выгрузки к выгрузке. Многие загрузчики сопоставляют по именам.</li>
+</ul>
+
+<h2>Типы</h2>
+<ul>
+<li>У каждого столбца один тип. Единственный <code>-</code> или «н/д» в числовом столбце превращает весь столбец в текст в Power Query или при автоопределении типов.</li>
+<li>Числа – настоящие числа, а не текст с пробелами. Даты – настоящие даты. См. <a href="text-numbers-to-numeric-values.html">числа-как-текст</a> и <a href="remove-extra-spaces-in-excel.html">лишние пробелы</a>.</li>
+<li>Идентификаторы с ведущими нулями (коды, индексы, телефоны) – текст, и текстом остаются.</li>
+<li>Десятичный разделитель должен соответствовать локали целевой системы, либо используйте однозначный формат.</li>
+<li>Для всего, что идёт в базу данных, используйте даты в формате ISO (<code>2024-03-12</code>). Порядок «день/месяц» – самый частый источник тихих ошибок.</li>
+</ul>
+
+<h2>Значения</h2>
+<ul>
+<li>Формулы в Excel – это нормально, но некоторые загрузчики читают кэшированное значение, а некоторые – текст формулы. Если сомневаетесь, вставьте значения на чистый лист.</li>
+<li>Уберите пробелы в начале и конце и неразрывные пробелы из ключей.</li>
+<li>Перед импортом проверьте наличие ошибок (<code>#Н/Д</code>, <code>#ССЫЛКА!</code>): загрузчик может остановиться или загрузить их как текст. См. <a href="find-all-errors-in-excel.html">поиск ошибок</a>.</li>
+<li>Для импорта через XML убедитесь, что в тексте нет недопустимых в XML символов.</li>
+</ul>
+
+<h2>Особенности инструментов</h2>
+<p><b>Power BI / Power Query.</b> В качестве источника лучше использовать таблицу Excel (<kbd>Ctrl</kbd>+<kbd>T</kbd>) или именованный диапазон: он продолжит работать при добавлении строк. По возможности переименовывайте столбцы в источнике, а не в запросе.</p>
+<p><b>SQL.</b> Меньше всего проблем создаёт CSV в UTF-8 (см. <a href="csv-files-without-encoding-issues.html">CSV и кодировки</a>). Для SQLite есть вариант <a href="export-excel-data-to-sqlite.html">экспорта прямо из книги</a>.</p>
+<p><b>1С.</b> Типовые обработки загрузки ожидают фиксированный порядок столбцов и одну строку заголовков. Проверьте требуемый шаблон для вида документа, а также ИНН, коды и даты перед загрузкой. Неверный ИНН или дата-как-текст отклоняются построчно, и исправлять это после загрузки долго.</p>
+
+<h2>Пробный прогон</h2>
+<p>Сначала загрузите десять строк. Разобрать проблему на десяти строках гораздо быстрее, чем на пятидесяти тысячах.</p>
+</div>
         </div>
     </div>
     <div class="footer">
         <p>Navferty &copy; 2021-<span id="current-year"></span> &bull; <a href="https://github.com/navferty/NavfertyExcelAddIn" target="_blank" rel="noopener" class="footer-link">Open Source on GitHub</a></p>
     </div>
-    <script>document.getElementById('current-year').textContent = new Date().getFullYear();</script>
+    <script src="article.js"></script>
 </body>
 
 </html>

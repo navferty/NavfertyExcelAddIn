@@ -9,15 +9,16 @@
     <link rel="stylesheet" href="../style.css" />
 </head>
 
-<body>
+<body data-title-en="Creating a VBA add-in with its own ribbon tab (Russian) - Navferty's Excel Add-In" data-title-ru="Создание VBA-надстройки с отдельной вкладкой в Excel - Надстройка Navferty Excel Add-In" data-desc-ru="Руководство по упаковке макросов в надстройку .xlam с собственной вкладкой на ленте Excel.">
     <div id="container">
         <div class="top_nav">
-            <div id="head_name">Navferty's Excel Add-In</div>
-            <div onclick="location.href='../index.html';">Home</div>
-            <div onclick="location.href='index.html';">Articles</div>
+            <div id="head_name"><a href="../index.html">Navferty's Excel Add-In</a></div>
+            <div onclick="setUserLanguage('ru');">Russian</div>
+            <div onclick="setUserLanguage('en');">English</div>
         </div>
 
         <div id="content" class="article">
+<div class="lang-en">
 <p class="back-to-top"><a href="index.html">&larr; All articles</a></p>
 <h1 class="zag">Creating a VBA add-in with its own ribbon tab (Russian)</h1>
 <p class="subtitle">A tutorial on packaging macros into an .xlam add-in with a custom Excel ribbon tab. Original article in Russian.</p>
@@ -34,13 +35,31 @@
 <li>Load it with <b>File → Options → Add-ins → Go → Browse</b>.</li>
 </ol>
 <p>The Custom UI Editor for Microsoft Office is a free tool that helps with the XML part.</p>
+</div>
+<div class="lang-ru" hidden>
+<p class="back-to-top"><a href="index.html">&larr; Все статьи</a></p>
+<h1 class="zag">Создание VBA-надстройки с отдельной вкладкой в Excel</h1>
+<p class="subtitle">Руководство по упаковке макросов в надстройку .xlam с собственной вкладкой на ленте Excel.</p>
+<p>Макросы из одной книги недоступны в другой, а личную книгу макросов неудобно передавать. Надстройка <code>.xlam</code> решает это: она загружается вместе с Excel, её процедуры доступны везде, а собственная вкладка на ленте даёт им кнопки.</p>
+<p>Подробное пошаговое руководство автора на Pikabu описывает создание такой надстройки: от сохранения книги в <code>.xlam</code> до добавления отдельной вкладки через Custom UI XML:</p>
+<p><a href="https://pikabu.ru/story/tutorial_sozdanie_vbanadstroyki_s_otdelnoy_vkladkoy_v_ms_excel_7160405" target="_blank" rel="noopener">Туториал: создание VBA-надстройки с отдельной вкладкой в MS Excel</a> (Pikabu)</p>
 
+<h2>Вкратце</h2>
+<ol>
+<li>Напишите процедуры в обычной книге, в стандартном модуле.</li>
+<li>Сохраните как <b>Надстройка Excel (*.xlam)</b>.</li>
+<li>Добавьте в файл часть <code>customUI14.xml</code>, описывающую вкладку, группы и кнопки, с именем callback в <code>onAction</code> для каждой кнопки.</li>
+<li>В VBA напишите для каждого callback процедуру с совпадающим именем и сигнатурой: <code>Sub OnButtonClick(control As IRibbonControl)</code>.</li>
+<li>Подключите через <b>Файл → Параметры → Надстройки → Перейти → Обзор</b>.</li>
+</ol>
+<p>Бесплатная программа Custom UI Editor for Microsoft Office помогает с XML-частью.</p>
+</div>
         </div>
     </div>
     <div class="footer">
         <p>Navferty &copy; 2021-<span id="current-year"></span> &bull; <a href="https://github.com/navferty/NavfertyExcelAddIn" target="_blank" rel="noopener" class="footer-link">Open Source on GitHub</a></p>
     </div>
-    <script>document.getElementById('current-year').textContent = new Date().getFullYear();</script>
+    <script src="article.js"></script>
 </body>
 
 </html>

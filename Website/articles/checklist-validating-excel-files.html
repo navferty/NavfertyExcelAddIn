@@ -9,15 +9,16 @@
     <link rel="stylesheet" href="../style.css" />
 </head>
 
-<body>
+<body data-title-en="Checklist for validating Excel files before sending - Navferty's Excel Add-In" data-title-ru="Чек-лист проверки файла Excel перед отправкой - Надстройка Navferty Excel Add-In" data-desc-ru="Короткий список проверок, которые стоит выполнить, прежде чем книга уйдёт с вашего компьютера.">
     <div id="container">
         <div class="top_nav">
-            <div id="head_name">Navferty's Excel Add-In</div>
-            <div onclick="location.href='../index.html';">Home</div>
-            <div onclick="location.href='index.html';">Articles</div>
+            <div id="head_name"><a href="../index.html">Navferty's Excel Add-In</a></div>
+            <div onclick="setUserLanguage('ru');">Russian</div>
+            <div onclick="setUserLanguage('en');">English</div>
         </div>
 
         <div id="content" class="article">
+<div class="lang-en">
 <p class="back-to-top"><a href="index.html">&larr; All articles</a></p>
 <h1 class="zag">Checklist for validating Excel files before sending</h1>
 <p class="subtitle">A short list of checks to run on a workbook before it leaves your computer.</p>
@@ -73,13 +74,70 @@
 <li>If the recipient may use a different system, think about whether a PDF or CSV is a better format.</li>
 <li>If the file will be imported by a program, run it through the checks in <a href="prepare-excel-files-for-import.html">preparing files for import</a>.</li>
 </ul>
+</div>
+<div class="lang-ru" hidden>
+<p class="back-to-top"><a href="index.html">&larr; Все статьи</a></p>
+<h1 class="zag">Чек-лист проверки файла Excel перед отправкой</h1>
+<p class="subtitle">Короткий список проверок, которые стоит выполнить, прежде чем книга уйдёт с вашего компьютера.</p>
+<p>Большинство неловких ошибок в книгах обнаруживает получатель. Эти проверки занимают около десяти минут и покрывают самые частые из них.</p>
 
+<h2>Содержимое</h2>
+<ul>
+<li>Нигде нет значений-ошибок (<a href="find-all-errors-in-excel.html">как их найти</a>).</li>
+<li>Итоги совпадают с независимым числом: из исходной системы, сводной таблицы или быстрой оценки.</li>
+<li>Режим вычислений – Автоматический, и вы один раз нажали <kbd>F9</kbd>.</li>
+<li>Нет чисел-как-текст и лишних пробелов в ключах (<a href="text-numbers-to-numeric-values.html">числа-как-текст</a>, <a href="remove-extra-spaces-in-excel.html">пробелы</a>).</li>
+<li>Дубликаты в ключевых столбцах просмотрены.</li>
+<li>Даты верны: год, порядок дня и месяца, период, указанный в заголовке.</li>
+<li>Единицы измерения и валюта указаны рядом с числами.</li>
+<li>Орфография проверена (<kbd>F7</kbd>), включая названия листов и заголовки диаграмм.</li>
+</ul>
+
+<h2>Скрытое</h2>
+<ul>
+<li>Скрытые листы, строки и столбцы: хотите ли вы, чтобы получатель их увидел? Щёлкните правой кнопкой по ярлыку листа и посмотрите, активно ли <b>Показать</b>.</li>
+<li><b>Файл → Сведения → Поиск проблем → Инспектор документов</b> находит примечания, скрытое содержимое, свойства документа и личные данные.</li>
+<li>Примечания и заметки, предназначавшиеся только вам.</li>
+<li>Отслеживаемые изменения и старые версии в истории файла.</li>
+<li>Имя автора и путь в свойствах.</li>
+</ul>
+
+<h2>Ссылки и источники данных</h2>
+<ul>
+<li><b>Данные → Изменить связи</b>: книга со связями на файлы на вашем диске у получателя покажет предупреждение безопасности и отобразит старые значения. Разорвите связи или вставьте значения.</li>
+<li>Сводные таблицы обновлены.</li>
+<li>Если вы отправляете отчёт, подумайте, должны ли формулы, ссылающиеся на другие файлы, остаться формулами.</li>
+</ul>
+
+<h2>Конфиденциальные данные</h2>
+<ul>
+<li>Столбцы, не нужные получателю (зарплаты, персональные данные, маржа), удалены, а не просто скрыты.</li>
+<li>Если вы отправили файл с защитой листа, помните, что это не безопасность. Для чувствительных файлов используйте шифрование с паролем, а пароль передайте другим каналом.</li>
+<li>Кэши сводных таблиц могут содержать все исходные данные, даже если сводная показывает только итоги.</li>
+</ul>
+
+<h2>Оформление</h2>
+<ul>
+<li>Предварительный просмотр печати: ориентация страницы, масштаб, область печати, повторяющиеся строки заголовков.</li>
+<li>Активный лист, выделенная ячейка и позиция прокрутки – на первой ячейке первого листа (перед сохранением нажмите <kbd>Ctrl</kbd>+<kbd>Home</kbd> на каждом листе).</li>
+<li>Ширины столбцов достаточно, чтобы числа отображались без <code>####</code>.</li>
+<li>Закрепление областей в больших таблицах.</li>
+</ul>
+
+<h2>Файл</h2>
+<ul>
+<li>Имя файла говорит, что это и когда: <code>Продажи_2024-03_v2.xlsx</code>.</li>
+<li>Размер файла разумный (см. <a href="speed-up-large-excel-workbooks.html">ускорение книг</a>).</li>
+<li>Если у получателя может быть другая система, подумайте, не лучше ли отправить PDF или CSV.</li>
+<li>Если файл будет импортироваться программой, пройдите проверки из статьи <a href="prepare-excel-files-for-import.html">подготовка файлов к импорту</a>.</li>
+</ul>
+</div>
         </div>
     </div>
     <div class="footer">
         <p>Navferty &copy; 2021-<span id="current-year"></span> &bull; <a href="https://github.com/navferty/NavfertyExcelAddIn" target="_blank" rel="noopener" class="footer-link">Open Source on GitHub</a></p>
     </div>
-    <script>document.getElementById('current-year').textContent = new Date().getFullYear();</script>
+    <script src="article.js"></script>
 </body>
 
 </html>

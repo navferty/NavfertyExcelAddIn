@@ -9,15 +9,16 @@
     <link rel="stylesheet" href="../style.css" />
 </head>
 
-<body>
+<body data-title-en="Removing extra spaces in Excel - Navferty's Excel Add-In" data-title-ru="Как убрать лишние пробелы в Excel - Надстройка Navferty Excel Add-In" data-desc-ru="СЖПРОБЕЛЫ, неразрывные пробелы и переносы строк: как правильно очистить текстовые ячейки.">
     <div id="container">
         <div class="top_nav">
-            <div id="head_name">Navferty's Excel Add-In</div>
-            <div onclick="location.href='../index.html';">Home</div>
-            <div onclick="location.href='index.html';">Articles</div>
+            <div id="head_name"><a href="../index.html">Navferty's Excel Add-In</a></div>
+            <div onclick="setUserLanguage('ru');">Russian</div>
+            <div onclick="setUserLanguage('en');">English</div>
         </div>
 
         <div id="content" class="article">
+<div class="lang-en">
 <p class="back-to-top"><a href="index.html">&larr; All articles</a></p>
 <h1 class="zag">Removing extra spaces in Excel</h1>
 <p class="subtitle">TRIM, non-breaking spaces and line breaks: how to clean text cells properly.</p>
@@ -49,13 +50,46 @@
 
 <h2>With the add-in</h2>
 <p><b>Trim Spaces</b> works directly on the selected cells: it removes leading and trailing whitespace, line breaks and extra spaces without helper columns or pasting values back.</p>
+</div>
+<div class="lang-ru" hidden>
+<p class="back-to-top"><a href="index.html">&larr; Все статьи</a></p>
+<h1 class="zag">Как убрать лишние пробелы в Excel</h1>
+<p class="subtitle">СЖПРОБЕЛЫ, неразрывные пробелы и переносы строк: как правильно очистить текстовые ячейки.</p>
+<p>Лишние пробелы – классическая причина сбоев в поиске, необнаруженных дубликатов и отклонённых при импорте файлов. <code>"Иванов"</code> и <code>"Иванов "</code> выглядят одинаково, но Excel считает их разными значениями.</p>
 
+<h2>СЖПРОБЕЛЫ</h2>
+<p><code>=СЖПРОБЕЛЫ(A2)</code> убирает пробелы в начале и конце текста, а повторяющиеся пробелы между словами сводит к одному. Скопируйте формулы, затем вставьте их поверх исходного столбца через <b>Специальная вставка → Значения</b>.</p>
+
+<h2>Когда СЖПРОБЕЛЫ не помогает</h2>
+<p>Если значение всё ещё выглядит неправильно, в нём, скорее всего, не обычный пробел:</p>
+<ul>
+<li><b>Неразрывный пробел</b>, код символа 160. Встречается в тексте с веб-страниц и из некоторых систем. <code>СЖПРОБЕЛЫ</code> его игнорирует. Используйте <code>=СЖПРОБЕЛЫ(ПОДСТАВИТЬ(A2;СИМВОЛ(160);" "))</code>.</li>
+<li><b>Переносы строк</b>, коды 10 и 13. <code>=ПЕЧСИМВ(A2)</code> удаляет их (и другие непечатаемые символы до кода 31). Если вместо переноса нужен пробел, сначала примените <code>ПОДСТАВИТЬ(A2;СИМВОЛ(10);" ")</code>.</li>
+<li><b>Табуляция</b>, код 9. <code>ПЕЧСИМВ</code> удаляет и её.</li>
+</ul>
+<p>Чтобы выяснить, что именно в ячейке, используйте <code>=UNICODE(ПРАВСИМВ(A2;1))</code> или <code>=UNICODE(ЛЕВСИМВ(A2;1))</code>. Результат 160 означает неразрывный пробел.</p>
+
+<h2>Универсальная формула</h2>
+<pre>=СЖПРОБЕЛЫ(ПЕЧСИМВ(ПОДСТАВИТЬ(A2;СИМВОЛ(160);" ")))</pre>
+<p>Она покрывает большинство случаев в реальных данных.</p>
+
+<h2>Без формул</h2>
+<p><b>Найти и заменить</b> (<kbd>Ctrl</kbd>+<kbd>H</kbd>) может убрать все пробелы в выделении: в поле <b>Найти</b> поставьте пробел, поле <b>Заменить на</b> оставьте пустым. Это подходит для кодов и чисел вроде <code>1 234 567</code>, но слова тоже склеятся, так что для имён и адресов не применяйте.</p>
+<p>Чтобы ввести неразрывный пробел в поле поиска, удерживайте <kbd>Alt</kbd> и наберите <code>0160</code> на цифровой клавиатуре.</p>
+
+<h2>Проверка до и после</h2>
+<p>Сравните <code>=ДЛСТР(A2)</code> и <code>=ДЛСТР(СЖПРОБЕЛЫ(A2))</code>, чтобы посчитать, у скольких ячеек действительно есть проблема:</p>
+<pre>=СУММПРОИЗВ(--(ДЛСТР(A2:A1000)&lt;&gt;ДЛСТР(СЖПРОБЕЛЫ(A2:A1000))))</pre>
+
+<h2>С надстройкой</h2>
+<p>Команда <b>Удалить лишние пробелы</b> (Trim Spaces) работает прямо на выделенных ячейках: убирает пробельные символы в начале и конце, переносы строк и лишние пробелы без вспомогательных столбцов и обратной вставки значений.</p>
+</div>
         </div>
     </div>
     <div class="footer">
         <p>Navferty &copy; 2021-<span id="current-year"></span> &bull; <a href="https://github.com/navferty/NavfertyExcelAddIn" target="_blank" rel="noopener" class="footer-link">Open Source on GitHub</a></p>
     </div>
-    <script>document.getElementById('current-year').textContent = new Date().getFullYear();</script>
+    <script src="article.js"></script>
 </body>
 
 </html>

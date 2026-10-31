@@ -735,3 +735,12 @@ tbody tr:last-child td {
     color: var(--text-medium);
     font-size: 0.95rem;
 }
+
+#content.article [hidden] {
+    display: none;
+}
+
+.top_nav #head_name a {
+    color: inherit;
+    text-decoration: none;
+}

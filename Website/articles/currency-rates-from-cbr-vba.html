@@ -9,15 +9,16 @@
     <link rel="stylesheet" href="../style.css" />
 </head>
 
-<body>
+<body data-title-en="Currency exchange rates from the Bank of Russia in VBA with auto-refresh (Russian) - Navferty's Excel Add-In" data-title-ru="Курсы валют с сайта ЦБ на VBA с автообновлением - Надстройка Navferty Excel Add-In" data-desc-ru="Пример на VBA: загрузка курсов валют с сайта Банка России в Excel и их автоматическое обновление.">
     <div id="container">
         <div class="top_nav">
-            <div id="head_name">Navferty's Excel Add-In</div>
-            <div onclick="location.href='../index.html';">Home</div>
-            <div onclick="location.href='index.html';">Articles</div>
+            <div id="head_name"><a href="../index.html">Navferty's Excel Add-In</a></div>
+            <div onclick="setUserLanguage('ru');">Russian</div>
+            <div onclick="setUserLanguage('en');">English</div>
         </div>
 
         <div id="content" class="article">
+<div class="lang-en">
 <p class="back-to-top"><a href="index.html">&larr; All articles</a></p>
 <h1 class="zag">Currency exchange rates from the Bank of Russia in VBA with auto-refresh (Russian)</h1>
 <p class="subtitle">A VBA example: loading currency rates from the CBR website into Excel and refreshing them automatically. Original article in Russian.</p>
@@ -33,13 +34,30 @@
 <li>Convert the decimal comma in the response to the decimal separator of the current locale before writing numbers.</li>
 </ul>
 <p>The same task is available inside the add-in: Navferty's Excel Add-In has a currency exchange rates dialog with several providers, including the Bank of Russia, the European Central Bank and the National Bank of Ukraine.</p>
+</div>
+<div class="lang-ru" hidden>
+<p class="back-to-top"><a href="index.html">&larr; Все статьи</a></p>
+<h1 class="zag">Курсы валют с сайта ЦБ на VBA с автообновлением</h1>
+<p class="subtitle">Пример на VBA: загрузка курсов валют с сайта Банка России в Excel и их автоматическое обновление.</p>
+<p>В финансовых книгах часто нужен официальный курс на заданную дату. Вводить его вручную каждый день – значит делать ошибки. Банк России публикует ежедневные курсы в машиночитаемом виде, так что макрос может их получить.</p>
+<p>Статья автора на Pikabu показывает, как загрузить курсы с помощью VBA и обновлять их по расписанию при открытии книги:</p>
+<p><a href="https://pikabu.ru/story/kursyi_valyut_s_sayta_tsb_na_vba_s_avtoobnovleniem_7469372" target="_blank" rel="noopener">Курсы валют с сайта ЦБ на VBA с автообновлением</a> (Pikabu)</p>
 
+<h2>Идея</h2>
+<ul>
+<li>Отправьте HTTP-запрос к ежедневному XML-сервису ЦБ через <code>MSXML2.XMLHTTP</code>, передав дату.</li>
+<li>Разберите XML-ответ через <code>MSXML2.DOMDocument</code> и прочитайте код и значение каждой валюты.</li>
+<li>Запишите значения на лист и при необходимости используйте <code>Application.OnTime</code>, чтобы запустить загрузку снова позже.</li>
+<li>Перед записью чисел замените десятичную запятую из ответа на десятичный разделитель текущей локали.</li>
+</ul>
+<p>Та же задача решена и внутри надстройки: в Navferty's Excel Add-In есть диалог курсов валют с несколькими источниками, включая Банк России, Европейский центральный банк и Национальный банк Украины.</p>
+</div>
         </div>
     </div>
     <div class="footer">
         <p>Navferty &copy; 2021-<span id="current-year"></span> &bull; <a href="https://github.com/navferty/NavfertyExcelAddIn" target="_blank" rel="noopener" class="footer-link">Open Source on GitHub</a></p>
     </div>
-    <script>document.getElementById('current-year').textContent = new Date().getFullYear();</script>
+    <script src="article.js"></script>
 </body>
 
 </html>

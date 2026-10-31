@@ -9,15 +9,16 @@
     <link rel="stylesheet" href="../style.css" />
 </head>
 
-<body>
+<body data-title-en="Removing protection from all sheets at once - Navferty's Excel Add-In" data-title-ru="Снятие защиты со всех листов сразу - Надстройка Navferty Excel Add-In" data-desc-ru="Что на самом деле защищают защита листа и книги и как быстро снять защиту со многих листов.">
     <div id="container">
         <div class="top_nav">
-            <div id="head_name">Navferty's Excel Add-In</div>
-            <div onclick="location.href='../index.html';">Home</div>
-            <div onclick="location.href='index.html';">Articles</div>
+            <div id="head_name"><a href="../index.html">Navferty's Excel Add-In</a></div>
+            <div onclick="setUserLanguage('ru');">Russian</div>
+            <div onclick="setUserLanguage('en');">English</div>
         </div>
 
         <div id="content" class="article">
+<div class="lang-en">
 <p class="back-to-top"><a href="index.html">&larr; All articles</a></p>
 <h1 class="zag">Removing protection from all sheets at once</h1>
 <p class="subtitle">What sheet and workbook protection actually does, and how to unprotect many sheets quickly.</p>
@@ -50,13 +51,47 @@ End Sub</pre>
 
 <h2>A note on protecting your own files</h2>
 <p>If you protect a sheet to prevent accidental edits, sheet protection is enough. If the data is confidential, use file encryption or do not send the file at all.</p>
+</div>
+<div class="lang-ru" hidden>
+<p class="back-to-top"><a href="index.html">&larr; Все статьи</a></p>
+<h1 class="zag">Снятие защиты со всех листов сразу</h1>
+<p class="subtitle">Что на самом деле защищают защита листа и книги и как быстро снять защиту со многих листов.</p>
+<p>Вам прислали книгу с двадцатью защищёнными листами, и нужно что-то изменить. Нажимать <b>Рецензирование → Снять защиту листа</b> на каждом долго, а если никто не помнит пароль, дело на этом и встаёт.</p>
 
+<h2>Какие бывают виды защиты</h2>
+<ul>
+<li><b>Защита листа</b> запрещает редактировать заблокированные ячейки, менять формат, вставлять строки и так далее. Это удобство, а не безопасность: пароль хранится в файле в виде, который можно обойти.</li>
+<li><b>Защита структуры книги</b> не даёт добавлять, удалять, переименовывать и перемещать листы.</li>
+<li><b>Защита VBA-проекта</b> закрывает просмотр кода макросов.</li>
+<li><b>Шифрование файла</b> (<b>Файл → Сведения → Защита книги → Зашифровать с использованием пароля</b>) – единственный вариант настоящей защиты. Без пароля файл не открыть.</li>
+</ul>
+
+<h2>Если пароль известен</h2>
+<p>Снимать защиту с каждого листа вручную можно, но долго. Короткий макрос обходит листы в цикле:</p>
+<pre>Sub UnprotectAll()
+    Dim ws As Worksheet
+    For Each ws In ActiveWorkbook.Worksheets
+        ws.Unprotect "password"
+    Next
+End Sub</pre>
+<p>Если пароли на листах разные, на первом несовпадении возникнет ошибка, поэтому добавьте обработку ошибок.</p>
+
+<h2>Если пароля нет</h2>
+<p>Сначала спросите автора. Если файл ваш или принадлежит вашей компании, а автор недоступен, защиту можно снять, потому что защита листа не является шифрованием. Файл .xlsx – это ZIP-архив; если переименовать его в .zip и удалить элемент <code>&lt;sheetProtection&gt;</code> из <code>xl/worksheets/sheetN.xml</code>, защита с этого листа будет снята. Это работает, но требует нескольких шагов на каждый лист, и легко ошибиться.</p>
+<p>Делайте это только с файлами, которые вы вправе изменять.</p>
+
+<h2>С надстройкой</h2>
+<p>Команда <b>Снять защиту книги</b> (Unprotect Workbook) одним действием убирает защиту со всех листов, структуры книги и VBA-проекта, пароль не нужен. С зашифрованными книгами она не работает, так как пароль нужен уже для открытия файла.</p>
+
+<h2>Заметка про защиту собственных файлов</h2>
+<p>Если вы защищаете лист от случайных правок, защиты листа достаточно. Если данные конфиденциальны, используйте шифрование файла или вообще не отправляйте его.</p>
+</div>
         </div>
     </div>
     <div class="footer">
         <p>Navferty &copy; 2021-<span id="current-year"></span> &bull; <a href="https://github.com/navferty/NavfertyExcelAddIn" target="_blank" rel="noopener" class="footer-link">Open Source on GitHub</a></p>
     </div>
-    <script>document.getElementById('current-year').textContent = new Date().getFullYear();</script>
+    <script src="article.js"></script>
 </body>
 
 </html>

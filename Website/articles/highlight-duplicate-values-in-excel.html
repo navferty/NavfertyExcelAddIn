@@ -9,15 +9,16 @@
     <link rel="stylesheet" href="../style.css" />
 </head>
 
-<body>
+<body data-title-en="Highlighting duplicate values without formulas - Navferty's Excel Add-In" data-title-ru="Подсветка дубликатов в Excel без формул - Надстройка Navferty Excel Add-In" data-desc-ru="Условное форматирование, удаление дубликатов и что делать, если нужно видеть, какие строки совпадают.">
     <div id="container">
         <div class="top_nav">
-            <div id="head_name">Navferty's Excel Add-In</div>
-            <div onclick="location.href='../index.html';">Home</div>
-            <div onclick="location.href='index.html';">Articles</div>
+            <div id="head_name"><a href="../index.html">Navferty's Excel Add-In</a></div>
+            <div onclick="setUserLanguage('ru');">Russian</div>
+            <div onclick="setUserLanguage('en');">English</div>
         </div>
 
         <div id="content" class="article">
+<div class="lang-en">
 <p class="back-to-top"><a href="index.html">&larr; All articles</a></p>
 <h1 class="zag">Highlighting duplicate values without formulas</h1>
 <p class="subtitle">Conditional formatting, Remove Duplicates and what to do when you need to see which rows match.</p>
@@ -45,13 +46,42 @@
 
 <h2>With the add-in</h2>
 <p><b>Highlight Duplications</b> colours the repeated values in the selected range, and each group of identical values gets its own colour. That makes it easy to see which rows belong together, which a single colour from conditional formatting does not show. The highlight is plain cell formatting, so it does not slow down the workbook.</p>
+</div>
+<div class="lang-ru" hidden>
+<p class="back-to-top"><a href="index.html">&larr; Все статьи</a></p>
+<h1 class="zag">Подсветка дубликатов в Excel без формул</h1>
+<p class="subtitle">Условное форматирование, удаление дубликатов и что делать, если нужно видеть, какие строки совпадают.</p>
+<p>Дубликаты в списке клиентов, реестре счетов или перечне идентификаторов могут привести к двойным платежам и неверным итогам. Прежде чем что-то удалять, полезно их увидеть.</p>
 
+<h2>Условное форматирование</h2>
+<p>Выделите столбец, затем <b>Главная → Условное форматирование → Правила выделения ячеек → Повторяющиеся значения</b>. Каждое значение, встречающееся более одного раза, получит цвет. При редактировании данных подсветка обновляется автоматически.</p>
+<p>Что учесть:</p>
+<ul>
+<li>Сравнение не учитывает регистр: <code>abc</code> и <code>ABC</code> считаются одним значением.</li>
+<li>Пробелы на конце делают значения разными. Сначала очистите текст (см. <a href="remove-extra-spaces-in-excel.html">удаление лишних пробелов</a>).</li>
+<li>Числа длиннее 15 цифр (номера карт, длинные идентификаторы) сравниваются только по первым 15 цифрам, поэтому Excel может отметить значения, различающиеся последними цифрами. Для таких столбцов используйте правило с формулой и точным сравнением, например <code>=СУММПРОИЗВ(--($A$2:$A$1000=$A2))&gt;1</code>.</li>
+</ul>
+
+<h2>Дубликаты по нескольким столбцам</h2>
+<p>Если дубликатом считается одинаковое сочетание, скажем, имени и даты, встроенного правила недостаточно. Используйте правило с формулой:</p>
+<pre>=СЧЁТЕСЛИМН($A$2:$A$1000;$A2;$B$2:$B$1000;$B2)&gt;1</pre>
+<p>и примените его ко всей таблице.</p>
+
+<h2>Удалить дубликаты</h2>
+<p><b>Данные → Удалить дубликаты</b> удаляет повторяющиеся строки, оставляя первую. Можно сравнивать только выбранные столбцы. Отменить действие можно только сразу по <kbd>Ctrl</kbd>+<kbd>Z</kbd>, поэтому работайте с копией данных.</p>
+
+<h2>Пометить, а не удалять</h2>
+<p>Вспомогательный столбец с <code>=СЧЁТЕСЛИ($A$2:$A2;A2)</code> даёт 1 для первого вхождения, 2 для второго и так далее. Отфильтруйте значения больше 1, чтобы увидеть только повторы, или оставьте первые вхождения и разберите остальные.</p>
+
+<h2>С надстройкой</h2>
+<p>Команда <b>Подсветить дубликаты</b> (Highlight Duplications) окрашивает повторяющиеся значения в выделенном диапазоне, причём каждая группа одинаковых значений получает свой цвет. Так видно, какие строки связаны между собой, чего не показывает один цвет в условном форматировании. Подсветка – это обычная заливка ячеек, поэтому книгу она не замедляет.</p>
+</div>
         </div>
     </div>
     <div class="footer">
         <p>Navferty &copy; 2021-<span id="current-year"></span> &bull; <a href="https://github.com/navferty/NavfertyExcelAddIn" target="_blank" rel="noopener" class="footer-link">Open Source on GitHub</a></p>
     </div>
-    <script>document.getElementById('current-year').textContent = new Date().getFullYear();</script>
+    <script src="article.js"></script>
 </body>
 
 </html>

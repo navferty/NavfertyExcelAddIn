@@ -9,15 +9,16 @@
     <link rel="stylesheet" href="../style.css" />
 </head>
 
-<body>
+<body data-title-en="How to speed up large Excel workbooks - Navferty's Excel Add-In" data-title-ru="Как ускорить большие книги Excel - Надстройка Navferty Excel Add-In" data-desc-ru="Почему книга тормозит и что менять в первую очередь.">
     <div id="container">
         <div class="top_nav">
-            <div id="head_name">Navferty's Excel Add-In</div>
-            <div onclick="location.href='../index.html';">Home</div>
-            <div onclick="location.href='index.html';">Articles</div>
+            <div id="head_name"><a href="../index.html">Navferty's Excel Add-In</a></div>
+            <div onclick="setUserLanguage('ru');">Russian</div>
+            <div onclick="setUserLanguage('en');">English</div>
         </div>
 
         <div id="content" class="article">
+<div class="lang-en">
 <p class="back-to-top"><a href="index.html">&larr; All articles</a></p>
 <h1 class="zag">How to speed up large Excel workbooks</h1>
 <p class="subtitle">Why a workbook becomes slow and what to change first.</p>
@@ -53,13 +54,50 @@
 
 <h2>When Excel is the wrong place</h2>
 <p>If a workbook holds millions of rows or many joins, move the data to a database and use Excel for reports on top of it. Power Query with the data model, or a SQLite or other database file, handles volumes where formulas do not. See <a href="export-excel-data-to-sqlite.html">exporting to SQLite</a>.</p>
+</div>
+<div class="lang-ru" hidden>
+<p class="back-to-top"><a href="index.html">&larr; Все статьи</a></p>
+<h1 class="zag">Как ускорить большие книги Excel</h1>
+<p class="subtitle">Почему книга тормозит и что менять в первую очередь.</p>
+<p>У книги, которая открывается минуту или зависает при каждой правке, обычно одна-две понятные причины. Найдите их, прежде чем пробовать всё подряд.</p>
 
+<h2>Сначала измерьте</h2>
+<p>Переключитесь на ручной расчёт (<b>Формулы → Параметры вычислений → Вручную</b>). Если файл ожил, дело в формулах. Если всё ещё тормозит, смотрите на размер файла, форматирование, объекты и надстройки. Для ручного пересчёта нажмите <kbd>F9</kbd>. Не забудьте вернуть режим обратно или предупредите тех, кто пользуется файлом.</p>
+
+<h2>Формулы</h2>
+<ul>
+<li><b>Ссылки на целые столбцы в тяжёлых функциях.</b> <code>СУММЕСЛИМН</code> по <code>A:A</code> в современном Excel нормально, но формулы массива и <code>СУММПРОИЗВ</code> по целым столбцам медленны. Ограничьте диапазоны или используйте таблицы.</li>
+<li><b>Тысячи <code>ВПР</code> с точным совпадением по большому диапазону.</b> Отсортируйте данные и используйте бинарный поиск там, где это уместно, или добавьте один вспомогательный столбец с <code>ПОИСКПОЗ</code> и используйте его результат в <code>ИНДЕКС</code>. <code>ПРОСМОТРX</code> и поиск по нормальной таблице тоже быстрее, чем один и тот же поиск, повторённый во многих столбцах.</li>
+<li><b>Волатильные функции</b> (<code>ТДАТА</code>, <code>СЕГОДНЯ</code>, <code>СЛЧИС</code>, <code>СМЕЩ</code>, <code>ДВССЫЛ</code>) пересчитываются при любом изменении вместе со всем, что от них зависит. Заменяйте <code>СМЕЩ</code> и <code>ДВССЫЛ</code> на <code>ИНДЕКС</code> или ссылки на таблицы, где возможно.</li>
+<li><b>Формулы, которые никогда не меняются.</b> Старые месяцы в отчёте не нужно пересчитывать каждый раз. Вставьте их как значения, а копию формул храните отдельно.</li>
+<li><b>Цепочки зависимостей через много листов и внешние ссылки.</b> Проверьте <b>Данные → Изменить связи</b> и удалите ссылки на файлы, которых больше нет.</li>
+</ul>
+
+<h2>Размер файла</h2>
+<ul>
+<li><b>Используемый диапазон намного больше данных.</b> Нажмите <kbd>Ctrl</kbd>+<kbd>End</kbd>. Если курсор улетает далеко за пределы данных, выделите пустые строки ниже и столбцы справа, удалите их (именно удалите, а не очистите) и сохраните.</li>
+<li><b>Форматирование, применённое к целым столбцам или строкам</b>, плюс обилие условного форматирования. Откройте <b>Условное форматирование → Управление правилами</b> и удалите дубликаты.</li>
+<li><b>Изображения и фигуры.</b> Сожмите рисунки (<b>Формат рисунка → Сжать рисунки</b>) и удалите невидимые фигуры. <b>Главная → Найти и выделить → Область выделения</b> показывает все объекты, в том числе скрытые.</li>
+<li><b>Кэши сводных таблиц.</b> Каждая сводная может нести копию данных. Используйте один кэш для сводных на одном источнике и, где допустимо, снимите галочку <b>Сохранять исходные данные вместе с файлом</b>.</li>
+<li><b>Формат.</b> Сохранение как <code>.xlsb</code> (двоичная книга) обычно даёт файл меньше и быстрее открываемый, чем <code>.xlsx</code>. Платой служит то, что некоторые сторонние инструменты его не читают.</li>
+</ul>
+
+<h2>Окружение</h2>
+<ul>
+<li>Для очень больших объёмов данных используйте 64-разрядный Excel.</li>
+<li>Отключите ненужные надстройки (<b>Файл → Параметры → Надстройки</b>) и проверьте, тормозит ли файл без них.</li>
+<li>Файлы на сетевых дисках открываются медленно; для проверки скопируйте файл локально.</li>
+</ul>
+
+<h2>Когда Excel – не то место</h2>
+<p>Если в книге миллионы строк или много объединений, перенесите данные в базу и используйте Excel для отчётов поверх неё. Power Query с моделью данных или файл SQLite либо другой базы справляются с объёмами, перед которыми формулы пасуют. См. <a href="export-excel-data-to-sqlite.html">экспорт в SQLite</a>.</p>
+</div>
         </div>
     </div>
     <div class="footer">
         <p>Navferty &copy; 2021-<span id="current-year"></span> &bull; <a href="https://github.com/navferty/NavfertyExcelAddIn" target="_blank" rel="noopener" class="footer-link">Open Source on GitHub</a></p>
     </div>
-    <script>document.getElementById('current-year').textContent = new Date().getFullYear();</script>
+    <script src="article.js"></script>
 </body>
 
 </html>
