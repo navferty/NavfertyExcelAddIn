@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="The basics of writing formulas, with the functions most people use every week.">
+    <title>Beginner&#x27;s guide to Excel formulas - Navferty's Excel Add-In</title>
+    <link rel="stylesheet" href="../style.css" />
+</head>
+
+<body>
+    <div id="container">
+        <div class="top_nav">
+            <div id="head_name">Navferty's Excel Add-In</div>
+            <div onclick="location.href='../index.html';">Home</div>
+            <div onclick="location.href='index.html';">Articles</div>
+        </div>
+
+        <div id="content" class="article">
+<p class="back-to-top"><a href="index.html">&larr; All articles</a></p>
+<h1 class="zag">Beginner's guide to Excel formulas</h1>
+<p class="subtitle">The basics of writing formulas, with the functions most people use every week.</p>
+<p>A formula starts with <code>=</code> and can contain numbers, cell references, operators and functions. Excel recalculates it every time the inputs change.</p>
+
+<h2>The basics</h2>
+<pre>=A1+B1        add
+=A1*B1        multiply
+=A1/B1        divide
+=A1^2         power
+=(A1+B1)*C1   parentheses change the order</pre>
+<p>Excel follows the usual order: parentheses, powers, multiplication and division, then addition and subtraction.</p>
+
+<h2>References</h2>
+<ul>
+<li><code>A1</code> is relative: when you copy the formula one row down, it becomes <code>A2</code>.</li>
+<li><code>$A$1</code> is absolute and does not change when copied. Press <kbd>F4</kbd> to add the dollar signs.</li>
+<li><code>$A1</code> and <code>A$1</code> lock only the column or only the row.</li>
+<li><code>Sheet2!A1</code> refers to another sheet. If the name has spaces, quote it: <code>'Sales 2024'!A1</code>.</li>
+<li>A range is written <code>A1:A10</code>.</li>
+</ul>
+
+<h2>Ten functions worth knowing</h2>
+<ul>
+<li><code>SUM(A1:A10)</code>, <code>AVERAGE</code>, <code>MIN</code>, <code>MAX</code>, <code>COUNT</code> (numbers), <code>COUNTA</code> (non-empty).</li>
+<li><code>IF(A1&gt;100, "high", "low")</code> – a choice. Combine conditions with <code>AND</code>, <code>OR</code>.</li>
+<li><code>SUMIF(range, criteria, sum_range)</code> and <code>SUMIFS</code> – sum with one or several conditions. <code>COUNTIF</code> and <code>COUNTIFS</code> do the same for counting.</li>
+<li><code>XLOOKUP(key, lookup_range, result_range)</code> or <code>VLOOKUP(key, table, column, FALSE)</code> – find a value by key.</li>
+<li><code>INDEX</code> and <code>MATCH</code> – the flexible lookup combination that works in all versions and in any direction.</li>
+<li><code>IFERROR(formula, "")</code> – a fallback for when a formula returns an error. Use it deliberately (see <a href="find-all-errors-in-excel.html">errors</a>).</li>
+<li><code>LEFT</code>, <code>RIGHT</code>, <code>MID</code>, <code>LEN</code>, <code>FIND</code> – work with parts of the text. <code>TRIM</code> and <code>SUBSTITUTE</code> clean it.</li>
+<li><code>TEXT(A1, "yyyy-mm")</code> – format a number or date as text. The format codes depend on the locale of Excel.</li>
+<li><code>&amp;</code> or <code>TEXTJOIN</code> – join text: <code>=A1&amp;" "&amp;B1</code>.</li>
+<li><code>TODAY()</code>, <code>DATE(y,m,d)</code>, <code>EOMONTH</code>, <code>DATEDIF</code> – dates.</li>
+</ul>
+
+<h2>Useful habits</h2>
+<ul>
+<li>Put inputs (rates, thresholds) in their own cells, not inside the formulas.</li>
+<li>Convert a range to a table and use column names in formulas.</li>
+<li>Click a formula and press <kbd>F2</kbd>: Excel outlines the referenced cells in colour. <b>Formulas → Evaluate Formula</b> walks through the calculation step by step.</li>
+<li>Check results with an example you can calculate by hand.</li>
+<li>Type the first letters of a function and press <kbd>Tab</kbd> to complete it, then <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>A</kbd> to see the argument names.</li>
+</ul>
+
+<h2>Locale notes</h2>
+<p>In some language versions the list separator is a semicolon rather than a comma (<code>=IF(A1&gt;100;"high";"low")</code>), and function names are localised (<code>SUM</code> is <code>СУММ</code> in Russian Excel). If a formula copied from a web page does not work, check this first.</p>
+
+<h2>Common first errors</h2>
+<p>Parentheses that do not match, text without quotes, a number stored as text, a circular reference (a formula that refers to its own cell). <a href="common-excel-mistakes.html">Common mistakes</a> lists more.</p>
+
+        </div>
+    </div>
+    <div class="footer">
+        <p>Navferty &copy; 2021-<span id="current-year"></span> &bull; <a href="https://github.com/navferty/NavfertyExcelAddIn" target="_blank" rel="noopener" class="footer-link">Open Source on GitHub</a></p>
+    </div>
+    <script>document.getElementById('current-year').textContent = new Date().getFullYear();</script>
+</body>
+
+</html>

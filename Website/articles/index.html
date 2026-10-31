@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Articles about Excel tips, data cleaning and the Navferty Excel Add-In.">
+    <title>Articles - Navferty's Excel Add-In</title>
+    <link rel="stylesheet" href="../style.css" />
+</head>
+
+<body>
+    <div id="container">
+        <div class="top_nav">
+            <div id="head_name">Navferty's Excel Add-In</div>
+            <div onclick="location.href='../index.html';">Home</div>
+            <div onclick="location.href='index.html';">Articles</div>
+        </div>
+
+        <div id="content" class="article">
+<h1 class="zag">Articles</h1>
+<p class="subtitle">Tips for everyday Excel problems: what goes wrong, how to fix it with built-in features, and where the add-in can save some clicks.</p>
+<h2>Using the add-in and Excel's built-in tools</h2>
+<ul class="article-list">
+<li><a href="find-all-errors-in-excel.html">How to find all errors in Excel (#VALUE!, #REF!, #DIV/0!)</a><br><span>Ways to locate every formula error in a sheet, and what each error usually means.</span></li>
+<li><a href="text-numbers-to-numeric-values.html">Converting text numbers to numeric values</a><br><span>Why numbers become text in Excel and several ways to convert them back.</span></li>
+<li><a href="remove-extra-spaces-in-excel.html">Removing extra spaces in Excel</a><br><span>TRIM, non-breaking spaces and line breaks: how to clean text cells properly.</span></li>
+<li><a href="highlight-duplicate-values-in-excel.html">Highlighting duplicate values without formulas</a><br><span>Conditional formatting, Remove Duplicates and what to do when you need to see which rows match.</span></li>
+<li><a href="remove-protection-from-all-sheets.html">Removing protection from all sheets at once</a><br><span>What sheet and workbook protection actually does, and how to unprotect many sheets quickly.</span></li>
+<li><a href="export-excel-data-to-sqlite.html">Exporting Excel data to SQLite</a><br><span>When a spreadsheet is no longer enough, SQLite gives you real queries in a single file.</span></li>
+<li><a href="validate-xml-against-xsd-in-excel.html">Validating XML against XSD inside Excel</a><br><span>How to check an XML file against its schema and read the errors as a table.</span></li>
+</ul>
+<h2>General Excel topics</h2>
+<ul class="article-list">
+<li><a href="common-excel-mistakes.html">Common Excel mistakes and how to fix them</a><br><span>Problems that show up again and again in real workbooks, with a way to avoid each one.</span></li>
+<li><a href="prepare-excel-files-for-import.html">Preparing Excel files for import into 1C, Power BI and SQL</a><br><span>What import tools expect from a spreadsheet and how to get the file into that shape.</span></li>
+<li><a href="speed-up-large-excel-workbooks.html">How to speed up large Excel workbooks</a><br><span>Why a workbook becomes slow and what to change first.</span></li>
+<li><a href="best-practices-for-cleaning-data-in-excel.html">Best practices for cleaning data in Excel</a><br><span>A repeatable order of steps for turning a messy export into a table you can rely on.</span></li>
+<li><a href="automating-excel-tasks-without-vba.html">Automating routine Excel tasks without VBA</a><br><span>Tables, Power Query, Flash Fill, dynamic arrays and other built-in tools that replace most simple macros.</span></li>
+<li><a href="csv-files-without-encoding-issues.html">Working with CSV files without encoding issues</a><br><span>Why Cyrillic and accented characters turn into garbage and how to open and save CSV correctly.</span></li>
+<li><a href="checklist-validating-excel-files.html">Checklist for validating Excel files before sending</a><br><span>A short list of checks to run on a workbook before it leaves your computer.</span></li>
+<li><a href="beginners-guide-to-excel-formulas.html">Beginner's guide to Excel formulas</a><br><span>The basics of writing formulas, with the functions most people use every week.</span></li>
+<li><a href="preparing-excel-reports-for-management.html">Preparing Excel reports for management</a><br><span>How to make a workbook that the reader understands in a minute.</span></li>
+<li><a href="best-free-excel-add-ins.html">Best free Excel add-ins</a><br><span>A short list of free add-ins that are worth installing, and what each is good at.</span></li>
+</ul>
+<h2>VBA (articles in Russian)</h2>
+<ul class="article-list">
+<li><a href="vba-addin-with-custom-ribbon-tab.html">Creating a VBA add-in with its own ribbon tab (Russian)</a><br><span>A tutorial on packaging macros into an .xlam add-in with a custom Excel ribbon tab. Original article in Russian.</span></li>
+<li><a href="currency-rates-from-cbr-vba.html">Currency exchange rates from the Bank of Russia in VBA with auto-refresh (Russian)</a><br><span>A VBA example: loading currency rates from the CBR website into Excel and refreshing them automatically. Original article in Russian.</span></li>
+<li><a href="debugging-vba-code-in-excel.html">VBA debugging techniques in Excel (Russian)</a><br><span>Practical ways to find bugs in VBA code, with examples from Excel. Original article in Russian.</span></li>
+</ul>
+
+        </div>
+    </div>
+    <div class="footer">
+        <p>Navferty &copy; 2021-<span id="current-year"></span> &bull; <a href="https://github.com/navferty/NavfertyExcelAddIn" target="_blank" rel="noopener" class="footer-link">Open Source on GitHub</a></p>
+    </div>
+    <script>document.getElementById('current-year').textContent = new Date().getFullYear();</script>
+</body>
+
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="A VBA example: loading currency rates from the CBR website into Excel and refreshing them automatically. Original article in Russian.">
+    <title>Currency exchange rates from the Bank of Russia in VBA with auto-refresh (Russian) - Navferty's Excel Add-In</title>
+    <link rel="stylesheet" href="../style.css" />
+</head>
+
+<body>
+    <div id="container">
+        <div class="top_nav">
+            <div id="head_name">Navferty's Excel Add-In</div>
+            <div onclick="location.href='../index.html';">Home</div>
+            <div onclick="location.href='index.html';">Articles</div>
+        </div>
+
+        <div id="content" class="article">
+<p class="back-to-top"><a href="index.html">&larr; All articles</a></p>
+<h1 class="zag">Currency exchange rates from the Bank of Russia in VBA with auto-refresh (Russian)</h1>
+<p class="subtitle">A VBA example: loading currency rates from the CBR website into Excel and refreshing them automatically. Original article in Russian.</p>
+<p>Financial workbooks often need the official exchange rate for a given date. Typing it in by hand every day is error-prone. The Bank of Russia publishes daily rates in a machine-readable form, so a macro can fetch them.</p>
+<p>The author's article in Russian shows how to load the rates with VBA and refresh them on a schedule when the workbook is opened:</p>
+<p><a href="https://pikabu.ru/story/kursyi_valyut_s_sayta_tsb_na_vba_s_avtoobnovleniem_7469372" target="_blank" rel="noopener">Currency rates from the CBR website in VBA with auto-refresh</a> (Pikabu, Russian)</p>
+
+<h2>The idea</h2>
+<ul>
+<li>Send an HTTP request to the CBR daily XML service with <code>MSXML2.XMLHTTP</code>, passing the date.</li>
+<li>Parse the XML response with <code>MSXML2.DOMDocument</code> and read each currency's code and value.</li>
+<li>Write the values to a sheet and, if required, use <code>Application.OnTime</code> to run it again later.</li>
+<li>Convert the decimal comma in the response to the decimal separator of the current locale before writing numbers.</li>
+</ul>
+<p>The same task is available inside the add-in: Navferty's Excel Add-In has a currency exchange rates dialog with several providers, including the Bank of Russia, the European Central Bank and the National Bank of Ukraine.</p>
+
+        </div>
+    </div>
+    <div class="footer">
+        <p>Navferty &copy; 2021-<span id="current-year"></span> &bull; <a href="https://github.com/navferty/NavfertyExcelAddIn" target="_blank" rel="noopener" class="footer-link">Open Source on GitHub</a></p>
+    </div>
+    <script>document.getElementById('current-year').textContent = new Date().getFullYear();</script>
+</body>
+
+</html>

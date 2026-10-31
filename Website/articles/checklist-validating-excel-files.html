@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="A short list of checks to run on a workbook before it leaves your computer.">
+    <title>Checklist for validating Excel files before sending - Navferty's Excel Add-In</title>
+    <link rel="stylesheet" href="../style.css" />
+</head>
+
+<body>
+    <div id="container">
+        <div class="top_nav">
+            <div id="head_name">Navferty's Excel Add-In</div>
+            <div onclick="location.href='../index.html';">Home</div>
+            <div onclick="location.href='index.html';">Articles</div>
+        </div>
+
+        <div id="content" class="article">
+<p class="back-to-top"><a href="index.html">&larr; All articles</a></p>
+<h1 class="zag">Checklist for validating Excel files before sending</h1>
+<p class="subtitle">A short list of checks to run on a workbook before it leaves your computer.</p>
+<p>Most embarrassing workbook mistakes are discovered by the recipient. These checks take about ten minutes and cover the common ones.</p>
+
+<h2>Content</h2>
+<ul>
+<li>No error values anywhere (<a href="find-all-errors-in-excel.html">how to find them</a>).</li>
+<li>Totals agree with an independent number: the source system, a pivot table or a quick estimate.</li>
+<li>Calculation mode is Automatic and you pressed <kbd>F9</kbd> once.</li>
+<li>No numbers stored as text, no stray spaces in keys (<a href="text-numbers-to-numeric-values.html">text numbers</a>, <a href="remove-extra-spaces-in-excel.html">spaces</a>).</li>
+<li>Duplicates in key columns have been reviewed.</li>
+<li>Dates are right: the year, the day/month order, and the period named in the title.</li>
+<li>Units and currency are written near the numbers.</li>
+<li>Spelling checked (<kbd>F7</kbd>), including sheet names and chart titles.</li>
+</ul>
+
+<h2>Hidden things</h2>
+<ul>
+<li>Hidden sheets, rows and columns: do you want the recipient to see them? Right-click a sheet tab to see if <b>Unhide</b> is active.</li>
+<li><b>File → Info → Check for Issues → Inspect Document</b> finds comments, hidden content, document properties and personal information.</li>
+<li>Comments and notes that were meant for you only.</li>
+<li>Tracked changes and old versions in the file history.</li>
+<li>Author name and path in the properties.</li>
+</ul>
+
+<h2>Links and data sources</h2>
+<ul>
+<li><b>Data → Edit Links</b>: a workbook linked to files on your drive shows a security warning on the recipient's side and displays old values. Break the links or paste values.</li>
+<li>Pivot tables are refreshed.</li>
+<li>If you send a report, think about whether formulas that reference other files should stay as formulas.</li>
+</ul>
+
+<h2>Confidential data</h2>
+<ul>
+<li>Columns the recipient does not need (salaries, personal data, margins) are deleted, not just hidden.</li>
+<li>If you sent the file with sheet protection, remember it is not security. Use encryption with a password for sensitive files, and send the password by another channel.</li>
+<li>Pivot caches can contain the whole source data even when the pivot shows only a summary.</li>
+</ul>
+
+<h2>Presentation</h2>
+<ul>
+<li>Print preview: page orientation, scale, print area, repeated header rows.</li>
+<li>The active sheet, selected cell and scroll position are on the first cell of the first sheet (<kbd>Ctrl</kbd>+<kbd>Home</kbd> on each sheet before saving).</li>
+<li>Column widths are enough to show numbers without <code>####</code>.</li>
+<li>Freeze panes on large tables.</li>
+</ul>
+
+<h2>File</h2>
+<ul>
+<li>File name tells what it is and when: <code>Sales_2024-03_v2.xlsx</code>.</li>
+<li>File size is reasonable (see <a href="speed-up-large-excel-workbooks.html">speeding up workbooks</a>).</li>
+<li>If the recipient may use a different system, think about whether a PDF or CSV is a better format.</li>
+<li>If the file will be imported by a program, run it through the checks in <a href="prepare-excel-files-for-import.html">preparing files for import</a>.</li>
+</ul>
+
+        </div>
+    </div>
+    <div class="footer">
+        <p>Navferty &copy; 2021-<span id="current-year"></span> &bull; <a href="https://github.com/navferty/NavfertyExcelAddIn" target="_blank" rel="noopener" class="footer-link">Open Source on GitHub</a></p>
+    </div>
+    <script>document.getElementById('current-year').textContent = new Date().getFullYear();</script>
+</body>
+
+</html>

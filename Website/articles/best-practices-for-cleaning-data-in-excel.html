@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="A repeatable order of steps for turning a messy export into a table you can rely on.">
+    <title>Best practices for cleaning data in Excel - Navferty's Excel Add-In</title>
+    <link rel="stylesheet" href="../style.css" />
+</head>
+
+<body>
+    <div id="container">
+        <div class="top_nav">
+            <div id="head_name">Navferty's Excel Add-In</div>
+            <div onclick="location.href='../index.html';">Home</div>
+            <div onclick="location.href='index.html';">Articles</div>
+        </div>
+
+        <div id="content" class="article">
+<p class="back-to-top"><a href="index.html">&larr; All articles</a></p>
+<h1 class="zag">Best practices for cleaning data in Excel</h1>
+<p class="subtitle">A repeatable order of steps for turning a messy export into a table you can rely on.</p>
+<p>Data cleaning goes faster and causes fewer mistakes when you do it in the same order every time and keep the original untouched.</p>
+
+<h2>1. Keep the original</h2>
+<p>Copy the raw data to a sheet called <code>raw</code> and never edit it. Work on a copy, or better, use Power Query so the steps are recorded and can be replayed on next month's file.</p>
+
+<h2>2. Look at the data before changing it</h2>
+<ul>
+<li>Turn on filters and look at the unique values of each column. Misspellings and variants of the same category show up in seconds.</li>
+<li>Sort a column ascending and descending: blanks, text among numbers and unexpected extremes end up at the edges.</li>
+<li>Check the row count and the totals, so that you can compare after cleaning.</li>
+</ul>
+
+<h2>3. Fix the structure</h2>
+<ul>
+<li>Remove title rows, notes and total rows inside the data.</li>
+<li>Unmerge cells and fill in the blanks. <b>Go To Special → Blanks</b>, type <code>=</code> and the cell above, then <kbd>Ctrl</kbd>+<kbd>Enter</kbd> fills down.</li>
+<li>One header row, unique column names.</li>
+</ul>
+
+<h2>4. Fix the text</h2>
+<ul>
+<li>Remove extra spaces and non-printable characters (<a href="remove-extra-spaces-in-excel.html">details</a>).</li>
+<li>Normalise case with <code>UPPER</code>, <code>LOWER</code>, <code>PROPER</code>. <code>PROPER</code> mishandles names like <code>McDonald</code> and abbreviations, so review the result.</li>
+<li>Look for lookalike letters. Latin <code>A</code> and Cyrillic <code>А</code> are different characters, and a code that mixes them will not match anything. This is common in Russian-language data with codes and licence plates.</li>
+<li>Split combined fields with <b>Text to Columns</b> or <b>Flash Fill</b> (<kbd>Ctrl</kbd>+<kbd>E</kbd>). Check the Flash Fill results, because it guesses a pattern.</li>
+</ul>
+
+<h2>5. Fix the types</h2>
+<ul>
+<li>Convert text numbers and text dates to real ones (<a href="text-numbers-to-numeric-values.html">details</a>).</li>
+<li>Keep identifiers as text if they have leading zeros.</li>
+<li>Use data validation lists on columns where people type values by hand.</li>
+</ul>
+
+<h2>6. Handle duplicates and missing values</h2>
+<ul>
+<li>Look at duplicates before removing them (<a href="highlight-duplicate-values-in-excel.html">details</a>). Two rows with the same key may be different records.</li>
+<li>Decide per column what a blank means: zero, unknown or not applicable. Do not fill in with zeros blindly, it changes averages.</li>
+</ul>
+
+<h2>7. Validate the result</h2>
+<ul>
+<li>Compare row count and totals with the original.</li>
+<li>Check for formula errors (<a href="find-all-errors-in-excel.html">details</a>).</li>
+<li>Test a few rows by hand against the source system.</li>
+</ul>
+
+<h2>Write down what you did</h2>
+<p>A small “Notes” sheet with the steps will save you the next time the same file arrives, and lets a colleague trust the result.</p>
+
+        </div>
+    </div>
+    <div class="footer">
+        <p>Navferty &copy; 2021-<span id="current-year"></span> &bull; <a href="https://github.com/navferty/NavfertyExcelAddIn" target="_blank" rel="noopener" class="footer-link">Open Source on GitHub</a></p>
+    </div>
+    <script>document.getElementById('current-year').textContent = new Date().getFullYear();</script>
+</body>
+
+</html>

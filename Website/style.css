@@ -715,3 +715,23 @@ tbody tr:last-child td {
         gap: 1rem;
     }
 }
+/* Article pages */
+#content.article {
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 860px;
+}
+
+#content .article-list {
+    list-style: none;
+    padding-left: 0;
+}
+
+#content .article-list li {
+    margin-bottom: 1rem;
+}
+
+#content .article-list span {
+    color: var(--text-medium);
+    font-size: 0.95rem;
+}

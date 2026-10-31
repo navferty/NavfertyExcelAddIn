@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Why numbers become text in Excel and several ways to convert them back.">
+    <title>Converting text numbers to numeric values - Navferty's Excel Add-In</title>
+    <link rel="stylesheet" href="../style.css" />
+</head>
+
+<body>
+    <div id="container">
+        <div class="top_nav">
+            <div id="head_name">Navferty's Excel Add-In</div>
+            <div onclick="location.href='../index.html';">Home</div>
+            <div onclick="location.href='index.html';">Articles</div>
+        </div>
+
+        <div id="content" class="article">
+<p class="back-to-top"><a href="index.html">&larr; All articles</a></p>
+<h1 class="zag">Converting text numbers to numeric values</h1>
+<p class="subtitle">Why numbers become text in Excel and several ways to convert them back.</p>
+<p>Numbers copied from a web page, a PDF, an accounting system or a CSV often arrive as text. They look normal, but <code>SUM</code> ignores them, sorting puts <code>100</code> before <code>20</code>, and <code>VLOOKUP</code> refuses to match them with real numbers.</p>
+
+<h2>How to recognise text numbers</h2>
+<ul>
+<li>They are left-aligned by default while real numbers are right-aligned.</li>
+<li>A small green triangle appears in the corner of the cell.</li>
+<li>The status bar shows only <b>Count</b> for the selection, not <b>Sum</b>.</li>
+<li><code>=ISNUMBER(A1)</code> returns <code>FALSE</code>.</li>
+</ul>
+
+<h2>Quick fixes in Excel</h2>
+<p><b>The green triangle.</b> Select the cells, click the warning icon that appears and choose <b>Convert to Number</b>. It works only when Excel flags the cells.</p>
+<p><b>Paste Special.</b> Type <code>1</code> in an empty cell and copy it. Select the text numbers, choose <b>Paste Special → Multiply</b>. Excel has to do arithmetic on each value, so it converts them.</p>
+<p><b>Text to Columns.</b> Select one column, open <b>Data → Text to Columns</b> and click <b>Finish</b> right away. This re-parses the values and converts numbers and dates. It is a fast trick for a single column.</p>
+<p><b>A formula.</b> <code>=VALUE(A1)</code> or the shorter <code>=--A1</code> returns a number. If the source has odd spaces, combine it with cleaning: <code>=VALUE(TRIM(SUBSTITUTE(A1,CHAR(160),"")))</code>. Non-breaking spaces (<code>CHAR(160)</code>) are common in data from websites and thousand separators in Russian or French formats, and <code>TRIM</code> does not remove them.</p>
+
+<h2>Things that go wrong</h2>
+<ul>
+<li><b>Decimal separator.</b> <code>1,5</code> is text on a system that expects <code>1.5</code>. Replace the separator first, or use <code>NUMBERVALUE(A1, ",", " ")</code> to state the decimal and group separators explicitly.</li>
+<li><b>Leading apostrophe.</b> It is invisible in the cell but marks it as text. Paste Special → Multiply handles it.</li>
+<li><b>Minus at the end.</b> Some systems export negative numbers as <code>100-</code>. Convert with <code>=IF(RIGHT(A1)="-",-LEFT(A1,LEN(A1)-1),A1)</code>.</li>
+<li><b>Leading zeros.</b> Phone numbers, postal codes and product codes should stay text. Converting them removes the zeros for good, so check before you convert a whole column.</li>
+<li><b>Cell format.</b> Changing a cell's format to Number does not convert what is already inside. You need to re-enter the value (<kbd>F2</kbd>, <kbd>Enter</kbd>) or use one of the methods above.</li>
+</ul>
+
+<h2>With the add-in</h2>
+<p>The <b>Parse Numerics</b> command converts the selected text cells to numbers in one step, including the cases with non-breaking spaces. If the result is wrong, <b>Undo Last Action</b> restores the previous values.</p>
+
+        </div>
+    </div>
+    <div class="footer">
+        <p>Navferty &copy; 2021-<span id="current-year"></span> &bull; <a href="https://github.com/navferty/NavfertyExcelAddIn" target="_blank" rel="noopener" class="footer-link">Open Source on GitHub</a></p>
+    </div>
+    <script>document.getElementById('current-year').textContent = new Date().getFullYear();</script>
+</body>
+
+</html>

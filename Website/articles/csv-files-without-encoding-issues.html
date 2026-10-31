@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Why Cyrillic and accented characters turn into garbage and how to open and save CSV correctly.">
+    <title>Working with CSV files without encoding issues - Navferty's Excel Add-In</title>
+    <link rel="stylesheet" href="../style.css" />
+</head>
+
+<body>
+    <div id="container">
+        <div class="top_nav">
+            <div id="head_name">Navferty's Excel Add-In</div>
+            <div onclick="location.href='../index.html';">Home</div>
+            <div onclick="location.href='index.html';">Articles</div>
+        </div>
+
+        <div id="content" class="article">
+<p class="back-to-top"><a href="index.html">&larr; All articles</a></p>
+<h1 class="zag">Working with CSV files without encoding issues</h1>
+<p class="subtitle">Why Cyrillic and accented characters turn into garbage and how to open and save CSV correctly.</p>
+<p>You open a CSV in Excel and see <code>РџСЂРёРІРµС‚</code> instead of the expected text, or <code>Ã©</code> in place of <code>é</code>. The file is fine. Excel has simply guessed the wrong encoding.</p>
+
+<h2>What is happening</h2>
+<p>A CSV file is plain text, and nothing in it says which encoding is used. Double-clicking a file makes Excel use the system's legacy code page (for example Windows-1251 on Russian Windows, Windows-1252 on Western European systems), unless the file starts with a UTF-8 byte-order mark (BOM). A UTF-8 file without a BOM is therefore misread.</p>
+
+<h2>Opening a file correctly</h2>
+<ol>
+<li>Do not double-click. Open a blank workbook.</li>
+<li><b>Data → From Text/CSV</b>.</li>
+<li>Select the file. In the preview, change <b>File Origin</b> until the text looks right (usually <b>65001: Unicode (UTF-8)</b>, or <b>1251: Cyrillic (Windows)</b> for older Russian files).</li>
+<li>Check the delimiter, then click <b>Load</b> or <b>Transform Data</b>.</li>
+</ol>
+
+<h2>Saving a file correctly</h2>
+<ul>
+<li><b>CSV UTF-8 (Comma delimited)</b> in the Save As type list writes UTF-8 with a BOM. It is the one to choose when the file goes to another program or when it opens in Excel on another computer.</li>
+<li>The plain <b>CSV (Comma delimited)</b> option saves in the system code page and loses characters that are not part of it.</li>
+<li>Some strict importers reject the BOM. Then remove it with a text editor such as Notepad++ (<b>Encoding → UTF-8</b>) or save from there.</li>
+</ul>
+
+<h2>Delimiter problems</h2>
+<p>In many European locales, including Russian and German, Excel uses a semicolon as the list separator, since the comma is the decimal separator. A comma-separated file opened by double-click will land in one column, and a semicolon-separated file opened on an English system will do the same. In the From Text/CSV dialog, set the delimiter explicitly. In a text file, an <code>sep=;</code> line at the top forces Excel to use a semicolon, but other tools will see it as data, so use that only for files meant for Excel.</p>
+
+<h2>Other traps</h2>
+<ul>
+<li><b>Leading zeros</b> disappear when Excel guesses the column as a number. In the import dialog, set the column type to Text.</li>
+<li><b>Long numbers</b> (more than 15 digits) are rounded and shown in scientific notation. Import them as text.</li>
+<li><b>Dates</b> are converted with the local day/month order. <code>03/04/2024</code> may mean the third of April or the fourth of March.</li>
+<li><b>Fields with line breaks or delimiters</b> must be in quotes, and quotes inside doubled. Programs that write CSV by concatenating strings often miss this.</li>
+<li><b>Saving a CSV over and over</b> in Excel changes the content (numbers, dates, zeros). Keep the original and the working .xlsx separate.</li>
+</ul>
+
+<h2>For recurring files</h2>
+<p>Use Power Query: it remembers the encoding, delimiter and column types, so the next file is a refresh away.</p>
+
+        </div>
+    </div>
+    <div class="footer">
+        <p>Navferty &copy; 2021-<span id="current-year"></span> &bull; <a href="https://github.com/navferty/NavfertyExcelAddIn" target="_blank" rel="noopener" class="footer-link">Open Source on GitHub</a></p>
+    </div>
+    <script>document.getElementById('current-year').textContent = new Date().getFullYear();</script>
+</body>
+
+</html>

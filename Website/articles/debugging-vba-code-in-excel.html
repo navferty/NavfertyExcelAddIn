@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Practical ways to find bugs in VBA code, with examples from Excel. Original article in Russian.">
+    <title>VBA debugging techniques in Excel (Russian) - Navferty's Excel Add-In</title>
+    <link rel="stylesheet" href="../style.css" />
+</head>
+
+<body>
+    <div id="container">
+        <div class="top_nav">
+            <div id="head_name">Navferty's Excel Add-In</div>
+            <div onclick="location.href='../index.html';">Home</div>
+            <div onclick="location.href='index.html';">Articles</div>
+        </div>
+
+        <div id="content" class="article">
+<p class="back-to-top"><a href="index.html">&larr; All articles</a></p>
+<h1 class="zag">VBA debugging techniques in Excel (Russian)</h1>
+<p class="subtitle">Practical ways to find bugs in VBA code, with examples from Excel. Original article in Russian.</p>
+<p>A macro that fails with “Run-time error 1004” does not say much on its own. The VBA editor has all the tools needed to find out why.</p>
+<p>The author's article in Russian collects debugging techniques with Excel examples:</p>
+<p><a href="https://pikabu.ru/story/priyomyi_otladki_vbakoda_na_primere_ms_excel_7151540" target="_blank" rel="noopener">Techniques for debugging VBA code using MS Excel as an example</a> (Pikabu, Russian)</p>
+
+<h2>A quick overview</h2>
+<ul>
+<li><b>Option Explicit</b> at the top of each module turns a typo in a variable name into a compile error.</li>
+<li><b>Breakpoints</b> (<kbd>F9</kbd>) and stepping (<kbd>F8</kbd> step into, <kbd>Shift</kbd>+<kbd>F8</kbd> step over) let you watch the code run line by line.</li>
+<li><b>Locals</b> and <b>Watch</b> windows show the values of variables. A watch can break the execution when a condition becomes true.</li>
+<li><b>Immediate window</b> (<kbd>Ctrl</kbd>+<kbd>G</kbd>) evaluates expressions and runs procedures. <code>Debug.Print</code> writes to it.</li>
+<li><b>Run to Cursor</b> and <b>Set Next Statement</b> let you skip or repeat code while debugging.</li>
+<li><b>Error handling</b> with <code>On Error GoTo</code>, and <code>Err.Number</code> and <code>Err.Description</code> in the handler, so that the macro reports the real reason.</li>
+<li>Turn off <code>Application.ScreenUpdating</code> and set calculation to manual in production code, and make sure they are restored on any exit path, including errors.</li>
+</ul>
+
+        </div>
+    </div>
+    <div class="footer">
+        <p>Navferty &copy; 2021-<span id="current-year"></span> &bull; <a href="https://github.com/navferty/NavfertyExcelAddIn" target="_blank" rel="noopener" class="footer-link">Open Source on GitHub</a></p>
+    </div>
+    <script>document.getElementById('current-year').textContent = new Date().getFullYear();</script>
+</body>
+
+</html>

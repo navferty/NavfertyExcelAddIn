@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="A short list of free add-ins that are worth installing, and what each is good at.">
+    <title>Best free Excel add-ins - Navferty's Excel Add-In</title>
+    <link rel="stylesheet" href="../style.css" />
+</head>
+
+<body>
+    <div id="container">
+        <div class="top_nav">
+            <div id="head_name">Navferty's Excel Add-In</div>
+            <div onclick="location.href='../index.html';">Home</div>
+            <div onclick="location.href='index.html';">Articles</div>
+        </div>
+
+        <div id="content" class="article">
+<p class="back-to-top"><a href="index.html">&larr; All articles</a></p>
+<h1 class="zag">Best free Excel add-ins</h1>
+<p class="subtitle">A short list of free add-ins that are worth installing, and what each is good at.</p>
+<p>Excel's ribbon has a lot of features, but many everyday chores still take too many steps. These free add-ins and built-in extras fill some of the gaps. Check each one's licence and privacy terms before using it with company data.</p>
+
+<h2>Built into Excel (but switched off)</h2>
+<ul>
+<li><b>Analysis ToolPak</b> – regression, histograms, t-tests and other statistics. Enable in <b>File → Options → Add-ins → Manage: Excel Add-ins → Go</b>.</li>
+<li><b>Solver</b> – optimisation under constraints, in the same dialog.</li>
+<li><b>Power Query and Power Pivot</b> – import, transform and model data. Power Query is on the <b>Data</b> tab in current versions.</li>
+</ul>
+
+<h2>From Microsoft</h2>
+<ul>
+<li><b>Microsoft Office Add-ins store</b> (<b>Insert → Get Add-ins</b>) has both free and paid items. The Microsoft Visio Data Visualizer, Power BI and a few chart tools are examples.</li>
+<li><b>Power Query</b> for older versions (2010/2013) is a free separate download.</li>
+</ul>
+
+<h2>Open-source and community</h2>
+<ul>
+<li><b>Navferty's Excel Add-In</b> – a free, open-source set of tools for working with cell contents: converting text to numbers, trimming spaces, replacing Cyrillic lookalike letters, transliteration, numbers to words (Russian, English, French), toggling case, unmerging cells with fill, highlighting duplicates, finding all error cells, validating values (including Russian tax IDs), exporting to SQLite and Markdown, creating a sample XML from an XSD and validating XML. It is a classic VSTO add-in for Windows desktop Excel. Source code and installer are on <a href="https://github.com/navferty/NavfertyExcelAddIn" target="_blank" rel="noopener">GitHub</a>.</li>
+<li><b>Kutools</b>, <b>ASAP Utilities</b> and the <b>Ablebits</b> suite offer a lot more commands. They are free for limited use or for a trial period and then paid, so read the terms.</li>
+<li><b>Excel-DNA</b> and <b>xlwings</b> are not add-ins to install but frameworks for developers: .NET functions in a worksheet, and Python with Excel.</li>
+</ul>
+
+<h2>How to choose</h2>
+<ul>
+<li>Does it do something you need at least weekly? A large toolbox that you use two buttons of is not a gain.</li>
+<li>Does it work offline and keep data on your machine? Check the privacy policy for anything that sends cells to a server.</li>
+<li>Can you see the source or at least trust the publisher?</li>
+<li>Does it fit your Excel (32 or 64 bit, version, Windows or Mac, desktop or web)? Many add-ins work only on Windows desktop.</li>
+<li>Can you uninstall it cleanly?</li>
+</ul>
+
+<h2>Installing a third-party add-in</h2>
+<p>For installer-based add-ins, run the installer and restart Excel. Others come as <code>.xlam</code> or <code>.xll</code> files: put the file in a folder you trust, and add it in <b>File → Options → Add-ins → Go → Browse</b>. If Excel blocks it, right-click the file in Explorer → <b>Properties</b> and check <b>Unblock</b>. The <a href="../index.html">main page</a> has installation steps for Navferty's add-in.</p>
+
+        </div>
+    </div>
+    <div class="footer">
+        <p>Navferty &copy; 2021-<span id="current-year"></span> &bull; <a href="https://github.com/navferty/NavfertyExcelAddIn" target="_blank" rel="noopener" class="footer-link">Open Source on GitHub</a></p>
+    </div>
+    <script>document.getElementById('current-year').textContent = new Date().getFullYear();</script>
+</body>
+
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="A tutorial on packaging macros into an .xlam add-in with a custom Excel ribbon tab. Original article in Russian.">
+    <title>Creating a VBA add-in with its own ribbon tab (Russian) - Navferty's Excel Add-In</title>
+    <link rel="stylesheet" href="../style.css" />
+</head>
+
+<body>
+    <div id="container">
+        <div class="top_nav">
+            <div id="head_name">Navferty's Excel Add-In</div>
+            <div onclick="location.href='../index.html';">Home</div>
+            <div onclick="location.href='index.html';">Articles</div>
+        </div>
+
+        <div id="content" class="article">
+<p class="back-to-top"><a href="index.html">&larr; All articles</a></p>
+<h1 class="zag">Creating a VBA add-in with its own ribbon tab (Russian)</h1>
+<p class="subtitle">A tutorial on packaging macros into an .xlam add-in with a custom Excel ribbon tab. Original article in Russian.</p>
+<p>Macros in one workbook are not available in another, and a personal macro workbook is awkward to share. An <code>.xlam</code> add-in solves this: it loads with Excel, and its procedures are available everywhere, and a custom ribbon tab gives them buttons.</p>
+<p>The author's step-by-step tutorial in Russian covers building such an add-in, from saving the workbook as <code>.xlam</code> to adding a separate tab using the Custom UI XML:</p>
+<p><a href="https://pikabu.ru/story/tutorial_sozdanie_vbanadstroyki_s_otdelnoy_vkladkoy_v_ms_excel_7160405" target="_blank" rel="noopener">Tutorial: creating a VBA add-in with a separate tab in MS Excel</a> (Pikabu, Russian)</p>
+
+<h2>In short</h2>
+<ol>
+<li>Write the procedures in a normal workbook, in a standard module.</li>
+<li>Save as <b>Excel Add-In (*.xlam)</b>.</li>
+<li>Add a <code>customUI14.xml</code> part to the file, which describes the tab, groups and buttons, with an <code>onAction</code> callback name for each button.</li>
+<li>In VBA, write a procedure with a matching name and signature for each callback: <code>Sub OnButtonClick(control As IRibbonControl)</code>.</li>
+<li>Load it with <b>File → Options → Add-ins → Go → Browse</b>.</li>
+</ol>
+<p>The Custom UI Editor for Microsoft Office is a free tool that helps with the XML part.</p>
+
+        </div>
+    </div>
+    <div class="footer">
+        <p>Navferty &copy; 2021-<span id="current-year"></span> &bull; <a href="https://github.com/navferty/NavfertyExcelAddIn" target="_blank" rel="noopener" class="footer-link">Open Source on GitHub</a></p>
+    </div>
+    <script>document.getElementById('current-year').textContent = new Date().getFullYear();</script>
+</body>
+
+</html>
