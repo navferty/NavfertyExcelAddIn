@@ -76,27 +76,15 @@ jobs:
           /p:VisualStudioVersion="17.0" /p:Platform=AnyCPU /p:Configuration=Release
           /p:BootstrapperEnabled=true /p:CreateWebPageOnPublish=true /verbosity:normal
 
-      - name: Copy SQLite native DLLs to ClickOnce output
-        shell: pwsh
-        run: |
-          $src = 'NavfertyExcelAddIn/bin/Release/net481/publish'
-          $dst = '${{ runner.temp }}\staging'
-          Get-ChildItem $src -Filter SQLite.Interop.dll -Recurse | ForEach-Object {
-            $dest = Join-Path $dst $_.FullName.Substring((Resolve-Path $src).Path.Length + 1)
-            New-Item -ItemType Directory -Force -Path (Split-Path $dest) | Out-Null
-            Copy-Item $_.FullName $dest -Force
-            Write-Host "Copied $dest"
-          }
-
       - name: Verify publish output
         shell: pwsh
         run: |
           $dst = '${{ runner.temp }}\staging'
           Get-ChildItem $dst -Recurse -File | Format-Table FullName, Length
           if (-not (Get-ChildItem $dst -Filter *.vsto)) { throw '.vsto manifest not found' }
-          foreach ($x86x64 in 'x86', 'x64') {
-            if (-not (Get-ChildItem $dst -Filter SQLite.Interop.dll -Recurse | Where-Object { $_.FullName -like "*\$x86x64\*" })) {
-              throw "SQLite.Interop.dll ($x86x64) not found"
+          foreach ($arch in 'x86', 'x64') {
+            if (-not (Get-ChildItem $dst -Filter 'SQLite.Interop.dll*' -Recurse | Where-Object { $_.FullName -like "*\$arch\*" })) {
+              throw "SQLite.Interop.dll ($arch) not found"
             }
           }
           Get-ChildItem $dst -Include *.vsto, *.manifest -Recurse | ForEach-Object {
