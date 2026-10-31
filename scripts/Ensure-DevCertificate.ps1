@@ -12,6 +12,9 @@ param(
 )
 
 $ErrorActionPreference = 'Stop'
+
+# A PowerShell 7 parent process (e.g. CI) leaks a module path that breaks Windows PowerShell
+$env:PSModulePath = [Environment]::GetEnvironmentVariable('PSModulePath', 'Machine')
 $subject = 'CN=Navferty Dev Certificate'
 
 $cert = Get-ChildItem Cert:\CurrentUser\My |
