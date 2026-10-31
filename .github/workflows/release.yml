@@ -8,16 +8,6 @@ on:
     paths:
       - .github/workflows/release.yml
       - .github/actions/**
-  workflow_dispatch:
-    inputs:
-      version:
-        description: Version (major.minor.patch) used instead of a release tag
-        default: 0.0.1
-        required: true
-      dry_run:
-        description: Dry run (uncheck to actually deploy to the server)
-        type: boolean
-        default: true
 
 permissions:
   contents: read
@@ -39,13 +29,9 @@ jobs:
       - name: Resolve version
         id: version
         shell: pwsh
-        env:
-          INPUT_VERSION: ${{ inputs.version }}
         run: |
           if ('${{ github.event_name }}' -eq 'release') {
             $base = '${{ github.event.release.tag_name }}'.TrimStart('v')
-          } elseif ($env:INPUT_VERSION) {
-            $base = $env:INPUT_VERSION
           } else {
             $base = '0.0.1'
           }
@@ -139,12 +125,12 @@ jobs:
   deploy:
     needs: build
     runs-on: ubuntu-latest
-    # PR and manual runs use repository secrets, releases use the production environment secrets
+    # PR dry runs use repository secrets, releases use the production environment secrets
     environment: ${{ github.event_name == 'release' && 'production' || null }}
     env:
       WWW_DIR: web/navferty_net/www/
       DEPLOY_DIR: web/navferty_net/deploy/
-      DRY_RUN: ${{ github.event_name == 'release' && 'false' || github.event_name == 'pull_request' && 'true' || inputs.dry_run }}
+      DRY_RUN: ${{ github.event_name == 'pull_request' }}
     steps:
       - uses: actions/download-artifact@v4
         with:
