@@ -18,7 +18,7 @@ concurrency:
 jobs:
   build:
     runs-on: windows-2022
-    environment: production
+    # TEMPORARY: no environment, repository secrets are used (revert before merge)
     outputs:
       version: ${{ steps.version.outputs.version }}
     steps:
@@ -120,7 +120,6 @@ jobs:
   deploy:
     needs: build
     runs-on: ubuntu-latest
-    environment: production
     env:
       WWW_DIR: web/navferty_net/www/
       DEPLOY_DIR: web/navferty_net/deploy/
