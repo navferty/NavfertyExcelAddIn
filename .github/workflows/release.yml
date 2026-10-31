@@ -1,0 +1,201 @@
+name: Release
+
+on:
+  release:
+    types: [published]
+  workflow_dispatch:
+    inputs:
+      version:
+        description: Version (major.minor.patch) used instead of a release tag
+        default: 0.0.1
+        required: true
+      dry_run:
+        description: Dry run (rsync -n, nothing is written to the server)
+        type: boolean
+        default: true
+
+permissions:
+  contents: read
+
+concurrency:
+  group: release
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: windows-latest
+    outputs:
+      version: ${{ steps.version.outputs.version }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Resolve version
+        id: version
+        shell: pwsh
+        env:
+          INPUT_VERSION: ${{ inputs.version }}
+        run: |
+          if ('${{ github.event_name }}' -eq 'release') {
+            $base = '${{ github.event.release.tag_name }}'.TrimStart('v')
+          } else {
+            $base = $env:INPUT_VERSION
+          }
+          if ($base -notmatch '^(\d+)\.(\d+)\.(\d+)') { throw "Cannot parse version from '$base'" }
+          $version = "$($Matches[1]).$($Matches[2]).$($Matches[3]).${{ github.run_number }}"
+          Write-Host "Version: $version"
+          "version=$version" >> $env:GITHUB_OUTPUT
+
+      - uses: ./.github/actions/prepare-build
+        with:
+          pfx-base64: ${{ secrets.CERT_PFX_BASE64 }}
+          pfx-password: ${{ secrets.CERT_PASSWORD }}
+
+      - name: Build
+        run: >
+          msbuild NavfertyExcelAddIn.slnx /m /p:Configuration=Release /p:Platform="Any CPU"
+          /p:Version="${{ steps.version.outputs.version }}" /verbosity:minimal
+
+      # setup.exe signing may fail, which is expected: setup.exe is not deployed
+      - name: Publish ClickOnce
+        continue-on-error: true
+        run: >
+          msbuild NavfertyExcelAddIn/NavfertyExcelAddIn.csproj /t:PublishOnly
+          /p:Version="${{ steps.version.outputs.version }}"
+          /p:ApplicationVersion="${{ steps.version.outputs.version }}"
+          /p:PublishDir="${{ runner.temp }}\staging\"
+          /p:InstallUrl="https://navferty.ru/deploy/"
+          /p:VisualStudioVersion="17.0" /p:Platform=AnyCPU /p:Configuration=Release
+          /p:BootstrapperEnabled=true /p:CreateWebPageOnPublish=true /verbosity:normal
+
+      - name: Copy SQLite native DLLs to ClickOnce output
+        shell: pwsh
+        run: |
+          $src = 'NavfertyExcelAddIn/bin/Release/net481/publish'
+          $dst = '${{ runner.temp }}\staging'
+          Get-ChildItem $src -Filter SQLite.Interop.dll -Recurse | ForEach-Object {
+            $dest = Join-Path $dst $_.FullName.Substring((Resolve-Path $src).Path.Length + 1)
+            New-Item -ItemType Directory -Force -Path (Split-Path $dest) | Out-Null
+            Copy-Item $_.FullName $dest -Force
+            Write-Host "Copied $dest"
+          }
+
+      - name: Verify publish output
+        shell: pwsh
+        run: |
+          $dst = '${{ runner.temp }}\staging'
+          Get-ChildItem $dst -Recurse -File | Format-Table FullName, Length
+          if (-not (Get-ChildItem $dst -Filter *.vsto)) { throw '.vsto manifest not found' }
+          foreach ($x86x64 in 'x86', 'x64') {
+            if (-not (Get-ChildItem $dst -Filter SQLite.Interop.dll -Recurse | Where-Object { $_.FullName -like "*\$x86x64\*" })) {
+              throw "SQLite.Interop.dll ($x86x64) not found"
+            }
+          }
+          Get-ChildItem $dst -Include *.vsto, *.manifest -Recurse | ForEach-Object {
+            $sig = Get-AuthenticodeSignature $_.FullName
+            Write-Host "$($_.Name): $($sig.Status) $($sig.SignerCertificate.Subject)"
+          }
+
+      - name: Export public certificate
+        shell: pwsh
+        env:
+          PFX_PASSWORD: ${{ secrets.CERT_PASSWORD }}
+        run: |
+          $cert = [Security.Cryptography.X509Certificates.X509Certificate2]::new((Resolve-Path 'NavfertyExcelAddIn/Navferty.pfx').Path, $env:PFX_PASSWORD)
+          [IO.File]::WriteAllBytes('${{ runner.temp }}\staging\NavfertyCert.cer', $cert.Export('Cert'))
+          Write-Host "Exported $($cert.Subject) $($cert.Thumbprint)"
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: InstallationFiles
+          path: ${{ runner.temp }}\staging
+          if-no-files-found: error
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: Website
+          path: Website
+          if-no-files-found: error
+
+      - name: Remove signing certificate file
+        if: always()
+        shell: pwsh
+        run: Remove-Item NavfertyExcelAddIn/Navferty.pfx -Force -ErrorAction SilentlyContinue
+
+  attach-release-assets:
+    if: github.event_name == 'release'
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          name: InstallationFiles
+          path: staging
+      - name: Zip and attach to release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          (cd staging && zip -qr ../NavfertyExcelAddIn-${{ needs.build.outputs.version }}.zip .)
+          gh release upload "${{ github.event.release.tag_name }}" NavfertyExcelAddIn-*.zip --clobber --repo "${{ github.repository }}"
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    # Manual runs use repository secrets, releases use the production environment secrets
+    environment: ${{ github.event_name == 'release' && 'production' || null }}
+    env:
+      WWW_DIR: web/navferty_net/www/
+      DEPLOY_DIR: web/navferty_net/deploy/
+      DRY_RUN: ${{ github.event_name == 'workflow_dispatch' && inputs.dry_run }}
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          name: InstallationFiles
+          path: install
+      - uses: actions/download-artifact@v4
+        with:
+          name: Website
+          path: website
+
+      - name: Configure SSH
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+          SERVER_HOST: ${{ secrets.SERVER_HOST }}
+        run: |
+          install -m 700 -d ~/.ssh
+          printf '%s\n' "$SSH_PRIVATE_KEY" > ~/.ssh/id_deploy
+          chmod 600 ~/.ssh/id_deploy
+          ssh-keyscan -H "$SERVER_HOST" >> ~/.ssh/known_hosts
+
+      # Fails fast unless both target directories already exist
+      - name: Check target directories
+        env:
+          SERVER_HOST: ${{ secrets.SERVER_HOST }}
+          SERVER_USER: ${{ secrets.SERVER_USER }}
+        run: |
+          ssh -i ~/.ssh/id_deploy "$SERVER_USER@$SERVER_HOST" \
+            'test -d "$HOME/web/navferty_net/www" && test -d "$HOME/web/navferty_net/deploy"'
+
+      - name: Upload website to www
+        env:
+          SERVER_HOST: ${{ secrets.SERVER_HOST }}
+          SERVER_USER: ${{ secrets.SERVER_USER }}
+        run: |
+          flags=(-rltvz --no-perms --no-owner --no-group --exclude='deploy/')
+          [ "$DRY_RUN" = "true" ] && flags+=(-n)
+          rsync "${flags[@]}" -e "ssh -i $HOME/.ssh/id_deploy" \
+            website/ "$SERVER_USER@$SERVER_HOST:$WWW_DIR"
+
+      # setup.exe is intentionally not deployed
+      - name: Upload installation files to deploy
+        env:
+          SERVER_HOST: ${{ secrets.SERVER_HOST }}
+          SERVER_USER: ${{ secrets.SERVER_USER }}
+        run: |
+          flags=(-rltvz --no-perms --no-owner --no-group --prune-empty-dirs)
+          for ext in dll pdb config deploy manifest vsto cer htm; do flags+=(--include="*.$ext"); done
+          flags+=(--include='*/' --exclude='*')
+          [ "$DRY_RUN" = "true" ] && flags+=(-n)
+          rsync "${flags[@]}" -e "ssh -i $HOME/.ssh/id_deploy" \
+            install/ "$SERVER_USER@$SERVER_HOST:$DEPLOY_DIR"

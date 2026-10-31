@@ -322,12 +322,11 @@ If you encounter a security warning about the certificate:
 
 ### Advanced: Offline Install
 
-The solution is built in Azure. You can download the full archive with installation files:
+The solution is built with GitHub Actions. You can download the full archive with installation files:
 
-1. Visit https://navferty.visualstudio.com/NavfertyExcelAddIn/_build?definitionId=3
-2. Select the latest build of 'NavfertyExcelAddIn - Publish' pipeline
-3. Download published installation files
-4. Extract files to a folder and run the '.vsto' file
+1. Open the [latest release](https://github.com/navferty/NavfertyExcelAddIn/releases/latest)
+2. Download the attached `NavfertyExcelAddIn-*.zip` archive
+3. Extract files to a folder and run the '.vsto' file
 
 > **Important:** Using the desktop folder is recommended - updates are only permitted from the same folder where the add-in was first installed.
 

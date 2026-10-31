@@ -1,0 +1,40 @@
+name: Prepare build
+description: Restore packages, drop the Website project from the solution and import the manifest signing certificate.
+
+inputs:
+  pfx-base64:
+    description: Base64 of the signing certificate (pfx)
+    required: true
+  pfx-password:
+    description: Password of the pfx
+    required: true
+
+runs:
+  using: composite
+  steps:
+    - uses: microsoft/setup-msbuild@v2
+
+    # The Website project targets .NET Framework 4.0, which fails on modern runners
+    - name: Remove Website project from solution
+      shell: pwsh
+      run: |
+        $content = Get-Content NavfertyExcelAddIn.slnx -Raw
+        $content = $content -replace '(?s)\s*<Project Path="Website/".*?</Project>', ''
+        Set-Content NavfertyExcelAddIn.slnx $content -NoNewline
+
+    - name: Import signing certificate
+      shell: pwsh
+      env:
+        PFX_BASE64: ${{ inputs.pfx-base64 }}
+        PFX_PASSWORD: ${{ inputs.pfx-password }}
+      run: |
+        if (-not $env:PFX_BASE64) { throw 'CERT_PFX_BASE64 secret is not available' }
+        $pfxPath = Join-Path $PWD 'NavfertyExcelAddIn/Navferty.pfx'
+        [IO.File]::WriteAllBytes($pfxPath, [Convert]::FromBase64String($env:PFX_BASE64))
+        $secure = ConvertTo-SecureString $env:PFX_PASSWORD -AsPlainText -Force
+        $cert = Import-PfxCertificate -FilePath $pfxPath -CertStoreLocation Cert:\CurrentUser\My -Password $secure
+        Write-Host "Imported certificate, thumbprint: $($cert.Thumbprint)"
+
+    - name: Restore
+      shell: pwsh
+      run: msbuild NavfertyExcelAddIn.slnx /t:Restore /p:Configuration=Release /verbosity:minimal

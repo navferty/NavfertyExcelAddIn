@@ -73,7 +73,7 @@ if (Test-Path $cerPath) {
     Write-Host "Thumbprint: $($cert.Thumbprint)"
     Write-Host "`nNext steps:"
     Write-Host "1. Update .csproj: <ManifestCertificateThumbprint>$($cert.Thumbprint)</ManifestCertificateThumbprint>"
-    Write-Host "2. Update Azure Pipeline password secret variable"
+    Write-Host "2. Update the CERT_PASSWORD and CERT_PFX_BASE64 GitHub secrets"
     Write-Host "3. Commit the new Navferty.pfx"
     
     # Cleanup temp files
