@@ -34,6 +34,7 @@ jobs:
         with:
           pfx-base64: ${{ secrets.CERT_PFX_BASE64 }}
           pfx-password: ${{ secrets.CERT_PASSWORD }}
+          require-signing: 'true'
 
       - name: Build
         run: >

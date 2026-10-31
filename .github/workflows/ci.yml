@@ -14,13 +14,11 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      # No production credentials in CI: the build is unsigned
       - uses: ./.github/actions/prepare-build
-        with:
-          pfx-base64: ${{ secrets.CERT_PFX_BASE64 }}
-          pfx-password: ${{ secrets.CERT_PASSWORD }}
 
       - name: Build
-        run: msbuild NavfertyExcelAddIn.slnx /m /p:Configuration=Release /p:Platform="Any CPU" /verbosity:minimal
+        run: msbuild NavfertyExcelAddIn.slnx /m /p:Configuration=Release /p:Platform="Any CPU" /p:SignManifests=false /verbosity:minimal
 
       - name: Run tests with code coverage
         run: |

@@ -3,11 +3,17 @@ description: Restore packages, drop the Website project from the solution and im
 
 inputs:
   pfx-base64:
-    description: Base64 of the signing certificate (pfx)
-    required: true
+    description: Base64 of the signing certificate (pfx); the import is skipped when empty
+    required: false
+    default: ''
   pfx-password:
     description: Password of the pfx
-    required: true
+    required: false
+    default: ''
+  require-signing:
+    description: Fail the build when the signing certificate is not provided
+    required: false
+    default: 'false'
 
 runs:
   using: composite
@@ -22,13 +28,18 @@ runs:
         $content = $content -replace '(?s)\s*<Project Path="Website/".*?</Project>', ''
         Set-Content NavfertyExcelAddIn.slnx $content -NoNewline
 
+    - name: Require signing certificate
+      if: inputs.require-signing == 'true' && (inputs.pfx-base64 == '' || inputs.pfx-password == '')
+      shell: pwsh
+      run: throw 'Signing certificate secrets are required but not available'
+
     - name: Import signing certificate
+      if: inputs.pfx-base64 != ''
       shell: pwsh
       env:
         PFX_BASE64: ${{ inputs.pfx-base64 }}
         PFX_PASSWORD: ${{ inputs.pfx-password }}
       run: |
-        if (-not $env:PFX_BASE64) { throw 'CERT_PFX_BASE64 secret is not available' }
         $pfxPath = Join-Path $PWD 'NavfertyExcelAddIn/Navferty.pfx'
         [IO.File]::WriteAllBytes($pfxPath, [Convert]::FromBase64String($env:PFX_BASE64))
         $secure = ConvertTo-SecureString $env:PFX_PASSWORD -AsPlainText -Force
