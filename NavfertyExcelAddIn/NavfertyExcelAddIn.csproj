@@ -244,6 +244,25 @@
     <ManifestKeyFile>Navferty.pfx</ManifestKeyFile>
   </PropertyGroup>
 
+  <!-- VSTO requires manifest signing. When the real (git-ignored) Navferty.pfx is absent, e.g. on a fresh clone or in CI,
+       sign with a self-signed development certificate that is generated on demand. -->
+  <Target Name="EnsureDevSigningCertificate" BeforeTargets="PrepareForBuild"
+          Condition="'$(SignManifests)' == 'true' AND '$(DesignTimeBuild)' != 'true' AND !Exists('$(MSBuildProjectDirectory)\$(ManifestKeyFile)')">
+    <PropertyGroup>
+      <DevCertPfx>$(MSBuildProjectDirectory)\obj\dev-signing\NavfertyDev.pfx</DevCertPfx>
+      <DevCertScript>$(MSBuildProjectDirectory)\..\scripts\Ensure-DevCertificate.ps1</DevCertScript>
+    </PropertyGroup>
+    <Exec Command="powershell -NoProfile -ExecutionPolicy Bypass -File &quot;$(DevCertScript)&quot; -PfxPath &quot;$(DevCertPfx)&quot;"
+          ConsoleToMSBuild="true" StandardOutputImportance="low">
+      <Output TaskParameter="ConsoleOutput" ItemName="DevCertThumbprintLine" />
+    </Exec>
+    <PropertyGroup>
+      <ManifestCertificateThumbprint>@(DevCertThumbprintLine)</ManifestCertificateThumbprint>
+      <ManifestKeyFile>$(DevCertPfx)</ManifestKeyFile>
+    </PropertyGroup>
+    <Message Importance="high" Text="Navferty.pfx not found, signing with development certificate $(ManifestCertificateThumbprint)" />
+  </Target>
+
   <!-- Custom target to ensure SQLite native DLLs are copied to output directory -->
   <Target Name="CopySQLiteNativeDlls" AfterTargets="Build;_CopyFilesToPublishFolder;ComputeFilesToPublish">
     <PropertyGroup>

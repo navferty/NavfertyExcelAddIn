@@ -14,11 +14,11 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      # No production credentials in CI: manifests are signed with a disposable certificate
+      # No production credentials in CI: the csproj signs with a generated development certificate
       - uses: ./.github/actions/prepare-build
 
       - name: Build
-        run: msbuild NavfertyExcelAddIn.slnx /m /p:Configuration=Release /p:Platform="Any CPU" /p:ManifestCertificateThumbprint=$env:CI_CERT_THUMBPRINT /verbosity:minimal
+        run: msbuild NavfertyExcelAddIn.slnx /m /p:Configuration=Release /p:Platform="Any CPU" /verbosity:minimal
 
       - name: Run tests with code coverage
         run: |

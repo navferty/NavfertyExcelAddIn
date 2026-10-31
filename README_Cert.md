@@ -1,4 +1,17 @@
-﻿# Generate self-signed code signing certificate
+﻿# Code signing certificates
+
+## Local development
+
+No setup is needed. VSTO requires signed manifests, so when `NavfertyExcelAddIn/Navferty.pfx` is absent the build
+runs `scripts/Ensure-DevCertificate.ps1` (via the `EnsureDevSigningCertificate` target in the csproj). It creates a
+self-signed `CN=Navferty Dev Certificate` in your `CurrentUser\My` store and signs with it. CI uses the same path.
+
+The development certificate is not trusted by end users. Real releases are signed in the `production` GitHub
+environment from the `CERT_PFX_BASE64` and `CERT_PASSWORD` secrets. `Navferty.pfx` is git-ignored and must not be committed.
+
+## Release certificate
+
+### Generate self-signed code signing certificate
 
 Use certreq so that the certificate has no EKU (Enhanced Key Usage) restrictions, matching the Visual Studio generated certificate.
 
@@ -74,7 +87,7 @@ if (Test-Path $cerPath) {
     Write-Host "`nNext steps:"
     Write-Host "1. Update .csproj: <ManifestCertificateThumbprint>$($cert.Thumbprint)</ManifestCertificateThumbprint>"
     Write-Host "2. Update the CERT_PASSWORD and CERT_PFX_BASE64 GitHub secrets"
-    Write-Host "3. Do NOT commit Navferty.pfx (it is git-ignored); for local builds keep it next to the csproj"
+    Write-Host "3. Do NOT commit Navferty.pfx (it is git-ignored)"
     
     # Cleanup temp files
     Remove-Item $infPath, $cerPath -Force
