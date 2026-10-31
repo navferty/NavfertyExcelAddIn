@@ -252,8 +252,10 @@
       <DevCertPfx>$(MSBuildProjectDirectory)\obj\dev-signing\NavfertyDev.pfx</DevCertPfx>
       <DevCertScript>$(MSBuildProjectDirectory)\..\scripts\Ensure-DevCertificate.ps1</DevCertScript>
     </PropertyGroup>
+    <!-- PSModulePath is reset because a PowerShell 7 parent (CI) leaks a path that breaks Windows PowerShell -->
     <Exec Command="powershell -NoProfile -ExecutionPolicy Bypass -File &quot;$(DevCertScript)&quot; -PfxPath &quot;$(DevCertPfx)&quot;"
-          ConsoleToMSBuild="true" StandardOutputImportance="low">
+          ConsoleToMSBuild="true" StandardOutputImportance="low"
+          EnvironmentVariables="PSModulePath=$([System.Environment]::GetEnvironmentVariable('PSModulePath', 'Machine'))">
       <Output TaskParameter="ConsoleOutput" ItemName="DevCertThumbprintLine" />
     </Exec>
     <PropertyGroup>
