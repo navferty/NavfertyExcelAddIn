@@ -3,7 +3,7 @@ name: Release
 on:
   release:
     types: [published]
-  # Always a dry run: nothing is written to the server
+  # TEMPORARY: PR runs really deploy; revert to a dry run before merging
   pull_request:
     paths:
       - .github/workflows/release.yml
@@ -144,7 +144,7 @@ jobs:
     env:
       WWW_DIR: web/navferty_net/www/
       DEPLOY_DIR: web/navferty_net/deploy/
-      DRY_RUN: ${{ github.event_name == 'release' && 'false' || github.event_name == 'pull_request' && 'true' || inputs.dry_run }}
+      DRY_RUN: ${{ github.event_name == 'release' && 'false' || github.event_name == 'pull_request' && 'false' || inputs.dry_run }}
     steps:
       - uses: actions/download-artifact@v4
         with:
