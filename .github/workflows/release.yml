@@ -3,6 +3,10 @@ name: Release
 on:
   release:
     types: [published]
+  # TEMPORARY (revert before merge): real deploy from the PR to test the release flow
+  pull_request:
+    paths:
+      - .github/workflows/release.yml
 
 permissions:
   contents: read
@@ -24,7 +28,7 @@ jobs:
         id: version
         shell: pwsh
         run: |
-          $base = '${{ github.event.release.tag_name }}'.TrimStart('v')
+          $base = '${{ github.event.release.tag_name || 'v0.0.1' }}'.TrimStart('v')
           if ($base -notmatch '^(\d+)\.(\d+)\.(\d+)') { throw "Cannot parse version from '$base'" }
           $version = "$($Matches[1]).$($Matches[2]).$($Matches[3]).${{ github.run_number }}"
           Write-Host "Version: $version"
@@ -96,6 +100,7 @@ jobs:
         run: Remove-Item NavfertyExcelAddIn/Navferty.pfx -Force -ErrorAction SilentlyContinue
 
   attach-release-assets:
+    if: github.event_name == 'release'
     needs: build
     runs-on: ubuntu-latest
     permissions:
