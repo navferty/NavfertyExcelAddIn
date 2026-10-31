@@ -3,11 +3,6 @@ name: Release
 on:
   release:
     types: [published]
-  # Always a dry run: nothing is written to the server
-  pull_request:
-    paths:
-      - .github/workflows/release.yml
-      - .github/actions/**
 
 permissions:
   contents: read
@@ -18,11 +13,8 @@ concurrency:
 
 jobs:
   build:
-    # Secrets are not available to fork PRs; the deploy job is skipped with the build
-    if: github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository
     runs-on: windows-2022
-    # The signing certificate secrets live in the production environment
-    environment: ${{ github.event_name == 'release' && 'production' || null }}
+    environment: production
     outputs:
       version: ${{ steps.version.outputs.version }}
     steps:
@@ -32,11 +24,7 @@ jobs:
         id: version
         shell: pwsh
         run: |
-          if ('${{ github.event_name }}' -eq 'release') {
-            $base = '${{ github.event.release.tag_name }}'.TrimStart('v')
-          } else {
-            $base = '0.0.1'
-          }
+          $base = '${{ github.event.release.tag_name }}'.TrimStart('v')
           if ($base -notmatch '^(\d+)\.(\d+)\.(\d+)') { throw "Cannot parse version from '$base'" }
           $version = "$($Matches[1]).$($Matches[2]).$($Matches[3]).${{ github.run_number }}"
           Write-Host "Version: $version"
@@ -107,7 +95,6 @@ jobs:
         run: Remove-Item NavfertyExcelAddIn/Navferty.pfx -Force -ErrorAction SilentlyContinue
 
   attach-release-assets:
-    if: github.event_name == 'release'
     needs: build
     runs-on: ubuntu-latest
     permissions:
@@ -127,12 +114,10 @@ jobs:
   deploy:
     needs: build
     runs-on: ubuntu-latest
-    # PR dry runs use repository secrets, releases use the production environment secrets
-    environment: ${{ github.event_name == 'release' && 'production' || null }}
+    environment: production
     env:
       WWW_DIR: web/navferty_net/www/
       DEPLOY_DIR: web/navferty_net/deploy/
-      DRY_RUN: ${{ github.event_name == 'pull_request' }}
     steps:
       - uses: actions/download-artifact@v4
         with:
@@ -168,7 +153,6 @@ jobs:
           SERVER_USER: ${{ secrets.SERVER_USER }}
         run: |
           flags=(-rltvz --no-perms --no-owner --no-group --exclude='deploy/')
-          [ "$DRY_RUN" = "true" ] && flags+=(-n)
           rsync "${flags[@]}" -e "ssh -i $HOME/.ssh/id_deploy" \
             website/ "$SERVER_USER@$SERVER_HOST:$WWW_DIR"
 
@@ -181,6 +165,5 @@ jobs:
           flags=(-rltvz --no-perms --no-owner --no-group --prune-empty-dirs)
           for ext in dll pdb config deploy manifest vsto cer htm; do flags+=(--include="*.$ext"); done
           flags+=(--include='*/' --exclude='*')
-          [ "$DRY_RUN" = "true" ] && flags+=(-n)
           rsync "${flags[@]}" -e "ssh -i $HOME/.ssh/id_deploy" \
             install/ "$SERVER_USER@$SERVER_HOST:$DEPLOY_DIR"
