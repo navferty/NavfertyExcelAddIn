@@ -74,7 +74,7 @@ if (Test-Path $cerPath) {
     Write-Host "`nNext steps:"
     Write-Host "1. Update .csproj: <ManifestCertificateThumbprint>$($cert.Thumbprint)</ManifestCertificateThumbprint>"
     Write-Host "2. Update the CERT_PASSWORD and CERT_PFX_BASE64 GitHub secrets"
-    Write-Host "3. Commit the new Navferty.pfx"
+    Write-Host "3. Do NOT commit Navferty.pfx (it is git-ignored); for local builds keep it next to the csproj"
     
     # Cleanup temp files
     Remove-Item $infPath, $cerPath -Force

@@ -327,3 +327,6 @@ ASALocalRun/
 
 # MFractors (Xamarin productivity tool) working folder 
 .mfractor/
+
+# Manifest signing certificate (provided by CI/release at build time)
+NavfertyExcelAddIn/Navferty.pfx
