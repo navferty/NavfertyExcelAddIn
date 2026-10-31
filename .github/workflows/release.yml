@@ -3,6 +3,11 @@ name: Release
 on:
   release:
     types: [published]
+  # Always a dry run: nothing is written to the server
+  pull_request:
+    paths:
+      - .github/workflows/release.yml
+      - .github/actions/**
   workflow_dispatch:
     inputs:
       version:
@@ -10,7 +15,7 @@ on:
         default: 0.0.1
         required: true
       dry_run:
-        description: Dry run (rsync -n, nothing is written to the server)
+        description: Dry run (uncheck to actually deploy to the server)
         type: boolean
         default: true
 
@@ -23,6 +28,8 @@ concurrency:
 
 jobs:
   build:
+    # Secrets are not available to fork PRs; the deploy job is skipped with the build
+    if: github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository
     runs-on: windows-latest
     outputs:
       version: ${{ steps.version.outputs.version }}
@@ -37,8 +44,10 @@ jobs:
         run: |
           if ('${{ github.event_name }}' -eq 'release') {
             $base = '${{ github.event.release.tag_name }}'.TrimStart('v')
-          } else {
+          } elseif ($env:INPUT_VERSION) {
             $base = $env:INPUT_VERSION
+          } else {
+            $base = '0.0.1'
           }
           if ($base -notmatch '^(\d+)\.(\d+)\.(\d+)') { throw "Cannot parse version from '$base'" }
           $version = "$($Matches[1]).$($Matches[2]).$($Matches[3]).${{ github.run_number }}"
@@ -142,12 +151,12 @@ jobs:
   deploy:
     needs: build
     runs-on: ubuntu-latest
-    # Manual runs use repository secrets, releases use the production environment secrets
+    # PR and manual runs use repository secrets, releases use the production environment secrets
     environment: ${{ github.event_name == 'release' && 'production' || null }}
     env:
       WWW_DIR: web/navferty_net/www/
       DEPLOY_DIR: web/navferty_net/deploy/
-      DRY_RUN: ${{ github.event_name == 'workflow_dispatch' && inputs.dry_run }}
+      DRY_RUN: ${{ github.event_name == 'release' && 'false' || github.event_name == 'pull_request' && 'true' || inputs.dry_run }}
     steps:
       - uses: actions/download-artifact@v4
         with:
