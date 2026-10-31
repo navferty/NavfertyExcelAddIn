@@ -72,7 +72,7 @@ jobs:
           /p:Version="${{ steps.version.outputs.version }}"
           /p:ApplicationVersion="${{ steps.version.outputs.version }}"
           /p:PublishDir="${{ runner.temp }}\staging\"
-          /p:InstallUrl="https://navferty.ru/deploy/"
+          /p:InstallUrl="https://deploy.navferty.net/"
           /p:VisualStudioVersion="17.0" /p:Platform=AnyCPU /p:Configuration=Release
           /p:BootstrapperEnabled=true /p:CreateWebPageOnPublish=true /verbosity:normal
 
