@@ -1,0 +1,51 @@
+name: CI
+
+on:
+  push:
+    branches: [master]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  build-and-test:
+    runs-on: windows-2022
+    steps:
+      - uses: actions/checkout@v4
+
+      # No production credentials in CI: the csproj signs with a generated development certificate
+      - uses: ./.github/actions/prepare-build
+
+      - name: Build
+        run: msbuild NavfertyExcelAddIn.slnx /m /p:Configuration=Release /p:Platform="Any CPU" /verbosity:minimal
+
+      - name: Run tests with code coverage
+        run: |
+          dotnet tool install dotnet-coverage --tool-path tools
+          dotnet tool install dotnet-reportgenerator-globaltool --tool-path tools
+          New-Item -ItemType Directory -Force -Path reports, TestResults | Out-Null
+
+          $testExe = Get-ChildItem -Recurse -Filter '*UnitTests.exe' |
+            Where-Object { $_.FullName -like '*bin\Release*' } | Select-Object -First 1
+          if (-not $testExe) { throw 'Test executable not found' }
+
+          & tools\dotnet-coverage.exe collect --output coverage.cobertura.xml --output-format cobertura `
+            $testExe.FullName --report-trx --results-directory TestResults --treenode-filter '/**[Category!=Automation]'
+          $exitCode = $LASTEXITCODE
+
+          if (Test-Path coverage.cobertura.xml) {
+            & tools\reportgenerator.exe '-reports:coverage.cobertura.xml' '-targetdir:reports' '-reporttypes:HTMLInline;HTMLChart'
+          }
+          exit $exitCode
+
+      - name: Upload test results and coverage
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-results
+          path: |
+            TestResults/**/*.trx
+            coverage.cobertura.xml
+            reports/
+          if-no-files-found: ignore
