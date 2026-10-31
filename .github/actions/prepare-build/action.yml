@@ -46,6 +46,16 @@ runs:
         $cert = Import-PfxCertificate -FilePath $pfxPath -CertStoreLocation Cert:\CurrentUser\My -Password $secure
         Write-Host "Imported certificate, thumbprint: $($cert.Thumbprint)"
 
+    # VSTO builds cannot be unsigned, so CI signs with a throwaway self-signed certificate
+    - name: Create disposable signing certificate
+      if: inputs.pfx-base64 == ''
+      shell: pwsh
+      run: |
+        $cert = New-SelfSignedCertificate -Type CodeSigningCert -Subject 'CN=CI Disposable' -CertStoreLocation Cert:\CurrentUser\My -NotAfter (Get-Date).AddDays(1)
+        $password = ConvertTo-SecureString ([guid]::NewGuid().ToString()) -AsPlainText -Force
+        Export-PfxCertificate -Cert $cert -FilePath (Join-Path $PWD 'NavfertyExcelAddIn/Navferty.pfx') -Password $password | Out-Null
+        "CI_CERT_THUMBPRINT=$($cert.Thumbprint)" >> $env:GITHUB_ENV
+
     - name: Restore
       shell: pwsh
       run: msbuild NavfertyExcelAddIn.slnx /t:Restore /p:Configuration=Release /verbosity:minimal
