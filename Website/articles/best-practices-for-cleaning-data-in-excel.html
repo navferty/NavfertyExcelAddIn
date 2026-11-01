@@ -41,6 +41,15 @@
 <li>One header row, unique column names.</li>
 </ul>
 
+<h3>Format the result as a table</h3>
+<p>Once the structure is clean, select any cell in the data and press <kbd>Ctrl</kbd>+<kbd>T</kbd> (Home &rarr; Format as Table). Tick "My table has headers". It costs nothing and helps later:</p>
+<ul>
+<li>The range grows by itself when you add rows, so formulas, charts and pivot tables based on it do not need updating.</li>
+<li>Filters and banded rows are added, and the header stays visible while scrolling.</li>
+<li>Formulas can use column names: <code>=SUM(Table1[Amount])</code> instead of <code>=SUM(C2:C500)</code>. A formula typed in one row fills the whole column.</li>
+<li>Give the table a meaningful name on the Table Design tab (for example <code>Orders</code>).</li>
+</ul>
+<p>Tables do not allow merged cells, and a table cannot contain subtotal rows inside the data, which fits well with the rules above.</p>
 <h2>4. Fix the text</h2>
 <ul>
 <li>Remove extra spaces and non-printable characters (<a href="remove-extra-spaces-in-excel.html">details</a>).</li>
@@ -95,6 +104,15 @@
 <li>Одна строка заголовков, уникальные имена столбцов.</li>
 </ul>
 
+<h3>Оформите результат как таблицу</h3>
+<p>Когда структура в порядке, выделите любую ячейку данных и нажмите <kbd>Ctrl</kbd>+<kbd>T</kbd> (Главная &rarr; Форматировать как таблицу). Отметьте «Таблица с заголовками». Это ничего не стоит и пригодится дальше:</p>
+<ul>
+<li>Диапазон растёт сам при добавлении строк, поэтому формулы, диаграммы и сводные таблицы на её основе не нужно обновлять вручную.</li>
+<li>Появляются фильтры и чередование строк, а заголовок остаётся на виду при прокрутке.</li>
+<li>В формулах можно использовать имена столбцов: <code>=СУММ(Таблица1[Amount])</code> вместо <code>=СУММ(C2:C500)</code>. Формула, введённая в одной строке, заполняет весь столбец.</li>
+<li>Дайте таблице понятное имя на вкладке «Конструктор таблиц» (например, <code>Orders</code>).</li>
+</ul>
+<p>В таблицах нельзя объединять ячейки, а промежуточные итоги внутри данных мешают, что согласуется с правилами выше.</p>
 <h2>4. Исправьте текст</h2>
 <ul>
 <li>Уберите лишние пробелы и непечатаемые символы (<a href="remove-extra-spaces-in-excel.html">подробнее</a>).</li>
