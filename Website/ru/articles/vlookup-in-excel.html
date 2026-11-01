@@ -50,11 +50,11 @@
 <p>На листе Users справочник:</p>
 <p><img src="../../images/articles/vlookup/users-reference.jpg" alt="Лист Users со столбцами User Id и User Name" loading="lazy" width="507" height="371"></p>
 <p>В ячейке <code>E2</code> листа Orders начните формулу. Введя первый аргумент, перейдите на лист Users и выделите столбцы <code>A:B</code>, Excel подставит второй аргумент:</p>
-<p><img src="../../images/articles/vlookup/vlookup-selecting-table_array.jpg" alt="Выделение диапазона A:B на листе Users при вводе формулы" loading="lazy" width="832" height="355"></p>
+<p><img src="../../images/articles/vlookup/vlookup-selecting-table_array-ru.jpg" alt="Выделение диапазона A:B на листе Users при вводе формулы" loading="lazy" width="940" height="386"></p>
 <pre>=ВПР(D2; Users!A:B; 2; ЛОЖЬ)</pre>
-<p><img src="../../images/articles/vlookup/vlookup-formula.jpg" alt="Формула в ячейке E2 во время ввода, под ячейкой подсказка по аргументам" loading="lazy" width="841" height="366"></p>
+<p><img src="../../images/articles/vlookup/vlookup-formula-ru.jpg" alt="Формула в ячейке E2 во время ввода, под ячейкой подсказка по аргументам" loading="lazy" width="922" height="380"></p>
 <p>Ключ находится в <code>D2</code>, таблица &ndash; <code>Users!A:B</code>, возвращаем второй столбец (имя). Протяните формулу вниз:</p>
-<p><img src="../../images/articles/vlookup/vlookup-result.jpg" alt="Результат ВПР в столбце E: имена пользователей и #Н/Д для идентификатора, которого нет на листе Users" loading="lazy" width="707" height="372"></p>
+<p><img src="../../images/articles/vlookup/vlookup-result-ru.jpg" alt="Результат ВПР в столбце E: имена пользователей и #Н/Д для идентификатора, которого нет на листе Users" loading="lazy" width="722" height="381"></p>
 <p>В заказе с идентификатором 8 появился <code>#Н/Д</code>: такого идентификатора нет на листе Users. Это правильное поведение: оно сообщает, что данные не сходятся, а это часто как раз то, что нужно найти.</p>
 <h2>Почему появляется #Н/Д (или неверное значение)</h2>
 <ul>
