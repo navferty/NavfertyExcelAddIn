@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Формулы Excel для начинающих - Надстройка Navferty Excel Add-In</title>
+    <meta name="description" content="Основы написания формул и функции, которыми большинство людей пользуется каждую неделю.">
+    <link rel="canonical" href="https://navferty.net/ru/articles/beginners-guide-to-excel-formulas.html">
+    <link rel="alternate" hreflang="en" href="https://navferty.net/en/articles/beginners-guide-to-excel-formulas.html">
+    <link rel="alternate" hreflang="ru" href="https://navferty.net/ru/articles/beginners-guide-to-excel-formulas.html">
+    <link rel="alternate" hreflang="x-default" href="https://navferty.net/en/articles/beginners-guide-to-excel-formulas.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="Надстройка Navferty Excel Add-In">
+    <meta property="og:title" content="Формулы Excel для начинающих - Надстройка Navferty Excel Add-In">
+    <meta property="og:description" content="Основы написания формул и функции, которыми большинство людей пользуется каждую неделю.">
+    <meta property="og:url" content="https://navferty.net/ru/articles/beginners-guide-to-excel-formulas.html">
+    <meta property="og:image" content="https://navferty.net/images/NavfertyToolsRibbonRu.png">
+    <meta property="og:locale" content="ru">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="icon" href="../../favicon.ico">
+    <link rel="stylesheet" href="../../style.css">
+    <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Формулы Excel для начинающих", "inLanguage": "ru", "description": "Основы написания формул и функции, которыми большинство людей пользуется каждую неделю.", "author": {"@type": "Person", "name": "Andrey Deev", "url": "https://github.com/navferty"}, "mainEntityOfPage": "https://navferty.net/ru/articles/beginners-guide-to-excel-formulas.html"}</script>
+</head>
+
+<body>
+    <header class="site-header">
+        <div class="site-header-inner">
+            <a class="brand" href="../">Надстройка Navferty Excel Add-In</a>
+            <nav aria-label="Надстройка Navferty Excel Add-In"><a href="../#commands">Команды</a><a href="./">Статьи</a><a href="../install.html">Установка</a><a href="https://github.com/navferty/NavfertyExcelAddIn" target="_blank" rel="noopener">GitHub</a><span class="lang-switch"><a href="../../en/articles/beginners-guide-to-excel-formulas.html" lang="en" hreflang="en" data-lang="en">English</a><a href="beginners-guide-to-excel-formulas.html" lang="ru" hreflang="ru" data-lang="ru" aria-current="true">Русский</a></span></nav>
+        </div>
+    </header>
+    <div id="container">
+        <main id="content" class="article">
+<p class="back-to-top"><a href="index.html">&larr; Все статьи</a></p>
+<h1 class="zag">Формулы Excel для начинающих</h1>
+<p class="subtitle">Основы написания формул и функции, которыми большинство людей пользуется каждую неделю.</p>
+<p>Формула начинается со знака <code>=</code> и может содержать числа, ссылки на ячейки, операторы и функции. Excel пересчитывает её при каждом изменении входных данных.</p>
+
+<h2>Основы</h2>
+<pre>=A1+B1        сложение
+=A1*B1        умножение
+=A1/B1        деление
+=A1^2         степень
+=(A1+B1)*C1   скобки меняют порядок</pre>
+<p>Excel следует обычному порядку: скобки, степени, умножение и деление, затем сложение и вычитание.</p>
+
+<h2>Ссылки</h2>
+<ul>
+<li><code>A1</code> – относительная: при копировании формулы на строку вниз она станет <code>A2</code>.</li>
+<li><code>$A$1</code> – абсолютная и не меняется при копировании. Нажмите <kbd>F4</kbd>, чтобы добавить знаки доллара.</li>
+<li><code>$A1</code> и <code>A$1</code> фиксируют только столбец или только строку.</li>
+<li><code>Лист2!A1</code> – ссылка на другой лист. Если в имени есть пробелы, возьмите его в апострофы: <code>'Продажи 2024'!A1</code>.</li>
+<li>Диапазон записывается как <code>A1:A10</code>.</li>
+</ul>
+
+<h2>Десять функций, которые стоит знать</h2>
+<ul>
+<li><code>СУММ(A1:A10)</code>, <code>СРЗНАЧ</code>, <code>МИН</code>, <code>МАКС</code>, <code>СЧЁТ</code> (числа), <code>СЧЁТЗ</code> (непустые).</li>
+<li><code>ЕСЛИ(A1&gt;100; "много"; "мало")</code> – выбор. Условия комбинируются через <code>И</code>, <code>ИЛИ</code>.</li>
+<li><code>СУММЕСЛИ(диапазон; условие; диапазон_суммирования)</code> и <code>СУММЕСЛИМН</code> – сумма с одним или несколькими условиями. <code>СЧЁТЕСЛИ</code> и <code>СЧЁТЕСЛИМН</code> делают то же для подсчёта.</li>
+<li><code>ПРОСМОТРX(ключ; диапазон_поиска; диапазон_результата)</code> или <code>ВПР(ключ; таблица; столбец; ЛОЖЬ)</code> – найти значение по ключу.</li>
+<li><code>ИНДЕКС</code> и <code>ПОИСКПОЗ</code> – гибкая комбинация для поиска, работает во всех версиях и в любом направлении.</li>
+<li><code>ЕСЛИОШИБКА(формула; "")</code> – запасной вариант на случай ошибки. Применяйте осознанно (см. <a href="find-all-errors-in-excel.html">ошибки</a>).</li>
+<li><code>ЛЕВСИМВ</code>, <code>ПРАВСИМВ</code>, <code>ПСТР</code>, <code>ДЛСТР</code>, <code>НАЙТИ</code> – работа с частями текста. <code>СЖПРОБЕЛЫ</code> и <code>ПОДСТАВИТЬ</code> его чистят.</li>
+<li><code>ТЕКСТ(A1; "ГГГГ-ММ")</code> – форматирует число или дату как текст. Коды форматов зависят от языка Excel.</li>
+<li><code>&amp;</code> или <code>ОБЪЕДИНИТЬ</code> – склейка текста: <code>=A1&amp;" "&amp;B1</code>.</li>
+<li><code>СЕГОДНЯ()</code>, <code>ДАТА(г;м;д)</code>, <code>КОНМЕСЯЦА</code>, <code>РАЗНДАТ</code> – даты.</li>
+</ul>
+
+<p>Для суммирования и подсчёта по категориям формулы не всегда нужны: посмотрите <a href="pivot-tables-basics.html">основы сводных таблиц</a>. Работу ускорят и <a href="excel-keyboard-shortcuts.html">сочетания клавиш</a>.</p>
+<h2>Полезные привычки</h2>
+<ul>
+<li>Выносите входные данные (ставки, пороги) в отдельные ячейки, а не внутрь формул.</li>
+<li>Преобразуйте диапазон в таблицу и используйте в формулах имена столбцов.</li>
+<li>Щёлкните по формуле и нажмите <kbd>F2</kbd>: Excel обведёт цветом используемые ячейки. <b>Формулы → Вычислить формулу</b> проведёт по расчёту шаг за шагом.</li>
+<li>Проверяйте результат на примере, который можно посчитать вручную.</li>
+<li>Введите первые буквы функции и нажмите <kbd>Tab</kbd> для автодополнения, затем <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>A</kbd>, чтобы увидеть имена аргументов.</li>
+</ul>
+
+<h2>Замечания о локали</h2>
+<p>В русской версии Excel разделитель аргументов – точка с запятой, а имена функций переведены (<code>SUM</code> – это <code>СУММ</code>). В английской версии разделителем служит запятая. Если формула, скопированная с веб-страницы, не работает, проверьте это в первую очередь.</p>
+
+<h2>Типичные первые ошибки</h2>
+<p>Несовпадающие скобки, текст без кавычек, число, сохранённое как текст, циклическая ссылка (формула ссылается на собственную ячейку). Больше примеров в статье <a href="common-excel-mistakes.html">типичные ошибки</a>.</p>
+        </main>
+    </div>
+    <footer class="footer">
+        <p>Navferty &copy; 2021-<span id="current-year">2026</span> &bull; <a href="https://github.com/navferty/NavfertyExcelAddIn" target="_blank" rel="noopener" class="footer-link">Открытый код на GitHub</a></p>
+    </footer>
+    <script src="../../site.js"></script>
+</body>
+
+</html>

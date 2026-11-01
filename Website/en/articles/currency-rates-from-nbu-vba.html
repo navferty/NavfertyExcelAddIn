@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Currency rates from the National Bank of Ukraine website in VBA - Navferty&#x27;s Excel Add-In</title>
+    <meta name="description" content="Two Excel user-defined functions that load National Bank of Ukraine exchange rates for a given date or for today, with notes on when not to use them.">
+    <link rel="canonical" href="https://navferty.net/en/articles/currency-rates-from-nbu-vba.html">
+    <link rel="alternate" hreflang="en" href="https://navferty.net/en/articles/currency-rates-from-nbu-vba.html">
+    <link rel="alternate" hreflang="ru" href="https://navferty.net/ru/articles/currency-rates-from-nbu-vba.html">
+    <link rel="alternate" hreflang="x-default" href="https://navferty.net/en/articles/currency-rates-from-nbu-vba.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="Navferty&#x27;s Excel Add-In">
+    <meta property="og:title" content="Currency rates from the National Bank of Ukraine website in VBA - Navferty&#x27;s Excel Add-In">
+    <meta property="og:description" content="Two Excel user-defined functions that load National Bank of Ukraine exchange rates for a given date or for today, with notes on when not to use them.">
+    <meta property="og:url" content="https://navferty.net/en/articles/currency-rates-from-nbu-vba.html">
+    <meta property="og:image" content="https://navferty.net/images/articles/currency-rates-from-nbu-vba/1593904881155676818.png">
+    <meta property="og:locale" content="en">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="icon" href="../../favicon.ico">
+    <link rel="stylesheet" href="../../style.css">
+    <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Currency rates from the National Bank of Ukraine website in VBA", "inLanguage": "en", "description": "Two Excel user-defined functions that load National Bank of Ukraine exchange rates for a given date or for today, with notes on when not to use them.", "author": {"@type": "Person", "name": "Andrey Deev", "url": "https://github.com/navferty"}, "mainEntityOfPage": "https://navferty.net/en/articles/currency-rates-from-nbu-vba.html"}</script>
+</head>
+
+<body>
+    <header class="site-header">
+        <div class="site-header-inner">
+            <a class="brand" href="../">Navferty's Excel Add-In</a>
+            <nav aria-label="Navferty's Excel Add-In"><a href="../#commands">Commands</a><a href="./">Guides</a><a href="../install.html">Install</a><a href="https://github.com/navferty/NavfertyExcelAddIn" target="_blank" rel="noopener">GitHub</a><span class="lang-switch"><a href="currency-rates-from-nbu-vba.html" lang="en" hreflang="en" data-lang="en" aria-current="true">English</a><a href="../../ru/articles/currency-rates-from-nbu-vba.html" lang="ru" hreflang="ru" data-lang="ru">Русский</a></span></nav>
+        </div>
+    </header>
+    <div id="container">
+        <main id="content" class="article">
+<p class="back-to-top"><a href="index.html">&larr; All articles</a></p>
+<h1 class="zag">Currency rates from the National Bank of Ukraine website in VBA</h1>
+<p class="subtitle">Two Excel user-defined functions that load National Bank of Ukraine exchange rates for a given date or for today, with notes on when not to use them.</p>
+<p>A reader of the <a href="currency-rates-from-cbr-vba.html">previous article</a> about loading Bank of Russia exchange rates asked about the same task for the National Bank of Ukraine (NBU). Here is a ready-made macro for it. The process is the same as the one described in detail in that article, so this one goes straight to the result.</p>
+<p>The macro declares two user-defined functions (UDF) that can be used in worksheet formulas.</p>
+<h2>Rate on a given date</h2>
+<pre><code>=GetNbuCurrency("RUB","5/31/2020")</code></pre>
+<p>Loads the rate of the chosen currency for the given date. The data comes from the official NBU API:</p>
+<pre><code>https://bank.gov.ua/NBU_Exchange/exchange?date=31.12.2019</code></pre>
+<h2>Rate for today</h2>
+<pre><code>=NbuTodayCurrency(C10,NOW())</code></pre>
+<p>Loads the rate for the current date. The value of the second argument can be anything. <code>NOW</code> is used only to force Excel to recalculate the value (and query the API) every time that argument changes: when the workbook is opened, and even when any cell in any open workbook changes.</p>
+<p>Be careful with this function. If a workbook has many cells with such a formula, you risk flooding the NBU website with requests, which can get you banned. It is wiser to put the formula in a single place (for example on a separate sheet) and refer to that cell from the rest of your formulas.</p>
+<p><img src="../../images/articles/currency-rates-from-nbu-vba/1593904881155676818.png" alt="A worksheet with GetNbuCurrency results for several currencies and dates, and a table of today&#39;s rates" loading="lazy" width="502" height="678"></p>
+<h2>Source code</h2>
+<p>The repository with the workbook, examples and source code: <a href="https://github.com/navferty/NBU-VBA-Currencies" target="_blank" rel="noopener">https://github.com/navferty/NBU-VBA-Currencies</a>. If you find bugs or have ideas for improvement, issues are welcome.</p>
+<p class="note">Originally published in Russian on <a href="https://pikabu.ru/story/kursyi_valyut_s_sayta_nbu_na_vba_7565687" target="_blank" rel="noopener">Pikabu</a>.</p>
+        </main>
+    </div>
+    <footer class="footer">
+        <p>Navferty &copy; 2021-<span id="current-year">2026</span> &bull; <a href="https://github.com/navferty/NavfertyExcelAddIn" target="_blank" rel="noopener" class="footer-link">Open Source on GitHub</a></p>
+    </footer>
+    <script src="../../site.js"></script>
+</body>
+
+</html>

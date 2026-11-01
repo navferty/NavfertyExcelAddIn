@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Экспорт данных из Excel в SQLite - Надстройка Navferty Excel Add-In</title>
+    <meta name="description" content="Когда таблицы уже недостаточно, SQLite даёт полноценные запросы в одном файле.">
+    <link rel="canonical" href="https://navferty.net/ru/articles/export-excel-data-to-sqlite.html">
+    <link rel="alternate" hreflang="en" href="https://navferty.net/en/articles/export-excel-data-to-sqlite.html">
+    <link rel="alternate" hreflang="ru" href="https://navferty.net/ru/articles/export-excel-data-to-sqlite.html">
+    <link rel="alternate" hreflang="x-default" href="https://navferty.net/en/articles/export-excel-data-to-sqlite.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="Надстройка Navferty Excel Add-In">
+    <meta property="og:title" content="Экспорт данных из Excel в SQLite - Надстройка Navferty Excel Add-In">
+    <meta property="og:description" content="Когда таблицы уже недостаточно, SQLite даёт полноценные запросы в одном файле.">
+    <meta property="og:url" content="https://navferty.net/ru/articles/export-excel-data-to-sqlite.html">
+    <meta property="og:image" content="https://navferty.net/images/NavfertyToolsRibbonRu.png">
+    <meta property="og:locale" content="ru">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="icon" href="../../favicon.ico">
+    <link rel="stylesheet" href="../../style.css">
+    <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Экспорт данных из Excel в SQLite", "inLanguage": "ru", "description": "Когда таблицы уже недостаточно, SQLite даёт полноценные запросы в одном файле.", "author": {"@type": "Person", "name": "Andrey Deev", "url": "https://github.com/navferty"}, "mainEntityOfPage": "https://navferty.net/ru/articles/export-excel-data-to-sqlite.html"}</script>
+</head>
+
+<body>
+    <header class="site-header">
+        <div class="site-header-inner">
+            <a class="brand" href="../">Надстройка Navferty Excel Add-In</a>
+            <nav aria-label="Надстройка Navferty Excel Add-In"><a href="../#commands">Команды</a><a href="./">Статьи</a><a href="../install.html">Установка</a><a href="https://github.com/navferty/NavfertyExcelAddIn" target="_blank" rel="noopener">GitHub</a><span class="lang-switch"><a href="../../en/articles/export-excel-data-to-sqlite.html" lang="en" hreflang="en" data-lang="en">English</a><a href="export-excel-data-to-sqlite.html" lang="ru" hreflang="ru" data-lang="ru" aria-current="true">Русский</a></span></nav>
+        </div>
+    </header>
+    <div id="container">
+        <main id="content" class="article">
+<p class="back-to-top"><a href="index.html">&larr; Все статьи</a></p>
+<h1 class="zag">Экспорт данных из Excel в SQLite</h1>
+<p class="subtitle">Когда таблицы уже недостаточно, SQLite даёт полноценные запросы в одном файле.</p>
+<p>Excel справляется с несколькими сотнями тысяч строк, но объединения между листами, группировки с условиями и повторяющиеся поиски становятся медленными и хрупкими. SQLite – это небольшая база данных в одном файле, без сервера. Читать её умеют многие инструменты: DB Browser for SQLite, DBeaver, Python, R, Power BI и почти все языки программирования.</p>
+
+<h2>Зачем переносить данные туда</h2>
+<ul>
+<li>Нужен <code>JOIN</code> по нескольким таблицам вместо вложенных <code>ВПР</code>.</li>
+<li>Один и тот же запрос нужно запускать на новых данных.</li>
+<li>Книга стала медленной и тяжёлой.</li>
+<li>Разработчик или аналитик просит данные в формате, который программа читает без сюрпризов.</li>
+</ul>
+
+<h2>Подготовьте листы</h2>
+<p>Каким бы инструментом вы ни пользовались, результат не лучше исходных данных:</p>
+<ul>
+<li>Одна строка заголовков, одна таблица на лист, без объединённых ячеек и пустых строк или столбцов посередине.</li>
+<li>Уникальные и непустые имена заголовков. Если собираетесь писать SQL вручную, избегайте пробелов и спецсимволов.</li>
+<li>Один тип на столбец. Столбец с числами и несколькими строками «н/д» станет текстовым.</li>
+<li>Даты – настоящие даты, а не текст.</li>
+</ul>
+
+<h2>Другие способы</h2>
+<ul>
+<li>Сохраните каждый лист как CSV и импортируйте командой <code>.import</code> в консольной утилите <code>sqlite3</code> или через диалог импорта в DB Browser for SQLite.</li>
+<li>Используйте Python с pandas: <code>pd.read_excel(...).to_sql(...)</code>.</li>
+<li>Подключитесь через ODBC и запишите данные из VBA. Это гибко, но требует больше всего настройки.</li>
+</ul>
+
+<h2>С надстройкой</h2>
+<p>Команда <b>Экспорт в SQLite</b> записывает всю книгу в файл <code>.db</code>. Каждый лист становится таблицей, типы столбцов определяются автоматически, а ещё можно указать, содержит ли первая строка имена столбцов, и сколько начальных строк пропустить – это удобно, когда над таблицей есть блок с заголовком отчёта.</p>
+
+<h2>Первый запрос</h2>
+<p>Откройте файл в любом клиенте SQLite. Пусть лист называется <code>Orders</code> и содержит столбцы <code>Customer</code> и <code>Amount</code>:</p>
+<pre>SELECT Customer, SUM(Amount) AS Total
+FROM Orders
+GROUP BY Customer
+ORDER BY Total DESC;</pre>
+<p>Если в имени есть пробелы, возьмите его в двойные кавычки: <code>"Order date"</code>.</p>
+<p>Команда надстройки для этой задачи: <a href="../features/export-to-sqlite.html">Экспорт в SQLite</a>.</p>
+        </main>
+    </div>
+    <footer class="footer">
+        <p>Navferty &copy; 2021-<span id="current-year">2026</span> &bull; <a href="https://github.com/navferty/NavfertyExcelAddIn" target="_blank" rel="noopener" class="footer-link">Открытый код на GitHub</a></p>
+    </footer>
+    <script src="../../site.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>How to speed up large Excel workbooks - Navferty&#x27;s Excel Add-In</title>
+    <meta name="description" content="Why a workbook becomes slow and what to change first.">
+    <link rel="canonical" href="https://navferty.net/en/articles/speed-up-large-excel-workbooks.html">
+    <link rel="alternate" hreflang="en" href="https://navferty.net/en/articles/speed-up-large-excel-workbooks.html">
+    <link rel="alternate" hreflang="ru" href="https://navferty.net/ru/articles/speed-up-large-excel-workbooks.html">
+    <link rel="alternate" hreflang="x-default" href="https://navferty.net/en/articles/speed-up-large-excel-workbooks.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="Navferty&#x27;s Excel Add-In">
+    <meta property="og:title" content="How to speed up large Excel workbooks - Navferty&#x27;s Excel Add-In">
+    <meta property="og:description" content="Why a workbook becomes slow and what to change first.">
+    <meta property="og:url" content="https://navferty.net/en/articles/speed-up-large-excel-workbooks.html">
+    <meta property="og:image" content="https://navferty.net/images/NavfertyToolsRibbonEn.png">
+    <meta property="og:locale" content="en">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="icon" href="../../favicon.ico">
+    <link rel="stylesheet" href="../../style.css">
+    <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "How to speed up large Excel workbooks", "inLanguage": "en", "description": "Why a workbook becomes slow and what to change first.", "author": {"@type": "Person", "name": "Andrey Deev", "url": "https://github.com/navferty"}, "mainEntityOfPage": "https://navferty.net/en/articles/speed-up-large-excel-workbooks.html"}</script>
+</head>
+
+<body>
+    <header class="site-header">
+        <div class="site-header-inner">
+            <a class="brand" href="../">Navferty's Excel Add-In</a>
+            <nav aria-label="Navferty's Excel Add-In"><a href="../#commands">Commands</a><a href="./">Guides</a><a href="../install.html">Install</a><a href="https://github.com/navferty/NavfertyExcelAddIn" target="_blank" rel="noopener">GitHub</a><span class="lang-switch"><a href="speed-up-large-excel-workbooks.html" lang="en" hreflang="en" data-lang="en" aria-current="true">English</a><a href="../../ru/articles/speed-up-large-excel-workbooks.html" lang="ru" hreflang="ru" data-lang="ru">Русский</a></span></nav>
+        </div>
+    </header>
+    <div id="container">
+        <main id="content" class="article">
+<p class="back-to-top"><a href="index.html">&larr; All articles</a></p>
+<h1 class="zag">How to speed up large Excel workbooks</h1>
+<p class="subtitle">Why a workbook becomes slow and what to change first.</p>
+<p>A workbook that takes a minute to open or freezes on every edit has usually one or two clear causes. Find those before trying everything.</p>
+
+<h2>Measure first</h2>
+<p>Switch to manual calculation (<b>Formulas → Calculation Options → Manual</b>). If the file becomes responsive, formulas are the issue. If it is still slow, look at file size, formatting, objects and add-ins. Press <kbd>F9</kbd> to calculate manually. Remember to switch back, or tell whoever uses the file.</p>
+
+<h2>Formulas</h2>
+<ul>
+<li><b>Whole-column references in heavy functions.</b> <code>SUMIFS</code> on <code>A:A</code> is OK in modern Excel, but array formulas and <code>SUMPRODUCT</code> over entire columns are slow. Limit ranges or use tables.</li>
+<li><b>Thousands of <code>VLOOKUP</code>s with exact match over a large range.</b> Sort the data and use binary search where it makes sense, or add one helper column with <code>MATCH</code> and reuse its result with <code>INDEX</code>. <code>XLOOKUP</code> and a lookup against a proper table are also faster than repeating the same search in many columns.</li>
+<li><b>Volatile functions</b> (<code>NOW</code>, <code>TODAY</code>, <code>RAND</code>, <code>OFFSET</code>, <code>INDIRECT</code>) recalculate on every change and everything that depends on them too. Replace <code>OFFSET</code> and <code>INDIRECT</code> with <code>INDEX</code> or table references where you can.</li>
+<li><b>Formulas that never change.</b> Old months in a report do not need to be calculated each time. Paste them as values and keep a copy of the formulas somewhere.</li>
+<li><b>Chains of dependency across many sheets and external links.</b> Check <b>Data → Edit Links</b> and remove links to files that no longer exist.</li>
+</ul>
+
+<h2>File size</h2>
+<ul>
+<li><b>Used range that is much bigger than the data.</b> Press <kbd>Ctrl</kbd>+<kbd>End</kbd>. If it jumps far beyond your data, select the empty rows and columns below and to the right, delete them (not just clear), and save.</li>
+<li><b>Formatting applied to entire columns or rows</b> that were then filled with fancy conditional formatting. Check <b>Conditional Formatting → Manage Rules</b> and delete duplicates.</li>
+<li><b>Images and shapes.</b> Compress pictures (<b>Picture Format → Compress Pictures</b>) and delete invisible shapes. <b>Home → Find &amp; Select → Selection Pane</b> lists all objects, including hidden ones.</li>
+<li><b>Pivot caches.</b> Each pivot table may carry a copy of the data. Use the same cache for pivots built on the same source, and untick <b>Save source data with file</b> where acceptable.</li>
+<li><b>Format.</b> Saving as <code>.xlsb</code> (binary workbook) is usually smaller and opens faster than <code>.xlsx</code>. The trade-off is that some non-Microsoft tools cannot read it.</li>
+</ul>
+
+<h2>Environment</h2>
+<ul>
+<li>Use 64-bit Excel if you work with very large data sets.</li>
+<li>Disable add-ins you do not use (<b>File → Options → Add-ins</b>) and check whether the file is slow without them.</li>
+<li>Files on network drives open slowly; copy locally to test.</li>
+</ul>
+
+<h2>When Excel is the wrong place</h2>
+<p>If a workbook holds millions of rows or many joins, move the data to a database and use Excel for reports on top of it. Power Query with the data model, or a SQLite or other database file, handles volumes where formulas do not. See <a href="export-excel-data-to-sqlite.html">exporting to SQLite</a>.</p>
+        </main>
+    </div>
+    <footer class="footer">
+        <p>Navferty &copy; 2021-<span id="current-year">2026</span> &bull; <a href="https://github.com/navferty/NavfertyExcelAddIn" target="_blank" rel="noopener" class="footer-link">Open Source on GitHub</a></p>
+    </footer>
+    <script src="../../site.js"></script>
+</body>
+
+</html>

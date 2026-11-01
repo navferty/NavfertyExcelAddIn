@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Как найти все ошибки в Excel (#ЗНАЧ!, #ССЫЛКА!, #ДЕЛ/0!) - Надстройка Navferty Excel Add-In</title>
+    <meta name="description" content="Способы найти все ошибки в формулах на листе и что означает каждая из них.">
+    <link rel="canonical" href="https://navferty.net/ru/articles/find-all-errors-in-excel.html">
+    <link rel="alternate" hreflang="en" href="https://navferty.net/en/articles/find-all-errors-in-excel.html">
+    <link rel="alternate" hreflang="ru" href="https://navferty.net/ru/articles/find-all-errors-in-excel.html">
+    <link rel="alternate" hreflang="x-default" href="https://navferty.net/en/articles/find-all-errors-in-excel.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="Надстройка Navferty Excel Add-In">
+    <meta property="og:title" content="Как найти все ошибки в Excel (#ЗНАЧ!, #ССЫЛКА!, #ДЕЛ/0!) - Надстройка Navferty Excel Add-In">
+    <meta property="og:description" content="Способы найти все ошибки в формулах на листе и что означает каждая из них.">
+    <meta property="og:url" content="https://navferty.net/ru/articles/find-all-errors-in-excel.html">
+    <meta property="og:image" content="https://navferty.net/images/articles/find-all-errors-in-excel/sample-range-with-errors.jpg">
+    <meta property="og:locale" content="ru">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="icon" href="../../favicon.ico">
+    <link rel="stylesheet" href="../../style.css">
+    <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Как найти все ошибки в Excel (#ЗНАЧ!, #ССЫЛКА!, #ДЕЛ/0!)", "inLanguage": "ru", "description": "Способы найти все ошибки в формулах на листе и что означает каждая из них.", "author": {"@type": "Person", "name": "Andrey Deev", "url": "https://github.com/navferty"}, "mainEntityOfPage": "https://navferty.net/ru/articles/find-all-errors-in-excel.html"}</script>
+</head>
+
+<body>
+    <header class="site-header">
+        <div class="site-header-inner">
+            <a class="brand" href="../">Надстройка Navferty Excel Add-In</a>
+            <nav aria-label="Надстройка Navferty Excel Add-In"><a href="../#commands">Команды</a><a href="./">Статьи</a><a href="../install.html">Установка</a><a href="https://github.com/navferty/NavfertyExcelAddIn" target="_blank" rel="noopener">GitHub</a><span class="lang-switch"><a href="../../en/articles/find-all-errors-in-excel.html" lang="en" hreflang="en" data-lang="en">English</a><a href="find-all-errors-in-excel.html" lang="ru" hreflang="ru" data-lang="ru" aria-current="true">Русский</a></span></nav>
+        </div>
+    </header>
+    <div id="container">
+        <main id="content" class="article">
+<p class="back-to-top"><a href="index.html">&larr; Все статьи</a></p>
+<h1 class="zag">Как найти все ошибки в Excel (#ЗНАЧ!, #ССЫЛКА!, #ДЕЛ/0!)</h1>
+<p class="subtitle">Способы найти все ошибки в формулах на листе и что означает каждая из них.</p>
+<p>Отчёт с <code>#ССЫЛКА!</code> в итогах выглядит плохо, а в большой книге одну ячейку с ошибкой легко пропустить. В Excel есть несколько встроенных способов найти их все.</p>
+
+<p>Пример диапазона для дальнейших шагов, с основными типами ошибок:</p>
+<p><img src="../../images/articles/find-all-errors-in-excel/sample-range-with-errors.jpg" alt="Лист с ошибками #DIV/0!, #REF!, #VALUE!, #N/A, #NAME? и #NUM! среди обычных чисел" loading="lazy" width="308" height="398"></p>
+<h2>Выделить группу ячеек</h2>
+<p>Выделите диапазон (или весь лист по <kbd>Ctrl</kbd>+<kbd>A</kbd>), нажмите <kbd>F5</kbd> (или <kbd>Ctrl</kbd>+<kbd>G</kbd>) → <b>Выделить…</b> → <b>Формулы</b> и оставьте галочку только на <b>Ошибки</b>. Excel выделит все ячейки, где сейчас отображается ошибка. Их можно залить цветом или обойти по <kbd>Enter</kbd>.</p>
+<p><img src="../../images/articles/find-all-errors-in-excel/go-to-main.jpg" alt="Диалог «Переход» с кнопкой «Выделить»" loading="lazy" width="488" height="412"></p>
+<p><img src="../../images/articles/find-all-errors-in-excel/go-to-special.jpg" alt="Диалог «Выделить группу ячеек» с выбранными пунктами «Формулы» и «Ошибки»" loading="lazy" width="388" height="451"></p>
+<p><img src="../../images/articles/find-all-errors-in-excel/go-to-special-errors-result-selection.jpg" alt="Выделены все ячейки с ошибками" loading="lazy" width="382" height="381"></p>
+<p>Ограничение: работает только в пределах одного листа и даёт выделение, а не список. Чтобы увидеть, что где находится, придётся прыгать по листу.</p>
+
+<h2>Поиск по символу #</h2>
+<p>Нажмите <kbd>Ctrl</kbd>+<kbd>F</kbd>, введите <code>#</code>, в поле <b>Область поиска</b> выберите <b>значения</b> и нажмите <b>Найти все</b>. Получится список ячеек с адресами. Способ находит и обычный текст со знаком решётки, так что лишнего будет немного, и плохо подходит, если <code>#</code> используется в заголовках.</p>
+
+<h2>Условное форматирование</h2>
+<p>Если лист постоянно редактируется, правило сделает ошибки заметными без всякого поиска. Выделите диапазон, выберите <b>Главная → Условное форматирование → Создать правило → Использовать формулу</b> и введите (A1 замените на левую верхнюю ячейку выделения):</p>
+<pre>=ЕОШИБКА(A1)</pre>
+<p><img src="../../images/articles/find-all-errors-in-excel/conditional-formatting-errors-rule.jpg" alt="Диалог создания правила форматирования с формулой =ЕОШИБКА(A1)" loading="lazy" width="893" height="780"></p>
+<p>Выберите красную заливку. Любая ошибка, которая появится позже, сразу подсветится.</p>
+<p><b>Следите за активной ячейкой.</b> В формуле условного форматирования относительная ссылка вроде <code>A1</code> отсчитывается от <i>активной</i> ячейки, а она не всегда совпадает с левой верхней ячейкой выделения. Если выделить диапазон снизу вверх или щёлкнуть ячейку посередине перед открытием диалога, правило окажется сдвинутым, и часть ячеек (обычно первые строки) не будет проверена. Перед созданием правила сделайте активной левую верхнюю ячейку: выделяйте диапазон, начиная с первой ячейки, и проверьте адрес в поле имени (слева от строки формул). Уже созданное правило можно открыть через <b>Управление правилами</b> и сравнить формулу с левой верхней ячейкой поля <b>Применяется к</b>.</p>
+<p><img src="../../images/articles/find-all-errors-in-excel/conditional-formatting-errors-result.jpg" alt="Результат: подсвечены все ячейки с ошибками, включая #DIV/0! и #REF!" loading="lazy" width="403" height="415"></p>
+
+
+<h2>Посчитать количество</h2>
+<p>Чтобы получить число для чек-листа или ячейки на дашборде:</p>
+<pre>=СУММПРОИЗВ(--ЕОШИБКА(A1:Z1000))</pre>
+<p><code>ЕОШИБКА</code> считает ошибкой и <code>#Н/Д</code>. Если <code>#Н/Д</code> нужно исключить, используйте <code>ЕОШ</code>.</p>
+
+<h2>Что означают ошибки</h2>
+<ul>
+<li><code>#ДЕЛ/0!</code> (англ. <code>#DIV/0!</code>) – деление на ноль или на пустую ячейку. Часто это поиск, который ничего не вернул, или месяц, за который ещё нет данных.</li>
+<li><code>#ЗНАЧ!</code> (англ. <code>#VALUE!</code>) – в формулу попало значение не того типа, обычно текст там, где ожидалось число. Частая причина – число с пробелом на конце или число, сохранённое как текст (см. <a href="text-numbers-to-numeric-values.html">преобразование текста в числа</a>).</li>
+<li><code>#ССЫЛКА!</code> (англ. <code>#REF!</code>) – формула указывает на ячейку, которой больше нет, обычно из-за удалённой строки, столбца или листа.</li>
+<li><code>#Н/Д</code> (англ. <code>#N/A</code>) – поиск не нашёл совпадения. Проверьте лишние пробелы и числа-как-текст с обеих сторон.</li>
+<li><code>#ИМЯ?</code> (англ. <code>#NAME?</code>) – опечатка в имени функции, пропущенные кавычки вокруг текста или функция, которой нет в вашей версии Excel.</li>
+<li><code>#ЧИСЛО!</code> (англ. <code>#NUM!</code>) – невозможная числовая операция, например корень из отрицательного числа, или слишком большой результат.</li>
+<li><code>#ПУСТО!</code> (англ. <code>#NULL!</code>) – два диапазона в формуле разделены пробелом вместо запятой или двоеточия, и они не пересекаются.</li>
+</ul>
+
+<h2>Что делать с ошибками</h2>
+<p>Обернуть всё в <code>ЕСЛИОШИБКА</code> просто, но так скрываются и настоящие проблемы. Применяйте её там, где пустой результат – нормальная ситуация (например, поиск может ничего не найти), а в остальных местах пусть ошибки будут видны, чтобы вы заметили поломку.</p>
+
+<h2>С надстройкой</h2>
+<p>Команда <b>Найти все ячейки с ошибками</b> проверяет выделенный диапазон и показывает список всех ячеек с ошибками и их типами. Клик по строке списка переходит к нужной ячейке. Это удобно, когда ошибки разбросаны по большому диапазону и их нужно разобрать по одной.</p>
+<p><img src="../../images/articles/find-all-errors-in-excel/find-errors-with-add-in.jpg" alt="Список ячеек с ошибками, найденных командой надстройки, с типом ошибки и адресом ячейки" loading="lazy" width="1193" height="618"></p>
+<p>Команда надстройки для этой задачи: <a href="../features/find-errors.html">Найти все ошибки в выделенном диапазоне</a>.</p>
+        </main>
+    </div>
+    <footer class="footer">
+        <p>Navferty &copy; 2021-<span id="current-year">2026</span> &bull; <a href="https://github.com/navferty/NavfertyExcelAddIn" target="_blank" rel="noopener" class="footer-link">Открытый код на GitHub</a></p>
+    </footer>
+    <script src="../../site.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ВПР (VLOOKUP) в Excel: синтаксис, примеры и частые ошибки - Надстройка Navferty Excel Add-In</title>
+    <meta name="description" content="Как работает ВПР, пример с заказами и пользователями, почему функция возвращает #N/A и чем её можно заменить.">
+    <link rel="canonical" href="https://navferty.net/ru/articles/vlookup-in-excel.html">
+    <link rel="alternate" hreflang="en" href="https://navferty.net/en/articles/vlookup-in-excel.html">
+    <link rel="alternate" hreflang="ru" href="https://navferty.net/ru/articles/vlookup-in-excel.html">
+    <link rel="alternate" hreflang="x-default" href="https://navferty.net/en/articles/vlookup-in-excel.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="Надстройка Navferty Excel Add-In">
+    <meta property="og:title" content="ВПР (VLOOKUP) в Excel: синтаксис, примеры и частые ошибки - Надстройка Navferty Excel Add-In">
+    <meta property="og:description" content="Как работает ВПР, пример с заказами и пользователями, почему функция возвращает #N/A и чем её можно заменить.">
+    <meta property="og:url" content="https://navferty.net/ru/articles/vlookup-in-excel.html">
+    <meta property="og:image" content="https://navferty.net/images/articles/vlookup/orders-table.jpg">
+    <meta property="og:locale" content="ru">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="icon" href="../../favicon.ico">
+    <link rel="stylesheet" href="../../style.css">
+    <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "ВПР (VLOOKUP) в Excel: синтаксис, примеры и частые ошибки", "inLanguage": "ru", "description": "Как работает ВПР, пример с заказами и пользователями, почему функция возвращает #N/A и чем её можно заменить.", "author": {"@type": "Person", "name": "Andrey Deev", "url": "https://github.com/navferty"}, "mainEntityOfPage": "https://navferty.net/ru/articles/vlookup-in-excel.html"}</script>
+</head>
+
+<body>
+    <header class="site-header">
+        <div class="site-header-inner">
+            <a class="brand" href="../">Надстройка Navferty Excel Add-In</a>
+            <nav aria-label="Надстройка Navferty Excel Add-In"><a href="../#commands">Команды</a><a href="./">Статьи</a><a href="../install.html">Установка</a><a href="https://github.com/navferty/NavfertyExcelAddIn" target="_blank" rel="noopener">GitHub</a><span class="lang-switch"><a href="../../en/articles/vlookup-in-excel.html" lang="en" hreflang="en" data-lang="en">English</a><a href="vlookup-in-excel.html" lang="ru" hreflang="ru" data-lang="ru" aria-current="true">Русский</a></span></nav>
+        </div>
+    </header>
+    <div id="container">
+        <main id="content" class="article">
+<p class="back-to-top"><a href="index.html">&larr; Все статьи</a></p>
+<h1 class="zag">ВПР (VLOOKUP) в Excel: синтаксис, примеры и частые ошибки</h1>
+<p class="subtitle">Как работает ВПР, пример с заказами и пользователями, почему функция возвращает #N/A и чем её можно заменить.</p>
+<p>Типичная ситуация: на одном листе заказы с идентификатором пользователя, на другом список пользователей, и нужно подставить имя рядом с каждым заказом. Копировать вручную долго и ненадёжно. Это делает ВПР (в английской версии <code>VLOOKUP</code>): берёт ключ, ищет его в первом столбце таблицы и возвращает значение из той же строки.</p>
+<h2>Синтаксис</h2>
+<pre>=ВПР(искомое_значение; таблица; номер_столбца; [интервальный_просмотр])</pre>
+<ul>
+<li><code>искомое_значение</code> &ndash; что искать, например идентификатор пользователя в текущей строке.</li>
+<li><code>таблица</code> &ndash; где искать. Ключ должен быть в <b>первом</b> столбце этого диапазона.</li>
+<li><code>номер_столбца</code> &ndash; какой столбец диапазона вернуть, считая с 1.</li>
+<li><code>интервальный_просмотр</code> &ndash; <code>ЛОЖЬ</code> (или <code>0</code>) для точного совпадения, <code>ИСТИНА</code> для приблизительного. Если аргумент опущен, Excel использует <code>ИСТИНА</code>, а для идентификаторов и имён это почти всегда не то, что нужно.</li>
+</ul>
+<h2>Пример</h2>
+<p>На листе Orders находятся номер заказа, дата, сумма и идентификатор пользователя:</p>
+<p><img src="../../images/articles/vlookup/orders-table.jpg" alt="Лист Orders со столбцами Order Id, Order Date, Amount и User Id" loading="lazy" width="536" height="365"></p>
+<p>На листе Users справочник:</p>
+<p><img src="../../images/articles/vlookup/users-reference.jpg" alt="Лист Users со столбцами User Id и User Name" loading="lazy" width="507" height="371"></p>
+<p>В ячейке <code>E2</code> листа Orders начните формулу. Введя первый аргумент, перейдите на лист Users и выделите столбцы <code>A:B</code>, Excel подставит второй аргумент:</p>
+<p><img src="../../images/articles/vlookup/vlookup-selecting-table_array.jpg" alt="Выделение диапазона A:B на листе Users при вводе формулы" loading="lazy" width="832" height="355"></p>
+<pre>=ВПР(D2; Users!A:B; 2; ЛОЖЬ)</pre>
+<p><img src="../../images/articles/vlookup/vlookup-formula.jpg" alt="Формула в ячейке E2 во время ввода, под ячейкой подсказка по аргументам" loading="lazy" width="841" height="366"></p>
+<p>Ключ находится в <code>D2</code>, таблица &ndash; <code>Users!A:B</code>, возвращаем второй столбец (имя). Протяните формулу вниз:</p>
+<p><img src="../../images/articles/vlookup/vlookup-result.jpg" alt="Результат ВПР в столбце E: имена пользователей и #Н/Д для идентификатора, которого нет на листе Users" loading="lazy" width="707" height="372"></p>
+<p>В заказе с идентификатором 8 появился <code>#Н/Д</code>: такого идентификатора нет на листе Users. Это правильное поведение: оно сообщает, что данные не сходятся, а это часто как раз то, что нужно найти.</p>
+<h2>Почему появляется #Н/Д (или неверное значение)</h2>
+<ul>
+<li><b>Ключа действительно нет.</b> Проверьте справочник.</li>
+<li><b>Текст и число.</b> Число <code>1</code> не совпадает с текстом <code>"1"</code>. См. <a href="text-numbers-to-numeric-values.html">преобразование чисел-как-текст</a>.</li>
+<li><b>Лишние пробелы.</b> <code>"Иван "</code> не равно <code>"Иван"</code>. См. <a href="remove-extra-spaces-in-excel.html">удаление лишних пробелов</a>.</li>
+<li><b>Столбец с ключом не первый.</b> ВПР ищет только справа от первого столбца диапазона.</li>
+<li><b>Приблизительное совпадение.</b> Без <code>ЛОЖЬ</code> Excel считает, что первый столбец отсортирован, и может молча вернуть не ту строку. Всегда указывайте последний аргумент.</li>
+<li><b>Номер столбца задан числом.</b> Если в справочник вставили столбец, <code>2</code> теперь указывает не туда. После изменения структуры таблицы проверяйте формулы.</li>
+<li><b>Диапазон «уезжает».</b> При копировании формулы <code>A2:B6</code> тоже смещается. Используйте столбцы целиком (<code>A:B</code>) или закрепите диапазон (<code>$A$2:$B$6</code>).</li>
+</ul>
+<h2>Альтернативы</h2>
+<p><b>ПРОСМОТРX</b> (<code>XLOOKUP</code>, Excel 2021 и Microsoft 365) снимает большинство этих ограничений: точное совпадение по умолчанию, не нужен номер столбца, можно искать влево, есть значение на случай «не найдено».</p>
+<pre>=ПРОСМОТРX(D2; Users!A:A; Users!B:B; "не найдено")</pre>
+<p><b>ИНДЕКС и ПОИСКПОЗ</b> работают во всех версиях и тоже ищут в любом направлении:</p>
+<pre>=ИНДЕКС(Users!B:B; ПОИСКПОЗ(D2; Users!A:A; 0))</pre>
+<p>Если справочник оформлен как таблица (см. <a href="best-practices-for-cleaning-data-in-excel.html">очистку данных</a>), на её столбцы можно ссылаться по имени, а диапазон растёт при добавлении строк.</p>
+<p>Конструкция <code>ЕСЛИОШИБКА(ВПР(...); "")</code> скрывает ошибки, в том числе настоящие проблемы с данными. Применяйте её после того, как выяснили, почему значения не находятся.</p>
+<p class="note">О формулах в целом: <a href="beginners-guide-to-excel-formulas.html">Формулы Excel для начинающих</a>.</p>
+        </main>
+    </div>
+    <footer class="footer">
+        <p>Navferty &copy; 2021-<span id="current-year">2026</span> &bull; <a href="https://github.com/navferty/NavfertyExcelAddIn" target="_blank" rel="noopener" class="footer-link">Открытый код на GitHub</a></p>
+    </footer>
+    <script src="../../site.js"></script>
+</body>
+
+</html>

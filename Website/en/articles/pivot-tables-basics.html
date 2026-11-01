@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pivot tables in Excel: a practical introduction - Navferty&#x27;s Excel Add-In</title>
+    <meta name="description" content="How to build a first pivot table, summarise by category and by date, switch between sum and count, and keep it up to date.">
+    <link rel="canonical" href="https://navferty.net/en/articles/pivot-tables-basics.html">
+    <link rel="alternate" hreflang="en" href="https://navferty.net/en/articles/pivot-tables-basics.html">
+    <link rel="alternate" hreflang="ru" href="https://navferty.net/ru/articles/pivot-tables-basics.html">
+    <link rel="alternate" hreflang="x-default" href="https://navferty.net/en/articles/pivot-tables-basics.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="Navferty&#x27;s Excel Add-In">
+    <meta property="og:title" content="Pivot tables in Excel: a practical introduction - Navferty&#x27;s Excel Add-In">
+    <meta property="og:description" content="How to build a first pivot table, summarise by category and by date, switch between sum and count, and keep it up to date.">
+    <meta property="og:url" content="https://navferty.net/en/articles/pivot-tables-basics.html">
+    <meta property="og:image" content="https://navferty.net/images/articles/pivot-tables/inserting-pivot-table.jpg">
+    <meta property="og:locale" content="en">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="icon" href="../../favicon.ico">
+    <link rel="stylesheet" href="../../style.css">
+    <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Pivot tables in Excel: a practical introduction", "inLanguage": "en", "description": "How to build a first pivot table, summarise by category and by date, switch between sum and count, and keep it up to date.", "author": {"@type": "Person", "name": "Andrey Deev", "url": "https://github.com/navferty"}, "mainEntityOfPage": "https://navferty.net/en/articles/pivot-tables-basics.html"}</script>
+</head>
+
+<body>
+    <header class="site-header">
+        <div class="site-header-inner">
+            <a class="brand" href="../">Navferty's Excel Add-In</a>
+            <nav aria-label="Navferty's Excel Add-In"><a href="../#commands">Commands</a><a href="./">Guides</a><a href="../install.html">Install</a><a href="https://github.com/navferty/NavfertyExcelAddIn" target="_blank" rel="noopener">GitHub</a><span class="lang-switch"><a href="pivot-tables-basics.html" lang="en" hreflang="en" data-lang="en" aria-current="true">English</a><a href="../../ru/articles/pivot-tables-basics.html" lang="ru" hreflang="ru" data-lang="ru">Русский</a></span></nav>
+        </div>
+    </header>
+    <div id="container">
+        <main id="content" class="article">
+<p class="back-to-top"><a href="index.html">&larr; All articles</a></p>
+<h1 class="zag">Pivot tables in Excel: a practical introduction</h1>
+<p class="subtitle">How to build a first pivot table, summarise by category and by date, switch between sum and count, and keep it up to date.</p>
+<p>A pivot table summarises a long list without a single formula: totals by category, counts, averages, by month or year. It is worth learning because the same task with <code>SUMIFS</code> means a formula for every cell. This article covers the basics only; the feature is deep, and the <a href="https://support.microsoft.com/en-us/office/create-a-pivottable-to-analyze-worksheet-data-a9a84538-bfe9-40a9-a8e9-f99134456576" target="_blank" rel="noopener">Microsoft documentation</a> goes further.</p>
+<h2>Prepare the source data</h2>
+<p>A pivot table needs a flat list: one header row, one record per row, no empty rows or columns, no merged cells, no subtotals inside. The example below has four columns: <i>Order Id</i>, <i>Order Date</i>, <i>Department Id</i> and <i>Amount</i>. If the data is messy, see <a href="best-practices-for-cleaning-data-in-excel.html">cleaning data</a> first. Dates and amounts must be real dates and numbers, not text (<a href="text-numbers-to-numeric-values.html">converting text numbers</a>).</p>
+<p>It helps to turn the list into a table first (<kbd>Ctrl</kbd>+<kbd>T</kbd>). A pivot table built on a table picks up new rows after a refresh, and does not include blank rows.</p>
+<h2>Create the pivot table</h2>
+<p>Select any cell in the data and choose <b>Insert &rarr; PivotTable</b>. Check the range Excel suggests and choose where to put the result; a new worksheet is the safe default.</p>
+<p><img src="../../images/articles/pivot-tables/inserting-pivot-table.jpg" alt="The Insert PivotTable dialog with the source range SourceData!$A:$D and a New Worksheet option" loading="lazy" width="1097" height="825"></p>
+<p>In this example the range is written as whole columns (<code>SourceData!$A:$D</code>). It works, but the pivot table will then contain a <code>(blank)</code> item for the empty cells below the data. A table or an exact range such as <code>$A$1:$D$25</code> avoids it.</p>
+<h2>Build the report</h2>
+<p>The empty pivot table shows the <b>PivotTable Fields</b> pane. The four areas below the field list decide what goes where:</p>
+<ul>
+<li><b>Rows</b> &ndash; the values that become row labels.</li>
+<li><b>Columns</b> &ndash; the values that become column headings.</li>
+<li><b>Values</b> &ndash; what to calculate (sum, count, average).</li>
+<li><b>Filters</b> &ndash; a drop-down above the table to limit the whole report.</li>
+</ul>
+<p><img src="../../images/articles/pivot-tables/fields-selection.jpg" alt="An empty PivotTable with the field list and the Filters, Columns, Rows and Values areas" loading="lazy" width="1102" height="787"></p>
+<p>Drag <i>Department Id</i> to <b>Rows</b> and <i>Amount</i> to <b>Values</b>. This is the first example: total amount per department. Excel chooses <b>Sum</b> for numbers.</p>
+<h2>Count instead of sum</h2>
+<p>To count orders per department, click the field in the <b>Values</b> area, choose <b>Value Field Settings</b> and pick <b>Count</b>. Counting works on any column, and for text columns Count is the default. The same dialog has Average, Max, Min and the <b>Show Values As</b> tab with percentages of the total.</p>
+<h2>Group dates by year or month</h2>
+<p>Drag <i>Order Date</i> to <b>Columns</b>. In recent versions of Excel the dates are grouped automatically (Years, Quarters, Months fields appear). If they are not, right-click a date and choose <b>Group</b>. Here the report has departments in the rows, years in the columns and the sum of amounts in between:</p>
+<p><img src="../../images/articles/pivot-tables/pivot-configuration.jpg" alt="A pivot table with departments in rows, years in columns and Sum of Amount in values, with the fields pane showing the Columns, Rows and Values areas" loading="lazy" width="1311" height="833"></p>
+<p>The grouping only works if every value in the column is a real date. One text value or an empty cell and Excel will not offer it.</p>
+<h2>Refresh</h2>
+<p>A pivot table is a snapshot of the data and does not recalculate when the source changes. Right-click it and choose <b>Refresh</b>, or press <kbd>Alt</kbd>+<kbd>F5</kbd>. <b>Data &rarr; Refresh All</b> (<kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>F5</kbd>) refreshes every pivot table in the workbook.</p>
+<h2>Limitations to know about</h2>
+<ul>
+<li>You cannot type over the values in the pivot area; the numbers come from the source.</li>
+<li>New rows are included only if they fall inside the source range, which is the point of using a table.</li>
+<li>A column format (like a thousands separator) can reset on refresh. Set it through <b>Value Field Settings &rarr; Number Format</b>.</li>
+<li>Read cells from a pivot with <code>GETPIVOTDATA</code>. Excel inserts it for you when you click a pivot cell from a formula; its address-style alternative breaks when the layout changes.</li>
+</ul>
+<p>Related: <a href="vlookup-in-excel.html">VLOOKUP</a> for bringing in names for the ids.</p>
+        </main>
+    </div>
+    <footer class="footer">
+        <p>Navferty &copy; 2021-<span id="current-year">2026</span> &bull; <a href="https://github.com/navferty/NavfertyExcelAddIn" target="_blank" rel="noopener" class="footer-link">Open Source on GitHub</a></p>
+    </footer>
+    <script src="../../site.js"></script>
+</body>
+
+</html>

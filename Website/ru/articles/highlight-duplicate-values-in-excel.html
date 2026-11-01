@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Подсветка дубликатов в Excel без формул - Надстройка Navferty Excel Add-In</title>
+    <meta name="description" content="Условное форматирование, удаление дубликатов и что делать, если нужно видеть, какие строки совпадают.">
+    <link rel="canonical" href="https://navferty.net/ru/articles/highlight-duplicate-values-in-excel.html">
+    <link rel="alternate" hreflang="en" href="https://navferty.net/en/articles/highlight-duplicate-values-in-excel.html">
+    <link rel="alternate" hreflang="ru" href="https://navferty.net/ru/articles/highlight-duplicate-values-in-excel.html">
+    <link rel="alternate" hreflang="x-default" href="https://navferty.net/en/articles/highlight-duplicate-values-in-excel.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="Надстройка Navferty Excel Add-In">
+    <meta property="og:title" content="Подсветка дубликатов в Excel без формул - Надстройка Navferty Excel Add-In">
+    <meta property="og:description" content="Условное форматирование, удаление дубликатов и что делать, если нужно видеть, какие строки совпадают.">
+    <meta property="og:url" content="https://navferty.net/ru/articles/highlight-duplicate-values-in-excel.html">
+    <meta property="og:image" content="https://navferty.net/images/articles/highlight-duplicate-values-in-excel/conditional-formatting-duplicate-menu.jpg">
+    <meta property="og:locale" content="ru">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="icon" href="../../favicon.ico">
+    <link rel="stylesheet" href="../../style.css">
+    <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Подсветка дубликатов в Excel без формул", "inLanguage": "ru", "description": "Условное форматирование, удаление дубликатов и что делать, если нужно видеть, какие строки совпадают.", "author": {"@type": "Person", "name": "Andrey Deev", "url": "https://github.com/navferty"}, "mainEntityOfPage": "https://navferty.net/ru/articles/highlight-duplicate-values-in-excel.html"}</script>
+</head>
+
+<body>
+    <header class="site-header">
+        <div class="site-header-inner">
+            <a class="brand" href="../">Надстройка Navferty Excel Add-In</a>
+            <nav aria-label="Надстройка Navferty Excel Add-In"><a href="../#commands">Команды</a><a href="./">Статьи</a><a href="../install.html">Установка</a><a href="https://github.com/navferty/NavfertyExcelAddIn" target="_blank" rel="noopener">GitHub</a><span class="lang-switch"><a href="../../en/articles/highlight-duplicate-values-in-excel.html" lang="en" hreflang="en" data-lang="en">English</a><a href="highlight-duplicate-values-in-excel.html" lang="ru" hreflang="ru" data-lang="ru" aria-current="true">Русский</a></span></nav>
+        </div>
+    </header>
+    <div id="container">
+        <main id="content" class="article">
+<p class="back-to-top"><a href="index.html">&larr; Все статьи</a></p>
+<h1 class="zag">Подсветка дубликатов в Excel без формул</h1>
+<p class="subtitle">Условное форматирование, удаление дубликатов и что делать, если нужно видеть, какие строки совпадают.</p>
+<p>Дубликаты в списке клиентов, реестре счетов или перечне идентификаторов могут привести к двойным платежам и неверным итогам. Прежде чем что-то удалять, полезно их увидеть.</p>
+
+<h2>Условное форматирование</h2>
+<p>Выделите столбец, затем <b>Главная → Условное форматирование → Правила выделения ячеек → Повторяющиеся значения</b>. Каждое значение, встречающееся более одного раза, получит цвет. При редактировании данных подсветка обновляется автоматически.</p>
+<p><img src="../../images/articles/highlight-duplicate-values-in-excel/conditional-formatting-duplicate-menu.jpg" alt="Меню «Условное форматирование» с пунктами «Правила выделения ячеек» и «Повторяющиеся значения»" loading="lazy" width="546" height="563"></p>
+<p><img src="../../images/articles/highlight-duplicate-values-in-excel/duplicate-highlighted.jpg" alt="Диалог «Повторяющиеся значения» с форматом «Светло-красная заливка и тёмно-красный текст», применённый к списку названий фруктов с повторами" loading="lazy" width="610" height="295"></p>
+<p>Что учесть:</p>
+<ul>
+<li>Сравнение не учитывает регистр: <code>abc</code> и <code>ABC</code> считаются одним значением.</li>
+<li>Пробелы на конце делают значения разными. Сначала очистите текст (см. <a href="remove-extra-spaces-in-excel.html">удаление лишних пробелов</a>).</li>
+<li>Числа длиннее 15 цифр (номера карт, длинные идентификаторы) сравниваются только по первым 15 цифрам, поэтому Excel может отметить значения, различающиеся последними цифрами. Для таких столбцов используйте правило с формулой и точным сравнением, например <code>=СУММПРОИЗВ(--($A$2:$A$1000=$A2))&gt;1</code>.</li>
+</ul>
+
+<h2>Дубликаты по нескольким столбцам</h2>
+<p>Если дубликатом считается одинаковое сочетание, скажем, имени и даты, встроенного правила недостаточно. Используйте правило с формулой:</p>
+<pre>=СЧЁТЕСЛИМН($A$2:$A$1000;$A2;$B$2:$B$1000;$B2)&gt;1</pre>
+<p>и примените его ко всей таблице.</p>
+
+<h2>Удалить дубликаты</h2>
+<p><b>Данные → Удалить дубликаты</b> удаляет повторяющиеся строки, оставляя первую. Можно сравнивать только выбранные столбцы. Отменить действие можно только сразу по <kbd>Ctrl</kbd>+<kbd>Z</kbd>, поэтому работайте с копией данных.</p>
+
+<h2>Пометить, а не удалять</h2>
+<p>Вспомогательный столбец с <code>=СЧЁТЕСЛИ($A$2:$A2;A2)</code> даёт 1 для первого вхождения, 2 для второго и так далее. Отфильтруйте значения больше 1, чтобы увидеть только повторы, или оставьте первые вхождения и разберите остальные.</p>
+
+<h2>С надстройкой</h2>
+<p>Команда <b>Подсветить дубликаты</b> (Highlight Duplications) окрашивает повторяющиеся значения в выделенном диапазоне, причём каждая группа одинаковых значений получает свой цвет. Так видно, какие строки связаны между собой, чего не показывает один цвет в условном форматировании. Подсветка – это обычная заливка ячеек, поэтому книгу она не замедляет.</p>
+<p>Команда надстройки для этой задачи: <a href="../features/highlight-duplications.html">Подсветить дубликаты</a>.</p>
+        </main>
+    </div>
+    <footer class="footer">
+        <p>Navferty &copy; 2021-<span id="current-year">2026</span> &bull; <a href="https://github.com/navferty/NavfertyExcelAddIn" target="_blank" rel="noopener" class="footer-link">Открытый код на GitHub</a></p>
+    </footer>
+    <script src="../../site.js"></script>
+</body>
+
+</html>

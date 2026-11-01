@@ -1,0 +1,568 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  <url><loc>https://navferty.net/</loc></url>
+  <url>
+    <loc>https://navferty.net/en/articles/automating-excel-tasks-without-vba.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://navferty.net/en/articles/automating-excel-tasks-without-vba.html"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://navferty.net/ru/articles/automating-excel-tasks-without-vba.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://navferty.net/en/articles/automating-excel-tasks-without-vba.html"/>
+  </url>
+  <url>
+    <loc>https://navferty.net/en/articles/beginners-guide-to-excel-formulas.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://navferty.net/en/articles/beginners-guide-to-excel-formulas.html"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://navferty.net/ru/articles/beginners-guide-to-excel-formulas.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://navferty.net/en/articles/beginners-guide-to-excel-formulas.html"/>
+  </url>
+  <url>
+    <loc>https://navferty.net/en/articles/best-free-excel-add-ins.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://navferty.net/en/articles/best-free-excel-add-ins.html"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://navferty.net/ru/articles/best-free-excel-add-ins.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://navferty.net/en/articles/best-free-excel-add-ins.html"/>
+  </url>
+  <url>
+    <loc>https://navferty.net/en/articles/best-practices-for-cleaning-data-in-excel.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://navferty.net/en/articles/best-practices-for-cleaning-data-in-excel.html"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://navferty.net/ru/articles/best-practices-for-cleaning-data-in-excel.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://navferty.net/en/articles/best-practices-for-cleaning-data-in-excel.html"/>
+  </url>
+  <url>
+    <loc>https://navferty.net/en/articles/checklist-validating-excel-files.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://navferty.net/en/articles/checklist-validating-excel-files.html"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://navferty.net/ru/articles/checklist-validating-excel-files.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://navferty.net/en/articles/checklist-validating-excel-files.html"/>
+  </url>
+  <url>
+    <loc>https://navferty.net/en/articles/common-excel-mistakes.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://navferty.net/en/articles/common-excel-mistakes.html"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://navferty.net/ru/articles/common-excel-mistakes.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://navferty.net/en/articles/common-excel-mistakes.html"/>
+  </url>
+  <url>
+    <loc>https://navferty.net/en/articles/csv-files-without-encoding-issues.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://navferty.net/en/articles/csv-files-without-encoding-issues.html"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://navferty.net/ru/articles/csv-files-without-encoding-issues.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://navferty.net/en/articles/csv-files-without-encoding-issues.html"/>
+  </url>
+  <url>
+    <loc>https://navferty.net/en/articles/currency-rates-from-cbr-vba.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://navferty.net/en/articles/currency-rates-from-cbr-vba.html"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://navferty.net/ru/articles/currency-rates-from-cbr-vba.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://navferty.net/en/articles/currency-rates-from-cbr-vba.html"/>
+  </url>
+  <url>
+    <loc>https://navferty.net/en/articles/currency-rates-from-nbu-vba.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://navferty.net/en/articles/currency-rates-from-nbu-vba.html"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://navferty.net/ru/articles/currency-rates-from-nbu-vba.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://navferty.net/en/articles/currency-rates-from-nbu-vba.html"/>
+  </url>
+  <url>
+    <loc>https://navferty.net/en/articles/debugging-vba-code-in-excel.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://navferty.net/en/articles/debugging-vba-code-in-excel.html"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://navferty.net/ru/articles/debugging-vba-code-in-excel.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://navferty.net/en/articles/debugging-vba-code-in-excel.html"/>
+  </url>
+  <url>
+    <loc>https://navferty.net/en/articles/excel-keyboard-shortcuts.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://navferty.net/en/articles/excel-keyboard-shortcuts.html"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://navferty.net/ru/articles/excel-keyboard-shortcuts.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://navferty.net/en/articles/excel-keyboard-shortcuts.html"/>
+  </url>
+  <url>
+    <loc>https://navferty.net/en/articles/export-excel-data-to-sqlite.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://navferty.net/en/articles/export-excel-data-to-sqlite.html"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://navferty.net/ru/articles/export-excel-data-to-sqlite.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://navferty.net/en/articles/export-excel-data-to-sqlite.html"/>
+  </url>
+  <url>
+    <loc>https://navferty.net/en/articles/find-all-errors-in-excel.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://navferty.net/en/articles/find-all-errors-in-excel.html"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://navferty.net/ru/articles/find-all-errors-in-excel.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://navferty.net/en/articles/find-all-errors-in-excel.html"/>
+  </url>
+  <url>
+    <loc>https://navferty.net/en/articles/highlight-duplicate-values-in-excel.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://navferty.net/en/articles/highlight-duplicate-values-in-excel.html"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://navferty.net/ru/articles/highlight-duplicate-values-in-excel.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://navferty.net/en/articles/highlight-duplicate-values-in-excel.html"/>
+  </url>
+  <url>
+    <loc>https://navferty.net/en/articles/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://navferty.net/en/articles/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://navferty.net/ru/articles/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://navferty.net/en/articles/"/>
+  </url>
+  <url>
+    <loc>https://navferty.net/en/articles/pivot-tables-basics.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://navferty.net/en/articles/pivot-tables-basics.html"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://navferty.net/ru/articles/pivot-tables-basics.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://navferty.net/en/articles/pivot-tables-basics.html"/>
+  </url>
+  <url>
+    <loc>https://navferty.net/en/articles/prepare-excel-files-for-import.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://navferty.net/en/articles/prepare-excel-files-for-import.html"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://navferty.net/ru/articles/prepare-excel-files-for-import.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://navferty.net/en/articles/prepare-excel-files-for-import.html"/>
+  </url>
+  <url>
+    <loc>https://navferty.net/en/articles/preparing-excel-reports-for-management.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://navferty.net/en/articles/preparing-excel-reports-for-management.html"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://navferty.net/ru/articles/preparing-excel-reports-for-management.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://navferty.net/en/articles/preparing-excel-reports-for-management.html"/>
+  </url>
+  <url>
+    <loc>https://navferty.net/en/articles/remove-extra-spaces-in-excel.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://navferty.net/en/articles/remove-extra-spaces-in-excel.html"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://navferty.net/ru/articles/remove-extra-spaces-in-excel.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://navferty.net/en/articles/remove-extra-spaces-in-excel.html"/>
+  </url>
+  <url>
+    <loc>https://navferty.net/en/articles/remove-protection-from-all-sheets.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://navferty.net/en/articles/remove-protection-from-all-sheets.html"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://navferty.net/ru/articles/remove-protection-from-all-sheets.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://navferty.net/en/articles/remove-protection-from-all-sheets.html"/>
+  </url>
+  <url>
+    <loc>https://navferty.net/en/articles/speed-up-large-excel-workbooks.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://navferty.net/en/articles/speed-up-large-excel-workbooks.html"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://navferty.net/ru/articles/speed-up-large-excel-workbooks.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://navferty.net/en/articles/speed-up-large-excel-workbooks.html"/>
+  </url>
+  <url>
+    <loc>https://navferty.net/en/articles/text-numbers-to-numeric-values.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://navferty.net/en/articles/text-numbers-to-numeric-values.html"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://navferty.net/ru/articles/text-numbers-to-numeric-values.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://navferty.net/en/articles/text-numbers-to-numeric-values.html"/>
+  </url>
+  <url>
+    <loc>https://navferty.net/en/articles/validate-xml-against-xsd-in-excel.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://navferty.net/en/articles/validate-xml-against-xsd-in-excel.html"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://navferty.net/ru/articles/validate-xml-against-xsd-in-excel.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://navferty.net/en/articles/validate-xml-against-xsd-in-excel.html"/>
+  </url>
+  <url>
+    <loc>https://navferty.net/en/articles/vba-addin-with-custom-ribbon-tab.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://navferty.net/en/articles/vba-addin-with-custom-ribbon-tab.html"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://navferty.net/ru/articles/vba-addin-with-custom-ribbon-tab.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://navferty.net/en/articles/vba-addin-with-custom-ribbon-tab.html"/>
+  </url>
+  <url>
+    <loc>https://navferty.net/en/articles/vlookup-in-excel.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://navferty.net/en/articles/vlookup-in-excel.html"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://navferty.net/ru/articles/vlookup-in-excel.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://navferty.net/en/articles/vlookup-in-excel.html"/>
+  </url>
+  <url>
+    <loc>https://navferty.net/en/features/copy-as-markdown.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://navferty.net/en/features/copy-as-markdown.html"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://navferty.net/ru/features/copy-as-markdown.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://navferty.net/en/features/copy-as-markdown.html"/>
+  </url>
+  <url>
+    <loc>https://navferty.net/en/features/create-sample-xml.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://navferty.net/en/features/create-sample-xml.html"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://navferty.net/ru/features/create-sample-xml.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://navferty.net/en/features/create-sample-xml.html"/>
+  </url>
+  <url>
+    <loc>https://navferty.net/en/features/export-to-sqlite.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://navferty.net/en/features/export-to-sqlite.html"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://navferty.net/ru/features/export-to-sqlite.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://navferty.net/en/features/export-to-sqlite.html"/>
+  </url>
+  <url>
+    <loc>https://navferty.net/en/features/find-errors.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://navferty.net/en/features/find-errors.html"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://navferty.net/ru/features/find-errors.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://navferty.net/en/features/find-errors.html"/>
+  </url>
+  <url>
+    <loc>https://navferty.net/en/features/highlight-duplications.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://navferty.net/en/features/highlight-duplications.html"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://navferty.net/ru/features/highlight-duplications.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://navferty.net/en/features/highlight-duplications.html"/>
+  </url>
+  <url>
+    <loc>https://navferty.net/en/features/parse-numerics.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://navferty.net/en/features/parse-numerics.html"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://navferty.net/ru/features/parse-numerics.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://navferty.net/en/features/parse-numerics.html"/>
+  </url>
+  <url>
+    <loc>https://navferty.net/en/features/replace.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://navferty.net/en/features/replace.html"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://navferty.net/ru/features/replace.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://navferty.net/en/features/replace.html"/>
+  </url>
+  <url>
+    <loc>https://navferty.net/en/features/stringify-numerics.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://navferty.net/en/features/stringify-numerics.html"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://navferty.net/ru/features/stringify-numerics.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://navferty.net/en/features/stringify-numerics.html"/>
+  </url>
+  <url>
+    <loc>https://navferty.net/en/features/toggle-case.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://navferty.net/en/features/toggle-case.html"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://navferty.net/ru/features/toggle-case.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://navferty.net/en/features/toggle-case.html"/>
+  </url>
+  <url>
+    <loc>https://navferty.net/en/features/trim-spaces.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://navferty.net/en/features/trim-spaces.html"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://navferty.net/ru/features/trim-spaces.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://navferty.net/en/features/trim-spaces.html"/>
+  </url>
+  <url>
+    <loc>https://navferty.net/en/features/undo-last-action.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://navferty.net/en/features/undo-last-action.html"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://navferty.net/ru/features/undo-last-action.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://navferty.net/en/features/undo-last-action.html"/>
+  </url>
+  <url>
+    <loc>https://navferty.net/en/features/unmerge-cells.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://navferty.net/en/features/unmerge-cells.html"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://navferty.net/ru/features/unmerge-cells.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://navferty.net/en/features/unmerge-cells.html"/>
+  </url>
+  <url>
+    <loc>https://navferty.net/en/features/unprotect-workbook.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://navferty.net/en/features/unprotect-workbook.html"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://navferty.net/ru/features/unprotect-workbook.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://navferty.net/en/features/unprotect-workbook.html"/>
+  </url>
+  <url>
+    <loc>https://navferty.net/en/features/validate-values.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://navferty.net/en/features/validate-values.html"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://navferty.net/ru/features/validate-values.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://navferty.net/en/features/validate-values.html"/>
+  </url>
+  <url>
+    <loc>https://navferty.net/en/features/validate-xml.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://navferty.net/en/features/validate-xml.html"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://navferty.net/ru/features/validate-xml.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://navferty.net/en/features/validate-xml.html"/>
+  </url>
+  <url>
+    <loc>https://navferty.net/en/features/worksheets-protection.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://navferty.net/en/features/worksheets-protection.html"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://navferty.net/ru/features/worksheets-protection.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://navferty.net/en/features/worksheets-protection.html"/>
+  </url>
+  <url>
+    <loc>https://navferty.net/en/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://navferty.net/en/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://navferty.net/ru/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://navferty.net/en/"/>
+  </url>
+  <url>
+    <loc>https://navferty.net/en/install.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://navferty.net/en/install.html"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://navferty.net/ru/install.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://navferty.net/en/install.html"/>
+  </url>
+  <url>
+    <loc>https://navferty.net/ru/articles/automating-excel-tasks-without-vba.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://navferty.net/en/articles/automating-excel-tasks-without-vba.html"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://navferty.net/ru/articles/automating-excel-tasks-without-vba.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://navferty.net/en/articles/automating-excel-tasks-without-vba.html"/>
+  </url>
+  <url>
+    <loc>https://navferty.net/ru/articles/beginners-guide-to-excel-formulas.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://navferty.net/en/articles/beginners-guide-to-excel-formulas.html"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://navferty.net/ru/articles/beginners-guide-to-excel-formulas.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://navferty.net/en/articles/beginners-guide-to-excel-formulas.html"/>
+  </url>
+  <url>
+    <loc>https://navferty.net/ru/articles/best-free-excel-add-ins.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://navferty.net/en/articles/best-free-excel-add-ins.html"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://navferty.net/ru/articles/best-free-excel-add-ins.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://navferty.net/en/articles/best-free-excel-add-ins.html"/>
+  </url>
+  <url>
+    <loc>https://navferty.net/ru/articles/best-practices-for-cleaning-data-in-excel.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://navferty.net/en/articles/best-practices-for-cleaning-data-in-excel.html"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://navferty.net/ru/articles/best-practices-for-cleaning-data-in-excel.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://navferty.net/en/articles/best-practices-for-cleaning-data-in-excel.html"/>
+  </url>
+  <url>
+    <loc>https://navferty.net/ru/articles/checklist-validating-excel-files.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://navferty.net/en/articles/checklist-validating-excel-files.html"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://navferty.net/ru/articles/checklist-validating-excel-files.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://navferty.net/en/articles/checklist-validating-excel-files.html"/>
+  </url>
+  <url>
+    <loc>https://navferty.net/ru/articles/common-excel-mistakes.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://navferty.net/en/articles/common-excel-mistakes.html"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://navferty.net/ru/articles/common-excel-mistakes.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://navferty.net/en/articles/common-excel-mistakes.html"/>
+  </url>
+  <url>
+    <loc>https://navferty.net/ru/articles/csv-files-without-encoding-issues.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://navferty.net/en/articles/csv-files-without-encoding-issues.html"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://navferty.net/ru/articles/csv-files-without-encoding-issues.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://navferty.net/en/articles/csv-files-without-encoding-issues.html"/>
+  </url>
+  <url>
+    <loc>https://navferty.net/ru/articles/currency-rates-from-cbr-vba.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://navferty.net/en/articles/currency-rates-from-cbr-vba.html"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://navferty.net/ru/articles/currency-rates-from-cbr-vba.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://navferty.net/en/articles/currency-rates-from-cbr-vba.html"/>
+  </url>
+  <url>
+    <loc>https://navferty.net/ru/articles/currency-rates-from-nbu-vba.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://navferty.net/en/articles/currency-rates-from-nbu-vba.html"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://navferty.net/ru/articles/currency-rates-from-nbu-vba.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://navferty.net/en/articles/currency-rates-from-nbu-vba.html"/>
+  </url>
+  <url>
+    <loc>https://navferty.net/ru/articles/debugging-vba-code-in-excel.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://navferty.net/en/articles/debugging-vba-code-in-excel.html"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://navferty.net/ru/articles/debugging-vba-code-in-excel.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://navferty.net/en/articles/debugging-vba-code-in-excel.html"/>
+  </url>
+  <url>
+    <loc>https://navferty.net/ru/articles/excel-keyboard-shortcuts.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://navferty.net/en/articles/excel-keyboard-shortcuts.html"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://navferty.net/ru/articles/excel-keyboard-shortcuts.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://navferty.net/en/articles/excel-keyboard-shortcuts.html"/>
+  </url>
+  <url>
+    <loc>https://navferty.net/ru/articles/export-excel-data-to-sqlite.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://navferty.net/en/articles/export-excel-data-to-sqlite.html"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://navferty.net/ru/articles/export-excel-data-to-sqlite.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://navferty.net/en/articles/export-excel-data-to-sqlite.html"/>
+  </url>
+  <url>
+    <loc>https://navferty.net/ru/articles/find-all-errors-in-excel.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://navferty.net/en/articles/find-all-errors-in-excel.html"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://navferty.net/ru/articles/find-all-errors-in-excel.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://navferty.net/en/articles/find-all-errors-in-excel.html"/>
+  </url>
+  <url>
+    <loc>https://navferty.net/ru/articles/highlight-duplicate-values-in-excel.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://navferty.net/en/articles/highlight-duplicate-values-in-excel.html"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://navferty.net/ru/articles/highlight-duplicate-values-in-excel.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://navferty.net/en/articles/highlight-duplicate-values-in-excel.html"/>
+  </url>
+  <url>
+    <loc>https://navferty.net/ru/articles/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://navferty.net/en/articles/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://navferty.net/ru/articles/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://navferty.net/en/articles/"/>
+  </url>
+  <url>
+    <loc>https://navferty.net/ru/articles/pivot-tables-basics.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://navferty.net/en/articles/pivot-tables-basics.html"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://navferty.net/ru/articles/pivot-tables-basics.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://navferty.net/en/articles/pivot-tables-basics.html"/>
+  </url>
+  <url>
+    <loc>https://navferty.net/ru/articles/prepare-excel-files-for-import.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://navferty.net/en/articles/prepare-excel-files-for-import.html"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://navferty.net/ru/articles/prepare-excel-files-for-import.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://navferty.net/en/articles/prepare-excel-files-for-import.html"/>
+  </url>
+  <url>
+    <loc>https://navferty.net/ru/articles/preparing-excel-reports-for-management.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://navferty.net/en/articles/preparing-excel-reports-for-management.html"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://navferty.net/ru/articles/preparing-excel-reports-for-management.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://navferty.net/en/articles/preparing-excel-reports-for-management.html"/>
+  </url>
+  <url>
+    <loc>https://navferty.net/ru/articles/remove-extra-spaces-in-excel.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://navferty.net/en/articles/remove-extra-spaces-in-excel.html"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://navferty.net/ru/articles/remove-extra-spaces-in-excel.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://navferty.net/en/articles/remove-extra-spaces-in-excel.html"/>
+  </url>
+  <url>
+    <loc>https://navferty.net/ru/articles/remove-protection-from-all-sheets.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://navferty.net/en/articles/remove-protection-from-all-sheets.html"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://navferty.net/ru/articles/remove-protection-from-all-sheets.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://navferty.net/en/articles/remove-protection-from-all-sheets.html"/>
+  </url>
+  <url>
+    <loc>https://navferty.net/ru/articles/speed-up-large-excel-workbooks.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://navferty.net/en/articles/speed-up-large-excel-workbooks.html"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://navferty.net/ru/articles/speed-up-large-excel-workbooks.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://navferty.net/en/articles/speed-up-large-excel-workbooks.html"/>
+  </url>
+  <url>
+    <loc>https://navferty.net/ru/articles/text-numbers-to-numeric-values.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://navferty.net/en/articles/text-numbers-to-numeric-values.html"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://navferty.net/ru/articles/text-numbers-to-numeric-values.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://navferty.net/en/articles/text-numbers-to-numeric-values.html"/>
+  </url>
+  <url>
+    <loc>https://navferty.net/ru/articles/validate-xml-against-xsd-in-excel.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://navferty.net/en/articles/validate-xml-against-xsd-in-excel.html"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://navferty.net/ru/articles/validate-xml-against-xsd-in-excel.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://navferty.net/en/articles/validate-xml-against-xsd-in-excel.html"/>
+  </url>
+  <url>
+    <loc>https://navferty.net/ru/articles/vba-addin-with-custom-ribbon-tab.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://navferty.net/en/articles/vba-addin-with-custom-ribbon-tab.html"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://navferty.net/ru/articles/vba-addin-with-custom-ribbon-tab.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://navferty.net/en/articles/vba-addin-with-custom-ribbon-tab.html"/>
+  </url>
+  <url>
+    <loc>https://navferty.net/ru/articles/vlookup-in-excel.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://navferty.net/en/articles/vlookup-in-excel.html"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://navferty.net/ru/articles/vlookup-in-excel.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://navferty.net/en/articles/vlookup-in-excel.html"/>
+  </url>
+  <url>
+    <loc>https://navferty.net/ru/features/copy-as-markdown.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://navferty.net/en/features/copy-as-markdown.html"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://navferty.net/ru/features/copy-as-markdown.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://navferty.net/en/features/copy-as-markdown.html"/>
+  </url>
+  <url>
+    <loc>https://navferty.net/ru/features/create-sample-xml.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://navferty.net/en/features/create-sample-xml.html"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://navferty.net/ru/features/create-sample-xml.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://navferty.net/en/features/create-sample-xml.html"/>
+  </url>
+  <url>
+    <loc>https://navferty.net/ru/features/export-to-sqlite.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://navferty.net/en/features/export-to-sqlite.html"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://navferty.net/ru/features/export-to-sqlite.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://navferty.net/en/features/export-to-sqlite.html"/>
+  </url>
+  <url>
+    <loc>https://navferty.net/ru/features/find-errors.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://navferty.net/en/features/find-errors.html"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://navferty.net/ru/features/find-errors.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://navferty.net/en/features/find-errors.html"/>
+  </url>
+  <url>
+    <loc>https://navferty.net/ru/features/highlight-duplications.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://navferty.net/en/features/highlight-duplications.html"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://navferty.net/ru/features/highlight-duplications.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://navferty.net/en/features/highlight-duplications.html"/>
+  </url>
+  <url>
+    <loc>https://navferty.net/ru/features/parse-numerics.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://navferty.net/en/features/parse-numerics.html"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://navferty.net/ru/features/parse-numerics.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://navferty.net/en/features/parse-numerics.html"/>
+  </url>
+  <url>
+    <loc>https://navferty.net/ru/features/replace.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://navferty.net/en/features/replace.html"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://navferty.net/ru/features/replace.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://navferty.net/en/features/replace.html"/>
+  </url>
+  <url>
+    <loc>https://navferty.net/ru/features/stringify-numerics.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://navferty.net/en/features/stringify-numerics.html"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://navferty.net/ru/features/stringify-numerics.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://navferty.net/en/features/stringify-numerics.html"/>
+  </url>
+  <url>
+    <loc>https://navferty.net/ru/features/toggle-case.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://navferty.net/en/features/toggle-case.html"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://navferty.net/ru/features/toggle-case.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://navferty.net/en/features/toggle-case.html"/>
+  </url>
+  <url>
+    <loc>https://navferty.net/ru/features/trim-spaces.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://navferty.net/en/features/trim-spaces.html"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://navferty.net/ru/features/trim-spaces.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://navferty.net/en/features/trim-spaces.html"/>
+  </url>
+  <url>
+    <loc>https://navferty.net/ru/features/undo-last-action.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://navferty.net/en/features/undo-last-action.html"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://navferty.net/ru/features/undo-last-action.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://navferty.net/en/features/undo-last-action.html"/>
+  </url>
+  <url>
+    <loc>https://navferty.net/ru/features/unmerge-cells.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://navferty.net/en/features/unmerge-cells.html"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://navferty.net/ru/features/unmerge-cells.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://navferty.net/en/features/unmerge-cells.html"/>
+  </url>
+  <url>
+    <loc>https://navferty.net/ru/features/unprotect-workbook.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://navferty.net/en/features/unprotect-workbook.html"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://navferty.net/ru/features/unprotect-workbook.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://navferty.net/en/features/unprotect-workbook.html"/>
+  </url>
+  <url>
+    <loc>https://navferty.net/ru/features/validate-values.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://navferty.net/en/features/validate-values.html"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://navferty.net/ru/features/validate-values.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://navferty.net/en/features/validate-values.html"/>
+  </url>
+  <url>
+    <loc>https://navferty.net/ru/features/validate-xml.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://navferty.net/en/features/validate-xml.html"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://navferty.net/ru/features/validate-xml.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://navferty.net/en/features/validate-xml.html"/>
+  </url>
+  <url>
+    <loc>https://navferty.net/ru/features/worksheets-protection.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://navferty.net/en/features/worksheets-protection.html"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://navferty.net/ru/features/worksheets-protection.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://navferty.net/en/features/worksheets-protection.html"/>
+  </url>
+  <url>
+    <loc>https://navferty.net/ru/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://navferty.net/en/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://navferty.net/ru/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://navferty.net/en/"/>
+  </url>
+  <url>
+    <loc>https://navferty.net/ru/install.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://navferty.net/en/install.html"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://navferty.net/ru/install.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://navferty.net/en/install.html"/>
+  </url>
+  <url>
+    <loc>https://navferty.net/en/features/repair-conditional-format.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://navferty.net/en/features/repair-conditional-format.html"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://navferty.net/ru/features/repair-conditional-format.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://navferty.net/en/features/repair-conditional-format.html"/>
+  </url>
+  <url>
+    <loc>https://navferty.net/ru/features/repair-conditional-format.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://navferty.net/en/features/repair-conditional-format.html"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://navferty.net/ru/features/repair-conditional-format.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://navferty.net/en/features/repair-conditional-format.html"/>
+  </url>
+  <url>
+    <loc>https://navferty.net/en/features/toggle-sheet-tabs.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://navferty.net/en/features/toggle-sheet-tabs.html"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://navferty.net/ru/features/toggle-sheet-tabs.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://navferty.net/en/features/toggle-sheet-tabs.html"/>
+  </url>
+  <url>
+    <loc>https://navferty.net/ru/features/toggle-sheet-tabs.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://navferty.net/en/features/toggle-sheet-tabs.html"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://navferty.net/ru/features/toggle-sheet-tabs.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://navferty.net/en/features/toggle-sheet-tabs.html"/>
+  </url>
+  <url>
+    <loc>https://navferty.net/en/features/switch-reference-style.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://navferty.net/en/features/switch-reference-style.html"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://navferty.net/ru/features/switch-reference-style.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://navferty.net/en/features/switch-reference-style.html"/>
+  </url>
+  <url>
+    <loc>https://navferty.net/ru/features/switch-reference-style.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://navferty.net/en/features/switch-reference-style.html"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://navferty.net/ru/features/switch-reference-style.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://navferty.net/en/features/switch-reference-style.html"/>
+  </url>
+  <url>
+    <loc>https://navferty.net/en/features/exchange-rates.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://navferty.net/en/features/exchange-rates.html"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://navferty.net/ru/features/exchange-rates.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://navferty.net/en/features/exchange-rates.html"/>
+  </url>
+  <url>
+    <loc>https://navferty.net/ru/features/exchange-rates.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://navferty.net/en/features/exchange-rates.html"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://navferty.net/ru/features/exchange-rates.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://navferty.net/en/features/exchange-rates.html"/>
+  </url>
+</urlset>

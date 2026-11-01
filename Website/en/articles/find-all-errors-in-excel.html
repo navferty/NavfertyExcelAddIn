@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>How to find all errors in Excel (#VALUE!, #REF!, #DIV/0!) - Navferty&#x27;s Excel Add-In</title>
+    <meta name="description" content="Ways to locate every formula error in a sheet, and what each error usually means.">
+    <link rel="canonical" href="https://navferty.net/en/articles/find-all-errors-in-excel.html">
+    <link rel="alternate" hreflang="en" href="https://navferty.net/en/articles/find-all-errors-in-excel.html">
+    <link rel="alternate" hreflang="ru" href="https://navferty.net/ru/articles/find-all-errors-in-excel.html">
+    <link rel="alternate" hreflang="x-default" href="https://navferty.net/en/articles/find-all-errors-in-excel.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="Navferty&#x27;s Excel Add-In">
+    <meta property="og:title" content="How to find all errors in Excel (#VALUE!, #REF!, #DIV/0!) - Navferty&#x27;s Excel Add-In">
+    <meta property="og:description" content="Ways to locate every formula error in a sheet, and what each error usually means.">
+    <meta property="og:url" content="https://navferty.net/en/articles/find-all-errors-in-excel.html">
+    <meta property="og:image" content="https://navferty.net/images/articles/find-all-errors-in-excel/sample-range-with-errors.jpg">
+    <meta property="og:locale" content="en">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="icon" href="../../favicon.ico">
+    <link rel="stylesheet" href="../../style.css">
+    <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "How to find all errors in Excel (#VALUE!, #REF!, #DIV/0!)", "inLanguage": "en", "description": "Ways to locate every formula error in a sheet, and what each error usually means.", "author": {"@type": "Person", "name": "Andrey Deev", "url": "https://github.com/navferty"}, "mainEntityOfPage": "https://navferty.net/en/articles/find-all-errors-in-excel.html"}</script>
+</head>
+
+<body>
+    <header class="site-header">
+        <div class="site-header-inner">
+            <a class="brand" href="../">Navferty's Excel Add-In</a>
+            <nav aria-label="Navferty's Excel Add-In"><a href="../#commands">Commands</a><a href="./">Guides</a><a href="../install.html">Install</a><a href="https://github.com/navferty/NavfertyExcelAddIn" target="_blank" rel="noopener">GitHub</a><span class="lang-switch"><a href="find-all-errors-in-excel.html" lang="en" hreflang="en" data-lang="en" aria-current="true">English</a><a href="../../ru/articles/find-all-errors-in-excel.html" lang="ru" hreflang="ru" data-lang="ru">Русский</a></span></nav>
+        </div>
+    </header>
+    <div id="container">
+        <main id="content" class="article">
+<p class="back-to-top"><a href="index.html">&larr; All articles</a></p>
+<h1 class="zag">How to find all errors in Excel (#VALUE!, #REF!, #DIV/0!)</h1>
+<p class="subtitle">Ways to locate every formula error in a sheet, and what each error usually means.</p>
+<p>A report that goes out with a <code>#REF!</code> in the totals looks bad, and in a large workbook a single error cell is easy to miss. Excel has a few built-in ways to find them all.</p>
+
+<p>Example range used below, with the common error types:</p>
+<p><img src="../../images/articles/find-all-errors-in-excel/sample-range-with-errors.jpg" alt="A sheet with the errors #DIV/0!, #REF!, #VALUE!, #N/A, #NAME? and #NUM! mixed with ordinary numbers" loading="lazy" width="308" height="398"></p>
+<h2>Go To Special</h2>
+<p>Select the range (or press <kbd>Ctrl</kbd>+<kbd>A</kbd> for the whole sheet), then press <kbd>F5</kbd> (or <kbd>Ctrl</kbd>+<kbd>G</kbd>) → <b>Special…</b> → <b>Formulas</b> and leave only <b>Errors</b> ticked. Excel selects every cell that currently shows an error. You can then fill them with a colour or step through them with <kbd>Enter</kbd>.</p>
+<p><img src="../../images/articles/find-all-errors-in-excel/go-to-main.jpg" alt="The Go To dialog with the Special button" loading="lazy" width="488" height="412"></p>
+<p><img src="../../images/articles/find-all-errors-in-excel/go-to-special.jpg" alt="The Go To Special dialog with Formulas and Errors selected" loading="lazy" width="388" height="451"></p>
+<p><img src="../../images/articles/find-all-errors-in-excel/go-to-special-errors-result-selection.jpg" alt="Every cell with an error is selected" loading="lazy" width="382" height="381"></p>
+<p>Limitation: it works per sheet, and it gives you a selection, not a list. You still have to jump around to see what is where.</p>
+
+<h2>Find with a wildcard</h2>
+<p>Press <kbd>Ctrl</kbd>+<kbd>F</kbd>, search for <code>#</code>, set <b>Look in</b> to <b>Values</b> and click <b>Find All</b>. This gives a list of cells with their addresses. It also finds legitimate text that contains a hash sign, so it is a bit noisy, and it does not work well if the sheet uses <code>#</code> in headers.</p>
+
+<h2>Conditional formatting</h2>
+<p>For a sheet that is edited constantly, a rule makes errors visible without any searching. Select the range, choose <b>Home → Conditional Formatting → New Rule → Use a formula</b> and enter (adjust A1 to the top-left cell of your selection):</p>
+<pre>=ISERROR(A1)</pre>
+<p><img src="../../images/articles/find-all-errors-in-excel/conditional-formatting-errors-rule.jpg" alt="The New Formatting Rule dialog with the formula =ISERROR(A1)" loading="lazy" width="893" height="780"></p>
+<p>Pick a red fill. Any error that appears later is highlighted right away.</p>
+<p><b>Mind the active cell.</b> In a conditional formatting formula, a relative reference like <code>A1</code> is relative to the <i>active</i> cell, which is not always the top-left cell of the selection. If you select the range from the bottom up, or click a cell in the middle before opening the dialog, the rule is shifted and some cells (typically the first rows) are not checked. The fix is to make the top-left cell active before creating the rule: select the range starting from its first cell, and check the Name Box (left of the formula bar) shows that address. You can also edit the rule later via <b>Manage Rules</b> and compare the formula with the top-left cell of <b>Applies to</b>.</p>
+<p><img src="../../images/articles/find-all-errors-in-excel/conditional-formatting-errors-result.jpg" alt="The result: every error cell is highlighted, including #DIV/0! and #REF!" loading="lazy" width="403" height="415"></p>
+
+
+<h2>Count them</h2>
+<p>To get a quick number for a checklist or a dashboard cell:</p>
+<pre>=SUMPRODUCT(--ISERROR(A1:Z1000))</pre>
+<p><code>ISERROR</code> also treats <code>#N/A</code> as an error. If you want to leave <code>#N/A</code> out, use <code>ISERR</code> instead.</p>
+
+<h2>What the errors mean</h2>
+<ul>
+<li><code>#DIV/0!</code> – division by zero or by an empty cell. Often a lookup that returned nothing or a month with no data yet.</li>
+<li><code>#VALUE!</code> – the formula got the wrong type of value, typically text where a number was expected. A number with a trailing space or a text-formatted number is a very common cause (see <a href="text-numbers-to-numeric-values.html">converting text numbers</a>).</li>
+<li><code>#REF!</code> – the formula points to a cell that no longer exists, usually because a row, column or sheet was deleted.</li>
+<li><code>#N/A</code> – a lookup found no match. Check for extra spaces and for numbers stored as text on either side.</li>
+<li><code>#NAME?</code> – a misspelled function name, a missing quote around text, or a function that your Excel version does not have.</li>
+<li><code>#NUM!</code> – an impossible numeric operation, such as the square root of a negative number, or a result too large for Excel.</li>
+<li><code>#NULL!</code> – two ranges in a formula are separated by a space instead of a comma or colon, and they do not intersect.</li>
+</ul>
+
+<h2>Handling them</h2>
+<p>Wrapping everything in <code>IFERROR</code> makes the error go away, but it also hides real problems. Use it where an empty result is a normal outcome (a lookup that may find nothing) and let errors show everywhere else, so you notice when something breaks.</p>
+
+<h2>With the add-in</h2>
+<p>The <b>Find All Cells Containing Errors</b> command scans the selected range and shows a list of all error cells with their type. Clicking an entry jumps to that cell. It is handy when the errors are spread over a big range and you want to work through them one by one.</p>
+<p><img src="../../images/articles/find-all-errors-in-excel/find-errors-with-add-in.jpg" alt="The list of error cells found by the add-in command, with the error type and cell address" loading="lazy" width="1193" height="618"></p>
+<p>The add-in command for this: <a href="../features/find-errors.html">Find All Cells Containing Errors</a>.</p>
+        </main>
+    </div>
+    <footer class="footer">
+        <p>Navferty &copy; 2021-<span id="current-year">2026</span> &bull; <a href="https://github.com/navferty/NavfertyExcelAddIn" target="_blank" rel="noopener" class="footer-link">Open Source on GitHub</a></p>
+    </footer>
+    <script src="../../site.js"></script>
+</body>
+
+</html>

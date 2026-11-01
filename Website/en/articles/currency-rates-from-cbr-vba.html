@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Currency rates from the Bank of Russia website in VBA - Navferty&#x27;s Excel Add-In</title>
+    <meta name="description" content="How to load exchange rates from the Bank of Russia (CBR) XML API into Excel with VBA and a user-defined function that refreshes automatically.">
+    <link rel="canonical" href="https://navferty.net/en/articles/currency-rates-from-cbr-vba.html">
+    <link rel="alternate" hreflang="en" href="https://navferty.net/en/articles/currency-rates-from-cbr-vba.html">
+    <link rel="alternate" hreflang="ru" href="https://navferty.net/ru/articles/currency-rates-from-cbr-vba.html">
+    <link rel="alternate" hreflang="x-default" href="https://navferty.net/en/articles/currency-rates-from-cbr-vba.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="Navferty&#x27;s Excel Add-In">
+    <meta property="og:title" content="Currency rates from the Bank of Russia website in VBA - Navferty&#x27;s Excel Add-In">
+    <meta property="og:description" content="How to load exchange rates from the Bank of Russia (CBR) XML API into Excel with VBA and a user-defined function that refreshes automatically.">
+    <meta property="og:url" content="https://navferty.net/en/articles/currency-rates-from-cbr-vba.html">
+    <meta property="og:image" content="https://navferty.net/images/articles/currency-rates-from-cbr-vba/1590228471139931720.png">
+    <meta property="og:locale" content="en">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="icon" href="../../favicon.ico">
+    <link rel="stylesheet" href="../../style.css">
+    <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Currency rates from the Bank of Russia website in VBA", "inLanguage": "en", "description": "How to load exchange rates from the Bank of Russia (CBR) XML API into Excel with VBA and a user-defined function that refreshes automatically.", "author": {"@type": "Person", "name": "Andrey Deev", "url": "https://github.com/navferty"}, "mainEntityOfPage": "https://navferty.net/en/articles/currency-rates-from-cbr-vba.html"}</script>
+</head>
+
+<body>
+    <header class="site-header">
+        <div class="site-header-inner">
+            <a class="brand" href="../">Navferty's Excel Add-In</a>
+            <nav aria-label="Navferty's Excel Add-In"><a href="../#commands">Commands</a><a href="./">Guides</a><a href="../install.html">Install</a><a href="https://github.com/navferty/NavfertyExcelAddIn" target="_blank" rel="noopener">GitHub</a><span class="lang-switch"><a href="currency-rates-from-cbr-vba.html" lang="en" hreflang="en" data-lang="en" aria-current="true">English</a><a href="../../ru/articles/currency-rates-from-cbr-vba.html" lang="ru" hreflang="ru" data-lang="ru">Русский</a></span></nav>
+        </div>
+    </header>
+    <div id="container">
+        <main id="content" class="article">
+<p class="back-to-top"><a href="index.html">&larr; All articles</a></p>
+<h1 class="zag">Currency rates from the Bank of Russia website in VBA</h1>
+<p class="subtitle">How to load exchange rates from the Bank of Russia (CBR) XML API into Excel with VBA and a user-defined function that refreshes automatically.</p>
+<p>A common request from Excel users is a macro that loads exchange rates from the Bank of Russia (CBR) website, with formulas that refresh themselves and pick up the current rate for today. A ready-made solution is available on GitHub: <a href="https://github.com/navferty/CBR-VBA-Currencies" target="_blank" rel="noopener">https://github.com/navferty/CBR-VBA-Currencies</a>. Below is how it is built, step by step.</p>
+<p><img src="../../images/articles/currency-rates-from-cbr-vba/1590231961122251017.webp" alt="The Bank of Russia page describing the exchange rate API" loading="lazy" width="650" height="427"></p>
+<h2>The Bank of Russia API</h2><p>The CBR website has an official API that returns the dynamics of exchange rates (handy if you need a rate for a specific date in the past). It is an HTTP GET request like this:</p>
+<pre><code>http://www.cbr.ru/scripts/XML_dynamic.asp?date_req1=02/03/2001&amp;date_req2=14/03/2001&amp;VAL_NM_RQ=R01235</code></pre><p>Here <code>R01235</code> is the currency code (US dollar). The list of currency codes for the request is also published on the CBR website.</p><p>The API returns XML. For VBA that is actually easier than JSON, since XML is supported out of the box while parsing JSON needs third-party libraries. A sample response:</p>
+<p><img src="../../images/articles/currency-rates-from-cbr-vba/1590228257130434333.webp" alt="An example XML response with a rate for each date" loading="lazy" width="700" height="329"></p>
+<p>The response contains a rate for every date in the interval together with the currency code, which is exactly what we need.</p>
+<h2>Making the request from VBA</h2><p>Now let us make this request from VBA. First, add a reference to MSXML 6.0 in the workbook (if another version is available that is fine: type names may differ slightly, but the logic is the same). In the VBA editor, open Tools &rarr; References.</p>
+<p><img src="../../images/articles/currency-rates-from-cbr-vba/1590228471139931720.png" alt="The References dialog with MSXML 6.0 and Microsoft Scripting Runtime" loading="lazy" width="445" height="364"></p>
+<p>While there, also add a reference to Microsoft Scripting Runtime. It provides the <code>Dictionary</code> type, which we will use to map currency codes (USD &rarr; R01235).</p><p>Let us create a simple function that sends the request and loads the response into an XML document:</p>
+<pre><code>Private Function RequestGetXml() As DOMDocument60
+    Dim XMLHTTP As New MSXML2.XMLHTTP60
+    Dim requestUrl As String
+
+    requestUrl = "http://www.cbr.ru/scripts/XML_dynamic.asp?date_req1=02/03/2001&amp;date_req2=14/03/2001&amp;VAL_NM_RQ=R01235"
+    XMLHTTP.Open "GET", requestUrl, False
+    XMLHTTP.send
+
+    Dim resultXmlDocument As DOMDocument60
+    Set resultXmlDocument = XMLHTTP.responseXML
+
+    Stop ' look at the document in the Locals window
+
+    Set RequestGetXml = resultXmlDocument
+End Function</code></pre><p>The XmlHttpRequest mechanism, including authorization examples, is described well here: <a href="https://codingislove.com/http-requests-excel-vba/" target="_blank" rel="noopener">https://codingislove.com/http-requests-excel-vba/</a>.</p><p>The <code>Stop</code> statement pauses execution so you can inspect the received XML document in the Locals window.</p>
+<h2>A class to hold the rate</h2><p>Now we have an XML document that we can walk through in a loop, extracting the rate for each date. But first let us add a class to store those values. We need three properties: the currency code (a string), the date and the value itself (for monetary amounts it is better to use the Decimal type). Add a class module named <code>CurrencyRecord</code>:</p>
+<pre><code>Option Explicit
+
+Private prCurrencyDate As Date
+Private prCurrencyValue As Variant 'decimal
+Private prCurrencyCode As String
+
+Public Property Get CurrencyDate() As Date
+    CurrencyDate = prCurrencyDate
+End Property
+Public Property Let CurrencyDate(ByVal vNewValue As Date)
+    prCurrencyDate = vNewValue
+End Property
+
+Public Property Get CurrencyValue() As Variant
+    CurrencyValue = prCurrencyValue
+End Property
+Public Property Let CurrencyValue(ByVal vNewValue As Variant)
+    prCurrencyValue = CDec(vNewValue)
+End Property
+
+Public Property Get CurrencyCode() As String
+    CurrencyCode = prCurrencyCode
+End Property
+Public Property Let CurrencyCode(ByVal vNewValue As String)
+    prCurrencyCode = vNewValue
+End Property</code></pre><p>Properties can be added with Insert &rarr; Procedure..., which generates the getters and setters automatically. Public fields would also work, but access through properties lets you control the data and is considered good practice.</p><p>The <code>CDec</code> function converts a value to a decimal number (the Decimal type). I strongly recommend it over Double for monetary amounts, because it avoids rounding errors with decimal fractions.</p>
+<p><img src="../../images/articles/currency-rates-from-cbr-vba/1590232854180743238.png" alt="Converting a value with CDec" loading="lazy" width="307" height="177"></p>
+<h2>Walking through the response</h2><p>Back to the task. Let us create a collection and fill it with <code>CurrencyRecord</code> objects:</p>
+<pre><code>Private Function LoadUsdItems() As Collection
+
+    Dim resultXmlDocument As DOMDocument60
+    Dim recordItem As IXMLDOMElement
+    Dim col As New Collection
+    Dim resultItem As CurrencyRecord
+
+    Set resultXmlDocument = RequestGetXml()
+
+    For Each recordItem In resultXmlDocument.LastChild.ChildNodes
+        Set resultItem = New CurrencyRecord
+        With resultItem
+            .CurrencyCode = recordItem.Attributes.getNamedItem("Id").NodeValue
+            .CurrencyDate = CDate(recordItem.Attributes.getNamedItem("Date").NodeValue)
+            .CurrencyValue = CDec(recordItem.ChildNodes.Item(1).nodeTypedValue)
+        End With
+        col.Add resultItem
+    Next
+
+    Set LoadUsdItems = col
+End Function</code></pre><p>The loop goes through the elements that hold the rate for each date. The access to <code>resultXmlDocument.LastChild.ChildNodes</code> can be rewritten with XPath to make navigation through the document clearer.</p>
+<h2>Requesting by currency code</h2><p>Once the request and the response handling work, let us rewrite the function to request a rate by currency code. We add a dictionary of code mappings and build the request address from the start and end dates and the currency code:</p>
+<pre><code>' returns a Collection of CurrencyRecord objects
+Private Function GetCurrency(currCode As String, startDate As Date, endDate As Date) As Collection
+
+    Dim codeDict As Dictionary
+    Set codeDict = New Dictionary
+    codeDict.Add "USD", "R01235"
+    codeDict.Add "GBP", "R01035"
+    codeDict.Add "BYN", "R01090B"
+    ' add other currencies here
+
+    Dim currCbrCode As String
+    currCbrCode = codeDict.Item(currCode)
+
+    Dim requestUri As String
+    requestUri = "http://www.cbr.ru/scripts/XML_dynamic.asp?" _
+                + "date_req1=" + Format(startDate, "dd/mm/yyyy") _
+                + "&amp;date_req2=" + Format(endDate, "dd/mm/yyyy") _
+                + "&amp;VAL_NM_RQ=" + currCbrCode
+    ' Date format is important!
+
+    Dim resp As DOMDocument60
+    Set resp = RequestGetXml(requestUri)
+
+    Dim col As New Collection
+    Dim recordItem As IXMLDOMElement
+    Dim resultItem As CurrencyRecord
+    For Each recordItem In resp.LastChild.ChildNodes
+        Set resultItem = New CurrencyRecord
+        With resultItem
+            .CurrencyCode = currCode
+            .CurrencyDate = CDate(recordItem.Attributes.getNamedItem("Date").NodeValue)
+            .CurrencyValue = CDec(recordItem.ChildNodes.Item(1).nodeTypedValue)
+        End With
+        col.Add resultItem
+    Next
+
+    Set GetCurrency = col
+End Function</code></pre><p>I also changed <code>CurrencyCode</code> when creating a record in the loop: instead of <code>"R01235"</code> the record now holds the familiar currency code <code>"USD"</code>.</p><p><code>RequestGetXml</code> is a helper function that loads an XML document with an HTTP request (the address is now passed as an argument):</p>
+<pre><code>Private Function RequestGetXml(requestUrl As String) As DOMDocument60
+    'about requests in VBA: https://codingislove.com/http-requests-excel-vba/
+    Dim XMLHTTP As New MSXML2.XMLHTTP60
+
+    XMLHTTP.Open "GET", requestUrl, False
+    XMLHTTP.send
+    Set RequestGetXml = XMLHTTP.responseXML
+End Function</code></pre><p>Let us check that the whole function works as expected by adding a temporary test procedure:</p><pre><code>Private Sub TestCurrLoad()
+    Dim col As Collection
+    Set col = GetCurrency("USD", #1/1/2020#, #2/2/2020#)
+    Stop
+End Sub</code></pre>
+<h2>A worksheet function</h2><p>Now let us add a public function that can be used in worksheet formulas (a UDF, user-defined function):</p>
+<pre><code>Public Function GetTodayCurrency(currCode As String, volatileArg As Variant) As Variant 'decimal
+    Dim currItem As CurrencyRecord
+    Dim col As Collection
+    Set col = GetCurrency(currCode, DateAdd("d", -1, Date), Now)
+
+    If col.Count = 0 Then
+        Exit Function
+    End If
+
+    Set currItem = col.Item(col.Count) ' VBA collections are numbered from 1
+    GetTodayCurrency = currItem.CurrencyValue
+
+    Debug.Print "Currency loaded, value is " + CStr(currItem.CurrencyValue)
+End Function</code></pre><p>The <code>DateAdd</code> function sets the date range to load: from yesterday to today. We get two records and take the value from the last one (VBA collections are numbered from 1).</p><p>Note the second argument, <code>volatileArg</code>. Its value is not used, but it is there to force Excel to recalculate the result when that argument changes in the cell formula:</p><pre><code>=GetTodayCurrency("USD", NOW())</code></pre><p>To confirm that the rate was refreshed, the function also calls <code>Debug.Print</code> with a success message. After debugging, that call can be removed so it does not clutter the Immediate window.</p>
+<h2>Checking it works</h2><p>Let us check that the rate is loaded when the workbook is opened:</p>
+<p><img src="../../images/articles/currency-rates-from-cbr-vba/1590231043185812459.webp" alt="The Immediate window with the &quot;currency loaded&quot; message" loading="lazy" width="700" height="346"></p>
+<p>The Immediate window shows the success message right after the workbook is opened. The same message will appear after any change on the sheet, because Excel recalculates the formula. If the workbook has many cells calling this function, it is better to add a cache: for example, a static variable holding a <code>Dictionary</code> where the key is a combination of the currency code and the date, and the value is the <code>CurrencyRecord</code>. That avoids a lot of identical requests to the CBR website.</p>
+<p>Improvements can be suggested in the issues of the repository <a href="https://github.com/navferty/CBR-VBA-Currencies" target="_blank" rel="noopener">https://github.com/navferty/CBR-VBA-Currencies</a>.</p>
+<p class="note">Originally published in Russian on <a href="https://pikabu.ru/story/kursyi_valyut_s_sayta_tsb_na_vba_s_avtoobnovleniem_7469372" target="_blank" rel="noopener">Pikabu</a>.</p>
+        </main>
+    </div>
+    <footer class="footer">
+        <p>Navferty &copy; 2021-<span id="current-year">2026</span> &bull; <a href="https://github.com/navferty/NavfertyExcelAddIn" target="_blank" rel="noopener" class="footer-link">Open Source on GitHub</a></p>
+    </footer>
+    <script src="../../site.js"></script>
+</body>
+
+</html>

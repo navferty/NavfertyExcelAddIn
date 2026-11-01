@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Installation and removal - Navferty&#x27;s Excel Add-In</title>
+    <meta name="description" content="How to install the Navferty Excel Add-In, what to do about the certificate warning, how to install offline and how to remove it.">
+    <link rel="canonical" href="https://navferty.net/en/install.html">
+    <link rel="alternate" hreflang="en" href="https://navferty.net/en/install.html">
+    <link rel="alternate" hreflang="ru" href="https://navferty.net/ru/install.html">
+    <link rel="alternate" hreflang="x-default" href="https://navferty.net/en/install.html">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Navferty&#x27;s Excel Add-In">
+    <meta property="og:title" content="Installation and removal - Navferty&#x27;s Excel Add-In">
+    <meta property="og:description" content="How to install the Navferty Excel Add-In, what to do about the certificate warning, how to install offline and how to remove it.">
+    <meta property="og:url" content="https://navferty.net/en/install.html">
+    <meta property="og:image" content="https://navferty.net/images/NavfertyToolsRibbonEn.png">
+    <meta property="og:locale" content="en">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="icon" href="../favicon.ico">
+    <link rel="stylesheet" href="../style.css">
+</head>
+
+<body>
+    <header class="site-header">
+        <div class="site-header-inner">
+            <a class="brand" href="./">Navferty's Excel Add-In</a>
+            <nav aria-label="Navferty's Excel Add-In"><a href="./#commands">Commands</a><a href="articles/">Guides</a><a href="install.html">Install</a><a href="https://github.com/navferty/NavfertyExcelAddIn" target="_blank" rel="noopener">GitHub</a><span class="lang-switch"><a href="install.html" lang="en" hreflang="en" data-lang="en" aria-current="true">English</a><a href="../ru/install.html" lang="ru" hreflang="ru" data-lang="ru">Русский</a></span></nav>
+        </div>
+    </header>
+    <div id="container">
+        <main id="content" class="article">
+<nav class="breadcrumb"><a href="./">Home</a> &rsaquo; <span>Installation and removal</span></nav>
+<h1 class="zag">Installation and removal</h1>
+<div class="installation-steps">
+<div class="step"><div class="step-number">1</div><div class="step-content"><h4>Download and unpack the installer archive</h4><p>Get the latest version from our server:</p>
+<a href="https://deploy.navferty.net/setup.zip" class="btn btn-primary btn-small">Download setup.zip</a></div></div>
+<div class="step"><div class="step-number">2</div><div class="step-content"><h4>Run the installation</h4><p>Double-click the downloaded <code>setup.exe</code> file and follow the installation wizard.</p></div></div>
+<div class="step"><div class="step-number">3</div><div class="step-content"><h4>Restart Excel</h4><p>If Excel was open during installation, restart it. You'll see the new <strong>Navferty's Tools</strong> tab in the ribbon.</p></div></div>
+</div>
+<h2 id="certificate">Certificate installation (if needed)</h2>
+<div class="warning-box">
+<p>If you encounter a security warning about the certificate:</p>
+<ol>
+<li>Right-click on <code>setup.exe</code> and select <strong>Properties</strong></li>
+<li>Go to the <strong>Digital Signatures</strong> tab</li>
+<li>Select the signature and click <strong>Details</strong></li>
+<li>Click <strong>View Certificate</strong> → <strong>Install Certificate</strong></li>
+<li>Choose <strong>Local Machine</strong> and place it in <strong>Trusted Root Certification Authorities</strong></li>
+</ol>
+<img src="../digital-certificate.jpg" alt="Certificate installation wizard" loading="lazy" width="1518" height="822">
+<p><em>You can remove the certificate after installation, but it will be required for future updates.</em></p>
+</div>
+<h2 id="offline">Offline install</h2>
+<p>Every release is built with GitHub Actions, and the full set of installation files is attached to it:</p>
+<ol>
+<li>Open the <a href="https://github.com/navferty/NavfertyExcelAddIn/releases/latest" target="_blank" rel="noopener">latest release</a></li>
+<li>Download the attached <code>NavfertyExcelAddIn-*.zip</code> archive</li>
+<li>Extract the files to a folder and run the <code>.vsto</code> file</li>
+</ol>
+<p>Installing from a folder on the desktop is recommended: updates are only permitted from the same folder where the add-in was first installed.</p>
+<p>After installation, restart Excel. The new <strong>Navferty's Tools</strong> tab appears in the ribbon.</p>
+<h2 id="uninstall">Removal</h2>
+<p><strong>Method 1: Windows Settings (recommended)</strong></p>
+<ol>
+<li>Open Windows Settings (<kbd>Win</kbd> + <kbd>I</kbd>)</li>
+<li>Go to <strong>Apps</strong> → <strong>Installed apps</strong> (<strong>Apps &amp; features</strong> on Windows 10)</li>
+<li>Find <strong>Navferty Excel Add-In</strong> in the list</li>
+<li>Click <strong>Uninstall</strong> and follow the prompts</li>
+</ol>
+<p><strong>Method 2: Control Panel</strong></p>
+<ol>
+<li>Open <strong>Control Panel</strong></li>
+<li>Go to <strong>Programs</strong> → <strong>Programs and Features</strong></li>
+<li>Right-click <strong>Navferty Excel Add-In</strong> and select <strong>Uninstall</strong></li>
+</ol>
+
+        </main>
+    </div>
+    <footer class="footer">
+        <p>Navferty &copy; 2021-<span id="current-year">2026</span> &bull; <a href="https://github.com/navferty/NavfertyExcelAddIn" target="_blank" rel="noopener" class="footer-link">Open Source on GitHub</a></p>
+    </footer>
+    <script src="../site.js"></script>
+</body>
+
+</html>

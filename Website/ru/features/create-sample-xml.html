@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Создать образец XML по XSD - Надстройка Navferty Excel Add-In</title>
+    <meta name="description" content="Генерация образца XML-файла из XSD-схемы для визуализации структуры.">
+    <link rel="canonical" href="https://navferty.net/ru/features/create-sample-xml.html">
+    <link rel="alternate" hreflang="en" href="https://navferty.net/en/features/create-sample-xml.html">
+    <link rel="alternate" hreflang="ru" href="https://navferty.net/ru/features/create-sample-xml.html">
+    <link rel="alternate" hreflang="x-default" href="https://navferty.net/en/features/create-sample-xml.html">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Надстройка Navferty Excel Add-In">
+    <meta property="og:title" content="Создать образец XML по XSD - Надстройка Navferty Excel Add-In">
+    <meta property="og:description" content="Генерация образца XML-файла из XSD-схемы для визуализации структуры.">
+    <meta property="og:url" content="https://navferty.net/ru/features/create-sample-xml.html">
+    <meta property="og:image" content="https://navferty.net/images/CreateSampleXml1.png">
+    <meta property="og:locale" content="ru">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="icon" href="../../favicon.ico">
+    <link rel="stylesheet" href="../../style.css">
+    <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Главная", "item": "https://navferty.net/ru/"}, {"@type": "ListItem", "position": 2, "name": "Команды", "item": "https://navferty.net/ru/#commands"}, {"@type": "ListItem", "position": 3, "name": "Создать образец XML по XSD"}]}</script>
+</head>
+
+<body>
+    <header class="site-header">
+        <div class="site-header-inner">
+            <a class="brand" href="../">Надстройка Navferty Excel Add-In</a>
+            <nav aria-label="Надстройка Navferty Excel Add-In"><a href="../#commands">Команды</a><a href="../articles/">Статьи</a><a href="../install.html">Установка</a><a href="https://github.com/navferty/NavfertyExcelAddIn" target="_blank" rel="noopener">GitHub</a><span class="lang-switch"><a href="../../en/features/create-sample-xml.html" lang="en" hreflang="en" data-lang="en">English</a><a href="create-sample-xml.html" lang="ru" hreflang="ru" data-lang="ru" aria-current="true">Русский</a></span></nav>
+        </div>
+    </header>
+    <div id="container">
+        <main id="content" class="article">
+<nav class="breadcrumb" aria-label="Breadcrumb"><a href="../">Главная</a> &rsaquo; <a href="../#commands">Команды</a> &rsaquo; <span>Создать образец XML по XSD</span></nav>
+<h1 class="zag"><img class="icons" src="../../images/icons/createSampleXml.png" alt="" width="64" height="64">Создать образец XML по XSD</h1>
+<p class="lead">Генерация образца XML-файла из XSD-схемы для визуализации структуры.</p>
+<div class="shots">
+    <img src="../../images/CreateSampleXml1.png" alt="Созданный пример XML-файла в редакторе" loading="lazy" width="497" height="441">
+</div>
+
+<h2>Посмотреть пример</h2>
+
+    <p><strong>Входная XSD-схема:</strong></p>
+    <pre>&lt;xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+           xmlns:tns="http://tempuri.org/PurchaseOrderSchema.xsd"
+           targetNamespace="http://tempuri.org/PurchaseOrderSchema.xsd"
+           elementFormDefault="qualified"&gt;
+ &lt;xsd:element name="PurchaseOrder" type="tns:PurchaseOrderType"/&gt;
+ &lt;xsd:complexType name="PurchaseOrderType"&gt;
+  &lt;xsd:sequence&gt;
+   &lt;xsd:element name="ShipTo" type="tns:USAddress" maxOccurs="2"/&gt;
+   &lt;xsd:element name="BillTo" type="tns:USAddress"/&gt;
+  &lt;/xsd:sequence&gt;
+  &lt;xsd:attribute name="OrderDate" type="xsd:date"/&gt;
+ &lt;/xsd:complexType&gt;
+
+ &lt;xsd:complexType name="USAddress"&gt;
+  &lt;xsd:sequence&gt;
+   &lt;xsd:element name="name"   type="xsd:string"/&gt;
+   &lt;xsd:element name="street" type="xsd:string"/&gt;
+   &lt;xsd:element name="city"   type="xsd:string"/&gt;
+   &lt;xsd:element name="state"  type="xsd:string"/&gt;
+   &lt;xsd:element name="zip"    type="xsd:integer"/&gt;
+  &lt;/xsd:sequence&gt;
+  &lt;xsd:attribute name="country" type="xsd:NMTOKEN" fixed="US"/&gt;
+ &lt;/xsd:complexType&gt;
+&lt;/xsd:schema&gt;</pre>
+
+    <p><strong>Сгенерированный XML:</strong></p>
+    <pre>&lt;PurchaseOrder xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" OrderDate="1900-01-01" xmlns="http://tempuri.org/PurchaseOrderSchema.xsd"&gt;
+  &lt;ShipTo country="US"&gt;
+    &lt;name&gt;name1&lt;/name&gt;
+    &lt;street&gt;street1&lt;/street&gt;
+    &lt;city&gt;city1&lt;/city&gt;
+    &lt;state&gt;state1&lt;/state&gt;
+    &lt;zip&gt;1&lt;/zip&gt;
+  &lt;/ShipTo&gt;
+  &lt;ShipTo country="US"&gt;
+    &lt;name&gt;name2&lt;/name&gt;
+    &lt;street&gt;street2&lt;/street&gt;
+    &lt;city&gt;city2&lt;/city&gt;
+    &lt;state&gt;state2&lt;/state&gt;
+    &lt;zip&gt;-79228162514264337593543950335&lt;/zip&gt;
+  &lt;/ShipTo&gt;
+  &lt;BillTo country="US"&gt;
+    &lt;name&gt;name1&lt;/name&gt;
+    &lt;street&gt;street1&lt;/street&gt;
+    &lt;city&gt;city1&lt;/city&gt;
+    &lt;state&gt;state1&lt;/state&gt;
+    &lt;zip&gt;1&lt;/zip&gt;
+  &lt;/BillTo&gt;
+&lt;/PurchaseOrder&gt;</pre>
+<div class="info-box"><p><strong>Статья по теме:</strong> <a href="../articles/validate-xml-against-xsd-in-excel.html">Проверка XML по XSD-схеме в Excel</a></p></div>
+<h2>Другие команды</h2>
+<ul class="other-commands">
+<li><a href="parse-numerics.html">Парсинг чисел</a></li>
+<li><a href="trim-spaces.html">Удалить пробелы</a></li>
+<li><a href="toggle-case.html">Изменить регистр</a></li>
+<li><a href="unmerge-cells.html">Разъединить ячейки</a></li>
+<li><a href="repair-conditional-format.html">Условное форматирование</a></li>
+<li><a href="replace.html">Заменить</a></li>
+<li><a href="stringify-numerics.html">Преобразовать числа в слова</a></li>
+<li><a href="find-errors.html">Найти все ошибки в выделенном диапазоне</a></li>
+<li><a href="highlight-duplications.html">Подсветить дубликаты</a></li>
+<li><a href="validate-values.html">Валидация значений</a></li>
+<li><a href="copy-as-markdown.html">Копировать в Markdown</a></li>
+<li><a href="export-to-sqlite.html">Экспорт в SQLite</a></li>
+<li><a href="validate-xml.html">Валидация XML по XSD</a></li>
+<li><a href="unprotect-workbook.html">Снять защиту с книги</a></li>
+<li><a href="worksheets-protection.html">Защита листов</a></li>
+<li><a href="toggle-sheet-tabs.html">Ярлычки листов</a></li>
+<li><a href="switch-reference-style.html">Стиль ссылок (A1/R1C1)</a></li>
+<li><a href="exchange-rates.html">Курсы валют</a></li>
+<li><a href="undo-last-action.html">Отменить последнее действие</a></li>
+</ul>
+<p class="cta">Надстройка бесплатная, с открытым кодом. <a href="../install.html">Инструкция по установке</a>.</p>
+
+        </main>
+    </div>
+    <footer class="footer">
+        <p>Navferty &copy; 2021-<span id="current-year">2026</span> &bull; <a href="https://github.com/navferty/NavfertyExcelAddIn" target="_blank" rel="noopener" class="footer-link">Открытый код на GitHub</a></p>
+    </footer>
+    <script src="../../site.js"></script>
+</body>
+
+</html>

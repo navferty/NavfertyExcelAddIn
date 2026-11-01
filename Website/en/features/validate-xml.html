@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Validate XML with XSD - Navferty&#x27;s Excel Add-In</title>
+    <meta name="description" content="Validate an XML file against an XSD schema. A detailed error report will be created in a new workbook.">
+    <link rel="canonical" href="https://navferty.net/en/features/validate-xml.html">
+    <link rel="alternate" hreflang="en" href="https://navferty.net/en/features/validate-xml.html">
+    <link rel="alternate" hreflang="ru" href="https://navferty.net/ru/features/validate-xml.html">
+    <link rel="alternate" hreflang="x-default" href="https://navferty.net/en/features/validate-xml.html">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Navferty&#x27;s Excel Add-In">
+    <meta property="og:title" content="Validate XML with XSD - Navferty&#x27;s Excel Add-In">
+    <meta property="og:description" content="Validate an XML file against an XSD schema. A detailed error report will be created in a new workbook.">
+    <meta property="og:url" content="https://navferty.net/en/features/validate-xml.html">
+    <meta property="og:image" content="https://navferty.net/images/ValidateXml1.png">
+    <meta property="og:locale" content="en">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="icon" href="../../favicon.ico">
+    <link rel="stylesheet" href="../../style.css">
+    <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://navferty.net/en/"}, {"@type": "ListItem", "position": 2, "name": "Commands", "item": "https://navferty.net/en/#commands"}, {"@type": "ListItem", "position": 3, "name": "Validate XML with XSD"}]}</script>
+</head>
+
+<body>
+    <header class="site-header">
+        <div class="site-header-inner">
+            <a class="brand" href="../">Navferty's Excel Add-In</a>
+            <nav aria-label="Navferty's Excel Add-In"><a href="../#commands">Commands</a><a href="../articles/">Guides</a><a href="../install.html">Install</a><a href="https://github.com/navferty/NavfertyExcelAddIn" target="_blank" rel="noopener">GitHub</a><span class="lang-switch"><a href="validate-xml.html" lang="en" hreflang="en" data-lang="en" aria-current="true">English</a><a href="../../ru/features/validate-xml.html" lang="ru" hreflang="ru" data-lang="ru">Русский</a></span></nav>
+        </div>
+    </header>
+    <div id="container">
+        <main id="content" class="article">
+<nav class="breadcrumb" aria-label="Breadcrumb"><a href="../">Home</a> &rsaquo; <a href="../#commands">Commands</a> &rsaquo; <span>Validate XML with XSD</span></nav>
+<h1 class="zag"><img class="icons" src="../../images/icons/validateXml.png" alt="" width="64" height="64">Validate XML with XSD</h1>
+<p class="lead">Validate an XML file against an XSD schema. A detailed error report will be created in a new workbook.</p>
+<div class="shots">
+    <img src="../../images/ValidateXml1.png" alt="Validation report on a sheet: severity, element, value and message" loading="lazy" width="883" height="257">
+</div>
+
+<h2>View sample error report</h2>
+
+    <div class="tbl">
+        <table>
+            <thead>
+                <tr>
+                    <th>Severity</th>
+                    <th>Element</th>
+                    <th>Message</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Error</td>
+                    <td>city</td>
+                    <td>The element 'shipto' has invalid child element 'city'. List of possible elements expected: 'address'.</td>
+                </tr>
+                <tr>
+                    <td>Error</td>
+                    <td>quantity</td>
+                    <td>The 'quantity' element is invalid - The value '-5' is invalid according to its datatype 'http://www.w3.org/2001/XMLSchema:positiveInteger'</td>
+                </tr>
+                <tr>
+                    <td>Error</td>
+                    <td>price</td>
+                    <td>The 'price' element is invalid - The value 'asdasd' is invalid according to its datatype 'http://www.w3.org/2001/XMLSchema:decimal'</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+<div class="info-box"><p><strong>Related guide:</strong> <a href="../articles/validate-xml-against-xsd-in-excel.html">Validating XML against XSD inside Excel</a></p></div>
+<h2>Other commands</h2>
+<ul class="other-commands">
+<li><a href="parse-numerics.html">Parse Numerics</a></li>
+<li><a href="trim-spaces.html">Trim Spaces</a></li>
+<li><a href="toggle-case.html">Toggle Case</a></li>
+<li><a href="unmerge-cells.html">Unmerge Cells</a></li>
+<li><a href="repair-conditional-format.html">Conditional Formatting</a></li>
+<li><a href="replace.html">Replace</a></li>
+<li><a href="stringify-numerics.html">Stringify Numerics</a></li>
+<li><a href="find-errors.html">Find All Cells Containing Errors</a></li>
+<li><a href="highlight-duplications.html">Highlight Duplications</a></li>
+<li><a href="validate-values.html">Validate Values</a></li>
+<li><a href="copy-as-markdown.html">Copy as Markdown</a></li>
+<li><a href="export-to-sqlite.html">Export to SQLite</a></li>
+<li><a href="create-sample-xml.html">Create Sample XML based on XSD</a></li>
+<li><a href="unprotect-workbook.html">Unprotect Workbook</a></li>
+<li><a href="worksheets-protection.html">Worksheets Protection</a></li>
+<li><a href="toggle-sheet-tabs.html">Sheet Tabs</a></li>
+<li><a href="switch-reference-style.html">Reference Style (A1/R1C1)</a></li>
+<li><a href="exchange-rates.html">Exchange rates</a></li>
+<li><a href="undo-last-action.html">Undo Last Action</a></li>
+</ul>
+<p class="cta">The add-in is free and open source. <a href="../install.html">Installation instructions</a>.</p>
+
+        </main>
+    </div>
+    <footer class="footer">
+        <p>Navferty &copy; 2021-<span id="current-year">2026</span> &bull; <a href="https://github.com/navferty/NavfertyExcelAddIn" target="_blank" rel="noopener" class="footer-link">Open Source on GitHub</a></p>
+    </footer>
+    <script src="../../site.js"></script>
+</body>
+
+</html>

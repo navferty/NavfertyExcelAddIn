@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Как убрать лишние пробелы в Excel - Надстройка Navferty Excel Add-In</title>
+    <meta name="description" content="СЖПРОБЕЛЫ, неразрывные пробелы и переносы строк: как правильно очистить текстовые ячейки.">
+    <link rel="canonical" href="https://navferty.net/ru/articles/remove-extra-spaces-in-excel.html">
+    <link rel="alternate" hreflang="en" href="https://navferty.net/en/articles/remove-extra-spaces-in-excel.html">
+    <link rel="alternate" hreflang="ru" href="https://navferty.net/ru/articles/remove-extra-spaces-in-excel.html">
+    <link rel="alternate" hreflang="x-default" href="https://navferty.net/en/articles/remove-extra-spaces-in-excel.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="Надстройка Navferty Excel Add-In">
+    <meta property="og:title" content="Как убрать лишние пробелы в Excel - Надстройка Navferty Excel Add-In">
+    <meta property="og:description" content="СЖПРОБЕЛЫ, неразрывные пробелы и переносы строк: как правильно очистить текстовые ячейки.">
+    <meta property="og:url" content="https://navferty.net/ru/articles/remove-extra-spaces-in-excel.html">
+    <meta property="og:image" content="https://navferty.net/images/articles/remove-extra-spaces-in-excel/extra-spaces.jpg">
+    <meta property="og:locale" content="ru">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="icon" href="../../favicon.ico">
+    <link rel="stylesheet" href="../../style.css">
+    <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Как убрать лишние пробелы в Excel", "inLanguage": "ru", "description": "СЖПРОБЕЛЫ, неразрывные пробелы и переносы строк: как правильно очистить текстовые ячейки.", "author": {"@type": "Person", "name": "Andrey Deev", "url": "https://github.com/navferty"}, "mainEntityOfPage": "https://navferty.net/ru/articles/remove-extra-spaces-in-excel.html"}</script>
+</head>
+
+<body>
+    <header class="site-header">
+        <div class="site-header-inner">
+            <a class="brand" href="../">Надстройка Navferty Excel Add-In</a>
+            <nav aria-label="Надстройка Navferty Excel Add-In"><a href="../#commands">Команды</a><a href="./">Статьи</a><a href="../install.html">Установка</a><a href="https://github.com/navferty/NavfertyExcelAddIn" target="_blank" rel="noopener">GitHub</a><span class="lang-switch"><a href="../../en/articles/remove-extra-spaces-in-excel.html" lang="en" hreflang="en" data-lang="en">English</a><a href="remove-extra-spaces-in-excel.html" lang="ru" hreflang="ru" data-lang="ru" aria-current="true">Русский</a></span></nav>
+        </div>
+    </header>
+    <div id="container">
+        <main id="content" class="article">
+<p class="back-to-top"><a href="index.html">&larr; Все статьи</a></p>
+<h1 class="zag">Как убрать лишние пробелы в Excel</h1>
+<p class="subtitle">СЖПРОБЕЛЫ, неразрывные пробелы и переносы строк: как правильно очистить текстовые ячейки.</p>
+<p>Лишние пробелы – классическая причина сбоев в поиске, необнаруженных дубликатов и отклонённых при импорте файлов. <code>"Иванов"</code> и <code>"Иванов "</code> выглядят одинаково, но Excel считает их разными значениями.</p>
+
+<h2>СЖПРОБЕЛЫ</h2>
+<p><code>=СЖПРОБЕЛЫ(A2)</code> убирает пробелы в начале и конце текста, а повторяющиеся пробелы между словами сводит к одному. Скопируйте формулы, затем вставьте их поверх исходного столбца через <b>Специальная вставка → Значения</b>.</p>
+
+<h2>Когда СЖПРОБЕЛЫ не помогает</h2>
+<p>Если значение всё ещё выглядит неправильно, в нём, скорее всего, не обычный пробел:</p>
+<ul>
+<li><b>Неразрывный пробел</b>, код символа 160. Встречается в тексте с веб-страниц и из некоторых систем. <code>СЖПРОБЕЛЫ</code> его игнорирует. Используйте <code>=СЖПРОБЕЛЫ(ПОДСТАВИТЬ(A2;СИМВОЛ(160);" "))</code>.</li>
+<li><b>Переносы строк</b>, коды 10 и 13. <code>=ПЕЧСИМВ(A2)</code> удаляет их (и другие непечатаемые символы до кода 31). Если вместо переноса нужен пробел, сначала примените <code>ПОДСТАВИТЬ(A2;СИМВОЛ(10);" ")</code>.</li>
+<li><b>Табуляция</b>, код 9. <code>ПЕЧСИМВ</code> удаляет и её.</li>
+</ul>
+<p>Чтобы выяснить, что именно в ячейке, используйте <code>=UNICODE(ПРАВСИМВ(A2;1))</code> или <code>=UNICODE(ЛЕВСИМВ(A2;1))</code>. Результат 160 означает неразрывный пробел.</p>
+
+<h2>Универсальная формула</h2>
+<pre>=СЖПРОБЕЛЫ(ПЕЧСИМВ(ПОДСТАВИТЬ(A2;СИМВОЛ(160);" ")))</pre>
+<p>Она покрывает большинство случаев в реальных данных.</p>
+
+<h2>Без формул</h2>
+<p><b>Найти и заменить</b> (<kbd>Ctrl</kbd>+<kbd>H</kbd>) может убрать все пробелы в выделении: в поле <b>Найти</b> поставьте пробел, поле <b>Заменить на</b> оставьте пустым. Это подходит для кодов и чисел вроде <code>1 234 567</code>, но слова тоже склеятся, так что для имён и адресов не применяйте.</p>
+<p>Чтобы ввести неразрывный пробел в поле поиска, удерживайте <kbd>Alt</kbd> и наберите <code>0160</code> на цифровой клавиатуре.</p>
+
+<h2>Проверка до и после</h2>
+<p>Сравните <code>=ДЛСТР(A2)</code> и <code>=ДЛСТР(СЖПРОБЕЛЫ(A2))</code>, чтобы посчитать, у скольких ячеек действительно есть проблема:</p>
+<p><img src="../../images/articles/remove-extra-spaces-in-excel/extra-spaces.jpg" alt="Таблица со сравнением длины текста, кода первого символа и результата СЖПРОБЕЛЫ, включая неразрывный пробел, который остаётся" loading="lazy" width="1002" height="251"></p>
+<pre>=СУММПРОИЗВ(--(ДЛСТР(A2:A1000)&lt;&gt;ДЛСТР(СЖПРОБЕЛЫ(A2:A1000))))</pre>
+
+<h2>С надстройкой</h2>
+<p>Команда <b>Удалить лишние пробелы</b> (Trim Spaces) работает прямо на выделенных ячейках: убирает пробельные символы в начале и конце, переносы строк и лишние пробелы без вспомогательных столбцов и обратной вставки значений.</p>
+<p>Команда надстройки для этой задачи: <a href="../features/trim-spaces.html">Удалить пробелы</a>.</p>
+        </main>
+    </div>
+    <footer class="footer">
+        <p>Navferty &copy; 2021-<span id="current-year">2026</span> &bull; <a href="https://github.com/navferty/NavfertyExcelAddIn" target="_blank" rel="noopener" class="footer-link">Открытый код на GitHub</a></p>
+    </footer>
+    <script src="../../site.js"></script>
+</body>
+
+</html>

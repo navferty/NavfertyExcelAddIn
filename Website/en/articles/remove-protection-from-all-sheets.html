@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Removing protection from all sheets at once - Navferty&#x27;s Excel Add-In</title>
+    <meta name="description" content="What sheet and workbook protection actually does, and how to unprotect many sheets quickly.">
+    <link rel="canonical" href="https://navferty.net/en/articles/remove-protection-from-all-sheets.html">
+    <link rel="alternate" hreflang="en" href="https://navferty.net/en/articles/remove-protection-from-all-sheets.html">
+    <link rel="alternate" hreflang="ru" href="https://navferty.net/ru/articles/remove-protection-from-all-sheets.html">
+    <link rel="alternate" hreflang="x-default" href="https://navferty.net/en/articles/remove-protection-from-all-sheets.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="Navferty&#x27;s Excel Add-In">
+    <meta property="og:title" content="Removing protection from all sheets at once - Navferty&#x27;s Excel Add-In">
+    <meta property="og:description" content="What sheet and workbook protection actually does, and how to unprotect many sheets quickly.">
+    <meta property="og:url" content="https://navferty.net/en/articles/remove-protection-from-all-sheets.html">
+    <meta property="og:image" content="https://navferty.net/images/NavfertyToolsRibbonEn.png">
+    <meta property="og:locale" content="en">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="icon" href="../../favicon.ico">
+    <link rel="stylesheet" href="../../style.css">
+    <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Removing protection from all sheets at once", "inLanguage": "en", "description": "What sheet and workbook protection actually does, and how to unprotect many sheets quickly.", "author": {"@type": "Person", "name": "Andrey Deev", "url": "https://github.com/navferty"}, "mainEntityOfPage": "https://navferty.net/en/articles/remove-protection-from-all-sheets.html"}</script>
+</head>
+
+<body>
+    <header class="site-header">
+        <div class="site-header-inner">
+            <a class="brand" href="../">Navferty's Excel Add-In</a>
+            <nav aria-label="Navferty's Excel Add-In"><a href="../#commands">Commands</a><a href="./">Guides</a><a href="../install.html">Install</a><a href="https://github.com/navferty/NavfertyExcelAddIn" target="_blank" rel="noopener">GitHub</a><span class="lang-switch"><a href="remove-protection-from-all-sheets.html" lang="en" hreflang="en" data-lang="en" aria-current="true">English</a><a href="../../ru/articles/remove-protection-from-all-sheets.html" lang="ru" hreflang="ru" data-lang="ru">Русский</a></span></nav>
+        </div>
+    </header>
+    <div id="container">
+        <main id="content" class="article">
+<p class="back-to-top"><a href="index.html">&larr; All articles</a></p>
+<h1 class="zag">Removing protection from all sheets at once</h1>
+<p class="subtitle">What sheet and workbook protection actually does, and how to unprotect many sheets quickly.</p>
+<p>You receive a workbook with twenty protected sheets and need to change something. Clicking <b>Review → Unprotect Sheet</b> on each one is tedious, and when nobody remembers the password it stops there.</p>
+
+<h2>What kinds of protection exist</h2>
+<ul>
+<li><b>Sheet protection</b> blocks editing of locked cells, formatting, inserting rows and so on. It is a convenience feature, not security: the password is stored in the file in a form that can be bypassed.</li>
+<li><b>Workbook structure protection</b> prevents adding, deleting, renaming and moving sheets.</li>
+<li><b>VBA project protection</b> locks the macro code view.</li>
+<li><b>File encryption</b> (<b>File → Info → Protect Workbook → Encrypt with Password</b>) is the only one that is real security. Without the password the file cannot be opened.</li>
+</ul>
+
+<h2>When you know the password</h2>
+<p>Unprotecting each sheet by hand works but is slow. A short macro loops through sheets:</p>
+<pre>Sub UnprotectAll()
+    Dim ws As Worksheet
+    For Each ws In ActiveWorkbook.Worksheets
+        ws.Unprotect "password"
+    Next
+End Sub</pre>
+<p>If the passwords differ between sheets, this will raise an error on the first mismatch, so wrap it in error handling.</p>
+
+<h2>When you do not</h2>
+<p>First, ask the author. If the file belongs to you or your company and the author is gone, the protection can be removed because sheet protection is not encryption. An .xlsx file is a ZIP archive; renaming it to .zip and deleting the <code>&lt;sheetProtection&gt;</code> element from <code>xl/worksheets/sheetN.xml</code> removes the protection from that sheet. It works but takes several steps per sheet and is easy to get wrong.</p>
+<p>Only do this with files you have the right to edit.</p>
+
+<h2>With the add-in</h2>
+<p><b>Unprotect Workbook</b> removes protection from all worksheets, the workbook structure and the VBA project in one command, and no password is required. It does not work with encrypted workbooks, because that password is needed to open the file in the first place.</p>
+
+<h2>A note on protecting your own files</h2>
+<p>If you protect a sheet to prevent accidental edits, sheet protection is enough. If the data is confidential, use file encryption or do not send the file at all.</p>
+<p>The add-in command for this: <a href="../features/unprotect-workbook.html">Unprotect Workbook</a>, <a href="../features/worksheets-protection.html">Worksheets Protection</a>.</p>
+        </main>
+    </div>
+    <footer class="footer">
+        <p>Navferty &copy; 2021-<span id="current-year">2026</span> &bull; <a href="https://github.com/navferty/NavfertyExcelAddIn" target="_blank" rel="noopener" class="footer-link">Open Source on GitHub</a></p>
+    </footer>
+    <script src="../../site.js"></script>
+</body>
+
+</html>

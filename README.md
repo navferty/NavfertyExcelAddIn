@@ -22,6 +22,10 @@ A free Excel add-in that enhances productivity with tools for data manipulation,
  - [Export to SQLite](#export-to-sqlite)
  - [Create Sample XML based on XSD](#create-sample-xml-based-on-xsd)
  - [Validate XML with XSD](#validate-xml-with-xsd)
+ - [Conditional Formatting](#conditional-formatting)
+ - [Sheet Tabs](#sheet-tabs)
+ - [Reference Style (A1/R1C1)](#reference-style-a1r1c1)
+ - [Exchange Rates](#exchange-rates)
  - [Undo Last Action](#undo-last-action)
 
 ## Installation
@@ -285,6 +289,54 @@ Sample error report:
 |Error|price|The 'price' element is invalid - The value 'asdasd' is invalid according to its datatype 'http://www.w3.org/2001/XMLSchema:decimal' - The string 'не число' is not a valid Decimal value.|
 
 </details>
+
+[Up](#navfertys-excel-add-in)
+
+---
+
+## Conditional Formatting
+
+Extend the conditional formatting rules from the first row of a selected range to its other rows. Useful when pasted or inserted rows broke the formatting. Select the whole target range, including the row containing the source rules and at least one additional row, then run the command.
+
+![Conditional Formatting](Website/images/ConditionalFormatting1.png)
+
+![Conditional Formatting](Website/images/ConditionalFormatting2.png)
+
+[Up](#navfertys-excel-add-in)
+
+---
+
+## Sheet Tabs
+
+Show or hide the worksheet tabs at the bottom of the Excel window with one click.
+
+![Sheet Tabs](Website/images/ToggleSheetTabs1.png)
+
+![Sheet Tabs](Website/images/ToggleSheetTabs2.png)
+
+[Up](#navfertys-excel-add-in)
+
+---
+
+## Reference Style (A1/R1C1)
+
+Switch the formula reference style between A1 and R1C1.
+
+![Reference Style (A1/R1C1)](Website/images/SwitchReferenceStyle1.png)
+
+![Reference Style (A1/R1C1)](Website/images/SwitchReferenceStyle2.png)
+
+[Up](#navfertys-excel-add-in)
+
+---
+
+## Exchange Rates
+
+Pick a currency rate from an online source (for example, the European Central Bank) for a chosen date. Select a single destination cell before running the command: the rate overwrites every cell in the current selection.
+
+![Exchange Rates](Website/images/ExchangeRates1.png)
+
+![Exchange Rates](Website/images/ExchangeRates2.png)
 
 [Up](#navfertys-excel-add-in)
 

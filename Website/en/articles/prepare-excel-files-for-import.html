@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Preparing Excel files for import into 1C, Power BI and SQL - Navferty&#x27;s Excel Add-In</title>
+    <meta name="description" content="What import tools expect from a spreadsheet and how to get the file into that shape.">
+    <link rel="canonical" href="https://navferty.net/en/articles/prepare-excel-files-for-import.html">
+    <link rel="alternate" hreflang="en" href="https://navferty.net/en/articles/prepare-excel-files-for-import.html">
+    <link rel="alternate" hreflang="ru" href="https://navferty.net/ru/articles/prepare-excel-files-for-import.html">
+    <link rel="alternate" hreflang="x-default" href="https://navferty.net/en/articles/prepare-excel-files-for-import.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="Navferty&#x27;s Excel Add-In">
+    <meta property="og:title" content="Preparing Excel files for import into 1C, Power BI and SQL - Navferty&#x27;s Excel Add-In">
+    <meta property="og:description" content="What import tools expect from a spreadsheet and how to get the file into that shape.">
+    <meta property="og:url" content="https://navferty.net/en/articles/prepare-excel-files-for-import.html">
+    <meta property="og:image" content="https://navferty.net/images/NavfertyToolsRibbonEn.png">
+    <meta property="og:locale" content="en">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="icon" href="../../favicon.ico">
+    <link rel="stylesheet" href="../../style.css">
+    <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Preparing Excel files for import into 1C, Power BI and SQL", "inLanguage": "en", "description": "What import tools expect from a spreadsheet and how to get the file into that shape.", "author": {"@type": "Person", "name": "Andrey Deev", "url": "https://github.com/navferty"}, "mainEntityOfPage": "https://navferty.net/en/articles/prepare-excel-files-for-import.html"}</script>
+</head>
+
+<body>
+    <header class="site-header">
+        <div class="site-header-inner">
+            <a class="brand" href="../">Navferty's Excel Add-In</a>
+            <nav aria-label="Navferty's Excel Add-In"><a href="../#commands">Commands</a><a href="./">Guides</a><a href="../install.html">Install</a><a href="https://github.com/navferty/NavfertyExcelAddIn" target="_blank" rel="noopener">GitHub</a><span class="lang-switch"><a href="prepare-excel-files-for-import.html" lang="en" hreflang="en" data-lang="en" aria-current="true">English</a><a href="../../ru/articles/prepare-excel-files-for-import.html" lang="ru" hreflang="ru" data-lang="ru">Русский</a></span></nav>
+        </div>
+    </header>
+    <div id="container">
+        <main id="content" class="article">
+<p class="back-to-top"><a href="index.html">&larr; All articles</a></p>
+<h1 class="zag">Preparing Excel files for import into 1C, Power BI and SQL</h1>
+<p class="subtitle">What import tools expect from a spreadsheet and how to get the file into that shape.</p>
+<p>Import tools are strict where people are forgiving. A human reads a title, a merged header and a total row and understands the table. A loader sees a mess. Most import failures come down to the same few things.</p>
+
+<h2>Shape of the table</h2>
+<ul>
+<li>One header row, directly above the data. No title block above it, or know how many rows to skip.</li>
+<li>No merged cells. Fill the repeated values instead.</li>
+<li>No subtotal or grand total rows inside the data.</li>
+<li>No blank rows or columns in the middle.</li>
+<li>One table per sheet.</li>
+</ul>
+
+<h2>Column names</h2>
+<ul>
+<li>Unique, non-empty, short. Duplicated names get suffixes or cause an error.</li>
+<li>For SQL, avoid spaces, punctuation and a leading digit. <code>order_date</code> is easier to work with than <code>Order date (UTC)</code>.</li>
+<li>Do not rename columns between exports. Many loaders map by name.</li>
+</ul>
+
+<h2>Types</h2>
+<ul>
+<li>Every column has one type. A single <code>-</code> or <code>n/a</code> in a numeric column turns the entire column to text in Power Query or in an automatic type detection.</li>
+<li>Numbers are real numbers, not text with spaces. Dates are real dates. See <a href="text-numbers-to-numeric-values.html">text numbers</a> and <a href="remove-extra-spaces-in-excel.html">extra spaces</a>.</li>
+<li>Identifiers with leading zeros (codes, postal codes, phone numbers) are text, and stay text.</li>
+<li>Keep the decimal separator consistent with the locale of the target system, or use an unambiguous format.</li>
+<li>Use ISO dates (<code>2024-03-12</code>) in anything that goes to a database. Day/month order is the most common source of silent errors.</li>
+</ul>
+
+<h2>Values</h2>
+<ul>
+<li>Formulas are fine in Excel but some importers read the cached value, and a few read the formula text. If in doubt, paste the values into a clean sheet.</li>
+<li>Remove leading and trailing spaces and non-breaking spaces from keys.</li>
+<li>Check for error values (<code>#N/A</code>, <code>#REF!</code>) before the import: a loader may stop or load them as text. See <a href="find-all-errors-in-excel.html">finding errors</a>.</li>
+<li>For XML-based imports, make sure text has no characters that are illegal in XML.</li>
+</ul>
+
+<h2>Tool-specific notes</h2>
+<p><b>Power BI / Power Query.</b> Prefer an Excel table (<kbd>Ctrl</kbd>+<kbd>T</kbd>) or a named range as the source: it keeps working when rows are added. Rename columns in the source rather than in the query when you can.</p>
+<p><b>SQL.</b> CSV with UTF-8 is the least troublesome format (see <a href="csv-files-without-encoding-issues.html">CSV and encoding</a>). For SQLite, an <a href="export-excel-data-to-sqlite.html">export straight from the workbook</a> is an option.</p>
+<p><b>1C.</b> Typical import processing expects a fixed column order and a single header row. Check the required template for the document type, and verify tax IDs, codes and dates before the load. A wrong TIN or a text date is rejected row by row, which is slow to fix after the fact.</p>
+
+<h2>A dry run</h2>
+<p>Import ten rows first. It is much faster to diagnose a problem on ten rows than on fifty thousand.</p>
+        </main>
+    </div>
+    <footer class="footer">
+        <p>Navferty &copy; 2021-<span id="current-year">2026</span> &bull; <a href="https://github.com/navferty/NavfertyExcelAddIn" target="_blank" rel="noopener" class="footer-link">Open Source on GitHub</a></p>
+    </footer>
+    <script src="../../site.js"></script>
+</body>
+
+</html>

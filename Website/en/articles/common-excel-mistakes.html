@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Common Excel mistakes and how to fix them - Navferty&#x27;s Excel Add-In</title>
+    <meta name="description" content="Problems that show up again and again in real workbooks, with a way to avoid each one.">
+    <link rel="canonical" href="https://navferty.net/en/articles/common-excel-mistakes.html">
+    <link rel="alternate" hreflang="en" href="https://navferty.net/en/articles/common-excel-mistakes.html">
+    <link rel="alternate" hreflang="ru" href="https://navferty.net/ru/articles/common-excel-mistakes.html">
+    <link rel="alternate" hreflang="x-default" href="https://navferty.net/en/articles/common-excel-mistakes.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="Navferty&#x27;s Excel Add-In">
+    <meta property="og:title" content="Common Excel mistakes and how to fix them - Navferty&#x27;s Excel Add-In">
+    <meta property="og:description" content="Problems that show up again and again in real workbooks, with a way to avoid each one.">
+    <meta property="og:url" content="https://navferty.net/en/articles/common-excel-mistakes.html">
+    <meta property="og:image" content="https://navferty.net/images/NavfertyToolsRibbonEn.png">
+    <meta property="og:locale" content="en">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="icon" href="../../favicon.ico">
+    <link rel="stylesheet" href="../../style.css">
+    <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Common Excel mistakes and how to fix them", "inLanguage": "en", "description": "Problems that show up again and again in real workbooks, with a way to avoid each one.", "author": {"@type": "Person", "name": "Andrey Deev", "url": "https://github.com/navferty"}, "mainEntityOfPage": "https://navferty.net/en/articles/common-excel-mistakes.html"}</script>
+</head>
+
+<body>
+    <header class="site-header">
+        <div class="site-header-inner">
+            <a class="brand" href="../">Navferty's Excel Add-In</a>
+            <nav aria-label="Navferty's Excel Add-In"><a href="../#commands">Commands</a><a href="./">Guides</a><a href="../install.html">Install</a><a href="https://github.com/navferty/NavfertyExcelAddIn" target="_blank" rel="noopener">GitHub</a><span class="lang-switch"><a href="common-excel-mistakes.html" lang="en" hreflang="en" data-lang="en" aria-current="true">English</a><a href="../../ru/articles/common-excel-mistakes.html" lang="ru" hreflang="ru" data-lang="ru">Русский</a></span></nav>
+        </div>
+    </header>
+    <div id="container">
+        <main id="content" class="article">
+<p class="back-to-top"><a href="index.html">&larr; All articles</a></p>
+<h1 class="zag">Common Excel mistakes and how to fix them</h1>
+<p class="subtitle">Problems that show up again and again in real workbooks, with a way to avoid each one.</p>
+<p>Most spreadsheet errors are not complicated. They come from a handful of habits that are easy to change.</p>
+
+<h2>Numbers stored as text</h2>
+<p>Totals that do not add up and lookups that fail often come from text-formatted numbers. See <a href="text-numbers-to-numeric-values.html">converting text numbers</a> for the fixes.</p>
+
+<h2>Hard-coded numbers inside formulas</h2>
+<p><code>=B2*1.2</code> works until the tax rate changes and you have to find every place where 1.2 was typed. Put the rate in a labelled cell and reference it: <code>=B2*$F$1</code>. Name the cell (<b>Formulas → Define Name</b>) and the formula reads <code>=B2*VAT</code>.</p>
+
+<h2>Relative and absolute references mixed up</h2>
+<p>If a formula copied down gives odd results, check the dollar signs. <code>$A$1</code> never moves, <code>A$1</code> keeps the row, <code>$A1</code> keeps the column. <kbd>F4</kbd> cycles through them while editing.</p>
+
+<h2>Ranges that do not cover new rows</h2>
+<p><code>=SUM(B2:B100)</code> silently misses row 101. Convert the data to a table (<kbd>Ctrl</kbd>+<kbd>T</kbd>) and use structured references such as <code>=SUM(Sales[Amount])</code>, which grow with the data.</p>
+
+<h2>Merged cells in the data area</h2>
+<p>Merged cells break sorting, filtering, pivot tables and copy-paste. Use <b>Center Across Selection</b> (<b>Format Cells → Alignment → Horizontal</b>) for the visual effect. If you inherited a merged table, unmerge it and fill each cell with the original value.</p>
+
+<h2>Dates that are really text</h2>
+<p>If <code>01.02.2024</code> will not sort or calculate, it is text, or it was read with the wrong day/month order. Check with <code>=ISNUMBER(A1)</code>. Convert with <code>DATE</code>, <code>DATEVALUE</code> or Text to Columns with the date format set explicitly.</p>
+
+<h2>Approximate match in lookups</h2>
+<p><code>VLOOKUP(x, range, 2)</code> without the last argument defaults to approximate match and needs sorted data. It can return a wrong value instead of an error. Always write <code>FALSE</code> (or use <code>XLOOKUP</code> where available, which defaults to an exact match).</p>
+
+<h2>Hidden rows, columns and sheets</h2>
+<p><code>SUM</code> includes hidden rows, <code>SUBTOTAL(109, ...)</code> does not. Filtered rows are the same story: pick the function that matches what you intend. Before you send a file, check <b>Review → Inspect Document</b> or right-click a sheet tab and look at <b>Unhide</b>.</p>
+
+<h2>Copying formulas over values and back</h2>
+<p>Paste Special → Values removes the link to source cells. Sometimes that is intended, but a report where half of the figures are frozen is a trap. Colour inputs differently from formulas, and keep one sheet with the raw data you never touch.</p>
+
+<h2>No second pair of eyes</h2>
+<p>A few cheap checks catch a surprising amount: totals compared with an independent calculation, a count of rows before and after, and <b>Formulas → Show Formulas</b> (<kbd>Ctrl</kbd>+<kbd>`</kbd>) to look for a cell where a formula was replaced by a number. See also the <a href="checklist-validating-excel-files.html">pre-send checklist</a>.</p>
+        </main>
+    </div>
+    <footer class="footer">
+        <p>Navferty &copy; 2021-<span id="current-year">2026</span> &bull; <a href="https://github.com/navferty/NavfertyExcelAddIn" target="_blank" rel="noopener" class="footer-link">Open Source on GitHub</a></p>
+    </footer>
+    <script src="../../site.js"></script>
+</body>
+
+</html>

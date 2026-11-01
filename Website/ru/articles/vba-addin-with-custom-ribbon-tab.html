@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Создание VBA-надстройки с отдельной вкладкой в MS Excel - Надстройка Navferty Excel Add-In</title>
+    <meta name="description" content="Как упаковать VBA-макросы в надстройку .xlam с собственной вкладкой на ленте: правка книги как zip-архива, customUI.xml, обработчики и установка.">
+    <link rel="canonical" href="https://navferty.net/ru/articles/vba-addin-with-custom-ribbon-tab.html">
+    <link rel="alternate" hreflang="en" href="https://navferty.net/en/articles/vba-addin-with-custom-ribbon-tab.html">
+    <link rel="alternate" hreflang="ru" href="https://navferty.net/ru/articles/vba-addin-with-custom-ribbon-tab.html">
+    <link rel="alternate" hreflang="x-default" href="https://navferty.net/en/articles/vba-addin-with-custom-ribbon-tab.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="Надстройка Navferty Excel Add-In">
+    <meta property="og:title" content="Создание VBA-надстройки с отдельной вкладкой в MS Excel - Надстройка Navferty Excel Add-In">
+    <meta property="og:description" content="Как упаковать VBA-макросы в надстройку .xlam с собственной вкладкой на ленте: правка книги как zip-архива, customUI.xml, обработчики и установка.">
+    <meta property="og:url" content="https://navferty.net/ru/articles/vba-addin-with-custom-ribbon-tab.html">
+    <meta property="og:image" content="https://navferty.net/images/articles/vba-addin-with-custom-ribbon-tab/1578783854145094499.png">
+    <meta property="og:locale" content="ru">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="icon" href="../../favicon.ico">
+    <link rel="stylesheet" href="../../style.css">
+    <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Создание VBA-надстройки с отдельной вкладкой в MS Excel", "inLanguage": "ru", "description": "Как упаковать VBA-макросы в надстройку .xlam с собственной вкладкой на ленте: правка книги как zip-архива, customUI.xml, обработчики и установка.", "author": {"@type": "Person", "name": "Andrey Deev", "url": "https://github.com/navferty"}, "mainEntityOfPage": "https://navferty.net/ru/articles/vba-addin-with-custom-ribbon-tab.html"}</script>
+</head>
+
+<body>
+    <header class="site-header">
+        <div class="site-header-inner">
+            <a class="brand" href="../">Надстройка Navferty Excel Add-In</a>
+            <nav aria-label="Надстройка Navferty Excel Add-In"><a href="../#commands">Команды</a><a href="./">Статьи</a><a href="../install.html">Установка</a><a href="https://github.com/navferty/NavfertyExcelAddIn" target="_blank" rel="noopener">GitHub</a><span class="lang-switch"><a href="../../en/articles/vba-addin-with-custom-ribbon-tab.html" lang="en" hreflang="en" data-lang="en">English</a><a href="vba-addin-with-custom-ribbon-tab.html" lang="ru" hreflang="ru" data-lang="ru" aria-current="true">Русский</a></span></nav>
+        </div>
+    </header>
+    <div id="container">
+        <main id="content" class="article">
+<p class="back-to-top"><a href="index.html">&larr; Все статьи</a></p>
+<h1 class="zag">Создание VBA-надстройки с отдельной вкладкой в MS Excel</h1>
+<p class="subtitle">Как упаковать VBA-макросы в надстройку .xlam с собственной вкладкой на ленте: правка книги как zip-архива, customUI.xml, обработчики и установка.</p>
+<p>Многие, кто часто работает в Excel, накопили коллекцию VBA-макросов, облегчающих ежедневный труд. Одни хранят макросы в отдельной книге, другие собрали их в <a href="https://support.office.com/en-us/article/copy-your-macros-to-a-personal-macro-workbook-aa439b90-f836-4381-97f0-6e4c3f5ee566" target="_blank" rel="noopener">«личной книге макросов»</a> (personal.xlsb), доступной на уровне всего приложения, и вручную добавили кнопки вызова на панель инструментов. В первом случае коллекцией удобно делиться с коллегами (достаточно переслать файл), но чтобы ею воспользоваться, книгу нужно каждый раз открывать. Во втором случае доступ к функциям есть сразу при запуске Excel, но с передачей наработок другим пользователям могут быть сложности.</p>
+<p>В этой статье описан способ сделать VBA-надстройку с собственной вкладкой на ленте Excel (<i>Ribbon</i>), которая сочетает преимущества обоих подходов. Это файл в формате xlam, которым можно делиться как обычной книгой. Когда пользователь открывает его, на ленте появляется вкладка с доступом к функциям надстройки:</p>
+<p><img src="../../images/articles/vba-addin-with-custom-ribbon-tab/1578783854145094499.png" alt="Новая вкладка Sample Add-in на ленте Excel" loading="lazy" width="700" height="108"></p>
+<p>При желании надстройку можно установить на постоянной основе, чтобы не открывать её каждый раз.</p><p>Понадобятся: Excel, 7-Zip и Visual Studio Code. Последние два необязательны: подойдёт любой архиватор с поддержкой zip и любой текстовый редактор, умеющий сохранять в UTF-8 (если вы хотите использовать кириллицу). Желательно также иметь базовое представление о формате XML.</p><p>Код и готовую книгу xlsm можно найти на GitHub: <a href="https://github.com/navferty/SampleExcelXlamAddin" target="_blank" rel="noopener">https://github.com/navferty/SampleExcelXlamAddin</a></p>
+<h2>Подготовка книги</h2><p>Откроем новую книгу и добавим модуль с образцом кода:</p><pre><code>Option Explicit
+
+Public Sub SayHelloWorld()
+    Dim firstCellValue As String
+
+    firstCellValue = ThisWorkbook.Worksheets(1).Cells(1, 1).Value
+    MsgBox "Hello, world! Cell A1 value is " &amp; firstCellValue
+End Sub</code></pre><p>Сохраним книгу в формате xlsm (книга с поддержкой макросов). Современные форматы документов Office (<i>xlsx, xlsm, docx, docm, pptx</i> и т. д.) основаны на стандарте OpenXML и представляют собой обычный zip-архив из компонентов (XML-файлы листов, изображения, двоичное содержимое и прочее) и файлов отношений (<i>.rels</i>), которые задают структуру документа ссылками на компоненты.</p><p>Чтобы увидеть содержимое книги, можно переименовать <i>Sample.xlsm</i> в <i>Sample.zip</i> и открыть любым архиватором. Некоторые архиваторы, например 7-Zip, умеют открывать такие файлы напрямую, без переименования:</p>
+<p><img src="../../images/articles/vba-addin-with-custom-ribbon-tab/1578771762187878642.webp" alt="Содержимое xlsm-файла в архиваторе" loading="lazy" width="700" height="492"></p>
+<p>Чтобы добавить панель на ленту, нужно создать новый компонент <b>customUI/customUI.xml</b> и добавить ссылку на него в корневой файл отношений <b>_rels/.rels</b>.</p><p>Распакуем весь документ в отдельную папку (в 7-Zip: «Распаковать в "Sample\"») и создадим в ней папку <b>customUI</b>:</p>
+<p><img src="../../images/articles/vba-addin-with-custom-ribbon-tab/15787721721968742.webp" alt="Папка customUI в распакованной книге" loading="lazy" width="700" height="394"></p>
+<p>Теперь добавим сам компонент:</p>
+<p><img src="../../images/articles/vba-addin-with-custom-ribbon-tab/1578772671166267580.webp" alt="Файл customUI.xml в папке customUI" loading="lazy" width="700" height="427"></p>
+<h2>Файл customUI.xml</h2><p>Текстовая версия содержимого <b>customUI.xml</b>:</p><pre><code>&lt;?xml version="1.0" encoding="utf-8"?&gt;
+&lt;customUI xmlns="http://schemas.microsoft.com/office/2006/01/customui"&gt;
+  &lt;ribbon&gt;
+    &lt;tabs&gt;
+      &lt;tab id="customTab" label="Sample Add-in" keytip="XT"&gt;
+        &lt;group id="Tools" label="Group 1"&gt;
+          &lt;button id="HelloWorldBtn" imageMso="BlackAndWhiteAutomatic" keytip="H" label="Привет, Мир!"
+                  onAction="SayHelloWorld" screentip="Поприветствовать мир" size="large" /&gt;
+          &lt;button id="DuplicatesBtn" imageMso="SmartArtChangeColorsGallery" keytip="D"
+                  label="Выделение цветом дублей" onAction="DuplicateColors"
+                  screentip="Выделение парными цветами повторов в выделенном диапазоне" size="large" /&gt;
+        &lt;/group&gt;
+      &lt;/tab&gt;
+    &lt;/tabs&gt;
+  &lt;/ribbon&gt;
+&lt;/customUI&gt;</code></pre><p>Коротко о важных элементах и атрибутах.</p><ul><li>Значения идентификаторов (атрибут <i>id</i>) должны быть уникальными. Для некоторых элементов (например, <i>tab</i>, когда вы объявляете новую вкладку, а не существующую через <i>idMso</i>) нужно обязательно указать и <i>label</i>, иначе Excel не покажет элемент.</li><li>Атрибут <i>imageMso</i> задаёт значок элемента из числа имеющихся в Office. Список доступных значений большой, но легко находится поиском.</li><li>Элемент <i>button</i> &mdash; обычная кнопка. В зависимости от атрибута <i>size</i> она может быть маленькой или большой, во всю высоту вкладки.</li><li>Атрибут <i>onAction</i> задаёт имя процедуры, которая будет выполнена при основном действии с элементом (например, при нажатии кнопки). У процедуры должна быть определённая сигнатура (число и тип аргументов), её можно найти в спецификации. Например, обработчик <i>onAction</i> для button принимает один аргумент типа <code>IRibbonControl</code>.</li><li>Имя процедуры не должно совпадать с именем модуля (или нужно явно указать модуль перед именем: <code>Module1.SayHelloWorld</code>).</li><li>Атрибут <i>keytip</i> помогает при навигации с клавиатуры: клавишей Alt можно переходить по вкладкам Excel.</li></ul><p>Образец разметки есть в документации Microsoft: <a href="https://learn.microsoft.com/en-us/office/open-xml/spreadsheet/how-to-add-custom-ui-to-a-spreadsheet-document" target="_blank" rel="noopener">образец customUI</a>. Тем, кто хочет изучить стандарт подробно, пригодится спецификация: <a href="https://docs.microsoft.com/en-us/openspecs/office_standards/ms-customui/31f152d6-2a5d-4b50-a867-9dbc6d01aa43" target="_blank" rel="noopener">[MS-CUSTOMUI]: Custom UI XML Markup Specification</a>.</p><p>Если в файле есть не-ASCII символы (например, кириллица), сохраняйте его в кодировке UTF-8, иначе Excel может не показать новую вкладку.</p>
+<h2>Ссылка в файле .rels</h2><p>Чтобы Excel «увидел» новый компонент и понял, что это, нужно сослаться на него в корневом файле отношений в папке <b>_rels</b>, он называется <b>.rels</b>. Это тоже XML, и для удобства его можно отформатировать (в VS Code: Ctrl+Shift+P &rarr; Format Document).</p><p>Добавляем элемент <i>Relationship</i> с путём к customUI.xml, типом компонента и идентификатором (какой именно, не важно, главное, чтобы он был уникальным среди других элементов <i>Relationship</i>):</p><pre><code>&lt;Relationship Id="rID4" Target="customUI/customUI.xml" Type="http://schemas.microsoft.com/office/2006/relationships/ui/extensibility" /&gt;</code></pre>
+<p><img src="../../images/articles/vba-addin-with-custom-ribbon-tab/1578772992128329742.webp" alt="Файл .rels с добавленным элементом Relationship" loading="lazy" width="700" height="427"></p>
+<p>Теперь запакуйте все файлы обратно в архив и верните имя Sample.xlsm.</p>
+<p><img src="../../images/articles/vba-addin-with-custom-ribbon-tab/157878107816842521.webp" alt="Упаковка файлов обратно в архив" loading="lazy" width="700" height="394"></p>
+<p>Если всё сделано правильно, при открытии книги на ленте появится новая вкладка:</p>
+<p><img src="../../images/articles/vba-addin-with-custom-ribbon-tab/1578781539166930736.png" alt="Новая вкладка на ленте после открытия книги" loading="lazy" width="700" height="256"></p>
+<h2>Ошибка «Wrong number of arguments»</h2><p>При запуске макроса HelloWorld можно увидеть предупреждение:</p><pre><code>Wrong number of arguments or invalid property assignment</code></pre><p>Причина в том, что процедура-обработчик должна иметь определённую сигнатуру. Обработчик нажатия на button выглядит так:</p>
+<p><img src="../../images/articles/vba-addin-with-custom-ribbon-tab/1578781698127844347.webp" alt="Сигнатура обработчика нажатия кнопки" loading="lazy" width="700" height="332"></p>
+<p>Добавьте аргумент <code>rc As IRibbonControl</code>, и появится долгожданное приветствие:</p><pre><code>Option Explicit
+
+Public Sub SayHelloWorld(rc As IRibbonControl)
+    Dim firstCellValue As String
+
+    firstCellValue = ThisWorkbook.Worksheets(1).Cells(1, 1).Value
+    MsgBox "Hello, world! Cell A1 value is " &amp; firstCellValue
+End Sub</code></pre>
+<p><img src="../../images/articles/vba-addin-with-custom-ribbon-tab/157878173618865220.png" alt="Окно с приветствием после нажатия кнопки" loading="lazy" width="211" height="133"></p>
+<p>Список сигнатур есть на <a href="https://docs.microsoft.com/en-us/previous-versions/office/developer/office-2007/aa722523(v=office.12)#how-can-i-determine-the-correct-signatures-for-each-callback-procedure" target="_blank" rel="noopener">сайте документации Microsoft</a>.</p>
+<h2>Сохранение как надстройки</h2><p>Осталось сохранить книгу с макросами как надстройку. В редакторе VBE выберите объект <code>ThisWorkbook</code> и установите свойство <code>IsAddin</code> в True.</p>
+<p><img src="../../images/articles/vba-addin-with-custom-ribbon-tab/1578782774119989254.webp" alt="Свойство IsAddin объекта ThisWorkbook" loading="lazy" width="700" height="445"></p>
+<p>Затем сохраните книгу в новом формате (Excel предложит это сам, если нажать Ctrl+S):</p>
+<p><img src="../../images/articles/vba-addin-with-custom-ribbon-tab/157878283811024502.webp" alt="Сохранение книги в формате надстройки" loading="lazy" width="700" height="394"></p>
+<p>Теперь надстройку можно открыть как обычную книгу. Отдельным окном она не отображается, но видна в Project Explorer редактора VBE:</p>
+<p><img src="../../images/articles/vba-addin-with-custom-ribbon-tab/157878307317991772.webp" alt="Надстройка в Project Explorer редактора VBA" loading="lazy" width="700" height="497"></p>
+<p>Чтобы надстройка была доступна сразу при запуске Excel, установите её через Excel Add-ins на вкладке «Разработчик»...</p>
+<p><img src="../../images/articles/vba-addin-with-custom-ribbon-tab/1578783265155493627.webp" alt="Установка надстройки через вкладку «Разработчик»" loading="lazy" width="700" height="479"></p>
+<p>...или через параметры Excel, раздел «Надстройки» (Add-ins):</p>
+<p><img src="../../images/articles/vba-addin-with-custom-ribbon-tab/157878334215840375.webp" alt="Установка надстройки через настройки Excel" loading="lazy" width="700" height="574"></p>
+<p>Готово. Теперь надстройкой можно пользоваться при работе с любым документом, а делиться наработками с коллегами легко, просто пересылая файл надстройки.</p>
+<h2>Бонус: другие элементы Custom UI</h2><ul><li><b>toggleButton</b> &mdash; кнопка с двумя состояниями;</li><li><b>splitButton</b> &mdash; составной элемент из button или toggleButton и выпадающего меню;</li><li><b>dropDown</b> &mdash; выпадающий список с заранее заданным набором элементов;</li><li><b>comboBox</b> &mdash; поле ввода, которое может содержать заранее заданный набор элементов;</li><li><b>dynamicMenu</b> &mdash; выпадающий список, элементы которого определяются динамически в методе getContent;</li><li><b>checkBox</b> &mdash; флажок с двумя состояниями.</li></ul>
+<p><img src="../../images/articles/vba-addin-with-custom-ribbon-tab/1578831453120134147.png" alt="Примеры элементов Custom UI на ленте" loading="lazy" width="700" height="108"></p>
+<p>Разметка и код модуля VBA приведены ниже, их же можно найти на <a href="https://github.com/navferty/SampleExcelXlamAddin" target="_blank" rel="noopener">GitHub</a>.</p><p><b>customUI.xml</b></p><pre><code>&lt;?xml version="1.0" encoding="utf-8"?&gt;
+&lt;customUI xmlns="http://schemas.microsoft.com/office/2006/01/customui"&gt;
+  &lt;ribbon&gt;
+    &lt;tabs&gt;
+      &lt;tab id="customTab" label="Sample Add-in" keytip="XT"&gt;
+        &lt;group id="SampleControls" label="Group 2"&gt;
+          &lt;splitButton id="splitButton" size="large"&gt;
+            &lt;button id="SplitButton" imageMso="HappyFace" label="Split Button" /&gt;
+            &lt;menu id="menu"&gt;
+              &lt;button id="button1" label="Button 1" onAction="OnSplitButton1Click" /&gt;
+              &lt;button id="button2" label="Button 2" onAction="OnSplitButton2Click" /&gt;
+            &lt;/menu&gt;
+          &lt;/splitButton&gt;
+          &lt;toggleButton id="ToggleButton" label="Toggle Button" onAction="OnToggleButtonClick" /&gt;
+          &lt;dropDown id="DropDown" label="DropDown" onAction="OnDropDownSelected"&gt;
+            &lt;item id="DropDownItem1" label="Item 1" /&gt;
+            &lt;item id="DropDownItem2" label="Item 2" /&gt;
+            &lt;item id="DropDownItem3" label="Item 3" /&gt;
+            &lt;button id="button" label="Button..." /&gt;
+          &lt;/dropDown&gt;
+          &lt;comboBox id="ComboBox" label="Combo Box" onChange="OnComboBoxSelected"&gt;
+            &lt;item id="ComboBoxItem1" label="Item 1" /&gt;
+            &lt;item id="ComboBoxItem2" label="Item 2" /&gt;
+            &lt;item id="ComboBoxItem3" label="Item 3" /&gt;
+          &lt;/comboBox&gt;
+          &lt;separator id="separator" /&gt;
+          &lt;dynamicMenu id="DynamicMenu" label="Dynamic Menu" getContent="GetMenuContent" /&gt;
+          &lt;checkBox id="CheckBox" label="Check Box" onAction="OnCheckBoxToggled" /&gt;
+        &lt;/group&gt;
+      &lt;/tab&gt;
+    &lt;/tabs&gt;
+  &lt;/ribbon&gt;
+&lt;/customUI&gt;</code></pre><p><b>VBA-модуль SampleControls</b></p><pre><code>Option Explicit
+
+Public Sub OnSplitButton1Click(rc As IRibbonControl)
+    MsgBox "Split button 1 was clicked"
+End Sub
+
+Public Sub OnSplitButton2Click(rc As IRibbonControl)
+    MsgBox "Split button 2 was clicked"
+End Sub
+
+Public Sub OnToggleButtonClick(rc As IRibbonControl, isButtonPressed As Boolean)
+    MsgBox "Toggle button was toggled, button now is " &amp; IIf(isButtonPressed, "pressed", "not pressed")
+End Sub
+
+Public Sub OnDropDownSelected(rc As IRibbonControl, selectedItemId As String, selectedItemIndex As Integer)
+    MsgBox "DropDown was changed, selected item id is " &amp; selectedItemId
+End Sub
+
+Public Sub OnComboBoxSelected(rc As IRibbonControl, comboBoxValue As String)
+    MsgBox "Combo box was changed, value is " &amp; comboBoxValue
+End Sub
+
+Public Sub GetMenuContent(rc As IRibbonControl, ByRef returnedVal)
+    Dim xml As String
+
+    xml = "&lt;menu xmlns=""http://schemas.microsoft.com/office/2006/01/customui""&gt;" &amp; _
+          "&lt;button id=""but1"" imageMso=""Help"" label=""Help"" onAction=""OnHelpPressed""/&gt;" &amp; _
+          "&lt;button id=""but2"" imageMso=""FindDialog"" label=""Find"" onAction=""OnFindPressed""/&gt;" &amp; _
+          "&lt;/menu&gt;"
+
+    returnedVal = xml
+End Sub
+
+Public Sub OnCheckBoxToggled(rc As IRibbonControl, isButtonChecked As Boolean)
+    MsgBox "Check box was toggled, value is " &amp; IIf(isButtonChecked, "checked", "not checked")
+End Sub
+
+Public Sub OnHelpPressed(rc As IRibbonControl)
+    MsgBox "Help button pressed"
+End Sub
+
+Public Sub OnFindPressed(rc As IRibbonControl)
+    MsgBox "Find button pressed"
+End Sub</code></pre><p>Подробнее об элементах Custom UI: <a href="https://docs.microsoft.com/en-us/openspecs/office_standards/ms-customui/d842006e-3187-4f66-a17d-0819a3cc94b5" target="_blank" rel="noopener">документация Microsoft</a>.</p>
+<h2>Ещё бонус: горячие клавиши редактора VBE</h2><p><b>Навигация по редактору</b></p><ul><li><kbd>Ctrl+R</kbd> &mdash; перейти в окно проектов (Project Explorer)</li><li><kbd>F4</kbd> &mdash; перейти к свойствам</li><li><kbd>Ctrl+G</kbd> &mdash; перейти в окно Immediate</li><li><kbd>F7</kbd> &mdash; перейти в окно редактора кода</li><li><kbd>Ctrl+Tab</kbd> (<kbd>Ctrl+Shift+Tab</kbd>) &mdash; переключение между открытыми окнами модулей</li><li><kbd>Ctrl+F4</kbd> &mdash; закрыть текущий модуль</li><li><kbd>Alt+F11</kbd> &mdash; открыть редактор VBE</li></ul><p><b>Редактирование и навигация по коду</b></p><ul><li><kbd>Ctrl+Space</kbd> &mdash; автодополнение</li><li><kbd>Ctrl+J</kbd> &mdash; показать доступные варианты (IntelliSense)</li><li><kbd>Ctrl+I</kbd> &mdash; показать информацию о методе (аргументы)</li><li><kbd>Shift+F2</kbd> &mdash; перейти к определению переменной или метода</li></ul><p><b>Отладка</b></p><ul><li><kbd>F5</kbd> &mdash; запустить макрос или продолжить выполнение</li><li><kbd>F8</kbd> &mdash; шаг вперёд (с заходом во вложенные процедуры)</li><li><kbd>Shift+F8</kbd> &mdash; шаг вперёд (без захода вглубь)</li><li><kbd>F9</kbd> &mdash; установить или снять точку останова</li><li><kbd>Shift+F9</kbd> &mdash; добавить наблюдателя (quick watch)</li><li><kbd>Ctrl+L</kbd> &mdash; показать стек вызовов (элементы кликабельны)</li></ul><p>О приёмах отладки подробнее в статье <a href="debugging-vba-code-in-excel.html">«Приёмы отладки VBA-кода»</a>.</p><p class="note">Статья впервые опубликована на <a href="https://pikabu.ru/story/tutorial_sozdanie_vbanadstroyki_s_otdelnoy_vkladkoy_v_ms_excel_7160405" target="_blank" rel="noopener">Пикабу</a>.</p>
+        </main>
+    </div>
+    <footer class="footer">
+        <p>Navferty &copy; 2021-<span id="current-year">2026</span> &bull; <a href="https://github.com/navferty/NavfertyExcelAddIn" target="_blank" rel="noopener" class="footer-link">Открытый код на GitHub</a></p>
+    </footer>
+    <script src="../../site.js"></script>
+</body>
+
+</html>

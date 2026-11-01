@@ -1,28 +1,77 @@
-﻿<!DOCTYPE html>
-<html>
+<!DOCTYPE html>
+<html lang="en">
 
 <head>
-    <meta http-equiv="Content-Type" content="text/html">
-    <link rel="stylesheet" href="style.css" />
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Navferty Excel Add-In</title>
-    <script src="script.js"></script>
+    <title>Navferty's Excel Add-In</title>
+    <meta name="description" content="A free, open-source Excel add-in with commands for cleaning text, converting numbers, finding errors and duplicates, validating values and XML, and exporting to SQLite.">
+    <link rel="canonical" href="https://navferty.net/">
+    <link rel="alternate" hreflang="en" href="https://navferty.net/en/">
+    <link rel="alternate" hreflang="ru" href="https://navferty.net/ru/">
+    <link rel="alternate" hreflang="x-default" href="https://navferty.net/en/">
+    <link rel="icon" href="favicon.ico">
+    <link rel="stylesheet" href="style.css">
+    <script>
+        // Language router. To add a language: add its code here and create the /<code>/ pages.
+        (function () {
+            var supported = ['en', 'ru'];
+            var fallback = 'en';
+
+            // Old single-page anchors -> new pages
+            var legacy = {
+                parsenumerics: 'features/parse-numerics.html',
+                replace: 'features/replace.html',
+                withtransliteration: 'features/replace.html',
+                replacechars: 'features/replace.html',
+                stringifynumerics: 'features/stringify-numerics.html',
+                togglecase: 'features/toggle-case.html',
+                trimspaces: 'features/trim-spaces.html',
+                unprotectworkbook: 'features/unprotect-workbook.html',
+                highlightduplications: 'features/highlight-duplications.html',
+                unmergecells: 'features/unmerge-cells.html',
+                findallcellscontainingerrors: 'features/find-errors.html',
+                copyasmarkdown: 'features/copy-as-markdown.html',
+                validatevalues: 'features/validate-values.html',
+                exporttosqlite: 'features/export-to-sqlite.html',
+                createsamplexmlbasedonxsd: 'features/create-sample-xml.html',
+                validatexmlwithxsd: 'features/validate-xml.html',
+                undolastaction: 'features/undo-last-action.html',
+                'how-to-install': 'install.html',
+                'how-to-uninstall': 'install.html#uninstall',
+                features: '#commands',
+                articles: 'articles/'
+            };
+
+            function pick() {
+                var saved = null;
+                try { saved = localStorage.getItem('lng'); } catch (e) { }
+                if (saved && supported.indexOf(saved) >= 0) return saved;
+                var prefs = navigator.languages && navigator.languages.length ? navigator.languages : [navigator.language || ''];
+                for (var i = 0; i < prefs.length; i++) {
+                    var code = String(prefs[i]).toLowerCase().split('-')[0];
+                    if (supported.indexOf(code) >= 0) return code;
+                }
+                return fallback;
+            }
+
+            var lang = pick();
+            var target = legacy[location.hash.replace('#', '')] || '';
+            location.replace(lang + '/' + target);
+        })();
+    </script>
 </head>
 
 <body>
     <div id="container">
-        <div class="top_nav">
-            <div id="head_name"></div>
-            <div onclick="setUserLanguage('ru');">Russian</div>
-            <div onclick="setUserLanguage('en');">English</div>
-        </div>
-
-        <div id="left_nav" class="nvgt"></div>
-        <div id="content"></div>
-    </div>
-    <div class="footer">
-        <p>Navferty © 2021-<span id="current-year"></span> • <a href="https://github.com/navferty/NavfertyExcelAddIn" target="_blank" rel="noopener" class="footer-link">Open Source on GitHub</a></p>
+        <main id="content" class="home">
+            <h1 class="zag">Navferty's Excel Add-In</h1>
+            <p class="subtitle">A free Excel add-in with tools for data manipulation, formatting, and validation.</p>
+            <ul>
+                <li><a href="en/">English</a></li>
+                <li><a href="ru/">Русский</a></li>
+            </ul>
+        </main>
     </div>
 </body>
 
