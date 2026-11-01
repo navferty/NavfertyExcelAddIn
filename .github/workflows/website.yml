@@ -1,0 +1,57 @@
+name: Website
+
+# Deploys only the static website; the add-in is neither built nor deployed here
+on:
+  push:
+    branches: [master]
+    paths:
+      - Website/**
+      - .github/workflows/website.yml
+
+permissions:
+  contents: read
+
+# Shared with the release workflow so both never write to the server at the same time
+concurrency:
+  group: release
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment: production
+    env:
+      WWW_DIR: web/navferty_net/www/
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Configure SSH
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+          SERVER_HOST: ${{ secrets.SERVER_HOST }}
+          SSH_HOST_KEY: ${{ secrets.SSH_HOST_KEY }}
+        run: |
+          install -m 700 -d ~/.ssh
+          printf '%s\n' "$SSH_PRIVATE_KEY" > ~/.ssh/id_deploy
+          chmod 600 ~/.ssh/id_deploy
+          [ -n "$SSH_HOST_KEY" ] || { echo 'SSH_HOST_KEY secret is required'; exit 1; }
+          printf '%s %s\n' "$SERVER_HOST" "$(printf '%s' "$SSH_HOST_KEY" | awk '{print $1, $2}')" > ~/.ssh/known_hosts
+
+      # Fails fast unless the target directory already exists
+      - name: Check target directory
+        env:
+          SERVER_HOST: ${{ secrets.SERVER_HOST }}
+          SERVER_USER: ${{ secrets.SERVER_USER }}
+        run: |
+          ssh -i ~/.ssh/id_deploy -o StrictHostKeyChecking=yes "$SERVER_USER@$SERVER_HOST" \
+            'test -d "$HOME/web/navferty_net/www"'
+
+      # deploy/ holds the add-in files and is excluded; no --delete, nothing is removed on the server
+      - name: Upload website to www
+        env:
+          SERVER_HOST: ${{ secrets.SERVER_HOST }}
+          SERVER_USER: ${{ secrets.SERVER_USER }}
+        run: |
+          rsync -rltvz --no-perms --no-owner --no-group --exclude='deploy/' \
+            -e "ssh -i $HOME/.ssh/id_deploy -o StrictHostKeyChecking=yes" \
+            Website/ "$SERVER_USER@$SERVER_HOST:$WWW_DIR"
