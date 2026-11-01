@@ -165,7 +165,8 @@ End Function</code></pre><p>The <code>DateAdd</code> function sets the date rang
 <h2>Checking it works</h2><p>Let us check that the rate is loaded when the workbook is opened:</p>
 <p><img src="../images/articles/currency-rates-from-cbr-vba/1590231043185812459.webp" alt="The Immediate window with the &quot;currency loaded&quot; message" loading="lazy"></p>
 <p>The Immediate window shows the success message right after the workbook is opened. The same message will appear after any change on the sheet, because Excel recalculates the formula. If the workbook has many cells calling this function, it is better to add a cache: for example, a static variable holding a <code>Dictionary</code> where the key is a combination of the currency code and the date, and the value is the <code>CurrencyRecord</code>. That avoids a lot of identical requests to the CBR website.</p>
-<p>The idea for this article came from the Pikabu user <a href="https://pikabu.ru/@AlexeyE30" target="_blank" rel="noopener">@AlexeyE30</a>. Improvements can be suggested in the issues of the repository <a href="https://github.com/navferty/CBR-VBA-Currencies" target="_blank" rel="noopener">https://github.com/navferty/CBR-VBA-Currencies</a>.</p><p class="note">Originally published in Russian on <a href="https://pikabu.ru/story/kursyi_valyut_s_sayta_tsb_na_vba_s_avtoobnovleniem_7469372" target="_blank" rel="noopener">Pikabu</a>.</p>
+<p>Improvements can be suggested in the issues of the repository <a href="https://github.com/navferty/CBR-VBA-Currencies" target="_blank" rel="noopener">https://github.com/navferty/CBR-VBA-Currencies</a>.</p>
+<p class="note">Originally published in Russian on <a href="https://pikabu.ru/story/kursyi_valyut_s_sayta_tsb_na_vba_s_avtoobnovleniem_7469372" target="_blank" rel="noopener">Pikabu</a>.</p>
 </div>
 <div class="lang-ru" hidden>
 <p class="back-to-top"><a href="index.html">&larr; Все статьи</a></p>
@@ -314,7 +315,8 @@ End Function</code></pre><p>С помощью <code>DateAdd</code> опреде�
 <h2>Проверка</h2><p>Проверим, что курс загружается при открытии книги:</p>
 <p><img src="../images/articles/currency-rates-from-cbr-vba/1590231043185812459.webp" alt="Окно Immediate с сообщением об успешной загрузке курса" loading="lazy"></p>
 <p>В окне Immediate видно сообщение об успешной загрузке сразу после открытия книги. Такое же сообщение появится при любом изменении на листе, потому что Excel пересчитывает формулу. Если в книге много ячеек с вызовом этой функции, лучше добавить кэш: например, статическую переменную со словарём (<code>Dictionary</code>), где ключ &mdash; сочетание кода валюты и даты, а значение &mdash; <code>CurrencyRecord</code>. Это избавит от множества одинаковых запросов к сайту ЦБ.</p>
-<p>Идею статьи подсказал пользователь Пикабу <a href="https://pikabu.ru/@AlexeyE30" target="_blank" rel="noopener">@AlexeyE30</a>. Если нужны доработки, их можно предложить в issues репозитория <a href="https://github.com/navferty/CBR-VBA-Currencies" target="_blank" rel="noopener">https://github.com/navferty/CBR-VBA-Currencies</a>.</p><p class="note">Статья впервые опубликована на <a href="https://pikabu.ru/story/kursyi_valyut_s_sayta_tsb_na_vba_s_avtoobnovleniem_7469372" target="_blank" rel="noopener">Пикабу</a>.</p>
+<p>Если нужны доработки, их можно предложить в issues репозитория <a href="https://github.com/navferty/CBR-VBA-Currencies" target="_blank" rel="noopener">https://github.com/navferty/CBR-VBA-Currencies</a>.</p>
+<p class="note">Статья впервые опубликована на <a href="https://pikabu.ru/story/kursyi_valyut_s_sayta_tsb_na_vba_s_avtoobnovleniem_7469372" target="_blank" rel="noopener">Пикабу</a>.</p>
 </div>
         </div>
     </div>
