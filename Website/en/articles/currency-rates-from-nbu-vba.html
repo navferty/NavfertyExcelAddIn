@@ -38,11 +38,11 @@
 <p>A reader of the <a href="currency-rates-from-cbr-vba.html">previous article</a> about loading Bank of Russia exchange rates asked about the same task for the National Bank of Ukraine (NBU). Here is a ready-made macro for it. The process is the same as the one described in detail in that article, so this one goes straight to the result.</p>
 <p>The macro declares two user-defined functions (UDF) that can be used in worksheet formulas.</p>
 <h2>Rate on a given date</h2>
-<pre><code>=GetNbuCurrency("RUB";"5/31/2020")</code></pre>
+<pre><code>=GetNbuCurrency("RUB","5/31/2020")</code></pre>
 <p>Loads the rate of the chosen currency for the given date. The data comes from the official NBU API:</p>
 <pre><code>https://bank.gov.ua/NBU_Exchange/exchange?date=31.12.2019</code></pre>
 <h2>Rate for today</h2>
-<pre><code>=NbuTodayCurrency(C10;NOW())</code></pre>
+<pre><code>=NbuTodayCurrency(C10,NOW())</code></pre>
 <p>Loads the rate for the current date. The value of the second argument can be anything. <code>NOW</code> is used only to force Excel to recalculate the value (and query the API) every time that argument changes: when the workbook is opened, and even when any cell in any open workbook changes.</p>
 <p>Be careful with this function. If a workbook has many cells with such a formula, you risk flooding the NBU website with requests, which can get you banned. It is wiser to put the formula in a single place (for example on a separate sheet) and refer to that cell from the rest of your formulas.</p>
 <p><img src="../../images/articles/currency-rates-from-nbu-vba/1593904881155676818.png" alt="A worksheet with GetNbuCurrency results for several currencies and dates, and a table of today&#39;s rates" loading="lazy" width="502" height="678"></p>

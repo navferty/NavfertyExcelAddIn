@@ -70,7 +70,7 @@
 FROM Orders
 GROUP BY Customer
 ORDER BY Total DESC;</pre>
-<p>If a name contains spaces, wrap it in double quotes: <code>"Order date"</code>.</p>
+<p>The add-in replaces spaces and other characters outside letters, digits and underscores with underscores in table and column names. For example, <code>Order date</code> becomes <code>Order_date</code>. Names starting with a digit also gain a leading underscore. Use the exported names in your queries.</p>
 <p>The add-in command for this: <a href="../features/export-to-sqlite.html">Export to SQLite</a>.</p>
         </main>
     </div>

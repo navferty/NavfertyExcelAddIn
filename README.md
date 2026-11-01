@@ -296,7 +296,7 @@ Sample error report:
 
 ## Conditional Formatting
 
-Extend the conditional formatting rules from the first row of a table to all its rows. Useful when pasted or inserted rows broke the formatting. Select a cell inside the table and run the command.
+Extend the conditional formatting rules from the first row of a selected range to its other rows. Useful when pasted or inserted rows broke the formatting. Select the whole target range, including the row containing the source rules and at least one additional row, then run the command.
 
 ![Conditional Formatting](Website/images/ConditionalFormatting1.png)
 
@@ -332,7 +332,7 @@ Switch the formula reference style between A1 and R1C1.
 
 ## Exchange Rates
 
-Pick a currency rate from an online source (for example, the European Central Bank) for a chosen date and insert it into the active cell.
+Pick a currency rate from an online source (for example, the European Central Bank) for a chosen date. Select a single destination cell before running the command: the rate overwrites every cell in the current selection.
 
 ![Exchange Rates](Website/images/ExchangeRates1.png)
 
