@@ -39,6 +39,7 @@
 <p>In cell <code>E2</code> of the Orders sheet start the formula. After typing the first argument, switch to the Users sheet and select the columns <code>A:B</code>; Excel fills in the second argument:</p>
 <p><img src="../images/articles/vlookup/vlookup-selecting-table_array.jpg" alt="Selecting the table_array range A:B on the Users sheet while typing the formula" loading="lazy"></p>
 <pre>=VLOOKUP(D2, Users!A:B, 2, FALSE)</pre>
+<p><img src="../images/articles/vlookup/vlookup-formula.jpg" alt="The formula being typed in E2, with the argument tooltip below the cell" loading="lazy"></p>
 <p>Here the key is in <code>D2</code>, the table is <code>Users!A:B</code>, and we return the second column (the name). Copy the formula down:</p>
 <p><img src="../images/articles/vlookup/vlookup-result.jpg" alt="VLOOKUP results in column E: user names, and #N/A for the user id that is not in the Users sheet" loading="lazy"></p>
 <p>The order with user id 8 shows <code>#N/A</code>: there is no such id in the Users sheet. This is the correct behaviour. It tells you the data does not match, which is often exactly what you are looking for.</p>
@@ -82,6 +83,7 @@
 <p>В ячейке <code>E2</code> листа Orders начните формулу. Введя первый аргумент, перейдите на лист Users и выделите столбцы <code>A:B</code>, Excel подставит второй аргумент:</p>
 <p><img src="../images/articles/vlookup/vlookup-selecting-table_array.jpg" alt="Выделение диапазона A:B на листе Users при вводе формулы" loading="lazy"></p>
 <pre>=ВПР(D2; Users!A:B; 2; ЛОЖЬ)</pre>
+<p><img src="../images/articles/vlookup/vlookup-formula.jpg" alt="Формула в ячейке E2 во время ввода, под ячейкой подсказка по аргументам" loading="lazy"></p>
 <p>Ключ находится в <code>D2</code>, таблица &ndash; <code>Users!A:B</code>, возвращаем второй столбец (имя). Протяните формулу вниз:</p>
 <p><img src="../images/articles/vlookup/vlookup-result.jpg" alt="Результат ВПР в столбце E: имена пользователей и #Н/Д для идентификатора, которого нет на листе Users" loading="lazy"></p>
 <p>В заказе с идентификатором 8 появился <code>#Н/Д</code>: такого идентификатора нет на листе Users. Это правильное поведение: оно сообщает, что данные не сходятся, а это часто как раз то, что нужно найти.</p>
