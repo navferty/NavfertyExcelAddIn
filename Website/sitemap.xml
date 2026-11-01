@@ -517,4 +517,52 @@
     <xhtml:link rel="alternate" hreflang="ru" href="https://navferty.net/ru/install.html"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://navferty.net/en/install.html"/>
   </url>
+  <url>
+    <loc>https://navferty.net/en/features/repair-conditional-format.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://navferty.net/en/features/repair-conditional-format.html"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://navferty.net/ru/features/repair-conditional-format.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://navferty.net/en/features/repair-conditional-format.html"/>
+  </url>
+  <url>
+    <loc>https://navferty.net/ru/features/repair-conditional-format.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://navferty.net/en/features/repair-conditional-format.html"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://navferty.net/ru/features/repair-conditional-format.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://navferty.net/en/features/repair-conditional-format.html"/>
+  </url>
+  <url>
+    <loc>https://navferty.net/en/features/toggle-sheet-tabs.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://navferty.net/en/features/toggle-sheet-tabs.html"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://navferty.net/ru/features/toggle-sheet-tabs.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://navferty.net/en/features/toggle-sheet-tabs.html"/>
+  </url>
+  <url>
+    <loc>https://navferty.net/ru/features/toggle-sheet-tabs.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://navferty.net/en/features/toggle-sheet-tabs.html"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://navferty.net/ru/features/toggle-sheet-tabs.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://navferty.net/en/features/toggle-sheet-tabs.html"/>
+  </url>
+  <url>
+    <loc>https://navferty.net/en/features/switch-reference-style.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://navferty.net/en/features/switch-reference-style.html"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://navferty.net/ru/features/switch-reference-style.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://navferty.net/en/features/switch-reference-style.html"/>
+  </url>
+  <url>
+    <loc>https://navferty.net/ru/features/switch-reference-style.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://navferty.net/en/features/switch-reference-style.html"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://navferty.net/ru/features/switch-reference-style.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://navferty.net/en/features/switch-reference-style.html"/>
+  </url>
+  <url>
+    <loc>https://navferty.net/en/features/exchange-rates.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://navferty.net/en/features/exchange-rates.html"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://navferty.net/ru/features/exchange-rates.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://navferty.net/en/features/exchange-rates.html"/>
+  </url>
+  <url>
+    <loc>https://navferty.net/ru/features/exchange-rates.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://navferty.net/en/features/exchange-rates.html"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://navferty.net/ru/features/exchange-rates.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://navferty.net/en/features/exchange-rates.html"/>
+  </url>
 </urlset>
