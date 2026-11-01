@@ -45,7 +45,8 @@
 <ul>
 <li>The comparison is case-insensitive: <code>abc</code> and <code>ABC</code> count as the same value.</li>
 <li>Trailing spaces make values different. Clean the text first (see <a href="remove-extra-spaces-in-excel.html">removing extra spaces</a>).</li>
-<li>For long numeric IDs stored as text, the built-in duplicate rule can compare only the first 15 digits and flag values that differ in later digits. Import or enter long IDs as text first: if Excel has already stored them as numbers, digits beyond its 15-digit precision are lost, and changing the format afterward cannot recover them. For IDs preserved as text, use an exact-comparison formula rule, for example <code>=SUMPRODUCT(--($A$2:$A$1000=$A2))&gt;1</code>.</li>
+<li>For long numeric IDs stored as text, the built-in duplicate rule can compare only the first 15 digits and flag values that differ in later digits. This problem exists even if the numbers are stored as text. Import or enter long IDs as text first: if Excel has already stored them as numbers, digits beyond its 15-digit precision are lost, and changing the format afterward cannot recover them. For IDs preserved as text, use an exact-comparison formula rule, for example <code>=SUMPRODUCT(--($A$2:$A$1000=$A2))&gt;1</code>.</li>
+<p><img src="../../images/articles/highlight-duplicate-values-in-excel/duplicates-conditional-formatting-limitation.jpg" alt="The Conditional Formatting fails to distinguish long numeric IDs stored as text" loading="lazy" width="1516" height="487"></p>
 </ul>
 
 <h2>Duplicates over several columns</h2>
