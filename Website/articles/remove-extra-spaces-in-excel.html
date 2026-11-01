@@ -46,6 +46,7 @@
 
 <h2>Check before and after</h2>
 <p>Compare <code>=LEN(A2)</code> with <code>=LEN(TRIM(A2))</code> to count how many cells actually have the problem:</p>
+<p><img src="../images/articles/remove-extra-spaces-in-excel/extra-spaces.jpg" alt="A table comparing text length, the code of the first character and the result of TRIM, including a non-breaking space that TRIM leaves in place" loading="lazy"></p>
 <pre>=SUMPRODUCT(--(LEN(A2:A1000)&lt;&gt;LEN(TRIM(A2:A1000))))</pre>
 
 <h2>With the add-in</h2>
@@ -79,6 +80,7 @@
 
 <h2>Проверка до и после</h2>
 <p>Сравните <code>=ДЛСТР(A2)</code> и <code>=ДЛСТР(СЖПРОБЕЛЫ(A2))</code>, чтобы посчитать, у скольких ячеек действительно есть проблема:</p>
+<p><img src="../images/articles/remove-extra-spaces-in-excel/extra-spaces.jpg" alt="Таблица со сравнением длины текста, кода первого символа и результата СЖПРОБЕЛЫ, включая неразрывный пробел, который остаётся" loading="lazy"></p>
 <pre>=СУММПРОИЗВ(--(ДЛСТР(A2:A1000)&lt;&gt;ДЛСТР(СЖПРОБЕЛЫ(A2:A1000))))</pre>
 
 <h2>С надстройкой</h2>

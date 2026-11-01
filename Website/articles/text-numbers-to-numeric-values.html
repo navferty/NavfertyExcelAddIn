@@ -23,6 +23,7 @@
 <h1 class="zag">Converting text numbers to numeric values</h1>
 <p class="subtitle">Why numbers become text in Excel and several ways to convert them back.</p>
 <p>Numbers copied from a web page, a PDF, an accounting system or a CSV often arrive as text. They look normal, but <code>SUM</code> ignores them, sorting puts <code>100</code> before <code>20</code>, and <code>VLOOKUP</code> refuses to match them with real numbers.</p>
+<p><img src="../images/articles/text-numbers-to-numeric-values/failed-sum.jpg" alt="SUM returns 0 for a column of numbers stored as text" loading="lazy"></p>
 
 <h2>How to recognise text numbers</h2>
 <ul>
@@ -34,8 +35,11 @@
 
 <h2>Quick fixes in Excel</h2>
 <p><b>The green triangle.</b> Select the cells, click the warning icon that appears and choose <b>Convert to Number</b>. It works only when Excel flags the cells.</p>
+<p><img src="../images/articles/text-numbers-to-numeric-values/number-as-text-warning.jpg" alt="The Number Stored as Text warning menu with the Convert to Number command" loading="lazy"></p>
 <p><b>Paste Special.</b> Type <code>1</code> in an empty cell and copy it. Select the text numbers, choose <b>Paste Special → Multiply</b>. Excel has to do arithmetic on each value, so it converts them.</p>
+<p><img src="../images/articles/text-numbers-to-numeric-values/paste-special-multiply.jpg" alt="The Paste Special dialog with the Multiply operation selected" loading="lazy"></p>
 <p><b>Text to Columns.</b> Select one column, open <b>Data → Text to Columns</b> and click <b>Finish</b> right away. This re-parses the values and converts numbers and dates. It is a fast trick for a single column.</p>
+<p><img src="../images/articles/text-numbers-to-numeric-values/text-to-columns.jpg" alt="The last step of the Text to Columns wizard with the General column format" loading="lazy"></p>
 <p><b>A formula.</b> <code>=VALUE(A1)</code> or the shorter <code>=--A1</code> returns a number. If the source has odd spaces, combine it with cleaning: <code>=VALUE(TRIM(SUBSTITUTE(A1,CHAR(160),"")))</code>. Non-breaking spaces (<code>CHAR(160)</code>) are common in data from websites and thousand separators in Russian or French formats, and <code>TRIM</code> does not remove them.</p>
 
 <h2>Things that go wrong</h2>
@@ -55,6 +59,7 @@
 <h1 class="zag">Преобразование чисел-как-текст в числа</h1>
 <p class="subtitle">Почему числа в Excel становятся текстом и несколько способов вернуть им числовой тип.</p>
 <p>Числа, скопированные с веб-страницы, из PDF, учётной системы или CSV, часто приходят как текст. Выглядят они нормально, но <code>СУММ</code> их игнорирует, при сортировке <code>100</code> оказывается перед <code>20</code>, а <code>ВПР</code> отказывается сопоставлять их с настоящими числами.</p>
+<p><img src="../images/articles/text-numbers-to-numeric-values/failed-sum.jpg" alt="СУММ возвращает 0 для столбца с числами, сохранёнными как текст" loading="lazy"></p>
 
 <h2>Как распознать числа-как-текст</h2>
 <ul>
@@ -66,8 +71,11 @@
 
 <h2>Быстрые способы в Excel</h2>
 <p><b>Зелёный треугольник.</b> Выделите ячейки, нажмите на появившийся значок предупреждения и выберите <b>Преобразовать в число</b>. Работает только там, где Excel сам пометил ячейки.</p>
+<p><img src="../images/articles/text-numbers-to-numeric-values/number-as-text-warning.jpg" alt="Меню предупреждения «Число сохранено как текст» с командой «Преобразовать в число»" loading="lazy"></p>
 <p><b>Специальная вставка.</b> Введите <code>1</code> в пустую ячейку и скопируйте её. Выделите числа-как-текст и выберите <b>Специальная вставка → Умножить</b>. Excel вынужден выполнить арифметику над каждым значением, и оно преобразуется.</p>
+<p><img src="../images/articles/text-numbers-to-numeric-values/paste-special-multiply.jpg" alt="Диалог «Специальная вставка» с выбранной операцией «Умножить»" loading="lazy"></p>
 <p><b>Текст по столбцам.</b> Выделите один столбец, откройте <b>Данные → Текст по столбцам</b> и сразу нажмите <b>Готово</b>. Значения будут разобраны заново, числа и даты преобразуются. Быстрый приём для одного столбца.</p>
+<p><img src="../images/articles/text-numbers-to-numeric-values/text-to-columns.jpg" alt="Последний шаг мастера «Текст по столбцам» с форматом данных «Общий»" loading="lazy"></p>
 <p><b>Формула.</b> <code>=ЗНАЧЕН(A1)</code> или короче <code>=--A1</code> вернёт число. Если в исходных данных странные пробелы, добавьте очистку: <code>=ЗНАЧЕН(СЖПРОБЕЛЫ(ПОДСТАВИТЬ(A1;СИМВОЛ(160);"")))</code>. Неразрывные пробелы (<code>СИМВОЛ(160)</code>) часто встречаются в данных с сайтов и в разделителях разрядов, а <code>СЖПРОБЕЛЫ</code> их не удаляет.</p>
 
 <h2>Что может пойти не так</h2>

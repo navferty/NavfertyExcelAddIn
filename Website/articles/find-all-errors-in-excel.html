@@ -42,7 +42,7 @@
 <p><img src="../images/articles/find-all-errors-in-excel/conditional-formatting-errors-rule.jpg" alt="The New Formatting Rule dialog with the formula =ISERROR(A1)" loading="lazy"></p>
 <p>Pick a red fill. Any error that appears later is highlighted right away.</p>
 <p><b>Mind the active cell.</b> In a conditional formatting formula, a relative reference like <code>A1</code> is relative to the <i>active</i> cell, which is not always the top-left cell of the selection. If you select the range from the bottom up, or click a cell in the middle before opening the dialog, the rule is shifted and some cells (typically the first rows) are not checked. The fix is to make the top-left cell active before creating the rule: select the range starting from its first cell, and check the Name Box (left of the formula bar) shows that address. You can also edit the rule later via <b>Manage Rules</b> and compare the formula with the top-left cell of <b>Applies to</b>.</p>
-<p><img src="../images/articles/find-all-errors-in-excel/conditional-formatting-errors-result.jpg" alt="The result of the rule applied from the wrong active cell: the first errors, #DIV/0! and #REF!, are not highlighted" loading="lazy"></p>
+<p><img src="../images/articles/find-all-errors-in-excel/conditional-formatting-errors-result.jpg" alt="The result: every error cell is highlighted, including #DIV/0! and #REF!" loading="lazy"></p>
 
 
 <h2>Count them</h2>
@@ -91,7 +91,7 @@
 <p><img src="../images/articles/find-all-errors-in-excel/conditional-formatting-errors-rule.jpg" alt="Диалог создания правила форматирования с формулой =ЕОШИБКА(A1)" loading="lazy"></p>
 <p>Выберите красную заливку. Любая ошибка, которая появится позже, сразу подсветится.</p>
 <p><b>Следите за активной ячейкой.</b> В формуле условного форматирования относительная ссылка вроде <code>A1</code> отсчитывается от <i>активной</i> ячейки, а она не всегда совпадает с левой верхней ячейкой выделения. Если выделить диапазон снизу вверх или щёлкнуть ячейку посередине перед открытием диалога, правило окажется сдвинутым, и часть ячеек (обычно первые строки) не будет проверена. Перед созданием правила сделайте активной левую верхнюю ячейку: выделяйте диапазон, начиная с первой ячейки, и проверьте адрес в поле имени (слева от строки формул). Уже созданное правило можно открыть через <b>Управление правилами</b> и сравнить формулу с левой верхней ячейкой поля <b>Применяется к</b>.</p>
-<p><img src="../images/articles/find-all-errors-in-excel/conditional-formatting-errors-result.jpg" alt="Результат правила, созданного при неверной активной ячейке: первые ошибки, #DIV/0! и #REF!, не подсвечены" loading="lazy"></p>
+<p><img src="../images/articles/find-all-errors-in-excel/conditional-formatting-errors-result.jpg" alt="Результат: подсвечены все ячейки с ошибками, включая #DIV/0! и #REF!" loading="lazy"></p>
 
 
 <h2>Посчитать количество</h2>
