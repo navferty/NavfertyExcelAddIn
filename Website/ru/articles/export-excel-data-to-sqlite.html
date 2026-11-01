@@ -70,7 +70,7 @@
 FROM Orders
 GROUP BY Customer
 ORDER BY Total DESC;</pre>
-<p>Если в имени есть пробелы, возьмите его в двойные кавычки: <code>"Order date"</code>.</p>
+<p>Если в имени есть пробелы, они будут заменены на символ подчеркивания: <code>Order_date</code>. Если имя начинается с цифры, будет добавен префикс <code>_</code>.</p>
 <p>Команда надстройки для этой задачи: <a href="../features/export-to-sqlite.html">Экспорт в SQLite</a>.</p>
         </main>
     </div>
