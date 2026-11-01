@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Типичные ошибки в Excel и как их исправить - Надстройка Navferty Excel Add-In</title>
+    <meta name="description" content="Проблемы, которые снова и снова встречаются в реальных книгах, и способ избежать каждой.">
+    <link rel="canonical" href="https://navferty.net/ru/articles/common-excel-mistakes.html">
+    <link rel="alternate" hreflang="en" href="https://navferty.net/en/articles/common-excel-mistakes.html">
+    <link rel="alternate" hreflang="ru" href="https://navferty.net/ru/articles/common-excel-mistakes.html">
+    <link rel="alternate" hreflang="x-default" href="https://navferty.net/en/articles/common-excel-mistakes.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="Надстройка Navferty Excel Add-In">
+    <meta property="og:title" content="Типичные ошибки в Excel и как их исправить - Надстройка Navferty Excel Add-In">
+    <meta property="og:description" content="Проблемы, которые снова и снова встречаются в реальных книгах, и способ избежать каждой.">
+    <meta property="og:url" content="https://navferty.net/ru/articles/common-excel-mistakes.html">
+    <meta property="og:image" content="https://navferty.net/images/NavfertyToolsRibbonRu.png">
+    <meta property="og:locale" content="ru">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="icon" href="../../favicon.ico">
+    <link rel="stylesheet" href="../../style.css">
+    <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Типичные ошибки в Excel и как их исправить", "inLanguage": "ru", "description": "Проблемы, которые снова и снова встречаются в реальных книгах, и способ избежать каждой.", "author": {"@type": "Person", "name": "Andrey Deev", "url": "https://github.com/navferty"}, "mainEntityOfPage": "https://navferty.net/ru/articles/common-excel-mistakes.html"}</script>
+</head>
+
+<body>
+    <header class="site-header">
+        <div class="site-header-inner">
+            <a class="brand" href="../">Надстройка Navferty Excel Add-In</a>
+            <nav aria-label="Надстройка Navferty Excel Add-In"><a href="../#commands">Команды</a><a href="./">Статьи</a><a href="../install.html">Установка</a><a href="https://github.com/navferty/NavfertyExcelAddIn" target="_blank" rel="noopener">GitHub</a><span class="lang-switch"><a href="../../en/articles/common-excel-mistakes.html" lang="en" hreflang="en" data-lang="en">English</a><a href="common-excel-mistakes.html" lang="ru" hreflang="ru" data-lang="ru" aria-current="true">Русский</a></span></nav>
+        </div>
+    </header>
+    <div id="container">
+        <main id="content" class="article">
+<p class="back-to-top"><a href="index.html">&larr; Все статьи</a></p>
+<h1 class="zag">Типичные ошибки в Excel и как их исправить</h1>
+<p class="subtitle">Проблемы, которые снова и снова встречаются в реальных книгах, и способ избежать каждой.</p>
+<p>Большинство ошибок в таблицах несложные. Они возникают из нескольких привычек, которые легко поменять.</p>
+
+<h2>Числа, сохранённые как текст</h2>
+<p>Итоги, которые не сходятся, и поиск, который не находит, часто связаны с числами в текстовом формате. Способы исправления – в статье <a href="text-numbers-to-numeric-values.html">преобразование текста в числа</a>.</p>
+
+<h2>Числа, вбитые прямо в формулы</h2>
+<p><code>=B2*1,2</code> работает, пока не изменится ставка налога и вам не придётся искать все места, где набрано 1,2. Вынесите ставку в подписанную ячейку и ссылайтесь на неё: <code>=B2*$F$1</code>. Дайте ячейке имя (<b>Формулы → Присвоить имя</b>), и формула станет читаться как <code>=B2*НДС</code>.</p>
+
+<h2>Перепутанные относительные и абсолютные ссылки</h2>
+<p>Если формула, скопированная вниз, даёт странные результаты, проверьте знаки доллара. <code>$A$1</code> не двигается никогда, <code>A$1</code> фиксирует строку, <code>$A1</code> – столбец. При редактировании <kbd>F4</kbd> переключает эти варианты по кругу.</p>
+
+<h2>Диапазоны, не охватывающие новые строки</h2>
+<p><code>=СУММ(B2:B100)</code> молча пропустит строку 101. Преобразуйте данные в таблицу (<kbd>Ctrl</kbd>+<kbd>T</kbd>) и используйте структурированные ссылки вида <code>=СУММ(Продажи[Сумма])</code>, они растут вместе с данными.</p>
+
+<h2>Объединённые ячейки в области данных</h2>
+<p>Объединённые ячейки ломают сортировку, фильтры, сводные таблицы и копирование. Для визуального эффекта используйте <b>По центру выделения</b> (<b>Формат ячеек → Выравнивание → По горизонтали</b>). Если вам досталась таблица с объединениями, разъедините ячейки и заполните каждую исходным значением.</p>
+
+<h2>Даты, которые на самом деле текст</h2>
+<p>Если <code>01.02.2024</code> не сортируется и не участвует в расчётах, это текст или дата, прочитанная с другим порядком дня и месяца. Проверьте через <code>=ЕЧИСЛО(A1)</code>. Преобразуйте через <code>ДАТА</code>, <code>ДАТАЗНАЧ</code> или «Текст по столбцам» с явно заданным форматом даты.</p>
+
+<h2>Приблизительное совпадение в поиске</h2>
+<p><code>ВПР(x; диапазон; 2)</code> без последнего аргумента по умолчанию использует приблизительное совпадение и требует отсортированных данных. Вместо ошибки она может вернуть неправильное значение. Всегда пишите <code>ЛОЖЬ</code> (или используйте <code>ПРОСМОТРX</code>, где по умолчанию точное совпадение).</p>
+
+<h2>Скрытые строки, столбцы и листы</h2>
+<p><code>СУММ</code> учитывает скрытые строки, <code>ПРОМЕЖУТОЧНЫЕ.ИТОГИ(109; ...)</code> – нет. С отфильтрованными строками то же самое: выбирайте функцию под то, что имеете в виду. Перед отправкой файла проверьте <b>Файл → Сведения → Поиск проблем → Инспектор документов</b> или щёлкните правой кнопкой по ярлыку листа и посмотрите, активно ли <b>Показать</b>.</p>
+
+<h2>Формулы, замещённые значениями, и обратно</h2>
+<p>«Специальная вставка → Значения» разрывает связь с исходными ячейками. Иногда это нужно, но отчёт, где половина цифр «заморожена», – ловушка. Выделяйте входные данные другим цветом, чем формулы, и храните отдельный лист с исходными данными, которые вы не трогаете.</p>
+
+<h2>Нет второй пары глаз</h2>
+<p>Несколько дешёвых проверок ловят удивительно много: итоги, сверенные с независимым расчётом, число строк до и после, а также <b>Формулы → Показать формулы</b> (<kbd>Ctrl</kbd>+<kbd>`</kbd>), чтобы найти ячейку, где формулу заменили числом. См. также <a href="checklist-validating-excel-files.html">чек-лист перед отправкой</a>.</p>
+        </main>
+    </div>
+    <footer class="footer">
+        <p>Navferty &copy; 2021-<span id="current-year">2026</span> &bull; <a href="https://github.com/navferty/NavfertyExcelAddIn" target="_blank" rel="noopener" class="footer-link">Открытый код на GitHub</a></p>
+    </footer>
+    <script src="../../site.js"></script>
+</body>
+
+</html>

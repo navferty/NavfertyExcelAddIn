@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Работа с CSV-файлами без проблем с кодировкой - Надстройка Navferty Excel Add-In</title>
+    <meta name="description" content="Почему кириллица и символы с диакритикой превращаются в «кракозябры» и как правильно открывать и сохранять CSV.">
+    <link rel="canonical" href="https://navferty.net/ru/articles/csv-files-without-encoding-issues.html">
+    <link rel="alternate" hreflang="en" href="https://navferty.net/en/articles/csv-files-without-encoding-issues.html">
+    <link rel="alternate" hreflang="ru" href="https://navferty.net/ru/articles/csv-files-without-encoding-issues.html">
+    <link rel="alternate" hreflang="x-default" href="https://navferty.net/en/articles/csv-files-without-encoding-issues.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="Надстройка Navferty Excel Add-In">
+    <meta property="og:title" content="Работа с CSV-файлами без проблем с кодировкой - Надстройка Navferty Excel Add-In">
+    <meta property="og:description" content="Почему кириллица и символы с диакритикой превращаются в «кракозябры» и как правильно открывать и сохранять CSV.">
+    <meta property="og:url" content="https://navferty.net/ru/articles/csv-files-without-encoding-issues.html">
+    <meta property="og:image" content="https://navferty.net/images/articles/csv-files-without-encoding-issues/wrong-encoding-csv-opened-in-excel.jpg">
+    <meta property="og:locale" content="ru">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="icon" href="../../favicon.ico">
+    <link rel="stylesheet" href="../../style.css">
+    <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Работа с CSV-файлами без проблем с кодировкой", "inLanguage": "ru", "description": "Почему кириллица и символы с диакритикой превращаются в «кракозябры» и как правильно открывать и сохранять CSV.", "author": {"@type": "Person", "name": "Andrey Deev", "url": "https://github.com/navferty"}, "mainEntityOfPage": "https://navferty.net/ru/articles/csv-files-without-encoding-issues.html"}</script>
+</head>
+
+<body>
+    <header class="site-header">
+        <div class="site-header-inner">
+            <a class="brand" href="../">Надстройка Navferty Excel Add-In</a>
+            <nav aria-label="Надстройка Navferty Excel Add-In"><a href="../#commands">Команды</a><a href="./">Статьи</a><a href="../install.html">Установка</a><a href="https://github.com/navferty/NavfertyExcelAddIn" target="_blank" rel="noopener">GitHub</a><span class="lang-switch"><a href="../../en/articles/csv-files-without-encoding-issues.html" lang="en" hreflang="en" data-lang="en">English</a><a href="csv-files-without-encoding-issues.html" lang="ru" hreflang="ru" data-lang="ru" aria-current="true">Русский</a></span></nav>
+        </div>
+    </header>
+    <div id="container">
+        <main id="content" class="article">
+<p class="back-to-top"><a href="index.html">&larr; Все статьи</a></p>
+<h1 class="zag">Работа с CSV-файлами без проблем с кодировкой</h1>
+<p class="subtitle">Почему кириллица и символы с диакритикой превращаются в «кракозябры» и как правильно открывать и сохранять CSV.</p>
+<p>Вы открываете CSV в Excel и видите <code>РџСЂРёРІРµС‚</code> вместо нормального текста, или <code>Ã©</code> вместо <code>é</code>. С файлом всё в порядке. Excel просто угадал не ту кодировку.</p>
+<p><img src="../../images/articles/csv-files-without-encoding-issues/wrong-encoding-csv-opened-in-excel.jpg" alt="CSV-файл, открытый двойным щелчком, с искажёнными буквами с диакритикой, например René и Müller" loading="lazy" width="822" height="346"></p>
+
+<h2>Что происходит</h2>
+<p>CSV – это обычный текст, и в нём ничего не сказано о кодировке. При двойном щелчке по файлу Excel использует системную кодовую страницу (например, Windows-1251 на русской Windows, Windows-1252 на западноевропейских системах), если только файл не начинается с метки порядка байтов UTF-8 (BOM). Поэтому файл в UTF-8 без BOM читается неверно.</p>
+
+<h2>Как правильно открыть файл</h2>
+<ol>
+<li>Не открывайте двойным щелчком. Откройте пустую книгу.</li>
+<li><b>Данные → Из текстового/CSV-файла</b>.</li>
+<li>Выберите файл. В окне предпросмотра меняйте <b>Источник файла</b>, пока текст не станет читаемым (обычно <b>65001: Юникод (UTF-8)</b>, а для старых русских файлов <b>1251: кириллица (Windows)</b>).</li>
+<li>Проверьте разделитель, затем нажмите <b>Загрузить</b> или <b>Преобразовать данные</b>.</li>
+</ol>
+<p><img src="../../images/articles/csv-files-without-encoding-issues/csv-import-with-encoding.jpg" alt="Предварительный просмотр «Из текстового/CSV-файла» с источником файла 65001: Юникод (UTF-8): буквы с диакритикой отображаются правильно" loading="lazy" width="1151" height="663"></p>
+<p><img src="../../images/articles/csv-files-without-encoding-issues/csv-import-result.jpg" alt="Загруженные данные на листе: René, Müller, São Paulo и Café без искажений" loading="lazy" width="391" height="207"></p>
+
+<h2>Как правильно сохранить файл</h2>
+<ul>
+<li><b>CSV UTF-8 (разделитель – запятая)</b> в списке типов файлов записывает UTF-8 с BOM. Выбирайте его, когда файл идёт в другую программу или открывается в Excel на другом компьютере.</li>
+<li>Обычный вариант <b>CSV (разделители – запятые)</b> сохраняет в системной кодовой странице и теряет символы, которых в ней нет.</li>
+<li>Некоторые строгие загрузчики отвергают BOM. Тогда уберите его в текстовом редакторе, например в Notepad++ (<b>Кодировки → UTF-8</b>), и сохраните оттуда.</li>
+</ul>
+
+<h2>Проблемы с разделителем</h2>
+<p>Во многих локалях, включая русскую и немецкую, Excel использует в качестве разделителя списка точку с запятой, потому что запятая – десятичный разделитель. Файл с запятыми, открытый двойным щелчком, окажется в одном столбце, и то же случится с файлом с точкой с запятой на английской системе. В диалоге «Из текстового/CSV-файла» задайте разделитель явно. В текстовом файле строка <code>sep=;</code> в начале заставляет Excel использовать точку с запятой, но другие программы воспримут её как данные, поэтому применяйте только для файлов, предназначенных для Excel.</p>
+
+<h2>Другие ловушки</h2>
+<ul>
+<li><b>Ведущие нули</b> пропадают, когда Excel угадывает столбец как число. В диалоге импорта задайте тип столбца «Текст».</li>
+<li><b>Длинные числа</b> (больше 15 цифр) округляются и показываются в экспоненциальной записи. Импортируйте их как текст.</li>
+<li><b>Даты</b> преобразуются с локальным порядком дня и месяца. <code>03/04/2024</code> может означать третье апреля или четвёртое марта.</li>
+<li><b>Поля с переносами строк или разделителями</b> должны быть в кавычках, а кавычки внутри удваиваться. Программы, записывающие CSV склейкой строк, часто это упускают.</li>
+<li><b>Многократное пересохранение CSV</b> в Excel меняет содержимое (числа, даты, нули). Храните оригинал и рабочий .xlsx отдельно.</li>
+</ul>
+
+<h2>Для регулярных файлов</h2>
+<p>Используйте Power Query: он запоминает кодировку, разделитель и типы столбцов, так что следующий файл – это одно обновление.</p>
+        </main>
+    </div>
+    <footer class="footer">
+        <p>Navferty &copy; 2021-<span id="current-year">2026</span> &bull; <a href="https://github.com/navferty/NavfertyExcelAddIn" target="_blank" rel="noopener" class="footer-link">Открытый код на GitHub</a></p>
+    </footer>
+    <script src="../../site.js"></script>
+</body>
+
+</html>

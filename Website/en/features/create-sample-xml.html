@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Sample XML based on XSD - Navferty&#x27;s Excel Add-In</title>
+    <meta name="description" content="Generate a sample XML file from an XSD schema to visualize the structure.">
+    <link rel="canonical" href="https://navferty.net/en/features/create-sample-xml.html">
+    <link rel="alternate" hreflang="en" href="https://navferty.net/en/features/create-sample-xml.html">
+    <link rel="alternate" hreflang="ru" href="https://navferty.net/ru/features/create-sample-xml.html">
+    <link rel="alternate" hreflang="x-default" href="https://navferty.net/en/features/create-sample-xml.html">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Navferty&#x27;s Excel Add-In">
+    <meta property="og:title" content="Create Sample XML based on XSD - Navferty&#x27;s Excel Add-In">
+    <meta property="og:description" content="Generate a sample XML file from an XSD schema to visualize the structure.">
+    <meta property="og:url" content="https://navferty.net/en/features/create-sample-xml.html">
+    <meta property="og:image" content="https://navferty.net/images/NavfertyToolsRibbonEn.png">
+    <meta property="og:locale" content="en">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="icon" href="../../favicon.ico">
+    <link rel="stylesheet" href="../../style.css">
+    <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://navferty.net/en/"}, {"@type": "ListItem", "position": 2, "name": "Commands", "item": "https://navferty.net/en/#commands"}, {"@type": "ListItem", "position": 3, "name": "Create Sample XML based on XSD"}]}</script>
+</head>
+
+<body>
+    <header class="site-header">
+        <div class="site-header-inner">
+            <a class="brand" href="../">Navferty's Excel Add-In</a>
+            <nav aria-label="Navferty's Excel Add-In"><a href="../#commands">Commands</a><a href="../articles/">Guides</a><a href="../install.html">Install</a><a href="https://github.com/navferty/NavfertyExcelAddIn" target="_blank" rel="noopener">GitHub</a><span class="lang-switch"><a href="create-sample-xml.html" lang="en" hreflang="en" data-lang="en" aria-current="true">English</a><a href="../../ru/features/create-sample-xml.html" lang="ru" hreflang="ru" data-lang="ru">Русский</a></span></nav>
+        </div>
+    </header>
+    <div id="container">
+        <main id="content" class="article">
+<nav class="breadcrumb" aria-label="Breadcrumb"><a href="../">Home</a> &rsaquo; <a href="../#commands">Commands</a> &rsaquo; <span>Create Sample XML based on XSD</span></nav>
+<h1 class="zag"><img class="icons" src="../../images/icons/createSampleXml.png" alt="" width="64" height="64">Create Sample XML based on XSD</h1>
+<p class="lead">Generate a sample XML file from an XSD schema to visualize the structure.</p>
+
+<h2>View example</h2>
+
+    <p><strong>Input XSD Schema:</strong></p>
+    <pre>&lt;xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+           xmlns:tns="http://tempuri.org/PurchaseOrderSchema.xsd"
+           targetNamespace="http://tempuri.org/PurchaseOrderSchema.xsd"
+           elementFormDefault="qualified"&gt;
+ &lt;xsd:element name="PurchaseOrder" type="tns:PurchaseOrderType"/&gt;
+ &lt;xsd:complexType name="PurchaseOrderType"&gt;
+  &lt;xsd:sequence&gt;
+   &lt;xsd:element name="ShipTo" type="tns:USAddress" maxOccurs="2"/&gt;
+   &lt;xsd:element name="BillTo" type="tns:USAddress"/&gt;
+  &lt;/xsd:sequence&gt;
+  &lt;xsd:attribute name="OrderDate" type="xsd:date"/&gt;
+ &lt;/xsd:complexType&gt;
+
+ &lt;xsd:complexType name="USAddress"&gt;
+  &lt;xsd:sequence&gt;
+   &lt;xsd:element name="name"   type="xsd:string"/&gt;
+   &lt;xsd:element name="street" type="xsd:string"/&gt;
+   &lt;xsd:element name="city"   type="xsd:string"/&gt;
+   &lt;xsd:element name="state"  type="xsd:string"/&gt;
+   &lt;xsd:element name="zip"    type="xsd:integer"/&gt;
+  &lt;/xsd:sequence&gt;
+  &lt;xsd:attribute name="country" type="xsd:NMTOKEN" fixed="US"/&gt;
+ &lt;/xsd:complexType&gt;
+&lt;/xsd:schema&gt;</pre>
+
+    <p><strong>Generated XML Output:</strong></p>
+    <pre>&lt;PurchaseOrder xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" OrderDate="1900-01-01" xmlns="http://tempuri.org/PurchaseOrderSchema.xsd"&gt;
+  &lt;ShipTo country="US"&gt;
+    &lt;name&gt;name1&lt;/name&gt;
+    &lt;street&gt;street1&lt;/street&gt;
+    &lt;city&gt;city1&lt;/city&gt;
+    &lt;state&gt;state1&lt;/state&gt;
+    &lt;zip&gt;1&lt;/zip&gt;
+  &lt;/ShipTo&gt;
+  &lt;ShipTo country="US"&gt;
+    &lt;name&gt;name2&lt;/name&gt;
+    &lt;street&gt;street2&lt;/street&gt;
+    &lt;city&gt;city2&lt;/city&gt;
+    &lt;state&gt;state2&lt;/state&gt;
+    &lt;zip&gt;-79228162514264337593543950335&lt;/zip&gt;
+  &lt;/ShipTo&gt;
+  &lt;BillTo country="US"&gt;
+    &lt;name&gt;name1&lt;/name&gt;
+    &lt;street&gt;street1&lt;/street&gt;
+    &lt;city&gt;city1&lt;/city&gt;
+    &lt;state&gt;state1&lt;/state&gt;
+    &lt;zip&gt;1&lt;/zip&gt;
+  &lt;/BillTo&gt;
+&lt;/PurchaseOrder&gt;</pre>
+<div class="info-box"><p><strong>Related guide:</strong> <a href="../articles/validate-xml-against-xsd-in-excel.html">Validating XML against XSD inside Excel</a></p></div>
+<h2>Other commands</h2>
+<ul class="other-commands">
+<li><a href="parse-numerics.html">Parse Numerics</a></li>
+<li><a href="trim-spaces.html">Trim Spaces</a></li>
+<li><a href="toggle-case.html">Toggle Case</a></li>
+<li><a href="unmerge-cells.html">Unmerge Cells</a></li>
+<li><a href="replace.html">Replace</a></li>
+<li><a href="stringify-numerics.html">Stringify Numerics</a></li>
+<li><a href="find-errors.html">Find All Cells Containing Errors</a></li>
+<li><a href="highlight-duplications.html">Highlight Duplications</a></li>
+<li><a href="validate-values.html">Validate Values</a></li>
+<li><a href="copy-as-markdown.html">Copy as Markdown</a></li>
+<li><a href="export-to-sqlite.html">Export to SQLite</a></li>
+<li><a href="validate-xml.html">Validate XML with XSD</a></li>
+<li><a href="unprotect-workbook.html">Unprotect Workbook</a></li>
+<li><a href="worksheets-protection.html">Worksheets Protection</a></li>
+<li><a href="undo-last-action.html">Undo Last Action</a></li>
+</ul>
+<p class="cta">The add-in is free and open source. <a href="../install.html">Installation instructions</a>.</p>
+
+        </main>
+    </div>
+    <footer class="footer">
+        <p>Navferty &copy; 2021-<span id="current-year">2026</span> &bull; <a href="https://github.com/navferty/NavfertyExcelAddIn" target="_blank" rel="noopener" class="footer-link">Open Source on GitHub</a></p>
+    </footer>
+    <script src="../../site.js"></script>
+</body>
+
+</html>

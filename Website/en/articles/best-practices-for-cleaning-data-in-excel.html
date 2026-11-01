@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Best practices for cleaning data in Excel - Navferty&#x27;s Excel Add-In</title>
+    <meta name="description" content="A repeatable order of steps for turning a messy export into a table you can rely on.">
+    <link rel="canonical" href="https://navferty.net/en/articles/best-practices-for-cleaning-data-in-excel.html">
+    <link rel="alternate" hreflang="en" href="https://navferty.net/en/articles/best-practices-for-cleaning-data-in-excel.html">
+    <link rel="alternate" hreflang="ru" href="https://navferty.net/ru/articles/best-practices-for-cleaning-data-in-excel.html">
+    <link rel="alternate" hreflang="x-default" href="https://navferty.net/en/articles/best-practices-for-cleaning-data-in-excel.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="Navferty&#x27;s Excel Add-In">
+    <meta property="og:title" content="Best practices for cleaning data in Excel - Navferty&#x27;s Excel Add-In">
+    <meta property="og:description" content="A repeatable order of steps for turning a messy export into a table you can rely on.">
+    <meta property="og:url" content="https://navferty.net/en/articles/best-practices-for-cleaning-data-in-excel.html">
+    <meta property="og:image" content="https://navferty.net/images/NavfertyToolsRibbonEn.png">
+    <meta property="og:locale" content="en">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="icon" href="../../favicon.ico">
+    <link rel="stylesheet" href="../../style.css">
+    <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Best practices for cleaning data in Excel", "inLanguage": "en", "description": "A repeatable order of steps for turning a messy export into a table you can rely on.", "author": {"@type": "Person", "name": "Andrey Deev", "url": "https://github.com/navferty"}, "mainEntityOfPage": "https://navferty.net/en/articles/best-practices-for-cleaning-data-in-excel.html"}</script>
+</head>
+
+<body>
+    <header class="site-header">
+        <div class="site-header-inner">
+            <a class="brand" href="../">Navferty's Excel Add-In</a>
+            <nav aria-label="Navferty's Excel Add-In"><a href="../#commands">Commands</a><a href="./">Guides</a><a href="../install.html">Install</a><a href="https://github.com/navferty/NavfertyExcelAddIn" target="_blank" rel="noopener">GitHub</a><span class="lang-switch"><a href="best-practices-for-cleaning-data-in-excel.html" lang="en" hreflang="en" data-lang="en" aria-current="true">English</a><a href="../../ru/articles/best-practices-for-cleaning-data-in-excel.html" lang="ru" hreflang="ru" data-lang="ru">Русский</a></span></nav>
+        </div>
+    </header>
+    <div id="container">
+        <main id="content" class="article">
+<p class="back-to-top"><a href="index.html">&larr; All articles</a></p>
+<h1 class="zag">Best practices for cleaning data in Excel</h1>
+<p class="subtitle">A repeatable order of steps for turning a messy export into a table you can rely on.</p>
+<p>Data cleaning goes faster and causes fewer mistakes when you do it in the same order every time and keep the original untouched.</p>
+
+<h2>1. Keep the original</h2>
+<p>Copy the raw data to a sheet called <code>raw</code> and never edit it. Work on a copy, or better, use Power Query so the steps are recorded and can be replayed on next month's file.</p>
+
+<h2>2. Look at the data before changing it</h2>
+<ul>
+<li>Turn on filters and look at the unique values of each column. Misspellings and variants of the same category show up in seconds.</li>
+<li>Sort a column ascending and descending: blanks, text among numbers and unexpected extremes end up at the edges.</li>
+<li>Check the row count and the totals, so that you can compare after cleaning.</li>
+</ul>
+
+<h2>3. Fix the structure</h2>
+<ul>
+<li>Remove title rows, notes and total rows inside the data.</li>
+<li>Unmerge cells and fill in the blanks. <b>Go To Special → Blanks</b>, type <code>=</code> and the cell above, then <kbd>Ctrl</kbd>+<kbd>Enter</kbd> fills down.</li>
+<li>One header row, unique column names.</li>
+</ul>
+
+<h3>Format the result as a table</h3>
+<p>Once the structure is clean, select any cell in the data and press <kbd>Ctrl</kbd>+<kbd>T</kbd> (Home &rarr; Format as Table). Tick "My table has headers". It costs nothing and helps later:</p>
+<ul>
+<li>The range grows by itself when you add rows, so formulas, charts and pivot tables based on it do not need updating.</li>
+<li>Filters and banded rows are added, and the header stays visible while scrolling.</li>
+<li>Formulas can use column names: <code>=SUM(Table1[Amount])</code> instead of <code>=SUM(C2:C500)</code>. A formula typed in one row fills the whole column.</li>
+<li>Give the table a meaningful name on the Table Design tab (for example <code>Orders</code>).</li>
+</ul>
+<p>Tables do not allow merged cells, and a table cannot contain subtotal rows inside the data, which fits well with the rules above.</p>
+<h2>4. Fix the text</h2>
+<ul>
+<li>Remove extra spaces and non-printable characters (<a href="remove-extra-spaces-in-excel.html">details</a>).</li>
+<li>Normalise case with <code>UPPER</code>, <code>LOWER</code>, <code>PROPER</code>. <code>PROPER</code> mishandles names like <code>McDonald</code> and abbreviations, so review the result.</li>
+<li>Look for lookalike letters. Latin <code>A</code> and Cyrillic <code>А</code> are different characters, and a code that mixes them will not match anything. This is common in Russian-language data with codes and licence plates.</li>
+<li>Split combined fields with <b>Text to Columns</b> or <b>Flash Fill</b> (<kbd>Ctrl</kbd>+<kbd>E</kbd>). Check the Flash Fill results, because it guesses a pattern.</li>
+</ul>
+
+<h2>5. Fix the types</h2>
+<ul>
+<li>Convert text numbers and text dates to real ones (<a href="text-numbers-to-numeric-values.html">details</a>).</li>
+<li>Keep identifiers as text if they have leading zeros.</li>
+<li>Use data validation lists on columns where people type values by hand.</li>
+</ul>
+
+<h2>6. Handle duplicates and missing values</h2>
+<ul>
+<li>Look at duplicates before removing them (<a href="highlight-duplicate-values-in-excel.html">details</a>). Two rows with the same key may be different records.</li>
+<li>Decide per column what a blank means: zero, unknown or not applicable. Do not fill in with zeros blindly, it changes averages.</li>
+</ul>
+
+<h2>7. Validate the result</h2>
+<ul>
+<li>Compare row count and totals with the original.</li>
+<li>Check for formula errors (<a href="find-all-errors-in-excel.html">details</a>).</li>
+<li>Test a few rows by hand against the source system.</li>
+</ul>
+
+<h2>Write down what you did</h2>
+<p>A small “Notes” sheet with the steps will save you the next time the same file arrives, and lets a colleague trust the result.</p>
+        </main>
+    </div>
+    <footer class="footer">
+        <p>Navferty &copy; 2021-<span id="current-year">2026</span> &bull; <a href="https://github.com/navferty/NavfertyExcelAddIn" target="_blank" rel="noopener" class="footer-link">Open Source on GitHub</a></p>
+    </footer>
+    <script src="../../site.js"></script>
+</body>
+
+</html>

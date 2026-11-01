@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Validating XML against XSD inside Excel - Navferty&#x27;s Excel Add-In</title>
+    <meta name="description" content="How to check an XML file against its schema and read the errors as a table.">
+    <link rel="canonical" href="https://navferty.net/en/articles/validate-xml-against-xsd-in-excel.html">
+    <link rel="alternate" hreflang="en" href="https://navferty.net/en/articles/validate-xml-against-xsd-in-excel.html">
+    <link rel="alternate" hreflang="ru" href="https://navferty.net/ru/articles/validate-xml-against-xsd-in-excel.html">
+    <link rel="alternate" hreflang="x-default" href="https://navferty.net/en/articles/validate-xml-against-xsd-in-excel.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="Navferty&#x27;s Excel Add-In">
+    <meta property="og:title" content="Validating XML against XSD inside Excel - Navferty&#x27;s Excel Add-In">
+    <meta property="og:description" content="How to check an XML file against its schema and read the errors as a table.">
+    <meta property="og:url" content="https://navferty.net/en/articles/validate-xml-against-xsd-in-excel.html">
+    <meta property="og:image" content="https://navferty.net/images/NavfertyToolsRibbonEn.png">
+    <meta property="og:locale" content="en">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="icon" href="../../favicon.ico">
+    <link rel="stylesheet" href="../../style.css">
+    <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Validating XML against XSD inside Excel", "inLanguage": "en", "description": "How to check an XML file against its schema and read the errors as a table.", "author": {"@type": "Person", "name": "Andrey Deev", "url": "https://github.com/navferty"}, "mainEntityOfPage": "https://navferty.net/en/articles/validate-xml-against-xsd-in-excel.html"}</script>
+</head>
+
+<body>
+    <header class="site-header">
+        <div class="site-header-inner">
+            <a class="brand" href="../">Navferty's Excel Add-In</a>
+            <nav aria-label="Navferty's Excel Add-In"><a href="../#commands">Commands</a><a href="./">Guides</a><a href="../install.html">Install</a><a href="https://github.com/navferty/NavfertyExcelAddIn" target="_blank" rel="noopener">GitHub</a><span class="lang-switch"><a href="validate-xml-against-xsd-in-excel.html" lang="en" hreflang="en" data-lang="en" aria-current="true">English</a><a href="../../ru/articles/validate-xml-against-xsd-in-excel.html" lang="ru" hreflang="ru" data-lang="ru">Русский</a></span></nav>
+        </div>
+    </header>
+    <div id="container">
+        <main id="content" class="article">
+<p class="back-to-top"><a href="index.html">&larr; All articles</a></p>
+<h1 class="zag">Validating XML against XSD inside Excel</h1>
+<p class="subtitle">How to check an XML file against its schema and read the errors as a table.</p>
+<p>Many systems exchange data as XML: tax and customs declarations, bank statements, e-invoicing, product feeds. Often the XML is produced from an Excel table by a script or a conversion tool, and the receiving system rejects it with a message like “file does not conform to schema” without saying where the mistake is.</p>
+
+<h2>What an XSD is</h2>
+<p>An XSD (XML Schema) file describes which elements are allowed, in what order, which are required and what type each value has. Validating means checking an XML file against those rules. A file can be well-formed (correct tags) and still invalid (a required element is missing, or a text value sits in a date field).</p>
+
+<h2>Typical problems</h2>
+<ul>
+<li>A required element is missing or in the wrong order. Order matters in <code>xs:sequence</code>.</li>
+<li>A value does not match its type: <code>-5</code> for a <code>positiveInteger</code>, <code>12.03.2024</code> for an <code>xs:date</code> that expects <code>2024-03-12</code>.</li>
+<li>Decimal comma instead of a point.</li>
+<li>Strings longer than <code>maxLength</code> or not matching a <code>pattern</code> (for example a tax ID of the wrong length).</li>
+<li>Characters like <code>&lt;</code> and <code>&amp;</code> that were not escaped when the XML was written.</li>
+</ul>
+
+<h2>Other ways to validate</h2>
+<ul>
+<li><code>xmllint --noout --schema schema.xsd file.xml</code> on Linux or macOS, and available for Windows too.</li>
+<li>Editors with schema support, such as Visual Studio Code with an XML extension, Oxygen or Notepad++ with the XML Tools plugin.</li>
+<li>Excel's own XML Maps (<b>Developer → Source</b>) can import an XSD and map it to cells. It is limited with nested or repeating structures.</li>
+</ul>
+
+<h2>With the add-in</h2>
+<p><b>Validate XML with XSD</b> takes an XML file and an XSD file and writes a new workbook with one row per problem: severity, element and the message. Because it is a normal sheet, you can filter, sort and send it to the person who produced the data.</p>
+<p>When you only have the schema and need to understand what a valid file looks like, <b>Create Sample XML based on XSD</b> generates an example file from it. For checks before the XML is even created, <b>Validate Values</b> checks that the cells hold numbers, dates, valid tax IDs, or text without characters that break XML.</p>
+
+<h2>Reading the messages</h2>
+<p>Messages mention the element name and the expected alternatives. Fix the first error first: later messages are often consequences of the first one, for example a missing element makes everything after it look out of order.</p>
+<p>The add-in command for this: <a href="../features/create-sample-xml.html">Create Sample XML based on XSD</a>, <a href="../features/validate-xml.html">Validate XML with XSD</a>.</p>
+        </main>
+    </div>
+    <footer class="footer">
+        <p>Navferty &copy; 2021-<span id="current-year">2026</span> &bull; <a href="https://github.com/navferty/NavfertyExcelAddIn" target="_blank" rel="noopener" class="footer-link">Open Source on GitHub</a></p>
+    </footer>
+    <script src="../../site.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Automating routine Excel tasks without VBA - Navferty&#x27;s Excel Add-In</title>
+    <meta name="description" content="Tables, Power Query, Flash Fill, dynamic arrays and other built-in tools that replace most simple macros.">
+    <link rel="canonical" href="https://navferty.net/en/articles/automating-excel-tasks-without-vba.html">
+    <link rel="alternate" hreflang="en" href="https://navferty.net/en/articles/automating-excel-tasks-without-vba.html">
+    <link rel="alternate" hreflang="ru" href="https://navferty.net/ru/articles/automating-excel-tasks-without-vba.html">
+    <link rel="alternate" hreflang="x-default" href="https://navferty.net/en/articles/automating-excel-tasks-without-vba.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="Navferty&#x27;s Excel Add-In">
+    <meta property="og:title" content="Automating routine Excel tasks without VBA - Navferty&#x27;s Excel Add-In">
+    <meta property="og:description" content="Tables, Power Query, Flash Fill, dynamic arrays and other built-in tools that replace most simple macros.">
+    <meta property="og:url" content="https://navferty.net/en/articles/automating-excel-tasks-without-vba.html">
+    <meta property="og:image" content="https://navferty.net/images/NavfertyToolsRibbonEn.png">
+    <meta property="og:locale" content="en">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="icon" href="../../favicon.ico">
+    <link rel="stylesheet" href="../../style.css">
+    <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Automating routine Excel tasks without VBA", "inLanguage": "en", "description": "Tables, Power Query, Flash Fill, dynamic arrays and other built-in tools that replace most simple macros.", "author": {"@type": "Person", "name": "Andrey Deev", "url": "https://github.com/navferty"}, "mainEntityOfPage": "https://navferty.net/en/articles/automating-excel-tasks-without-vba.html"}</script>
+</head>
+
+<body>
+    <header class="site-header">
+        <div class="site-header-inner">
+            <a class="brand" href="../">Navferty's Excel Add-In</a>
+            <nav aria-label="Navferty's Excel Add-In"><a href="../#commands">Commands</a><a href="./">Guides</a><a href="../install.html">Install</a><a href="https://github.com/navferty/NavfertyExcelAddIn" target="_blank" rel="noopener">GitHub</a><span class="lang-switch"><a href="automating-excel-tasks-without-vba.html" lang="en" hreflang="en" data-lang="en" aria-current="true">English</a><a href="../../ru/articles/automating-excel-tasks-without-vba.html" lang="ru" hreflang="ru" data-lang="ru">Русский</a></span></nav>
+        </div>
+    </header>
+    <div id="container">
+        <main id="content" class="article">
+<p class="back-to-top"><a href="index.html">&larr; All articles</a></p>
+<h1 class="zag">Automating routine Excel tasks without VBA</h1>
+<p class="subtitle">Tables, Power Query, Flash Fill, dynamic arrays and other built-in tools that replace most simple macros.</p>
+<p>Macros are powerful, but they need maintenance, they get blocked by security settings, and they do not run in Excel for the web. A lot of routine work can be done with built-in features that anyone can inspect and change.</p>
+
+<h2>Tables</h2>
+<p>A table (<kbd>Ctrl</kbd>+<kbd>T</kbd>) extends formulas, formatting, filters and chart ranges automatically when you add rows. This alone removes many “update the range” macros.</p>
+
+<h2>Power Query</h2>
+<p><b>Data → Get Data</b> is the right tool for repeated imports and clean-up: combine all files from a folder, remove columns, change types, split, unpivot, merge two tables on a key. Every step is recorded. Next month you drop in the new file and click <b>Refresh All</b>.</p>
+<p>Typical cases: a monthly export from an accounting system with the same layout; a folder of branch reports to stack into one table; a report that needs unpivoting from a wide to a long format.</p>
+
+<h2>Dynamic array functions</h2>
+<p>In Microsoft 365 and Excel 2021 and later, one formula can return a whole range:</p>
+<ul>
+<li><code>=UNIQUE(A2:A1000)</code> – a list of distinct values.</li>
+<li><code>=SORT(A2:C1000, 2, -1)</code> – sorted copy of the data.</li>
+<li><code>=FILTER(A2:C1000, C2:C1000&gt;1000)</code> – only the rows that match.</li>
+<li><code>=XLOOKUP(E2, A:A, C:C, "not found")</code> – a lookup with a default value.</li>
+<li><code>=TEXTSPLIT</code>, <code>=TEXTJOIN</code>, <code>=LET</code> to split, join and name intermediate results.</li>
+</ul>
+
+<h2>Flash Fill</h2>
+<p>Type the result for the first row (for example the initials extracted from a full name), then press <kbd>Ctrl</kbd>+<kbd>E</kbd>. Excel infers the pattern. It is not a formula, so it does not update when the source changes.</p>
+
+<h2>Pivot tables and slicers</h2>
+<p>A pivot table replaces most hand-written summary formulas, and refreshes with a click. Add slicers for interactive filters.</p>
+
+<h2>Data validation and conditional formatting</h2>
+<p>Dropdown lists and rules that highlight problems (an empty required field, a date in the past, a duplicate) prevent errors at entry time, so there is less to clean afterwards.</p>
+
+<h2>Office Scripts and Power Automate</h2>
+<p>For Excel on the web, Office Scripts (TypeScript) can automate edits, and Power Automate can run them on a schedule or when a file arrives. This is a closer replacement for VBA in a cloud workflow.</p>
+
+<h2>Add-ins for repeated chores</h2>
+<p>Small operations that appear in many files, such as trimming text, converting text to numbers, highlighting duplicates or exporting to another format, fit well in an add-in with a ribbon button. See <a href="best-free-excel-add-ins.html">free add-ins</a>.</p>
+
+<h2>When VBA still makes sense</h2>
+<p>When you need custom dialogs, interaction with other desktop applications, or logic that does not fit a formula or a query, VBA is still the straightforward way. The VBA articles linked from the <a href="index.html">article index</a> may help there.</p>
+        </main>
+    </div>
+    <footer class="footer">
+        <p>Navferty &copy; 2021-<span id="current-year">2026</span> &bull; <a href="https://github.com/navferty/NavfertyExcelAddIn" target="_blank" rel="noopener" class="footer-link">Open Source on GitHub</a></p>
+    </footer>
+    <script src="../../site.js"></script>
+</body>
+
+</html>

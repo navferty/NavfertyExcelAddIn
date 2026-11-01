@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Подготовка отчётов Excel для руководства - Надстройка Navferty Excel Add-In</title>
+    <meta name="description" content="Как сделать книгу, которую читатель поймёт за минуту.">
+    <link rel="canonical" href="https://navferty.net/ru/articles/preparing-excel-reports-for-management.html">
+    <link rel="alternate" hreflang="en" href="https://navferty.net/en/articles/preparing-excel-reports-for-management.html">
+    <link rel="alternate" hreflang="ru" href="https://navferty.net/ru/articles/preparing-excel-reports-for-management.html">
+    <link rel="alternate" hreflang="x-default" href="https://navferty.net/en/articles/preparing-excel-reports-for-management.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="Надстройка Navferty Excel Add-In">
+    <meta property="og:title" content="Подготовка отчётов Excel для руководства - Надстройка Navferty Excel Add-In">
+    <meta property="og:description" content="Как сделать книгу, которую читатель поймёт за минуту.">
+    <meta property="og:url" content="https://navferty.net/ru/articles/preparing-excel-reports-for-management.html">
+    <meta property="og:image" content="https://navferty.net/images/NavfertyToolsRibbonRu.png">
+    <meta property="og:locale" content="ru">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="icon" href="../../favicon.ico">
+    <link rel="stylesheet" href="../../style.css">
+    <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Подготовка отчётов Excel для руководства", "inLanguage": "ru", "description": "Как сделать книгу, которую читатель поймёт за минуту.", "author": {"@type": "Person", "name": "Andrey Deev", "url": "https://github.com/navferty"}, "mainEntityOfPage": "https://navferty.net/ru/articles/preparing-excel-reports-for-management.html"}</script>
+</head>
+
+<body>
+    <header class="site-header">
+        <div class="site-header-inner">
+            <a class="brand" href="../">Надстройка Navferty Excel Add-In</a>
+            <nav aria-label="Надстройка Navferty Excel Add-In"><a href="../#commands">Команды</a><a href="./">Статьи</a><a href="../install.html">Установка</a><a href="https://github.com/navferty/NavfertyExcelAddIn" target="_blank" rel="noopener">GitHub</a><span class="lang-switch"><a href="../../en/articles/preparing-excel-reports-for-management.html" lang="en" hreflang="en" data-lang="en">English</a><a href="preparing-excel-reports-for-management.html" lang="ru" hreflang="ru" data-lang="ru" aria-current="true">Русский</a></span></nav>
+        </div>
+    </header>
+    <div id="container">
+        <main id="content" class="article">
+<p class="back-to-top"><a href="index.html">&larr; Все статьи</a></p>
+<h1 class="zag">Подготовка отчётов Excel для руководства</h1>
+<p class="subtitle">Как сделать книгу, которую читатель поймёт за минуту.</p>
+<p>Руководитель, читающий ваш отчёт, хочет знать, что произошло, хорошо это или плохо и что делать. Время, потраченное на цвет ячейки, должно служить этому.</p>
+
+<h2>Начните с вопроса</h2>
+<p>Прежде чем открывать Excel, запишите, какое решение предстоит принять читателю. Отчёт без вопроса легко превращается в свалку из всех имеющихся цифр.</p>
+
+<h2>Структура книги</h2>
+<ul>
+<li><b>Сначала лист со сводкой</b>: от трёх до семи ключевых показателей, рядом с ними предыдущий период или план и одно предложение с выводом.</li>
+<li><b>Детали после</b>, в порядке, в котором читатель задал бы следующие вопросы.</li>
+<li><b>Исходные данные и расчёты</b> на отдельных листах, чтобы читателю не приходилось на них смотреть.</li>
+<li>У листов осмысленные названия, а не <code>Лист1</code> и <code>Копия (2)</code>.</li>
+</ul>
+
+<h2>Таблицы</h2>
+<ul>
+<li>Выравнивайте числа по правому краю, в столбце одно число знаков после запятой и разделитель разрядов.</li>
+<li>Округляйте до точности, которая важна. Тысячи или миллионы в заголовке (<code>руб., тыс.</code>) читаются лучше длинных чисел.</li>
+<li>Используйте мало границ. Обычно хватает светлых горизонтальных линий и жирного заголовка.</li>
+<li>Закрепляйте строку заголовков в длинных таблицах.</li>
+<li>Итоги должны быть заметны и сходиться. Таблица, где итог из-за округления отличается на единицу от суммы строк, вызывает вопросы. Используйте <code>ОКРУГЛ</code> в расчёте или добавьте примечание.</li>
+</ul>
+
+<h2>Диаграммы</h2>
+<ul>
+<li>Выбирайте тип под вопрос: линии для изменения во времени, столбцы для сравнения, а круговых диаграмм больше чем на четыре сектора избегайте.</li>
+<li>В заголовке сформулирована мысль: «Продажи упали на 8% в третьем квартале», а не «Продажи по кварталам».</li>
+<li>Оси столбчатых диаграмм начинайте с нуля. Уберите 3D, градиенты и лишние линии сетки.</li>
+<li>Подписывайте напрямую вместо легенды, когда это возможно.</li>
+</ul>
+
+<h2>Условное форматирование – понемногу</h2>
+<p>Подсвечивайте то, что требует внимания (план не выполнен, просрочка), а не всё подряд. Когда красных ячеек десять, красного не видно.</p>
+
+<h2>Сделайте обновляемым</h2>
+<p>Вы будете делать это снова в следующем месяце. Используйте таблицы, Power Query и сводные таблицы, чтобы обновление сводилось к вставке новых данных и нажатию <b>Обновить всё</b>. В отчёте, собранном вручную, рано или поздно окажется ошибка копирования.</p>
+
+<h2>Перед отправкой</h2>
+<p>Пройдитесь по <a href="checklist-validating-excel-files.html">чек-листу</a>, задайте область печати и подумайте об отправке PDF, если читателю нужно только прочитать. Если нужна интерактивность, отправляйте книгу с активным листом сводки.</p>
+        </main>
+    </div>
+    <footer class="footer">
+        <p>Navferty &copy; 2021-<span id="current-year">2026</span> &bull; <a href="https://github.com/navferty/NavfertyExcelAddIn" target="_blank" rel="noopener" class="footer-link">Открытый код на GitHub</a></p>
+    </footer>
+    <script src="../../site.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Приёмы отладки VBA-кода на примере MS Excel - Надстройка Navferty Excel Add-In</title>
+    <meta name="description" content="Точки останова, пошаговое выполнение, окна Immediate, Locals и Watches, условные точки останова и настройки обработки ошибок в редакторе VBA.">
+    <link rel="canonical" href="https://navferty.net/ru/articles/debugging-vba-code-in-excel.html">
+    <link rel="alternate" hreflang="en" href="https://navferty.net/en/articles/debugging-vba-code-in-excel.html">
+    <link rel="alternate" hreflang="ru" href="https://navferty.net/ru/articles/debugging-vba-code-in-excel.html">
+    <link rel="alternate" hreflang="x-default" href="https://navferty.net/en/articles/debugging-vba-code-in-excel.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="Надстройка Navferty Excel Add-In">
+    <meta property="og:title" content="Приёмы отладки VBA-кода на примере MS Excel - Надстройка Navferty Excel Add-In">
+    <meta property="og:description" content="Точки останова, пошаговое выполнение, окна Immediate, Locals и Watches, условные точки останова и настройки обработки ошибок в редакторе VBA.">
+    <meta property="og:url" content="https://navferty.net/ru/articles/debugging-vba-code-in-excel.html">
+    <meta property="og:image" content="https://navferty.net/images/articles/debugging-vba-code-in-excel/157842736017165403.png">
+    <meta property="og:locale" content="ru">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="icon" href="../../favicon.ico">
+    <link rel="stylesheet" href="../../style.css">
+    <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Приёмы отладки VBA-кода на примере MS Excel", "inLanguage": "ru", "description": "Точки останова, пошаговое выполнение, окна Immediate, Locals и Watches, условные точки останова и настройки обработки ошибок в редакторе VBA.", "author": {"@type": "Person", "name": "Andrey Deev", "url": "https://github.com/navferty"}, "mainEntityOfPage": "https://navferty.net/ru/articles/debugging-vba-code-in-excel.html"}</script>
+</head>
+
+<body>
+    <header class="site-header">
+        <div class="site-header-inner">
+            <a class="brand" href="../">Надстройка Navferty Excel Add-In</a>
+            <nav aria-label="Надстройка Navferty Excel Add-In"><a href="../#commands">Команды</a><a href="./">Статьи</a><a href="../install.html">Установка</a><a href="https://github.com/navferty/NavfertyExcelAddIn" target="_blank" rel="noopener">GitHub</a><span class="lang-switch"><a href="../../en/articles/debugging-vba-code-in-excel.html" lang="en" hreflang="en" data-lang="en">English</a><a href="debugging-vba-code-in-excel.html" lang="ru" hreflang="ru" data-lang="ru" aria-current="true">Русский</a></span></nav>
+        </div>
+    </header>
+    <div id="container">
+        <main id="content" class="article">
+<p class="back-to-top"><a href="index.html">&larr; Все статьи</a></p>
+<h1 class="zag">Приёмы отладки VBA-кода на примере MS Excel</h1>
+<p class="subtitle">Точки останова, пошаговое выполнение, окна Immediate, Locals и Watches, условные точки останова и настройки обработки ошибок в редакторе VBA.</p>
+<p>Многие из тех, кто часто работает в MS Excel, используют книги или надстройки с VBA-макросами. Зачастую требуется доработать существующее решение: добавить новую функциональность или исправить найденный баг. В поисках места, где скрывается баг или производится нужное вычисление, можно провести немало времени, особенно если проект содержит десятки тысяч строк кода (увы, такие макросы иногда встречаются). Можно прибегнуть к текстовому поиску (например, по тексту сообщения, вшитому в код), но иногда удобнее запустить макрос и воспользоваться пошаговой отладкой.</p>
+<p>Ниже описано несколько приёмов отладки макросов на VBA в приложениях MS Office, на примере Excel:</p><ol><li>Стандартные точки останова (breakpoint), step-into, step-over, step-out.</li><li>Окна Immediate («REPL-терминал»), Locals (локальные переменные) и Watches (наблюдатели).</li><li>Условные точки останова на базе watch expression.</li><li>Обработка ошибок.</li></ol>
+<h2>1. Точки останова и пошаговое выполнение</h2><p>Самый очевидный способ отладки &mdash; поставить точку останова в начале макроса, а затем выполнять код строка за строкой, наблюдая за значениями переменных и состоянием ячеек в книге. Чтобы установить точку останова, нажмите <kbd>F9</kbd>: на строке, где находится курсор, появится отметка. Можно также кликнуть мышью по полю слева от кода (красный кружок).</p>
+<p><img src="../../images/articles/debugging-vba-code-in-excel/1578427120196987602.webp" alt="Точка останова в редакторе VBA" loading="lazy" width="700" height="214"></p>
+<p>Как только поток исполнения дойдёт до этой строки, он будет приостановлен, а жёлтый указатель покажет следующую инструкцию:</p>
+<p><img src="../../images/articles/debugging-vba-code-in-excel/157842736017165403.png" alt="Макрос остановлен, жёлтый указатель показывает следующую инструкцию" loading="lazy" width="424" height="47"></p>
+<p>Многие не знают, что этот указатель можно переместить на любую инструкцию в пределах процедуры, просто перетащив жёлтую стрелку мышью.</p>
+<p>Когда исполнение приостановлено, его можно продолжать пошагово командами step-into, step-over и step-out:</p><ul><li><b>step-into</b> (<kbd>F8</kbd>) &mdash; шаг вперёд. Выполняется строка под указателем, указатель переходит на следующую. Если в строке есть вызов другой процедуры, указатель перейдёт внутрь неё.</li><li><b>step-over</b> (<kbd>Shift+F8</kbd>) &mdash; то же, что step-into, но без «проваливания» во вложенные вызовы: вызванная процедура выполняется целиком.</li><li><b>step-out</b> (<kbd>Ctrl+Shift+F8</kbd>) &mdash; текущая процедура выполняется до конца, а исполнение приостанавливается в вызывающей процедуре. Выручает, если вы случайно провалились в длинную функцию командой step-into.</li></ul>
+<h2>2. Окна Immediate, Locals и Watches</h2><p>Теперь о том, как узнать значения переменных и другую полезную информацию. В нижней части редактора VBA (VBE) находятся три окна:</p><ul><li>Immediate &mdash; терминал для выполнения кода и вывода текста;</li><li>Locals &mdash; локальные переменные;</li><li>Watches &mdash; наблюдатели.</li></ul>
+<p><img src="../../images/articles/debugging-vba-code-in-excel/157842820212856706.png" alt="Окна Immediate, Locals и Watches в нижней части редактора VBA" loading="lazy" width="700" height="132"></p>
+<p>Если этих окон не видно, включите их в меню View.</p>
+<p><img src="../../images/articles/debugging-vba-code-in-excel/157842841811498116.webp" alt="Меню View с включением окон отладки" loading="lazy" width="700" height="372"></p>
+<p>Рассмотрим подробнее, что дают эти инструменты.</p><p>Окно <b>Immediate</b> &mdash; это <a href="https://en.wikipedia.org/wiki/Read%E2%80%93eval%E2%80%93print_loop" target="_blank" rel="noopener">REPL</a>-терминал: введите выражение и нажмите Enter, и оно будет выполнено. Чтобы вывести результат в это же окно, передайте его в <code>Debug.Print</code> (эту функцию можно вызывать и из основного кода макроса &mdash; вывод попадёт в то же окно Immediate). В самом окне можно использовать сокращение &mdash; знак вопроса:</p>
+<p><img src="../../images/articles/debugging-vba-code-in-excel/1578428865178198053.png" alt="Окно Immediate: вычисление выражений и Debug.Print" loading="lazy" width="523" height="270"></p>
+<p>Сочетания <kbd>Ctrl+Space</kbd> и <kbd>Ctrl+J</kbd> вызывают IntelliSense, как и в основном редакторе кода.</p>
+<p>Окно <b>Locals</b> показывает значения переменных, доступных в текущем контексте:</p>
+<p><img src="../../images/articles/debugging-vba-code-in-excel/1578429103128329763.png" alt="Окно Locals со значениями переменных" loading="lazy" width="527" height="256"></p>
+<p>Например, текущее значение счётчика цикла или состав коллекции. Для объектов <code>Collection</code> при раскрытии отображаются значения элементов, а для словарей (<code>Dictionary</code>) &mdash; их ключи. Поэтому, чтобы узнать значение элемента словаря, нужно вычислить выражение, например такое:</p><pre><code>dict.Item("key1")</code></pre><p>Это можно сделать с помощью «наблюдателя» (watch expression).</p>
+<p><img src="../../images/articles/debugging-vba-code-in-excel/1578432168173270813.png" alt="Добавление наблюдателя через контекстное меню" loading="lazy" width="512" height="94"></p>
+<p>Выделите выражение и выберите Add Watch... в контекстном меню (правая кнопка мыши) или введите нужное выражение вручную в окне добавления наблюдателя:</p>
+<p><img src="../../images/articles/debugging-vba-code-in-excel/1578429559158522146.png" alt="Окно добавления наблюдателя (Add Watch)" loading="lazy" width="399" height="298"></p>
+<p><b>Осторожно:</b> выражение <code>d.Item("key1")</code> при вычислении добавит элемент в словарь, если такого ключа в нём нет. Поэтому не забудьте удалить наблюдатель, когда он станет не нужен, иначе потом можно долго выяснять, откуда в словаре взялся лишний элемент.</p>
+<h2>3. Условные точки останова</h2><p>Условные точки останова можно сделать с помощью наблюдателей. В окне добавления наблюдателя, помимо стандартной опции Watch Expression, есть ещё две: <b>Break When Value Is True</b> и <b>Break When Value Changes</b>. Они приостанавливают выполнение макроса, когда выражение становится истинным или когда его значение меняется.</p><p>Это особенно полезно при отладке циклов. Если известно, что макрос, обрабатывающий в цикле строки листа, падает, скажем, на строке 42, то можно не «пролистывать» вручную 41 предыдущую итерацию, а добавить выражение <code>i=42</code> с опцией Break When Value Is True, где <code>i</code> &mdash; переменная-счётчик цикла.</p>
+<h2>4. Обработка ошибок</h2><p>Напоследок об обработке ошибок в VBA. В настройках VBE (меню Tools &rarr; Options, вкладка General) есть выбор из трёх вариантов:</p><ul><li>Break on All Errors</li><li>Break in Class Module</li><li>Break on Unhandled Errors</li></ul>
+<p><img src="../../images/articles/debugging-vba-code-in-excel/1578430263138998521.png" alt="Tools → Options → General: параметры Error Trapping" loading="lazy" width="564" height="361"></p>
+<p>Обычно по умолчанию выбран последний вариант, который позволяет обрабатывать ошибки директивами <code>On Error GoTo</code> (показать сообщение, «прибраться за собой» &mdash; закрыть книгу или соединение) и <code>On Error Resume Next</code> (игнорировать ошибку и продолжить). Но когда вы видите сообщение вроде «Извините, что-то пошло не так», выведенное из обработчика <code>On Error GoTo</code>, найти место, где произошла ошибка, трудно. Здесь пригодится Break on All Errors: он игнорирует директивы <code>On Error</code> и останавливает выполнение прямо на строке с ошибкой. В этот момент полезно заглянуть в окно Locals: например, значение счётчика цикла покажет, на какой строке листа Excel возникла ошибка.</p><p>Эти настройки хранятся на уровне пользователя и не сохраняются в VBA-проекте.</p>
+<p>Надеюсь, статья будет полезна и начинающим пользователям VBA, и опытным разработчикам. Если вы работаете с Excel через надстройку и хотите расширить её возможности, проект <a href="https://github.com/navferty/NavfertyExcelAddIn" target="_blank" rel="noopener">Navferty Excel Add-In</a> открыт под лицензией MIT, а предложения и замечания можно оставлять в issues на GitHub.</p><p class="note">Статья впервые опубликована на <a href="https://pikabu.ru/story/priyomyi_otladki_vbakoda_na_primere_ms_excel_7151540" target="_blank" rel="noopener">Пикабу</a>.</p>
+        </main>
+    </div>
+    <footer class="footer">
+        <p>Navferty &copy; 2021-<span id="current-year">2026</span> &bull; <a href="https://github.com/navferty/NavfertyExcelAddIn" target="_blank" rel="noopener" class="footer-link">Открытый код на GitHub</a></p>
+    </footer>
+    <script src="../../site.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exporting Excel data to SQLite - Navferty&#x27;s Excel Add-In</title>
+    <meta name="description" content="When a spreadsheet is no longer enough, SQLite gives you real queries in a single file.">
+    <link rel="canonical" href="https://navferty.net/en/articles/export-excel-data-to-sqlite.html">
+    <link rel="alternate" hreflang="en" href="https://navferty.net/en/articles/export-excel-data-to-sqlite.html">
+    <link rel="alternate" hreflang="ru" href="https://navferty.net/ru/articles/export-excel-data-to-sqlite.html">
+    <link rel="alternate" hreflang="x-default" href="https://navferty.net/en/articles/export-excel-data-to-sqlite.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="Navferty&#x27;s Excel Add-In">
+    <meta property="og:title" content="Exporting Excel data to SQLite - Navferty&#x27;s Excel Add-In">
+    <meta property="og:description" content="When a spreadsheet is no longer enough, SQLite gives you real queries in a single file.">
+    <meta property="og:url" content="https://navferty.net/en/articles/export-excel-data-to-sqlite.html">
+    <meta property="og:image" content="https://navferty.net/images/NavfertyToolsRibbonEn.png">
+    <meta property="og:locale" content="en">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="icon" href="../../favicon.ico">
+    <link rel="stylesheet" href="../../style.css">
+    <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Exporting Excel data to SQLite", "inLanguage": "en", "description": "When a spreadsheet is no longer enough, SQLite gives you real queries in a single file.", "author": {"@type": "Person", "name": "Andrey Deev", "url": "https://github.com/navferty"}, "mainEntityOfPage": "https://navferty.net/en/articles/export-excel-data-to-sqlite.html"}</script>
+</head>
+
+<body>
+    <header class="site-header">
+        <div class="site-header-inner">
+            <a class="brand" href="../">Navferty's Excel Add-In</a>
+            <nav aria-label="Navferty's Excel Add-In"><a href="../#commands">Commands</a><a href="./">Guides</a><a href="../install.html">Install</a><a href="https://github.com/navferty/NavfertyExcelAddIn" target="_blank" rel="noopener">GitHub</a><span class="lang-switch"><a href="export-excel-data-to-sqlite.html" lang="en" hreflang="en" data-lang="en" aria-current="true">English</a><a href="../../ru/articles/export-excel-data-to-sqlite.html" lang="ru" hreflang="ru" data-lang="ru">Русский</a></span></nav>
+        </div>
+    </header>
+    <div id="container">
+        <main id="content" class="article">
+<p class="back-to-top"><a href="index.html">&larr; All articles</a></p>
+<h1 class="zag">Exporting Excel data to SQLite</h1>
+<p class="subtitle">When a spreadsheet is no longer enough, SQLite gives you real queries in a single file.</p>
+<p>Excel handles a few hundred thousand rows, but joins across sheets, grouping with conditions and repeated lookups get slow and fragile. SQLite is a small database stored in one file, with no server. Many tools can read it: DB Browser for SQLite, DBeaver, Python, R, Power BI and most programming languages.</p>
+
+<h2>Why move data there</h2>
+<ul>
+<li>You need a <code>JOIN</code> across several tables instead of nested <code>VLOOKUP</code>s.</li>
+<li>You want to run the same query repeatedly on a new data set.</li>
+<li>The workbook has become slow and large.</li>
+<li>A developer or analyst asks for the data in a format a program can read reliably.</li>
+</ul>
+
+<h2>Prepare the sheets</h2>
+<p>Whatever tool you use, the result is only as good as the input:</p>
+<ul>
+<li>One header row, one table per sheet, no merged cells and no blank rows or columns in the middle.</li>
+<li>Unique and non-empty header names. Avoid spaces and special characters if you plan to write SQL by hand.</li>
+<li>One type per column. A column with mostly numbers and a few <code>n/a</code> strings becomes text.</li>
+<li>Dates as real dates, not as text.</li>
+</ul>
+
+<h2>Other ways to do it</h2>
+<ul>
+<li>Save each sheet as CSV and import it with the <code>.import</code> command of the <code>sqlite3</code> command-line tool, or with the import dialog in DB Browser for SQLite.</li>
+<li>Use Python with pandas: <code>pd.read_excel(...).to_sql(...)</code>.</li>
+<li>Connect through ODBC and write the data with VBA. This is flexible and needs the most setup.</li>
+</ul>
+
+<h2>With the add-in</h2>
+<p><b>Export to SQLite</b> writes the whole workbook to a <code>.db</code> file. Each sheet becomes a table, the column types are detected automatically, and you can choose whether the first row holds the column names and how many leading rows to skip, which helps when a report has a title block above the table.</p>
+
+<h2>A first query</h2>
+<p>Open the file in any SQLite client. If the sheet was called <code>Orders</code> and has columns <code>Customer</code> and <code>Amount</code>:</p>
+<pre>SELECT Customer, SUM(Amount) AS Total
+FROM Orders
+GROUP BY Customer
+ORDER BY Total DESC;</pre>
+<p>If a name contains spaces, wrap it in double quotes: <code>"Order date"</code>.</p>
+<p>The add-in command for this: <a href="../features/export-to-sqlite.html">Export to SQLite</a>.</p>
+        </main>
+    </div>
+    <footer class="footer">
+        <p>Navferty &copy; 2021-<span id="current-year">2026</span> &bull; <a href="https://github.com/navferty/NavfertyExcelAddIn" target="_blank" rel="noopener" class="footer-link">Open Source on GitHub</a></p>
+    </footer>
+    <script src="../../site.js"></script>
+</body>
+
+</html>

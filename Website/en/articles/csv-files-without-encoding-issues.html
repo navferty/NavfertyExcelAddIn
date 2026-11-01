@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Working with CSV files without encoding issues - Navferty&#x27;s Excel Add-In</title>
+    <meta name="description" content="Why Cyrillic and accented characters turn into garbage and how to open and save CSV correctly.">
+    <link rel="canonical" href="https://navferty.net/en/articles/csv-files-without-encoding-issues.html">
+    <link rel="alternate" hreflang="en" href="https://navferty.net/en/articles/csv-files-without-encoding-issues.html">
+    <link rel="alternate" hreflang="ru" href="https://navferty.net/ru/articles/csv-files-without-encoding-issues.html">
+    <link rel="alternate" hreflang="x-default" href="https://navferty.net/en/articles/csv-files-without-encoding-issues.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="Navferty&#x27;s Excel Add-In">
+    <meta property="og:title" content="Working with CSV files without encoding issues - Navferty&#x27;s Excel Add-In">
+    <meta property="og:description" content="Why Cyrillic and accented characters turn into garbage and how to open and save CSV correctly.">
+    <meta property="og:url" content="https://navferty.net/en/articles/csv-files-without-encoding-issues.html">
+    <meta property="og:image" content="https://navferty.net/images/articles/csv-files-without-encoding-issues/wrong-encoding-csv-opened-in-excel.jpg">
+    <meta property="og:locale" content="en">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="icon" href="../../favicon.ico">
+    <link rel="stylesheet" href="../../style.css">
+    <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Working with CSV files without encoding issues", "inLanguage": "en", "description": "Why Cyrillic and accented characters turn into garbage and how to open and save CSV correctly.", "author": {"@type": "Person", "name": "Andrey Deev", "url": "https://github.com/navferty"}, "mainEntityOfPage": "https://navferty.net/en/articles/csv-files-without-encoding-issues.html"}</script>
+</head>
+
+<body>
+    <header class="site-header">
+        <div class="site-header-inner">
+            <a class="brand" href="../">Navferty's Excel Add-In</a>
+            <nav aria-label="Navferty's Excel Add-In"><a href="../#commands">Commands</a><a href="./">Guides</a><a href="../install.html">Install</a><a href="https://github.com/navferty/NavfertyExcelAddIn" target="_blank" rel="noopener">GitHub</a><span class="lang-switch"><a href="csv-files-without-encoding-issues.html" lang="en" hreflang="en" data-lang="en" aria-current="true">English</a><a href="../../ru/articles/csv-files-without-encoding-issues.html" lang="ru" hreflang="ru" data-lang="ru">Русский</a></span></nav>
+        </div>
+    </header>
+    <div id="container">
+        <main id="content" class="article">
+<p class="back-to-top"><a href="index.html">&larr; All articles</a></p>
+<h1 class="zag">Working with CSV files without encoding issues</h1>
+<p class="subtitle">Why Cyrillic and accented characters turn into garbage and how to open and save CSV correctly.</p>
+<p>You open a CSV in Excel and see <code>РџСЂРёРІРµС‚</code> instead of the expected text, or <code>Ã©</code> in place of <code>é</code>. The file is fine. Excel has simply guessed the wrong encoding.</p>
+<p><img src="../../images/articles/csv-files-without-encoding-issues/wrong-encoding-csv-opened-in-excel.jpg" alt="A CSV file opened by double-click, with accented letters such as René and Müller garbled" loading="lazy" width="822" height="346"></p>
+
+<h2>What is happening</h2>
+<p>A CSV file is plain text, and nothing in it says which encoding is used. Double-clicking a file makes Excel use the system's legacy code page (for example Windows-1251 on Russian Windows, Windows-1252 on Western European systems), unless the file starts with a UTF-8 byte-order mark (BOM). A UTF-8 file without a BOM is therefore misread.</p>
+
+<h2>Opening a file correctly</h2>
+<ol>
+<li>Do not double-click. Open a blank workbook.</li>
+<li><b>Data → From Text/CSV</b>.</li>
+<li>Select the file. In the preview, change <b>File Origin</b> until the text looks right (usually <b>65001: Unicode (UTF-8)</b>, or <b>1251: Cyrillic (Windows)</b> for older Russian files).</li>
+<li>Check the delimiter, then click <b>Load</b> or <b>Transform Data</b>.</li>
+</ol>
+<p><img src="../../images/articles/csv-files-without-encoding-issues/csv-import-with-encoding.jpg" alt="The From Text/CSV preview with File Origin set to 65001: Unicode (UTF-8), and the accented letters shown correctly" loading="lazy" width="1151" height="663"></p>
+<p><img src="../../images/articles/csv-files-without-encoding-issues/csv-import-result.jpg" alt="The loaded data on the sheet, with René, Müller, São Paulo and Café intact" loading="lazy" width="391" height="207"></p>
+
+<h2>Saving a file correctly</h2>
+<ul>
+<li><b>CSV UTF-8 (Comma delimited)</b> in the Save As type list writes UTF-8 with a BOM. It is the one to choose when the file goes to another program or when it opens in Excel on another computer.</li>
+<li>The plain <b>CSV (Comma delimited)</b> option saves in the system code page and loses characters that are not part of it.</li>
+<li>Some strict importers reject the BOM. Then remove it with a text editor such as Notepad++ (<b>Encoding → UTF-8</b>) or save from there.</li>
+</ul>
+
+<h2>Delimiter problems</h2>
+<p>In many European locales, including Russian and German, Excel uses a semicolon as the list separator, since the comma is the decimal separator. A comma-separated file opened by double-click will land in one column, and a semicolon-separated file opened on an English system will do the same. In the From Text/CSV dialog, set the delimiter explicitly. In a text file, an <code>sep=;</code> line at the top forces Excel to use a semicolon, but other tools will see it as data, so use that only for files meant for Excel.</p>
+
+<h2>Other traps</h2>
+<ul>
+<li><b>Leading zeros</b> disappear when Excel guesses the column as a number. In the import dialog, set the column type to Text.</li>
+<li><b>Long numbers</b> (more than 15 digits) are rounded and shown in scientific notation. Import them as text.</li>
+<li><b>Dates</b> are converted with the local day/month order. <code>03/04/2024</code> may mean the third of April or the fourth of March.</li>
+<li><b>Fields with line breaks or delimiters</b> must be in quotes, and quotes inside doubled. Programs that write CSV by concatenating strings often miss this.</li>
+<li><b>Saving a CSV over and over</b> in Excel changes the content (numbers, dates, zeros). Keep the original and the working .xlsx separate.</li>
+</ul>
+
+<h2>For recurring files</h2>
+<p>Use Power Query: it remembers the encoding, delimiter and column types, so the next file is a refresh away.</p>
+        </main>
+    </div>
+    <footer class="footer">
+        <p>Navferty &copy; 2021-<span id="current-year">2026</span> &bull; <a href="https://github.com/navferty/NavfertyExcelAddIn" target="_blank" rel="noopener" class="footer-link">Open Source on GitHub</a></p>
+    </footer>
+    <script src="../../site.js"></script>
+</body>
+
+</html>

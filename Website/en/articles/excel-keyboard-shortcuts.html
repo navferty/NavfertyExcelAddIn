@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Excel keyboard shortcuts that save the most time - Navferty&#x27;s Excel Add-In</title>
+    <meta name="description" content="A practical set of shortcuts for editing, navigating, selecting, filling and pasting in Excel, grouped by task.">
+    <link rel="canonical" href="https://navferty.net/en/articles/excel-keyboard-shortcuts.html">
+    <link rel="alternate" hreflang="en" href="https://navferty.net/en/articles/excel-keyboard-shortcuts.html">
+    <link rel="alternate" hreflang="ru" href="https://navferty.net/ru/articles/excel-keyboard-shortcuts.html">
+    <link rel="alternate" hreflang="x-default" href="https://navferty.net/en/articles/excel-keyboard-shortcuts.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="Navferty&#x27;s Excel Add-In">
+    <meta property="og:title" content="Excel keyboard shortcuts that save the most time - Navferty&#x27;s Excel Add-In">
+    <meta property="og:description" content="A practical set of shortcuts for editing, navigating, selecting, filling and pasting in Excel, grouped by task.">
+    <meta property="og:url" content="https://navferty.net/en/articles/excel-keyboard-shortcuts.html">
+    <meta property="og:image" content="https://navferty.net/images/NavfertyToolsRibbonEn.png">
+    <meta property="og:locale" content="en">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="icon" href="../../favicon.ico">
+    <link rel="stylesheet" href="../../style.css">
+    <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Excel keyboard shortcuts that save the most time", "inLanguage": "en", "description": "A practical set of shortcuts for editing, navigating, selecting, filling and pasting in Excel, grouped by task.", "author": {"@type": "Person", "name": "Andrey Deev", "url": "https://github.com/navferty"}, "mainEntityOfPage": "https://navferty.net/en/articles/excel-keyboard-shortcuts.html"}</script>
+</head>
+
+<body>
+    <header class="site-header">
+        <div class="site-header-inner">
+            <a class="brand" href="../">Navferty's Excel Add-In</a>
+            <nav aria-label="Navferty's Excel Add-In"><a href="../#commands">Commands</a><a href="./">Guides</a><a href="../install.html">Install</a><a href="https://github.com/navferty/NavfertyExcelAddIn" target="_blank" rel="noopener">GitHub</a><span class="lang-switch"><a href="excel-keyboard-shortcuts.html" lang="en" hreflang="en" data-lang="en" aria-current="true">English</a><a href="../../ru/articles/excel-keyboard-shortcuts.html" lang="ru" hreflang="ru" data-lang="ru">Русский</a></span></nav>
+        </div>
+    </header>
+    <div id="container">
+        <main id="content" class="article">
+<p class="back-to-top"><a href="index.html">&larr; All articles</a></p>
+<h1 class="zag">Excel keyboard shortcuts that save the most time</h1>
+<p class="subtitle">A practical set of shortcuts for editing, navigating, selecting, filling and pasting in Excel, grouped by task.</p>
+<p>Most of the time saved with the keyboard comes from a small set of shortcuts used constantly. These are grouped by what you are doing. Learn a few from one group, use them for a week, then add more.</p><h2>Editing a cell</h2>
+<ul>
+<li><kbd>F2</kbd> &ndash; edit the cell in place, with the cursor at the end of the text. Press it again to switch between "enter" and "edit" modes, where the arrow keys move the cursor or select another cell.</li>
+<li><kbd>Alt+Enter</kbd> &ndash; new line inside a cell.</li>
+<li><kbd>Ctrl+Enter</kbd> &ndash; confirm and fill the whole selection with the same value or formula.</li>
+<li><kbd>F4</kbd> &ndash; while typing a reference, cycle between <code>A1</code>, <code>$A$1</code>, <code>A$1</code> and <code>$A1</code>. Outside of editing it repeats the last action.</li>
+<li><kbd>Ctrl+;</kbd> &ndash; insert today's date as a fixed value. <kbd>Ctrl+Shift+;</kbd> inserts the current time.</li>
+<li><kbd>Ctrl+Z / Ctrl+Y</kbd> &ndash; undo and redo.</li>
+</ul>
+<h2>Moving around</h2>
+<ul>
+<li><kbd>Ctrl+Arrow</kbd> &ndash; jump to the edge of the current block of data. Pressed in an empty area it jumps to the next filled cell.</li>
+<li><kbd>Ctrl+Home / Ctrl+End</kbd> &ndash; go to <code>A1</code> or to the last used cell.</li>
+<li><kbd>Ctrl+PgDn / Ctrl+PgUp</kbd> &ndash; next and previous sheet.</li>
+<li><kbd>F5 or Ctrl+G</kbd> &ndash; Go To: type a cell address or a name. The <b>Special…</b> button selects cells by type (blanks, errors, formulas, visible cells only).</li>
+<li><kbd>Ctrl+F / Ctrl+H</kbd> &ndash; find and replace.</li>
+</ul>
+<h2>Selecting</h2>
+<ul>
+<li><kbd>Ctrl+Space</kbd> &ndash; select the whole column. If it switches the keyboard layout instead, change that shortcut in the Windows language settings.</li>
+<li><kbd>Shift+Space</kbd> &ndash; select the whole row.</li>
+<li><kbd>Ctrl+A</kbd> &ndash; select the current data region; pressed again, the whole sheet.</li>
+<li><kbd>Shift+Arrow</kbd> &ndash; extend the selection by one cell. Combined with <kbd>Ctrl</kbd> it extends to the edge of the data: <kbd>Ctrl+Shift+Arrow</kbd>.</li>
+<li><kbd>Ctrl+Shift+End</kbd> &ndash; extend the selection to the last used cell.</li>
+<li><kbd>Alt+;</kbd> &ndash; select only visible cells. Useful before copying a filtered list, so hidden rows are not copied.</li>
+</ul>
+<h2>Filling and formulas</h2>
+<ul>
+<li><kbd>Ctrl+D</kbd> &ndash; fill down: copy the top cell of the selection into the cells below. <kbd>Ctrl+R</kbd> fills right.</li>
+<li><kbd>Alt+=</kbd> &ndash; insert <code>SUM</code> for the neighbouring range. With several cells selected it adds totals to all of them at once.</li>
+<li><kbd>Ctrl+E</kbd> &ndash; Flash Fill: type the result for the first row, then press it to continue the pattern.</li>
+<li><kbd>Ctrl+`</kbd> &ndash; show formulas instead of values (the key to the left of <kbd>1</kbd>). Press again to switch back.</li>
+<li><kbd>Ctrl+Shift+Enter</kbd> &ndash; enter an array formula in older versions of Excel.</li>
+</ul>
+<h2>Copying and pasting</h2>
+<ul>
+<li><kbd>Ctrl+C / Ctrl+X / Ctrl+V</kbd> &ndash; copy, cut, paste.</li>
+<li><kbd>Ctrl+Alt+V</kbd> &ndash; Paste Special. In the dialog, press the underlined letter of the option, for example to paste values only or to multiply by a number (see <a href="text-numbers-to-numeric-values.html">converting text numbers to numeric values</a>).</li>
+<li><kbd>Ctrl+Shift++ / Ctrl+-</kbd> &ndash; insert or delete cells, rows or columns. Select a whole row or column first.</li>
+<li><kbd>Ctrl+9 / Ctrl+0</kbd> &ndash; hide the selected rows or columns.</li>
+</ul>
+<h2>Formatting and files</h2>
+<ul>
+<li><kbd>Ctrl+1</kbd> &ndash; Format Cells dialog.</li>
+<li><kbd>Ctrl+T</kbd> &ndash; turn the range into a table (see <a href="best-practices-for-cleaning-data-in-excel.html">cleaning data</a>).</li>
+<li><kbd>Ctrl+Shift+L</kbd> &ndash; toggle filters.</li>
+<li><kbd>Ctrl+B / Ctrl+I / Ctrl+U</kbd> &ndash; bold, italic, underline.</li>
+<li><kbd>F12</kbd> &ndash; Save As.</li>
+<li><kbd>Ctrl+S</kbd> &ndash; save. Worth pressing every few minutes.</li>
+</ul>
+<p>Shortcuts are the same in English and Russian Excel unless noted. On a Mac most <kbd>Ctrl</kbd> shortcuts use <kbd>Cmd</kbd>, and some differ, so check the Excel help for your version.</p><p>Related: <a href="automating-excel-tasks-without-vba.html">Automating routine Excel tasks without VBA</a>.</p>
+        </main>
+    </div>
+    <footer class="footer">
+        <p>Navferty &copy; 2021-<span id="current-year">2026</span> &bull; <a href="https://github.com/navferty/NavfertyExcelAddIn" target="_blank" rel="noopener" class="footer-link">Open Source on GitHub</a></p>
+    </footer>
+    <script src="../../site.js"></script>
+</body>
+
+</html>

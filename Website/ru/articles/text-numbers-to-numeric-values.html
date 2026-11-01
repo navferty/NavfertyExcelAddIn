@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Преобразование чисел-как-текст в числа - Надстройка Navferty Excel Add-In</title>
+    <meta name="description" content="Почему числа в Excel становятся текстом и несколько способов вернуть им числовой тип.">
+    <link rel="canonical" href="https://navferty.net/ru/articles/text-numbers-to-numeric-values.html">
+    <link rel="alternate" hreflang="en" href="https://navferty.net/en/articles/text-numbers-to-numeric-values.html">
+    <link rel="alternate" hreflang="ru" href="https://navferty.net/ru/articles/text-numbers-to-numeric-values.html">
+    <link rel="alternate" hreflang="x-default" href="https://navferty.net/en/articles/text-numbers-to-numeric-values.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="Надстройка Navferty Excel Add-In">
+    <meta property="og:title" content="Преобразование чисел-как-текст в числа - Надстройка Navferty Excel Add-In">
+    <meta property="og:description" content="Почему числа в Excel становятся текстом и несколько способов вернуть им числовой тип.">
+    <meta property="og:url" content="https://navferty.net/ru/articles/text-numbers-to-numeric-values.html">
+    <meta property="og:image" content="https://navferty.net/images/articles/text-numbers-to-numeric-values/failed-sum.jpg">
+    <meta property="og:locale" content="ru">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="icon" href="../../favicon.ico">
+    <link rel="stylesheet" href="../../style.css">
+    <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Преобразование чисел-как-текст в числа", "inLanguage": "ru", "description": "Почему числа в Excel становятся текстом и несколько способов вернуть им числовой тип.", "author": {"@type": "Person", "name": "Andrey Deev", "url": "https://github.com/navferty"}, "mainEntityOfPage": "https://navferty.net/ru/articles/text-numbers-to-numeric-values.html"}</script>
+</head>
+
+<body>
+    <header class="site-header">
+        <div class="site-header-inner">
+            <a class="brand" href="../">Надстройка Navferty Excel Add-In</a>
+            <nav aria-label="Надстройка Navferty Excel Add-In"><a href="../#commands">Команды</a><a href="./">Статьи</a><a href="../install.html">Установка</a><a href="https://github.com/navferty/NavfertyExcelAddIn" target="_blank" rel="noopener">GitHub</a><span class="lang-switch"><a href="../../en/articles/text-numbers-to-numeric-values.html" lang="en" hreflang="en" data-lang="en">English</a><a href="text-numbers-to-numeric-values.html" lang="ru" hreflang="ru" data-lang="ru" aria-current="true">Русский</a></span></nav>
+        </div>
+    </header>
+    <div id="container">
+        <main id="content" class="article">
+<p class="back-to-top"><a href="index.html">&larr; Все статьи</a></p>
+<h1 class="zag">Преобразование чисел-как-текст в числа</h1>
+<p class="subtitle">Почему числа в Excel становятся текстом и несколько способов вернуть им числовой тип.</p>
+<p>Числа, скопированные с веб-страницы, из PDF, учётной системы или CSV, часто приходят как текст. Выглядят они нормально, но <code>СУММ</code> их игнорирует, при сортировке <code>100</code> оказывается перед <code>20</code>, а <code>ВПР</code> отказывается сопоставлять их с настоящими числами.</p>
+<p><img src="../../images/articles/text-numbers-to-numeric-values/failed-sum.jpg" alt="СУММ возвращает 0 для столбца с числами, сохранёнными как текст" loading="lazy" width="547" height="282"></p>
+
+<h2>Как распознать числа-как-текст</h2>
+<ul>
+<li>Они выровнены по левому краю, тогда как настоящие числа по правому.</li>
+<li>В углу ячейки виден зелёный треугольник.</li>
+<li>В строке состояния для выделения показывается только <b>Количество</b>, но нет <b>Суммы</b>.</li>
+<li><code>=ЕЧИСЛО(A1)</code> возвращает <code>ЛОЖЬ</code>.</li>
+</ul>
+
+<h2>Быстрые способы в Excel</h2>
+<p><b>Зелёный треугольник.</b> Выделите ячейки, нажмите на появившийся значок предупреждения и выберите <b>Преобразовать в число</b>. Работает только там, где Excel сам пометил ячейки.</p>
+<p><img src="../../images/articles/text-numbers-to-numeric-values/number-as-text-warning.jpg" alt="Меню предупреждения «Число сохранено как текст» с командой «Преобразовать в число»" loading="lazy" width="513" height="382"></p>
+<p><b>Специальная вставка.</b> Введите <code>1</code> в пустую ячейку и скопируйте её. Выделите числа-как-текст и выберите <b>Специальная вставка → Умножить</b>. Excel вынужден выполнить арифметику над каждым значением, и оно преобразуется.</p>
+<p><img src="../../images/articles/text-numbers-to-numeric-values/paste-special-multiply.jpg" alt="Диалог «Специальная вставка» с выбранной операцией «Умножить»" loading="lazy" width="792" height="710"></p>
+<p><b>Текст по столбцам.</b> Выделите один столбец, откройте <b>Данные → Текст по столбцам</b> и сразу нажмите <b>Готово</b>. Значения будут разобраны заново, числа и даты преобразуются. Быстрый приём для одного столбца.</p>
+<p><img src="../../images/articles/text-numbers-to-numeric-values/text-to-columns.jpg" alt="Последний шаг мастера «Текст по столбцам» с форматом данных «Общий»" loading="lazy" width="1028" height="632"></p>
+<p><b>Формула.</b> <code>=ЗНАЧЕН(A1)</code> или короче <code>=--A1</code> вернёт число. Если в исходных данных странные пробелы, добавьте очистку: <code>=ЗНАЧЕН(СЖПРОБЕЛЫ(ПОДСТАВИТЬ(A1;СИМВОЛ(160);"")))</code>. Неразрывные пробелы (<code>СИМВОЛ(160)</code>) часто встречаются в данных с сайтов и в разделителях разрядов, а <code>СЖПРОБЕЛЫ</code> их не удаляет.</p>
+
+<h2>Что может пойти не так</h2>
+<ul>
+<li><b>Десятичный разделитель.</b> <code>1,5</code> – это текст в системе, ожидающей <code>1.5</code>. Сначала замените разделитель или используйте <code>ЧЗНАЧ(A1; ","; " ")</code>, где десятичный разделитель и разделитель групп заданы явно.</li>
+<li><b>Апостроф в начале.</b> В ячейке его не видно, но он помечает значение как текст. Справится «Специальная вставка → Умножить».</li>
+<li><b>Минус в конце.</b> Некоторые системы выгружают отрицательные числа как <code>100-</code>. Преобразуйте так: <code>=ЕСЛИ(ПРАВСИМВ(A1)="-";-ЛЕВСИМВ(A1;ДЛСТР(A1)-1);A1)</code>.</li>
+<li><b>Ведущие нули.</b> Телефоны, индексы и коды товаров должны остаться текстом. После преобразования нули пропадут безвозвратно, так что проверьте столбец до того, как преобразовывать его целиком.</li>
+<li><b>Формат ячейки.</b> Смена формата на «Числовой» не преобразует то, что уже внутри. Нужно заново ввести значение (<kbd>F2</kbd>, <kbd>Enter</kbd>) или применить один из способов выше.</li>
+</ul>
+
+<h2>С надстройкой</h2>
+<p>Команда <b>Преобразовать в числа</b> (Parse Numerics) за один шаг превращает выделенные текстовые ячейки в числа, в том числе с неразрывными пробелами. Если результат не устроил, <b>Отменить последнее действие</b> вернёт прежние значения.</p>
+<p>Команда надстройки для этой задачи: <a href="../features/parse-numerics.html">Парсинг чисел</a>.</p>
+        </main>
+    </div>
+    <footer class="footer">
+        <p>Navferty &copy; 2021-<span id="current-year">2026</span> &bull; <a href="https://github.com/navferty/NavfertyExcelAddIn" target="_blank" rel="noopener" class="footer-link">Открытый код на GitHub</a></p>
+    </footer>
+    <script src="../../site.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Preparing Excel reports for management - Navferty&#x27;s Excel Add-In</title>
+    <meta name="description" content="How to make a workbook that the reader understands in a minute.">
+    <link rel="canonical" href="https://navferty.net/en/articles/preparing-excel-reports-for-management.html">
+    <link rel="alternate" hreflang="en" href="https://navferty.net/en/articles/preparing-excel-reports-for-management.html">
+    <link rel="alternate" hreflang="ru" href="https://navferty.net/ru/articles/preparing-excel-reports-for-management.html">
+    <link rel="alternate" hreflang="x-default" href="https://navferty.net/en/articles/preparing-excel-reports-for-management.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="Navferty&#x27;s Excel Add-In">
+    <meta property="og:title" content="Preparing Excel reports for management - Navferty&#x27;s Excel Add-In">
+    <meta property="og:description" content="How to make a workbook that the reader understands in a minute.">
+    <meta property="og:url" content="https://navferty.net/en/articles/preparing-excel-reports-for-management.html">
+    <meta property="og:image" content="https://navferty.net/images/NavfertyToolsRibbonEn.png">
+    <meta property="og:locale" content="en">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="icon" href="../../favicon.ico">
+    <link rel="stylesheet" href="../../style.css">
+    <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Preparing Excel reports for management", "inLanguage": "en", "description": "How to make a workbook that the reader understands in a minute.", "author": {"@type": "Person", "name": "Andrey Deev", "url": "https://github.com/navferty"}, "mainEntityOfPage": "https://navferty.net/en/articles/preparing-excel-reports-for-management.html"}</script>
+</head>
+
+<body>
+    <header class="site-header">
+        <div class="site-header-inner">
+            <a class="brand" href="../">Navferty's Excel Add-In</a>
+            <nav aria-label="Navferty's Excel Add-In"><a href="../#commands">Commands</a><a href="./">Guides</a><a href="../install.html">Install</a><a href="https://github.com/navferty/NavfertyExcelAddIn" target="_blank" rel="noopener">GitHub</a><span class="lang-switch"><a href="preparing-excel-reports-for-management.html" lang="en" hreflang="en" data-lang="en" aria-current="true">English</a><a href="../../ru/articles/preparing-excel-reports-for-management.html" lang="ru" hreflang="ru" data-lang="ru">Русский</a></span></nav>
+        </div>
+    </header>
+    <div id="container">
+        <main id="content" class="article">
+<p class="back-to-top"><a href="index.html">&larr; All articles</a></p>
+<h1 class="zag">Preparing Excel reports for management</h1>
+<p class="subtitle">How to make a workbook that the reader understands in a minute.</p>
+<p>A manager reading your report wants to know what happened, whether it is good or bad, and what to do about it. Any time spent on a cell colour should serve that.</p>
+
+<h2>Start with the question</h2>
+<p>Before opening Excel, write down what the reader needs to decide. A report without a question tends to become a collection of every number available.</p>
+
+<h2>Structure of the workbook</h2>
+<ul>
+<li><b>Summary sheet first</b>: three to seven key figures, with the previous period or plan next to them, and a sentence of conclusion.</li>
+<li><b>Details after</b>, in the order the reader would ask the next question.</li>
+<li><b>Raw data and calculations</b> on separate sheets, so the reader is not required to look at them.</li>
+<li>Sheets have meaningful names, not <code>Sheet1</code> and <code>Copy (2)</code>.</li>
+</ul>
+
+<h2>Tables</h2>
+<ul>
+<li>Align numbers to the right, with the same number of decimals in a column and a thousands separator.</li>
+<li>Round to the precision that matters. Thousands or millions in a header (<code>USD, thousand</code>) read better than long numbers.</li>
+<li>Use a few borders. Light horizontal lines and a bold header are usually enough.</li>
+<li>Freeze the header row on long tables.</li>
+<li>Show totals clearly and make sure they add up. A table whose total differs by one from the sum of the rows because of rounding invites questions. Use <code>ROUND</code> in the calculation, or add a note.</li>
+</ul>
+
+<h2>Charts</h2>
+<ul>
+<li>Pick the type for the question: lines for change over time, bars for comparison, and avoid pies with more than four slices.</li>
+<li>The title says the point: “Sales fell 8% in Q3”, not “Sales by quarter”.</li>
+<li>Start bar chart axes at zero. Remove 3D, gradients and extra gridlines.</li>
+<li>Label directly instead of using a legend when you can.</li>
+</ul>
+
+<h2>Conditional formatting, sparingly</h2>
+<p>Highlight what needs attention (plan missed, overdue), not everything. When ten cells are red, nothing is.</p>
+
+<h2>Make it refreshable</h2>
+<p>You will do this again next month. Use tables, Power Query and pivot tables so that updating means pasting new data and clicking <b>Refresh All</b>. A manually assembled report is likely to contain a copy-paste mistake sooner or later.</p>
+
+<h2>Before sending</h2>
+<p>Go through the <a href="checklist-validating-excel-files.html">checklist</a>, set the print area, and consider sending a PDF if the reader only needs to read. If they need to interact, send the workbook with the summary sheet active.</p>
+        </main>
+    </div>
+    <footer class="footer">
+        <p>Navferty &copy; 2021-<span id="current-year">2026</span> &bull; <a href="https://github.com/navferty/NavfertyExcelAddIn" target="_blank" rel="noopener" class="footer-link">Open Source on GitHub</a></p>
+    </footer>
+    <script src="../../site.js"></script>
+</body>
+
+</html>

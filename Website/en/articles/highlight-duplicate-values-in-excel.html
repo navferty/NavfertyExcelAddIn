@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Highlighting duplicate values without formulas - Navferty&#x27;s Excel Add-In</title>
+    <meta name="description" content="Conditional formatting, Remove Duplicates and what to do when you need to see which rows match.">
+    <link rel="canonical" href="https://navferty.net/en/articles/highlight-duplicate-values-in-excel.html">
+    <link rel="alternate" hreflang="en" href="https://navferty.net/en/articles/highlight-duplicate-values-in-excel.html">
+    <link rel="alternate" hreflang="ru" href="https://navferty.net/ru/articles/highlight-duplicate-values-in-excel.html">
+    <link rel="alternate" hreflang="x-default" href="https://navferty.net/en/articles/highlight-duplicate-values-in-excel.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="Navferty&#x27;s Excel Add-In">
+    <meta property="og:title" content="Highlighting duplicate values without formulas - Navferty&#x27;s Excel Add-In">
+    <meta property="og:description" content="Conditional formatting, Remove Duplicates and what to do when you need to see which rows match.">
+    <meta property="og:url" content="https://navferty.net/en/articles/highlight-duplicate-values-in-excel.html">
+    <meta property="og:image" content="https://navferty.net/images/articles/highlight-duplicate-values-in-excel/conditional-formatting-duplicate-menu.jpg">
+    <meta property="og:locale" content="en">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="icon" href="../../favicon.ico">
+    <link rel="stylesheet" href="../../style.css">
+    <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Highlighting duplicate values without formulas", "inLanguage": "en", "description": "Conditional formatting, Remove Duplicates and what to do when you need to see which rows match.", "author": {"@type": "Person", "name": "Andrey Deev", "url": "https://github.com/navferty"}, "mainEntityOfPage": "https://navferty.net/en/articles/highlight-duplicate-values-in-excel.html"}</script>
+</head>
+
+<body>
+    <header class="site-header">
+        <div class="site-header-inner">
+            <a class="brand" href="../">Navferty's Excel Add-In</a>
+            <nav aria-label="Navferty's Excel Add-In"><a href="../#commands">Commands</a><a href="./">Guides</a><a href="../install.html">Install</a><a href="https://github.com/navferty/NavfertyExcelAddIn" target="_blank" rel="noopener">GitHub</a><span class="lang-switch"><a href="highlight-duplicate-values-in-excel.html" lang="en" hreflang="en" data-lang="en" aria-current="true">English</a><a href="../../ru/articles/highlight-duplicate-values-in-excel.html" lang="ru" hreflang="ru" data-lang="ru">Русский</a></span></nav>
+        </div>
+    </header>
+    <div id="container">
+        <main id="content" class="article">
+<p class="back-to-top"><a href="index.html">&larr; All articles</a></p>
+<h1 class="zag">Highlighting duplicate values without formulas</h1>
+<p class="subtitle">Conditional formatting, Remove Duplicates and what to do when you need to see which rows match.</p>
+<p>Duplicates in a customer list, invoice register or a list of IDs can lead to double payments and wrong totals. Before deleting anything it helps to see them.</p>
+
+<h2>Conditional formatting</h2>
+<p>Select the column, then <b>Home → Conditional Formatting → Highlight Cells Rules → Duplicate Values</b>. Every value that occurs more than once gets a colour. It updates automatically when you edit the data.</p>
+<p><img src="../../images/articles/highlight-duplicate-values-in-excel/conditional-formatting-duplicate-menu.jpg" alt="The Conditional Formatting menu with Highlight Cells Rules and Duplicate Values" loading="lazy" width="546" height="563"></p>
+<p><img src="../../images/articles/highlight-duplicate-values-in-excel/duplicate-highlighted.jpg" alt="The Duplicate Values dialog with the Light Red Fill with Dark Red Text format, applied to a list of fruit names with repeats" loading="lazy" width="610" height="295"></p>
+<p>Keep in mind:</p>
+<ul>
+<li>The comparison is case-insensitive: <code>abc</code> and <code>ABC</code> count as the same value.</li>
+<li>Trailing spaces make values different. Clean the text first (see <a href="remove-extra-spaces-in-excel.html">removing extra spaces</a>).</li>
+<li>Numbers longer than 15 digits (card numbers, long IDs) are compared only by their first 15 digits, so Excel can flag values that differ in the last digits. For such columns use a formula rule with an exact comparison, for example <code>=SUMPRODUCT(--($A$2:$A$1000=$A2))&gt;1</code>.</li>
+</ul>
+
+<h2>Duplicates over several columns</h2>
+<p>If a duplicate means the same combination of, for example, name and date, the built-in rule is not enough. Use a formula-based rule:</p>
+<pre>=COUNTIFS($A$2:$A$1000,$A2,$B$2:$B$1000,$B2)&gt;1</pre>
+<p>and apply it to the whole table.</p>
+
+<h2>Remove Duplicates</h2>
+<p><b>Data → Remove Duplicates</b> deletes the repeated rows and keeps the first one. It can compare on selected columns only. There is no undo outside of <kbd>Ctrl</kbd>+<kbd>Z</kbd> right after, so work on a copy of the data.</p>
+
+<h2>Marking, not deleting</h2>
+<p>A helper column with <code>=COUNTIF($A$2:$A2,A2)</code> gives 1 for the first occurrence, 2 for the second and so on. Filter on values greater than 1 to see only the repeated rows, or leave the first occurrences alone and review the rest.</p>
+
+<h2>With the add-in</h2>
+<p><b>Highlight Duplications</b> colours the repeated values in the selected range, and each group of identical values gets its own colour. That makes it easy to see which rows belong together, which a single colour from conditional formatting does not show. The highlight is plain cell formatting, so it does not slow down the workbook.</p>
+<p>The add-in command for this: <a href="../features/highlight-duplications.html">Highlight Duplications</a>.</p>
+        </main>
+    </div>
+    <footer class="footer">
+        <p>Navferty &copy; 2021-<span id="current-year">2026</span> &bull; <a href="https://github.com/navferty/NavfertyExcelAddIn" target="_blank" rel="noopener" class="footer-link">Open Source on GitHub</a></p>
+    </footer>
+    <script src="../../site.js"></script>
+</body>
+
+</html>

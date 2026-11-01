@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Creating a VBA add-in with its own ribbon tab in Excel - Navferty&#x27;s Excel Add-In</title>
+    <meta name="description" content="How to package VBA macros into an .xlam add-in with a custom ribbon tab: editing the workbook as a zip archive, customUI.xml, callbacks and installation.">
+    <link rel="canonical" href="https://navferty.net/en/articles/vba-addin-with-custom-ribbon-tab.html">
+    <link rel="alternate" hreflang="en" href="https://navferty.net/en/articles/vba-addin-with-custom-ribbon-tab.html">
+    <link rel="alternate" hreflang="ru" href="https://navferty.net/ru/articles/vba-addin-with-custom-ribbon-tab.html">
+    <link rel="alternate" hreflang="x-default" href="https://navferty.net/en/articles/vba-addin-with-custom-ribbon-tab.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="Navferty&#x27;s Excel Add-In">
+    <meta property="og:title" content="Creating a VBA add-in with its own ribbon tab in Excel - Navferty&#x27;s Excel Add-In">
+    <meta property="og:description" content="How to package VBA macros into an .xlam add-in with a custom ribbon tab: editing the workbook as a zip archive, customUI.xml, callbacks and installation.">
+    <meta property="og:url" content="https://navferty.net/en/articles/vba-addin-with-custom-ribbon-tab.html">
+    <meta property="og:image" content="https://navferty.net/images/articles/vba-addin-with-custom-ribbon-tab/1578783854145094499.png">
+    <meta property="og:locale" content="en">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="icon" href="../../favicon.ico">
+    <link rel="stylesheet" href="../../style.css">
+    <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Creating a VBA add-in with its own ribbon tab in Excel", "inLanguage": "en", "description": "How to package VBA macros into an .xlam add-in with a custom ribbon tab: editing the workbook as a zip archive, customUI.xml, callbacks and installation.", "author": {"@type": "Person", "name": "Andrey Deev", "url": "https://github.com/navferty"}, "mainEntityOfPage": "https://navferty.net/en/articles/vba-addin-with-custom-ribbon-tab.html"}</script>
+</head>
+
+<body>
+    <header class="site-header">
+        <div class="site-header-inner">
+            <a class="brand" href="../">Navferty's Excel Add-In</a>
+            <nav aria-label="Navferty's Excel Add-In"><a href="../#commands">Commands</a><a href="./">Guides</a><a href="../install.html">Install</a><a href="https://github.com/navferty/NavfertyExcelAddIn" target="_blank" rel="noopener">GitHub</a><span class="lang-switch"><a href="vba-addin-with-custom-ribbon-tab.html" lang="en" hreflang="en" data-lang="en" aria-current="true">English</a><a href="../../ru/articles/vba-addin-with-custom-ribbon-tab.html" lang="ru" hreflang="ru" data-lang="ru">Русский</a></span></nav>
+        </div>
+    </header>
+    <div id="container">
+        <main id="content" class="article">
+<p class="back-to-top"><a href="index.html">&larr; All articles</a></p>
+<h1 class="zag">Creating a VBA add-in with its own ribbon tab in Excel</h1>
+<p class="subtitle">How to package VBA macros into an .xlam add-in with a custom ribbon tab: editing the workbook as a zip archive, customUI.xml, callbacks and installation.</p>
+<p>Many people who work in Excel a lot have built up a collection of VBA macros that make daily work easier. Some keep them in a separate workbook; others put them in a <a href="https://support.office.com/en-us/article/copy-your-macros-to-a-personal-macro-workbook-aa439b90-f836-4381-97f0-6e4c3f5ee566" target="_blank" rel="noopener">personal macro workbook</a> (personal.xlsb), which is available application-wide, and added buttons to the toolbar by hand. In the first case the collection is easy to share with colleagues (just send the file), but the workbook has to be opened every time you want to use it. In the second case the functions are available as soon as Excel starts, but passing them on to other users can be a problem.</p>
+<p>This article describes how to make a VBA add-in with its own tab on the Excel ribbon (<i>Ribbon</i>), combining the advantages of both approaches. It is an xlam file that can be shared like an ordinary workbook. When a user opens it, a tab appears on the ribbon that gives access to the add-in functions:</p>
+<p><img src="../../images/articles/vba-addin-with-custom-ribbon-tab/1578783854145094499.png" alt="The new Sample Add-in tab on the Excel ribbon" loading="lazy" width="700" height="108"></p>
+<p>If you wish, the add-in can be installed permanently so you do not have to open it each time.</p><p>You will need Excel, 7-Zip and Visual Studio Code. The last two are optional: any archiver that supports zip and any text editor that can save UTF-8 (if you want to use Cyrillic) will do. A basic understanding of XML helps too.</p><p>The code and the finished xlsm workbook are on GitHub: <a href="https://github.com/navferty/SampleExcelXlamAddin" target="_blank" rel="noopener">https://github.com/navferty/SampleExcelXlamAddin</a></p>
+<h2>Preparing the workbook</h2><p>Open a new workbook and add a module with sample code:</p><pre><code>Option Explicit
+
+Public Sub SayHelloWorld()
+    Dim firstCellValue As String
+
+    firstCellValue = ThisWorkbook.Worksheets(1).Cells(1, 1).Value
+    MsgBox "Hello, world! Cell A1 value is " &amp; firstCellValue
+End Sub</code></pre><p>Save the workbook as xlsm (macro-enabled workbook). Modern Office document formats (<i>xlsx, xlsm, docx, docm, pptx</i> and so on) are based on the OpenXML standard and are simply zip archives made of components (XML files for the sheets, images, binary content and so on) and relationship files (<i>.rels</i>) that define the structure of the document by linking to the components.</p><p>To see what is inside, you can rename <i>Sample.xlsm</i> to <i>Sample.zip</i> and open it with any archiver. Some archivers, such as 7-Zip, can open these files directly without renaming:</p>
+<p><img src="../../images/articles/vba-addin-with-custom-ribbon-tab/1578771762187878642-en.jpg" alt="The contents of an xlsm file in an archiver" loading="lazy" width="867" height="641"></p>
+<p>To add a ribbon tab we need to create a new component, <b>customUI/customUI.xml</b>, and add a reference to it in the root relationships file, <b>_rels/.rels</b>.</p><p>Extract the whole document into a separate folder (in 7-Zip: &ldquo;Extract to "Sample\"&rdquo;) and create a <b>customUI</b> folder in it:</p>
+<p><img src="../../images/articles/vba-addin-with-custom-ribbon-tab/15787721721968742-en.jpg" alt="The customUI folder in the unpacked workbook" loading="lazy" width="882" height="273"></p>
+<p>Now add the component itself:</p>
+<p><img src="../../images/articles/vba-addin-with-custom-ribbon-tab/1578772671166267580.webp" alt="The customUI.xml file in the customUI folder" loading="lazy" width="700" height="427"></p>
+<h2>The customUI.xml file</h2><p>The text version of <b>customUI.xml</b>:</p><pre><code>&lt;?xml version="1.0" encoding="utf-8"?&gt;
+&lt;customUI xmlns="http://schemas.microsoft.com/office/2006/01/customui"&gt;
+  &lt;ribbon&gt;
+    &lt;tabs&gt;
+      &lt;tab id="customTab" label="Sample Add-in" keytip="XT"&gt;
+        &lt;group id="Tools" label="Group 1"&gt;
+          &lt;button id="HelloWorldBtn" imageMso="BlackAndWhiteAutomatic" keytip="H" label="Hello, World!"
+                  onAction="SayHelloWorld" screentip="Say hello to the world" size="large" /&gt;
+          &lt;button id="DuplicatesBtn" imageMso="SmartArtChangeColorsGallery" keytip="D"
+                  label="Highlight duplicates" onAction="DuplicateColors"
+                  screentip="Highlight repeated values in the selected range with paired colors" size="large" /&gt;
+        &lt;/group&gt;
+      &lt;/tab&gt;
+    &lt;/tabs&gt;
+  &lt;/ribbon&gt;
+&lt;/customUI&gt;</code></pre><p>A short overview of the important elements and attributes.</p><ul><li>Identifier values (the <i>id</i> attribute) must be unique. For some elements (for example <i>tab</i>, when you declare a new tab rather than extend an existing one via <i>idMso</i>) you must also set <i>label</i>, otherwise Excel will not show the element.</li><li>The <i>imageMso</i> attribute sets the element icon from the ones built into Office. The list of available values is long but easy to find with a search.</li><li>The <i>button</i> element is an ordinary button. Depending on the <i>size</i> attribute it can be small or large, the full height of the tab.</li><li>The <i>onAction</i> attribute names the procedure to run on the primary action of the element (for example a click on a button). The procedure must have a specific signature (the number and types of arguments), which you can find in the specification. For example, an <i>onAction</i> handler for a button takes one argument of type <code>IRibbonControl</code>.</li><li>The procedure name must not match the module name (or you must prefix it with the module name explicitly: <code>Module1.SayHelloWorld</code>).</li><li>The <i>keytip</i> attribute helps with keyboard navigation: the Alt key lets you move between Excel tabs.</li></ul><p>A markup sample is available in the Microsoft documentation: <a href="https://learn.microsoft.com/en-us/office/open-xml/spreadsheet/how-to-add-custom-ui-to-a-spreadsheet-document" target="_blank" rel="noopener">customUI sample</a>. If you want to study the standard in detail, there is a specification: <a href="https://docs.microsoft.com/en-us/openspecs/office_standards/ms-customui/31f152d6-2a5d-4b50-a867-9dbc6d01aa43" target="_blank" rel="noopener">[MS-CUSTOMUI]: Custom UI XML Markup Specification</a>.</p><p>If the file contains non-ASCII characters (for example Cyrillic), save it as UTF-8, otherwise Excel may not show the new tab.</p>
+<h2>The reference in the .rels file</h2><p>For Excel to &ldquo;see&rdquo; the new component and understand what it is, we must reference it in the root relationships file, which is in the <b>_rels</b> folder and is called <b>.rels</b>. It is XML too, and for convenience you can format it (in VS Code: Ctrl+Shift+P &rarr; Format Document).</p><p>Add a <i>Relationship</i> element with the path to customUI.xml, the component type and an identifier (it does not matter which, as long as it is unique among the other <i>Relationship</i> elements):</p><pre><code>&lt;Relationship Id="rID4" Target="customUI/customUI.xml" Type="http://schemas.microsoft.com/office/2006/relationships/ui/extensibility" /&gt;</code></pre>
+<p><img src="../../images/articles/vba-addin-with-custom-ribbon-tab/1578772992128329742.webp" alt="The .rels file with the added Relationship element" loading="lazy" width="700" height="427"></p>
+<p>Now pack all the files back into an archive and restore the file name Sample.xlsm.</p>
+<p><img src="../../images/articles/vba-addin-with-custom-ribbon-tab/157878107816842521-en.jpg" alt="Packing the files back into an archive" loading="lazy" width="992" height="502"></p>
+<p>If everything was done correctly, a new tab appears on the ribbon when you open the workbook:</p>
+<p><img src="../../images/articles/vba-addin-with-custom-ribbon-tab/1578781539166930736.png" alt="The new tab on the ribbon after opening the workbook" loading="lazy" width="700" height="256"></p>
+<h2>The &ldquo;Wrong number of arguments&rdquo; error</h2><p>When you run the HelloWorld macro you may get this warning:</p><pre><code>Wrong number of arguments or invalid property assignment</code></pre><p>This happens because a callback procedure must have a specific signature. A button click handler should look like this:</p>
+<p><img src="../../images/articles/vba-addin-with-custom-ribbon-tab/1578781698127844347.webp" alt="The signature of a button click handler" loading="lazy" width="700" height="332"></p>
+<p>Add the <code>rc As IRibbonControl</code> argument and you will see the long-awaited greeting:</p><pre><code>Option Explicit
+
+Public Sub SayHelloWorld(rc As IRibbonControl)
+    Dim firstCellValue As String
+
+    firstCellValue = ThisWorkbook.Worksheets(1).Cells(1, 1).Value
+    MsgBox "Hello, world! Cell A1 value is " &amp; firstCellValue
+End Sub</code></pre>
+<p><img src="../../images/articles/vba-addin-with-custom-ribbon-tab/157878173618865220.png" alt="The greeting message box after clicking the button" loading="lazy" width="211" height="133"></p>
+<p>The list of signatures is on the <a href="https://docs.microsoft.com/en-us/previous-versions/office/developer/office-2007/aa722523(v=office.12)#how-can-i-determine-the-correct-signatures-for-each-callback-procedure" target="_blank" rel="noopener">Microsoft documentation site</a>.</p>
+<h2>Saving as an add-in</h2><p>All that remains is to save the workbook with macros as an add-in. In the VBE, select the <code>ThisWorkbook</code> object and set its <code>IsAddin</code> property to True.</p>
+<p><img src="../../images/articles/vba-addin-with-custom-ribbon-tab/1578782774119989254.webp" alt="The IsAddin property of ThisWorkbook" loading="lazy" width="700" height="445"></p>
+<p>Then save the workbook in the new format (Excel will offer this itself if you press Ctrl+S):</p>
+<p><img src="../../images/articles/vba-addin-with-custom-ribbon-tab/157878283811024502.webp" alt="Saving the workbook as an add-in" loading="lazy" width="700" height="394"></p>
+<p>The add-in can now be opened like an ordinary workbook. It is not shown in a separate window, but it is visible in the Project Explorer of the VBE:</p>
+<p><img src="../../images/articles/vba-addin-with-custom-ribbon-tab/157878307317991772.webp" alt="The add-in in the Project Explorer of the VBA editor" loading="lazy" width="700" height="497"></p>
+<p>To make the add-in available right when Excel starts, install it from Excel Add-ins on the Developer tab...</p>
+<p><img src="../../images/articles/vba-addin-with-custom-ribbon-tab/1578783265155493627.webp" alt="Installing the add-in from the Developer tab" loading="lazy" width="700" height="479"></p>
+<p>...or from the Excel options, in the Add-ins section:</p>
+<p><img src="../../images/articles/vba-addin-with-custom-ribbon-tab/157878334215840375.webp" alt="Installing the add-in from the Excel options" loading="lazy" width="700" height="574"></p>
+<p>Done. The add-in can now be used with any document, and sharing it with colleagues is easy: just send them the add-in file.</p>
+<h2>Bonus: other Custom UI controls</h2><ul><li><b>toggleButton</b> &mdash; a button with two states;</li><li><b>splitButton</b> &mdash; a composite of a button or toggleButton and a drop-down menu;</li><li><b>dropDown</b> &mdash; a drop-down list with a predefined set of items;</li><li><b>comboBox</b> &mdash; an input field that can hold a predefined set of items;</li><li><b>dynamicMenu</b> &mdash; a drop-down list whose items are defined dynamically in the getContent method;</li><li><b>checkBox</b> &mdash; a check box with two states.</li></ul>
+<p><img src="../../images/articles/vba-addin-with-custom-ribbon-tab/1578831453120134147.png" alt="Examples of Custom UI controls on the ribbon" loading="lazy" width="700" height="108"></p>
+<p>The markup and the VBA module code are below; you can also find them on <a href="https://github.com/navferty/SampleExcelXlamAddin" target="_blank" rel="noopener">GitHub</a>.</p><p><b>customUI.xml</b></p><pre><code>&lt;?xml version="1.0" encoding="utf-8"?&gt;
+&lt;customUI xmlns="http://schemas.microsoft.com/office/2006/01/customui"&gt;
+  &lt;ribbon&gt;
+    &lt;tabs&gt;
+      &lt;tab id="customTab" label="Sample Add-in" keytip="XT"&gt;
+        &lt;group id="SampleControls" label="Group 2"&gt;
+          &lt;splitButton id="splitButton" size="large"&gt;
+            &lt;button id="SplitButton" imageMso="HappyFace" label="Split Button" /&gt;
+            &lt;menu id="menu"&gt;
+              &lt;button id="button1" label="Button 1" onAction="OnSplitButton1Click" /&gt;
+              &lt;button id="button2" label="Button 2" onAction="OnSplitButton2Click" /&gt;
+            &lt;/menu&gt;
+          &lt;/splitButton&gt;
+          &lt;toggleButton id="ToggleButton" label="Toggle Button" onAction="OnToggleButtonClick" /&gt;
+          &lt;dropDown id="DropDown" label="DropDown" onAction="OnDropDownSelected"&gt;
+            &lt;item id="DropDownItem1" label="Item 1" /&gt;
+            &lt;item id="DropDownItem2" label="Item 2" /&gt;
+            &lt;item id="DropDownItem3" label="Item 3" /&gt;
+            &lt;button id="button" label="Button..." /&gt;
+          &lt;/dropDown&gt;
+          &lt;comboBox id="ComboBox" label="Combo Box" onChange="OnComboBoxSelected"&gt;
+            &lt;item id="ComboBoxItem1" label="Item 1" /&gt;
+            &lt;item id="ComboBoxItem2" label="Item 2" /&gt;
+            &lt;item id="ComboBoxItem3" label="Item 3" /&gt;
+          &lt;/comboBox&gt;
+          &lt;separator id="separator" /&gt;
+          &lt;dynamicMenu id="DynamicMenu" label="Dynamic Menu" getContent="GetMenuContent" /&gt;
+          &lt;checkBox id="CheckBox" label="Check Box" onAction="OnCheckBoxToggled" /&gt;
+        &lt;/group&gt;
+      &lt;/tab&gt;
+    &lt;/tabs&gt;
+  &lt;/ribbon&gt;
+&lt;/customUI&gt;</code></pre><p><b>SampleControls VBA module</b></p><pre><code>Option Explicit
+
+Public Sub OnSplitButton1Click(rc As IRibbonControl)
+    MsgBox "Split button 1 was clicked"
+End Sub
+
+Public Sub OnSplitButton2Click(rc As IRibbonControl)
+    MsgBox "Split button 2 was clicked"
+End Sub
+
+Public Sub OnToggleButtonClick(rc As IRibbonControl, isButtonPressed As Boolean)
+    MsgBox "Toggle button was toggled, button now is " &amp; IIf(isButtonPressed, "pressed", "not pressed")
+End Sub
+
+Public Sub OnDropDownSelected(rc As IRibbonControl, selectedItemId As String, selectedItemIndex As Integer)
+    MsgBox "DropDown was changed, selected item id is " &amp; selectedItemId
+End Sub
+
+Public Sub OnComboBoxSelected(rc As IRibbonControl, comboBoxValue As String)
+    MsgBox "Combo box was changed, value is " &amp; comboBoxValue
+End Sub
+
+Public Sub GetMenuContent(rc As IRibbonControl, ByRef returnedVal)
+    Dim xml As String
+
+    xml = "&lt;menu xmlns=""http://schemas.microsoft.com/office/2006/01/customui""&gt;" &amp; _
+          "&lt;button id=""but1"" imageMso=""Help"" label=""Help"" onAction=""OnHelpPressed""/&gt;" &amp; _
+          "&lt;button id=""but2"" imageMso=""FindDialog"" label=""Find"" onAction=""OnFindPressed""/&gt;" &amp; _
+          "&lt;/menu&gt;"
+
+    returnedVal = xml
+End Sub
+
+Public Sub OnCheckBoxToggled(rc As IRibbonControl, isButtonChecked As Boolean)
+    MsgBox "Check box was toggled, value is " &amp; IIf(isButtonChecked, "checked", "not checked")
+End Sub
+
+Public Sub OnHelpPressed(rc As IRibbonControl)
+    MsgBox "Help button pressed"
+End Sub
+
+Public Sub OnFindPressed(rc As IRibbonControl)
+    MsgBox "Find button pressed"
+End Sub</code></pre><p>More about the Custom UI elements: <a href="https://docs.microsoft.com/en-us/openspecs/office_standards/ms-customui/d842006e-3187-4f66-a17d-0819a3cc94b5" target="_blank" rel="noopener">Microsoft documentation</a>.</p>
+<h2>One more bonus: VBE keyboard shortcuts</h2><p><b>Moving around the editor</b></p><ul><li><kbd>Ctrl+R</kbd> &mdash; go to the Project Explorer</li><li><kbd>F4</kbd> &mdash; go to the Properties window</li><li><kbd>Ctrl+G</kbd> &mdash; go to the Immediate window</li><li><kbd>F7</kbd> &mdash; go to the code editor window</li><li><kbd>Ctrl+Tab</kbd> (<kbd>Ctrl+Shift+Tab</kbd>) &mdash; switch between open module windows</li><li><kbd>Ctrl+F4</kbd> &mdash; close the current module</li><li><kbd>Alt+F11</kbd> &mdash; open the VBE</li></ul><p><b>Editing and code navigation</b></p><ul><li><kbd>Ctrl+Space</kbd> &mdash; auto-complete</li><li><kbd>Ctrl+J</kbd> &mdash; show the available options (IntelliSense)</li><li><kbd>Ctrl+I</kbd> &mdash; show information about a method (its arguments)</li><li><kbd>Shift+F2</kbd> &mdash; go to the definition of a variable or method</li></ul><p><b>Debugging</b></p><ul><li><kbd>F5</kbd> &mdash; run the macro or continue execution</li><li><kbd>F8</kbd> &mdash; step forward (into nested procedures)</li><li><kbd>Shift+F8</kbd> &mdash; step forward (without going inside)</li><li><kbd>F9</kbd> &mdash; set or remove a breakpoint</li><li><kbd>Shift+F9</kbd> &mdash; add a watch (quick watch)</li><li><kbd>Ctrl+L</kbd> &mdash; show the call stack (clickable)</li></ul><p>There is more on debugging in <a href="debugging-vba-code-in-excel.html">Debugging VBA code in Excel</a>.</p><p class="note">Originally published in Russian on <a href="https://pikabu.ru/story/tutorial_sozdanie_vbanadstroyki_s_otdelnoy_vkladkoy_v_ms_excel_7160405" target="_blank" rel="noopener">Pikabu</a>.</p>
+        </main>
+    </div>
+    <footer class="footer">
+        <p>Navferty &copy; 2021-<span id="current-year">2026</span> &bull; <a href="https://github.com/navferty/NavfertyExcelAddIn" target="_blank" rel="noopener" class="footer-link">Open Source on GitHub</a></p>
+    </footer>
+    <script src="../../site.js"></script>
+</body>
+
+</html>

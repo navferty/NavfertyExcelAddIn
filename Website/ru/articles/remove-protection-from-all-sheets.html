@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Снятие защиты со всех листов сразу - Надстройка Navferty Excel Add-In</title>
+    <meta name="description" content="Что на самом деле защищают защита листа и книги и как быстро снять защиту со многих листов.">
+    <link rel="canonical" href="https://navferty.net/ru/articles/remove-protection-from-all-sheets.html">
+    <link rel="alternate" hreflang="en" href="https://navferty.net/en/articles/remove-protection-from-all-sheets.html">
+    <link rel="alternate" hreflang="ru" href="https://navferty.net/ru/articles/remove-protection-from-all-sheets.html">
+    <link rel="alternate" hreflang="x-default" href="https://navferty.net/en/articles/remove-protection-from-all-sheets.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="Надстройка Navferty Excel Add-In">
+    <meta property="og:title" content="Снятие защиты со всех листов сразу - Надстройка Navferty Excel Add-In">
+    <meta property="og:description" content="Что на самом деле защищают защита листа и книги и как быстро снять защиту со многих листов.">
+    <meta property="og:url" content="https://navferty.net/ru/articles/remove-protection-from-all-sheets.html">
+    <meta property="og:image" content="https://navferty.net/images/NavfertyToolsRibbonRu.png">
+    <meta property="og:locale" content="ru">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="icon" href="../../favicon.ico">
+    <link rel="stylesheet" href="../../style.css">
+    <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Снятие защиты со всех листов сразу", "inLanguage": "ru", "description": "Что на самом деле защищают защита листа и книги и как быстро снять защиту со многих листов.", "author": {"@type": "Person", "name": "Andrey Deev", "url": "https://github.com/navferty"}, "mainEntityOfPage": "https://navferty.net/ru/articles/remove-protection-from-all-sheets.html"}</script>
+</head>
+
+<body>
+    <header class="site-header">
+        <div class="site-header-inner">
+            <a class="brand" href="../">Надстройка Navferty Excel Add-In</a>
+            <nav aria-label="Надстройка Navferty Excel Add-In"><a href="../#commands">Команды</a><a href="./">Статьи</a><a href="../install.html">Установка</a><a href="https://github.com/navferty/NavfertyExcelAddIn" target="_blank" rel="noopener">GitHub</a><span class="lang-switch"><a href="../../en/articles/remove-protection-from-all-sheets.html" lang="en" hreflang="en" data-lang="en">English</a><a href="remove-protection-from-all-sheets.html" lang="ru" hreflang="ru" data-lang="ru" aria-current="true">Русский</a></span></nav>
+        </div>
+    </header>
+    <div id="container">
+        <main id="content" class="article">
+<p class="back-to-top"><a href="index.html">&larr; Все статьи</a></p>
+<h1 class="zag">Снятие защиты со всех листов сразу</h1>
+<p class="subtitle">Что на самом деле защищают защита листа и книги и как быстро снять защиту со многих листов.</p>
+<p>Вам прислали книгу с двадцатью защищёнными листами, и нужно что-то изменить. Нажимать <b>Рецензирование → Снять защиту листа</b> на каждом долго, а если никто не помнит пароль, дело на этом и встаёт.</p>
+
+<h2>Какие бывают виды защиты</h2>
+<ul>
+<li><b>Защита листа</b> запрещает редактировать заблокированные ячейки, менять формат, вставлять строки и так далее. Это удобство, а не безопасность: пароль хранится в файле в виде, который можно обойти.</li>
+<li><b>Защита структуры книги</b> не даёт добавлять, удалять, переименовывать и перемещать листы.</li>
+<li><b>Защита VBA-проекта</b> закрывает просмотр кода макросов.</li>
+<li><b>Шифрование файла</b> (<b>Файл → Сведения → Защита книги → Зашифровать с использованием пароля</b>) – единственный вариант настоящей защиты. Без пароля файл не открыть.</li>
+</ul>
+
+<h2>Если пароль известен</h2>
+<p>Снимать защиту с каждого листа вручную можно, но долго. Короткий макрос обходит листы в цикле:</p>
+<pre>Sub UnprotectAll()
+    Dim ws As Worksheet
+    For Each ws In ActiveWorkbook.Worksheets
+        ws.Unprotect "password"
+    Next
+End Sub</pre>
+<p>Если пароли на листах разные, на первом несовпадении возникнет ошибка, поэтому добавьте обработку ошибок.</p>
+
+<h2>Если пароля нет</h2>
+<p>Сначала спросите автора. Если файл ваш или принадлежит вашей компании, а автор недоступен, защиту можно снять, потому что защита листа не является шифрованием. Файл .xlsx – это ZIP-архив; если переименовать его в .zip и удалить элемент <code>&lt;sheetProtection&gt;</code> из <code>xl/worksheets/sheetN.xml</code>, защита с этого листа будет снята. Это работает, но требует нескольких шагов на каждый лист, и легко ошибиться.</p>
+<p>Делайте это только с файлами, которые вы вправе изменять.</p>
+
+<h2>С надстройкой</h2>
+<p>Команда <b>Снять защиту книги</b> (Unprotect Workbook) одним действием убирает защиту со всех листов, структуры книги и VBA-проекта, пароль не нужен. С зашифрованными книгами она не работает, так как пароль нужен уже для открытия файла.</p>
+
+<h2>Заметка про защиту собственных файлов</h2>
+<p>Если вы защищаете лист от случайных правок, защиты листа достаточно. Если данные конфиденциальны, используйте шифрование файла или вообще не отправляйте его.</p>
+<p>Команда надстройки для этой задачи: <a href="../features/unprotect-workbook.html">Снять защиту с книги</a>, <a href="../features/worksheets-protection.html">Защита листов</a>.</p>
+        </main>
+    </div>
+    <footer class="footer">
+        <p>Navferty &copy; 2021-<span id="current-year">2026</span> &bull; <a href="https://github.com/navferty/NavfertyExcelAddIn" target="_blank" rel="noopener" class="footer-link">Открытый код на GitHub</a></p>
+    </footer>
+    <script src="../../site.js"></script>
+</body>
+
+</html>

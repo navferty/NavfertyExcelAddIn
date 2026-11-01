@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Removing extra spaces in Excel - Navferty&#x27;s Excel Add-In</title>
+    <meta name="description" content="TRIM, non-breaking spaces and line breaks: how to clean text cells properly.">
+    <link rel="canonical" href="https://navferty.net/en/articles/remove-extra-spaces-in-excel.html">
+    <link rel="alternate" hreflang="en" href="https://navferty.net/en/articles/remove-extra-spaces-in-excel.html">
+    <link rel="alternate" hreflang="ru" href="https://navferty.net/ru/articles/remove-extra-spaces-in-excel.html">
+    <link rel="alternate" hreflang="x-default" href="https://navferty.net/en/articles/remove-extra-spaces-in-excel.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="Navferty&#x27;s Excel Add-In">
+    <meta property="og:title" content="Removing extra spaces in Excel - Navferty&#x27;s Excel Add-In">
+    <meta property="og:description" content="TRIM, non-breaking spaces and line breaks: how to clean text cells properly.">
+    <meta property="og:url" content="https://navferty.net/en/articles/remove-extra-spaces-in-excel.html">
+    <meta property="og:image" content="https://navferty.net/images/articles/remove-extra-spaces-in-excel/extra-spaces.jpg">
+    <meta property="og:locale" content="en">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="icon" href="../../favicon.ico">
+    <link rel="stylesheet" href="../../style.css">
+    <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Removing extra spaces in Excel", "inLanguage": "en", "description": "TRIM, non-breaking spaces and line breaks: how to clean text cells properly.", "author": {"@type": "Person", "name": "Andrey Deev", "url": "https://github.com/navferty"}, "mainEntityOfPage": "https://navferty.net/en/articles/remove-extra-spaces-in-excel.html"}</script>
+</head>
+
+<body>
+    <header class="site-header">
+        <div class="site-header-inner">
+            <a class="brand" href="../">Navferty's Excel Add-In</a>
+            <nav aria-label="Navferty's Excel Add-In"><a href="../#commands">Commands</a><a href="./">Guides</a><a href="../install.html">Install</a><a href="https://github.com/navferty/NavfertyExcelAddIn" target="_blank" rel="noopener">GitHub</a><span class="lang-switch"><a href="remove-extra-spaces-in-excel.html" lang="en" hreflang="en" data-lang="en" aria-current="true">English</a><a href="../../ru/articles/remove-extra-spaces-in-excel.html" lang="ru" hreflang="ru" data-lang="ru">Русский</a></span></nav>
+        </div>
+    </header>
+    <div id="container">
+        <main id="content" class="article">
+<p class="back-to-top"><a href="index.html">&larr; All articles</a></p>
+<h1 class="zag">Removing extra spaces in Excel</h1>
+<p class="subtitle">TRIM, non-breaking spaces and line breaks: how to clean text cells properly.</p>
+<p>Extra spaces are a classic reason for failed lookups, duplicates that are not detected and imports that reject a file. <code>"Smith"</code> and <code>"Smith "</code> look the same, but Excel treats them as different values.</p>
+
+<h2>TRIM</h2>
+<p><code>=TRIM(A2)</code> removes spaces at the start and the end of the text and reduces repeated spaces between words to one. Copy the formulas, then paste them over the original column with <b>Paste Special → Values</b>.</p>
+
+<h2>When TRIM does nothing</h2>
+<p>If the value still looks wrong, it probably contains a character that is not an ordinary space:</p>
+<ul>
+<li><b>Non-breaking space</b>, character code 160. It appears in text copied from web pages and some systems. <code>TRIM</code> ignores it. Use <code>=TRIM(SUBSTITUTE(A2,CHAR(160)," "))</code>.</li>
+<li><b>Line breaks</b>, codes 10 and 13. <code>=CLEAN(A2)</code> removes them (and other non-printable characters up to code 31). If you want a space instead of the break, use <code>SUBSTITUTE(A2,CHAR(10)," ")</code> first.</li>
+<li><b>Tabs</b>, code 9. <code>CLEAN</code> removes them as well.</li>
+</ul>
+<p>To see which character is the culprit, use <code>=UNICODE(RIGHT(A2,1))</code> or <code>=UNICODE(LEFT(A2,1))</code>. A result of 160 means a non-breaking space.</p>
+
+<h2>A combined formula</h2>
+<pre>=TRIM(CLEAN(SUBSTITUTE(A2,CHAR(160)," ")))</pre>
+<p>This covers most cases in real data.</p>
+
+<h2>Without formulas</h2>
+<p><b>Find &amp; Replace</b> (<kbd>Ctrl</kbd>+<kbd>H</kbd>) can remove all spaces from a selection: put a space into <b>Find what</b>, leave <b>Replace with</b> empty. It is fine for codes and numbers like <code>1 234 567</code>, but it will also glue words together, so do not use it on names or addresses.</p>
+<p>To enter a non-breaking space in the Find box, hold <kbd>Alt</kbd> and type <code>0160</code> on the numeric keypad.</p>
+
+<h2>Check before and after</h2>
+<p>Compare <code>=LEN(A2)</code> with <code>=LEN(TRIM(A2))</code> to count how many cells actually have the problem:</p>
+<p><img src="../../images/articles/remove-extra-spaces-in-excel/extra-spaces.jpg" alt="A table comparing text length, the code of the first character and the result of TRIM, including a non-breaking space that TRIM leaves in place" loading="lazy" width="1002" height="251"></p>
+<pre>=SUMPRODUCT(--(LEN(A2:A1000)&lt;&gt;LEN(TRIM(A2:A1000))))</pre>
+
+<h2>With the add-in</h2>
+<p><b>Trim Spaces</b> works directly on the selected cells: it removes leading and trailing whitespace, line breaks and extra spaces without helper columns or pasting values back.</p>
+<p>The add-in command for this: <a href="../features/trim-spaces.html">Trim Spaces</a>.</p>
+        </main>
+    </div>
+    <footer class="footer">
+        <p>Navferty &copy; 2021-<span id="current-year">2026</span> &bull; <a href="https://github.com/navferty/NavfertyExcelAddIn" target="_blank" rel="noopener" class="footer-link">Open Source on GitHub</a></p>
+    </footer>
+    <script src="../../site.js"></script>
+</body>
+
+</html>
