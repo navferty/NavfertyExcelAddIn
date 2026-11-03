@@ -13,6 +13,9 @@ namespace NavfertyExcelAddIn.Info
 		private const string FeatureRequestUrl = "https://github.com/navferty/NavfertyExcelAddIn/issues/new?template=feature_request.md";
 		private const string BugReportUrl = "https://github.com/navferty/NavfertyExcelAddIn/issues/new?template=bug_report.md";
 
+		private const string CopyGlyph = "\uE8C8";
+		private const string CheckGlyph = "\uE73E";
+
 		private static readonly Color LinkBlue = Color.FromArgb(5, 99, 193);
 
 		private readonly ToolTip toolTip = new ToolTip();
@@ -98,56 +101,77 @@ namespace NavfertyExcelAddIn.Info
 				AutoSize = true,
 				Margin = new Padding(0),
 			});
-			titles.Controls.Add(new Label
-			{
-				Text = string.Format(UIStrings.Info_Version, version),
-				ForeColor = SystemColors.GrayText,
-				AutoSize = true,
-				Margin = new Padding(0, 2, 0, 0),
-			});
+			titles.Controls.Add(CreateVersionRow());
 			header.Controls.Add(titles);
 
 			return header;
 		}
 
-		private Control CreateButtonRow()
+		private Control CreateVersionRow()
 		{
-			var copyLink = CreateLink(UIStrings.Info_CopyVersion, null);
-			copyLink.Margin = new Padding(0, 0, 0, 0);
-			copyLink.LinkClicked += (s, e) =>
+			var row = new FlowLayoutPanel
+			{
+				FlowDirection = FlowDirection.LeftToRight,
+				WrapContents = false,
+				AutoSize = true,
+				Margin = new Padding(0, 2, 0, 0),
+			};
+			row.Controls.Add(new Label
+			{
+				Text = string.Format(UIStrings.Info_Version, version),
+				ForeColor = SystemColors.GrayText,
+				AutoSize = true,
+				Margin = new Padding(0, 0, 6, 0),
+			});
+
+			var copyIcon = new Label
+			{
+				Text = CopyGlyph,
+				Font = new Font("Segoe MDL2 Assets", 10f),
+				ForeColor = LinkBlue,
+				Cursor = Cursors.Hand,
+				AutoSize = true,
+				Margin = new Padding(0),
+			};
+			toolTip.SetToolTip(copyIcon, UIStrings.Info_CopyVersion);
+			copyIcon.Click += (s, e) =>
 			{
 				try
 				{
 					Clipboard.SetText(version);
-					copyLink.Text = UIStrings.Info_Copied;
+					copyIcon.Text = CheckGlyph;
+					toolTip.SetToolTip(copyIcon, UIStrings.Info_Copied);
 				}
 				catch (System.Runtime.InteropServices.ExternalException)
 				{
 					// clipboard is locked by another process
 				}
 			};
+			row.Controls.Add(copyIcon);
+			return row;
+		}
 
+		private Control CreateButtonRow()
+		{
 			var ok = new Button
 			{
 				Text = UIStrings.OK,
 				DialogResult = DialogResult.OK,
 				Size = new Size(DpiScale(75), DpiScale(27)),
 				Margin = new Padding(0),
+				Anchor = AnchorStyles.Right,
 			};
 			AcceptButton = ok;
 			CancelButton = ok;
 
 			var row = new TableLayoutPanel
 			{
-				ColumnCount = 2,
+				ColumnCount = 1,
 				AutoSize = true,
 				Dock = DockStyle.Fill,
 				Margin = new Padding(0, 16, 0, 0),
 			};
 			row.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100));
-			row.ColumnStyles.Add(new ColumnStyle(SizeType.AutoSize));
-			copyLink.Anchor = AnchorStyles.Left;
-			row.Controls.Add(copyLink);
 			row.Controls.Add(ok);
 			return row;
 		}
