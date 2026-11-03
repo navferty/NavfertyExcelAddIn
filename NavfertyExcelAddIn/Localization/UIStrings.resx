@@ -255,4 +255,13 @@
   <data name="Info_BugReport" xml:space="preserve">
     <value>Report a bug on GitHub</value>
   </data>
-</root>
+  <data name="Info_AppName" xml:space="preserve">
+    <value>Navferty Excel Add-In</value>
+  </data>
+  <data name="Info_CopyVersion" xml:space="preserve">
+    <value>Copy version</value>
+  </data>
+  <data name="Info_Copied" xml:space="preserve">
+    <value>Copied to clipboard</value>
+  </data>
+</root>

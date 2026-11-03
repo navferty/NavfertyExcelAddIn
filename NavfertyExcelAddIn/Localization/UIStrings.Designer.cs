@@ -412,6 +412,87 @@ namespace NavfertyExcelAddIn.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Navferty Excel Add-In.
+        /// </summary>
+        internal static string Info_AppName {
+            get {
+                return ResourceManager.GetString("Info_AppName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Report a bug on GitHub.
+        /// </summary>
+        internal static string Info_BugReport {
+            get {
+                return ResourceManager.GetString("Info_BugReport", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Copied to clipboard.
+        /// </summary>
+        internal static string Info_Copied {
+            get {
+                return ResourceManager.GetString("Info_Copied", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Copy version.
+        /// </summary>
+        internal static string Info_CopyVersion {
+            get {
+                return ResourceManager.GetString("Info_CopyVersion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Navferty Excel Add-In is a free set of tools....
+        /// </summary>
+        internal static string Info_Description {
+            get {
+                return ResourceManager.GetString("Info_Description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Request a feature on GitHub.
+        /// </summary>
+        internal static string Info_FeatureRequest {
+            get {
+                return ResourceManager.GetString("Info_FeatureRequest", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to About Navferty Excel Add-In.
+        /// </summary>
+        internal static string Info_Title {
+            get {
+                return ResourceManager.GetString("Info_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Version: {0}.
+        /// </summary>
+        internal static string Info_Version {
+            get {
+                return ResourceManager.GetString("Info_Version", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Website: navferty.net.
+        /// </summary>
+        internal static string Info_Website {
+            get {
+                return ResourceManager.GetString("Info_Website", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Value.
         /// </summary>
         internal static string XmlValidationReport_Value {
