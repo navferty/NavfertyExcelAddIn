@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Поддержка и обратная связь - Надстройка Navferty Excel Add-In</title>
+    <meta name="description" content="Как сообщить об ошибке или предложить функцию для надстройки Navferty Excel Add-In, где найти журналы и как включить подробное журналирование.">
+    <link rel="canonical" href="https://navferty.net/ru/support.html">
+    <link rel="alternate" hreflang="en" href="https://navferty.net/en/support.html">
+    <link rel="alternate" hreflang="ru" href="https://navferty.net/ru/support.html">
+    <link rel="alternate" hreflang="x-default" href="https://navferty.net/en/support.html">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Надстройка Navferty Excel Add-In">
+    <meta property="og:title" content="Поддержка и обратная связь - Надстройка Navferty Excel Add-In">
+    <meta property="og:description" content="Как сообщить об ошибке или предложить функцию для надстройки Navferty Excel Add-In, где найти журналы и как включить подробное журналирование.">
+    <meta property="og:url" content="https://navferty.net/ru/support.html">
+    <meta property="og:image" content="https://navferty.net/images/NavfertyToolsRibbonRu.png">
+    <meta property="og:locale" content="ru">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="icon" href="../favicon.ico">
+    <link rel="stylesheet" href="../style.css">
+</head>
+
+<body>
+    <header class="site-header">
+        <div class="site-header-inner">
+            <a class="brand" href="./">Надстройка Navferty Excel Add-In</a>
+            <nav aria-label="Надстройка Navferty Excel Add-In"><a href="./#commands">Команды</a><a href="articles/">Статьи</a><a href="install.html">Установка</a><a href="support.html">Поддержка</a><a href="https://github.com/navferty/NavfertyExcelAddIn" target="_blank" rel="noopener">GitHub</a><span class="lang-switch"><a href="../en/support.html" lang="en" hreflang="en" data-lang="en">English</a><a href="support.html" lang="ru" hreflang="ru" data-lang="ru" aria-current="true">Русский</a></span></nav>
+        </div>
+    </header>
+    <div id="container">
+        <main id="content" class="article">
+<nav class="breadcrumb"><a href="./">Главная</a> &rsaquo; <span>Поддержка и обратная связь</span></nav>
+<h1 class="zag">Поддержка и обратная связь</h1>
+<p>Нашли проблему или не хватает функции? Создайте обращение на GitHub. Кнопка <strong>Информация</strong> в конце вкладки <strong>Navferty's Tools</strong> открывает диалог с теми же ссылками.</p>
+<h2 id="bug">Сообщить об ошибке</h2>
+<p><a href="https://github.com/navferty/NavfertyExcelAddIn/issues/new?template=bug_report.md" class="btn btn-primary btn-small" target="_blank" rel="noopener">Сообщить об ошибке на GitHub</a></p>
+<p>Пожалуйста, укажите:</p>
+<ul>
+<li>версию надстройки (скопируйте её значком рядом с версией в диалоге <strong>Информация</strong>) и версию Excel;</li>
+<li>шаги для воспроизведения и ожидаемый результат;</li>
+<li>по возможности небольшой пример книги без конфиденциальных данных;</li>
+<li><a href="#logs">файл журнала</a>, лучше записанный с <a href="#verbose">подробным журналированием</a>.</li>
+</ul>
+<h2 id="feature">Предложить функцию</h2>
+<p><a href="https://github.com/navferty/NavfertyExcelAddIn/issues/new?template=feature_request.md" class="btn btn-secondary btn-small" target="_blank" rel="noopener">Предложить функцию на GitHub</a></p>
+<p>Сначала просмотрите <a href="https://github.com/navferty/NavfertyExcelAddIn/issues" target="_blank" rel="noopener">существующие обращения</a>: если идея уже есть, поддержите её или оставьте комментарий. Опишите задачу, которую нужно решить, и пример данных, а не только желаемое решение.</p>
+<h2 id="logs">Журналы</h2>
+<p>Надстройка пишет отдельный файл журнала на каждый день. Чтобы открыть папку, нажмите <strong>Информация</strong> &rarr; <strong>Открыть папку с журналами</strong> или перейдите по пути:</p>
+<p><code>%LOCALAPPDATA%\Navferty\ExcelAddIn\logs</code></p>
+<p>Приложите последний файл <code>.log</code> к обращению. Файлы больше 5&nbsp;МБ делятся на части, а файлы старше 14 дней удаляются автоматически.</p>
+<h2 id="verbose">Подробное журналирование</h2>
+<p>По умолчанию записываются только важные события и ошибки. Чтобы записать подробности:</p>
+<ol>
+<li>Нажмите <strong>Информация</strong> и включите <strong>Подробный журнал</strong>.</li>
+<li>Воспроизведите проблему.</li>
+<li>Приложите файл журнала к обращению.</li>
+</ol>
+<p>Подробный журнал отключается при перезапуске Excel.</p>
+<div class="info-box">
+<h3>Конфиденциальность</h3>
+<p>Значения ячеек, названия книг и листов и пути к файлам в журнал не попадают: вместо них записываются длина и короткий хеш. Сообщения об ошибках от Excel и других компонентов записываются как есть, поэтому просмотрите файл перед публикацией в открытом обращении.</p>
+</div>
+
+        </main>
+    </div>
+    <footer class="footer">
+        <p>Navferty &copy; 2021-<span id="current-year">2026</span> &bull; <a href="https://github.com/navferty/NavfertyExcelAddIn" target="_blank" rel="noopener" class="footer-link">Открытый код на GitHub</a></p>
+    </footer>
+    <script src="../site.js"></script>
+</body>
+
+</html>
