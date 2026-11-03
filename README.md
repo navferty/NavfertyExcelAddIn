@@ -380,7 +380,9 @@ The solution is built with GitHub Actions. You can download the full archive wit
 2. Download the attached `NavfertyExcelAddIn-*.zip` archive
 3. Extract files to a folder and run the '.vsto' file
 
-> **Important:** Using the desktop folder is recommended - updates are only permitted from the same folder where the add-in was first installed.
+> **Important:** Excel records the location of the `.vsto` file you run and uses it to check for updates. Create a dedicated folder for the add-in, keep the extracted installation files there, and use that same folder when installing future updates.
+
+![Excel COM Add-ins dialog showing the add-in's installation location](Website/images/offline-install-addin-location.png)
 
 After installation, restart Excel and you'll see the new **Navferty's Tools** tab.
 
