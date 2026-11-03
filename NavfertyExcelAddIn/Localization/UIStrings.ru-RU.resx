@@ -237,4 +237,37 @@
   <data name="Cancel" xml:space="preserve">
     <value>Отмена</value>
   </data>
+  <data name="Info_Title" xml:space="preserve">
+    <value>О надстройке Navferty Excel Add-In</value>
+  </data>
+  <data name="Info_Description" xml:space="preserve">
+    <value>Navferty Excel Add-In — бесплатный набор инструментов, ускоряющих повседневную работу в Microsoft Excel.</value>
+  </data>
+  <data name="Info_Version" xml:space="preserve">
+    <value>Версия: {0}</value>
+  </data>
+  <data name="Info_Website" xml:space="preserve">
+    <value>Сайт: navferty.net</value>
+  </data>
+  <data name="Info_FeatureRequest" xml:space="preserve">
+    <value>Предложить новую функцию на GitHub</value>
+  </data>
+  <data name="Info_BugReport" xml:space="preserve">
+    <value>Сообщить об ошибке на GitHub</value>
+  </data>
+  <data name="Info_AppName" xml:space="preserve">
+    <value>Navferty Excel Add-In</value>
+  </data>
+  <data name="Info_CopyVersion" xml:space="preserve">
+    <value>Копировать версию</value>
+  </data>
+  <data name="Info_Copied" xml:space="preserve">
+    <value>Скопировано в буфер обмена</value>
+  </data>
+  <data name="Info_VerboseLogging" xml:space="preserve">
+    <value>Подробный журнал (до перезапуска Excel)</value>
+  </data>
+  <data name="Info_OpenLogs" xml:space="preserve">
+    <value>Открыть папку с журналами</value>
+  </data>
 </root>

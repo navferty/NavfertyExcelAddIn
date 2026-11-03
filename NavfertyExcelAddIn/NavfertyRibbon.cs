@@ -183,7 +183,7 @@ namespace NavfertyExcelAddIn
 			var wb = App.ActiveWorkbook;
 			var path = wb.FullName;
 
-			logger.Debug($"UnprotectWorkbook {path}");
+			logger.Debug($"UnprotectWorkbook {LogSanitizer.Path(path)}");
 
 			var extension = path.Split('.').LastOrDefault();
 
@@ -213,7 +213,7 @@ namespace NavfertyExcelAddIn
 			if (wb is null) return;
 
 			var path = wb.FullName;
-			logger.Debug($"ProtectUnprotectWorksheets {path}");
+			logger.Debug($"ProtectUnprotectWorksheets {LogSanitizer.Path(path)}");
 
 			var wsProtectorUnprotector = GetService<IWsProtectorUnprotector>();
 			wsProtectorUnprotector.ProtectUnprotectSelectedWorksheets(wb);
@@ -430,13 +430,21 @@ namespace NavfertyExcelAddIn
 		#endregion
 
 		#region Web
+		public void ShowInfo(IRibbonControl ribbonControl)
+		{
+			using (var infoForm = new Info.InfoForm())
+			{
+				infoForm.ShowDialog();
+			}
+		}
+
 		public void CurrencyExchangeRatesSelect(IRibbonControl ribbonControl)
 		{
 			var wb = App.ActiveWorkbook;
 			if (wb is null) return;
 
 			var path = wb.FullName;
-			logger.Debug($"Web.CurrencyExchangeRates {path}");
+			logger.Debug($"Web.CurrencyExchangeRates {LogSanitizer.Path(path)}");
 
 			var webExchangeRates = GetService<Web.IWebTools>();
 			webExchangeRates.CurrencyExchangeRates_Show();

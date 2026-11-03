@@ -260,6 +260,12 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://navferty.net/en/install.html"/>
   </url>
   <url>
+    <loc>https://navferty.net/en/support.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://navferty.net/en/support.html"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://navferty.net/ru/support.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://navferty.net/en/support.html"/>
+  </url>
+  <url>
     <loc>https://navferty.net/ru/articles/automating-excel-tasks-without-vba.html</loc>
     <xhtml:link rel="alternate" hreflang="en" href="https://navferty.net/en/articles/automating-excel-tasks-without-vba.html"/>
     <xhtml:link rel="alternate" hreflang="ru" href="https://navferty.net/ru/articles/automating-excel-tasks-without-vba.html"/>
@@ -516,6 +522,12 @@
     <xhtml:link rel="alternate" hreflang="en" href="https://navferty.net/en/install.html"/>
     <xhtml:link rel="alternate" hreflang="ru" href="https://navferty.net/ru/install.html"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://navferty.net/en/install.html"/>
+  </url>
+  <url>
+    <loc>https://navferty.net/ru/support.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://navferty.net/en/support.html"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://navferty.net/ru/support.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://navferty.net/en/support.html"/>
   </url>
   <url>
     <loc>https://navferty.net/en/features/repair-conditional-format.html</loc>

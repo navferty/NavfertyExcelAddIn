@@ -3,6 +3,10 @@ using System.Threading;
 
 using Microsoft.Office.Core;
 
+using NavfertyExcelAddIn.Commons;
+
+using NLog;
+
 namespace NavfertyExcelAddIn
 {
 	public partial class ThisAddIn
@@ -15,6 +19,10 @@ namespace NavfertyExcelAddIn
 
 		private void ThisAddInStartup(object sender, EventArgs e)
 		{
+			LogManager.GetCurrentClassLogger().Info(
+				$"Add-in {GetType().Assembly.GetName().Version} started. Excel {Application.Version}, " +
+				$"OS {Environment.OSVersion}, UI culture {Application.LanguageSettings.get_LanguageID(MsoAppLanguageID.msoLanguageIDUI)}");
+
 			Thread.CurrentThread.CurrentUICulture =
 				new System.Globalization.CultureInfo(
 					Application.LanguageSettings.get_LanguageID(
@@ -27,11 +35,12 @@ namespace NavfertyExcelAddIn
 
 		private void ThisAddInShutdown(object sender, EventArgs e)
 		{
-			// TODO
+			LogSetup.Shutdown();
 		}
 
 		private void InternalStartup()
 		{
+			LogSetup.Initialize();
 			Startup += new EventHandler(ThisAddInStartup);
 			Shutdown += new EventHandler(ThisAddInShutdown);
 		}

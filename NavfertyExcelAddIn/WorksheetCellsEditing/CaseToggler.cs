@@ -43,7 +43,7 @@ namespace NavfertyExcelAddIn.WorksheetCellsEditing
 
 		private TextCaseType DetectTargetCase(string value)
 		{
-			logger.Debug($"Detecting case of value {value}");
+			logger.Debug($"Detecting case of value {LogSanitizer.Value(value)}");
 
 			// TODO case of value 'a' - short cycle A->a->A->a
 			// if(value.Length==1 && char.IsLetter(value[0])){ return ...}

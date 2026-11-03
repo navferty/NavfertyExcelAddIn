@@ -127,6 +127,11 @@
             keytip="EX" imageMso="InternationalCurrency" size="large" getScreentip="GetLabel" getSupertip="GetSupertip"/>
         </group>
 
+        <group id="InfoGroup" getLabel="GetLabel" autoScale="1">
+          <button id="ShowInfo" getLabel="GetLabel" onAction="ShowInfo" imageMso="Info"
+            size="large" keytip="IN" getScreentip="GetLabel" getSupertip="GetSupertip"/>
+        </group>
+
       </tab>
     </tabs>
   </ribbon>

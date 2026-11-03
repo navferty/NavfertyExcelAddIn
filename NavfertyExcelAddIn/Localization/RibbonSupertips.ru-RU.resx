@@ -199,4 +199,7 @@
   <data name="ExportToSqlite" xml:space="preserve">
     <value>Экспортировать все листы текущей книги в файл базы данных SQLite</value>
   </data>
-</root>
+  <data name="ShowInfo" xml:space="preserve">
+    <value>О надстройке, сайт, запрос функции и сообщение об ошибке</value>
+  </data>
+</root>

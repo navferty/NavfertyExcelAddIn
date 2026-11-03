@@ -7,6 +7,7 @@ using Microsoft.Office.Interop.Excel;
 
 using Navferty.Common;
 
+using NavfertyExcelAddIn.Commons;
 using NavfertyExcelAddIn.Localization;
 
 using NLog;
@@ -60,7 +61,7 @@ public class SqliteExporter : ISqliteExporter
 			return;
 		}
 
-		logger.Debug($"Exporting workbook to SQLite: {dbPath}");
+		logger.Debug($"Exporting workbook to SQLite: {LogSanitizer.Path(dbPath)}");
 
 		try
 		{
@@ -91,18 +92,18 @@ public class SqliteExporter : ISqliteExporter
 			{
 				try
 				{
-					logger.Debug($"Exporting worksheet: {worksheet.Name}");
+					logger.Debug($"Exporting worksheet: {LogSanitizer.Name(worksheet.Name)}");
 					ExportWorksheetToTable(worksheet, connection, options);
 				}
 				catch (Exception ex)
 				{
-					logger.Error(ex, $"Failed to export worksheet: {worksheet.Name}");
+					logger.Error(ex, $"Failed to export worksheet: {LogSanitizer.Name(worksheet.Name)}");
 					throw;
 				}
 			}
 		}
 
-		logger.Debug($"Successfully exported {workbook.Worksheets.Count} worksheets to {dbPath}");
+		logger.Debug($"Successfully exported {workbook.Worksheets.Count} worksheets to {LogSanitizer.Path(dbPath)}");
 	}
 
 	private void ExportWorksheetToTable(Worksheet worksheet, SQLiteConnection connection, SqliteExportOptions options)
@@ -110,7 +111,7 @@ public class SqliteExporter : ISqliteExporter
 		var usedRange = worksheet.UsedRange;
 		if (usedRange == null || usedRange.Rows.Count == 0)
 		{
-			logger.Debug($"Worksheet {worksheet.Name} is empty, skipping");
+			logger.Debug($"Worksheet {LogSanitizer.Name(worksheet.Name)} is empty, skipping");
 			return;
 		}
 
@@ -121,7 +122,7 @@ public class SqliteExporter : ISqliteExporter
 		var values = (object[,])usedRange.Value;
 		if (values == null)
 		{
-			logger.Debug($"Worksheet {worksheet.Name} has no values, skipping");
+			logger.Debug($"Worksheet {LogSanitizer.Name(worksheet.Name)} has no values, skipping");
 			return;
 		}
 
@@ -131,7 +132,7 @@ public class SqliteExporter : ISqliteExporter
 		// Validate header row is within bounds
 		if (headerRowIndex > rowCount)
 		{
-			logger.Debug($"Worksheet {worksheet.Name} has no rows after skipping {options.RowsToSkip} rows, skipping");
+			logger.Debug($"Worksheet {LogSanitizer.Name(worksheet.Name)} has no rows after skipping {options.RowsToSkip} rows, skipping");
 			return;
 		}
 		
@@ -156,7 +157,7 @@ public class SqliteExporter : ISqliteExporter
 		// Check if there's any data to export
 		if (dataStartRow > rowCount)
 		{
-			logger.Debug($"Worksheet {worksheet.Name} has no data rows after skipping, skipping");
+			logger.Debug($"Worksheet {LogSanitizer.Name(worksheet.Name)} has no data rows after skipping, skipping");
 			return;
 		}
 
@@ -171,7 +172,7 @@ public class SqliteExporter : ISqliteExporter
 
 		InsertData(connection, tableName, values, dataStartRow, rowCount, colCount, columnTypes);
 
-		logger.Debug($"Exported {rowCount - dataStartRow + 1} rows to table {tableName}");
+		logger.Debug($"Exported {rowCount - dataStartRow + 1} rows to table {LogSanitizer.Name(tableName)}");
 	}
 
 	private void CreateTable(SQLiteConnection connection, string tableName, int columnCount, string[]? columnNames, ColumnTypeDetector.SqliteColumnType[] columnTypes)
@@ -247,7 +248,7 @@ public class SqliteExporter : ISqliteExporter
 								else
 								{
 									// This shouldn't happen if type detection is correct, but handle it gracefully
-									logger.Warn($"Non-integer value {dbl} in INTEGER column, converting to REAL");
+									logger.Warn("Non-integer value in INTEGER column, converting to REAL");
 									command.Parameters.AddWithValue($"@col{col}", dbl);
 								}
 							}
@@ -259,7 +260,7 @@ public class SqliteExporter : ISqliteExporter
 								}
 								else
 								{
-									logger.Warn($"Non-integer value {flt} in INTEGER column, converting to REAL");
+									logger.Warn("Non-integer value in INTEGER column, converting to REAL");
 									command.Parameters.AddWithValue($"@col{col}", flt);
 								}
 							}
@@ -271,7 +272,7 @@ public class SqliteExporter : ISqliteExporter
 								}
 								else
 								{
-									logger.Warn($"Non-integer value {dec} in INTEGER column, converting to REAL");
+									logger.Warn("Non-integer value in INTEGER column, converting to REAL");
 									command.Parameters.AddWithValue($"@col{col}", (double)dec);
 								}
 							}
