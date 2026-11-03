@@ -10,8 +10,8 @@ namespace NavfertyExcelAddIn.Info
 	internal sealed class InfoForm : Form
 	{
 		private const string WebsiteUrl = "https://navferty.net";
-		private const string FeatureRequestUrl = "https://github.com/navferty/NavfertyExcelAddIn/issues/new?labels=enhancement";
-		private const string BugReportUrl = "https://github.com/navferty/NavfertyExcelAddIn/issues/new?labels=bug";
+		private const string FeatureRequestUrl = "https://github.com/navferty/NavfertyExcelAddIn/issues/new?template=feature_request.md";
+		private const string BugReportUrl = "https://github.com/navferty/NavfertyExcelAddIn/issues/new?template=bug_report.md";
 
 		private static readonly Color LinkBlue = Color.FromArgb(5, 99, 193);
 
