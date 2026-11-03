@@ -237,4 +237,22 @@
   <data name="Cancel" xml:space="preserve">
     <value>Cancel</value>
   </data>
-</root>
+  <data name="Info_Title" xml:space="preserve">
+    <value>About Navferty Excel Add-In</value>
+  </data>
+  <data name="Info_Description" xml:space="preserve">
+    <value>Navferty Excel Add-In is a free set of tools that make everyday work in Microsoft Excel faster.</value>
+  </data>
+  <data name="Info_Version" xml:space="preserve">
+    <value>Version: {0}</value>
+  </data>
+  <data name="Info_Website" xml:space="preserve">
+    <value>Website: navferty.net</value>
+  </data>
+  <data name="Info_FeatureRequest" xml:space="preserve">
+    <value>Request a feature on GitHub</value>
+  </data>
+  <data name="Info_BugReport" xml:space="preserve">
+    <value>Report a bug on GitHub</value>
+  </data>
+</root>

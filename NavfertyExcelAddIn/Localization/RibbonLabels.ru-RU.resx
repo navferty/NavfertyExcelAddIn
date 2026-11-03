@@ -240,4 +240,10 @@
   <data name="ExportToSqlite" xml:space="preserve">
     <value>Экспорт в SQLite</value>
   </data>
-</root>
+  <data name="InfoGroup" xml:space="preserve">
+    <value>О программе</value>
+  </data>
+  <data name="ShowInfo" xml:space="preserve">
+    <value>Информация</value>
+  </data>
+</root>

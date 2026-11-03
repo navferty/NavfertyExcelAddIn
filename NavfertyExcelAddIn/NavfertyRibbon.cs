@@ -430,6 +430,14 @@ namespace NavfertyExcelAddIn
 		#endregion
 
 		#region Web
+		public void ShowInfo(IRibbonControl ribbonControl)
+		{
+			using (var infoForm = new Info.InfoForm())
+			{
+				infoForm.ShowDialog();
+			}
+		}
+
 		public void CurrencyExchangeRatesSelect(IRibbonControl ribbonControl)
 		{
 			var wb = App.ActiveWorkbook;
