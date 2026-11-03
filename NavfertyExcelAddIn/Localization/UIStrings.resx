@@ -264,4 +264,10 @@
   <data name="Info_Copied" xml:space="preserve">
     <value>Copied to clipboard</value>
   </data>
+  <data name="Info_VerboseLogging" xml:space="preserve">
+    <value>Verbose logging (until Excel is restarted)</value>
+  </data>
+  <data name="Info_OpenLogs" xml:space="preserve">
+    <value>Open logs folder</value>
+  </data>
 </root>

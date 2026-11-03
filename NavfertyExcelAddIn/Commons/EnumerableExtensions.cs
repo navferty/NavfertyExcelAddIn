@@ -35,7 +35,7 @@ namespace NavfertyExcelAddIn.Commons
 
 		public static void ApplyForEachCellOfType<TIn, TOut>(this Range range, Func<TIn, TOut> transform)
 		{
-			logger.Debug($"Apply transformation to range '{range.GetRelativeAddress()}' on worksheet '{range.Worksheet.Name}'");
+			logger.Debug($"Apply transformation to range '{range.GetRelativeAddress()}' on worksheet '{LogSanitizer.Name(range.Worksheet.Name)}'");
 
 			undoManager.StartNewAction(range);
 

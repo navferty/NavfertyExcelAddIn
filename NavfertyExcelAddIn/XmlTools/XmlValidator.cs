@@ -6,6 +6,7 @@ using Microsoft.Office.Interop.Excel;
 
 using Navferty.Common;
 
+using NavfertyExcelAddIn.Commons;
 using NavfertyExcelAddIn.Localization;
 
 using NLog;
@@ -47,7 +48,7 @@ namespace NavfertyExcelAddIn.XmlTools
                 throw new ArgumentException("One or more files not found");
             }
 
-            logger.Debug($"Try to validate {xmlFileName} by {string.Join(", ", xsdFileNames)}");
+            logger.Debug($"Try to validate {LogSanitizer.Path(xmlFileName)} by {string.Join(", ", xsdFileNames.Select(LogSanitizer.Path))}");
 
             var errors = xsdValidator.Validate(xmlFileName, xsdFileNames);
 

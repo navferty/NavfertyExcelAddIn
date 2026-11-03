@@ -493,6 +493,24 @@ namespace NavfertyExcelAddIn.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Open logs folder.
+        /// </summary>
+        internal static string Info_OpenLogs {
+            get {
+                return ResourceManager.GetString("Info_OpenLogs", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Verbose logging.
+        /// </summary>
+        internal static string Info_VerboseLogging {
+            get {
+                return ResourceManager.GetString("Info_VerboseLogging", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Value.
         /// </summary>
         internal static string XmlValidationReport_Value {

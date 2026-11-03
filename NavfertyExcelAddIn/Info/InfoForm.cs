@@ -1,8 +1,10 @@
 using System;
 using System.Diagnostics;
 using System.Drawing;
+using System.IO;
 using System.Windows.Forms;
 
+using NavfertyExcelAddIn.Commons;
 using NavfertyExcelAddIn.Localization;
 
 namespace NavfertyExcelAddIn.Info
@@ -55,6 +57,8 @@ namespace NavfertyExcelAddIn.Info
 			root.Controls.Add(CreateLink(UIStrings.Info_Website, WebsiteUrl));
 			root.Controls.Add(CreateLink(UIStrings.Info_FeatureRequest, FeatureRequestUrl));
 			root.Controls.Add(CreateLink(UIStrings.Info_BugReport, BugReportUrl));
+			root.Controls.Add(CreateOpenLogsLink());
+			root.Controls.Add(CreateVerboseLoggingCheckBox());
 			root.Controls.Add(CreateButtonRow());
 
 			Controls.Add(root);
@@ -149,6 +153,31 @@ namespace NavfertyExcelAddIn.Info
 			};
 			row.Controls.Add(copyIcon);
 			return row;
+		}
+
+		private LinkLabel CreateOpenLogsLink()
+		{
+			var link = CreateLink(UIStrings.Info_OpenLogs, null);
+			toolTip.SetToolTip(link, LogSetup.LogDirectory);
+			link.LinkClicked += (s, e) =>
+			{
+				Directory.CreateDirectory(LogSetup.LogDirectory);
+				Process.Start(new ProcessStartInfo(LogSetup.LogDirectory) { UseShellExecute = true });
+			};
+			return link;
+		}
+
+		private CheckBox CreateVerboseLoggingCheckBox()
+		{
+			var checkBox = new CheckBox
+			{
+				Text = UIStrings.Info_VerboseLogging,
+				Checked = LogSetup.IsVerbose,
+				AutoSize = true,
+				Margin = new Padding(0, 4, 0, 0),
+			};
+			checkBox.CheckedChanged += (s, e) => LogSetup.IsVerbose = checkBox.Checked;
+			return checkBox;
 		}
 
 		private Control CreateButtonRow()

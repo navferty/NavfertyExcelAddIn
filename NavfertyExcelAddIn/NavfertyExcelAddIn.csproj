@@ -176,9 +176,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Content Include="NLog.config">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
+    <EmbeddedResource Include="NLog.config" LogicalName="NavfertyExcelAddIn.NLog.config" />
     <None Update="ThisAddIn.Designer.xml">
       <DependentUpon>ThisAddIn.cs</DependentUpon>
     </None>

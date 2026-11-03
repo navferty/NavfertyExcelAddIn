@@ -264,4 +264,10 @@
   <data name="Info_Copied" xml:space="preserve">
     <value>Скопировано в буфер обмена</value>
   </data>
+  <data name="Info_VerboseLogging" xml:space="preserve">
+    <value>Подробный журнал (до перезапуска Excel)</value>
+  </data>
+  <data name="Info_OpenLogs" xml:space="preserve">
+    <value>Открыть папку с журналами</value>
+  </data>
 </root>
