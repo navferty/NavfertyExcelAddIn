@@ -85,9 +85,9 @@ namespace NavfertyExcelAddIn.Undo
 				return true;
 
 			if (x.NewValue is null)
-				return currentValue is null;
+				return currentValue is not null;
 
-			return x.NewValue.Equals(currentValue);
+			return !x.NewValue.Equals(currentValue);
 		}
 
 		private static bool CheckChanges(Worksheet worksheet, AreaUndoItems areaUndoItems)
