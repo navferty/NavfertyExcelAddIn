@@ -44,7 +44,7 @@ jobs:
           SERVER_USER: ${{ secrets.SERVER_USER }}
         run: |
           ssh -i ~/.ssh/id_deploy -o StrictHostKeyChecking=yes "$SERVER_USER@$SERVER_HOST" \
-            'test -d /opt/navferty_net/www"'
+            'test -d "/opt/navferty_net/www"'
 
       # deploy/ holds the add-in files and is excluded; no --delete, nothing is removed on the server
       - name: Upload website to www
