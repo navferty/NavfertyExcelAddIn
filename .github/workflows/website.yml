@@ -21,7 +21,7 @@ jobs:
     runs-on: ubuntu-latest
     environment: production
     env:
-      WWW_DIR: web/navferty_net/www/
+      WWW_DIR: /opt/navferty_net/www/
     steps:
       - uses: actions/checkout@v4
 
@@ -44,7 +44,7 @@ jobs:
           SERVER_USER: ${{ secrets.SERVER_USER }}
         run: |
           ssh -i ~/.ssh/id_deploy -o StrictHostKeyChecking=yes "$SERVER_USER@$SERVER_HOST" \
-            'test -d "$HOME/web/navferty_net/www"'
+            'test -d /opt/navferty_net/www"'
 
       # deploy/ holds the add-in files and is excluded; no --delete, nothing is removed on the server
       - name: Upload website to www

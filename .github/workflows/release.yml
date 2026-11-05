@@ -117,8 +117,8 @@ jobs:
     runs-on: ubuntu-latest
     environment: production
     env:
-      WWW_DIR: web/navferty_net/www/
-      DEPLOY_DIR: web/navferty_net/deploy/
+      WWW_DIR: /opt/navferty_net/www/
+      DEPLOY_DIR: /opt/navferty_net/deploy/
     steps:
       - uses: actions/download-artifact@v4
         with:
@@ -149,7 +149,7 @@ jobs:
           SERVER_USER: ${{ secrets.SERVER_USER }}
         run: |
           ssh -i ~/.ssh/id_deploy -o StrictHostKeyChecking=yes "$SERVER_USER@$SERVER_HOST" \
-            'test -d "$HOME/web/navferty_net/www" && test -d "$HOME/web/navferty_net/deploy"'
+            'test -d "/opt/navferty_net/www" && test -d "/opt/navferty_net/deploy"'
 
       - name: Upload website to www
         env:
