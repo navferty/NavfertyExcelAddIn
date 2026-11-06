@@ -66,9 +66,35 @@
 <li><b>Hard-coded column number.</b> If someone inserts a column in the lookup table, <code>2</code> now points at the wrong one. Check formulas after changing the table structure.</li>
 <li><b>A moving range.</b> When you copy the formula, <code>A2:B6</code> shifts too. Use whole columns (<code>A:B</code>) or lock the range (<code>$A$2:$B$6</code>).</li>
 </ul>
+<h2>XLOOKUP: a modern alternative to VLOOKUP</h2>
+<p>XLOOKUP is available in Excel 2021 and Microsoft 365 and removes several VLOOKUP limitations. It can search in any column and return a value from a column either to its left or right. You do not need to count a column index, exact match is the default, and an optional argument lets you choose what to display when no key is found.</p>
+<h3>Syntax</h3>
+<pre>=XLOOKUP(lookup_value, lookup_array, return_array, [if_not_found], [match_mode], [search_mode])</pre>
+<p>The first three arguments are required: what to look for, where to look, and which range to return a result from. The lookup and return arrays must be the same size. The remaining arguments are optional and set the message for a missing key, the matching rule, and the search direction.</p>
+<h3>Example: look up a currency name by code</h3>
+<p>On the Orders sheet, column <code>F</code> contains a currency code. On the Currencies sheet, codes are in column <code>C</code> and names are in <code>B</code>. VLOOKUP would not work with this column order: the lookup column is to the right of the return column. XLOOKUP takes these ranges separately, so it can look to the left.</p>
+<p><img src="../../images/articles/vlookup/xlookup-orders.png" alt="Orders sheet with currency codes in column F and an empty Currency Name column for the result" loading="lazy" width="1022" height="603"></p>
+<p>On the Currencies sheet, column <code>C</code> contains the keys and column <code>B</code> contains the currency names:</p>
+<p><img src="../../images/articles/vlookup/xlookup-currencies.png" alt="Currency reference table with names in column B and codes in column C" loading="lazy" width="893" height="588"></p>
+<p>In cell <code>G2</code>, start the formula and enter the value to look up: the code in <code>F2</code>.</p>
+<p><img src="../../images/articles/vlookup/xlookup-lookup-value.png" alt="Beginning an XLOOKUP formula with a reference to the currency code in F2" loading="lazy" width="1438" height="607"></p>
+<p>For the lookup array, select the code column, <code>Currencies!C:C</code>:</p>
+<p><img src="../../images/articles/vlookup/xlookup-lookup-array.png" alt="The XLOOKUP formula uses Currencies!C:C as the currency-code lookup array" loading="lazy" width="1430" height="598"></p>
+<p>For the return array, select the names in <code>Currencies!B:B</code>. This column can be to the left of the lookup array:</p>
+<p><img src="../../images/articles/vlookup/xlookup-return-array.png" alt="The XLOOKUP formula uses Currencies!B:B as the return array, to the left of the lookup column" loading="lazy" width="1447" height="601"></p>
+<p>The fourth argument is optional. Enter a clear message, such as <code>"Currency not found"</code>, to display instead of <code>#N/A</code> when a code is missing:</p>
+<p><img src="../../images/articles/vlookup/xlookup-if-not-found.png" alt="The XLOOKUP formula specifies Currency not found for a missing code" loading="lazy" width="1466" height="597"></p>
+<p>The complete formula for cell <code>G2</code> is:</p>
+<pre>=XLOOKUP(F2, Currencies!C:C, Currencies!B:B, "Currency not found")</pre>
+<p>Press Enter and copy the formula down. The missing code <code>AMD</code> displays the message you specified:</p>
+<p><img src="../../images/articles/vlookup/xlookup-result.png" alt="XLOOKUP results with currency names filled in and Currency not found shown for the missing AMD code" loading="lazy" width="1207" height="592"></p>
+<h3>Optional modes</h3>
+<p>If you need something other than an exact match, the fifth argument, <code>match_mode</code>, changes the lookup rule. You can usually omit it: XLOOKUP uses an exact match by default. Use <code>0</code> to explicitly request an exact match; <code>-1</code> for an exact match or the next smaller item; <code>1</code> for an exact match or the next larger item; and <code>2</code> to enable wildcard matching. In supported Microsoft 365 builds, <code>3</code> enables regular-expression matching.</p>
+<p><img src="../../images/articles/vlookup/xlookup-match-mode.png" alt="Excel tooltip listing XLOOKUP match_mode values" loading="lazy" width="1495" height="598"></p>
+<p>The sixth argument, <code>search_mode</code>, sets the direction: <code>1</code> (the default) searches from first to last, while <code>-1</code> searches from last to first. Values <code>2</code> and <code>-2</code> enable binary search and require the data to be sorted in ascending or descending order respectively; leave the default for ordinary lookup lists.</p>
+<p><img src="../../images/articles/vlookup/xlookup-search-model.png" alt="Excel tooltip listing XLOOKUP search_mode values" loading="lazy" width="1557" height="597"></p>
+<p>For example, the result screenshot explicitly sets exact matching and a first-to-last search: <code>=XLOOKUP(F2, Currencies!C:C, Currencies!B:B, "Currency not found", 0, 1)</code>. You can omit the last two arguments when the default exact search is all you need.</p>
 <h2>Alternatives</h2>
-<p><b>XLOOKUP</b> (Excel 2021 and Microsoft 365) removes most of these limits: exact match by default, no column number, can look to the left, and has a built-in "not found" value.</p>
-<pre>=XLOOKUP(D2, Users!A:A, Users!B:B, "not found")</pre>
 <p><b>INDEX and MATCH</b> work in every version and also look in any direction:</p>
 <pre>=INDEX(Users!B:B, MATCH(D2, Users!A:A, 0))</pre>
 <p>If the lookup list is a table (see <a href="best-practices-for-cleaning-data-in-excel.html">cleaning data</a>), you can refer to its columns by name, and the range grows when you add rows.</p>
