@@ -5,6 +5,8 @@ document.addEventListener('click', function (e) {
     }
 });
 
+// test
+
 var yearEl = document.getElementById('current-year');
 if (yearEl) yearEl.textContent = new Date().getFullYear();
 
