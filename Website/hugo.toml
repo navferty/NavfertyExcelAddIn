@@ -4,6 +4,9 @@ defaultContentLanguage = "en"
 defaultContentLanguageInSubdir = true
 enableRobotsTXT = true
 
+[params]
+  defaultLanguage = "en"
+
 [languages]
   [languages.en]
     languageName = "English"
@@ -45,9 +48,6 @@ enableRobotsTXT = true
 [[module.mounts]]
   source = "style.css"
   target = "static/style.css"
-[[module.mounts]]
-  source = "site.js"
-  target = "static/site.js"
 [[module.mounts]]
   source = "favicon.ico"
   target = "static/favicon.ico"

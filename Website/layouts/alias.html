@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="{{ site.Language.Lang }}">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -13,7 +13,7 @@
       var saved;
       try { saved = localStorage.getItem('lng'); } catch (error) { saved = null; }
       var preferences = [saved].concat(navigator.languages || [navigator.language]);
-      var language = 'en';
+      var language = {{ site.Language.Lang | jsonify }};
       for (var i = 0; i < preferences.length; i++) {
         var candidate = String(preferences[i] || '').toLowerCase().split('-')[0];
         if (supported.indexOf(candidate) !== -1) { language = candidate; break; }
@@ -24,7 +24,7 @@
 </head>
 <body>
   <h1>Navferty's Excel Add-In</h1>
-  <nav aria-label="Languages">
+  <nav aria-label="{{ i18n "languageList" }}">
     <ul>{{ range site.Sites }}<li><a href="{{ .Home.RelPermalink }}" lang="{{ .Language.Lang }}">{{ .Language.LanguageName }}</a></li>{{ end }}</ul>
   </nav>
 </body>

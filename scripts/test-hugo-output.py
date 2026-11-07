@@ -1,6 +1,8 @@
 #!/usr/bin/env python3
 """Regression checks for the built bilingual Hugo preview."""
 import sys
+import json
+import tomllib
 import unittest
 from html.parser import HTMLParser
 from pathlib import Path
@@ -14,10 +16,24 @@ class Elements(HTMLParser):
     def __init__(self, path):
         super().__init__(convert_charrefs=True)
         self.tags = []
+        self.scripts = {}
+        self.current_script = None
         self.feed(path.read_text(encoding="utf-8"))
 
     def handle_starttag(self, tag, attrs):
-        self.tags.append((tag, dict(attrs)))
+        attrs = dict(attrs)
+        self.tags.append((tag, attrs))
+        if tag == "script" and attrs.get("id"):
+            self.current_script = attrs["id"]
+            self.scripts[self.current_script] = ""
+
+    def handle_data(self, data):
+        if self.current_script:
+            self.scripts[self.current_script] += data
+
+    def handle_endtag(self, tag):
+        if tag == "script":
+            self.current_script = None
 
     def find(self, tag, **attrs):
         return [
@@ -52,6 +68,27 @@ class HugoOutputTests(unittest.TestCase):
                 self.assertEqual(page.find("a", **{"data-lang": other})[0]["href"], f"/{other}/install/")
                 search = Elements(BUILD / language / "search" / "index.html")
                 self.assertEqual(search.find("input", id="search-query")[0]["name"], "q")
+
+    def test_localization_catalogs_cover_configured_languages(self):
+        config = tomllib.loads((ROOT / "Website" / "hugo.toml").read_text(encoding="utf-8"))
+        language_codes = set(config["languages"])
+        self.assertEqual(config["params"]["defaultLanguage"], config["defaultContentLanguage"])
+        catalogs = {
+            path.stem: tomllib.loads(path.read_text(encoding="utf-8"))
+            for path in (ROOT / "Website" / "i18n").glob("*.toml")
+        }
+        self.assertEqual(set(catalogs), language_codes)
+        keys = set(next(iter(catalogs.values())))
+        for language, catalog in catalogs.items():
+            with self.subTest(language=language):
+                self.assertEqual(set(catalog), keys)
+                page = Elements(BUILD / language / "install" / "index.html")
+                messages = json.loads(page.scripts["site-messages"])
+                self.assertEqual(messages["searchFailed"], catalog["searchFailed"])
+                self.assertFalse(page.find("script", src="/site.js"))
+        client_script = (ROOT / "Website" / "hugo-assets" / "site.js").read_text(encoding="utf-8")
+        self.assertNotIn("=== 'ru'", client_script)
+        self.assertNotIn("=== 'en'", client_script)
 
 
 if __name__ == "__main__":

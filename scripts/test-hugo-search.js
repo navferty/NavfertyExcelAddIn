@@ -15,6 +15,11 @@ async function testSearch() {
         dataset: { index: '/en/search-index.json' },
         addEventListener(type, handler) { if (type === 'submit') submit = handler; }
     };
+    const messages = {
+        searching: 'Recherche…',
+        searchResults: 'Résultats : {count}',
+        searchFailed: 'Échec de la recherche.'
+    };
     const pages = [
         { title: 'Body match', description: 'Guide', content: 'error', url: '/body/' },
         { title: 'Description match', description: 'an error', content: 'guide', url: '/description/' },
@@ -22,10 +27,15 @@ async function testSearch() {
         { title: 'Other Errors', description: 'Find problems', content: 'guide', url: '/second-title/' }
     ];
     const document = {
-        documentElement: { lang: 'en' },
+        documentElement: { lang: 'fr' },
         querySelector(selector) { return selector === '.site-search' ? form : null; },
         getElementById(id) {
-            return { 'search-query': query, 'search-status': status, 'search-results': results }[id] || null;
+            return {
+                'search-query': query,
+                'search-status': status,
+                'search-results': results,
+                'site-messages': { textContent: JSON.stringify(messages) }
+            }[id] || null;
         },
         createElement(tag) {
             return {
@@ -41,14 +51,14 @@ async function testSearch() {
     vm.runInNewContext(fs.readFileSync('Website/hugo-assets/site.js', 'utf8'), context);
     submit({ preventDefault() {} });
     await new Promise(resolve => setImmediate(resolve));
-    assert.equal(status.textContent, 'Results: 4');
+    assert.equal(status.textContent, 'Résultats : 4');
     assert.deepEqual(results.children.map(item => item.children[0].href),
         ['/title/', '/second-title/', '/description/', '/body/']);
 
     query.value = 'find error';
     submit({ preventDefault() {} });
     await new Promise(resolve => setImmediate(resolve));
-    assert.equal(status.textContent, 'Results: 2');
+    assert.equal(status.textContent, 'Résultats : 2');
     assert.deepEqual(results.children.map(item => item.children[0].href), ['/title/', '/second-title/']);
 }
 

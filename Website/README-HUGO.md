@@ -1,28 +1,29 @@
-# Hugo migration preview
+# Website
 
-The existing static site remains the production source. The Hugo site is an
-in-progress migration and must not be deployed until its content, accessibility,
-SEO, and deployment cutover have been reviewed.
+Hugo is the source and build system for the production website. The generated
+site is deployed by `.github/workflows/website.yml` on pushes to `master` and by
+`.github/workflows/release.yml` when a release is published. Both pipelines
+build and validate the same Hugo output before deployment.
 
 Install Hugo Extended 0.123.7, then run:
 
 ```sh
+bash scripts/build-website.sh /tmp/navferty-website
 hugo server --source Website
 ```
 
-To build and check local links:
+The build script checks generated local links, content/navigation markup, and
+search ranking. The deployment pipelines synchronize only the generated site
+to the web root and remove obsolete files from earlier site versions.
+The old `.html` URLs are intentionally not kept or redirected; the published
+pages use Hugo's clean URLs.
 
-```sh
-hugo --source Website --destination /tmp/navferty-hugo-site --gc
-python scripts/verify-hugo.py /tmp/navferty-hugo-site
-python scripts/test-hugo-output.py /tmp/navferty-hugo-site
-node scripts/test-hugo-search.js
-```
-
-The original HTML is retained while converted Markdown is reviewed. The
-one-time conversion script requires `pandoc` and Python Beautiful Soup;
-running it again overwrites the migrated content. Do not run it after editing
-the Markdown unless those edits are backed up.
+To add a language, add its Hugo language configuration, translated content, and
+an `i18n/<language-code>.toml` catalog with the same keys as the existing
+catalogs. The shared templates and JavaScript read translated UI strings from
+those catalogs and enumerate configured languages; they do not branch on
+specific language codes. Keep `params.defaultLanguage` aligned with
+`defaultContentLanguage` for SEO `x-default` links.
 
 The header search opens from its link or the `/` keyboard shortcut. Submitting
 it opens the current language's search results; Escape closes the input.

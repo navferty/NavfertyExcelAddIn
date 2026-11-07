@@ -7,7 +7,7 @@
   {{ with .Description }}<meta name="description" content="{{ . }}">{{ end }}
   <link rel="canonical" href="{{ .Permalink }}">
   {{ range .AllTranslations }}<link rel="alternate" hreflang="{{ .Language.Lang }}" href="{{ .Permalink }}">{{ end }}
-  {{ range where .AllTranslations "Language.Lang" "en" }}<link rel="alternate" hreflang="x-default" href="{{ .Permalink }}">{{ end }}
+  {{ range where .AllTranslations "Language.Lang" .Site.Params.defaultLanguage }}<link rel="alternate" hreflang="x-default" href="{{ .Permalink }}">{{ end }}
   <meta property="og:type" content="{{ if eq .Section "articles" }}article{{ else }}website{{ end }}">
   <meta property="og:site_name" content="{{ .Site.Title }}">
   <meta property="og:title" content="{{ .Title }}">
@@ -27,23 +27,35 @@
   <link rel="icon" href="/favicon.ico">
   <link rel="stylesheet" href="/style.css">
   <link rel="stylesheet" href="/hugo/site.css">
+  {{ $messages := dict
+    "searching" (i18n "searching")
+    "searchResults" (i18n "searchResults")
+    "searchFailed" (i18n "searchFailed")
+    "imageViewer" (i18n "imageViewer")
+    "close" (i18n "close")
+    "enlargeImage" (i18n "enlargeImage")
+    "copySectionLink" (i18n "copySectionLink")
+    "linkCopied" (i18n "linkCopied")
+    "copyLinkFailed" (i18n "copyLinkFailed")
+  }}
+  <script id="site-messages" type="application/json">{{ $messages | jsonify | safeJS }}</script>
 </head>
 <body>
-  <a class="skip-link" href="#content">{{ if eq .Site.Language.Lang "ru" }}Перейти к содержимому{{ else }}Skip to content{{ end }}</a>
+  <a class="skip-link" href="#content">{{ i18n "skipToContent" }}</a>
   <header class="site-header">
     <div class="site-header-inner">
       <a class="brand" href="{{ .Site.Home.RelPermalink }}">{{ .Site.Title }}</a>
-      <nav aria-label="{{ if eq .Site.Language.Lang "ru" }}Основная навигация{{ else }}Main navigation{{ end }}">
-        <a href="{{ .Site.Home.RelPermalink }}#commands">{{ if eq .Site.Language.Lang "ru" }}Команды{{ else }}Commands{{ end }}</a>
-        <a href="{{ .Site.Home.RelPermalink }}articles/">{{ if eq .Site.Language.Lang "ru" }}Статьи{{ else }}Guides{{ end }}</a>
-        <a href="{{ .Site.Home.RelPermalink }}install/">{{ if eq .Site.Language.Lang "ru" }}Установка{{ else }}Install{{ end }}</a>
-        <a href="{{ .Site.Home.RelPermalink }}support/">{{ if eq .Site.Language.Lang "ru" }}Поддержка{{ else }}Support{{ end }}</a>
+      <nav aria-label="{{ i18n "mainNavigation" }}">
+        <a href="{{ .Site.Home.RelPermalink }}#commands">{{ i18n "commands" }}</a>
+        <a href="{{ .Site.Home.RelPermalink }}articles/">{{ i18n "articles" }}</a>
+        <a href="{{ .Site.Home.RelPermalink }}install/">{{ i18n "install" }}</a>
+        <a href="{{ .Site.Home.RelPermalink }}support/">{{ i18n "support" }}</a>
         <div class="header-search">
-          <a class="header-search-toggle" href="{{ .Site.Home.RelPermalink }}search/" aria-controls="header-search-form" aria-expanded="false">{{ if eq .Site.Language.Lang "ru" }}Поиск{{ else }}Search{{ end }}</a>
+          <a class="header-search-toggle" href="{{ .Site.Home.RelPermalink }}search/" aria-controls="header-search-form" aria-expanded="false">{{ i18n "search" }}</a>
           <form id="header-search-form" class="header-search-form" role="search" action="{{ .Site.Home.RelPermalink }}search/" method="get" hidden>
-            <label for="header-search-query">{{ if eq .Site.Language.Lang "ru" }}Поисковый запрос{{ else }}Search query{{ end }}</label>
+            <label for="header-search-query">{{ i18n "searchQuery" }}</label>
             <input id="header-search-query" type="search" name="q" required autocomplete="off">
-            <button type="submit">{{ if eq .Site.Language.Lang "ru" }}Найти{{ else }}Search{{ end }}</button>
+            <button type="submit">{{ i18n "searchSubmit" }}</button>
           </form>
         </div>
         <details class="language-menu">
@@ -60,8 +72,7 @@
       {{ block "main" . }}{{ end }}
     </main>
   </div>
-  <footer class="footer"><p>Navferty &copy; 2021-<span id="current-year">2026</span> &bull; <a href="https://github.com/navferty/NavfertyExcelAddIn" class="footer-link">{{ if eq .Site.Language.Lang "ru" }}Открытый код на GitHub{{ else }}Open Source on GitHub{{ end }}</a></p></footer>
-  <script src="/site.js" defer></script>
+  <footer class="footer"><p>Navferty &copy; 2021-<span id="current-year">2026</span> &bull; <a href="https://github.com/navferty/NavfertyExcelAddIn" class="footer-link">{{ i18n "openSource" }}</a></p></footer>
   <script src="/hugo/site.js" defer></script>
 </body>
 </html>

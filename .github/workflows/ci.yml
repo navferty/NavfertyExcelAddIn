@@ -18,13 +18,7 @@ jobs:
           hugo-version: '0.123.7'
           extended: true
       - name: Build Hugo preview
-        run: hugo --source Website --destination "$RUNNER_TEMP/website" --gc --minify
-      - name: Check generated local links
-        run: python3 scripts/verify-hugo.py "$RUNNER_TEMP/website"
-      - name: Check Hugo content and navigation
-        run: python3 scripts/test-hugo-output.py "$RUNNER_TEMP/website"
-      - name: Check search ranking
-        run: node scripts/test-hugo-search.js
+        run: bash scripts/build-website.sh "$RUNNER_TEMP/website"
 
   build-and-test:
     runs-on: windows-2022

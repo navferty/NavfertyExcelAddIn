@@ -1,6 +1,7 @@
 (function () {
     'use strict';
-    var russian = document.documentElement.lang === 'ru';
+    var messagesElement = document.getElementById('site-messages');
+    var messages = JSON.parse(messagesElement.textContent);
     var searchToggle = document.querySelector('.header-search-toggle');
     var headerForm = document.getElementById('header-search-form');
     var headerInput = document.getElementById('header-search-query');
@@ -36,10 +37,11 @@
         var requestNumber = 0;
         form.addEventListener('submit', function (event) {
             event.preventDefault();
-            var terms = document.getElementById('search-query').value.trim().toLocaleLowerCase().split(/\s+/);
+            var locale = document.documentElement.lang;
+            var terms = document.getElementById('search-query').value.trim().toLocaleLowerCase(locale).split(/\s+/);
             if (!terms[0]) return;
             var request = ++requestNumber;
-            status.textContent = russian ? 'Поиск…' : 'Searching…';
+            status.textContent = messages.searching;
             results.replaceChildren();
             if (!indexPromise) {
                 indexPromise = fetch(form.dataset.index).then(function (response) {
@@ -53,9 +55,9 @@
             indexPromise.then(function (pages) {
                 if (request !== requestNumber) return;
                 var matches = pages.map(function (page, index) {
-                    var title = page.title.toLocaleLowerCase();
-                    var description = page.description.toLocaleLowerCase();
-                    var text = title + ' ' + description + ' ' + page.content.toLocaleLowerCase();
+                    var title = page.title.toLocaleLowerCase(locale);
+                    var description = page.description.toLocaleLowerCase(locale);
+                    var text = title + ' ' + description + ' ' + page.content.toLocaleLowerCase(locale);
                     return {
                         page: page,
                         index: index,
@@ -69,7 +71,7 @@
                     return b.titleMatches - a.titleMatches ||
                         b.descriptionMatches - a.descriptionMatches || a.index - b.index;
                 });
-                status.textContent = russian ? 'Результатов: ' + matches.length : 'Results: ' + matches.length;
+                status.textContent = messages.searchResults.replace('{count}', matches.length);
                 matches.forEach(function (result) {
                     var page = result.page;
                     var item = document.createElement('li');
@@ -84,7 +86,7 @@
             }).catch(function (error) {
                 if (request !== requestNumber) return;
                 console.error('Search failed:', error);
-                status.textContent = russian ? 'Не удалось выполнить поиск. Попробуйте ещё раз.' : 'Search failed. Please try again.';
+                status.textContent = messages.searchFailed;
             });
         });
         var initialQuery = new URLSearchParams(window.location.search).get('q');
@@ -94,13 +96,80 @@
         }
     }
 
+    var year = document.getElementById('current-year');
+    if (year) year.textContent = new Date().getFullYear();
+
+    var article = document.querySelector('#content.article');
+    if (article) {
+        var usedIds = new Set(Array.from(document.querySelectorAll('[id]'), function (element) {
+            return element.id;
+        }));
+
+        article.querySelectorAll('h2, h3, h4').forEach(function (heading) {
+            if (heading.closest('.installation-steps')) return;
+            if (!heading.id) {
+                var slug = heading.textContent
+                    .toLowerCase()
+                    .normalize('NFKD')
+                    .replace(/\p{M}/gu, '')
+                    .replace(/[^\p{L}\p{N}]+/gu, '-')
+                    .replace(/^-|-$/g, '') || 'section';
+                var id = slug;
+                var suffix = 2;
+                while (usedIds.has(id)) id = slug + '-' + suffix++;
+                heading.id = id;
+                usedIds.add(id);
+            }
+
+            var copyButton = document.createElement('button');
+            copyButton.type = 'button';
+            copyButton.className = 'heading-anchor';
+            copyButton.setAttribute('aria-label', messages.copySectionLink);
+            copyButton.title = messages.copySectionLink;
+            copyButton.textContent = '#';
+
+            var copyStatus = document.createElement('span');
+            copyStatus.className = 'heading-anchor-status';
+            copyStatus.setAttribute('aria-live', 'polite');
+            copyStatus.setAttribute('aria-atomic', 'true');
+            copyButton.appendChild(copyStatus);
+            heading.insertBefore(copyButton, heading.firstChild);
+        });
+
+        article.addEventListener('click', function (event) {
+            var button = event.target.closest('.heading-anchor');
+            if (!button) return;
+
+            var heading = button.parentElement;
+            var link = new URL(window.location.href);
+            link.hash = heading.id;
+            var copyStatus = button.querySelector('.heading-anchor-status');
+
+            Promise.resolve().then(function () {
+                if (!navigator.clipboard) throw new Error('Clipboard access is unavailable.');
+                return navigator.clipboard.writeText(link.href);
+            }).then(function () {
+                copyStatus.textContent = messages.linkCopied;
+            }).catch(function (error) {
+                console.error('Could not copy the section link.', error);
+                copyStatus.textContent = messages.copyLinkFailed;
+            });
+        });
+
+        var fragment = window.location.hash.slice(1);
+        var target = Array.from(article.querySelectorAll('[id]')).find(function (element) {
+            return element.id === fragment || encodeURIComponent(element.id) === fragment;
+        });
+        if (target) target.scrollIntoView();
+    }
+
     if (typeof HTMLDialogElement === 'undefined' || !HTMLDialogElement.prototype.showModal) return;
     var dialog = document.createElement('dialog');
     dialog.className = 'image-dialog';
-    dialog.setAttribute('aria-label', russian ? 'Просмотр изображения' : 'Image viewer');
+    dialog.setAttribute('aria-label', messages.imageViewer);
     var close = document.createElement('button');
     close.type = 'button';
-    close.textContent = russian ? 'Закрыть' : 'Close';
+    close.textContent = messages.close;
     var enlarged = document.createElement('img');
     var trigger;
     dialog.append(close, enlarged);
@@ -117,7 +186,7 @@
         var button = document.createElement('button');
         button.type = 'button';
         button.className = 'image-open';
-        button.setAttribute('aria-label', (russian ? 'Увеличить изображение: ' : 'Enlarge image: ') + image.alt);
+        button.setAttribute('aria-label', messages.enlargeImage + image.alt);
         image.parentNode.insertBefore(button, image);
         button.appendChild(image);
         button.addEventListener('click', function () {

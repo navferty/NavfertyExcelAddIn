@@ -6,6 +6,10 @@ on:
     branches: [master]
     paths:
       - Website/**
+      - scripts/build-website.sh
+      - scripts/verify-hugo.py
+      - scripts/test-hugo-output.py
+      - scripts/test-hugo-search.js
       - .github/workflows/website.yml
 
 permissions:
@@ -22,8 +26,17 @@ jobs:
     environment: production
     env:
       WWW_DIR: /opt/navferty_net/www/
+      SITE_DIR: ${{ runner.temp }}/website
     steps:
       - uses: actions/checkout@v4
+
+      - uses: peaceiris/actions-hugo@v3
+        with:
+          hugo-version: '0.123.7'
+          extended: true
+
+      - name: Build and verify Hugo site
+        run: bash scripts/build-website.sh "$SITE_DIR"
 
       - name: Configure SSH
         env:
@@ -46,15 +59,12 @@ jobs:
           ssh -i ~/.ssh/id_deploy -o StrictHostKeyChecking=yes "$SERVER_USER@$SERVER_HOST" \
             'test -d "/opt/navferty_net/www"'
 
-      # deploy/ holds the add-in files and is excluded; no --delete, nothing is removed on the server
-      - name: Upload website to www
+      # The generated Hugo directory is the complete website; remove obsolete legacy pages.
+      - name: Deploy Hugo site to www
         env:
           SERVER_HOST: ${{ secrets.SERVER_HOST }}
           SERVER_USER: ${{ secrets.SERVER_USER }}
         run: |
-          rsync -rltvz --no-perms --no-owner --no-group --exclude='deploy/' \
-            --exclude='content/' --exclude='layouts/' --exclude='hugo-assets/' \
-            --exclude='public/' --exclude='resources/' --exclude='README-HUGO.md' \
-            --exclude='hugo.toml' --exclude='.hugo_build.lock' \
+          rsync -rltvz --delete-delay --no-perms --no-owner --no-group \
             -e "ssh -i $HOME/.ssh/id_deploy -o StrictHostKeyChecking=yes" \
-            Website/ "$SERVER_USER@$SERVER_HOST:$WWW_DIR"
+            "$SITE_DIR/" "$SERVER_USER@$SERVER_HOST:$WWW_DIR"
