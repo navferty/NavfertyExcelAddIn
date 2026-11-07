@@ -16,4 +16,10 @@ Unmerge cells while filling each cell with the original merged value.
 
 </div>
 
+## How to use
+
+Select cells that include the merged areas and click **Unmerge**. For example, if `A1:A3` is merged and contains `North`, the command unmerges it and fills `A1`, `A2` and `A3` with `North`.
+
+The entire merged area is processed even when the selection includes only part of it. The original top-left cell's formula is assigned to every cell in the area, so review formula results as well as values. Save a copy before making changes.
+
 The add-in is free and open source. [Installation instructions](/en/install/).

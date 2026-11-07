@@ -22,4 +22,12 @@ Automatically color-code duplicate values in the selected range. Different color
 
 </div>
 
+## How to use
+
+Select the cells to compare, then click **Colorize Duplicates**. For `apple`, `pear`, `apple`, both `apple` cells receive the same fill; a different repeated value receives another color.
+
+Comparison ignores letter case and skips empty or whitespace-only values. It compares individual cell values across the entire selection, not complete rows. Colors are drawn from a finite palette and can repeat when there are many groups.
+
+**Important:** Existing cell fills are changed for duplicates. This is a one-time formatting operation, not a live rule; rerun it after the data changes and review existing colors.
+
 The add-in is free and open source. [Installation instructions](/en/install/).

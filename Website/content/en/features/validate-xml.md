@@ -1,6 +1,6 @@
 {
   "title": "Validate XML with XSD",
-  "description": "Validate an XML file against an XSD schema. A detailed error report will be created in a new workbook.",
+  "description": "Validate an XML file against XSD schemas and review reported issues in Excel.",
   "image": "https://navferty.net/images/ValidateXml1.png"
 }
 
@@ -8,7 +8,7 @@
 
 # <img alt="" src="/images/icons/validateXml.png" class="icons" width="64" height="64" />Validate XML with XSD
 
-Validate an XML file against an XSD schema. A detailed error report will be created in a new workbook.
+Validate an XML file against one or more XSD schemas. If issues are reported, a detailed report is created in a new workbook.
 
 <div class="shots">
 
@@ -33,5 +33,13 @@ Validate an XML file against an XSD schema. A detailed error report will be crea
 **Related guide:** [Validating XML against XSD inside Excel](/en/articles/validate-xml-against-xsd-in-excel/)
 
 </div>
+
+## How to use
+
+Click **Validate XML with XSD**, select one XML file, then select the XSD file or files that make up the schema. If validation reports issues, the new workbook lists severity, element, value and message. If there are no reported issues, a success message appears instead.
+
+For example, a text value where an integer is required produces a report identifying the element and explaining the type mismatch. Fix the XML and run validation again.
+
+Validation checks the selected file against the supplied schemas; it does not repair it or verify business meaning. Missing, malformed or incompatible files can prevent validation.
 
 The add-in is free and open source. [Installation instructions](/en/install/).

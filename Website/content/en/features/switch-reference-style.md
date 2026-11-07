@@ -16,4 +16,10 @@ Switches the way cells are referenced in formulas between the A1 style (`=B2*C2`
 
 </div>
 
+## How to use
+
+Click **Reference Style (A1/R1C1)** to switch the current Excel reference style; click again to switch back. For example, a reference one column to the left can be written as `A1` in A1 notation or `RC[-1]` in R1C1 notation, depending on the formula's location.
+
+This changes the notation Excel displays and accepts, not the underlying calculation. The setting is applied to the Excel application, so it can affect other open workbooks as well.
+
 The add-in is free and open source. [Installation instructions](/en/install/).

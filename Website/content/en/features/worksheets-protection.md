@@ -22,4 +22,12 @@ Set or remove protection on multiple worksheets at once.
 
 </div>
 
+## How to use
+
+Open the workbook and click **Worksheets Protection**. Choose **Set** or **Clear**, select the listed worksheets, optionally enter a password, and click **Execute**. The list shows sheets eligible for the selected action.
+
+For example, choose **Set**, select two unprotected sheets and enter a password to protect both. To clear password-protected sheets, provide the appropriate password. If a sheet fails, an error is shown and the dialog remains open for review.
+
+This command operates on worksheet protection, not file encryption. A password is optional when setting protection; keep any password you use in a safe place.
+
 The add-in is free and open source. [Installation instructions](/en/install/).

@@ -34,7 +34,7 @@ Complete transliteration of Cyrillic alphabet to English. For example: "Ж" → 
 
 ## <img alt="" src="/images/icons/replaceChars.png" class="icons" width="64" height="64" /> Replace Chars
 
-Replace only visually similar letters: А↔A, В↔B, Е↔E, К↔K, М↔M, Н↔H, О↔O, Р↔P, С↔C, Т↔T, У↔Y, Х↔X.
+Replace visually similar Cyrillic letters with Latin letters: А→A, В→B, Е→E, К→K, М→M, Н→H, О→O, Р→P, С→C, Т→T, У→Y, Х→X.
 
 <div class="shots">
 
@@ -45,5 +45,11 @@ Replace only visually similar letters: А↔A, В↔B, Е↔E, К↔K, М↔M, �
 </div>
 
 </div>
+
+## How to use
+
+Select the text cells and choose an option from **Replace**. **With Transliteration** converts Russian Cyrillic letters according to the displayed mapping; for example, `Жук` becomes `Zhuk`. **Replace Chars** changes only look-alike Cyrillic characters to Latin: `СОС` becomes `COC`. It does not convert Latin letters back to Cyrillic.
+
+**Important:** Transliteration is not translation, and characters outside the supported mapping may not be retained. Review names against the required standard. The command writes values back to the selection and can replace formulas with their results; save a copy first.
 
 The add-in is free and open source. [Installation instructions](/en/install/).

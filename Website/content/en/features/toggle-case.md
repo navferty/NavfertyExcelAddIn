@@ -16,4 +16,12 @@ Cycle through text case transformations: `Abcde` → `abcde` → `ABCDE`
 
 </div>
 
+## How to use
+
+Select the text cells and click **Text Case**. The first selected text value containing letters determines the target case for the whole selection: lowercase changes to uppercase, uppercase to title case, and mixed case to lowercase.
+
+For example, repeated clicks on `example text` produce `EXAMPLE TEXT`, then `Example Text`, then `example text`. A single letter alternates between uppercase and lowercase.
+
+**Important:** Mixed selections are not cycled independently. The operation writes values back to the selection and can replace formulas with their results; work on a copy or select text cells only.
+
 The add-in is free and open source. [Installation instructions](/en/install/).

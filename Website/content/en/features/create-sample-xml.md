@@ -77,4 +77,12 @@ Generate a sample XML file from an XSD schema to visualize the structure.
 
 </div>
 
+## How to use
+
+Click **XML from XSD**, select an XSD schema, then choose a new XML output filename. The add-in writes an indented UTF-8 sample file; open it in a text or XML editor to inspect the generated elements and attributes.
+
+For example, a purchase-order schema can produce a sample with `PurchaseOrder` and `ShipTo` elements, as shown above. The sample illustrates the schema structure, not real order data.
+
+Choose a filename that does not already exist. Review generated values and validate the sample against the intended schema before using it as a template for an integration.
+
 The add-in is free and open source. [Installation instructions](/en/install/).
