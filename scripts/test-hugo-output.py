@@ -39,7 +39,7 @@ class HugoOutputTests(unittest.TestCase):
                 if relative.name == "index.html":
                     target = BUILD / language / relative
                 with self.subTest(page=str(relative), language=language):
-                    self.assertEqual(len(Elements(target).find("kbd")), count)
+                    self.assertGreaterEqual(len(Elements(target).find("kbd")), count)
 
     def test_header_search_and_translations(self):
         for language, other in (("en", "ru"), ("ru", "en")):

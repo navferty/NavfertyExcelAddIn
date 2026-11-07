@@ -12,6 +12,18 @@ A practical set of shortcuts for editing, navigating, selecting, filling and pas
 
 Most of the time saved with the keyboard comes from a small set of shortcuts used constantly. These are grouped by what you are doing. Learn a few from one group, use them for a week, then add more.
 
+## Ribbon shortcuts with Alt KeyTips
+
+In desktop Excel for Windows, press and release <kbd>Alt</kbd> to show small KeyTip labels for the ribbon tabs and other controls:
+
+<img src="/images/articles/excel-keyboard-shortcuts/alt-keytips-en.png" alt="Excel showing KeyTips for ribbon tabs after pressing Alt, including H for Home" width="610" height="229" loading="lazy">
+
+Press the letter shown for a tab to open it. Excel then displays new KeyTips for that tab's commands; follow the labels one step at a time. For example, in English Excel, select a cell in a column and press <kbd>Alt</kbd>, <kbd>H</kbd>, <kbd>O</kbd>, <kbd>I</kbd> in sequence to AutoFit the column width. Release each key before pressing the next; do not hold them all together. Press <kbd>Esc</kbd> to back out.
+
+The add-in also has a ribbon KeyTip: press <kbd>Alt</kbd>, <kbd>Z</kbd>, <kbd>X</kbd> to open **Navferty's Tools**, then follow the displayed labels to choose a command.
+
+KeyTip letters can differ with the Excel interface language and version. Use the labels shown in your installation rather than assuming an English sequence works everywhere.
+
 ## Editing a cell
 
 - <kbd>F2</kbd> – edit the cell in place, with the cursor at the end of the text. Press it again to switch between "enter" and "edit" modes, where the arrow keys move the cursor or select another cell.
@@ -62,6 +74,6 @@ Most of the time saved with the keyboard comes from a small set of shortcuts use
 - <kbd>F12</kbd> – Save As.
 - <kbd>Ctrl+S</kbd> – save. Worth pressing every few minutes.
 
-Shortcuts are the same in English and Russian Excel unless noted. On a Mac most <kbd>Ctrl</kbd> shortcuts use <kbd>Cmd</kbd>, and some differ, so check the Excel help for your version.
+Many shortcuts are the same in English and Russian Excel, but ribbon KeyTips can differ. On a Mac most <kbd>Ctrl</kbd> shortcuts use <kbd>Cmd</kbd>, and some differ, so check the Excel help for your version.
 
 Related: [Automating routine Excel tasks without VBA](/en/articles/automating-excel-tasks-without-vba/).
