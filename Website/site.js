@@ -39,7 +39,10 @@ if (article) {
             : 'Copy link to this section';
         copyButton.setAttribute('aria-label', copyLabel);
         copyButton.title = copyLabel;
-        copyButton.textContent = '#';
+        var icon = document.createElement('span');
+        icon.setAttribute('aria-hidden', 'true');
+        icon.textContent = '#';
+        copyButton.appendChild(icon);
 
         var status = document.createElement('span');
         status.className = 'heading-anchor-status';
@@ -49,6 +52,8 @@ if (article) {
         heading.insertBefore(copyButton, heading.firstChild);
     });
 
+    var copyTimers = new WeakMap();
+    var copyAttempts = new WeakMap();
     article.addEventListener('click', function (event) {
         var button = event.target.closest('.heading-anchor');
         if (!button) return;
@@ -57,16 +62,29 @@ if (article) {
         var link = new URL(window.location.href);
         link.hash = heading.id;
         var status = button.querySelector('.heading-anchor-status');
+        var icon = button.querySelector('[aria-hidden]');
+        var attempt = (copyAttempts.get(button) || 0) + 1;
+        copyAttempts.set(button, attempt);
+        clearTimeout(copyTimers.get(button));
+        icon.textContent = '#';
+        status.textContent = '';
 
         Promise.resolve().then(function () {
             if (!navigator.clipboard) throw new Error('Clipboard access is unavailable.');
             return navigator.clipboard.writeText(link.href);
         }).then(function () {
+            if (copyAttempts.get(button) !== attempt) return;
+            icon.textContent = '\u2713';
             status.textContent = document.documentElement.lang === 'ru'
                 ? 'Ссылка скопирована'
                 : 'Link copied';
+            copyTimers.set(button, setTimeout(function () {
+                icon.textContent = '#';
+                copyTimers.delete(button);
+            }, 2000));
         }).catch(function (error) {
             console.error('Could not copy the section link.', error);
+            if (copyAttempts.get(button) !== attempt) return;
             status.textContent = document.documentElement.lang === 'ru'
                 ? 'Не удалось скопировать ссылку. Скопируйте её из адресной строки.'
                 : 'Could not copy link. Please copy it from the address bar.';
