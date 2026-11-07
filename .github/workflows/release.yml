@@ -156,7 +156,10 @@ jobs:
           SERVER_HOST: ${{ secrets.SERVER_HOST }}
           SERVER_USER: ${{ secrets.SERVER_USER }}
         run: |
-          flags=(-rltvz --no-perms --no-owner --no-group --exclude='deploy/')
+          flags=(-rltvz --no-perms --no-owner --no-group --exclude='deploy/'
+            --exclude='content/' --exclude='layouts/' --exclude='hugo-assets/'
+            --exclude='public/' --exclude='resources/' --exclude='README-HUGO.md'
+            --exclude='hugo.toml' --exclude='.hugo_build.lock')
           rsync "${flags[@]}" -e "ssh -i $HOME/.ssh/id_deploy -o StrictHostKeyChecking=yes" \
             website/ "$SERVER_USER@$SERVER_HOST:$WWW_DIR"
 

@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Navferty's Excel Add-In</title>
+  <link rel="canonical" href="https://navferty.net/">
+  {{ range site.Sites }}<link rel="alternate" hreflang="{{ .Language.Lang }}" href="{{ .Home.Permalink }}">{{ end }}
+  <link rel="alternate" hreflang="x-default" href="{{ .Permalink }}">
+  <script>
+    (function () {
+      var supported = [{{ range $i, $site := site.Sites }}{{ if $i }},{{ end }}{{ $site.Language.Lang }}{{ end }}];
+      var saved;
+      try { saved = localStorage.getItem('lng'); } catch (error) { saved = null; }
+      var preferences = [saved].concat(navigator.languages || [navigator.language]);
+      var language = 'en';
+      for (var i = 0; i < preferences.length; i++) {
+        var candidate = String(preferences[i] || '').toLowerCase().split('-')[0];
+        if (supported.indexOf(candidate) !== -1) { language = candidate; break; }
+      }
+      location.replace('/' + language + '/');
+    }());
+  </script>
+</head>
+<body>
+  <h1>Navferty's Excel Add-In</h1>
+  <nav aria-label="Languages">
+    <ul>{{ range site.Sites }}<li><a href="{{ .Home.RelPermalink }}" lang="{{ .Language.Lang }}">{{ .Language.LanguageName }}</a></li>{{ end }}</ul>
+  </nav>
+</body>
+</html>

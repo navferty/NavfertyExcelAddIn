@@ -1,0 +1,22 @@
+{{ define "main" }}
+  {{ .Content }}
+  {{ if eq .Section "features" }}
+    <h2>{{ if eq .Site.Language.Lang "ru" }}Другие команды{{ else }}Other commands{{ end }}</h2>
+    <ul class="other-commands">
+      {{ $current := .RelPermalink }}
+      {{ range where .Site.RegularPages "Section" "features" }}
+        {{ if ne .RelPermalink $current }}<li><a href="{{ .RelPermalink }}">{{ .Title }}</a></li>{{ end }}
+      {{ end }}
+    </ul>
+  {{ end }}
+  {{ if eq .File.TranslationBaseName "search" }}
+    <form class="site-search" role="search" data-index="{{ .Site.Home.RelPermalink }}search-index.json">
+      <label for="search-query">{{ if eq .Site.Language.Lang "ru" }}Поисковый запрос{{ else }}Search query{{ end }}</label>
+      <input id="search-query" type="search" required autocomplete="off">
+      <button type="submit">{{ if eq .Site.Language.Lang "ru" }}Найти{{ else }}Search{{ end }}</button>
+    </form>
+    <p id="search-status" role="status" aria-live="polite"></p>
+    <ul id="search-results"></ul>
+    <noscript>{{ if eq .Site.Language.Lang "ru" }}Для поиска необходим JavaScript.{{ else }}Search requires JavaScript.{{ end }}</noscript>
+  {{ end }}
+{{ end }}

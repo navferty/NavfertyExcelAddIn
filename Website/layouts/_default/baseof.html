@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="{{ .Site.Language.Lang }}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{ if .IsHome }}{{ .Title }}{{ else }}{{ .Title }} - {{ .Site.Title }}{{ end }}</title>
+  {{ with .Description }}<meta name="description" content="{{ . }}">{{ end }}
+  <link rel="canonical" href="{{ .Permalink }}">
+  {{ range .AllTranslations }}<link rel="alternate" hreflang="{{ .Language.Lang }}" href="{{ .Permalink }}">{{ end }}
+  {{ range where .AllTranslations "Language.Lang" "en" }}<link rel="alternate" hreflang="x-default" href="{{ .Permalink }}">{{ end }}
+  <meta property="og:type" content="{{ if eq .Section "articles" }}article{{ else }}website{{ end }}">
+  <meta property="og:site_name" content="{{ .Site.Title }}">
+  <meta property="og:title" content="{{ .Title }}">
+  <meta property="og:description" content="{{ .Description }}">
+  <meta property="og:url" content="{{ .Permalink }}">
+  {{ with .Params.image }}<meta property="og:image" content="{{ . }}">{{ end }}
+  <meta name="twitter:card" content="summary_large_image">
+  {{ if eq .Section "articles" }}
+    {{ if eq .Kind "page" }}
+      {{ $schema := dict "@context" "https://schema.org" "@type" "Article" "headline" .Title "description" .Description "inLanguage" .Site.Language.Lang "mainEntityOfPage" .Permalink "author" (dict "@type" "Person" "name" "Andrey Deev" "url" "https://github.com/navferty") }}
+      <script type="application/ld+json">{{ $schema | jsonify | safeJS }}</script>
+    {{ end }}
+  {{ else if .IsHome }}
+    {{ $schema := dict "@context" "https://schema.org" "@type" "SoftwareApplication" "name" "Navferty's Excel Add-In" "applicationCategory" "BusinessApplication" "operatingSystem" "Windows" "inLanguage" .Site.Language.Lang "description" .Description "url" .Permalink "downloadUrl" "https://deploy.navferty.net/setup.zip" "isAccessibleForFree" true "offers" (dict "@type" "Offer" "price" "0" "priceCurrency" "USD") }}
+    <script type="application/ld+json">{{ $schema | jsonify | safeJS }}</script>
+  {{ end }}
+  <link rel="icon" href="/favicon.ico">
+  <link rel="stylesheet" href="/style.css">
+  <link rel="stylesheet" href="/hugo/site.css">
+</head>
+<body>
+  <a class="skip-link" href="#content">{{ if eq .Site.Language.Lang "ru" }}Перейти к содержимому{{ else }}Skip to content{{ end }}</a>
+  <header class="site-header">
+    <div class="site-header-inner">
+      <a class="brand" href="{{ .Site.Home.RelPermalink }}">{{ .Site.Title }}</a>
+      <nav aria-label="{{ if eq .Site.Language.Lang "ru" }}Основная навигация{{ else }}Main navigation{{ end }}">
+        <a href="{{ .Site.Home.RelPermalink }}#commands">{{ if eq .Site.Language.Lang "ru" }}Команды{{ else }}Commands{{ end }}</a>
+        <a href="{{ .Site.Home.RelPermalink }}articles/">{{ if eq .Site.Language.Lang "ru" }}Статьи{{ else }}Guides{{ end }}</a>
+        <a href="{{ .Site.Home.RelPermalink }}install/">{{ if eq .Site.Language.Lang "ru" }}Установка{{ else }}Install{{ end }}</a>
+        <a href="{{ .Site.Home.RelPermalink }}support/">{{ if eq .Site.Language.Lang "ru" }}Поддержка{{ else }}Support{{ end }}</a>
+        <a href="{{ .Site.Home.RelPermalink }}search/">{{ if eq .Site.Language.Lang "ru" }}Поиск{{ else }}Search{{ end }}</a>
+        <details class="language-menu">
+          <summary>{{ .Site.Language.LanguageName }}</summary>
+          <ul>
+            {{ range .AllTranslations }}<li><a href="{{ .RelPermalink }}" lang="{{ .Language.Lang }}" hreflang="{{ .Language.Lang }}" data-lang="{{ .Language.Lang }}"{{ if eq $.Site.Language.Lang .Language.Lang }} aria-current="page"{{ end }}>{{ .Language.LanguageName }}</a></li>{{ end }}
+          </ul>
+        </details>
+      </nav>
+    </div>
+  </header>
+  <div id="container">
+    <main id="content" class="{{ if .IsHome }}home{{ else }}article{{ end }}">
+      {{ block "main" . }}{{ end }}
+    </main>
+  </div>
+  <footer class="footer"><p>Navferty &copy; 2021-<span id="current-year">2026</span> &bull; <a href="https://github.com/navferty/NavfertyExcelAddIn" class="footer-link">{{ if eq .Site.Language.Lang "ru" }}Открытый код на GitHub{{ else }}Open Source on GitHub{{ end }}</a></p></footer>
+  <script src="/site.js" defer></script>
+  <script src="/hugo/site.js" defer></script>
+</body>
+</html>

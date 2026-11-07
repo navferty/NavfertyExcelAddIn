@@ -333,3 +333,6 @@ NavfertyExcelAddIn/Navferty.pfx
 
 # Website configuration file for local debugging
 /Website/Web.config
+/Website/.hugo_build.lock
+/Website/public/
+/Website/resources/

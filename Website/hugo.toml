@@ -1,0 +1,62 @@
+baseURL = "https://navferty.net/"
+title = "Navferty's Excel Add-In"
+defaultContentLanguage = "en"
+defaultContentLanguageInSubdir = true
+enableRobotsTXT = true
+
+[languages]
+  [languages.en]
+    languageName = "English"
+    languageCode = "en"
+    contentDir = "content/en"
+    weight = 1
+  [languages.ru]
+    languageName = "Русский"
+    languageCode = "ru"
+    contentDir = "content/ru"
+    weight = 2
+
+[markup.goldmark.renderer]
+  unsafe = true
+
+[outputs]
+  home = ["HTML", "RSS", "SearchIndex"]
+
+[outputFormats.SearchIndex]
+  mediaType = "application/json"
+  baseName = "search-index"
+  isPlainText = true
+  notAlternative = true
+
+[[module.mounts]]
+  source = "content/en"
+  target = "content"
+  lang = "en"
+[[module.mounts]]
+  source = "content/ru"
+  target = "content"
+  lang = "ru"
+[[module.mounts]]
+  source = "layouts"
+  target = "layouts"
+[[module.mounts]]
+  source = "images"
+  target = "static/images"
+[[module.mounts]]
+  source = "style.css"
+  target = "static/style.css"
+[[module.mounts]]
+  source = "site.js"
+  target = "static/site.js"
+[[module.mounts]]
+  source = "favicon.ico"
+  target = "static/favicon.ico"
+[[module.mounts]]
+  source = "digital-certificate.jpg"
+  target = "static/digital-certificate.jpg"
+[[module.mounts]]
+  source = "cert-install.png"
+  target = "static/cert-install.png"
+[[module.mounts]]
+  source = "hugo-assets"
+  target = "static/hugo"

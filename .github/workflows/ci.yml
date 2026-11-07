@@ -9,6 +9,19 @@ permissions:
   contents: read
 
 jobs:
+  website-preview:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: peaceiris/actions-hugo@v3
+        with:
+          hugo-version: '0.123.7'
+          extended: true
+      - name: Build Hugo preview
+        run: hugo --source Website --destination "$RUNNER_TEMP/website" --gc --minify
+      - name: Check generated local links
+        run: python3 scripts/verify-hugo.py "$RUNNER_TEMP/website"
+
   build-and-test:
     runs-on: windows-2022
     steps:
