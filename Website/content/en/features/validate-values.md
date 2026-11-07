@@ -10,11 +10,11 @@
 
 Check cell values against specific formats:
 
-- [x] Number
-- [x] Date
-- [x] TIN of an individual (12 digits, with verification digits)
-- [x] TIN of a legal entity (10 digits, with verification digit)
-- [x] Text checked against the add-in's XML-text character filter
+- Number
+- Date
+- TIN of an individual (12 digits, with verification digits)
+- TIN of a legal entity (10 digits, with verification digit)
+- Text checked against the add-in's XML-text character filter
 
 *Note: Valid TIN format doesn't guarantee the organization or individual exists.*
 

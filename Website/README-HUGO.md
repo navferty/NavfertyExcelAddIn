@@ -25,6 +25,10 @@ those catalogs and enumerate configured languages; they do not branch on
 specific language codes. Keep `params.defaultLanguage` aligned with
 `defaultContentLanguage` for SEO `x-default` links.
 
+Give informative images concise, contextual `alt` text. Use an empty `alt` only
+for decorative icons whose meaning is already conveyed by nearby text; the
+generated-site tests enforce this distinction.
+
 The header search opens from its link or the `/` keyboard shortcut. Submitting
 it opens the current language's search results; Escape closes the input.
 Matches in titles rank first, followed by matches in descriptions and page text.

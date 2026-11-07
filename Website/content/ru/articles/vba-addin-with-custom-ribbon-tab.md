@@ -20,7 +20,7 @@
 
 Понадобятся: Excel, 7-Zip и Visual Studio Code. Последние два необязательны: подойдёт любой архиватор с поддержкой zip и любой текстовый редактор, умеющий сохранять в UTF-8 (если вы хотите использовать кириллицу). Желательно также иметь базовое представление о формате XML.
 
-Код и готовую книгу xlsm можно найти на GitHub: <a href="https://github.com/navferty/SampleExcelXlamAddin" rel="noopener" target="_blank">https://github.com/navferty/SampleExcelXlamAddin</a>
+Код и готовую книгу XLSM можно найти в [репозитории SampleExcelXlamAddin на GitHub](https://github.com/navferty/SampleExcelXlamAddin).
 
 ## Подготовка книги
 
@@ -163,7 +163,7 @@
 
 <img src="/images/articles/vba-addin-with-custom-ribbon-tab/1578831453120134147.png" loading="lazy" width="700" height="108" alt="Примеры элементов Custom UI на ленте" />
 
-Разметка и код модуля VBA приведены ниже, их же можно найти на <a href="https://github.com/navferty/SampleExcelXlamAddin" rel="noopener" target="_blank">GitHub</a>.
+Разметка и код модуля VBA приведены ниже, их же можно найти в [репозитории SampleExcelXlamAddin на GitHub](https://github.com/navferty/SampleExcelXlamAddin).
 
 **customUI.xml**
 

@@ -34,6 +34,6 @@
 
 ## Исходный код
 
-Репозиторий с книгой, примерами и исходным кодом: <a href="https://github.com/navferty/NBU-VBA-Currencies" rel="noopener" target="_blank">https://github.com/navferty/NBU-VBA-Currencies</a>. Если найдёте ошибки или будут идеи по доработке, пишите в issues.
+В [репозитории NBU-VBA-Currencies на GitHub](https://github.com/navferty/NBU-VBA-Currencies) лежат книга, примеры и исходный код. Если найдёте ошибки или будут идеи по доработке, оставляйте их в issues.
 
 Статья впервые опубликована на <a href="https://pikabu.ru/story/kursyi_valyut_s_sayta_nbu_na_vba_7565687" rel="noopener" target="_blank">Пикабу</a>.

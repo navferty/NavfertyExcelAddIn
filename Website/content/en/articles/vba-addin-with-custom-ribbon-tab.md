@@ -20,7 +20,7 @@ If you wish, the add-in can be installed permanently so you do not have to open 
 
 You will need Excel, 7-Zip and Visual Studio Code. The last two are optional: any archiver that supports zip and any text editor that can save UTF-8 (if you want to use Cyrillic) will do. A basic understanding of XML helps too.
 
-The code and the finished xlsm workbook are on GitHub: <a href="https://github.com/navferty/SampleExcelXlamAddin" rel="noopener" target="_blank">https://github.com/navferty/SampleExcelXlamAddin</a>
+The code and finished XLSM workbook are in the [SampleExcelXlamAddin GitHub repository](https://github.com/navferty/SampleExcelXlamAddin).
 
 ## Preparing the workbook
 
@@ -163,7 +163,7 @@ Done. The add-in can now be used with any document, and sharing it with colleagu
 
 <img src="/images/articles/vba-addin-with-custom-ribbon-tab/1578831453120134147.png" loading="lazy" width="700" height="108" alt="Examples of Custom UI controls on the ribbon" />
 
-The markup and the VBA module code are below; you can also find them on <a href="https://github.com/navferty/SampleExcelXlamAddin" rel="noopener" target="_blank">GitHub</a>.
+The markup and VBA module code are below and in the [SampleExcelXlamAddin GitHub repository](https://github.com/navferty/SampleExcelXlamAddin).
 
 **customUI.xml**
 

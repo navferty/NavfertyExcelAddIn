@@ -10,7 +10,7 @@
 
 How to load exchange rates from the Bank of Russia (CBR) XML API into Excel with VBA and a user-defined function that refreshes automatically.
 
-A common request from Excel users is a macro that loads exchange rates from the Bank of Russia (CBR) website, with formulas that refresh themselves and pick up the current rate for today. A ready-made solution is available on GitHub: <a href="https://github.com/navferty/CBR-VBA-Currencies" rel="noopener" target="_blank">https://github.com/navferty/CBR-VBA-Currencies</a>. Below is how it is built, step by step.
+A common request from Excel users is a macro that loads exchange rates from the Bank of Russia (CBR) website, with formulas that refresh themselves and pick up the current rate for today. A ready-made solution is available in the [CBR-VBA-Currencies GitHub repository](https://github.com/navferty/CBR-VBA-Currencies). Below is how it is built, step by step.
 
 <img src="/images/articles/currency-rates-from-cbr-vba/1590231961122251017.webp" loading="lazy" width="650" height="427" alt="The Bank of Russia page describing the exchange rate API" />
 
@@ -54,7 +54,7 @@ Let us create a simple function that sends the request and loads the response in
         Set RequestGetXml = resultXmlDocument
     End Function
 
-The XmlHttpRequest mechanism, including authorization examples, is described well here: <a href="https://codingislove.com/http-requests-excel-vba/" rel="noopener" target="_blank">https://codingislove.com/http-requests-excel-vba/</a>.
+The XmlHttpRequest mechanism, including authorization examples, is described in this [guide to HTTP requests in Excel VBA](https://codingislove.com/http-requests-excel-vba/).
 
 The `Stop` statement pauses execution so you can inspect the received XML document in the Locals window.
 
@@ -222,6 +222,6 @@ Let us check that the rate is loaded when the workbook is opened:
 
 The Immediate window shows the success message right after the workbook is opened. The same message will appear after any change on the sheet, because Excel recalculates the formula. If the workbook has many cells calling this function, it is better to add a cache: for example, a static variable holding a `Dictionary` where the key is a combination of the currency code and the date, and the value is the `CurrencyRecord`. That avoids a lot of identical requests to the CBR website.
 
-Improvements can be suggested in the issues of the repository <a href="https://github.com/navferty/CBR-VBA-Currencies" rel="noopener" target="_blank">https://github.com/navferty/CBR-VBA-Currencies</a>.
+Improvements can be suggested in the [CBR-VBA-Currencies GitHub issues](https://github.com/navferty/CBR-VBA-Currencies/issues).
 
 Originally published in Russian on <a href="https://pikabu.ru/story/kursyi_valyut_s_sayta_tsb_na_vba_s_avtoobnovleniem_7469372" rel="noopener" target="_blank">Pikabu</a>.

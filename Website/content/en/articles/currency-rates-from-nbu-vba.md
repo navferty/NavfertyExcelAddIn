@@ -34,6 +34,6 @@ Be careful with this function. If a workbook has many cells with such a formula,
 
 ## Source code
 
-The repository with the workbook, examples and source code: <a href="https://github.com/navferty/NBU-VBA-Currencies" rel="noopener" target="_blank">https://github.com/navferty/NBU-VBA-Currencies</a>. If you find bugs or have ideas for improvement, issues are welcome.
+The [NBU-VBA-Currencies GitHub repository](https://github.com/navferty/NBU-VBA-Currencies) contains the workbook, examples and source code. If you find bugs or have ideas for improvement, issues are welcome.
 
 Originally published in Russian on <a href="https://pikabu.ru/story/kursyi_valyut_s_sayta_nbu_na_vba_7565687" rel="noopener" target="_blank">Pikabu</a>.

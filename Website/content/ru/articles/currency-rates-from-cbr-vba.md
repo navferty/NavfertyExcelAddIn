@@ -10,7 +10,7 @@
 
 Как загрузить курсы валют из XML API Банка России в Excel с помощью VBA и пользовательской функции, которая обновляется автоматически.
 
-Частый запрос от пользователей Excel: макрос, который загружает курсы валют с сайта ЦБ РФ, а формулы при этом обновляются автоматически и подтягивают актуальный курс на текущую дату. Готовый вариант решения лежит на GitHub: <a href="https://github.com/navferty/CBR-VBA-Currencies" rel="noopener" target="_blank">https://github.com/navferty/CBR-VBA-Currencies</a>. Ниже разобрано, как он делается по шагам.
+Частый запрос от пользователей Excel: макрос, который загружает курсы валют с сайта ЦБ РФ, а формулы при этом обновляются автоматически и подтягивают актуальный курс на текущую дату. Готовый вариант решения лежит в [репозитории CBR-VBA-Currencies на GitHub](https://github.com/navferty/CBR-VBA-Currencies). Ниже разобрано, как он делается по шагам.
 
 <img src="/images/articles/currency-rates-from-cbr-vba/1590231961122251017.webp" loading="lazy" width="650" height="427" alt="Страница ЦБ РФ с описанием API курсов валют" />
 
@@ -54,7 +54,7 @@ API возвращает данные в формате XML. Для VBA это �
         Set RequestGetXml = resultXmlDocument
     End Function
 
-Механизм XmlHttpRequest, в том числе с авторизацией, хорошо расписан здесь: <a href="https://codingislove.com/http-requests-excel-vba/" rel="noopener" target="_blank">https://codingislove.com/http-requests-excel-vba/</a>.
+Механизм XmlHttpRequest, в том числе с авторизацией, подробно разобран в этой [статье о HTTP-запросах в Excel VBA](https://codingislove.com/http-requests-excel-vba/).
 
 Команда `Stop` приостанавливает выполнение, и в окне Locals можно посмотреть на полученный XML-документ.
 
@@ -222,6 +222,6 @@ API возвращает данные в формате XML. Для VBA это �
 
 В окне Immediate видно сообщение об успешной загрузке сразу после открытия книги. Такое же сообщение появится при любом изменении на листе, потому что Excel пересчитывает формулу. Если в книге много ячеек с вызовом этой функции, лучше добавить кэш: например, статическую переменную со словарём (`Dictionary`), где ключ — сочетание кода валюты и даты, а значение — `CurrencyRecord`. Это избавит от множества одинаковых запросов к сайту ЦБ.
 
-Если нужны доработки, их можно предложить в issues репозитория <a href="https://github.com/navferty/CBR-VBA-Currencies" rel="noopener" target="_blank">https://github.com/navferty/CBR-VBA-Currencies</a>.
+Предложения по доработкам можно оставить в [обсуждениях репозитория CBR-VBA-Currencies](https://github.com/navferty/CBR-VBA-Currencies/issues).
 
 Статья впервые опубликована на <a href="https://pikabu.ru/story/kursyi_valyut_s_sayta_tsb_na_vba_s_avtoobnovleniem_7469372" rel="noopener" target="_blank">Пикабу</a>.

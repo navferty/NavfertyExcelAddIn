@@ -18,22 +18,65 @@ class Elements(HTMLParser):
         self.tags = []
         self.scripts = {}
         self.current_script = None
+        self.open_tags = []
+        self.nested_anchors = []
+        self.unnamed_links = []
+        self.unnamed_buttons = []
+        self.open_links = []
+        self.open_buttons = []
+        self.labels = set()
+        self.controls = []
         self.feed(path.read_text(encoding="utf-8"))
 
     def handle_starttag(self, tag, attrs):
         attrs = dict(attrs)
         self.tags.append((tag, attrs))
+        if tag == "a" and "a" in self.open_tags:
+            self.nested_anchors.append(attrs.get("href"))
+        if tag == "a":
+            self.open_links.append({"href": attrs.get("href"), "name": attrs.get("aria-label", "")})
+        if tag == "button":
+            self.open_buttons.append({"name": attrs.get("aria-label", "")})
+        if tag == "label" and attrs.get("for"):
+            self.labels.add(attrs["for"])
+        if tag in ("input", "select", "textarea"):
+            self.controls.append((attrs, "label" in self.open_tags))
+        if tag == "img":
+            for link in self.open_links:
+                link["name"] += attrs.get("alt") or ""
+            for button in self.open_buttons:
+                button["name"] += attrs.get("alt") or ""
         if tag == "script" and attrs.get("id"):
             self.current_script = attrs["id"]
             self.scripts[self.current_script] = ""
+        if tag not in {
+            "area", "base", "br", "col", "embed", "hr", "img", "input",
+            "link", "meta", "param", "source", "track", "wbr",
+        }:
+            self.open_tags.append(tag)
 
     def handle_data(self, data):
         if self.current_script:
             self.scripts[self.current_script] += data
+        for link in self.open_links:
+            link["name"] += data
+        for button in self.open_buttons:
+            button["name"] += data
 
     def handle_endtag(self, tag):
         if tag == "script":
             self.current_script = None
+        if tag == "a" and self.open_links:
+            link = self.open_links.pop()
+            if not link["name"].strip():
+                self.unnamed_links.append(link["href"])
+        if tag == "button" and self.open_buttons:
+            button = self.open_buttons.pop()
+            if not button["name"].strip():
+                self.unnamed_buttons.append(button)
+        while self.open_tags:
+            if self.open_tags.pop() == tag:
+                break
 
     def find(self, tag, **attrs):
         return [
@@ -43,35 +86,72 @@ class Elements(HTMLParser):
 
 
 class HugoOutputTests(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls):
+        cls.config = tomllib.loads((ROOT / "Website" / "hugo.toml").read_text(encoding="utf-8"))
+        cls.languages = set(cls.config["languages"])
+
     def test_keyboard_markup_is_preserved(self):
-        for language in ("en", "ru"):
-            for source in (ROOT / "Website" / language).rglob("*.html"):
+        for language in self.languages:
+            content_root = ROOT / "Website" / "content" / language
+            for source in content_root.rglob("*.md"):
                 original = Elements(source)
                 count = len(original.find("kbd"))
                 if not count:
                     continue
-                relative = source.relative_to(ROOT / "Website" / language)
-                target = BUILD / language / relative.with_suffix("") / "index.html"
-                if relative.name == "index.html":
-                    target = BUILD / language / relative
+                relative = source.relative_to(content_root).with_suffix("")
+                parts = list(relative.parts)
+                if parts[-1] == "_index":
+                    parts.pop()
+                target = BUILD / language / Path(*parts) / "index.html"
                 with self.subTest(page=str(relative), language=language):
                     self.assertGreaterEqual(len(Elements(target).find("kbd")), count)
 
     def test_header_search_and_translations(self):
-        for language, other in (("en", "ru"), ("ru", "en")):
+        for language in self.languages:
             page = Elements(BUILD / language / "install" / "index.html")
             with self.subTest(language=language):
                 form = page.find("form", id="header-search-form")[0]
                 self.assertEqual(form["action"], f"/{language}/search/")
                 self.assertIn("hidden", form)
                 self.assertEqual(page.find("input", id="header-search-query")[0]["name"], "q")
-                self.assertEqual(page.find("a", **{"data-lang": other})[0]["href"], f"/{other}/install/")
+                language_links = page.find("a", **{"data-lang": language})
+                self.assertEqual(language_links[0]["href"], f"/{language}/install/")
+                self.assertEqual(language_links[0]["aria-current"], "page")
                 search = Elements(BUILD / language / "search" / "index.html")
                 self.assertEqual(search.find("input", id="search-query")[0]["name"], "q")
 
+    def test_all_images_have_alternatives_or_are_decorative(self):
+        for page_path in BUILD.rglob("*.html"):
+            page = Elements(page_path)
+            for image in page.find("img"):
+                with self.subTest(page=str(page_path.relative_to(BUILD)), src=image.get("src")):
+                    self.assertIn("alt", image)
+                    if not (image["alt"] or "").strip():
+                        self.assertIn("/icons/", image.get("src", ""))
+
+    def test_links_and_form_controls_are_accessible(self):
+        for page_path in BUILD.rglob("*.html"):
+            page = Elements(page_path)
+            relative = str(page_path.relative_to(BUILD))
+            with self.subTest(page=relative):
+                self.assertEqual(page.nested_anchors, [])
+                self.assertEqual(page.unnamed_links, [])
+                self.assertEqual(page.unnamed_buttons, [])
+                for attrs, wrapped in page.controls:
+                    if attrs.get("type") == "hidden":
+                        continue
+                    labelled = (
+                        attrs.get("aria-label")
+                        or attrs.get("aria-labelledby")
+                        or attrs.get("id") in page.labels
+                        or wrapped
+                    )
+                    self.assertTrue(labelled, f"Unlabelled form control: {attrs}")
+
     def test_localization_catalogs_cover_configured_languages(self):
-        config = tomllib.loads((ROOT / "Website" / "hugo.toml").read_text(encoding="utf-8"))
-        language_codes = set(config["languages"])
+        config = self.config
+        language_codes = self.languages
         self.assertEqual(config["params"]["defaultLanguage"], config["defaultContentLanguage"])
         catalogs = {
             path.stem: tomllib.loads(path.read_text(encoding="utf-8"))
