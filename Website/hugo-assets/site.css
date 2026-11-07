@@ -72,6 +72,7 @@
 }
 #content .step-number p { color: inherit; margin: 0; font-size: inherit; line-height: inherit; }
 #content .info-box { padding-left: 2.5rem; }
+#content pre.markdown-example { color: #f8f8f2; background-color: #272822; tab-size: 4; }
 .site-search { display: flex; flex-wrap: wrap; align-items: end; gap: .75rem; margin: 1rem 0; }
 .site-search label { flex-basis: 100%; }
 .site-search input { flex: 1 1 15rem; min-width: 0; padding: .65rem; font: inherit; }
