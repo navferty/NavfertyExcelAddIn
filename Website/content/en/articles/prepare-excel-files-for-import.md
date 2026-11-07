@@ -43,7 +43,7 @@ Import tools are strict where people are forgiving. A human reads a title, a mer
 
 ## Tool-specific notes
 
-**Power BI / Power Query.** Prefer an Excel table (<span class="kbd">Ctrl</span>+<span class="kbd">T</span>) or a named range as the source: it keeps working when rows are added. Rename columns in the source rather than in the query when you can.
+**Power BI / Power Query.** Prefer an Excel table (<kbd>Ctrl</kbd>+<kbd>T</kbd>) or a named range as the source: it keeps working when rows are added. Rename columns in the source rather than in the query when you can.
 
 **SQL.** CSV with UTF-8 is the least troublesome format (see [CSV and encoding](/en/articles/csv-files-without-encoding-issues/)). For SQLite, an [export straight from the workbook](/en/articles/export-excel-data-to-sqlite/) is an option.
 

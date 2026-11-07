@@ -14,7 +14,7 @@ Macros are powerful, but they need maintenance, they get blocked by security set
 
 ## Tables
 
-A table (<span class="kbd">Ctrl</span>+<span class="kbd">T</span>) extends formulas, formatting, filters and chart ranges automatically when you add rows. This alone removes many “update the range” macros.
+A table (<kbd>Ctrl</kbd>+<kbd>T</kbd>) extends formulas, formatting, filters and chart ranges automatically when you add rows. This alone removes many “update the range” macros.
 
 ## Power Query
 
@@ -34,7 +34,7 @@ In Microsoft 365 and Excel 2021 and later, one formula can return a whole range:
 
 ## Flash Fill
 
-Type the result for the first row (for example the initials extracted from a full name), then press <span class="kbd">Ctrl</span>+<span class="kbd">E</span>. Excel infers the pattern. It is not a formula, so it does not update when the source changes.
+Type the result for the first row (for example the initials extracted from a full name), then press <kbd>Ctrl</kbd>+<kbd>E</kbd>. Excel infers the pattern. It is not a formula, so it does not update when the source changes.
 
 ## Pivot tables and slicers
 

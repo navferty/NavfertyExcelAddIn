@@ -16,7 +16,7 @@ A pivot table summarises a long list without a single formula: totals by categor
 
 A pivot table needs a flat list: one header row, one record per row, no empty rows or columns, no merged cells, no subtotals inside. The example below has four columns: *Order Id*, *Order Date*, *Department Id* and *Amount*. If the data is messy, see [cleaning data](/en/articles/best-practices-for-cleaning-data-in-excel/) first. Dates and amounts must be real dates and numbers, not text ([converting text numbers](/en/articles/text-numbers-to-numeric-values/)).
 
-It helps to turn the list into a table first (<span class="kbd">Ctrl</span>+<span class="kbd">T</span>). A pivot table built on a table picks up new rows after a refresh, and does not include blank rows.
+It helps to turn the list into a table first (<kbd>Ctrl</kbd>+<kbd>T</kbd>). A pivot table built on a table picks up new rows after a refresh, and does not include blank rows.
 
 ## Create the pivot table
 
@@ -53,7 +53,7 @@ The grouping only works if every value in the column is a real date. One text va
 
 ## Refresh
 
-A pivot table is a snapshot of the data and does not recalculate when the source changes. Right-click it and choose **Refresh**, or press <span class="kbd">Alt</span>+<span class="kbd">F5</span>. **Data → Refresh All** (<span class="kbd">Ctrl</span>+<span class="kbd">Alt</span>+<span class="kbd">F5</span>) refreshes every pivot table in the workbook.
+A pivot table is a snapshot of the data and does not recalculate when the source changes. Right-click it and choose **Refresh**, or press <kbd>Alt</kbd>+<kbd>F5</kbd>. **Data → Refresh All** (<kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>F5</kbd>) refreshes every pivot table in the workbook.
 
 ## Limitations to know about
 

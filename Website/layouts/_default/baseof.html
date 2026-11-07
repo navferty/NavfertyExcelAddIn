@@ -38,7 +38,14 @@
         <a href="{{ .Site.Home.RelPermalink }}articles/">{{ if eq .Site.Language.Lang "ru" }}Статьи{{ else }}Guides{{ end }}</a>
         <a href="{{ .Site.Home.RelPermalink }}install/">{{ if eq .Site.Language.Lang "ru" }}Установка{{ else }}Install{{ end }}</a>
         <a href="{{ .Site.Home.RelPermalink }}support/">{{ if eq .Site.Language.Lang "ru" }}Поддержка{{ else }}Support{{ end }}</a>
-        <a href="{{ .Site.Home.RelPermalink }}search/">{{ if eq .Site.Language.Lang "ru" }}Поиск{{ else }}Search{{ end }}</a>
+        <div class="header-search">
+          <a class="header-search-toggle" href="{{ .Site.Home.RelPermalink }}search/" aria-controls="header-search-form" aria-expanded="false">{{ if eq .Site.Language.Lang "ru" }}Поиск{{ else }}Search{{ end }}</a>
+          <form id="header-search-form" class="header-search-form" role="search" action="{{ .Site.Home.RelPermalink }}search/" method="get" hidden>
+            <label for="header-search-query">{{ if eq .Site.Language.Lang "ru" }}Поисковый запрос{{ else }}Search query{{ end }}</label>
+            <input id="header-search-query" type="search" name="q" required autocomplete="off">
+            <button type="submit">{{ if eq .Site.Language.Lang "ru" }}Найти{{ else }}Search{{ end }}</button>
+          </form>
+        </div>
         <details class="language-menu">
           <summary>{{ .Site.Language.LanguageName }}</summary>
           <ul>

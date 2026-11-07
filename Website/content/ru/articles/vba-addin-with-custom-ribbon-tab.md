@@ -254,29 +254,29 @@
 
 **Навигация по редактору**
 
-- <span class="kbd">Ctrl+R</span> — перейти в окно проектов (Project Explorer)
-- <span class="kbd">F4</span> — перейти к свойствам
-- <span class="kbd">Ctrl+G</span> — перейти в окно Immediate
-- <span class="kbd">F7</span> — перейти в окно редактора кода
-- <span class="kbd">Ctrl+Tab</span> (<span class="kbd">Ctrl+Shift+Tab</span>) — переключение между открытыми окнами модулей
-- <span class="kbd">Ctrl+F4</span> — закрыть текущий модуль
-- <span class="kbd">Alt+F11</span> — открыть редактор VBE
+- <kbd>Ctrl+R</kbd> — перейти в окно проектов (Project Explorer)
+- <kbd>F4</kbd> — перейти к свойствам
+- <kbd>Ctrl+G</kbd> — перейти в окно Immediate
+- <kbd>F7</kbd> — перейти в окно редактора кода
+- <kbd>Ctrl+Tab</kbd> (<kbd>Ctrl+Shift+Tab</kbd>) — переключение между открытыми окнами модулей
+- <kbd>Ctrl+F4</kbd> — закрыть текущий модуль
+- <kbd>Alt+F11</kbd> — открыть редактор VBE
 
 **Редактирование и навигация по коду**
 
-- <span class="kbd">Ctrl+Space</span> — автодополнение
-- <span class="kbd">Ctrl+J</span> — показать доступные варианты (IntelliSense)
-- <span class="kbd">Ctrl+I</span> — показать информацию о методе (аргументы)
-- <span class="kbd">Shift+F2</span> — перейти к определению переменной или метода
+- <kbd>Ctrl+Space</kbd> — автодополнение
+- <kbd>Ctrl+J</kbd> — показать доступные варианты (IntelliSense)
+- <kbd>Ctrl+I</kbd> — показать информацию о методе (аргументы)
+- <kbd>Shift+F2</kbd> — перейти к определению переменной или метода
 
 **Отладка**
 
-- <span class="kbd">F5</span> — запустить макрос или продолжить выполнение
-- <span class="kbd">F8</span> — шаг вперёд (с заходом во вложенные процедуры)
-- <span class="kbd">Shift+F8</span> — шаг вперёд (без захода вглубь)
-- <span class="kbd">F9</span> — установить или снять точку останова
-- <span class="kbd">Shift+F9</span> — добавить наблюдателя (quick watch)
-- <span class="kbd">Ctrl+L</span> — показать стек вызовов (элементы кликабельны)
+- <kbd>F5</kbd> — запустить макрос или продолжить выполнение
+- <kbd>F8</kbd> — шаг вперёд (с заходом во вложенные процедуры)
+- <kbd>Shift+F8</kbd> — шаг вперёд (без захода вглубь)
+- <kbd>F9</kbd> — установить или снять точку останова
+- <kbd>Shift+F9</kbd> — добавить наблюдателя (quick watch)
+- <kbd>Ctrl+L</kbd> — показать стек вызовов (элементы кликабельны)
 
 О приёмах отладки подробнее в статье [«Приёмы отладки VBA-кода»](/ru/articles/debugging-vba-code-in-excel/).
 

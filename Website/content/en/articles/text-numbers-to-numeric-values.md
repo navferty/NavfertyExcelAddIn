@@ -43,7 +43,7 @@ Numbers copied from a web page, a PDF, an accounting system or a CSV often arriv
 - **Leading apostrophe.** It is invisible in the cell but marks it as text. Paste Special → Multiply handles it.
 - **Minus at the end.** Some systems export negative numbers as `100-`. Convert with `=IF(RIGHT(A1)="-",-LEFT(A1,LEN(A1)-1),A1)`.
 - **Leading zeros.** Phone numbers, postal codes and product codes should stay text. Converting them removes the zeros for good, so check before you convert a whole column.
-- **Cell format.** Changing a cell's format to Number does not convert what is already inside. You need to re-enter the value (<span class="kbd">F2</span>, <span class="kbd">Enter</span>) or use one of the methods above.
+- **Cell format.** Changing a cell's format to Number does not convert what is already inside. You need to re-enter the value (<kbd>F2</kbd>, <kbd>Enter</kbd>) or use one of the methods above.
 
 ## With the add-in
 

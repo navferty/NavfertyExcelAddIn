@@ -21,7 +21,7 @@ This article describes a few ways to debug VBA macros in MS Office applications,
 
 ## 1. Breakpoints and stepping
 
-The most obvious way to debug is to put a breakpoint at the start of the macro and then run it line by line, watching variable values and the state of the cells in the workbook. To set a breakpoint, press <span class="kbd">F9</span> and a marker appears on the line with the cursor. You can also click in the margin to the left of the code (the red dot).
+The most obvious way to debug is to put a breakpoint at the start of the macro and then run it line by line, watching variable values and the state of the cells in the workbook. To set a breakpoint, press <kbd>F9</kbd> and a marker appears on the line with the cursor. You can also click in the margin to the left of the code (the red dot).
 
 <img src="/images/articles/debugging-vba-code-in-excel/1578427120196987602.webp" loading="lazy" width="700" height="214" alt="A breakpoint marker in the VBA editor" />
 
@@ -33,9 +33,9 @@ Not everyone knows that this pointer can be moved to any statement within the sa
 
 While execution is paused you can continue step by step with step-into, step-over and step-out:
 
-- **step-into** (<span class="kbd">F8</span>) — one step forward. The line under the pointer is executed and the pointer moves to the next one. If the line calls another procedure, the pointer moves inside it.
-- **step-over** (<span class="kbd">Shift+F8</span>) — the same as step-into, except that it does not go into nested calls; the called procedure runs in one go.
-- **step-out** (<span class="kbd">Ctrl+Shift+F8</span>) — the current procedure runs to its end and execution pauses in the caller. Useful when you stepped into a long function by accident.
+- **step-into** (<kbd>F8</kbd>) — one step forward. The line under the pointer is executed and the pointer moves to the next one. If the line calls another procedure, the pointer moves inside it.
+- **step-over** (<kbd>Shift+F8</kbd>) — the same as step-into, except that it does not go into nested calls; the called procedure runs in one go.
+- **step-out** (<kbd>Ctrl+Shift+F8</kbd>) — the current procedure runs to its end and execution pauses in the caller. Useful when you stepped into a long function by accident.
 
 ## 2. The Immediate, Locals and Watches windows
 
@@ -57,7 +57,7 @@ The **Immediate** window is a <a href="https://en.wikipedia.org/wiki/Read%E2%80%
 
 <img src="/images/articles/debugging-vba-code-in-excel/1578428865178198053.png" loading="lazy" width="523" height="270" alt="The Immediate window evaluating expressions and Debug.Print" />
 
-Note that <span class="kbd">Ctrl+Space</span> and <span class="kbd">Ctrl+J</span> bring up IntelliSense here too, just like in the main code editor.
+Note that <kbd>Ctrl+Space</kbd> and <kbd>Ctrl+J</kbd> bring up IntelliSense here too, just like in the main code editor.
 
 The **Locals** window shows the values of the variables available in the current context:
 

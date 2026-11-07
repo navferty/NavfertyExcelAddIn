@@ -16,12 +16,12 @@ Most embarrassing workbook mistakes are discovered by the recipient. These check
 
 - No error values anywhere ([how to find them](/en/articles/find-all-errors-in-excel/)).
 - Totals agree with an independent number: the source system, a pivot table or a quick estimate.
-- Calculation mode is Automatic and you pressed <span class="kbd">F9</span> once.
+- Calculation mode is Automatic and you pressed <kbd>F9</kbd> once.
 - No numbers stored as text, no stray spaces in keys ([text numbers](/en/articles/text-numbers-to-numeric-values/), [spaces](/en/articles/remove-extra-spaces-in-excel/)).
 - Duplicates in key columns have been reviewed.
 - Dates are right: the year, the day/month order, and the period named in the title.
 - Units and currency are written near the numbers.
-- Spelling checked (<span class="kbd">F7</span>), including sheet names and chart titles.
+- Spelling checked (<kbd>F7</kbd>), including sheet names and chart titles.
 
 ## Hidden things
 
@@ -46,7 +46,7 @@ Most embarrassing workbook mistakes are discovered by the recipient. These check
 ## Presentation
 
 - Print preview: page orientation, scale, print area, repeated header rows.
-- The active sheet, selected cell and scroll position are on the first cell of the first sheet (<span class="kbd">Ctrl</span>+<span class="kbd">Home</span> on each sheet before saving).
+- The active sheet, selected cell and scroll position are on the first cell of the first sheet (<kbd>Ctrl</kbd>+<kbd>Home</kbd> on each sheet before saving).
 - Column widths are enough to show numbers without `####`.
 - Freeze panes on large tables.
 

@@ -12,8 +12,22 @@
 :focus-visible { outline: 3px solid #185c37; outline-offset: 3px; }
 .site-header :focus-visible { outline-color: #fff; }
 #content.article .heading-anchor { opacity: .8; visibility: visible; }
-.language-menu { display: inline-block; position: relative; }
-.language-menu summary { cursor: pointer; }
+.site-header .language-menu {
+    display: inline-block;
+    position: relative;
+    margin: 0;
+    border: 0;
+    border-radius: 0;
+}
+.site-header .language-menu summary {
+    padding: .5rem .65rem;
+    color: #fff;
+    background: transparent;
+    border: 0;
+    cursor: pointer;
+}
+.site-header .language-menu summary:hover,
+.site-header .language-menu[open] summary { color: #fff; background: #185c37; border: 0; }
 .language-menu ul {
     position: absolute;
     right: 0;
@@ -25,9 +39,37 @@
     border: 1px solid #605e5c;
     box-shadow: var(--shadow-md);
 }
+.site-header .language-menu > ul { margin: 0; padding: .5rem; }
 .language-menu li { padding: .25rem; }
 .site-header .language-menu a { display: block; color: #185c37; padding: .35rem; }
 .site-header .language-menu a:hover { background: #f3f2f1; }
+.site-header .language-menu a:focus-visible { outline-color: #185c37; }
+.header-search { position: relative; }
+.site-header .header-search-toggle { display: inline-block; padding: .6rem .65rem; }
+.site-header .header-search-toggle:hover { background: #185c37; }
+.header-search-form {
+    position: absolute;
+    right: 0;
+    top: 100%;
+    z-index: 10;
+    width: min(22rem, 90vw);
+    padding: .75rem;
+    background: #fff;
+    color: #323130;
+    border: 1px solid #605e5c;
+    box-shadow: var(--shadow-md);
+}
+.header-search-form[hidden] { display: none; }
+.header-search-form label { display: block; margin-bottom: .35rem; }
+.header-search-form input { width: 100%; padding: .5rem; font: inherit; }
+.header-search-form button { margin-top: .5rem; padding: .5rem 1rem; font: inherit; }
+.site-header .header-search-form :focus-visible { outline-color: #185c37; }
+@media (max-width: 768px) {
+    .header-search { position: static; }
+    .header-search-form { right: 1rem; width: min(22rem, calc(100vw - 2rem)); }
+}
+#content .step-number p { color: inherit; margin: 0; font-size: inherit; line-height: inherit; }
+#content .info-box { padding-left: 2.5rem; }
 .site-search { display: flex; flex-wrap: wrap; align-items: end; gap: .75rem; margin: 1rem 0; }
 .site-search label { flex-basis: 100%; }
 .site-search input { flex: 1 1 15rem; min-width: 0; padding: .65rem; font: inherit; }

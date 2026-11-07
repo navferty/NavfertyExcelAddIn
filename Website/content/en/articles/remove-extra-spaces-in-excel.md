@@ -34,9 +34,9 @@ This covers most cases in real data.
 
 ## Without formulas
 
-**Find & Replace** (<span class="kbd">Ctrl</span>+<span class="kbd">H</span>) can remove all spaces from a selection: put a space into **Find what**, leave **Replace with** empty. It is fine for codes and numbers like `1 234 567`, but it will also glue words together, so do not use it on names or addresses.
+**Find & Replace** (<kbd>Ctrl</kbd>+<kbd>H</kbd>) can remove all spaces from a selection: put a space into **Find what**, leave **Replace with** empty. It is fine for codes and numbers like `1 234 567`, but it will also glue words together, so do not use it on names or addresses.
 
-To enter a non-breaking space in the Find box, hold <span class="kbd">Alt</span> and type `0160` on the numeric keypad.
+To enter a non-breaking space in the Find box, hold <kbd>Alt</kbd> and type `0160` on the numeric keypad.
 
 ## Check before and after
 

@@ -36,7 +36,7 @@ and apply it to the whole table.
 
 ## Remove Duplicates
 
-**Data → Remove Duplicates** deletes the repeated rows and keeps the first one. It can compare on selected columns only. There is no undo outside of <span class="kbd">Ctrl</span>+<span class="kbd">Z</span> right after, so work on a copy of the data.
+**Data → Remove Duplicates** deletes the repeated rows and keeps the first one. It can compare on selected columns only. There is no undo outside of <kbd>Ctrl</kbd>+<kbd>Z</kbd> right after, so work on a copy of the data.
 
 ## Marking, not deleting
 

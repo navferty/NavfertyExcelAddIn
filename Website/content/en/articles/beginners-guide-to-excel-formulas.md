@@ -25,7 +25,7 @@ Excel follows the usual order: parentheses, powers, multiplication and division,
 ## References
 
 - `A1` is relative: when you copy the formula one row down, it becomes `A2`.
-- `$A$1` is absolute and does not change when copied. Press <span class="kbd">F4</span> to add the dollar signs.
+- `$A$1` is absolute and does not change when copied. Press <kbd>F4</kbd> to add the dollar signs.
 - `$A1` and `A$1` lock only the column or only the row.
 - `Sheet2!A1` refers to another sheet. If the name has spaces, quote it: `'Sales 2024'!A1`.
 - A range is written `A1:A10`.
@@ -49,9 +49,9 @@ For totals and counts by category you may not need formulas at all: see [pivot t
 
 - Put inputs (rates, thresholds) in their own cells, not inside the formulas.
 - Convert a range to a table and use column names in formulas.
-- Click a formula and press <span class="kbd">F2</span>: Excel outlines the referenced cells in colour. **Formulas → Evaluate Formula** walks through the calculation step by step.
+- Click a formula and press <kbd>F2</kbd>: Excel outlines the referenced cells in colour. **Formulas → Evaluate Formula** walks through the calculation step by step.
 - Check results with an example you can calculate by hand.
-- Type the first letters of a function and press <span class="kbd">Tab</span> to complete it, then <span class="kbd">Ctrl</span>+<span class="kbd">Shift</span>+<span class="kbd">A</span> to see the argument names.
+- Type the first letters of a function and press <kbd>Tab</kbd> to complete it, then <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>A</kbd> to see the argument names.
 
 ## Locale notes
 

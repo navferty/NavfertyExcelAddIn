@@ -25,12 +25,12 @@ Copy the raw data to a sheet called `raw` and never edit it. Work on a copy, or 
 ## 3. Fix the structure
 
 - Remove title rows, notes and total rows inside the data.
-- Unmerge cells and fill in the blanks. **Go To Special → Blanks**, type `=` and the cell above, then <span class="kbd">Ctrl</span>+<span class="kbd">Enter</span> fills down.
+- Unmerge cells and fill in the blanks. **Go To Special → Blanks**, type `=` and the cell above, then <kbd>Ctrl</kbd>+<kbd>Enter</kbd> fills down.
 - One header row, unique column names.
 
 ### Format the result as a table
 
-Once the structure is clean, select any cell in the data and press <span class="kbd">Ctrl</span>+<span class="kbd">T</span> (Home → Format as Table). Tick "My table has headers". It costs nothing and helps later:
+Once the structure is clean, select any cell in the data and press <kbd>Ctrl</kbd>+<kbd>T</kbd> (Home → Format as Table). Tick "My table has headers". It costs nothing and helps later:
 
 - The range grows by itself when you add rows, so formulas, charts and pivot tables based on it do not need updating.
 - Filters and banded rows are added, and the header stays visible while scrolling.
@@ -44,7 +44,7 @@ Tables do not allow merged cells, and a table cannot contain subtotal rows insid
 - Remove extra spaces and non-printable characters ([details](/en/articles/remove-extra-spaces-in-excel/)).
 - Normalise case with `UPPER`, `LOWER`, `PROPER`. `PROPER` mishandles names like `McDonald` and abbreviations, so review the result.
 - Look for lookalike letters. Latin `A` and Cyrillic `А` are different characters, and a code that mixes them will not match anything. This is common in Russian-language data with codes and licence plates.
-- Split combined fields with **Text to Columns** or **Flash Fill** (<span class="kbd">Ctrl</span>+<span class="kbd">E</span>). Check the Flash Fill results, because it guesses a pattern.
+- Split combined fields with **Text to Columns** or **Flash Fill** (<kbd>Ctrl</kbd>+<kbd>E</kbd>). Check the Flash Fill results, because it guesses a pattern.
 
 ## 5. Fix the types
 

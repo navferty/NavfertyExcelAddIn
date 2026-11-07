@@ -254,29 +254,29 @@ More about the Custom UI elements: <a href="https://docs.microsoft.com/en-us/ope
 
 **Moving around the editor**
 
-- <span class="kbd">Ctrl+R</span> — go to the Project Explorer
-- <span class="kbd">F4</span> — go to the Properties window
-- <span class="kbd">Ctrl+G</span> — go to the Immediate window
-- <span class="kbd">F7</span> — go to the code editor window
-- <span class="kbd">Ctrl+Tab</span> (<span class="kbd">Ctrl+Shift+Tab</span>) — switch between open module windows
-- <span class="kbd">Ctrl+F4</span> — close the current module
-- <span class="kbd">Alt+F11</span> — open the VBE
+- <kbd>Ctrl+R</kbd> — go to the Project Explorer
+- <kbd>F4</kbd> — go to the Properties window
+- <kbd>Ctrl+G</kbd> — go to the Immediate window
+- <kbd>F7</kbd> — go to the code editor window
+- <kbd>Ctrl+Tab</kbd> (<kbd>Ctrl+Shift+Tab</kbd>) — switch between open module windows
+- <kbd>Ctrl+F4</kbd> — close the current module
+- <kbd>Alt+F11</kbd> — open the VBE
 
 **Editing and code navigation**
 
-- <span class="kbd">Ctrl+Space</span> — auto-complete
-- <span class="kbd">Ctrl+J</span> — show the available options (IntelliSense)
-- <span class="kbd">Ctrl+I</span> — show information about a method (its arguments)
-- <span class="kbd">Shift+F2</span> — go to the definition of a variable or method
+- <kbd>Ctrl+Space</kbd> — auto-complete
+- <kbd>Ctrl+J</kbd> — show the available options (IntelliSense)
+- <kbd>Ctrl+I</kbd> — show information about a method (its arguments)
+- <kbd>Shift+F2</kbd> — go to the definition of a variable or method
 
 **Debugging**
 
-- <span class="kbd">F5</span> — run the macro or continue execution
-- <span class="kbd">F8</span> — step forward (into nested procedures)
-- <span class="kbd">Shift+F8</span> — step forward (without going inside)
-- <span class="kbd">F9</span> — set or remove a breakpoint
-- <span class="kbd">Shift+F9</span> — add a watch (quick watch)
-- <span class="kbd">Ctrl+L</span> — show the call stack (clickable)
+- <kbd>F5</kbd> — run the macro or continue execution
+- <kbd>F8</kbd> — step forward (into nested procedures)
+- <kbd>Shift+F8</kbd> — step forward (without going inside)
+- <kbd>F9</kbd> — set or remove a breakpoint
+- <kbd>Shift+F9</kbd> — add a watch (quick watch)
+- <kbd>Ctrl+L</kbd> — show the call stack (clickable)
 
 There is more on debugging in [Debugging VBA code in Excel](/en/articles/debugging-vba-code-in-excel/).
 

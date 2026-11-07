@@ -110,7 +110,7 @@ After installation, restart Excel. The new **Navferty's Tools** tab appears in t
 
 **Method 1: Windows Settings (recommended)**
 
-1.  Open Windows Settings (<span class="kbd">Win</span> + <span class="kbd">I</span>)
+1.  Open Windows Settings (<kbd>Win</kbd> + <kbd>I</kbd>)
 2.  Go to **Apps** → **Installed apps** (**Apps & features** on Windows 10)
 3.  Find **Navferty Excel Add-In** in the list
 4.  Click **Uninstall** and follow the prompts

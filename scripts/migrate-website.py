@@ -75,6 +75,7 @@ def convert(path, lang):
             r"<img\b[^>]*>", lambda match: match.group(0) if re.search(r"\balt=", match.group(0))
             else match.group(0).replace("<img ", '<img alt="" ', 1), markdown,
         )
+        markdown = re.sub(r'<span class="kbd">(.*?)</span>', r'<kbd>\1</kbd>', markdown)
     output.write_text(json.dumps(meta, ensure_ascii=False, indent=2) + "\n\n" + markdown, encoding="utf-8")
 
 

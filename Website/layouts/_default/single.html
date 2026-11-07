@@ -12,7 +12,7 @@
   {{ if eq .File.TranslationBaseName "search" }}
     <form class="site-search" role="search" data-index="{{ .Site.Home.RelPermalink }}search-index.json">
       <label for="search-query">{{ if eq .Site.Language.Lang "ru" }}Поисковый запрос{{ else }}Search query{{ end }}</label>
-      <input id="search-query" type="search" required autocomplete="off">
+      <input id="search-query" type="search" name="q" required autocomplete="off">
       <button type="submit">{{ if eq .Site.Language.Lang "ru" }}Найти{{ else }}Search{{ end }}</button>
     </form>
     <p id="search-status" role="status" aria-live="polite"></p>

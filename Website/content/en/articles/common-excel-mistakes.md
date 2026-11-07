@@ -22,11 +22,11 @@ Totals that do not add up and lookups that fail often come from text-formatted n
 
 ## Relative and absolute references mixed up
 
-If a formula copied down gives odd results, check the dollar signs. `$A$1` never moves, `A$1` keeps the row, `$A1` keeps the column. <span class="kbd">F4</span> cycles through them while editing.
+If a formula copied down gives odd results, check the dollar signs. `$A$1` never moves, `A$1` keeps the row, `$A1` keeps the column. <kbd>F4</kbd> cycles through them while editing.
 
 ## Ranges that do not cover new rows
 
-`=SUM(B2:B100)` silently misses row 101. Convert the data to a table (<span class="kbd">Ctrl</span>+<span class="kbd">T</span>) and use structured references such as `=SUM(Sales[Amount])`, which grow with the data.
+`=SUM(B2:B100)` silently misses row 101. Convert the data to a table (<kbd>Ctrl</kbd>+<kbd>T</kbd>) and use structured references such as `=SUM(Sales[Amount])`, which grow with the data.
 
 ## Merged cells in the data area
 
@@ -50,4 +50,4 @@ Paste Special → Values removes the link to source cells. Sometimes that is int
 
 ## No second pair of eyes
 
-A few cheap checks catch a surprising amount: totals compared with an independent calculation, a count of rows before and after, and **Formulas → Show Formulas** (<span class="kbd">Ctrl</span>+<span class="kbd">\`</span>) to look for a cell where a formula was replaced by a number. See also the [pre-send checklist](/en/articles/checklist-validating-excel-files/).
+A few cheap checks catch a surprising amount: totals compared with an independent calculation, a count of rows before and after, and **Formulas → Show Formulas** (<kbd>Ctrl</kbd>+<kbd>\`</kbd>) to look for a cell where a formula was replaced by a number. See also the [pre-send checklist](/en/articles/checklist-validating-excel-files/).

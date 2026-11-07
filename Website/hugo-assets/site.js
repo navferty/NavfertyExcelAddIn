@@ -1,6 +1,33 @@
 (function () {
     'use strict';
     var russian = document.documentElement.lang === 'ru';
+    var searchToggle = document.querySelector('.header-search-toggle');
+    var headerForm = document.getElementById('header-search-form');
+    var headerInput = document.getElementById('header-search-query');
+    if (searchToggle && headerForm && headerInput) {
+        function setSearchOpen(open) {
+            headerForm.hidden = !open;
+            searchToggle.setAttribute('aria-expanded', String(open));
+            if (open) headerInput.focus();
+        }
+        searchToggle.addEventListener('click', function (event) {
+            event.preventDefault();
+            setSearchOpen(headerForm.hidden);
+        });
+        document.addEventListener('keydown', function (event) {
+            var target = event.target;
+            var editing = target instanceof Element &&
+                (target.matches('input, textarea, select') || target.isContentEditable);
+            if (event.key === '/' && !event.ctrlKey && !event.metaKey && !event.altKey && !editing) {
+                event.preventDefault();
+                setSearchOpen(true);
+            } else if (event.key === 'Escape' && !headerForm.hidden) {
+                setSearchOpen(false);
+                searchToggle.focus();
+            }
+        });
+    }
+
     var form = document.querySelector('.site-search');
     if (form) {
         var status = document.getElementById('search-status');
@@ -46,6 +73,11 @@
                 status.textContent = russian ? 'Не удалось выполнить поиск. Попробуйте ещё раз.' : 'Search failed. Please try again.';
             });
         });
+        var initialQuery = new URLSearchParams(window.location.search).get('q');
+        if (initialQuery && initialQuery.trim()) {
+            document.getElementById('search-query').value = initialQuery;
+            form.requestSubmit();
+        }
     }
 
     if (typeof HTMLDialogElement === 'undefined' || !HTMLDialogElement.prototype.showModal) return;

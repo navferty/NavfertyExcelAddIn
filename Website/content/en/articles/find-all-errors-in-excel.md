@@ -18,7 +18,7 @@ Example range used below, with the common error types:
 
 ## Go To Special
 
-Select the range (or press <span class="kbd">Ctrl</span>+<span class="kbd">A</span> for the whole sheet), then press <span class="kbd">F5</span> (or <span class="kbd">Ctrl</span>+<span class="kbd">G</span>) → **Special…** → **Formulas** and leave only **Errors** ticked. Excel selects every cell that currently shows an error. You can then fill them with a colour or step through them with <span class="kbd">Enter</span>.
+Select the range (or press <kbd>Ctrl</kbd>+<kbd>A</kbd> for the whole sheet), then press <kbd>F5</kbd> (or <kbd>Ctrl</kbd>+<kbd>G</kbd>) → **Special…** → **Formulas** and leave only **Errors** ticked. Excel selects every cell that currently shows an error. You can then fill them with a colour or step through them with <kbd>Enter</kbd>.
 
 <img src="/images/articles/find-all-errors-in-excel/go-to-main.jpg" loading="lazy" width="488" height="412" alt="The Go To dialog with the Special button" />
 
@@ -30,7 +30,7 @@ Limitation: it works per sheet, and it gives you a selection, not a list. You st
 
 ## Find with a wildcard
 
-Press <span class="kbd">Ctrl</span>+<span class="kbd">F</span>, search for `#`, set **Look in** to **Values** and click **Find All**. This gives a list of cells with their addresses. It also finds legitimate text that contains a hash sign, so it is a bit noisy, and it does not work well if the sheet uses `#` in headers.
+Press <kbd>Ctrl</kbd>+<kbd>F</kbd>, search for `#`, set **Look in** to **Values** and click **Find All**. This gives a list of cells with their addresses. It also finds legitimate text that contains a hash sign, so it is a bit noisy, and it does not work well if the sheet uses `#` in headers.
 
 ## Conditional formatting
 
