@@ -18,6 +18,8 @@
     margin: 0;
     border: 0;
     border-radius: 0;
+    background: transparent;
+    overflow: visible;
 }
 .site-header .language-menu summary {
     padding: .5rem .65rem;

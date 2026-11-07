@@ -1,8 +1,7 @@
-document.addEventListener('click', function (e) {
-    var a = e.target.closest && e.target.closest('a[data-lang]');
-    if (a) {
-        try { localStorage.setItem('lng', a.getAttribute('data-lang')); } catch (err) { }
-    }
+document.querySelectorAll('a[data-lang]').forEach(function (link) {
+    link.addEventListener('click', function () {
+        try { localStorage.setItem('lng', link.getAttribute('data-lang')); } catch (err) { }
+    });
 });
 
 // test
@@ -17,6 +16,7 @@ if (article) {
     }));
 
     article.querySelectorAll('h2, h3, h4').forEach(function (heading) {
+        if (heading.closest('.installation-steps')) return;
         if (!heading.id) {
             var slug = heading.textContent
                 .toLowerCase()

@@ -16,6 +16,7 @@ To build and check local links:
 hugo --source Website --destination /tmp/navferty-hugo-site --gc
 python scripts/verify-hugo.py /tmp/navferty-hugo-site
 python scripts/test-hugo-output.py /tmp/navferty-hugo-site
+node scripts/test-hugo-search.js
 ```
 
 The original HTML is retained while converted Markdown is reviewed. The
@@ -25,3 +26,4 @@ the Markdown unless those edits are backed up.
 
 The header search opens from its link or the `/` keyboard shortcut. Submitting
 it opens the current language's search results; Escape closes the input.
+Matches in titles rank first, followed by matches in descriptions and page text.

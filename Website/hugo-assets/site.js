@@ -52,12 +52,26 @@
             }
             indexPromise.then(function (pages) {
                 if (request !== requestNumber) return;
-                var matches = pages.filter(function (page) {
-                    var text = (page.title + ' ' + page.description + ' ' + page.content).toLocaleLowerCase();
-                    return terms.every(function (term) { return text.includes(term); });
+                var matches = pages.map(function (page, index) {
+                    var title = page.title.toLocaleLowerCase();
+                    var description = page.description.toLocaleLowerCase();
+                    var text = title + ' ' + description + ' ' + page.content.toLocaleLowerCase();
+                    return {
+                        page: page,
+                        index: index,
+                        matches: terms.every(function (term) { return text.includes(term); }),
+                        titleMatches: terms.filter(function (term) { return title.includes(term); }).length,
+                        descriptionMatches: terms.filter(function (term) { return description.includes(term); }).length
+                    };
+                }).filter(function (result) {
+                    return result.matches;
+                }).sort(function (a, b) {
+                    return b.titleMatches - a.titleMatches ||
+                        b.descriptionMatches - a.descriptionMatches || a.index - b.index;
                 });
                 status.textContent = russian ? 'Результатов: ' + matches.length : 'Results: ' + matches.length;
-                matches.forEach(function (page) {
+                matches.forEach(function (result) {
+                    var page = result.page;
                     var item = document.createElement('li');
                     var link = document.createElement('a');
                     var description = document.createElement('p');
