@@ -26,7 +26,6 @@ jobs:
     environment: production
     env:
       WWW_DIR: /opt/navferty_net/www/
-      SITE_DIR: ${{ runner.temp }}/website
     steps:
       - uses: actions/checkout@v4
 
@@ -36,7 +35,7 @@ jobs:
           extended: true
 
       - name: Build and verify Hugo site
-        run: bash scripts/build-website.sh "$SITE_DIR"
+        run: bash scripts/build-website.sh "$RUNNER_TEMP/website"
 
       - name: Configure SSH
         env:
@@ -67,4 +66,4 @@ jobs:
         run: |
           rsync -rltvz --delete-delay --no-perms --no-owner --no-group \
             -e "ssh -i $HOME/.ssh/id_deploy -o StrictHostKeyChecking=yes" \
-            "$SITE_DIR/" "$SERVER_USER@$SERVER_HOST:$WWW_DIR"
+            "$RUNNER_TEMP/website/" "$SERVER_USER@$SERVER_HOST:$WWW_DIR"
