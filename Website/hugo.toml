@@ -3,6 +3,7 @@ title = "Navferty's Excel Add-In"
 defaultContentLanguage = "en"
 defaultContentLanguageInSubdir = true
 enableRobotsTXT = true
+disableKinds = ["taxonomy", "term"]
 
 [params]
   defaultLanguage = "en"

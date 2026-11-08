@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Regression checks for the built bilingual Hugo preview."""
+"""Regression checks for the built Hugo site."""
 import sys
 import json
 import tomllib
@@ -115,7 +115,7 @@ class HugoOutputTests(unittest.TestCase):
                 self.assertEqual(form["action"], f"/{language}/search/")
                 self.assertIn("hidden", form)
                 self.assertEqual(page.find("input", id="header-search-query")[0]["name"], "q")
-                language_links = page.find("a", **{"data-lang": language})
+                language_links = page.find("a", hreflang=language)
                 self.assertEqual(language_links[0]["href"], f"/{language}/install/")
                 self.assertEqual(language_links[0]["aria-current"], "page")
                 search = Elements(BUILD / language / "search" / "index.html")
@@ -153,6 +153,14 @@ class HugoOutputTests(unittest.TestCase):
         config = self.config
         language_codes = self.languages
         self.assertEqual(config["params"]["defaultLanguage"], config["defaultContentLanguage"])
+        mounts = {
+            mount["lang"]: mount["source"]
+            for mount in config["module"]["mounts"]
+            if mount.get("target") == "content" and "lang" in mount
+        }
+        self.assertEqual(set(mounts), language_codes)
+        for language in language_codes:
+            self.assertEqual(mounts[language], config["languages"][language]["contentDir"])
         catalogs = {
             path.stem: tomllib.loads(path.read_text(encoding="utf-8"))
             for path in (ROOT / "Website" / "i18n").glob("*.toml")
@@ -169,6 +177,17 @@ class HugoOutputTests(unittest.TestCase):
         client_script = (ROOT / "Website" / "hugo-assets" / "site.js").read_text(encoding="utf-8")
         self.assertNotIn("=== 'ru'", client_script)
         self.assertNotIn("=== 'en'", client_script)
+
+    def test_feature_index_and_unused_taxonomies(self):
+        for language in self.languages:
+            page = Elements(BUILD / language / "features" / "index.html")
+            feature_files = list((ROOT / "Website" / "content" / language / "features").glob("*.md"))
+            for source in feature_files:
+                if source.stem != "_index":
+                    with self.subTest(language=language, feature=source.stem):
+                        self.assertTrue(page.find("a", href=f"/{language}/features/{source.stem}/"))
+            self.assertFalse((BUILD / language / "categories" / "index.html").exists())
+            self.assertFalse((BUILD / language / "tags" / "index.html").exists())
 
 
 if __name__ == "__main__":

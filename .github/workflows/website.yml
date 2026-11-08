@@ -10,6 +10,7 @@ on:
       - scripts/verify-hugo.py
       - scripts/test-hugo-output.py
       - scripts/test-hugo-search.js
+      - scripts/test-hugo-language.js
       - .github/workflows/website.yml
 
 permissions:

@@ -61,7 +61,7 @@
         <details class="language-menu">
           <summary>{{ .Site.Language.LanguageName }}</summary>
           <ul>
-            {{ range .AllTranslations }}<li><a href="{{ .RelPermalink }}" lang="{{ .Language.Lang }}" hreflang="{{ .Language.Lang }}" data-lang="{{ .Language.Lang }}"{{ if eq $.Site.Language.Lang .Language.Lang }} aria-current="page"{{ end }}>{{ .Language.LanguageName }}</a></li>{{ end }}
+            {{ range .AllTranslations }}<li><a href="{{ .RelPermalink }}" lang="{{ .Language.Lang }}" hreflang="{{ .Language.Lang }}"{{ if eq $.Site.Language.Lang .Language.Lang }} aria-current="page"{{ end }}>{{ .Language.LanguageName }}</a></li>{{ end }}
           </ul>
         </details>
       </nav>

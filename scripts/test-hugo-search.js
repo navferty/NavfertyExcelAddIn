@@ -45,7 +45,7 @@ async function testSearch() {
         }
     };
     const context = {
-        document, window: { location: { search: '' } }, URLSearchParams, console,
+        document, window: { location: { search: '' }, localStorage: { setItem() {} } }, URLSearchParams, console,
         fetch: async () => ({ ok: true, json: async () => pages })
     };
     vm.runInNewContext(fs.readFileSync('Website/hugo-assets/site.js', 'utf8'), context);

@@ -314,12 +314,6 @@ a.btn svg {
     transition: transform var(--transition-fast);
 }
 
-.dscrptn {
-    flex: 1;
-    color: var(--text-medium);
-    font-size: 1.05rem;
-}
-
 /* Details/Summary Elements */
 details {
     margin: 1.5rem 0;
@@ -536,23 +530,6 @@ tbody tr:last-child td {
     color: var(--text-light);
 }
 
-/* Back to Top */
-.back-to-top {
-    text-align: center;
-    margin: 2rem 0 1rem;
-}
-
-.back-to-top a {
-    color: var(--text-light);
-    text-decoration: none;
-    font-size: 0.9rem;
-    transition: color var(--transition-fast);
-}
-
-.back-to-top a:hover {
-    color: var(--primary-color);
-}
-
 /* Responsive Design */
 @media (max-width: 1024px) {
     #container {
@@ -695,49 +672,13 @@ tbody tr:last-child td {
     flex-wrap: wrap;
 }
 
-.site-header nav > a,
-.site-header .lang-switch a {
+.site-header nav > a {
     padding: 0.85rem 0.9rem;
     transition: background-color var(--transition-fast);
 }
 
-.site-header nav > a:hover,
-.site-header .lang-switch a:hover {
+.site-header nav > a:hover {
     background-color: var(--primary-dark);
-}
-
-.lang-switch {
-    display: flex;
-    margin-left: 0.5rem;
-    padding-left: 0.5rem;
-    border-left: 1px solid rgba(255, 255, 255, 0.35);
-}
-
-.lang-switch a[aria-current] {
-    font-weight: 700;
-    text-decoration: underline;
-    text-underline-offset: 4px;
-}
-
-/* Breadcrumbs and small helpers */
-.breadcrumb {
-    font-size: 0.9rem;
-    color: var(--text-light);
-    margin-bottom: 1.25rem;
-}
-
-#content .breadcrumb a {
-    color: var(--text-medium);
-}
-
-#content p.lead {
-    font-size: 1.15rem;
-    color: var(--text-dark);
-}
-
-#content .cta {
-    margin-top: 2.5rem;
-    font-size: 0.95rem;
 }
 
 #content .more-link {
@@ -941,8 +882,7 @@ tbody tr:last-child td {
         padding-bottom: 0.25rem;
     }
 
-    .site-header nav > a,
-    .site-header .lang-switch a {
+    .site-header nav > a {
         padding: 0.6rem 0.65rem;
         font-size: 0.95rem;
     }

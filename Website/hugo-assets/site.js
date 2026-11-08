@@ -1,5 +1,10 @@
 (function () {
     'use strict';
+    try {
+        window.localStorage.setItem('websiteLanguage', document.documentElement.lang);
+    } catch (error) {
+        console.warn('Could not save language preference:', error);
+    }
     var messagesElement = document.getElementById('site-messages');
     var messages = JSON.parse(messagesElement.textContent);
     var searchToggle = document.querySelector('.header-search-toggle');

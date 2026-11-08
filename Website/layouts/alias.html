@@ -9,16 +9,27 @@
   <link rel="alternate" hreflang="x-default" href="{{ .Permalink }}">
   <script>
     (function () {
-      var supported = [{{ range $i, $site := site.Sites }}{{ if $i }},{{ end }}{{ $site.Language.Lang }}{{ end }}];
+      {{ $languages := slice }}
+      {{ range site.Sites }}{{ $languages = $languages | append (dict "code" .Language.Lang "url" .Home.RelPermalink) }}{{ end }}
+      var supported = {{ $languages | jsonify | safeJS }};
       var saved;
-      try { saved = localStorage.getItem('lng'); } catch (error) { saved = null; }
-      var preferences = [saved].concat(navigator.languages || [navigator.language]);
-      var language = {{ site.Language.Lang | jsonify }};
-      for (var i = 0; i < preferences.length; i++) {
-        var candidate = String(preferences[i] || '').toLowerCase().split('-')[0];
-        if (supported.indexOf(candidate) !== -1) { language = candidate; break; }
+      try { saved = localStorage.getItem('websiteLanguage'); } catch (error) {
+        console.warn('Language preference is unavailable:', error);
       }
-      location.replace('/' + language + '/');
+      var preferences = [saved].concat(navigator.languages && navigator.languages.length ? navigator.languages : [navigator.language]);
+      var defaultLanguage = {{ site.Language.Lang }};
+      var destination = supported.find(function (item) { return item.code === defaultLanguage; }).url;
+      for (var i = 0; i < preferences.length; i++) {
+        var candidate = String(preferences[i] || '').toLowerCase();
+        while (candidate) {
+          var match = supported.find(function (item) { return item.code.toLowerCase() === candidate; });
+          if (match) { destination = match.url; break; }
+          var separator = candidate.lastIndexOf('-');
+          candidate = separator < 0 ? '' : candidate.slice(0, separator);
+        }
+        if (match) break;
+      }
+      location.replace(destination);
     }());
   </script>
 </head>

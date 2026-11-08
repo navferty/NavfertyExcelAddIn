@@ -331,8 +331,6 @@ ASALocalRun/
 # Manifest signing certificate (provided by CI/release at build time)
 NavfertyExcelAddIn/Navferty.pfx
 
-# Website configuration file for local debugging
-/Website/Web.config
 /Website/.hugo_build.lock
 /Website/public/
 /Website/resources/

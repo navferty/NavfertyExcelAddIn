@@ -17,7 +17,7 @@ jobs:
         with:
           hugo-version: '0.123.7'
           extended: true
-      - name: Build Hugo preview
+      - name: Build Hugo site
         run: bash scripts/build-website.sh "$RUNNER_TEMP/website"
 
   build-and-test:
