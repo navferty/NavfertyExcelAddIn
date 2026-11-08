@@ -169,17 +169,34 @@
     dialog.setAttribute('aria-label', messages.imageViewer);
     var close = document.createElement('button');
     close.type = 'button';
-    close.textContent = messages.close;
+    close.className = 'image-close';
+    close.setAttribute('aria-label', messages.close);
+    close.title = messages.close;
+    close.textContent = '×';
     var enlarged = document.createElement('img');
+    var imageFrame = document.createElement('div');
+    imageFrame.className = 'image-frame';
     var trigger;
-    dialog.append(close, enlarged);
+    imageFrame.append(enlarged, close);
+    dialog.appendChild(imageFrame);
     document.body.appendChild(dialog);
     close.addEventListener('click', function () { dialog.close(); });
     dialog.addEventListener('close', function () {
+        imageFrame.classList.remove('image-frame-hover-close');
         if (trigger) trigger.focus();
     });
     dialog.addEventListener('click', function (event) {
         if (event.target === dialog) dialog.close();
+    });
+    imageFrame.addEventListener('pointermove', function (event) {
+        if (event.pointerType === 'touch') return;
+        var bounds = enlarged.getBoundingClientRect();
+        var inCorner = event.clientX >= bounds.left && event.clientX <= bounds.left + bounds.width / 3 &&
+            event.clientY >= bounds.top && event.clientY <= bounds.top + bounds.height / 3;
+        imageFrame.classList.toggle('image-frame-hover-close', inCorner);
+    });
+    imageFrame.addEventListener('pointerleave', function () {
+        imageFrame.classList.remove('image-frame-hover-close');
     });
     document.querySelectorAll('#content img:not(.icons)').forEach(function (image) {
         if (!image.alt || image.closest('a, button')) return;
