@@ -1,5 +1,5 @@
 name: Prepare build
-description: Restore packages, drop the Website project from the solution and import the manifest signing certificate.
+description: Restore packages and import the manifest signing certificate.
 
 inputs:
   pfx-base64:
@@ -19,14 +19,6 @@ runs:
   using: composite
   steps:
     - uses: microsoft/setup-msbuild@v2
-
-    # The Website project targets .NET Framework 4.0, which fails on modern runners
-    - name: Remove Website project from solution
-      shell: pwsh
-      run: |
-        $content = Get-Content NavfertyExcelAddIn.slnx -Raw
-        $content = $content -replace '(?s)\s*<Project Path="Website/".*?</Project>', ''
-        Set-Content NavfertyExcelAddIn.slnx $content -NoNewline
 
     - name: Require signing certificate
       if: inputs.require-signing == 'true' && (inputs.pfx-base64 == '' || inputs.pfx-password == '')

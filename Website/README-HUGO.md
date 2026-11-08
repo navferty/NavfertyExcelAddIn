@@ -12,6 +12,17 @@ bash scripts/build-website.sh /tmp/navferty-website
 hugo server --source Website
 ```
 
+For Visual Studio on Windows, install Hugo Extended 0.123.7 and ensure `hugo`
+is on `PATH` (restart Visual Studio after changing `PATH`). Open
+`NavfertyExcelAddIn.slnx`, right-click the `Website` project and select
+**Set as Startup Project**, then press **F5** or **Ctrl+F5**. The launcher
+starts Hugo on localhost, opens the browser when the site is ready and watches
+for edits. Stop debugging, close the launcher console, or press Ctrl+C to stop
+the server. F5 debugs the launcher, not Hugo templates; use browser developer
+tools to debug site JavaScript. An unavailable Hugo executable is reported in
+the launcher's console; versions other than Extended 0.123.7 produce a warning.
+To start without opening a browser, pass `--no-browser` to the launcher.
+
 The build script checks generated local links, content/navigation markup, and
 search ranking. The deployment pipelines synchronize only the generated site
 to the web root and remove obsolete files from earlier site versions.
