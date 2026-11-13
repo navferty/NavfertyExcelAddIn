@@ -40,7 +40,7 @@ Only do this with files you have the right to edit.
 
 ## With the add-in
 
-**Unprotect Workbook** removes protection from all worksheets, the workbook structure and the VBA project in one command, and no password is required. It does not work with encrypted workbooks, because that password is needed to open the file in the first place.
+**Unprotect Workbook** removes worksheet and workbook-structure protection from saved `.xlsx` and `.xlsm` files without a password and attempts to unlock an `.xlsm` file's VBA project. Save your changes and make a separate backup before confirming: the command closes the workbook without saving, modifies the original file on disk, and reopens it. Unsaved changes are lost, and successful VBA recovery is not guaranteed. It does not open password-encrypted workbooks.
 
 ## A note on protecting your own files
 
