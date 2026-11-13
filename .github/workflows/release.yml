@@ -84,16 +84,26 @@ jobs:
           path: ${{ runner.temp }}\staging
           if-no-files-found: error
 
-      - uses: actions/upload-artifact@v4
-        with:
-          name: Website
-          path: Website
-          if-no-files-found: error
-
       - name: Remove signing certificate file
         if: always()
         shell: pwsh
         run: Remove-Item NavfertyExcelAddIn/Navferty.pfx -Force -ErrorAction SilentlyContinue
+
+  build-website:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: peaceiris/actions-hugo@v3
+        with:
+          hugo-version: '0.123.7'
+          extended: true
+      - name: Build and verify Hugo site
+        run: bash scripts/build-website.sh "$RUNNER_TEMP/website"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: Website
+          path: ${{ runner.temp }}/website
+          if-no-files-found: error
 
   attach-release-assets:
     needs: build
@@ -113,7 +123,7 @@ jobs:
           gh release upload "${{ github.event.release.tag_name }}" NavfertyExcelAddIn-*.zip --clobber --repo "${{ github.repository }}"
 
   deploy:
-    needs: build
+    needs: [build, build-website]
     runs-on: ubuntu-latest
     environment: production
     env:
@@ -151,13 +161,13 @@ jobs:
           ssh -i ~/.ssh/id_deploy -o StrictHostKeyChecking=yes "$SERVER_USER@$SERVER_HOST" \
             'test -d "/opt/navferty_net/www" && test -d "/opt/navferty_net/deploy"'
 
-      - name: Upload website to www
+      - name: Deploy Hugo site to www
         env:
           SERVER_HOST: ${{ secrets.SERVER_HOST }}
           SERVER_USER: ${{ secrets.SERVER_USER }}
         run: |
-          flags=(-rltvz --no-perms --no-owner --no-group --exclude='deploy/')
-          rsync "${flags[@]}" -e "ssh -i $HOME/.ssh/id_deploy -o StrictHostKeyChecking=yes" \
+          rsync -rltvz --delete-delay --no-perms --no-owner --no-group \
+            -e "ssh -i $HOME/.ssh/id_deploy -o StrictHostKeyChecking=yes" \
             website/ "$SERVER_USER@$SERVER_HOST:$WWW_DIR"
 
       # setup.exe is intentionally not deployed

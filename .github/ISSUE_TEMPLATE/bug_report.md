@@ -1,38 +1,40 @@
 ---
 name: Bug report
-about: Create a report to help us improve
+about: Report a problem with the Excel add-in or its website
 title: ''
 labels: ''
 assignees: ''
 
 ---
 
-**Describe the bug**
-A clear and concise description of what the bug is.
+## Problem
+Describe what happened and which add-in command or website page is affected.
 
-**To Reproduce**
-Steps to reproduce the behavior:
-1. Go to '...'
-2. Click on '....'
-3. Scroll down to '....'
-4. See error
+## Steps to reproduce
+1.
+2.
+3.
 
-**Expected behavior**
-A clear and concise description of what you expected to happen.
+## Expected result
+Describe what you expected to happen.
 
-**Screenshots**
-If applicable, add screenshots to help explain your problem.
+## Actual result
+Describe what happened instead, including the exact error message, if any.
 
-**Desktop (please complete the following information):**
- - OS: [e.g. iOS]
- - Browser [e.g. chrome, safari]
- - Version [e.g. 22]
+## Environment
+For add-in issues:
+- Add-in version (copy it from the **Info** dialog):
+- Excel version and build:
+- Windows version:
 
-**Smartphone (please complete the following information):**
- - Device: [e.g. iPhone6]
- - OS: [e.g. iOS8.1]
- - Browser [e.g. stock browser, safari]
- - Version [e.g. 22]
+For website issues, include the page URL and browser name and version; include
+the device and OS if relevant.
 
-**Additional context**
-Add any other context about the problem here.
+## Supporting information
+If possible, attach a small sample workbook or input file, relevant screenshots,
+and the add-in log recorded while reproducing the problem. For logs, open
+**Info** → **Open logs folder**; enabling **Verbose logging** before reproducing
+may help. See the [support guide](https://navferty.net/en/support/#logs).
+
+Issues are public. Remove sensitive information from attachments and screenshots,
+and review logs before sharing: error messages may contain sensitive details.
