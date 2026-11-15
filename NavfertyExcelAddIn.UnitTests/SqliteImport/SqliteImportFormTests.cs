@@ -8,6 +8,43 @@ namespace NavfertyExcelAddIn.UnitTests.SqliteImport;
 public class SqliteImportFormTests
 {
 	[Test]
+	public async Task CountUpdatesPreserveSelectionAndShowWarningAndUnavailable()
+	{
+		Exception? error = null;
+		bool selectionPreserved = false;
+		bool warned = false;
+		bool countUnavailable = false;
+		string unavailable = "";
+		var thread = new Thread(() =>
+		{
+			try
+			{
+				var formType = typeof(SqliteDatabase).Assembly.GetType("NavfertyExcelAddIn.SqliteImport.SqliteImportForm", true)!;
+				var items = new[] { new SqliteObject("large", "table"), new SqliteObject("broken", "view") };
+				using var form = (Form)Activator.CreateInstance(formType, new object[] { items })!;
+				var list = (CheckedListBox)((TableLayoutPanel)form.Controls[0]).GetControlFromPosition(0, 1)!;
+				list.SetItemChecked(0, true);
+				var update = formType.GetMethod("ApplyCount", BindingFlags.Instance | BindingFlags.NonPublic)!;
+				update.Invoke(form, new object?[] { items, 0, (long)SqliteDatabase.MaxRows + 1 });
+				update.Invoke(form, new object?[] { items, 1, null });
+				selectionPreserved = list.GetItemChecked(0) && !list.GetItemChecked(1);
+				warned = form.Controls.Find("rowLimitWarning", true).Length == 1;
+				countUnavailable = items[1].CountUnavailable;
+				unavailable = list.Items[1].ToString()!;
+			}
+			catch (Exception ex) { error = ex; }
+		});
+		thread.SetApartmentState(ApartmentState.STA);
+		thread.Start();
+		thread.Join();
+		if (error != null) throw error;
+		await Assert.That(selectionPreserved).IsTrue();
+		await Assert.That(warned).IsTrue();
+		await Assert.That(countUnavailable).IsTrue();
+		await Assert.That(unavailable).Contains("broken");
+	}
+
+	[Test]
 	public async Task RowLimitWarningAppearsOnlyWhenAnyTableOrViewExceedsLimit()
 	{
 		Exception? error = null;

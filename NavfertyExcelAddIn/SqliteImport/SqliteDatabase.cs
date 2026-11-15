@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using System.Data.SQLite;
 using System.Globalization;
 using System.Text.RegularExpressions;
+using System.Threading;
+
+using NavfertyExcelAddIn.Localization;
 
 namespace NavfertyExcelAddIn.SqliteImport;
 
@@ -36,12 +39,42 @@ public sealed class SqliteDatabase : IDisposable
 			while (reader.Read())
 				objects.Add(new SqliteObject(reader.GetString(0), reader.GetString(1)));
 		}
-		foreach (var item in objects)
-		{
-			using (var command = new SQLiteCommand("SELECT COUNT(*) FROM " + QuoteIdentifier(item.Name), connection))
-				item.Count = Convert.ToInt64(command.ExecuteScalar(), CultureInfo.InvariantCulture);
-		}
 		return objects;
+	}
+
+	public void LoadCounts(IReadOnlyList<SqliteObject> objects, Action<int, long?> report, CancellationToken cancellationToken)
+	{
+		SQLiteProgressEventHandler progress = (sender, args) =>
+		{
+			if (cancellationToken.IsCancellationRequested)
+				args.ReturnCode = SQLiteProgressReturnCode.Interrupt;
+		};
+		connection.ProgressOps = 1000;
+		connection.Progress += progress;
+		try
+		{
+			using (cancellationToken.Register(() => connection.Cancel()))
+			{
+				for (int i = 0; i < objects.Count; i++)
+				{
+					cancellationToken.ThrowIfCancellationRequested();
+					long? count;
+					try
+					{
+						using (var command = new SQLiteCommand("SELECT COUNT(*) FROM " + QuoteIdentifier(objects[i].Name), connection))
+							count = Convert.ToInt64(command.ExecuteScalar(), CultureInfo.InvariantCulture);
+					}
+					catch (SQLiteException)
+					{
+						cancellationToken.ThrowIfCancellationRequested();
+						count = null;
+					}
+					cancellationToken.ThrowIfCancellationRequested();
+					report(i, count);
+				}
+			}
+		}
+		finally { connection.Progress -= progress; }
 	}
 
 	public static string QuoteIdentifier(string name) => "\"" + name.Replace("\"", "\"\"") + "\"";
@@ -111,7 +144,7 @@ public sealed class SqliteDatabase : IDisposable
 		if (value is long number)
 			return number > 999999999999999L || number < -999999999999999L
 				? (object)number.ToString(CultureInfo.InvariantCulture) : (double)number;
-		if (value is DateTime date) return date.ToString("yyyy-MM-dd HH:mm:ss", CultureInfo.InvariantCulture);
+		if (value is DateTime date) return date.ToString("O", CultureInfo.InvariantCulture);
 		return value;
 	}
 
@@ -129,7 +162,13 @@ public sealed class SqliteObject
 {
 	public string Name { get; }
 	public string Type { get; }
-	public long Count { get; internal set; }
+	public long? Count { get; internal set; }
+	public bool CountUnavailable { get; internal set; }
 	public SqliteObject(string name, string type) { Name = name; Type = type; }
-	public override string ToString() => $"{Name} ({Type}, {Count:N0})";
+	public override string ToString()
+	{
+		var count = Count.HasValue ? Count.Value.ToString("N0") :
+			UIStrings.ResourceManager.GetString(CountUnavailable ? "SqliteImportCountUnavailable" : "SqliteImportCountLoading");
+		return $"{Name} ({Type}, {count})";
+	}
 }

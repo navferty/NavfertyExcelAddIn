@@ -38,9 +38,10 @@ public class SqliteDatabaseTests
 		}
 		using var database = new SqliteDatabase(path);
 		var objects = database.GetObjects();
+		database.LoadCounts(objects, (i, count) => typeof(SqliteObject).GetProperty("Count")!.SetValue(objects[i], count), CancellationToken.None);
 		await Assert.That(objects.Count).IsEqualTo(2);
-		await Assert.That(objects.Single(x => x.Name == "a\"b").Count).IsEqualTo(1L);
-		await Assert.That(objects.Single(x => x.Name == "v").Count).IsEqualTo(1L);
+		await Assert.That(objects.Single(x => x.Name == "a\"b").Count).IsEqualTo((long?)1L);
+		await Assert.That(objects.Single(x => x.Name == "v").Count).IsEqualTo((long?)1L);
 		string[] headers = null!;
 		object[,] values = null!;
 		database.ReadTable("a\"b", h => headers = h, (v, count) => values = v);
@@ -55,6 +56,83 @@ public class SqliteDatabaseTests
 		await Assert.That(values[0, 0]).IsEqualTo((object)"=1+1");
 		Assert.Throws<ArgumentException>(() => database.ReadQuery("SELECT 1; DELETE FROM v", _ => { }, (_, _) => { }));
 		Assert.Throws<ArgumentException>(() => database.ReadQuery("DELETE FROM v", _ => { }, (_, _) => { }));
+	}
+
+	[Test]
+	public async Task UnreadableViewDoesNotPreventOtherCountsOrReads()
+	{
+		using (var connection = new SQLiteConnection($"Data Source={path};Version=3;"))
+		{
+			connection.Open();
+			using var command = new SQLiteCommand("CREATE TABLE good (n INTEGER); INSERT INTO good VALUES (1); CREATE VIEW broken AS SELECT * FROM missing", connection);
+			command.ExecuteNonQuery();
+		}
+		using var database = new SqliteDatabase(path);
+		var objects = database.GetObjects();
+		var counts = new Dictionary<string, long?>();
+		database.LoadCounts(objects, (i, count) => counts.Add(objects[i].Name, count), CancellationToken.None);
+		await Assert.That(counts["broken"]).IsNull();
+		await Assert.That(counts["good"]).IsEqualTo((long?)1L);
+		object[,] values = null!;
+		database.ReadQuery("SELECT * FROM good", _ => { }, (v, _) => values = v);
+		await Assert.That(values[0, 0]).IsEqualTo((object)1d);
+	}
+
+	[Test]
+	public async Task LongRunningCountCanBeCancelled()
+	{
+		using (var connection = new SQLiteConnection($"Data Source={path};Version=3;"))
+		{
+			connection.Open();
+			using var command = new SQLiteCommand("CREATE TABLE nums (n INTEGER); WITH RECURSIVE seq(n) AS (SELECT 1 UNION ALL SELECT n+1 FROM seq WHERE n<10000) INSERT INTO nums SELECT n FROM seq; CREATE VIEW slow AS SELECT a.n FROM nums a, nums b, nums c", connection);
+			command.ExecuteNonQuery();
+		}
+		using var cts = new CancellationTokenSource();
+		var started = new TaskCompletionSource<bool>();
+		var task = Task.Run(() =>
+		{
+			using var database = new SqliteDatabase(path);
+			var objects = database.GetObjects().Where(x => x.Name == "slow").ToArray();
+			started.SetResult(true);
+			try { database.LoadCounts(objects, (_, _) => { }, cts.Token); }
+			catch (OperationCanceledException) { return true; }
+			return false;
+		});
+		var startup = await Task.WhenAny(started.Task, task, Task.Delay(10000));
+		if (startup == task) await task;
+		if (startup != started.Task)
+		{
+			cts.Cancel();
+			throw new TimeoutException("The count did not start.");
+		}
+		cts.CancelAfter(100);
+		var finished = await Task.WhenAny(task, Task.Delay(10000));
+		await Assert.That(finished == task).IsTrue();
+		if (finished == task) await Assert.That(await task).IsTrue();
+	}
+
+	[Test]
+	public async Task DateTimeMappingPreservesFractionalSecondsAndKind()
+	{
+		var date = new DateTime(2026, 1, 2, 3, 4, 5, DateTimeKind.Utc).AddTicks(1234567);
+		var convert = typeof(SqliteDatabase).GetMethod("ToExcelValue", BindingFlags.Static | BindingFlags.NonPublic)!;
+		var value = (string)convert.Invoke(null, new object[] { date })!;
+		await Assert.That(value).IsEqualTo("2026-01-02T03:04:05.1234567Z");
+	}
+
+	[Test]
+	public async Task ReadsFractionalSecondsFromDatetimeColumn()
+	{
+		using (var connection = new SQLiteConnection($"Data Source={path};Version=3;"))
+		{
+			connection.Open();
+			using var command = new SQLiteCommand("CREATE TABLE dates (stamp DATETIME); INSERT INTO dates VALUES ('2026-01-02 03:04:05.1234567')", connection);
+			command.ExecuteNonQuery();
+		}
+		using var database = new SqliteDatabase(path);
+		object[,] values = null!;
+		database.ReadTable("dates", _ => { }, (v, _) => values = v);
+		await Assert.That((string)values[0, 0]).IsEqualTo("2026-01-02T03:04:05.1234567");
 	}
 
 	[Test]

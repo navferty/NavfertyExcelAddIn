@@ -25,7 +25,7 @@ public sealed class SqliteImporter
 			try
 			{
 				using (var database = new SqliteDatabase(picker.FileName))
-				using (var form = new SqliteImportForm(database.GetObjects()))
+				using (var form = new SqliteImportForm(database.GetObjects(), picker.FileName))
 				{
 					if (form.ShowDialog() != DialogResult.OK) return;
 					ImportWorkbook(app, database, form.SelectedObjects.Select(x => x.Name).ToArray(), form.Query);
@@ -71,17 +71,24 @@ public sealed class SqliteImporter
 		var sheet = index == 0
 			? (Worksheet)workbook.Worksheets[1]
 			: (Worksheet)workbook.Worksheets.Add(After: workbook.Worksheets[workbook.Worksheets.Count]);
+		sheet.Name = GetSheetName(name, names);
+		return sheet;
+	}
+
+	private static string GetSheetName(string name, HashSet<string> names)
+	{
 		var safe = new string(name.Select(c => "[]:*?/\\".IndexOf(c) >= 0 || char.IsControl(c) ? '_' : c).ToArray()).Trim('\'');
-		if (string.IsNullOrWhiteSpace(safe)) safe = "Sheet";
 		if (safe.Length > 31) safe = safe.Substring(0, 31);
+		safe = safe.Trim('\'');
+		if (string.IsNullOrWhiteSpace(safe)) safe = "Sheet";
+		if (string.Equals(safe, "History", StringComparison.OrdinalIgnoreCase)) safe = "History_";
 		string candidate = safe;
 		for (int suffix = 2; !names.Add(candidate); suffix++)
 		{
 			string ending = $" ({suffix})";
-			candidate = safe.Substring(0, Math.Min(safe.Length, 31 - ending.Length)) + ending;
+			candidate = safe.Substring(0, Math.Min(safe.Length, 31 - ending.Length)).TrimEnd('\'') + ending;
 		}
-		sheet.Name = candidate;
-		return sheet;
+		return candidate;
 	}
 
 	private static void WriteResult(Worksheet sheet, Action<Action<string[]>, Action<object[,], int>> read)
