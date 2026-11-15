@@ -58,7 +58,7 @@ namespace NavfertyExcelAddIn.Undo
 
 			foreach (var item in undoItems)
 			{
-				worksheet.Cells[item.RowIndex, item.ColumnIndex].Formula = item.OldFormula;
+				((Range)worksheet.Cells[item.RowIndex, item.ColumnIndex]).Formula = item.OldFormula;
 			}
 
 			foreach (var item in areaUndoItems)
@@ -73,8 +73,8 @@ namespace NavfertyExcelAddIn.Undo
 		private static Range GetRange(Worksheet worksheet, AreaUndoItems item)
 		{
 			return worksheet.Range[
-				worksheet.Cells[item.Row, item.Column],
-				worksheet.Cells[item.Row + item.Height - 1, item.Column + item.Width - 1]];
+				(Range)worksheet.Cells[item.Row, item.Column],
+				(Range)worksheet.Cells[item.Row + item.Height - 1, item.Column + item.Width - 1]];
 		}
 
 		private static bool CheckChanges(Worksheet worksheet, UndoItem x)

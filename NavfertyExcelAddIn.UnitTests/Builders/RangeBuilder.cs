@@ -44,6 +44,7 @@ public class RangeBuilder : TestDataBuilder<Range>
 	public RangeBuilder WithCells()
 	{
 		MockObject.Setup(x => x.Cells[It.IsAny<int>(), It.IsAny<int>()]).Returns(MockObject.Object);
+		MockObject.Setup(x => x[It.IsAny<int>(), It.IsAny<int>()]).Returns(MockObject.Object);
 		return this;
 	}
 
