@@ -36,7 +36,7 @@ Whatever tool you use, the result is only as good as the input:
 
 ## With the add-in
 
-**Export to SQLite** writes the whole workbook to a `.db` file. Each sheet becomes a table, the column types are detected automatically, and you can choose whether the first row holds the column names and how many leading rows to skip, which helps when a report has a title block above the table.
+**Export to SQLite** writes the whole workbook to a `.db` file. Each sheet with exportable data becomes a table, the column types are detected automatically, and you can choose whether the first row holds the column names and how many leading rows to skip, which helps when a report has a title block above the table. **Choose a new filename or back up the destination first: an existing database at the selected path is deleted before export begins, including all its existing tables, even if the export subsequently fails.**
 
 ## A first query
 
