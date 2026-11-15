@@ -29,7 +29,16 @@ internal sealed class SqliteImportForm : Form
 		layout.RowStyles.Add(new RowStyle(SizeType.AutoSize));
 		layout.RowStyles.Add(new RowStyle(SizeType.Percent, 40));
 		layout.RowStyles.Add(new RowStyle(SizeType.AutoSize));
-		layout.Controls.Add(new Label { Text = TextFor("SqliteImportObjects"), AutoSize = true }, 0, 0);
+		var selectionControls = new FlowLayoutPanel { Dock = DockStyle.Fill, AutoSize = true };
+		selectionControls.Controls.Add(new Label { Text = TextFor("SqliteImportObjects"), AutoSize = true, Anchor = AnchorStyles.Left });
+		var selectAll = new Button { Name = "selectAll", Text = TextFor("SqliteImportSelectAll"), AutoSize = true };
+		selectAll.Click += (sender, args) =>
+		{
+			for (int i = 0; i < objects.Items.Count; i++)
+				objects.SetItemChecked(i, true);
+		};
+		selectionControls.Controls.Add(selectAll);
+		layout.Controls.Add(selectionControls, 0, 0);
 		objects.Dock = DockStyle.Fill;
 		objects.CheckOnClick = true;
 		foreach (var item in items) objects.Items.Add(item);
