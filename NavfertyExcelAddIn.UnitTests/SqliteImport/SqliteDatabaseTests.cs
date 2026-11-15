@@ -136,6 +136,48 @@ public class SqliteDatabaseTests
 	}
 
 	[Test]
+	public async Task ReadsMixedStorageClassesFromDatetimeColumn()
+	{
+		using (var connection = new SQLiteConnection($"Data Source={path};Version=3;"))
+		{
+			connection.Open();
+			using var command = new SQLiteCommand("CREATE TABLE dates (stamp DATETIME); INSERT INTO dates VALUES ('2026-01-02 03:04:05.1234567'), ('not a date'), (42), (2.5), (X'00FF'), (NULL), ('2026-01-03 04:05:06'), (9223372036854775807)", connection);
+			command.ExecuteNonQuery();
+		}
+		using var database = new SqliteDatabase(path);
+		foreach (bool query in new[] { false, true })
+		{
+			object[,] values = null!;
+			if (query)
+				database.ReadQuery("SELECT stamp FROM dates ORDER BY rowid", _ => { }, (v, _) => values = v);
+			else
+				database.ReadTable("dates", _ => { }, (v, _) => values = v);
+			await Assert.That(values[0, 0]).IsEqualTo((object)"2026-01-02T03:04:05.1234567");
+			await Assert.That(values[1, 0]).IsEqualTo((object)"not a date");
+			await Assert.That(values[2, 0]).IsEqualTo((object)42d);
+			await Assert.That(values[3, 0]).IsEqualTo((object)2.5d);
+			await Assert.That(values[4, 0]).IsEqualTo((object)"AP8=");
+			await Assert.That(values[5, 0]).IsNull();
+			await Assert.That(values[6, 0]).IsEqualTo((object)"2026-01-03T04:05:06.0000000");
+			await Assert.That(values[7, 0]).IsEqualTo((object)"9223372036854775807");
+		}
+	}
+
+	[Test]
+	public async Task RejectsOversizedBlobAfterConversionFailure()
+	{
+		using (var connection = new SQLiteConnection($"Data Source={path};Version=3;"))
+		{
+			connection.Open();
+			using var command = new SQLiteCommand("CREATE TABLE dates (stamp DATETIME); INSERT INTO dates VALUES (zeroblob(24574))", connection);
+			command.ExecuteNonQuery();
+		}
+		using var database = new SqliteDatabase(path);
+		var error = Assert.Throws<InvalidOperationException>(() => database.ReadTable("dates", _ => { }, (_, _) => { }));
+		await Assert.That(error!.Message.Contains("BLOB")).IsTrue();
+	}
+
+	[Test]
 	public async Task MissingDatabaseIsNotCreated()
 	{
 		Assert.Throws<SQLiteException>(() => new SqliteDatabase(path));

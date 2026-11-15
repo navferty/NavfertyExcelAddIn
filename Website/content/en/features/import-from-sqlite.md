@@ -19,6 +19,8 @@ Import tables and views from a SQLite database into a new workbook. Each selecte
 
 The database is opened read-only. SQL `NULL` becomes an empty cell, BLOB values are encoded as base64 text, and integers exceeding 15 digits are imported as text to preserve their precision. Text is formatted as text to prevent formulas from being executed.
 
+Values are first converted according to their declared column type. If that conversion fails, the value is imported according to its SQLite storage class instead. Successful conversions, such as a date converted to .NET `DateTime`, may change the original representation.
+
 Results exceeding Excel's limits (1,048,575 data rows plus a header, 16,384 columns, or 32,767 characters per cell) cannot be imported. Invalid or locked files and other import errors are reported without leaving a partial workbook.
 
 To create a database from an existing workbook, see [Export to SQLite](/en/features/export-to-sqlite/).

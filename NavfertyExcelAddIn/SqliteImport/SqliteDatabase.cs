@@ -111,13 +111,37 @@ public sealed class SqliteDatabase : IDisposable
 					throw new InvalidOperationException("The result has too many rows for an Excel worksheet.");
 				var row = new object[columns];
 				for (int col = 0; col < columns; col++)
-					row[col] = ToExcelValue(reader.GetValue(col));
+					row[col] = ToExcelValue(ReadValue(reader, col));
 				batch.Add(row);
 				if (batch.Count == batchSize)
 					Flush(batch, columns, rows);
 			}
 			if (batch.Count > 0)
 				Flush(batch, columns, rows);
+		}
+	}
+
+	private static object ReadValue(SQLiteDataReader reader, int column)
+	{
+		var affinity = reader.GetFieldAffinity(column);
+		try { return reader.GetValue(column); }
+		catch (Exception ex) when (ex is FormatException || ex is InvalidCastException || ex is OverflowException)
+		{
+			switch (affinity)
+			{
+				case TypeAffinity.Int64: return reader.GetInt64(column);
+				case TypeAffinity.Double: return reader.GetDouble(column);
+				case TypeAffinity.Text: return reader.GetString(column);
+				case TypeAffinity.Null: return DBNull.Value;
+				case TypeAffinity.Blob:
+					long length = reader.GetBytes(column, 0, null, 0, 0);
+					if (length > (MaxCellLength / 4) * 3)
+						throw new InvalidOperationException("A BLOB exceeds Excel's 32,767 character cell limit when encoded as base64.");
+					var bytes = new byte[(int)length];
+					reader.GetBytes(column, 0, bytes, 0, bytes.Length);
+					return bytes;
+				default: throw;
+			}
 		}
 	}
 
