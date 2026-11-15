@@ -54,10 +54,11 @@ namespace NavfertyExcelAddIn.Commons
 			if (rangeValue is TIn currentValue)
 			{
 				var newValue = transform(currentValue);
+				var oldFormula = range.Formula;
 				range.Value = newValue;
 				var undoItem = new UndoItem
 				{
-					OldValue = currentValue,
+					OldFormula = oldFormula,
 					NewValue = newValue,
 					ColumnIndex = range.Column,
 					RowIndex = range.Row
@@ -74,7 +75,6 @@ namespace NavfertyExcelAddIn.Commons
 			int upperJ = values.GetUpperBound(1); // Columns
 
 			var isChanged = false;
-			var oldValues = (object[,])values.Clone();
 
 			logger.Debug($"Converting columns from {values.GetLowerBound(0)} to {upperI}, " +
 				$"rows from {values.GetLowerBound(1)} to {upperJ}");
@@ -99,11 +99,12 @@ namespace NavfertyExcelAddIn.Commons
 			if (isChanged)
 			{
 				logger.Debug("Some values were converted, writing to worksheet");
+				var oldFormulas = (object[,])range.Formula;
 				range.Value = values;
 				undoManager.PushAreaUndoItem(new AreaUndoItems
 				{
 					NewValues = values,
-					OldValues = oldValues,
+					OldFormulas = oldFormulas,
 					Column = range.Column,
 					Row = range.Row,
 					Height = upperI,

@@ -44,6 +44,7 @@ public class RangeBuilder : TestDataBuilder<Range>
 	public RangeBuilder WithCells()
 	{
 		MockObject.Setup(x => x.Cells[It.IsAny<int>(), It.IsAny<int>()]).Returns(MockObject.Object);
+		MockObject.Setup(x => x[It.IsAny<int>(), It.IsAny<int>()]).Returns(MockObject.Object);
 		return this;
 	}
 
@@ -114,6 +115,7 @@ public class RangeBuilder : TestDataBuilder<Range>
 	public RangeBuilder WithSingleValue(object? value)
 	{
 		MockObject.Setup(x => x.get_Value(Missing.Value)).Returns(value!);
+		MockObject.SetupGet(x => x.Formula).Returns(value!);
 		return this;
 	}
 
@@ -121,6 +123,7 @@ public class RangeBuilder : TestDataBuilder<Range>
 	{
 		var value = values ?? new object[,] { { "asd", "dsa" }, { 123.456d, (int)CVErrEnum.ErrNA } };
 		MockObject.Setup(x => x.get_Value(Missing.Value)).Returns(value);
+		MockObject.SetupGet(x => x.Formula).Returns((object[,])value.Clone());
 		return this;
 	}
 
