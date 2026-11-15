@@ -9,10 +9,9 @@ public class SqliteExportAutomationTest : AutomationTestsBase
 	private string testDbPath = string.Empty;
 
 	[Before(HookType.Test)]
-	public override async Task Initialize()
+	public void InitializeDatabase()
 	{
 		testDbPath = Path.Combine(Path.GetTempPath(), $"test_automation_{Guid.NewGuid()}.db");
-		await base.Initialize();
 	}
 
 	[Test]
@@ -128,20 +127,11 @@ public class SqliteExportAutomationTest : AutomationTestsBase
 	}
 
 	[After(HookType.Test)]
-	public override void Cleanup()
+	public void CleanupDatabase()
 	{
 		if (File.Exists(testDbPath))
 		{
-			try
-			{
-				File.Delete(testDbPath);
-			}
-			catch (Exception ex)
-			{
-				TestContext.Output.WriteLine($"Warning: Could not delete test database: {ex.Message}");
-			}
+			File.Delete(testDbPath);
 		}
-
-		base.Cleanup();
 	}
 }

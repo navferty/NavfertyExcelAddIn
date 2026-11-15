@@ -12,7 +12,7 @@ public class AutomationTestsBase : TestsBase
 	protected Application app = null!;
 
 	[Before(HookType.Test)]
-	public virtual async Task Initialize()
+	public async Task Initialize()
 	{
 		app = OpenNewExcelApp();
 		app.WindowState = Microsoft.Office.Interop.Excel.XlWindowState.xlMaximized;
@@ -33,10 +33,21 @@ public class AutomationTestsBase : TestsBase
 	}
 
 	[After(HookType.Test)]
-	public virtual void Cleanup()
+	public void Cleanup()
 	{
-		app.Quit();
-		Marshal.ReleaseComObject(app);
+		if (app == null)
+			return;
+
+		var excelApp = app;
+		app = null!;
+		try
+		{
+			excelApp.Quit();
+		}
+		finally
+		{
+			Marshal.ReleaseComObject(excelApp);
+		}
 	}
 
 	private static Application OpenNewExcelApp()
