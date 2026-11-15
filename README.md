@@ -20,6 +20,7 @@ A free Excel add-in that enhances productivity with tools for data manipulation,
  - [Copy as Markdown](#copy-as-markdown)
  - [Validate Values](#validate-values)
  - [Export to SQLite](#export-to-sqlite)
+ - [Import from SQLite](#import-from-sqlite)
  - [Create Sample XML based on XSD](#create-sample-xml-based-on-xsd)
  - [Validate XML with XSD](#validate-xml-with-xsd)
  - [Conditional Formatting](#conditional-formatting)
@@ -203,6 +204,14 @@ Export the entire workbook to a SQLite database file. Each worksheet becomes a s
 ![Export dialog](images/ExportToSqlite1.png)
 ![SQLite database result](images/ExportToSqlite2.png)
 </details>
+
+[Up](#navfertys-excel-add-in)
+
+---
+
+## Import from SQLite
+
+Select a SQLite file, then choose tables or views and/or enter a single SELECT query (without a semicolon). Each result is imported into a separate sheet in a new workbook. NULL becomes an empty cell, BLOB is base64 text, and integers exceeding Excel's 15-digit precision are imported as text. Text is formatted as text to prevent formulas from being executed. Results exceeding Excel's row, column, or cell-length limits are rejected.
 
 [Up](#navfertys-excel-add-in)
 

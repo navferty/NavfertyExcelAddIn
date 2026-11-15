@@ -270,4 +270,11 @@
   <data name="Info_OpenLogs" xml:space="preserve">
     <value>Open logs folder</value>
   </data>
+  <data name="SqliteImportTitle" xml:space="preserve"><value>Import from SQLite</value></data>
+  <data name="SqliteImportObjects" xml:space="preserve"><value>Select tables and views (record counts shown):</value></data>
+  <data name="SqliteImportQuery" xml:space="preserve"><value>Optional SELECT query (without a semicolon):</value></data>
+  <data name="SqliteImportCancel" xml:space="preserve"><value>Cancel</value></data>
+  <data name="SqliteImportButton" xml:space="preserve"><value>Import</value></data>
+  <data name="SqliteImportSelect" xml:space="preserve"><value>Select at least one table or view, or enter a SELECT query.</value></data>
+  <data name="SqliteImportError" xml:space="preserve"><value>Could not import from SQLite</value></data>
 </root>

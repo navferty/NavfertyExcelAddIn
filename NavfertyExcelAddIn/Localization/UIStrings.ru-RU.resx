@@ -270,4 +270,11 @@
   <data name="Info_OpenLogs" xml:space="preserve">
     <value>Открыть папку с журналами</value>
   </data>
+  <data name="SqliteImportTitle" xml:space="preserve"><value>Импорт из SQLite</value></data>
+  <data name="SqliteImportObjects" xml:space="preserve"><value>Выберите таблицы и представления (указано число записей):</value></data>
+  <data name="SqliteImportQuery" xml:space="preserve"><value>Необязательный запрос SELECT (без точки с запятой):</value></data>
+  <data name="SqliteImportCancel" xml:space="preserve"><value>Отмена</value></data>
+  <data name="SqliteImportButton" xml:space="preserve"><value>Импорт</value></data>
+  <data name="SqliteImportSelect" xml:space="preserve"><value>Выберите таблицу или представление либо введите запрос SELECT.</value></data>
+  <data name="SqliteImportError" xml:space="preserve"><value>Не удалось импортировать из SQLite</value></data>
 </root>

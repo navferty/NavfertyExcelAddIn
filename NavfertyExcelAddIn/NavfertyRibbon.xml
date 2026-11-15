@@ -120,6 +120,8 @@
             keytip="VX" getScreentip="GetLabel" getSupertip="GetSupertip"/>
           <button id="ExportToSqlite" getLabel="GetLabel" onAction="ExportToSqlite" imageMso="ExportExcel" size="large"
             keytip="ES" getScreentip="GetLabel" getSupertip="GetSupertip"/>
+          <button id="ImportFromSqlite" getLabel="GetLabel" onAction="ImportFromSqlite" imageMso="ImportExcel" size="large"
+            keytip="IS" getScreentip="GetLabel" getSupertip="GetSupertip"/>
         </group>
 
         <group id="WebToolsGroup" getLabel="GetLabel" autoScale="1">

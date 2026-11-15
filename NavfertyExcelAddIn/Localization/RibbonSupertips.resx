@@ -202,4 +202,5 @@ Allows rewriting values in range -999 billion to 999 billion, with precision up 
   <data name="ShowInfo" xml:space="preserve">
     <value>About the add-in, website, feature requests and bug reports</value>
   </data>
-</root>
+  <data name="ImportFromSqlite" xml:space="preserve"><value>Import tables, views or a SELECT query from a SQLite database into a new workbook</value></data>
+</root>

@@ -202,4 +202,5 @@
   <data name="ShowInfo" xml:space="preserve">
     <value>О надстройке, сайт, запрос функции и сообщение об ошибке</value>
   </data>
-</root>
+  <data name="ImportFromSqlite" xml:space="preserve"><value>Импортировать таблицы, представления или запрос SELECT из базы SQLite в новую книгу</value></data>
+</root>
