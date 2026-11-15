@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="{{ site.Language.Lang }}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Navferty's Excel Add-In</title>
+  <link rel="canonical" href="https://navferty.net/">
+  {{ range site.Sites }}<link rel="alternate" hreflang="{{ .Language.Lang }}" href="{{ .Home.Permalink }}">{{ end }}
+  <link rel="alternate" hreflang="x-default" href="{{ .Permalink }}">
+  <script>
+    (function () {
+      {{ $languages := slice }}
+      {{ range site.Sites }}{{ $languages = $languages | append (dict "code" .Language.Lang "url" .Home.RelPermalink) }}{{ end }}
+      var supported = {{ $languages | jsonify | safeJS }};
+      var saved;
+      try { saved = localStorage.getItem('websiteLanguage'); } catch (error) {
+        console.warn('Language preference is unavailable:', error);
+      }
+      var preferences = [saved].concat(navigator.languages && navigator.languages.length ? navigator.languages : [navigator.language]);
+      var defaultLanguage = {{ site.Language.Lang }};
+      var destination = supported.find(function (item) { return item.code === defaultLanguage; }).url;
+      for (var i = 0; i < preferences.length; i++) {
+        var candidate = String(preferences[i] || '').toLowerCase();
+        while (candidate) {
+          var match = supported.find(function (item) { return item.code.toLowerCase() === candidate; });
+          if (match) { destination = match.url; break; }
+          var separator = candidate.lastIndexOf('-');
+          candidate = separator < 0 ? '' : candidate.slice(0, separator);
+        }
+        if (match) break;
+      }
+      location.replace(destination);
+    }());
+  </script>
+</head>
+<body>
+  <h1>Navferty's Excel Add-In</h1>
+  <nav aria-label="{{ i18n "languageList" }}">
+    <ul>{{ range site.Sites }}<li><a href="{{ .Home.RelPermalink }}" lang="{{ .Language.Lang }}">{{ .Language.LanguageName }}</a></li>{{ end }}</ul>
+  </nav>
+</body>
+</html>

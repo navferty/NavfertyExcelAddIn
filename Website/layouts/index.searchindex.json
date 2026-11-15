@@ -1,0 +1,9 @@
+{{- $pages := slice -}}
+{{- range .Site.Pages -}}
+  {{- if or (eq .Kind "page") .IsHome (and (eq .Kind "section") (eq .Section "articles")) -}}
+    {{- if ne .RelPermalink (printf "%ssearch/" .Site.Home.RelPermalink) -}}
+      {{- $pages = $pages | append (dict "title" .Title "description" .Description "url" .RelPermalink "content" .Plain) -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+{{- $pages | jsonify -}}

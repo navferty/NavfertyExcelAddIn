@@ -1,0 +1,22 @@
+{{ define "main" }}
+  {{ .Content }}
+  {{ if eq .Section "features" }}
+    <h2>{{ i18n "otherCommands" }}</h2>
+    <ul class="other-commands">
+      {{ $current := .RelPermalink }}
+      {{ range where .Site.RegularPages "Section" "features" }}
+        {{ if ne .RelPermalink $current }}<li><a href="{{ .RelPermalink }}">{{ .Title }}</a></li>{{ end }}
+      {{ end }}
+    </ul>
+  {{ end }}
+  {{ if eq .File.TranslationBaseName "search" }}
+    <form class="site-search" role="search" data-index="{{ .Site.Home.RelPermalink }}search-index.json">
+      <label for="search-query">{{ i18n "searchQuery" }}</label>
+      <input id="search-query" type="search" name="q" required autocomplete="off">
+      <button type="submit">{{ i18n "searchSubmit" }}</button>
+    </form>
+    <p id="search-status" role="status" aria-live="polite"></p>
+    <ul id="search-results"></ul>
+    <noscript>{{ i18n "searchNoScript" }}</noscript>
+  {{ end }}
+{{ end }}

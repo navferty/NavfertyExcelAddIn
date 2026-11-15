@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="{{ .Site.Language.Lang }}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{ if .IsHome }}{{ .Title }}{{ else }}{{ .Title }} - {{ .Site.Title }}{{ end }}</title>
+  {{ with .Description }}<meta name="description" content="{{ . }}">{{ end }}
+  <link rel="canonical" href="{{ .Permalink }}">
+  {{ range .AllTranslations }}<link rel="alternate" hreflang="{{ .Language.Lang }}" href="{{ .Permalink }}">{{ end }}
+  {{ range where .AllTranslations "Language.Lang" .Site.Params.defaultLanguage }}<link rel="alternate" hreflang="x-default" href="{{ .Permalink }}">{{ end }}
+  <meta property="og:type" content="{{ if eq .Section "articles" }}article{{ else }}website{{ end }}">
+  <meta property="og:site_name" content="{{ .Site.Title }}">
+  <meta property="og:title" content="{{ .Title }}">
+  <meta property="og:description" content="{{ .Description }}">
+  <meta property="og:url" content="{{ .Permalink }}">
+  {{ with .Params.image }}<meta property="og:image" content="{{ . }}">{{ end }}
+  <meta name="twitter:card" content="summary_large_image">
+  {{ if eq .Section "articles" }}
+    {{ if eq .Kind "page" }}
+      {{ $schema := dict "@context" "https://schema.org" "@type" "Article" "headline" .Title "description" .Description "inLanguage" .Site.Language.Lang "mainEntityOfPage" .Permalink "author" (dict "@type" "Person" "name" "Andrey Deev" "url" "https://github.com/navferty") }}
+      <script type="application/ld+json">{{ $schema | jsonify | safeJS }}</script>
+    {{ end }}
+  {{ else if .IsHome }}
+    {{ $schema := dict "@context" "https://schema.org" "@type" "SoftwareApplication" "name" "Navferty's Excel Add-In" "applicationCategory" "BusinessApplication" "operatingSystem" "Windows" "inLanguage" .Site.Language.Lang "description" .Description "url" .Permalink "downloadUrl" "https://deploy.navferty.net/setup.zip" "isAccessibleForFree" true "offers" (dict "@type" "Offer" "price" "0" "priceCurrency" "USD") }}
+    <script type="application/ld+json">{{ $schema | jsonify | safeJS }}</script>
+  {{ end }}
+  <link rel="icon" href="/favicon.ico">
+  <link rel="stylesheet" href="/style.css">
+  <link rel="stylesheet" href="/hugo/site.css">
+  {{ $messages := dict
+    "searching" (i18n "searching")
+    "searchResults" (i18n "searchResults")
+    "searchFailed" (i18n "searchFailed")
+    "imageViewer" (i18n "imageViewer")
+    "close" (i18n "close")
+    "enlargeImage" (i18n "enlargeImage")
+    "copySectionLink" (i18n "copySectionLink")
+    "linkCopied" (i18n "linkCopied")
+    "copyLinkFailed" (i18n "copyLinkFailed")
+  }}
+  <script id="site-messages" type="application/json">{{ $messages | jsonify | safeJS }}</script>
+</head>
+<body>
+  <a class="skip-link" href="#content">{{ i18n "skipToContent" }}</a>
+  <header class="site-header">
+    <div class="site-header-inner">
+      <a class="brand" href="{{ .Site.Home.RelPermalink }}">{{ .Site.Title }}</a>
+      <nav aria-label="{{ i18n "mainNavigation" }}">
+        <a href="{{ .Site.Home.RelPermalink }}#commands">{{ i18n "commands" }}</a>
+        <a href="{{ .Site.Home.RelPermalink }}articles/">{{ i18n "articles" }}</a>
+        <a href="{{ .Site.Home.RelPermalink }}install/">{{ i18n "install" }}</a>
+        <a href="{{ .Site.Home.RelPermalink }}support/">{{ i18n "support" }}</a>
+        <div class="header-search">
+          <a class="header-search-toggle" href="{{ .Site.Home.RelPermalink }}search/" aria-controls="header-search-form" aria-expanded="false">{{ i18n "search" }}</a>
+          <form id="header-search-form" class="header-search-form" role="search" action="{{ .Site.Home.RelPermalink }}search/" method="get" hidden>
+            <label for="header-search-query">{{ i18n "searchQuery" }}</label>
+            <input id="header-search-query" type="search" name="q" required autocomplete="off">
+            <button type="submit">{{ i18n "searchSubmit" }}</button>
+          </form>
+        </div>
+        <details class="language-menu">
+          <summary>{{ .Site.Language.LanguageName }}</summary>
+          <ul>
+            {{ range .AllTranslations }}<li><a href="{{ .RelPermalink }}" lang="{{ .Language.Lang }}" hreflang="{{ .Language.Lang }}"{{ if eq $.Site.Language.Lang .Language.Lang }} aria-current="page"{{ end }}>{{ .Language.LanguageName }}</a></li>{{ end }}
+          </ul>
+        </details>
+      </nav>
+    </div>
+  </header>
+  <div id="container">
+    <main id="content" class="{{ if .IsHome }}home{{ else }}article{{ end }}">
+      {{ block "main" . }}{{ end }}
+    </main>
+  </div>
+  <footer class="footer"><p>Navferty &copy; 2021-<span id="current-year">2026</span> &bull; <a href="https://github.com/navferty/NavfertyExcelAddIn" class="footer-link">{{ i18n "openSource" }}</a></p></footer>
+  <script src="/hugo/site.js" defer></script>
+</body>
+</html>

@@ -9,6 +9,17 @@ permissions:
   contents: read
 
 jobs:
+  website-preview:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: peaceiris/actions-hugo@v3
+        with:
+          hugo-version: '0.123.7'
+          extended: true
+      - name: Build Hugo site
+        run: bash scripts/build-website.sh "$RUNNER_TEMP/website"
+
   build-and-test:
     runs-on: windows-2022
     steps:
@@ -19,6 +30,15 @@ jobs:
 
       - name: Build
         run: msbuild NavfertyExcelAddIn.slnx /m /p:Configuration=Release /p:Platform="Any CPU" /verbosity:minimal
+
+      - uses: peaceiris/actions-hugo@v3
+        with:
+          hugo-version: '0.123.7'
+          extended: true
+
+      - name: Check Hugo launcher lifecycle
+        shell: pwsh
+        run: ./scripts/test-hugo-launcher.ps1
 
       - name: Run tests with code coverage
         run: |

@@ -1,1 +1,0 @@
-This is a folder where all build artifacts will be uploaded to.
