@@ -20,6 +20,7 @@ public class NumericParserTests
 		var values = new object?[,] { { 1, "1", "abc" }, { "123.123", "321 , 321", null } };
 
 		selection.SetupGet(x => x.get_Value(Missing.Value)).Returns(values);
+		selection.SetupGet(x => x.Formula).Returns(values);
 		selection.SetupSet(x => x.Value = It.Is<object[,]>(z => VerifyParsed(z).GetAwaiter().GetResult()));
 		Expression<Func<Range, string>> getAddress = x => x.get_Address(It.IsAny<object>(), It.IsAny<object>(),
 							It.IsAny<XlReferenceStyle>(), It.IsAny<object>(), It.IsAny<object>());
