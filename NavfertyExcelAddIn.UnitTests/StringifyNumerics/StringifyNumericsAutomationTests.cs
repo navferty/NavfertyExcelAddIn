@@ -1,4 +1,9 @@
-﻿using Microsoft.Office.Interop.Excel;
+﻿using Autofac;
+
+using Microsoft.Office.Interop.Excel;
+
+using NavfertyExcelAddIn.Commons;
+using NavfertyExcelAddIn.Undo;
 
 namespace NavfertyExcelAddIn.UnitTests.StringifyNumerics;
 
@@ -6,6 +11,42 @@ namespace NavfertyExcelAddIn.UnitTests.StringifyNumerics;
 [NotInParallel("Automation")]
 public class StringifyNumericsAutomationTests : AutomationTestsBase
 {
+	[Test]
+	public async Task Undo_RestoresFormulasAndValues()
+	{
+		var workbook = app.Workbooks.Add();
+		var sheet = (Worksheet)workbook.Sheets[1];
+		((Range)sheet.Cells[1, 1]).Value = 1;
+		((Range)sheet.Cells[2, 1]).Value = 2;
+		((Range)sheet.Cells[3, 1]).Formula = "=A1+A2";
+		((Range)sheet.Cells[1, 2]).Value = "text";
+		var selection = sheet.Range["A1", "B3"];
+		var undoManager = NavfertyRibbon.Container.Resolve<UndoManager>();
+
+		selection.ApplyForEachCellOfType<double, string>(x => $"number {x}");
+		await Assert.That((string)((Range)sheet.Cells[3, 1]).Value).IsEqualTo("number 3");
+		undoManager.UndoLastAction(sheet);
+
+		await Assert.That((string)((Range)sheet.Cells[3, 1]).Formula).IsEqualTo("=A1+A2");
+		await Assert.That((double)((Range)sheet.Cells[1, 1]).Value).IsEqualTo(1d);
+		await Assert.That((double)((Range)sheet.Cells[2, 1]).Value).IsEqualTo(2d);
+		await Assert.That((string)((Range)sheet.Cells[1, 2]).Value).IsEqualTo("text");
+		await Assert.That((object?)((Range)sheet.Cells[2, 2]).Value).IsNull();
+
+		var formulaCell = (Range)sheet.Cells[3, 1];
+		formulaCell.ApplyForEachCellOfType<double, string>(x => $"number {x}");
+		undoManager.UndoLastAction(sheet);
+
+		await Assert.That((string)formulaCell.Formula).IsEqualTo("=A1+A2");
+
+		selection.ApplyForEachCellOfType<double, string>(x => $"number {x}");
+		((Range)sheet.Cells[1, 1]).Value = "edited";
+		undoManager.UndoLastAction(sheet);
+
+		await Assert.That((string)((Range)sheet.Cells[1, 1]).Value).IsEqualTo("edited");
+		await Assert.That((string)formulaCell.Value).IsEqualTo("number 3");
+	}
+
 	[Test]
 	[MethodDataSource(nameof(GetStringifyTestCases))]
 	[Property("Description", "Create blank workbook, fill it with numbers and stringify numerics to each of 3 language options")]

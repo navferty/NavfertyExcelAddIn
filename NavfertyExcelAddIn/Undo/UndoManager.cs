@@ -58,13 +58,13 @@ namespace NavfertyExcelAddIn.Undo
 
 			foreach (var item in undoItems)
 			{
-				worksheet.Cells[item.RowIndex, item.ColumnIndex].Value = item.OldValue;
+				worksheet.Cells[item.RowIndex, item.ColumnIndex].Formula = item.OldFormula;
 			}
 
 			foreach (var item in areaUndoItems)
 			{
 				var range = GetRange(worksheet, item);
-				range.Value = item.OldValues;
+				range.Formula = item.OldFormulas;
 			}
 
 			undoItems.Clear();
@@ -135,13 +135,13 @@ namespace NavfertyExcelAddIn.Undo
 		public int Width { get; set; }
 		public int Height { get; set; }
 
-		public object?[,] OldValues { get; set; } = null!;
+		public object?[,] OldFormulas { get; set; } = null!;
 		public object?[,] NewValues { get; set; } = null!;
 	}
 
 	public class UndoItem
 	{
-		public object? OldValue { get; set; }
+		public object? OldFormula { get; set; }
 		public object? NewValue { get; set; }
 
 		public int RowIndex { get; set; }
