@@ -12,3 +12,4 @@ python3 scripts/verify-hugo.py "$destination"
 python3 scripts/test-hugo-output.py "$destination"
 node scripts/test-hugo-search.js
 node scripts/test-hugo-language.js "$destination"
+node scripts/test-hugo-copy.js

@@ -11,6 +11,7 @@ on:
       - scripts/test-hugo-output.py
       - scripts/test-hugo-search.js
       - scripts/test-hugo-language.js
+      - scripts/test-hugo-copy.js
       - .github/workflows/website.yml
 
 permissions:

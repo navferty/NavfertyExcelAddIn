@@ -131,7 +131,11 @@
             copyButton.className = 'heading-anchor';
             copyButton.setAttribute('aria-label', messages.copySectionLink);
             copyButton.title = messages.copySectionLink;
-            copyButton.textContent = '#';
+            var icon = document.createElement('span');
+            icon.className = 'heading-anchor-icon';
+            icon.setAttribute('aria-hidden', 'true');
+            icon.textContent = '#';
+            copyButton.appendChild(icon);
 
             var copyStatus = document.createElement('span');
             copyStatus.className = 'heading-anchor-status';
@@ -141,6 +145,8 @@
             heading.insertBefore(copyButton, heading.firstChild);
         });
 
+        var copyTimers = new WeakMap();
+        var copyAttempts = new WeakMap();
         article.addEventListener('click', function (event) {
             var button = event.target.closest('.heading-anchor');
             if (!button) return;
@@ -149,14 +155,27 @@
             var link = new URL(window.location.href);
             link.hash = heading.id;
             var copyStatus = button.querySelector('.heading-anchor-status');
+            var icon = button.querySelector('.heading-anchor-icon');
+            var attempt = (copyAttempts.get(button) || 0) + 1;
+            copyAttempts.set(button, attempt);
+            clearTimeout(copyTimers.get(button));
+            icon.textContent = '#';
+            copyStatus.textContent = '';
 
             Promise.resolve().then(function () {
                 if (!navigator.clipboard) throw new Error('Clipboard access is unavailable.');
                 return navigator.clipboard.writeText(link.href);
             }).then(function () {
+                if (copyAttempts.get(button) !== attempt) return;
+                icon.textContent = '\u2713';
                 copyStatus.textContent = messages.linkCopied;
+                copyTimers.set(button, setTimeout(function () {
+                    icon.textContent = '#';
+                    copyTimers.delete(button);
+                }, 2000));
             }).catch(function (error) {
                 console.error('Could not copy the section link.', error);
+                if (copyAttempts.get(button) !== attempt) return;
                 copyStatus.textContent = messages.copyLinkFailed;
             });
         });
