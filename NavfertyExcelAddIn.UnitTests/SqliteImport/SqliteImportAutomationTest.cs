@@ -6,6 +6,8 @@ using Navferty.Common;
 using NavfertyExcelAddIn.SqliteExport;
 using NavfertyExcelAddIn.SqliteImport;
 
+using Range = Microsoft.Office.Interop.Excel.Range;
+
 namespace NavfertyExcelAddIn.UnitTests.SqliteImport;
 
 [Category("Automation")]
@@ -44,8 +46,8 @@ public class SqliteImportAutomationTest : AutomationTestsBase
 			await Assert.That(target.Name).IsEqualTo("Products");
 			for (int row = 1; row <= 4; row++)
 				for (int col = 1; col <= 3; col++)
-					await Assert.That(((Range)target.Cells[row, col]).Value2)
-						.IsEqualTo(((Range)source.Cells[row, col]).Value2);
+					await Assert.That((object)((Range)target.Cells[row, col]).Value2)
+						.IsEqualTo((object)((Range)source.Cells[row, col]).Value2);
 			await Assert.That((bool)((Range)target.Cells[4, 1]).HasFormula).IsFalse();
 		}
 		finally
