@@ -273,6 +273,7 @@
   <data name="SqliteImportTitle" xml:space="preserve"><value>Импорт из SQLite</value></data>
   <data name="SqliteImportObjects" xml:space="preserve"><value>Выберите таблицы и представления (указано число записей):</value></data>
   <data name="SqliteImportSelectAll" xml:space="preserve"><value>Выбрать все</value></data>
+  <data name="SqliteImportRowLimitWarning" xml:space="preserve"><value>Некоторые таблицы или представления превышают ограничение Excel: {0} строк данных. Не отмечайте их или ограничьте результат запросом SELECT.</value></data>
   <data name="SqliteImportQuery" xml:space="preserve"><value>Необязательный запрос SELECT (без точки с запятой):</value></data>
   <data name="SqliteImportCancel" xml:space="preserve"><value>Отмена</value></data>
   <data name="SqliteImportButton" xml:space="preserve"><value>Импорт</value></data>

@@ -273,6 +273,7 @@
   <data name="SqliteImportTitle" xml:space="preserve"><value>Import from SQLite</value></data>
   <data name="SqliteImportObjects" xml:space="preserve"><value>Select tables and views (record counts shown):</value></data>
   <data name="SqliteImportSelectAll" xml:space="preserve"><value>Select all</value></data>
+  <data name="SqliteImportRowLimitWarning" xml:space="preserve"><value>Some tables or views exceed Excel's limit of {0} data rows. Leave them unchecked or use a SELECT query to limit the results.</value></data>
   <data name="SqliteImportQuery" xml:space="preserve"><value>Optional SELECT query (without a semicolon):</value></data>
   <data name="SqliteImportCancel" xml:space="preserve"><value>Cancel</value></data>
   <data name="SqliteImportButton" xml:space="preserve"><value>Import</value></data>

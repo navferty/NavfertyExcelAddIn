@@ -23,9 +23,10 @@ internal sealed class SqliteImportForm : Form
 		StartPosition = FormStartPosition.CenterScreen;
 		Size = new Size(600, 440);
 		MinimumSize = new Size(450, 350);
-		var layout = new TableLayoutPanel { Dock = DockStyle.Fill, ColumnCount = 1, RowCount = 5, Padding = new Padding(10) };
+		var layout = new TableLayoutPanel { Dock = DockStyle.Fill, ColumnCount = 1, RowCount = 6, Padding = new Padding(10) };
 		layout.RowStyles.Add(new RowStyle(SizeType.AutoSize));
 		layout.RowStyles.Add(new RowStyle(SizeType.Percent, 60));
+		layout.RowStyles.Add(new RowStyle(SizeType.AutoSize));
 		layout.RowStyles.Add(new RowStyle(SizeType.AutoSize));
 		layout.RowStyles.Add(new RowStyle(SizeType.Percent, 40));
 		layout.RowStyles.Add(new RowStyle(SizeType.AutoSize));
@@ -43,11 +44,22 @@ internal sealed class SqliteImportForm : Form
 		objects.CheckOnClick = true;
 		foreach (var item in items) objects.Items.Add(item);
 		layout.Controls.Add(objects, 0, 1);
-		layout.Controls.Add(new Label { Text = TextFor("SqliteImportQuery"), AutoSize = true }, 0, 2);
+		if (items.Any(item => item.Count > SqliteDatabase.MaxRows))
+		{
+			layout.Controls.Add(new Label
+			{
+				Name = "rowLimitWarning",
+				Text = string.Format(TextFor("SqliteImportRowLimitWarning"), SqliteDatabase.MaxRows.ToString("N0")),
+				AutoSize = true,
+				ForeColor = Color.DarkRed,
+				MaximumSize = new Size(400, 0)
+			}, 0, 2);
+		}
+		layout.Controls.Add(new Label { Text = TextFor("SqliteImportQuery"), AutoSize = true }, 0, 3);
 		query.Multiline = true;
 		query.ScrollBars = ScrollBars.Vertical;
 		query.Dock = DockStyle.Fill;
-		layout.Controls.Add(query, 0, 3);
+		layout.Controls.Add(query, 0, 4);
 		var buttons = new FlowLayoutPanel { Dock = DockStyle.Fill, AutoSize = true, FlowDirection = FlowDirection.RightToLeft };
 		var cancel = new Button { Text = TextFor("SqliteImportCancel"), DialogResult = DialogResult.Cancel, AutoSize = true };
 		var ok = new Button { Text = TextFor("SqliteImportButton"), AutoSize = true };
@@ -62,7 +74,7 @@ internal sealed class SqliteImportForm : Form
 		};
 		buttons.Controls.Add(cancel);
 		buttons.Controls.Add(ok);
-		layout.Controls.Add(buttons, 0, 4);
+		layout.Controls.Add(buttons, 0, 5);
 		Controls.Add(layout);
 		AcceptButton = ok;
 		CancelButton = cancel;
