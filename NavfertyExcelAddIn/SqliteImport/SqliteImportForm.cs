@@ -38,6 +38,9 @@ internal sealed class SqliteImportForm : Form
 		this.items = items;
 		this.databasePath = databasePath;
 		Text = TextFor("SqliteImportTitle");
+		using (var iconStream = typeof(SqliteImportForm).Assembly.GetManifestResourceStream("NavfertyExcelAddIn.favicon.ico")
+			?? throw new InvalidOperationException("The window icon resource is missing."))
+			Icon = new Icon(iconStream);
 		StartPosition = FormStartPosition.CenterScreen;
 		Size = new Size(760, 650);
 		MinimumSize = new Size(560, 480);

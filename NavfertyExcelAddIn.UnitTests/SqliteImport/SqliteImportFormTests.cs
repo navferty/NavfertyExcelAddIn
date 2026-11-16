@@ -1,3 +1,4 @@
+using System.Drawing;
 using System.Reflection;
 using System.Windows.Forms;
 
@@ -44,6 +45,24 @@ public class SqliteImportFormTests
 	private static void ApplyCount(Form form, SqliteObject[] items, int index, long? count) =>
 		FormType.GetMethod("ApplyCount", BindingFlags.Instance | BindingFlags.NonPublic)!
 			.Invoke(form, new object?[] { items, index, count });
+
+	[Test]
+	public async Task WindowUsesEmbeddedFavicon()
+	{
+		bool matches = false;
+		OnStaThread(() =>
+		{
+			using var stream = FormType.Assembly.GetManifestResourceStream("NavfertyExcelAddIn.favicon.ico")!;
+			using var expected = new Icon(stream);
+			using var form = CreateForm(Array.Empty<SqliteObject>());
+			using var expectedBytes = new MemoryStream();
+			using var actualBytes = new MemoryStream();
+			expected.Save(expectedBytes);
+			form.Icon.Save(actualBytes);
+			matches = expectedBytes.ToArray().SequenceEqual(actualBytes.ToArray());
+		});
+		await Assert.That(matches).IsTrue();
+	}
 
 	[Test]
 	public async Task CountUpdatesPreserveSelectionAndUpdateRowsAndWarning()

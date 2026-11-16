@@ -184,6 +184,7 @@
 
   <ItemGroup>
     <EmbeddedResource Include="NLog.config" LogicalName="NavfertyExcelAddIn.NLog.config" />
+    <EmbeddedResource Include="..\Website\favicon.ico" LogicalName="NavfertyExcelAddIn.favicon.ico" />
     <None Update="ThisAddIn.Designer.xml">
       <DependentUpon>ThisAddIn.cs</DependentUpon>
     </None>
