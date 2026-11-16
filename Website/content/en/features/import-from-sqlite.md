@@ -13,11 +13,11 @@ Import tables and views from a SQLite database into a new workbook. Each selecte
 
 1. On the **Navferty's Tools** ribbon, choose **Import from SQLite**.
 2. Select a `.db`, `.sqlite` or `.sqlite3` database file. The file picker also offers an all-files filter.
-3. Check one or more tables or views. Record counts load in the background and may be unavailable for an unreadable object. Use **Select all** to check every item at once, then uncheck any you do not need. If a count exceeds Excel's row limit, the dialog warns you; leave that item unchecked or use a query to limit the results.
-4. Optionally enter a single `SELECT` query without a semicolon. You can import the query alone or together with selected tables and views.
-5. Click **Import**. The results appear in a new workbook.
+3. Check one or more tables or views. Use **Find** to filter names; selections remain checked when hidden. Counts load in the background and may be unavailable. **Select all** selects objects across the filter but skips those known to exceed Excel's row limit; **Clear all** clears all selections. Oversized selections are marked with a warning.
+4. Optionally enter a single `SELECT` query without a semicolon. You can import the query alone or together with selected tables and views. **Count rows** counts its result in the background; you can cancel the count. The count is cleared when the query changes and warns if it exceeds Excel's row limit.
+5. Click **Import**. The progress dialog shows the current result and imported row count. You can cancel; a partial workbook is closed without saving. The results appear in a new workbook.
 
-The database is opened read-only.
+The database is opened read-only. Query counting may take time and runs the query separately from import. The displayed count reflects the database at count time; changes before import can alter the result.
 
 ## How values are converted
 

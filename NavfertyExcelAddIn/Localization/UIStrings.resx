@@ -282,4 +282,26 @@
   <data name="SqliteImportButton" xml:space="preserve"><value>Import</value></data>
   <data name="SqliteImportSelect" xml:space="preserve"><value>Select at least one table or view, or enter a SELECT query.</value></data>
   <data name="SqliteImportError" xml:space="preserve"><value>Could not import from SQLite</value></data>
+  <data name="SqliteImportDatabase" xml:space="preserve"><value>Database: {0}</value></data>
+  <data name="SqliteImportDatabaseName" xml:space="preserve"><value>Database file</value></data>
+  <data name="SqliteImportSearch" xml:space="preserve"><value>Find:</value></data>
+  <data name="SqliteImportClearAll" xml:space="preserve"><value>Clear all</value></data>
+  <data name="SqliteImportColumnName" xml:space="preserve"><value>Name</value></data>
+  <data name="SqliteImportColumnType" xml:space="preserve"><value>Type</value></data>
+  <data name="SqliteImportColumnRows" xml:space="preserve"><value>Rows</value></data>
+  <data name="SqliteImportOverLimit" xml:space="preserve"><value>(over limit)</value></data>
+  <data name="SqliteImportSelectionSummary" xml:space="preserve"><value>{0} selected; each result gets a separate worksheet. Select all skips known oversized items.</value></data>
+  <data name="SqliteImportSelectedLimitWarning" xml:space="preserve"><value>Warning: a selected item exceeds Excel's limit of {0} data rows. Uncheck it or use a SELECT query to limit the results.</value></data>
+  <data name="SqliteImportQueryHelp" xml:space="preserve"><value>Optional SELECT query (no semicolon). Import it alone or with selected tables and views.</value></data>
+  <data name="SqliteImportCountRows" xml:space="preserve"><value>Count rows</value></data>
+  <data name="SqliteImportCancelCount" xml:space="preserve"><value>Cancel count</value></data>
+  <data name="SqliteImportCounting" xml:space="preserve"><value>Counting rows…</value></data>
+  <data name="SqliteImportQueryCount" xml:space="preserve"><value>Rows at count time: {0}.</value></data>
+  <data name="SqliteImportQueryLimit" xml:space="preserve"><value>Warning: exceeds Excel's limit of {0} data rows.</value></data>
+  <data name="SqliteImportQueryCountError" xml:space="preserve"><value>Could not count rows: {0}</value></data>
+  <data name="SqliteImportCountDisclaimer" xml:space="preserve"><value>Counting may take time and runs the query again. The database may change before import.</value></data>
+  <data name="SqliteImportProgressTitle" xml:space="preserve"><value>Import from SQLite</value></data>
+  <data name="SqliteImportProgressText" xml:space="preserve"><value>Importing {0}: {1:N0} rows</value></data>
+  <data name="SqliteImportProgressCancel" xml:space="preserve"><value>Cancel</value></data>
+  <data name="SqliteImportProgressCancelling" xml:space="preserve"><value>Cancelling…</value></data>
 </root>

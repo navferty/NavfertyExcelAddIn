@@ -82,19 +82,101 @@ public sealed class SqliteDatabase : IDisposable
 	public void ReadTable(string name, Action<string[]> headers, Action<object[,], int> rows)
 		=> Read("SELECT * FROM " + QuoteIdentifier(name), headers, rows);
 
+	public void ReadTable(string name, Action<string[]> headers, Action<object[,], int> rows, CancellationToken token)
+		=> ReadCancellable("SELECT * FROM " + QuoteIdentifier(name), headers, rows, token);
+
 	public void ReadQuery(string query, Action<string[]> headers, Action<object[,], int> rows)
+	{
+		ValidateQuery(query);
+		Read(query, headers, rows);
+	}
+
+	public void ReadQuery(string query, Action<string[]> headers, Action<object[,], int> rows, CancellationToken token)
+	{
+		ValidateQuery(query);
+		ReadCancellable(query, headers, rows, token);
+	}
+
+	public long CountQuery(string query, CancellationToken token)
+	{
+		ValidateQuery(query);
+		token.ThrowIfCancellationRequested();
+		SQLiteProgressEventHandler progress = (sender, args) =>
+		{
+			if (token.IsCancellationRequested)
+				args.ReturnCode = SQLiteProgressReturnCode.Interrupt;
+		};
+		connection.ProgressOps = 1000;
+		connection.Progress += progress;
+		try
+		{
+			using (token.Register(() => connection.Cancel()))
+			{
+				token.ThrowIfCancellationRequested();
+				try
+				{
+					using (var command = new SQLiteCommand(query, connection))
+					using (var reader = command.ExecuteReader())
+					{
+						long count = 0;
+						while (reader.Read())
+						{
+							token.ThrowIfCancellationRequested();
+							count = checked(count + 1);
+						}
+						token.ThrowIfCancellationRequested();
+						return count;
+					}
+				}
+				catch (SQLiteException)
+				{
+					token.ThrowIfCancellationRequested();
+					throw;
+				}
+			}
+		}
+		finally { connection.Progress -= progress; }
+	}
+
+	private static void ValidateQuery(string query)
 	{
 		// Restrict the input to one SELECT statement. The connection is also read-only.
 		if (string.IsNullOrWhiteSpace(query) || !Regex.IsMatch(query, @"^\s*SELECT\b", RegexOptions.IgnoreCase | RegexOptions.CultureInvariant) || query.IndexOf(';') >= 0)
 			throw new ArgumentException("Enter a single SELECT statement without a semicolon.");
-		Read(query, headers, rows);
 	}
 
-	private void Read(string sql, Action<string[]> headers, Action<object[,], int> rows)
+	private void ReadCancellable(string sql, Action<string[]> headers, Action<object[,], int> rows, CancellationToken token)
+	{
+		token.ThrowIfCancellationRequested();
+		SQLiteProgressEventHandler progress = (sender, args) =>
+		{
+			if (token.IsCancellationRequested)
+				args.ReturnCode = SQLiteProgressReturnCode.Interrupt;
+		};
+		connection.ProgressOps = 1000;
+		connection.Progress += progress;
+		try
+		{
+			using (token.Register(() => connection.Cancel()))
+			{
+				token.ThrowIfCancellationRequested();
+				try { Read(sql, headers, rows, token); }
+				catch (SQLiteException)
+				{
+					token.ThrowIfCancellationRequested();
+					throw;
+				}
+			}
+		}
+		finally { connection.Progress -= progress; }
+	}
+
+	private void Read(string sql, Action<string[]> headers, Action<object[,], int> rows, CancellationToken token = default)
 	{
 		using (var command = new SQLiteCommand(sql, connection))
 		using (var reader = command.ExecuteReader())
 		{
+			token.ThrowIfCancellationRequested();
 			int columns = reader.FieldCount;
 			if (columns == 0 || columns > MaxColumns)
 				throw new InvalidOperationException("The result has too many columns for Excel.");
@@ -102,11 +184,13 @@ public sealed class SqliteDatabase : IDisposable
 			for (int col = 0; col < columns; col++)
 				names[col] = CheckLength(reader.GetName(col));
 			headers(names);
+			token.ThrowIfCancellationRequested();
 			int batchSize = Math.Max(1, Math.Min(500, 250000 / columns));
 			var batch = new List<object[]>();
 			int total = 0;
 			while (reader.Read())
 			{
+				token.ThrowIfCancellationRequested();
 				if (++total > MaxRows)
 					throw new InvalidOperationException("The result has too many rows for an Excel worksheet.");
 				var row = new object[columns];
@@ -114,10 +198,17 @@ public sealed class SqliteDatabase : IDisposable
 					row[col] = ToExcelValue(ReadValue(reader, col));
 				batch.Add(row);
 				if (batch.Count == batchSize)
+				{
 					Flush(batch, columns, rows);
+					token.ThrowIfCancellationRequested();
+				}
 			}
+			token.ThrowIfCancellationRequested();
 			if (batch.Count > 0)
+			{
 				Flush(batch, columns, rows);
+				token.ThrowIfCancellationRequested();
+			}
 		}
 	}
 

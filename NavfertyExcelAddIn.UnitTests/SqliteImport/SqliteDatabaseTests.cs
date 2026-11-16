@@ -59,6 +59,152 @@ public class SqliteDatabaseTests
 	}
 
 	[Test]
+	public async Task CountsFullQueryResults()
+	{
+		using (var connection = new SQLiteConnection($"Data Source={path};Version=3;"))
+		{
+			connection.Open();
+			using var command = new SQLiteCommand("CREATE TABLE nums (n INTEGER); INSERT INTO nums VALUES (1), (1), (2), (3)", connection);
+			command.ExecuteNonQuery();
+		}
+		using var database = new SqliteDatabase(path);
+		await Assert.That(database.CountQuery("SELECT n FROM nums WHERE n > 3", CancellationToken.None)).IsEqualTo(0L);
+		await Assert.That(database.CountQuery("SELECT DISTINCT n FROM nums", CancellationToken.None)).IsEqualTo(3L);
+		await Assert.That(database.CountQuery("SELECT n, COUNT(*) FROM nums GROUP BY n HAVING COUNT(*) > 1", CancellationToken.None)).IsEqualTo(1L);
+		await Assert.That(database.CountQuery("SELECT n FROM nums ORDER BY n LIMIT 2 OFFSET 1", CancellationToken.None)).IsEqualTo(2L);
+		await Assert.That(database.CountQuery("SELECT n FROM nums -- trailing comment", CancellationToken.None)).IsEqualTo(4L);
+		await Assert.That(database.CountQuery("SELECT a.n FROM nums a, nums b, nums c, nums d, nums e, nums f, nums g, nums h, nums i, nums j, nums k", CancellationToken.None)).IsEqualTo(4194304L);
+	}
+
+	[Test]
+	public async Task CountQueryRejectsInvalidStatementsAndPreservesSyntaxErrors()
+	{
+		using (var connection = new SQLiteConnection($"Data Source={path};Version=3;"))
+		{
+			connection.Open();
+			using var command = new SQLiteCommand("CREATE TABLE nums (n INTEGER); INSERT INTO nums VALUES (1)", connection);
+			command.ExecuteNonQuery();
+		}
+		using var database = new SqliteDatabase(path);
+		foreach (string query in new[] { null!, "", "  ", "DELETE FROM nums", "SELECT 1; DELETE FROM nums", "SELECT 1;", "SELECT ';'" })
+		{
+			Assert.Throws<ArgumentException>(() => database.CountQuery(query, CancellationToken.None));
+			Assert.Throws<ArgumentException>(() => database.ReadQuery(query, _ => { }, (_, _) => { }));
+		}
+		Assert.Throws<SQLiteException>(() => database.CountQuery("SELECT FROM nums", CancellationToken.None));
+		const string unbalanced = "SELECT 1) WHERE 1 OR (1";
+		Assert.Throws<SQLiteException>(() => database.ReadQuery(unbalanced, _ => { }, (_, _) => { }));
+		Assert.Throws<SQLiteException>(() => database.CountQuery(unbalanced, CancellationToken.None));
+		Assert.Throws<SQLiteException>(() => database.CountQuery("SELECT abs(-9223372036854775808)", CancellationToken.None));
+		await Assert.That(database.CountQuery("SELECT * FROM nums", CancellationToken.None)).IsEqualTo(1L);
+	}
+
+	[Test]
+	public async Task CountQueryCanBeCancelledAndConnectionReused()
+	{
+		using (var connection = new SQLiteConnection($"Data Source={path};Version=3;"))
+		{
+			connection.Open();
+			using var command = new SQLiteCommand("CREATE TABLE nums (n INTEGER); WITH RECURSIVE seq(n) AS (SELECT 1 UNION ALL SELECT n+1 FROM seq WHERE n<10000) INSERT INTO nums SELECT n FROM seq", connection);
+			command.ExecuteNonQuery();
+		}
+		using var cts = new CancellationTokenSource();
+		var started = new TaskCompletionSource<bool>();
+		var task = Task.Run(() =>
+		{
+			using var database = new SqliteDatabase(path);
+			using (var alreadyCancelled = new CancellationTokenSource())
+			{
+				alreadyCancelled.Cancel();
+				Assert.Throws<OperationCanceledException>(() => database.CountQuery("SELECT 1", alreadyCancelled.Token));
+			}
+			started.SetResult(true);
+			Assert.Throws<OperationCanceledException>(() => database.CountQuery("SELECT a.n FROM nums a, nums b, nums c", cts.Token));
+			return database.CountQuery("SELECT 1", CancellationToken.None);
+		});
+		var startup = await Task.WhenAny(started.Task, task, Task.Delay(10000));
+		if (startup == task) await task;
+		if (startup != started.Task)
+		{
+			cts.Cancel();
+			throw new TimeoutException("The count did not start.");
+		}
+		cts.CancelAfter(100);
+		var finished = await Task.WhenAny(task, Task.Delay(10000));
+		await Assert.That(finished == task).IsTrue();
+		if (finished == task) await Assert.That(await task).IsEqualTo(1L);
+	}
+
+	[Test]
+	public async Task CancellableReadOverloadsStopCallbacksAndAllowReuse()
+	{
+		using (var connection = new SQLiteConnection($"Data Source={path};Version=3;"))
+		{
+			connection.Open();
+			using var command = new SQLiteCommand("CREATE TABLE nums (n INTEGER); WITH RECURSIVE seq(n) AS (SELECT 1 UNION ALL SELECT n+1 FROM seq WHERE n<501) INSERT INTO nums SELECT n FROM seq", connection);
+			command.ExecuteNonQuery();
+		}
+		using var database = new SqliteDatabase(path);
+		using (var cancelled = new CancellationTokenSource())
+		{
+			cancelled.Cancel();
+			Assert.Throws<OperationCanceledException>(() => database.ReadTable("nums", _ => { }, (_, _) => { }, cancelled.Token));
+			Assert.Throws<OperationCanceledException>(() => database.ReadQuery("SELECT * FROM nums", _ => { }, (_, _) => { }, cancelled.Token));
+			Assert.Throws<ArgumentException>(() => database.ReadQuery("DELETE FROM nums", _ => { }, (_, _) => { }, cancelled.Token));
+		}
+		using (var cts = new CancellationTokenSource())
+		{
+			int batches = 0;
+			Assert.Throws<OperationCanceledException>(() => database.ReadTable("nums", _ => { }, (_, _) => { batches++; cts.Cancel(); }, cts.Token));
+			await Assert.That(batches).IsEqualTo(1);
+		}
+		using (var cts = new CancellationTokenSource())
+		{
+			int batches = 0;
+			Assert.Throws<OperationCanceledException>(() => database.ReadQuery("SELECT * FROM nums", _ => cts.Cancel(), (_, _) => batches++, cts.Token));
+			await Assert.That(batches).IsEqualTo(0);
+		}
+		Assert.Throws<SQLiteException>(() => database.ReadQuery("SELECT FROM nums", _ => { }, (_, _) => { }, CancellationToken.None));
+		int total = 0;
+		database.ReadQuery("SELECT * FROM nums", _ => { }, (_, count) => total += count, CancellationToken.None);
+		await Assert.That(total).IsEqualTo(501);
+		total = 0;
+		database.ReadTable("nums", _ => { }, (_, count) => total += count, CancellationToken.None);
+		await Assert.That(total).IsEqualTo(501);
+	}
+
+	[Test]
+	public async Task LongRunningQueryReadCanBeCancelled()
+	{
+		using (var connection = new SQLiteConnection($"Data Source={path};Version=3;"))
+		{
+			connection.Open();
+			using var command = new SQLiteCommand("CREATE TABLE nums (n INTEGER); WITH RECURSIVE seq(n) AS (SELECT 1 UNION ALL SELECT n+1 FROM seq WHERE n<10000) INSERT INTO nums SELECT n FROM seq", connection);
+			command.ExecuteNonQuery();
+		}
+		using var cts = new CancellationTokenSource();
+		var started = new TaskCompletionSource<bool>();
+		var task = Task.Run(() =>
+		{
+			using var database = new SqliteDatabase(path);
+			started.SetResult(true);
+			Assert.Throws<OperationCanceledException>(() => database.ReadQuery("SELECT a.n FROM nums a, nums b, nums c ORDER BY a.n + b.n + c.n", _ => { }, (_, _) => { }, cts.Token));
+			return database.CountQuery("SELECT 1", CancellationToken.None);
+		});
+		var startup = await Task.WhenAny(started.Task, task, Task.Delay(10000));
+		if (startup == task) await task;
+		if (startup != started.Task)
+		{
+			cts.Cancel();
+			throw new TimeoutException("The read did not start.");
+		}
+		cts.CancelAfter(100);
+		var finished = await Task.WhenAny(task, Task.Delay(10000));
+		await Assert.That(finished == task).IsTrue();
+		if (finished == task) await Assert.That(await task).IsEqualTo(1L);
+	}
+
+	[Test]
 	public async Task UnreadableViewDoesNotPreventOtherCountsOrReads()
 	{
 		using (var connection = new SQLiteConnection($"Data Source={path};Version=3;"))
