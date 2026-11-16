@@ -291,7 +291,7 @@
   <data name="SqliteImportColumnRows" xml:space="preserve"><value>Строки</value></data>
   <data name="SqliteImportOverLimit" xml:space="preserve"><value>(выше лимита)</value></data>
   <data name="SqliteImportSelectionSummary" xml:space="preserve"><value>Выбрано: {0}; каждый результат попадёт на отдельный лист. Известные объекты сверх лимита не выбираются кнопкой «Выбрать все».</value></data>
-  <data name="SqliteImportSelectedLimitWarning" xml:space="preserve"><value>Предупреждение: выбранный объект превышает ограничение Excel в {0} строк данных. Снимите отметку или ограничьте результат запросом SELECT.</value></data>
+  <data name="SqliteImportSelectedLimitWarning" xml:space="preserve"><value>Предупреждение: выбранных таблиц и представлений, превышающих ограничение Excel в {1} строк данных: {0}. Снимите отметки со всех таких объектов или ограничьте результат запросом SELECT.</value></data>
   <data name="SqliteImportQueryHelp" xml:space="preserve"><value>Необязательный запрос SELECT (без точки с запятой). Его можно импортировать отдельно или вместе с выбранными объектами.</value></data>
   <data name="SqliteImportCountRows" xml:space="preserve"><value>Подсчитать строки</value></data>
   <data name="SqliteImportCancelCount" xml:space="preserve"><value>Отменить подсчёт</value></data>

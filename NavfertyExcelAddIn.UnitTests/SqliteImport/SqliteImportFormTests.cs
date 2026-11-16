@@ -134,6 +134,43 @@ public class SqliteImportFormTests
 	}
 
 	[Test]
+	public async Task OversizedWarningTracksAllSelectedObjectsIncludingHiddenOnes()
+	{
+		string one = "", two = "", afterDeselect = "", afterCountChange = "";
+		bool afterLastDeselect = true, afterCountBecomesSafe = true;
+		OnStaThread(() =>
+		{
+			var items = new[] { new SqliteObject("first", "table"), new SqliteObject("second", "view") };
+			using var form = CreateForm(items);
+			var list = Control<ListView>(form, "objects");
+			var warning = Control<Label>(form, "rowLimitWarning");
+			ApplyCount(form, items, 0, (long)SqliteDatabase.MaxRows + 1);
+			ApplyCount(form, items, 1, (long)SqliteDatabase.MaxRows + 1);
+			list.Items[0].Checked = true;
+			one = warning.Text;
+			list.Items[1].Checked = true;
+			two = warning.Text;
+			list.Items[0].Checked = false;
+			afterDeselect = warning.Visible ? warning.Text : "";
+			Control<TextBox>(form, "searchBox").Text = "first";
+			afterCountChange = warning.Visible ? warning.Text : "";
+			Control<TextBox>(form, "searchBox").Text = "";
+			list.Items[1].Checked = false;
+			afterLastDeselect = warning.Visible;
+			list.Items[1].Checked = true;
+			ApplyCount(form, items, 1, SqliteDatabase.MaxRows);
+			afterCountBecomesSafe = warning.Visible;
+		});
+		await Assert.That(one).Contains("1");
+		await Assert.That(two).Contains("2");
+		await Assert.That(two == one).IsFalse();
+		await Assert.That(afterDeselect).IsEqualTo(one);
+		await Assert.That(afterCountChange).IsEqualTo(one);
+		await Assert.That(afterLastDeselect).IsFalse();
+		await Assert.That(afterCountBecomesSafe).IsFalse();
+	}
+
+	[Test]
 	public async Task FilteringPreservesHiddenSelectionAndCountUpdates()
 	{
 		string whileFiltered = "", afterFiltering = "", afterClear = "";
