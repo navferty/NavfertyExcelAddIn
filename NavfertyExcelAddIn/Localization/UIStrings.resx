@@ -291,7 +291,8 @@
   <data name="SqliteImportColumnRows" xml:space="preserve"><value>Rows</value></data>
   <data name="SqliteImportOverLimit" xml:space="preserve"><value>(over limit)</value></data>
   <data name="SqliteImportSelectionSummary" xml:space="preserve"><value>{0} selected; each result gets a separate worksheet. Select all skips known oversized items.</value></data>
-  <data name="SqliteImportSelectedLimitWarning" xml:space="preserve"><value>Warning: {0} selected table(s) or view(s) exceed Excel's limit of {1} data rows. Uncheck all oversized items or use a SELECT query to limit the results.</value></data>
+  <data name="SqliteImportSingleLimitWarning" xml:space="preserve"><value>Warning: "{0}" has {1} rows; Excel's limit is {2} data rows. Uncheck it or use a SELECT query to limit the result.</value></data>
+  <data name="SqliteImportMultipleLimitWarning" xml:space="preserve"><value>Warning: {0} selected tables or views exceed Excel's limit of {2} data rows; the largest has {1} rows. Uncheck all oversized items or use a SELECT query to limit the results.</value></data>
   <data name="SqliteImportQueryHelp" xml:space="preserve"><value>Optional SELECT query (no semicolon). Import it alone or with selected tables and views.</value></data>
   <data name="SqliteImportCountRows" xml:space="preserve"><value>Count rows</value></data>
   <data name="SqliteImportCancelCount" xml:space="preserve"><value>Cancel count</value></data>

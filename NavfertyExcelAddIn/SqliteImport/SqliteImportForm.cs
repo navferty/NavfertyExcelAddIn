@@ -157,9 +157,16 @@ internal sealed class SqliteImportForm : Form
 	private void UpdateSelection()
 	{
 		selectionSummary.Text = string.Format(TextFor("SqliteImportSelectionSummary"), selected.Count);
-		int oversized = selected.Count(item => item.Count > SqliteDatabase.MaxRows);
-		rowLimitWarning.Text = string.Format(TextFor("SqliteImportSelectedLimitWarning"), oversized.ToString("N0"), SqliteDatabase.MaxRows.ToString("N0"));
-		rowLimitWarning.Visible = oversized > 0;
+		var oversized = items.Where(item => selected.Contains(item) && item.Count > SqliteDatabase.MaxRows).ToArray();
+		rowLimitWarning.Visible = oversized.Length > 0;
+		if (oversized.Length == 1)
+			rowLimitWarning.Text = string.Format(TextFor("SqliteImportSingleLimitWarning"),
+				oversized[0].Name, oversized[0].Count!.Value.ToString("N0"), SqliteDatabase.MaxRows.ToString("N0"));
+		else if (oversized.Length > 1)
+			rowLimitWarning.Text = string.Format(TextFor("SqliteImportMultipleLimitWarning"),
+				oversized.Length.ToString("N0"), oversized.Max(item => item.Count!.Value).ToString("N0"), SqliteDatabase.MaxRows.ToString("N0"));
+		else
+			rowLimitWarning.Text = "";
 	}
 
 	private void InvalidateQueryCount()

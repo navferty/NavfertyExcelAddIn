@@ -136,7 +136,8 @@ public class SqliteImportFormTests
 	[Test]
 	public async Task OversizedWarningTracksAllSelectedObjectsIncludingHiddenOnes()
 	{
-		string one = "", two = "", afterDeselect = "", afterCountChange = "";
+		string first = "", second = "", both = "", afterDeselect = "", hidden = "", afterCountChange = "", afterSecondDeselect = "";
+		string firstCount = "", secondCount = "", updatedCount = "", limit = "";
 		bool afterLastDeselect = true, afterCountBecomesSafe = true;
 		OnStaThread(() =>
 		{
@@ -144,28 +145,54 @@ public class SqliteImportFormTests
 			using var form = CreateForm(items);
 			var list = Control<ListView>(form, "objects");
 			var warning = Control<Label>(form, "rowLimitWarning");
-			ApplyCount(form, items, 0, (long)SqliteDatabase.MaxRows + 1);
-			ApplyCount(form, items, 1, (long)SqliteDatabase.MaxRows + 1);
-			list.Items[0].Checked = true;
-			one = warning.Text;
+			long count1 = (long)SqliteDatabase.MaxRows + 123;
+			long count2 = (long)SqliteDatabase.MaxRows + 456;
+			long updated = count2 + 789;
+			firstCount = count1.ToString("N0");
+			secondCount = count2.ToString("N0");
+			updatedCount = updated.ToString("N0");
+			limit = SqliteDatabase.MaxRows.ToString("N0");
+			ApplyCount(form, items, 0, count1);
+			ApplyCount(form, items, 1, count2);
 			list.Items[1].Checked = true;
-			two = warning.Text;
+			second = warning.Text;
+			list.Items[1].Checked = false;
+			list.Items[0].Checked = true;
+			first = warning.Text;
+			list.Items[1].Checked = true;
+			both = warning.Text;
 			list.Items[0].Checked = false;
 			afterDeselect = warning.Visible ? warning.Text : "";
 			Control<TextBox>(form, "searchBox").Text = "first";
+			hidden = warning.Visible ? warning.Text : "";
+			ApplyCount(form, items, 1, updated);
 			afterCountChange = warning.Visible ? warning.Text : "";
 			Control<TextBox>(form, "searchBox").Text = "";
+			list.Items[0].Checked = true;
 			list.Items[1].Checked = false;
+			afterSecondDeselect = warning.Visible ? warning.Text : "";
+			list.Items[0].Checked = false;
 			afterLastDeselect = warning.Visible;
 			list.Items[1].Checked = true;
 			ApplyCount(form, items, 1, SqliteDatabase.MaxRows);
 			afterCountBecomesSafe = warning.Visible;
 		});
-		await Assert.That(one).Contains("1");
-		await Assert.That(two).Contains("2");
-		await Assert.That(two == one).IsFalse();
-		await Assert.That(afterDeselect).IsEqualTo(one);
-		await Assert.That(afterCountChange).IsEqualTo(one);
+		await Assert.That(first).Contains("first");
+		await Assert.That(first).Contains(firstCount);
+		await Assert.That(first).Contains(limit);
+		await Assert.That(second).Contains("second");
+		await Assert.That(second).Contains(secondCount);
+		await Assert.That(second).Contains(limit);
+		await Assert.That(second.Contains(firstCount)).IsFalse();
+		await Assert.That(both).Contains(2.ToString("N0"));
+		await Assert.That(both).Contains(secondCount);
+		await Assert.That(both).Contains(limit);
+		await Assert.That(both.Contains(firstCount)).IsFalse();
+		await Assert.That(afterDeselect).IsEqualTo(second);
+		await Assert.That(hidden).IsEqualTo(second);
+		await Assert.That(afterCountChange).Contains("second");
+		await Assert.That(afterCountChange).Contains(updatedCount);
+		await Assert.That(afterSecondDeselect).IsEqualTo(first);
 		await Assert.That(afterLastDeselect).IsFalse();
 		await Assert.That(afterCountBecomesSafe).IsFalse();
 	}
