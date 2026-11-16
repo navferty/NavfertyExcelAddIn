@@ -124,6 +124,17 @@ public sealed class SqliteDatabase : IDisposable
 	private static object ReadValue(SQLiteDataReader reader, int column)
 	{
 		var affinity = reader.GetFieldAffinity(column);
+		byte[]? blob = null;
+		if (affinity == TypeAffinity.Blob)
+		{
+			// A failed provider conversion can change the affinity reported by SQLite.
+			long length = reader.GetBytes(column, 0, null, 0, 0);
+			if (length <= (MaxCellLength / 4) * 3)
+			{
+				blob = new byte[(int)length];
+				reader.GetBytes(column, 0, blob, 0, blob.Length);
+			}
+		}
 		try { return reader.GetValue(column); }
 		catch (Exception ex) when (ex is FormatException || ex is InvalidCastException || ex is OverflowException)
 		{
@@ -134,12 +145,9 @@ public sealed class SqliteDatabase : IDisposable
 				case TypeAffinity.Text: return reader.GetString(column);
 				case TypeAffinity.Null: return DBNull.Value;
 				case TypeAffinity.Blob:
-					long length = reader.GetBytes(column, 0, null, 0, 0);
-					if (length > (MaxCellLength / 4) * 3)
+					if (blob == null)
 						throw new InvalidOperationException("A BLOB exceeds Excel's 32,767 character cell limit when encoded as base64.");
-					var bytes = new byte[(int)length];
-					reader.GetBytes(column, 0, bytes, 0, bytes.Length);
-					return bytes;
+					return blob;
 				default: throw;
 			}
 		}

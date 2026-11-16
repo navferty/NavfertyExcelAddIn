@@ -164,6 +164,25 @@ public class SqliteDatabaseTests
 	}
 
 	[Test]
+	public async Task ReadsBlobFallbackAtCellLimitAndKeepsSuccessfulDateConversion()
+	{
+		using (var connection = new SQLiteConnection($"Data Source={path};Version=3;"))
+		{
+			connection.Open();
+			using var command = new SQLiteCommand("CREATE TABLE dates (stamp DATETIME); INSERT INTO dates VALUES (X''), (X'00FF'), (zeroblob(24573)), (CAST('2026-01-03 04:05:06' AS BLOB)), ('not a date')", connection);
+			command.ExecuteNonQuery();
+		}
+		using var database = new SqliteDatabase(path);
+		object[,] values = null!;
+		database.ReadQuery("SELECT stamp FROM dates ORDER BY rowid", _ => { }, (v, _) => values = v);
+		await Assert.That(values[0, 0]).IsEqualTo((object)"");
+		await Assert.That(values[1, 0]).IsEqualTo((object)"AP8=");
+		await Assert.That(values[2, 0]).IsEqualTo((object)Convert.ToBase64String(new byte[24573]));
+		await Assert.That(values[3, 0]).IsEqualTo((object)"2026-01-03T04:05:06.0000000");
+		await Assert.That(values[4, 0]).IsEqualTo((object)"not a date");
+	}
+
+	[Test]
 	public async Task RejectsOversizedBlobAfterConversionFailure()
 	{
 		using (var connection = new SQLiteConnection($"Data Source={path};Version=3;"))
