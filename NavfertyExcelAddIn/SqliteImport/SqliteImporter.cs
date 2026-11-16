@@ -81,7 +81,7 @@ public sealed class SqliteImporter
 		if (safe.Length > 31) safe = safe.Substring(0, 31);
 		safe = safe.Trim('\'');
 		if (string.IsNullOrWhiteSpace(safe)) safe = "Sheet";
-		if (string.Equals(safe, "History", StringComparison.OrdinalIgnoreCase)) safe = "History_";
+		if (string.Equals(safe, "History", StringComparison.OrdinalIgnoreCase)) safe = safe + "_";
 		string candidate = safe;
 		for (int suffix = 2; !names.Add(candidate); suffix++)
 		{
