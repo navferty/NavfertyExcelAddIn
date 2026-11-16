@@ -17,9 +17,28 @@ Import tables and views from a SQLite database into a new workbook. Each selecte
 4. Optionally enter a single `SELECT` query without a semicolon. You can import the query alone or together with selected tables and views.
 5. Click **Import**. The results appear in a new workbook.
 
-The database is opened read-only. SQL `NULL` becomes an empty cell, BLOB values are encoded as base64 text, and integers exceeding 15 digits are imported as text to preserve their precision. Text is formatted as text to prevent formulas from being executed.
+The database is opened read-only.
 
-Values are first converted according to their declared column type. If that conversion fails, the value is imported according to its SQLite storage class instead. Successful conversions, such as a date converted to .NET `DateTime`, may change the original representation.
+## How values are converted
+
+SQLite allows values of different storage classes in the same column. For each value in a table, view or query result, the SQLite provider first attempts its normal conversion, which can use the declared column type. If it throws a format, invalid-cast or overflow exception, the importer reads the value using its SQLite storage class instead. Other errors still stop the import.
+
+The resulting values are written as follows:
+
+| Value returned by the provider or fallback | Excel result |
+| --- | --- |
+| `NULL` | Empty cell |
+| Integer (`Int64`) | Number if it has at most 15 digits; otherwise text, to avoid loss of precision |
+| Real (`Double`) | Number |
+| Text | Text |
+| BLOB | Base64-encoded text (for example, `X'00FF'` becomes `AP8=`) |
+| .NET `DateTime` | Round-trip date/time text, preserving fractional seconds and any kind/offset indicator; it is not an Excel date cell |
+
+For example, in a `DATETIME` column, `2026-01-02 03:04:05.1234567` can be converted by the provider to a `DateTime` and imported as `2026-01-02T03:04:05.1234567`. If another row contains `not a date`, that conversion fails and the text is imported unchanged. The importer continues with subsequent rows.
+
+The fallback only runs when the provider throws one of the conversion exceptions above. A successful provider conversion may already have changed the value or its representation, so exact preservation of every original SQLite value is **not** guaranteed. SQLite date/time functions such as `datetime()` return text; they do not themselves create a .NET `DateTime`.
+
+The destination ranges are formatted as text before writing to prevent imported text from being executed as formulas. Numeric values are still written as numbers.
 
 Results exceeding Excel's limits (1,048,575 data rows plus a header, 16,384 columns, or 32,767 characters per cell) cannot be imported. Invalid or locked files and other import errors are reported without leaving a partial workbook.
 
