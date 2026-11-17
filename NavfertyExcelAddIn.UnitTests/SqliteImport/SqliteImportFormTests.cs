@@ -1,4 +1,5 @@
 using System.Drawing;
+using System.Globalization;
 using System.Reflection;
 using System.Windows.Forms;
 
@@ -62,6 +63,45 @@ public class SqliteImportFormTests
 			matches = expectedBytes.ToArray().SequenceEqual(actualBytes.ToArray());
 		});
 		await Assert.That(matches).IsTrue();
+	}
+
+	[Test]
+	public async Task LocalizedLabelsWrapAtDefaultAndMinimumWindowSizes()
+	{
+		var failures = new List<string>();
+		OnStaThread(() =>
+		{
+			var originalCulture = Thread.CurrentThread.CurrentUICulture;
+			try
+			{
+				foreach (string culture in new[] { "ru-RU", "en-US" })
+				{
+					Thread.CurrentThread.CurrentUICulture = CultureInfo.GetCultureInfo(culture);
+					var items = new[] { new SqliteObject("large", "table") };
+					using var form = CreateForm(items);
+					ApplyCount(form, items, 0, (long)SqliteDatabase.MaxRows + 1);
+					Control<ListView>(form, "objects").Items[0].Checked = true;
+					var status = Control<Label>(form, "queryCountStatus");
+					status.Text = new string('x', 500);
+					foreach (var size in new[] { form.Size, form.MinimumSize })
+					{
+						form.Size = size;
+						form.PerformLayout();
+						foreach (string name in new[] { "selectionSummary", "rowLimitWarning", "queryHelp", "countDisclaimer", "queryCountStatus" })
+						{
+							var label = Control<Label>(form, name);
+							if (label.Width > label.Parent!.ClientSize.Width ||
+								label.Height < label.GetPreferredSize(new Size(label.MaximumSize.Width, 0)).Height)
+								failures.Add($"{culture}, {size}, {name}");
+						}
+						var layout = Control<TableLayoutPanel>(form, "importLayout");
+						if (!layout.AutoScroll) failures.Add($"{culture}: scrolling disabled");
+					}
+				}
+			}
+			finally { Thread.CurrentThread.CurrentUICulture = originalCulture; }
+		});
+		await Assert.That(string.Join("; ", failures)).IsEqualTo("");
 	}
 
 	[Test]

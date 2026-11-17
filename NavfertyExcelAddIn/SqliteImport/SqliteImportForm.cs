@@ -13,12 +13,12 @@ namespace NavfertyExcelAddIn.SqliteImport;
 
 internal sealed class SqliteImportForm : Form
 {
-	private readonly ListView objects = new ListView { Name = "objects", View = View.Details, CheckBoxes = true, FullRowSelect = true, Dock = DockStyle.Fill };
+	private readonly ListView objects = new ListView { Name = "objects", View = View.Details, CheckBoxes = true, FullRowSelect = true, Dock = DockStyle.Fill, MinimumSize = new Size(0, 80) };
 	private readonly TextBox search = new TextBox { Name = "searchBox", Width = 180 };
-	private readonly TextBox query = new TextBox { Name = "query", Multiline = true, ScrollBars = ScrollBars.Both, Dock = DockStyle.Fill, AcceptsReturn = true, WordWrap = false };
+	private readonly TextBox query = new TextBox { Name = "query", Multiline = true, ScrollBars = ScrollBars.Both, Dock = DockStyle.Fill, AcceptsReturn = true, WordWrap = false, MinimumSize = new Size(0, 60) };
 	private readonly Label selectionSummary = new Label { Name = "selectionSummary", AutoSize = true };
-	private readonly Label rowLimitWarning = new Label { Name = "rowLimitWarning", AutoSize = true, ForeColor = Color.DarkRed, MaximumSize = new Size(700, 0), Visible = false };
-	private readonly Label queryCountStatus = new Label { Name = "queryCountStatus", AutoSize = true, MaximumSize = new Size(700, 0) };
+	private readonly Label rowLimitWarning = new Label { Name = "rowLimitWarning", AutoSize = true, ForeColor = Color.DarkRed, Visible = false };
+	private readonly Label queryCountStatus = new Label { Name = "queryCountStatus", AutoSize = true };
 	private readonly Button countQuery = new Button { Name = "countQuery", AutoSize = true };
 	private readonly CancellationTokenSource countCancellation = new CancellationTokenSource();
 	private readonly IReadOnlyList<SqliteObject> items;
@@ -45,7 +45,7 @@ internal sealed class SqliteImportForm : Form
 		Size = new Size(760, 650);
 		MinimumSize = new Size(560, 480);
 		AutoScaleMode = AutoScaleMode.Font;
-		var layout = new TableLayoutPanel { Dock = DockStyle.Fill, ColumnCount = 1, RowCount = 10, Padding = new Padding(10) };
+		var layout = new TableLayoutPanel { Name = "importLayout", Dock = DockStyle.Fill, ColumnCount = 1, RowCount = 10, Padding = new Padding(10), AutoScroll = true };
 		layout.RowStyles.Add(new RowStyle(SizeType.AutoSize));
 		layout.RowStyles.Add(new RowStyle(SizeType.AutoSize));
 		layout.RowStyles.Add(new RowStyle(SizeType.Percent, 55));
@@ -91,7 +91,8 @@ internal sealed class SqliteImportForm : Form
 		layout.Controls.Add(objects, 0, 2);
 		layout.Controls.Add(selectionSummary, 0, 3);
 		layout.Controls.Add(rowLimitWarning, 0, 4);
-		layout.Controls.Add(new Label { Text = TextFor("SqliteImportQueryHelp"), AutoSize = true, MaximumSize = new Size(700, 0) }, 0, 5);
+		var queryHelp = new Label { Name = "queryHelp", Text = TextFor("SqliteImportQueryHelp"), AutoSize = true };
+		layout.Controls.Add(queryHelp, 0, 5);
 		query.AccessibleName = TextFor("SqliteImportQuery");
 		query.TextChanged += (sender, args) => InvalidateQueryCount();
 		layout.Controls.Add(query, 0, 6);
@@ -106,7 +107,8 @@ internal sealed class SqliteImportForm : Form
 		queryControls.Controls.Add(countQuery);
 		queryControls.Controls.Add(queryCountStatus);
 		layout.Controls.Add(queryControls, 0, 7);
-		layout.Controls.Add(new Label { Text = TextFor("SqliteImportCountDisclaimer"), AutoSize = true, MaximumSize = new Size(700, 0) }, 0, 8);
+		var disclaimer = new Label { Name = "countDisclaimer", Text = TextFor("SqliteImportCountDisclaimer"), AutoSize = true };
+		layout.Controls.Add(disclaimer, 0, 8);
 		var buttons = new FlowLayoutPanel { Dock = DockStyle.Fill, AutoSize = true, FlowDirection = FlowDirection.RightToLeft };
 		var cancel = new Button { Text = TextFor("SqliteImportCancel"), DialogResult = DialogResult.Cancel, AutoSize = true };
 		var ok = new Button { Text = TextFor("SqliteImportButton"), AutoSize = true };
@@ -126,7 +128,18 @@ internal sealed class SqliteImportForm : Form
 		buttons.Controls.Add(cancel);
 		buttons.Controls.Add(ok);
 		layout.Controls.Add(buttons, 0, 9);
+		void UpdateLabelWidths()
+		{
+			int width = Math.Max(1, layout.ClientSize.Width - layout.Padding.Horizontal - SystemInformation.VerticalScrollBarWidth - 6);
+			foreach (var label in new[] { fileLabel, selectionSummary, rowLimitWarning, queryHelp, disclaimer })
+				if (label.MaximumSize.Width != width) label.MaximumSize = new Size(width, 0);
+			int statusWidth = Math.Max(1, width - countQuery.Width - countQuery.Margin.Horizontal - queryCountStatus.Margin.Horizontal);
+			if (queryCountStatus.MaximumSize.Width != statusWidth) queryCountStatus.MaximumSize = new Size(statusWidth, 0);
+		}
+		layout.SizeChanged += (sender, args) => UpdateLabelWidths();
+		countQuery.SizeChanged += (sender, args) => UpdateLabelWidths();
 		Controls.Add(layout);
+		UpdateLabelWidths();
 		AcceptButton = ok;
 		CancelButton = cancel;
 		RefreshObjects();
