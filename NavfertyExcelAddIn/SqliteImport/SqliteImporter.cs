@@ -10,6 +10,7 @@ using NavfertyExcelAddIn.Localization;
 
 using Action = System.Action;
 using ExcelApplication = Microsoft.Office.Interop.Excel.Application;
+using Window = Microsoft.Office.Interop.Excel.Window;
 
 namespace NavfertyExcelAddIn.SqliteImport;
 
@@ -76,7 +77,14 @@ public sealed class SqliteImporter
 			dispatch(() =>
 			{
 				token.ThrowIfCancellationRequested();
-				workbook = app.Workbooks.Add(XlWBATemplate.xlWBATWorksheet);
+				bool screenUpdating = app.ScreenUpdating;
+				try
+				{
+					app.ScreenUpdating = false;
+					workbook = app.Workbooks.Add(XlWBATemplate.xlWBATWorksheet);
+					((Window)workbook.Windows[1]).Visible = false;
+				}
+				finally { app.ScreenUpdating = screenUpdating; }
 			});
 			var names = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
 			int index = 0;
@@ -108,6 +116,7 @@ public sealed class SqliteImporter
 			dispatch(() =>
 			{
 				token.ThrowIfCancellationRequested();
+				((Window)workbook!.Windows[1]).Visible = true;
 				complete();
 			});
 		}
