@@ -23,6 +23,7 @@ using NavfertyExcelAddIn.InteractiveRangeReport;
 using NavfertyExcelAddIn.Localization;
 using NavfertyExcelAddIn.ParseNumerics;
 using NavfertyExcelAddIn.SqliteExport;
+using NavfertyExcelAddIn.SqliteImport;
 using NavfertyExcelAddIn.StringifyNumerics;
 using NavfertyExcelAddIn.Transliterate;
 using NavfertyExcelAddIn.Undo;
@@ -426,6 +427,11 @@ namespace NavfertyExcelAddIn
 
 			var exporter = GetService<ISqliteExporter>();
 			exporter.ExportToSqlite(wb);
+		}
+
+		public void ImportFromSqlite(IRibbonControl ribbonControl)
+		{
+			new SqliteImporter().Import(App);
 		}
 		#endregion
 

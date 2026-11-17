@@ -36,4 +36,6 @@ For example, if a sheet's used range starts with a report title followed by head
 
 **Important:** An existing database at the chosen path is deleted and replaced. Choose a new filename or back it up first. Formatting and Excel formulas are not exported as workbook features; inspect the resulting data and types before relying on them.
 
+To bring data back into Excel, see [Import from SQLite](/en/features/import-from-sqlite/).
+
 The add-in is free and open source. [Installation instructions](/en/install/).

@@ -246,4 +246,5 @@
   <data name="ShowInfo" xml:space="preserve">
     <value>Информация</value>
   </data>
-</root>
+  <data name="ImportFromSqlite" xml:space="preserve"><value>Импорт из SQLite</value></data>
+</root>

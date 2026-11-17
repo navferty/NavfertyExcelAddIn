@@ -270,4 +270,39 @@
   <data name="Info_OpenLogs" xml:space="preserve">
     <value>Открыть папку с журналами</value>
   </data>
+  <data name="SqliteImportTitle" xml:space="preserve"><value>Импорт из SQLite</value></data>
+  <data name="SqliteImportObjects" xml:space="preserve"><value>Выберите таблицы и представления (указано число записей):</value></data>
+  <data name="SqliteImportSelectAll" xml:space="preserve"><value>Выбрать все</value></data>
+  <data name="SqliteImportCountLoading" xml:space="preserve"><value>подсчёт записей</value></data>
+  <data name="SqliteImportCountUnavailable" xml:space="preserve"><value>число записей недоступно</value></data>
+  <data name="SqliteImportUnknownCountConfirm" xml:space="preserve"><value>Для некоторых выбранных таблиц или представлений число записей неизвестно. Оно может превышать ограничение Excel. Продолжить импорт?</value></data>
+  <data name="SqliteImportRowLimitWarning" xml:space="preserve"><value>Некоторые таблицы или представления превышают ограничение Excel: {0} строк данных. Не отмечайте их или ограничьте результат запросом SELECT.</value></data>
+  <data name="SqliteImportQuery" xml:space="preserve"><value>Необязательный запрос SELECT (без точки с запятой):</value></data>
+  <data name="SqliteImportCancel" xml:space="preserve"><value>Отмена</value></data>
+  <data name="SqliteImportButton" xml:space="preserve"><value>Импорт</value></data>
+  <data name="SqliteImportSelect" xml:space="preserve"><value>Выберите таблицу или представление либо введите запрос SELECT.</value></data>
+  <data name="SqliteImportError" xml:space="preserve"><value>Не удалось импортировать из SQLite</value></data>
+  <data name="SqliteImportDatabase" xml:space="preserve"><value>База данных: {0}</value></data>
+  <data name="SqliteImportDatabaseName" xml:space="preserve"><value>Файл базы данных</value></data>
+  <data name="SqliteImportSearch" xml:space="preserve"><value>Найти:</value></data>
+  <data name="SqliteImportClearAll" xml:space="preserve"><value>Снять все</value></data>
+  <data name="SqliteImportColumnName" xml:space="preserve"><value>Название</value></data>
+  <data name="SqliteImportColumnType" xml:space="preserve"><value>Тип</value></data>
+  <data name="SqliteImportColumnRows" xml:space="preserve"><value>Строки</value></data>
+  <data name="SqliteImportOverLimit" xml:space="preserve"><value>(выше лимита)</value></data>
+  <data name="SqliteImportSelectionSummary" xml:space="preserve"><value>Выбрано: {0}; каждый результат попадёт на отдельный лист. Известные объекты сверх лимита не выбираются кнопкой «Выбрать все».</value></data>
+  <data name="SqliteImportSingleLimitWarning" xml:space="preserve"><value>Предупреждение: в «{0}» строк: {1}; ограничение Excel — {2} строк данных. Снимите отметку или ограничьте результат запросом SELECT.</value></data>
+  <data name="SqliteImportMultipleLimitWarning" xml:space="preserve"><value>Предупреждение: выбранных таблиц и представлений, превышающих ограничение Excel в {2} строк данных: {0}; наибольшее число строк — {1}. Снимите отметки со всех таких объектов или ограничьте результат запросом SELECT.</value></data>
+  <data name="SqliteImportQueryHelp" xml:space="preserve"><value>Необязательный запрос SELECT (без точки с запятой). Его можно импортировать отдельно или вместе с выбранными объектами.</value></data>
+  <data name="SqliteImportCountRows" xml:space="preserve"><value>Подсчитать строки</value></data>
+  <data name="SqliteImportCancelCount" xml:space="preserve"><value>Отменить подсчёт</value></data>
+  <data name="SqliteImportCounting" xml:space="preserve"><value>Подсчёт строк…</value></data>
+  <data name="SqliteImportQueryCount" xml:space="preserve"><value>Строк на момент подсчёта: {0}.</value></data>
+  <data name="SqliteImportQueryLimit" xml:space="preserve"><value>Предупреждение: превышено ограничение Excel в {0} строк данных.</value></data>
+  <data name="SqliteImportQueryCountError" xml:space="preserve"><value>Не удалось подсчитать строки: {0}</value></data>
+  <data name="SqliteImportCountDisclaimer" xml:space="preserve"><value>Подсчёт может занять время и повторно выполняет запрос. До импорта база может измениться.</value></data>
+  <data name="SqliteImportProgressTitle" xml:space="preserve"><value>Импорт из SQLite</value></data>
+  <data name="SqliteImportProgressText" xml:space="preserve"><value>Импорт {0}: строк {1:N0}</value></data>
+  <data name="SqliteImportProgressCancel" xml:space="preserve"><value>Отмена</value></data>
+  <data name="SqliteImportProgressCancelling" xml:space="preserve"><value>Отмена…</value></data>
 </root>
