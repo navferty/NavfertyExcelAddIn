@@ -1,6 +1,7 @@
 {
   "title": "Импорт из SQLite",
-  "description": "Импорт таблиц, представлений или запроса SELECT из SQLite в новую книгу Excel."
+  "description": "Импорт таблиц, представлений или запроса SELECT из SQLite в новую книгу Excel.",
+  "image": "https://navferty.net/images/ImportFromSqlite-ru.png"
 }
 
 [Главная](/ru/) › [Команды](/ru/#commands) › Импорт из SQLite
@@ -8,6 +9,12 @@
 # Импорт из SQLite
 
 Импортируйте таблицы и представления базы SQLite в новую книгу. Каждая выбранная таблица, представление или результат запроса помещается на отдельный лист; в первой строке находятся названия столбцов.
+
+<div class="shots">
+
+<img src="/images/ImportFromSqlite-ru.png" loading="lazy" width="991" height="753" alt="Окно импорта из SQLite" />
+
+</div>
 
 ## Как использовать
 

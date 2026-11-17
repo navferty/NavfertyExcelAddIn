@@ -1,6 +1,7 @@
 {
   "title": "Import from SQLite",
-  "description": "Import SQLite tables, views or a SELECT query into a new Excel workbook."
+  "description": "Import SQLite tables, views or a SELECT query into a new Excel workbook.",
+  "image": "https://navferty.net/images/ImportFromSqlite.png"
 }
 
 [Home](/en/) › [Commands](/en/#commands) › Import from SQLite
@@ -8,6 +9,12 @@
 # Import from SQLite
 
 Import tables and views from a SQLite database into a new workbook. Each selected table, view or query result gets its own worksheet, with column names in the first row.
+
+<div class="shots">
+
+<img src="/images/ImportFromSqlite.png" loading="lazy" width="810" height="766" alt="SQLite import dialog" />
+
+</div>
 
 ## How to use
 
